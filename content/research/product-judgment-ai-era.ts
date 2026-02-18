@@ -308,8 +308,6 @@ export const productJudgmentAiEra: ResearchArticle = {
     },
   ],
   pdfUrl: "/pdfs/product-judgment-ai-era.pdf",
-  slidesUrl: "/pdfs/product-judgment-ai-era-slides.pptx",
-  slidesPdfUrl: "/pdfs/product-judgment-ai-era-slides.pdf",
   metaTitle:
     "The PM's New Job: Product Judgment in the Age of Infinite Build Capacity | Leverage Strategies",
   metaDescription:
