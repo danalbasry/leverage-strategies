@@ -465,6 +465,7 @@ export const aiRoiPlaybook: ResearchArticle = {
     "board presentation AI",
   ],
   relatedSlugs: [
+    "product-judgment-ai-era",
     "ai-powered-gtm-playbook-2026",
     "what-ai-agents-actually-are",
     "ai-sales-playbook",

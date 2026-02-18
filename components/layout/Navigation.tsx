@@ -64,6 +64,10 @@ const researchDropdown: NavItemWithDropdown = {
       heading: "Featured Research",
       items: [
         {
+          label: "The PM's New Job: Product Judgment in the AI Era",
+          href: "/research/product-judgment-ai-era",
+        },
+        {
           label: "How to Measure AI ROI: Every CFO's Question",
           href: "/research/ai-roi-playbook",
         },

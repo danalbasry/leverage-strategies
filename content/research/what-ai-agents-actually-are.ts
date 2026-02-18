@@ -25,7 +25,7 @@ export const aiAgentsArticle: ResearchArticle = {
     "agent maturity",
     "revenue operations",
   ],
-  relatedSlugs: ["ai-roi-playbook", "non-technical-builders-playbook", "openai-frontier-playbook", "blockchain-gtm-playbook", "ai-sales-playbook", "ai-powered-gtm-playbook-2026"],
+  relatedSlugs: ["product-judgment-ai-era", "ai-roi-playbook", "non-technical-builders-playbook", "openai-frontier-playbook", "blockchain-gtm-playbook", "ai-sales-playbook", "ai-powered-gtm-playbook-2026"],
   thumbnailUrl: "/images/article-agents.png",
   coverBg: "#1e1e2e",
   keyTakeaways: [

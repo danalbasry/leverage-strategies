@@ -230,6 +230,7 @@ export const nonTechnicalBuildersPlaybook: ResearchArticle = {
     "citizen developer AI",
   ],
   relatedSlugs: [
+    "product-judgment-ai-era",
     "ai-roi-playbook",
     "openai-frontier-playbook",
     "what-ai-agents-actually-are",
