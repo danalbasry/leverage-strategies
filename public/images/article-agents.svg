@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" fill="none">
+  <rect width="600" height="340" fill="#001F3F"/>
+  <!-- Central circle -->
+  <circle cx="300" cy="170" r="60" fill="none" stroke="#9B8EC4" stroke-width="2"/>
+  <text x="300" y="165" fill="#ffffff" font-family="system-ui" font-size="12" text-anchor="middle" font-weight="600">Revenue</text>
+  <text x="300" y="182" fill="#ffffff" font-family="system-ui" font-size="12" text-anchor="middle" font-weight="600">Engine</text>
+  <!-- Four agent nodes -->
+  <circle cx="140" cy="90" r="40" fill="#9B8EC420" stroke="#9B8EC4" stroke-width="2"/>
+  <text x="140" y="87" fill="#ffffff" font-family="system-ui" font-size="11" text-anchor="middle" font-weight="600">Signal</text>
+  <text x="140" y="102" fill="#ffffff60" font-family="system-ui" font-size="10" text-anchor="middle">Agent</text>
+  <circle cx="460" cy="90" r="40" fill="#9B8EC420" stroke="#9B8EC4" stroke-width="2"/>
+  <text x="460" y="87" fill="#ffffff" font-family="system-ui" font-size="11" text-anchor="middle" font-weight="600">Research</text>
+  <text x="460" y="102" fill="#ffffff60" font-family="system-ui" font-size="10" text-anchor="middle">Agent</text>
+  <circle cx="140" cy="250" r="40" fill="#9B8EC420" stroke="#9B8EC4" stroke-width="2"/>
+  <text x="140" y="247" fill="#ffffff" font-family="system-ui" font-size="11" text-anchor="middle" font-weight="600">Execution</text>
+  <text x="140" y="262" fill="#ffffff60" font-family="system-ui" font-size="10" text-anchor="middle">Agent</text>
+  <circle cx="460" cy="250" r="40" fill="#9B8EC420" stroke="#9B8EC4" stroke-width="2"/>
+  <text x="460" y="247" fill="#ffffff" font-family="system-ui" font-size="11" text-anchor="middle" font-weight="600">Insights</text>
+  <text x="460" y="262" fill="#ffffff60" font-family="system-ui" font-size="10" text-anchor="middle">Agent</text>
+  <!-- Connection lines -->
+  <line x1="175" y1="110" x2="245" y2="145" stroke="#9B8EC450" stroke-width="1.5"/>
+  <line x1="425" y1="110" x2="355" y2="145" stroke="#9B8EC450" stroke-width="1.5"/>
+  <line x1="175" y1="230" x2="245" y2="195" stroke="#9B8EC450" stroke-width="1.5"/>
+  <line x1="425" y1="230" x2="355" y2="195" stroke="#9B8EC450" stroke-width="1.5"/>
+  <!-- Flow arrows between agents -->
+  <path d="M180,90 Q300,50 420,90" fill="none" stroke="#9B8EC430" stroke-width="1" stroke-dasharray="4,4"/>
+  <path d="M460,130 Q500,170 460,210" fill="none" stroke="#9B8EC430" stroke-width="1" stroke-dasharray="4,4"/>
+  <path d="M420,250 Q300,290 180,250" fill="none" stroke="#9B8EC430" stroke-width="1" stroke-dasharray="4,4"/>
+  <path d="M140,210 Q100,170 140,130" fill="none" stroke="#9B8EC430" stroke-width="1" stroke-dasharray="4,4"/>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" fill="none">
+  <!-- Grid lines -->
+  <line x1="50" y1="350" x2="550" y2="350" stroke="#ffffff20" stroke-width="1"/>
+  <line x1="50" y1="280" x2="550" y2="280" stroke="#ffffff10" stroke-width="1"/>
+  <line x1="50" y1="210" x2="550" y2="210" stroke="#ffffff10" stroke-width="1"/>
+  <line x1="50" y1="140" x2="550" y2="140" stroke="#ffffff10" stroke-width="1"/>
+  <line x1="50" y1="70" x2="550" y2="70" stroke="#ffffff10" stroke-width="1"/>
+  <!-- Trend line -->
+  <polyline points="50,320 120,300 190,280 260,240 330,180 400,120 470,80 550,40" stroke="#9B8EC4" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Data points -->
+  <circle cx="50" cy="320" r="4" fill="#9B8EC4"/>
+  <circle cx="120" cy="300" r="4" fill="#9B8EC4"/>
+  <circle cx="190" cy="280" r="4" fill="#9B8EC4"/>
+  <circle cx="260" cy="240" r="5" fill="#9B8EC4"/>
+  <circle cx="330" cy="180" r="5" fill="#9B8EC4"/>
+  <circle cx="400" cy="120" r="5" fill="#9B8EC4"/>
+  <circle cx="470" cy="80" r="6" fill="#9B8EC4"/>
+  <circle cx="550" cy="40" r="6" fill="#9B8EC4"/>
+  <!-- Secondary line -->
+  <polyline points="50,340 120,330 190,310 260,290 330,270 400,260 470,250 550,240" stroke="#ffffff30" stroke-width="2" fill="none" stroke-dasharray="6,4" stroke-linecap="round"/>
+  <!-- Glow effect on latest point -->
+  <circle cx="550" cy="40" r="12" fill="#9B8EC4" opacity="0.2"/>
+  <circle cx="550" cy="40" r="20" fill="#9B8EC4" opacity="0.1"/>
+  <!-- Label -->
+  <text x="460" y="35" fill="#ffffff80" font-family="system-ui" font-size="11">AI-Native GTM</text>
+  <text x="460" y="255" fill="#ffffff40" font-family="system-ui" font-size="11">Traditional GTM</text>
+</svg>
