@@ -4,7 +4,13 @@ export interface ArticleSection {
   content: string;
 }
 
-export type ResearchCategory = "framework" | "research" | "blockchain-web3";
+export type ResearchCategory =
+  | "framework"
+  | "research"
+  | "blockchain-web3"
+  | "guide"
+  | "deep-dive"
+  | "trends";
 
 export interface ResearchArticle {
   slug: string;
@@ -19,6 +25,8 @@ export interface ResearchArticle {
   executiveSummary: string;
   sections: ArticleSection[];
   pdfUrl: string;
+  slidesUrl?: string;
+  slidesPdfUrl?: string;
   metaTitle: string;
   metaDescription: string;
   keywords: string[];
