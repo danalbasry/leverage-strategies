@@ -23,9 +23,9 @@ export const aiAgentsArticle: ResearchArticle = {
     "execution agent",
     "insights agent",
     "agent maturity",
-    "revenue operations",
+    "revenue operations"
   ],
-  relatedSlugs: ["product-judgment-ai-era", "ai-roi-playbook", "non-technical-builders-playbook", "openai-frontier-playbook", "blockchain-gtm-playbook", "ai-sales-playbook", "ai-powered-gtm-playbook-2026"],
+  relatedSlugs: ["ai-roi-playbook", "non-technical-builders-playbook", "openai-frontier-playbook", "blockchain-gtm-playbook", "ai-sales-playbook", "ai-powered-gtm-playbook-2026"],
   thumbnailUrl: "/images/article-agents.png",
   coverBg: "#1e1e2e",
   keyTakeaways: [
@@ -34,7 +34,7 @@ export const aiAgentsArticle: ResearchArticle = {
     "These four agents chain together to go from signal to pipeline in 36 hours, with only 12 minutes of total human involvement.",
     "A five-level maturity roadmap: from Suggest & Confirm to Agent-First Revenue. Most organizations are between Level 1 and Level 2 today.",
     "The fully loaded cost of a four-agent revenue stack equals roughly one mid-level SDR's compensation. The output is comparable to five to ten SDRs.",
-    "Start with one team, one workflow. Eight weeks from pilot to proof. The results from the first team justify the expansion to the second.",
+    "Start with one team, one workflow. Eight weeks from pilot to proof. The results from the first team justify the expansion to the second."
   ],
   executiveSummary:
     "Most leaders keep hearing 'AI agents' and have no idea what it actually means for their revenue operation. This is the plain language guide. Inside: what agents are (and aren't), the four agents every revenue team needs, how they chain together to go from signal to pipeline in 36 hours, a five-level maturity roadmap, what it costs, what it returns, and how to start with one team in eight weeks.",
@@ -677,6 +677,6 @@ export const aiAgentsArticle: ResearchArticle = {
 
 <p>The organizations that will lead their markets over the next three to five years are the ones making this decision now. Not because the technology is perfect; it is not. But because the compounding advantage of starting earlier is real, measurable, and increasingly difficult for late movers to close. Eight weeks from today, you can have proof. The only question is whether you start.</p>
 `,
-    },
+    }
   ],
 };

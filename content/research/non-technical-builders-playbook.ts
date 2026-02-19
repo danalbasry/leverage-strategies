@@ -19,7 +19,7 @@ export const nonTechnicalBuildersPlaybook: ResearchArticle = {
     "Two tools cover everything: Claude Code (inside VS Code) for tools that process data and run automatically, and Google AI Studio for visual apps you can build and share in under an hour, with zero installation.",
     "Six profession-specific builder stories show exactly what to build: a physiotherapist's clinical note generator, a lawyer's contract reviewer, an HR onboarding engine, an artist's client brief system, an admin's meeting intelligence tool, and a sales leader's weekly report automation.",
     "The 30-Day Builder Sprint takes you from setup to shipping: Week 1 install and observe, Week 2 build your first personal tool, Week 3 share and automate, Week 4 multiply and teach someone else.",
-    "Start read-only (tools that read data and produce reports), keep scope tight (one tool, one job), test with sample data first, and never paste passwords or secrets into AI. These are safety guardrails that let non-technical builders move fast without breaking things.",
+    "Start read-only (tools that read data and produce reports), keep scope tight (one tool, one job), test with sample data first, and never paste passwords or secrets into AI. These are safety guardrails that let non-technical builders move fast without breaking things."
   ],
   executiveSummary:
     "Most people paste into ChatGPT and call it AI. This playbook is for anyone ready to build real tools: apps that persist, run without you, and other people can use. Inside: how to set up Claude Code and Google AI Studio, the mindset shift from using to building, six profession-specific stories (healthcare, legal, HR, creative, admin, sales), and a 30-day sprint framework to go from zero to shipping. No coding required. Just clarity about what you do and willingness to describe it. The only language you need is English.",
@@ -210,7 +210,7 @@ export const nonTechnicalBuildersPlaybook: ResearchArticle = {
 <p><strong>Days 21-25:</strong> Teach one person. Sit down with a colleague. Ask them what slows them down. Build a tiny tool together using AI Studio. The best way to learn this is to teach it.</p>
 <p><strong>Days 26-30:</strong> Document and reflect. Write down what you built, how you built it, and what you learned. Two to three pages with screenshots. This is your portfolio.</p>
 <blockquote>The people who build useful tools are not smarter. They are simply willing to say "change this" fifteen times until it is right. Building is not about technical skill. It is about persistence, clarity, and the willingness to iterate.</blockquote>`,
-    },
+    }
   ],
   pdfUrl: "/pdfs/non-technical-builders-playbook.pdf",
   metaTitle:
@@ -227,13 +227,12 @@ export const nonTechnicalBuildersPlaybook: ResearchArticle = {
     "builder playbook",
     "VS Code Claude",
     "AI automation",
-    "citizen developer AI",
+    "citizen developer AI"
   ],
   relatedSlugs: [
-    "product-judgment-ai-era",
     "ai-roi-playbook",
     "openai-frontier-playbook",
     "what-ai-agents-actually-are",
-    "ai-sales-playbook",
+    "ai-sales-playbook"
   ],
 };
