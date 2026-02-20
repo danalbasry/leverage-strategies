@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import Logo from "@/components/ui/Logo";
 
 export default function CoachingNav() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,10 +27,8 @@ export default function CoachingNav() {
       <div className="coaching-container">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/coaching" className="flex items-center gap-2">
-            <span className="font-display text-xl font-bold tracking-tight">
-              Leverage<span className="text-amber-dark">\</span>Strategies
-            </span>
+          <Link href="/coaching" aria-label="Leverage Strategies home">
+            <Logo variant="dark" />
           </Link>
 
           {/* Desktop Navigation */}

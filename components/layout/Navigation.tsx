@@ -64,12 +64,12 @@ const researchDropdown: NavItemWithDropdown = {
       heading: "Featured Research",
       items: [
         {
-          label: "How to Measure AI ROI: Every CFO's Question",
-          href: "/research/ai-roi-playbook",
+          label: "Dev Capacity Went Unlimited. The PM Role Didn't.",
+          href: "/research/unlimited-dev-capacity-pm-playbook",
         },
         {
-          label: "The Non-Technical Builder's Playbook",
-          href: "/research/non-technical-builders-playbook",
+          label: "How to Measure AI ROI: Every CFO's Question",
+          href: "/research/ai-roi-playbook",
         },
         {
           label: "The OpenAI Frontier Playbook",
