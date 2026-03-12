@@ -7,7 +7,7 @@ import ContactButton from "@/components/ui/ContactButton";
 export const metadata: Metadata = {
   title: "AI Consultation",
   description:
-    "One-time AI consultation for professionals in legal, medical, government, banking, and other high-compliance sectors.",
+    "AI consultation for professionals in legal, medical, government, banking, and other high-compliance sectors.",
 };
 
 const SECTORS = [
@@ -112,15 +112,9 @@ export default function ConsultPage() {
               sectors. One session covering the right tools for your field,
               how to use them, and the resources to get started.
             </p>
-            <div className="flex flex-col sm:flex-row items-start gap-4">
-              <div className="flex items-baseline gap-3">
-                <span className="text-4xl font-bold text-white">$500</span>
-                <span className="text-white/50 text-sm">one-time session</span>
-              </div>
-              <ContactButton variant="primary" className="sm:ml-4">
-                Book a Consultation
-              </ContactButton>
-            </div>
+            <ContactButton variant="primary">
+              Book a Consultation
+            </ContactButton>
           </div>
         </Container>
       </section>
@@ -265,7 +259,7 @@ export default function ConsultPage() {
               Get in touch to book a session.
             </h2>
             <p className="text-white/60 mb-8 max-w-xl mx-auto">
-              $500, one session. Covers tools, training, and resources
+              One session covering tools, training, and resources
               for your field.
             </p>
             <ContactButton variant="primary">
