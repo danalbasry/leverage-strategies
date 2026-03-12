@@ -38,6 +38,7 @@ const servicesDropdown: NavItemWithDropdown = {
     {
       heading: "Founders & SMBs",
       items: [
+        { label: "SEO, GEO & Digital Marketing", href: "/services/digital-marketing" },
         { label: "Personal AI Coaching", href: "/coaching" },
         { label: "Business Process Automation", href: "/services#smb" },
         { label: "CRM & Operational Systems", href: "/services#smb" },
