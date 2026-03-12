@@ -8,7 +8,7 @@ import ContactButton from "@/components/ui/ContactButton";
 export const metadata: Metadata = {
   title: "AI Systems for Professional Services",
   description:
-    "AI workflows for professional services firms in law, healthcare, financial advisory, real estate, and consulting. GEO, practitioner workflow systems, content pipelines, and AI search visibility.",
+    "SEO, GEO, AI search visibility, strategic positioning, and practitioner workflow systems for professional services firms in law, healthcare, financial advisory, real estate, and consulting.",
 };
 
 const SERVICES = [
@@ -92,11 +92,10 @@ export default function ProfessionalServicesPage() {
               AI Systems for Professional Services Firms
             </h1>
             <p className="text-white/70 lg:text-lg max-w-2xl">
-              Leverage Strategies builds AI workflows for firms where
-              reputation, visibility, and operational efficiency determine who
-              wins. We work with practices in law, healthcare, financial
-              advisory, real estate, and consulting to turn expertise into
-              scalable systems.
+              SEO, Generative Engine Optimization, AI search visibility,
+              strategic positioning, and practitioner workflow systems for firms
+              in law, healthcare, financial advisory, real estate, and
+              consulting. We turn expertise into scalable systems.
             </p>
           </div>
         </Container>
@@ -142,11 +141,11 @@ export default function ProfessionalServicesPage() {
         <Container>
           <SectionLabel className="mb-2">What We Build</SectionLabel>
           <h2 className="text-display-xl font-serif font-bold text-heading mb-3">
-            AI systems designed for how professional services firms operate.
+            SEO. GEO. Strategic positioning. Practitioner workflows.
           </h2>
           <p className="text-gray-text mb-10 max-w-2xl">
             Each system is built around your firm's specific practice areas,
-            workflows, and client base.
+            competitive landscape, and client acquisition goals.
           </p>
 
           <div className="space-y-6">
