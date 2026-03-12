@@ -243,6 +243,18 @@ export default function Navigation() {
             </div>
           ))}
 
+          {/* Consult */}
+          <Link
+            href="/consult"
+            className={`px-3 py-2 text-sm font-medium transition-colors rounded-md ${
+              pathname === "/consult"
+                ? "text-dark-hero"
+                : "text-gray-text hover:text-heading"
+            }`}
+          >
+            Consult
+          </Link>
+
           {/* About */}
           <Link
             href="/about"
@@ -389,6 +401,16 @@ export default function Navigation() {
               ))}
             </div>
           </div>
+
+          {/* Consult */}
+          <Link
+            href="/consult"
+            className={`block py-3 text-base font-medium ${
+              pathname === "/consult" ? "text-dark-hero font-bold" : "text-heading"
+            }`}
+          >
+            Consult
+          </Link>
 
           {/* About */}
           <Link
