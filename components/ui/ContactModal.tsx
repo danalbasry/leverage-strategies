@@ -18,6 +18,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -48,22 +50,40 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
+    setError(false);
 
-    const subject = encodeURIComponent(
-      `Inquiry from ${formData.firstName} ${formData.lastName}, ${formData.company}`
-    );
-    const body = encodeURIComponent(
-      `Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nCompany: ${formData.company}\nTitle: ${formData.jobTitle}\nPhone: ${formData.phone}\n\nMessage:\n${formData.message}`
-    );
-    window.location.href = `mailto:dan@leveragestrategies.ai?subject=${subject}&body=${body}`;
+    try {
+      const res = await fetch("https://formspree.io/f/xkoqrejw", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          company: formData.company,
+          jobTitle: formData.jobTitle,
+          phone: formData.phone,
+          message: formData.message,
+        }),
+      });
 
-    setSubmitted(true);
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleReset = () => {
     setSubmitted(false);
+    setError(false);
     setFormData({
       firstName: "",
       lastName: "",
@@ -109,10 +129,10 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               Thank you for reaching out.
             </h2>
             <p className="text-gray-text mb-2">
-              Your email client should open with a pre-filled message.
+              Your message has been sent.
             </p>
             <p className="text-gray-text text-sm mb-8">
-              If it didn&apos;t open, please try again or reach out through LinkedIn.
+              We typically respond within one business day.
             </p>
             <button
               onClick={handleReset}
@@ -280,16 +300,28 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
               <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
                 <button
                   type="submit"
-                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg bg-purple-accent px-8 py-3 text-sm font-semibold text-white hover:bg-purple-accent-hover transition-colors shadow-sm"
+                  disabled={submitting}
+                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg bg-purple-accent px-8 py-3 text-sm font-semibold text-white hover:bg-purple-accent-hover transition-colors shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Submit
-                  <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
+                  {submitting ? "Sending..." : "Submit"}
+                  {!submitting && (
+                    <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  )}
                 </button>
-                <p className="text-xs text-gray-text/60">
-                  We typically respond within one business day.
-                </p>
+                <div>
+                  {error && (
+                    <p className="text-xs text-red-600">
+                      Something went wrong. Please try again or email dan.albasry@outlook.com directly.
+                    </p>
+                  )}
+                  {!error && (
+                    <p className="text-xs text-gray-text/60">
+                      We typically respond within one business day.
+                    </p>
+                  )}
+                </div>
               </div>
             </form>
           </>
