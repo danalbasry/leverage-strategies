@@ -5,9 +5,9 @@ import SectionLabel from "@/components/ui/SectionLabel";
 import ContactButton from "@/components/ui/ContactButton";
 
 export const metadata: Metadata = {
-  title: "AI Consultation — $500 One-Time Session",
+  title: "AI Consultation",
   description:
-    "A personalized, one-time AI consultation for professionals in legal, medical, government, banking, and other high-compliance sectors. Walk away with the right tools, best practices, and resources for your field.",
+    "One-time AI consultation for professionals in legal, medical, government, banking, and other high-compliance sectors.",
 };
 
 const SECTORS = [
@@ -16,9 +16,9 @@ const SECTORS = [
     roles: "Law firms, solo practitioners, paralegals, compliance counsel",
     examples: [
       "AI-assisted legal research and case analysis",
-      "Contract review and drafting acceleration",
+      "Contract review and drafting workflows",
       "Client intake and document automation",
-      "Confidentiality-safe tools that respect attorney-client privilege",
+      "Tools that respect attorney-client privilege",
     ],
   },
   {
@@ -27,15 +27,15 @@ const SECTORS = [
     examples: [
       "Clinical documentation and note generation",
       "Patient intake automation",
-      "HIPAA-compliant AI tools and vendor evaluation",
-      "Medical research and literature review acceleration",
+      "HIPAA-compliant tool selection and vendor evaluation",
+      "Medical research and literature review",
     ],
   },
   {
     name: "Government & Public Sector",
     roles: "Federal, state, and municipal agencies, public administration",
     examples: [
-      "Constituent communication and response automation",
+      "Constituent communication and response workflows",
       "Policy research and legislative analysis",
       "FedRAMP and security-cleared tool selection",
       "Internal process automation within compliance boundaries",
@@ -45,7 +45,7 @@ const SECTORS = [
     name: "Banking & Financial Services",
     roles: "Banks, credit unions, wealth management, insurance, fintech",
     examples: [
-      "Risk analysis and compliance reporting acceleration",
+      "Risk analysis and compliance reporting",
       "Client communication and advisory workflows",
       "FINRA, SOX, and regulatory-compliant tool selection",
       "Document processing and data extraction",
@@ -65,34 +65,34 @@ const SECTORS = [
 
 const DELIVERABLES = [
   {
-    title: "AI Tool Audit & Recommendations",
+    title: "Tool Recommendations",
     description:
-      "A personalized assessment of your current workflow, role, and organization — matched to the exact AI tools that will have the highest impact. No generic lists. Every recommendation is specific to what you actually do.",
+      "An assessment of your current workflow, role, and organization matched to the AI tools that fit. Recommendations are specific to what you do, not a generic list.",
   },
   {
-    title: "Compliance-First Vendor Evaluation",
+    title: "Vendor Evaluation",
     description:
-      "Honest, unbiased answers about AI vendors, their data handling policies, and which platforms are safe for your regulatory environment — HIPAA, attorney-client privilege, FINRA, FedRAMP, SOC 2, and beyond.",
+      "Clear answers on AI vendors, data handling policies, and which platforms meet your regulatory requirements. HIPAA, attorney-client privilege, FINRA, FedRAMP, SOC 2.",
   },
   {
-    title: "Live Walkthrough & Hands-On Training",
+    title: "Hands-On Walkthrough",
     description:
-      "A guided session where I walk you through each recommended tool, show you how to use it effectively in your day-to-day work, and answer every question until you feel confident.",
+      "A live session where we go through each recommended tool, how to use it in your day-to-day, and any questions you have.",
   },
   {
-    title: "Best Practices for Your Field",
+    title: "Best Practices",
     description:
-      "Industry-specific guidance on prompt engineering, data handling, output verification, and the operational patterns that separate productive AI use from risky experimentation.",
+      "Industry-specific guidance on prompt engineering, data handling, output verification, and the operational patterns that matter in regulated environments.",
   },
   {
     title: "Resource Package",
     description:
-      "You leave with a curated kit — setup guides, prompt templates, vendor comparison matrices, and reference materials you can share with your team or firm leadership.",
+      "Setup guides, prompt templates, vendor comparison notes, and reference materials you can share with your team or firm leadership.",
   },
   {
-    title: "Ongoing Q&A Support",
+    title: "Follow-Up Support",
     description:
-      "After the session, you can reach out with follow-up questions about the tools, vendors, or implementation. The goal is for you to feel fully equipped, not just informed.",
+      "After the session, you can reach out with follow-up questions about the tools, vendors, or implementation.",
   },
 ];
 
@@ -103,15 +103,14 @@ export default function ConsultPage() {
       <section className="bg-dark-hero pt-28 pb-14 lg:pt-36 lg:pb-20">
         <Container>
           <div className="max-w-3xl">
-            <SectionLabel dark>One-Time Consultation</SectionLabel>
+            <SectionLabel dark>Consultation</SectionLabel>
             <h1 className="text-display-hero font-serif font-bold text-white mt-3 mb-5">
-              AI Tools & Strategy for High-Compliance Professionals
+              AI Consultation for Regulated Industries
             </h1>
             <p className="text-white/70 lg:text-lg max-w-2xl mb-8">
-              A single, focused session to identify the best AI tools for your
-              field, walk you through how to use them, and leave you with
-              everything you need to leverage them confidently — with your
-              compliance and confidentiality requirements front and center.
+              We consult for professionals and organizations in high-compliance
+              sectors. One session covering the right tools for your field,
+              how to use them, and the resources to get started.
             </p>
             <div className="flex flex-col sm:flex-row items-start gap-4">
               <div className="flex items-baseline gap-3">
@@ -119,24 +118,23 @@ export default function ConsultPage() {
                 <span className="text-white/50 text-sm">one-time session</span>
               </div>
               <ContactButton variant="primary" className="sm:ml-4">
-                Book Your Consultation
+                Book a Consultation
               </ContactButton>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* What You Get */}
+      {/* What's Included */}
       <Section theme="white">
         <Container>
-          <SectionLabel className="mb-2">What You Get</SectionLabel>
+          <SectionLabel className="mb-2">What&apos;s Included</SectionLabel>
           <h2 className="text-display-xl font-serif font-bold text-heading mb-3">
-            Everything you need to adopt AI with confidence.
+            The session covers everything you need to get going.
           </h2>
           <p className="text-gray-text mb-10 max-w-2xl">
-            This isn&apos;t a generic overview of ChatGPT. It&apos;s a
-            personalized working session built around your role, your
-            organization, and the regulatory constraints of your industry.
+            Tailored to your role, your organization, and the regulatory
+            requirements of your industry.
           </p>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -160,14 +158,13 @@ export default function ConsultPage() {
       {/* Sectors */}
       <Section theme="gray">
         <Container>
-          <SectionLabel className="mb-2">Sectors</SectionLabel>
+          <SectionLabel className="mb-2">Industries We Work With</SectionLabel>
           <h2 className="text-display-xl font-serif font-bold text-heading mb-3">
-            Built for industries where confidentiality isn&apos;t optional.
+            Compliance and confidentiality are the starting point.
           </h2>
           <p className="text-gray-text mb-10 max-w-2xl">
-            Every recommendation is made with your sector&apos;s regulatory and
-            data handling requirements as the starting point — not an
-            afterthought.
+            Every recommendation accounts for your sector&apos;s regulatory and
+            data handling requirements.
           </p>
 
           <div className="space-y-6">
@@ -218,30 +215,30 @@ export default function ConsultPage() {
       {/* How It Works */}
       <Section theme="white">
         <Container>
-          <SectionLabel className="mb-2">How It Works</SectionLabel>
+          <SectionLabel className="mb-2">Process</SectionLabel>
           <h2 className="text-display-xl font-serif font-bold text-heading mb-10">
-            Simple, focused, and actionable.
+            How it works.
           </h2>
 
           <div className="grid gap-8 md:grid-cols-3">
             {[
               {
                 step: "01",
-                title: "Tell me about your work",
+                title: "Intake",
                 description:
-                  "We start with a short intake — your role, your organization, the tools you currently use, and what you're trying to accomplish. This lets me tailor everything to your situation.",
+                  "You share your role, your organization, the tools you currently use, and what you are trying to accomplish. This lets us tailor the session to your situation.",
               },
               {
                 step: "02",
-                title: "Live consultation session",
+                title: "Live Session",
                 description:
-                  "A focused, hands-on session where I walk you through the recommended tools, demonstrate how to use them in your workflows, and answer every question you have about vendors, pricing, and compliance.",
+                  "We walk through the recommended tools, demonstrate how they apply to your workflows, and cover any questions you have about vendors, pricing, and compliance.",
               },
               {
                 step: "03",
-                title: "Walk away equipped",
+                title: "Deliverables",
                 description:
-                  "You leave with a complete resource package — tool recommendations, setup guides, prompt templates, and vendor evaluations. Plus ongoing access for follow-up questions.",
+                  "You receive your resource package with tool recommendations, setup guides, prompt templates, and vendor evaluations. Follow-up questions are welcome after the session.",
               },
             ].map((item) => (
               <div key={item.step} className="relative">
@@ -260,58 +257,19 @@ export default function ConsultPage() {
         </Container>
       </Section>
 
-      {/* Why Me */}
-      <Section theme="purple-light">
-        <Container>
-          <div className="max-w-3xl mx-auto text-center">
-            <SectionLabel className="mb-2">Why Leverage Strategies</SectionLabel>
-            <h2 className="text-display-xl font-serif font-bold text-heading mb-6">
-              Not a course. Not a webinar. A working session with someone who
-              does this every day.
-            </h2>
-            <div className="text-left space-y-4 mt-8">
-              {[
-                "I've worked hands-on with every major AI platform — I know what actually works versus what's marketing.",
-                "Recommendations are specific to your role, your workflows, and your compliance constraints — not a one-size-fits-all list.",
-                "Every tool I suggest is vetted for your sector's data handling and regulatory requirements before I recommend it.",
-                "You walk away with actionable resources and real competence, not a slide deck you'll never open.",
-                "I work across legal, medical, government, banking, and enterprise — so I understand the patterns and pitfalls unique to high-compliance environments.",
-              ].map((text) => (
-                <div key={text} className="flex items-start gap-3">
-                  <svg
-                    className="h-5 w-5 text-purple-accent shrink-0 mt-0.5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <p className="text-body leading-relaxed">{text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* Final CTA */}
+      {/* CTA */}
       <Section theme="dark">
         <Container>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-display-lg font-serif font-bold text-white mb-4">
-              Ready to leverage AI the right way?
+              Get in touch to book a session.
             </h2>
             <p className="text-white/60 mb-8 max-w-xl mx-auto">
-              One session. $500. Walk away with the tools, training, and
-              resources to use AI confidently in your field.
+              $500, one session. Covers tools, training, and resources
+              for your field.
             </p>
             <ContactButton variant="primary">
-              Book Your Consultation
+              Book a Consultation
             </ContactButton>
           </div>
         </Container>
