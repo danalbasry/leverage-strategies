@@ -243,6 +243,18 @@ export default function Navigation() {
             </div>
           ))}
 
+          {/* Industries */}
+          <Link
+            href="/professional-services"
+            className={`px-3 py-2 text-sm font-medium transition-colors rounded-md ${
+              pathname === "/professional-services"
+                ? "text-dark-hero"
+                : "text-gray-text hover:text-heading"
+            }`}
+          >
+            Industries
+          </Link>
+
           {/* Consult */}
           <Link
             href="/consult"
@@ -401,6 +413,16 @@ export default function Navigation() {
               ))}
             </div>
           </div>
+
+          {/* Industries */}
+          <Link
+            href="/professional-services"
+            className={`block py-3 text-base font-medium ${
+              pathname === "/professional-services" ? "text-dark-hero font-bold" : "text-heading"
+            }`}
+          >
+            Industries
+          </Link>
 
           {/* Consult */}
           <Link
