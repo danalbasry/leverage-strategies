@@ -1,0 +1,1193 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Real estate agent playbook: listings, follow-ups, showing notes and the fair housing rules</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="How agents in the US and Canada can use AI for listings, follow-ups and showing notes, with the fair housing, advertising and consent checks that go in front of anything a client sees. Three reading levels.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* LAYOUT: one reading column (680px) with figures to 1040px; a fact sheet opens the page; one ink band; floating level switch. Light theme by choice (site direction G. Combined). */
+:root{
+  color-scheme: light;
+  --paper:#F8F6F1; --ink:#141412; --body:#3A3832; --muted:#5A584F; --rule:#CFCBC0; --panel:#EDE9DF; --accent:#7A2E1A;
+  --display:'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --text:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --col:680px; --wide:1040px;
+}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+.eyebrow{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 24px}
+.widewrap{max-width:var(--wide);margin:0 auto;padding:0 24px}
+figure.wrap,figure.widewrap{margin:44px auto}
+
+/* three reading levels: .d detailed, .s simple, .t starter, .ds detailed+simple, .st simple+starter */
+body.lv-d .s, body.lv-d .t, body.lv-d .st{display:none !important}
+body.lv-s .d, body.lv-s .t{display:none !important}
+body.lv-t .d, body.lv-t .s, body.lv-t .ds{display:none !important}
+body.lv-s .prose{font-size:19px;line-height:1.75}
+body.lv-t .prose{font-size:20px;line-height:1.8}
+
+header.site{padding:24px 32px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink)}
+header.site .mark{font-family:var(--display);font-size:32px;line-height:1}
+header.site .where{font-size:14px;color:var(--muted)}
+
+.hero{max-width:var(--wide);margin:0 auto;padding:72px 24px 0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:end}
+.hero h1{font-size:clamp(44px,6.4vw,80px);line-height:1.02;letter-spacing:-.02em;margin-top:24px}
+.hero .lede{margin:28px 0 0;font-size:21px;line-height:1.6;color:var(--body)}
+.hero .by{margin:28px 0 0;font-size:14px;color:var(--muted)}
+.hero figure{margin:0}
+.hero img{width:100%;max-height:620px;object-fit:cover;object-position:center 30%;border:1px solid var(--rule)}
+@media (max-width:820px){.hero{grid-template-columns:1fr;gap:32px;padding-top:56px}.hero img{max-height:520px}}
+
+.versions{margin:56px auto 0;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:22px 0}
+.versions p{margin:0;font-size:16px;color:var(--body);flex:1 1 300px}
+.seg{display:inline-flex;border:1px solid var(--ink);background:var(--paper)}
+.seg button{font:500 14px/1 var(--text);letter-spacing:.04em;padding:14px 16px;min-height:44px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button + button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.float{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:20;box-shadow:0 6px 24px rgba(20,20,18,.18)}
+.float .lab{display:flex;align-items:center;padding:0 14px 0 16px;font-size:13px;color:var(--muted);border-right:1px solid var(--rule)}
+@media (max-width:520px){.float .lab{display:none}.seg button{padding:14px 13px}}
+
+.toc{margin:56px auto 0}
+.toc ol{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--ink)}
+.toc li{border-bottom:1px solid var(--rule)}
+.toc a{display:flex;gap:20px;align-items:baseline;padding:14px 0;text-decoration:none;font-family:var(--display);font-size:24px;line-height:1.2}
+.toc a span.n{font:400 13px var(--text);color:var(--muted);flex:0 0 20px;font-variant-numeric:tabular-nums}
+
+section.q{padding:96px 0 0;scroll-margin-top:12px}
+section.q h2{font-size:clamp(34px,5vw,52px);line-height:1.06;margin:14px 0 28px}
+.prose p{margin:0 0 20px;color:var(--body)}
+.prose p.answer{font-size:1.14em;line-height:1.55;color:var(--ink)}
+.prose strong{color:var(--ink);font-weight:600}
+.prose ul,.prose ol{margin:0 0 20px;padding-left:22px;color:var(--body)}
+.prose li{margin:0 0 10px}
+.key{font-family:var(--display);font-size:clamp(28px,4vw,38px);line-height:1.15;color:var(--ink);margin:36px 0;padding:28px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.key em{color:var(--accent)}
+
+figure{margin:44px auto}
+figcaption{margin-top:12px;font-size:13px;line-height:1.5;color:var(--muted)}
+.figtitle{margin:0 0 18px;font-family:var(--display);font-size:26px;line-height:1.15}
+
+/* ladder */
+.ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end;border-bottom:1px solid var(--ink)}
+.rung{border:1px solid var(--ink);border-bottom:0;padding:18px 18px 20px;background:var(--paper)}
+.rung:nth-child(1){min-height:200px}.rung:nth-child(2){min-height:250px}.rung:nth-child(3){min-height:300px;background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.rung .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.rung h3{font-size:30px;line-height:1.1;margin:6px 0 10px}
+.rung p{margin:0;font-size:15.5px;line-height:1.55;color:var(--body)}
+.rung p.ex{margin-top:12px;padding-top:12px;border-top:1px solid var(--rule)}
+@media (max-width:700px){.ladder{grid-template-columns:1fr;border-bottom:0}.rung,.rung:nth-child(n){min-height:0;border-bottom:1px solid var(--ink)}.rung:nth-child(3){border-bottom-color:var(--accent)}}
+
+/* test list */
+.test{list-style:none;margin:0 0 24px;padding:0;border-top:1px solid var(--ink);counter-reset:tq}
+.test li{counter-increment:tq;display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.test li::before{content:counter(tq);font-family:var(--display);font-size:30px;line-height:1;color:var(--accent)}
+
+/* flow diagram */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px}
+.stage{position:relative;border:1px solid var(--ink);padding:16px 16px 18px;background:var(--paper)}
+.stage .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.stage h3{font-size:25px;line-height:1.1;margin:6px 0 8px}
+.stage p{margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.stage:not(:last-child)::after{content:"\2192";position:absolute;right:-29px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--muted)}
+.stage.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.repair{margin-top:36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:28px;align-items:start;border-top:1px dashed var(--ink);padding-top:22px}
+.repair h3{font-size:28px;line-height:1.1}
+.repair .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.repair ol{margin:0;padding-left:20px;font-size:15.5px;line-height:1.55;color:var(--body)}
+.repair li{margin-bottom:6px}
+@media (max-width:820px){.flow{grid-template-columns:1fr;gap:30px}.stage:not(:last-child)::after{content:"\2193";right:auto;left:22px;top:auto;bottom:-29px;transform:none}.repair{grid-template-columns:1fr;gap:12px}}
+
+/* bars */
+.bars{display:grid;gap:18px}
+.bar{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;align-items:center}
+.bar .l{font-size:15px;line-height:1.35;color:var(--ink)}
+.bar .l small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.bar .tr{display:flex;align-items:center;gap:12px}
+.bar .f{height:30px;background:#A8A397;min-width:2px}
+.bar .f.hot{background:var(--accent)}
+.bar .f.ink{background:var(--ink)}
+.bar .v{font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:560px){.bar{grid-template-columns:1fr;gap:6px}}
+
+/* business finder */
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.pick button{font:500 15px var(--text);min-height:44px;padding:10px 14px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.pick button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.biz{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink);border-left:1px solid var(--rule)}
+.biz li{padding:18px 20px 20px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);transition:background .25s}
+.biz li.on{background:var(--panel);box-shadow:inset 3px 0 0 var(--accent)}
+.biz h3{font-size:27px;line-height:1.1;margin:0 0 10px}
+.biz dl{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 12px;font-size:15px;line-height:1.5}
+.biz dt{font:500 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.biz dd{margin:0;color:var(--body)}
+@media (max-width:640px){.biz{grid-template-columns:1fr}}
+
+.box{margin:36px 0;padding:24px 26px;background:var(--panel);border:1px solid var(--ink)}
+.box h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.box p{margin:0 0 12px;font-size:16.5px;line-height:1.6;color:var(--body)}
+.box p:last-child{margin-bottom:0}
+
+/* two countries */
+.where2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;margin:36px 0;border:1px solid var(--ink)}
+.where2 > div{padding:24px 26px;background:var(--panel)}
+.where2 > div + div{border-left:1px solid var(--ink)}
+@media (max-width:600px){.where2 > div + div{border-left:0;border-top:1px solid var(--ink)}}
+.where2 h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2 ul{margin:0;padding-left:18px;font-size:15.5px;line-height:1.6;color:var(--body)}
+.where2 li{margin-bottom:10px}
+
+/* numbered risks */
+.steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink);counter-reset:st}
+.steps li{counter-increment:st;display:grid;grid-template-columns:64px 1fr;gap:8px;padding:26px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(st);font-family:var(--display);font-size:54px;line-height:.9;color:var(--accent)}
+.steps h3{font-size:28px;line-height:1.15;margin:0 0 8px}
+.steps p{margin:0;color:var(--body);font-size:.96em}
+
+.skip{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.skip li{display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.skip li::before{content:"\00D7";font-family:var(--display);font-size:36px;line-height:.8;color:var(--accent)}
+
+table{border-collapse:collapse;width:100%;font-size:15.5px;line-height:1.45}
+th{font:500 12.5px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 14px 10px 0;border-bottom:1px solid var(--ink)}
+td{padding:13px 14px 13px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--body)}
+td:first-child{color:var(--ink);font-weight:500;white-space:nowrap}
+
+.band{background:var(--ink);color:var(--paper);margin-top:96px;padding:64px 0}
+.band p.eyebrow{color:#B5B1A6;font-family:var(--text);font-size:13px;line-height:1.4;margin:0}
+.band p{margin:16px 0 0;font-family:var(--display);font-size:clamp(24px,3.4vw,32px);line-height:1.3;color:var(--paper)}
+
+.note{display:inline;background:#F3E3DC;color:var(--accent);font-size:.92em;padding:1px 6px}
+
+.check{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.check li{border-bottom:1px solid var(--rule)}
+.check label{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:20px 0;cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;width:24px;height:24px;margin:4px 0 0;border:1.5px solid var(--ink);background:var(--paper);display:grid;place-content:center;cursor:pointer}
+.check input:checked{background:var(--ink)}
+.check input:checked::after{content:"";width:11px;height:6px;border-left:2px solid var(--paper);border-bottom:2px solid var(--paper);transform:rotate(-45deg) translate(1px,-1px)}
+.check span{color:var(--ink)}
+
+.cta{border-top:1px solid var(--ink);margin-top:96px;padding:88px 24px;text-align:center}
+.cta h2{font-size:clamp(40px,6vw,68px);line-height:1.04}
+.cta p{max-width:600px;margin:22px auto 0;color:var(--body)}
+
+.sources{padding:72px 0 0}
+.sources h2{font-size:34px;margin:0 0 8px}
+.sources ul{margin:18px 0 0;padding-left:20px;font-size:15px;line-height:1.6;color:var(--body)}
+.sources li{margin-bottom:8px}
+.sources p{font-size:15px;color:var(--muted);margin:0}
+footer.site{margin-top:88px;border-top:1px solid var(--ink);padding:24px 32px 110px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.biz li{transition:none}}
+
+/* phone article additions */
+.log{border:1px solid var(--ink);background:#fff;padding:18px 0 8px;box-shadow:0 18px 40px rgba(20,20,18,.08)}
+.log .hd{display:flex;justify-content:space-between;align-items:baseline;padding:0 20px 12px;border-bottom:1px solid var(--rule)}
+.log .hd b{font-family:var(--display);font-weight:400;font-size:28px}
+.log .hd span{font-size:13px;color:var(--muted)}
+.log ul{list-style:none;margin:0;padding:0}
+.log li{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:12px 20px;border-bottom:1px solid var(--panel)}
+.log li:last-child{border-bottom:0}
+.log .ic{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--accent);position:relative}
+.log .ic::after{content:"";position:absolute;left:5px;top:9px;width:9px;height:1.5px;background:var(--accent);transform:rotate(-35deg)}
+.log .who{font-size:16px;color:var(--accent);line-height:1.3}
+.log .who small{display:block;font-size:13px;color:var(--muted)}
+.log .tm{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.verdict{margin:48px 0 0;padding:26px 28px;border:1px solid var(--ink);background:var(--panel);box-shadow:inset 0 3px 0 var(--accent)}
+.verdict h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+.verdict p{margin:0;font-family:var(--display);font-size:clamp(24px,3.2vw,30px);line-height:1.25;color:var(--ink)}
+.lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.lane{border:1px solid var(--ink);padding:18px}
+.lane h3{font-size:26px;line-height:1.1;margin:4px 0 8px}
+.lane .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.lane p{margin:10px 0 0;font-size:15px;line-height:1.5;color:var(--body)}
+.day{display:flex;height:26px;border:1px solid var(--ink);margin-top:10px}
+.day i{display:block;height:100%}
+.day .p{background:#A8A397}.day .a{background:var(--accent)}.day .pa{background:repeating-linear-gradient(135deg,#A8A397 0 6px,var(--accent) 6px 12px)}
+.daykey{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px}
+.legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:14px;color:var(--body)}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px}
+.legend .lp::before{background:#A8A397}.legend .la::before{background:var(--accent)}.legend .lpa::before{background:repeating-linear-gradient(135deg,#A8A397 0 3px,var(--accent) 3px 6px)}
+@media (max-width:760px){.lanes{grid-template-columns:1fr}}
+.dots{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:6px;max-width:560px}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--ink)}
+.dots i.m{background:transparent;border:1.5px solid #A8A397}
+.dots i.v{background:var(--accent)}
+.dotkey{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:14px;color:var(--body)}
+.dotkey span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.dotkey .a::before{background:var(--ink)}.dotkey .m::before{border:1.5px solid #A8A397}.dotkey .v::before{background:var(--accent)}
+.bar .f.cad{background:repeating-linear-gradient(135deg,#A8A397 0 6px,#CFCBC0 6px 12px)}
+.scroll{overflow-x:auto}
+@media (max-width:600px){.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--rule)}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8.5em;white-space:normal}.stack td::before{content:attr(data-l);float:inline-start;width:8em;margin-inline-start:-8.5em;font:500 12px/1.9 var(--text);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}.stack td:first-child{font-weight:600}}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+th.n{text-align:right}
+
+
+
+/* real estate playbook additions */
+body{background:var(--paper)}
+.wrap,.widewrap{padding-left:max(24px, env(safe-area-inset-left, 0px));padding-right:max(24px, env(safe-area-inset-right, 0px))}
+header.site,footer.site{padding-left:max(24px, env(safe-area-inset-left, 0px));padding-right:max(24px, env(safe-area-inset-right, 0px))}
+.hero{padding-left:max(24px, env(safe-area-inset-left, 0px));padding-right:max(24px, env(safe-area-inset-right, 0px))}
+.cta{padding-left:max(24px, env(safe-area-inset-left, 0px));padding-right:max(24px, env(safe-area-inset-right, 0px))}
+.float{bottom:calc(20px + env(safe-area-inset-bottom, 0px))}
+.hero h1{font-size:clamp(44px,6.4vw,78px)}
+.hero .sub{margin:14px 0 0;font-family:var(--display);font-size:clamp(24px,3vw,32px);line-height:1.2;color:var(--body)}
+.note{display:inline;background:#F3E3DC;color:var(--accent);font-size:.92em;padding:1px 6px;line-height:1.7}
+p.notep{margin:0 0 20px}
+.made{display:inline-block;font:600 11.5px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:3px 7px;margin:0 0 10px}
+
+/* fact sheet card */
+.sheet{border:1px solid var(--ink);background:#fff;box-shadow:0 18px 40px rgba(20,20,18,.08)}
+.sheet .hd{padding:16px 20px 12px;border-bottom:1px solid var(--ink)}
+.sheet .hd b{display:block;font-family:var(--display);font-weight:400;font-size:28px;line-height:1.1}
+.sheet .hd span{font-size:13px;color:var(--muted)}
+.sheet dl{margin:0;display:grid;grid-template-columns:minmax(0,1fr) auto;font-size:15px}
+.sheet dt,.sheet dd{margin:0;padding:9px 20px;border-bottom:1px solid var(--panel)}
+.sheet dt{color:var(--muted)}
+.sheet dd{color:var(--ink);text-align:right;font-variant-numeric:tabular-nums;padding-left:0}
+.sheet .no{padding:12px 20px 16px;font-size:14px;color:var(--body)}
+.sheet .no strong{display:block;font:600 11.5px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+
+/* risk ladder, four rungs */
+.ladder4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:end;border-bottom:1px solid var(--ink)}
+.ladder4 .rung{border:1px solid var(--ink);border-bottom:0;padding:16px 16px 18px;background:var(--paper)}
+.ladder4 .rung:nth-child(1){min-height:180px}.ladder4 .rung:nth-child(2){min-height:220px}.ladder4 .rung:nth-child(3){min-height:260px}.ladder4 .rung:nth-child(4){min-height:300px;background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.ladder4 .rung h3{font-size:25px;line-height:1.1;margin:6px 0 10px}
+.ladder4 .rung p{margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.ladder4 .tag{display:inline-block;margin-top:12px;font:500 12px var(--text);letter-spacing:.04em;color:var(--ink);border-top:1px solid var(--ink);padding-top:8px}
+.riskaxis{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:8px}
+@media (max-width:760px){.ladder4{grid-template-columns:1fr;border-bottom:0}.ladder4 .rung,.ladder4 .rung:nth-child(n){min-height:0;border-bottom:1px solid var(--ink)}.ladder4 .rung:nth-child(4){border-bottom-color:var(--accent)}.riskaxis{display:none}}
+
+/* prompt blocks */
+.prompt{margin:0 0 28px;border:1px solid var(--ink);background:#fff}
+.prompt .ph{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 8px 8px 16px;border-bottom:1px solid var(--rule)}
+.prompt .ph span{font:600 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.prompt button{font:500 13px var(--text);min-height:36px;padding:6px 12px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.prompt blockquote{margin:0;padding:16px;font-size:15.5px;line-height:1.6;color:var(--ink);white-space:pre-wrap}
+
+/* tool switch */
+.tools{margin:8px 0 32px;border-top:1px solid var(--ink);padding-top:18px}
+.tools .tl{font:600 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.toolseg{display:flex;flex-wrap:wrap}
+.toolseg button{padding:10px 14px;min-height:44px}
+.tool{padding-top:20px}
+.tool h3{font-size:28px;line-height:1.15;margin:0 0 12px}
+.tool ol,.tool ul{margin:0;padding-left:22px;color:var(--body)}
+.tool li{margin:0 0 10px}
+.tool p{margin:0 0 14px;color:var(--body)}
+
+/* trace figure */
+.trace{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,.8fr) minmax(0,1.3fr);gap:28px;align-items:start}
+.trace .col{border:1px solid var(--ink);background:#fff;padding:16px 18px}
+.trace .col .k{font:600 11.5px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.trace ul{list-style:none;margin:0;padding:0;font-size:14.5px;line-height:1.5}
+.trace li{padding:6px 0;border-bottom:1px solid var(--panel);display:flex;justify-content:space-between;gap:10px}
+.trace li b{font-weight:600;font-variant-numeric:tabular-nums}
+.trace .col p{margin:0;font-size:14.5px;line-height:1.6;color:var(--body)}
+.trace mark{background:transparent;color:var(--ink);font-weight:600;border-bottom:2px solid var(--ink)}
+.trace mark.off{color:var(--accent);border-bottom:2px dashed var(--accent)}
+.trace .arrow{position:relative}
+.trace .col + .col::before{content:"\2192";position:absolute;margin-left:-26px;margin-top:40px;font-size:20px;color:var(--muted)}
+.trace .col{position:relative}
+.used{margin-top:14px;width:100%;font-size:13.5px}
+.used td,.used th{padding:6px 8px 6px 0}
+.used td:first-child{font-weight:600;white-space:nowrap}
+.used .bad td{color:var(--accent)}
+@media (max-width:860px){.trace{grid-template-columns:1fr;gap:30px}.trace .col + .col::before{content:"\2193";margin-left:0;margin-top:-30px;left:18px}}
+
+/* where2 tweaks */
+.where2 h3{margin-bottom:14px}
+.where2 p{margin:0 0 12px;font-size:15.5px;line-height:1.6;color:var(--body)}
+.where2 li strong,.where2 p strong{color:var(--ink)}
+.widewhere{max-width:var(--wide)}
+
+/* groups figure */
+.groups{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:0;border:1px solid var(--ink)}
+.groups > div{padding:20px 22px}
+.groups > div + div{border-left:1px solid var(--ink);background:var(--panel)}
+.groups h3{font-size:26px;line-height:1.1;margin:0 0 4px}
+.groups .k{font-size:13px;color:var(--muted);margin:0 0 14px}
+.groups ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.groups li{font-size:14.5px;line-height:1.3;padding:7px 10px;border:1px solid var(--rule);background:var(--paper);color:var(--ink)}
+.groups li.add{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent);font-weight:500}
+.groups .foot{margin:16px 0 0;padding-top:12px;border-top:1px dashed var(--ink);font-size:14px;color:var(--body)}
+@media (max-width:640px){.groups{grid-template-columns:1fr}.groups > div + div{border-left:0;border-top:1px solid var(--ink)}}
+
+/* drafts */
+.drafts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:1px solid var(--ink);margin:8px 0 28px}
+.drafts > div{padding:18px 20px;background:#fff}
+.drafts > div + div{border-left:1px solid var(--ink)}
+.drafts h3{font:600 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.drafts p{margin:0;font-size:15.5px;line-height:1.65;color:var(--ink)}
+.drafts u{text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:3px}
+.drafts .num{border:1.5px dashed var(--accent);padding:0 3px}
+.drafts small{display:block;margin-top:12px;font-size:13px;color:var(--muted)}
+@media (max-width:640px){.drafts{grid-template-columns:1fr}.drafts > div + div{border-left:0;border-top:1px solid var(--ink)}}
+
+/* paired bars */
+.pairs{display:grid;gap:0;border-top:1px solid var(--ink)}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:20px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule)}
+.pair .l{font-size:15.5px;line-height:1.35;color:var(--ink)}
+.pair .l small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.pair .bb{display:grid;gap:6px}
+.pair .row{display:grid;grid-template-columns:48px minmax(0,1fr);gap:8px;align-items:center;font-size:12px;color:var(--muted)}
+.pair .tr{display:flex;align-items:center;gap:10px}
+.pair .f{height:20px;background:#A8A397;min-width:2px}
+.pair .f.a{background:var(--accent)}
+.pair .v{font-family:var(--display);font-size:24px;line-height:1;font-variant-numeric:tabular-nums}
+.pair .v small{font-family:var(--text);font-size:12.5px;color:var(--muted);margin-left:6px}
+@media (max-width:560px){.pair{grid-template-columns:1fr;gap:8px}}
+.limit{position:relative;margin-top:8px}
+.limit .track{position:relative;height:22px;border:1px solid var(--ink);background:var(--paper)}
+.limit .track i{position:absolute;left:0;top:0;bottom:0;background:#A8A397}
+.limit .track i.a{background:var(--accent)}
+.limit .lr{display:grid;grid-template-columns:64px minmax(0,1fr) 54px;gap:10px;align-items:center;margin-bottom:8px;font-size:13.5px;color:var(--ink)}
+.limit .lr b{font-family:var(--display);font-weight:400;font-size:22px;text-align:right;font-variant-numeric:tabular-nums}
+.limit .scale{display:grid;grid-template-columns:64px minmax(0,1fr) 54px;gap:10px;font-size:12px;color:var(--muted)}
+.limit .scale span{display:flex;justify-content:space-between}
+
+/* channel grid */
+.grid3{overflow-x:auto}
+.grid3 table{min-width:620px}
+.grid3 td{font-size:14.5px;line-height:1.5}
+.grid3 td:first-child{font-family:var(--display);font-size:24px;font-weight:400;white-space:nowrap;padding-right:18px}
+.grid3 th:first-child{width:90px}
+@media (max-width:600px){.grid3 table{min-width:0}.grid3 td:first-child{font-size:26px;padding:4px 0 6px}.grid3 .stack td{padding-inline-start:6.5em}.grid3 .stack td::before{width:6em;margin-inline-start:-6.5em}.grid3 .stack td:first-child{padding-inline-start:0}.grid3 .stack td:first-child::before{content:none}}
+
+/* CASL clock */
+.clock{position:relative;margin-top:10px}
+.clock .axis{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));font-size:12px;color:var(--muted);border-top:1px solid var(--ink);padding-top:6px}
+.clock .clane{margin:0 0 14px}
+.clock .lab2{position:relative;z-index:2;display:inline-block;background:var(--paper);padding-right:6px;font-size:13.5px;line-height:1.4;color:var(--ink);margin:0 0 6px}
+.clock .bar2{position:relative;height:22px;border-bottom:1px solid var(--rule)}
+.clock .seg2{position:absolute;top:0;height:22px;background:#A8A397}
+.clock .seg2.a{background:var(--accent)}
+.clock .lanes2{position:relative;padding-top:26px}
+.clock .today{position:absolute;top:0;bottom:-6px;border-left:2px solid var(--ink);z-index:1}
+.clock .today span{position:absolute;top:0;left:6px;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap;background:var(--paper);padding-right:4px}
+@media (max-width:560px){.clock .axis span:nth-child(even){visibility:hidden}}
+.clockkey{display:grid;gap:6px;margin-top:14px;font-size:14px;color:var(--body)}
+
+/* seller update sample */
+.update{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:0;border:1px solid var(--ink)}
+.update > div{padding:20px 22px}
+.update .main{background:#fff}
+.update .side{background:var(--panel);border-left:1px solid var(--ink)}
+.update h3{font-size:26px;line-height:1.1;margin:0 0 4px}
+.update .k{font-size:13px;color:var(--muted);margin:0 0 14px}
+.update h4{font:600 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
+.update ol,.update ul{margin:0;padding-left:20px;font-size:15px;line-height:1.55;color:var(--body)}
+.update p{margin:0;font-size:15px;line-height:1.55;color:var(--body)}
+.update .side h4{color:var(--accent);margin-top:0}
+.update .side li{margin-bottom:6px}
+@media (max-width:700px){.update{grid-template-columns:1fr}.update .side{border-left:0;border-top:1px solid var(--ink)}}
+
+/* agent run */
+.run{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:26px}
+.run .stage h3{font-size:21px}
+.run .stage p{font-size:14px}
+.run .stage.gate{background:var(--accent);border-color:var(--accent)}
+.run .stage.gate h3,.run .stage.gate p,.run .stage.gate .k{color:#FBF4EF}
+.run .stage:not(:last-child)::after{right:-21px;font-size:18px}
+@media (max-width:900px){.run{grid-template-columns:repeat(3,minmax(0,1fr))}.run .stage:not(:last-child)::after{content:none}}
+@media (max-width:560px){.run{grid-template-columns:1fr;gap:28px}.run .stage:not(:last-child)::after{content:"\2193";right:auto;left:22px;top:auto;bottom:-27px;transform:none}}
+
+/* workflow strip */
+.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:1px solid var(--ink)}
+.strip > div{padding:16px 16px 18px;position:relative}
+.strip > div + div{border-left:1px solid var(--ink)}
+.strip .n{font-family:var(--display);font-size:38px;line-height:.9;color:var(--accent)}
+.strip h3{font-size:21px;line-height:1.15;margin:8px 0 8px}
+.strip .tool2{font-size:14px;color:var(--ink);font-weight:500;margin:0}
+.strip .hand{font-size:13px;color:var(--muted);margin:6px 0 0}
+.strip .chk{margin:12px 0 0;padding-top:10px;border-top:1px solid var(--rule);font-size:14px;line-height:1.45;color:var(--body);display:grid;grid-template-columns:18px 1fr;gap:6px}
+.strip .chk::before{content:"\2713";color:var(--accent);font-weight:600}
+@media (max-width:860px){.strip{grid-template-columns:1fr}.strip > div + div{border-left:0;border-top:1px solid var(--ink)}}
+
+.prose h3.sub3{font-size:28px;line-height:1.15;margin:28px 0 12px;color:var(--ink)}
+.cta .note{font-size:15px}
+td.wrapc{white-space:normal}
+</style>
+
+<script>
+(function(){var v=null;try{v=localStorage.getItem('leverage-notes-level')}catch(e){}if(v!=='d'&&v!=='s'&&v!=='t')v='t';document.body.classList.add('lv-'+v);})();
+</script>
+
+<header class="site">
+  <span class="mark">Leverage</span>
+  <span class="where">Notes · For real estate agents</span>
+</header>
+
+<div class="hero">
+  <div>
+    <p class="eyebrow"><span class="d">Field guide · Detailed version</span><span class="s">Field guide · Simple version</span><span class="t">Field guide · Easiest version</span></p>
+    <h1>Real estate agent playbook</h1>
+    <p class="sub">Listings, follow-ups, showing notes and the fair housing rules</p>
+    <p class="lede d">Use AI to draft listings, follow-ups and showing notes faster, with the checks that keep you on the right side of fair housing, advertising and consent rules in the US and Canada.</p>
+    <p class="lede s">Use AI to write listings, follow-ups and showing notes faster, and check them so they follow fair housing, advertising and consent rules in the US and Canada.</p>
+    <p class="lede t">AI can help you write listings, follow-ups and showing notes fast. This guide shows you how to check them so they follow the rules.</p>
+    <p class="by">By Dan Albasry · November 27, 2026 · For agents in the US and Canada</p>
+  </div>
+  <figure>
+    <div class="sheet" aria-label="A made-up listing fact sheet for a 1925 brick semi in Hamilton, Ontario">
+      <div class="hd"><span class="made">Made-up example</span><b>Fact sheet</b><span>Brick semi, Hamilton, Ontario</span></div>
+      <dl>
+        <dt>Year built</dt><dd>1925</dd>
+        <dt>Bedrooms</dt><dd>3</dd>
+        <dt>Bathrooms</dt><dd>1.5</dd>
+        <dt>Above grade</dt><dd>1,250 sq ft</dd>
+        <dt>Lot frontage</dt><dd>22 ft</dd>
+        <dt>Furnace</dt><dd>Replaced 2022</dd>
+      </dl>
+      <div class="no"><strong>Do not mention</strong>Who should live here · schools · places of worship · safety · the seller's reasons · lockbox code</div>
+    </div>
+    <figcaption>The made-up listing used for the checks in this guide. The house and street are invented.</figcaption>
+  </figure>
+</div>
+
+<div class="wrap">
+  <div class="versions">
+    <p><strong>Three ways to read this.</strong> Starter is the easiest. Simple says everything in plain words. Detailed has every number and source. Switch any time with the button at the bottom of your screen.</p>
+    <div class="seg" role="group" aria-label="Choose a reading level">
+      <button type="button" data-v="t" aria-pressed="true">Starter</button>
+      <button type="button" data-v="s" aria-pressed="false">Simple</button>
+      <button type="button" data-v="d" aria-pressed="false">Detailed</button>
+    </div>
+  </div>
+
+  <div class="prose" style="margin-top:48px">
+    <p class="notep d"><span class="note">[DAN TO SUPPLY: a short real moment, three or four sentences. For example, the first time you watched an AI listing draft add a feature the house did not have, or describe who "should" live there. No client names.]</span></p>
+    <p class="notep s"><span class="note">[DAN TO SUPPLY: the same short real moment as the Detailed version, in plain words.]</span></p>
+    <p class="notep t"><span class="note">[DAN TO SUPPLY: the same short real moment, in very simple words.]</span></p>
+  </div>
+
+  <nav class="toc" aria-label="Questions in this guide">
+    <p class="eyebrow">Nine questions agents ask</p>
+    <ol>
+      <li><a href="#q1"><span class="n">1</span><span>Where does AI actually help an agent today?</span></a></li>
+      <li><a href="#q2"><span class="n">2</span><span>How do I write a listing description with AI that is accurate and legal?</span></a></li>
+      <li><a href="#q3"><span class="n">3</span><span>What do fair housing and advertising rules say about AI copy?</span></a></li>
+      <li><a href="#q4"><span class="n">4</span><span>How do I check AI copy before it goes live?</span></a></li>
+      <li><a href="#q5"><span class="n">5</span><span>How do I handle follow-ups without breaking consent rules?</span></a></li>
+      <li><a href="#q6"><span class="n">6</span><span>How do I turn showing feedback into notes for the seller?</span></a></li>
+      <li><a href="#q7"><span class="n">7</span><span>What is the agent version of this job, and where must I approve?</span></a></li>
+      <li><a href="#q8"><span class="n">8</span><span>What does a workflow across tools look like?</span></a></li>
+      <li><a href="#q9"><span class="n">9</span><span>What should I do this week?</span></a></li>
+    </ol>
+  </nav>
+</div>
+
+<!-- 1 -->
+<section class="q" id="q1">
+  <div class="wrap">
+    <p class="eyebrow">Question 1 of 9</p>
+    <h2>Where does AI actually help an agent today?</h2>
+    <div class="prose">
+      <p class="answer d">AI helps most with writing jobs that you read before anyone else does: listing descriptions, social posts, follow-up emails and seller updates. It helps least with anything that touches money, law or a live client conversation without you in the middle.</p>
+      <p class="answer s">AI helps most with writing that you read before anyone else sees it. That means listing descriptions, social posts, follow-up emails and updates for sellers.</p>
+      <p class="answer t">AI is best at writing. You read it before anyone else does.</p>
+      <p class="d">The numbers back this up. Among US Realtors who use AI, 75% use it for listing descriptions, 56% for social posts, 52% for emails and follow-ups and 30% for market summaries, and 91% of them use ChatGPT (<a href="https://www.nar.realtor/news/real-estate-news/technology/the-tech-real-estate-agents-rely-on-most-in-2026" target="_blank" rel="noopener">NAR 2026 Technology Report</a>, about 1,200 agents, released 22 Sep 2026).</p>
+      <p class="s">In the US, 3 in 4 Realtors who use AI use it for listing descriptions. About half use it for emails and follow-ups. Most of them use ChatGPT (<a href="https://www.nar.realtor/news/real-estate-news/technology/the-tech-real-estate-agents-rely-on-most-in-2026" target="_blank" rel="noopener">NAR, 2026</a>).</p>
+      <p class="t">In the US, 3 in 4 Realtors who use AI write listings with it (<a href="https://www.nar.realtor/news/real-estate-news/technology/the-tech-real-estate-agents-rely-on-most-in-2026" target="_blank" rel="noopener">NAR</a>). In Canada, one company's tool rated more than 1 in 3 REALTOR.ca listings as likely written with AI (<a href="https://originality.ai/blog/likely-ai-canadian-real-estate-listings-study" target="_blank" rel="noopener">Originality.ai</a>). That company sells the tool it used.</p>
+    </div>
+  </div>
+  <figure class="wrap d">
+    <p class="figtitle">What US Realtors who use AI use it for</p>
+    <div class="bars">
+      <div class="bar"><span class="l">Listing descriptions</span><span class="tr"><span class="f hot" style="width:75%"></span><span class="v">75%</span></span></div>
+      <div class="bar"><span class="l">Social posts</span><span class="tr"><span class="f" style="width:56%"></span><span class="v">56%</span></span></div>
+      <div class="bar"><span class="l">Emails and follow-ups</span><span class="tr"><span class="f" style="width:52%"></span><span class="v">52%</span></span></div>
+      <div class="bar"><span class="l">Market summaries</span><span class="tr"><span class="f" style="width:30%"></span><span class="v">30%</span></span></div>
+    </div>
+    <figcaption>Share of AI-using Realtors, from the <a href="https://www.nar.realtor/news/real-estate-news/technology/the-tech-real-estate-agents-rely-on-most-in-2026" target="_blank" rel="noopener">NAR 2026 Technology Report</a> (about 1,200 agents). Bars are drawn to a 0 to 100% scale.</figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="prose">
+      <p class="d">I found no Canadian survey like that. The closest evidence is a scan of 72,047 REALTOR.ca listings in 20 cities in May 2026, which rated 37% of descriptions as likely AI-written (62% in Hamilton) and found that none of them said so (<a href="https://originality.ai/blog/likely-ai-canadian-real-estate-listings-study" target="_blank" rel="noopener">Originality.ai</a>). Originality.ai sells the detector it used, so treat that as an estimate, not a count.</p>
+      <p class="s">I found no Canadian survey like that. One company scanned 72,047 REALTOR.ca listings in May 2026. It rated more than 1 in 3 as likely written by AI, and none said so (<a href="https://originality.ai/blog/likely-ai-canadian-real-estate-listings-study" target="_blank" rel="noopener">Originality.ai</a>). The company sells the tool it used, so this is an estimate.</p>
+      <p class="d">Showing notes are the gap. No survey I found measures AI use for showing feedback, so I will not give you a number for it. It is still one of the best jobs to hand over, because the output is a private draft you check before the seller sees it.</p>
+      <p class="s">No survey measures AI for showing notes. It is still a good job for AI, because the notes stay private until you check them.</p>
+      <p class="t">AI can also sort your showing notes. Those notes stay private until you check them.</p>
+    </div>
+  </div>
+  <figure class="widewrap">
+    <p class="figtitle"><span class="ds">Four jobs, from lowest risk to highest</span><span class="t">Four jobs, from safest to riskiest</span></p>
+    <div class="ladder4">
+      <div class="rung"><p class="k">Lowest risk</p><h3>Showing notes</h3><p><span class="ds">A private draft. Only you see it before it becomes a seller update.</span><span class="t">Only you see it.</span></p><span class="tag">You read it first</span></div>
+      <div class="rung"><p class="k">Low</p><h3>Seller updates</h3><p><span class="ds">One client reads it. Names and buyer details must stay out.</span><span class="t">One client reads it.</span></p><span class="tag">You read it first</span></div>
+      <div class="rung"><p class="k">Higher</p><h3>Follow-ups</h3><p><span class="ds">Goes to leads, so consent rules for text, email and calls apply.</span><span class="t">Goes to buyers. Texts, emails and calls have permission rules.</span></p><span class="tag">You read it first</span></div>
+      <div class="rung"><p class="k">Highest risk</p><h3><span class="ds">Public listings and automatic texts</span><span class="t">Public listings</span></h3><p><span class="ds">Everyone sees it. Fair housing and advertising rules apply to every word.</span><span class="t">Everyone sees it. The rules apply to every word.</span></p><span class="tag">You read it first</span></div>
+    </div>
+    <div class="riskaxis"><span>Private</span><span>Public</span></div>
+  </figure>
+</section>
+
+<!-- 2 -->
+<section class="q" id="q2">
+  <div class="wrap">
+    <p class="eyebrow">Question 2 of 9</p>
+    <h2>How do I write a listing description with AI that is accurate and legal?</h2>
+    <div class="prose">
+      <p class="answer d">Give the AI a fact sheet, not a vibe, and tell it to describe the property and never the people who might live there. Most of the trouble with AI listings comes from what the AI fills in when your input has gaps.</p>
+      <p class="answer s">Give the AI a list of true facts. Tell it to describe the home, not the people who might live there.</p>
+      <p class="answer t">Give the AI true facts. Tell it to talk about the home, not the people.</p>
+      <p class="d">AI predicts likely words. Asked to make a house sound good, it reaches for what houses usually have: hardwood, a renovated kitchen, a quiet street. NAR's own warning is that AI "can invent amenities, overstate features or get details wrong, and it will do so in a polished voice" (<a href="https://www.nar.realtor/news/real-estate-news/technology/faster-cheaper-riskier-what-brokers-should-know-before-putting-ai-to-work" target="_blank" rel="noopener">NAR, 23 Oct 2026</a>). Alberta's regulator gives an example in its AI bulletin: an agent pastes an unreviewed AI description that mentions a high-end range the sellers had excluded, and the regulator says relying on unreviewed AI content "may be negligent" (<a href="https://www.reca.ca/wp-content/uploads/Use-of-Artificial-Intelligence.pdf" target="_blank" rel="noopener">RECA bulletin</a>).</p>
+      <p class="s">AI guesses likely words. If your facts have gaps, it fills them with things houses often have, like hardwood floors or a new kitchen. NAR warns that AI can "invent amenities" in a polished voice (<a href="https://www.nar.realtor/news/real-estate-news/technology/faster-cheaper-riskier-what-brokers-should-know-before-putting-ai-to-work" target="_blank" rel="noopener">NAR</a>). Alberta's regulator gives an example. An agent posts an unchecked AI description. It lists a stove the sellers are taking with them. The regulator says using unchecked AI work "may be negligent" (<a href="https://www.reca.ca/wp-content/uploads/Use-of-Artificial-Intelligence.pdf" target="_blank" rel="noopener">RECA</a>).</p>
+      <p class="t">AI guesses. If you leave gaps, it may add things the house does not have. Alberta's regulator gives an example. An agent posts an AI listing without checking it. It names a stove the sellers are taking. The regulator says that may be careless (<a href="https://www.reca.ca/wp-content/uploads/Use-of-Artificial-Intelligence.pdf" target="_blank" rel="noopener">RECA</a>).</p>
+      <p class="d"><strong>Build the fact sheet first.</strong> Property type; bedrooms and bathrooms exactly as on the MLS input; finished square footage as on the MLS input; year built; lot size; parking; each upgrade with its year; what is included and excluded; location facts as names and distances only; and a "do not mention" list. Leave out anything you cannot show from a document or photo. Leaving out schools and places of worship is a cautious house rule, because they are common fair housing risk areas, not a legal ban. Point buyers to the school board's own boundary tool instead.</p>
+      <p class="s"><strong>Make a fact sheet first.</strong> Write the beds, baths and square feet exactly as on the MLS form. Add the year built, the lot, parking, upgrades with their years, and what is included. Write locations as names and distances only.</p>
+      <p class="t"><strong>First, make a fact sheet.</strong> Write the beds, baths and size from the MLS form. Add the year built and any upgrades.</p>
+      <p class="d"><strong>What never goes in the prompt:</strong> client names, the seller's reasons or timeline, offer terms, commission, lockbox codes and showing instructions. A model cannot tell which facts are meant for the public, so it may write them into the description. Before you paste anything about a client, check the tool's data settings (whether chats are used to train models) and whether your brokerage has an approved AI tool or plan. In Ontario, RECO says to get a client's explicit, written consent before entering client details or contract terms into an AI tool (<a href="https://www.reco.on.ca/agents-and-brokerages/reco-bulletins/reco-guidance-use-of-artificial-intelligence/" target="_blank" rel="noopener">RECO guidance, updated 22 Oct 2026</a>).</p>
+      <p class="s"><strong>Never paste in:</strong> client names, why the seller is moving, offer terms, commission, lockbox codes or showing instructions. Check if your brokerage has an approved AI tool. Turn off chat training in settings if you can. In Ontario, RECO says to get the client's written consent before their details go into an AI tool (<a href="https://www.reco.on.ca/agents-and-brokerages/reco-bulletins/reco-guidance-use-of-artificial-intelligence/" target="_blank" rel="noopener">RECO</a>).</p>
+      <p class="t"><strong>Do not paste in:</strong> client names, offer details, lockbox codes or why the seller is moving. Check if your brokerage has an approved AI tool. Turn off chat training in settings if you can.</p>
+    </div>
+
+    <div class="prompt d"><div class="ph"><span>The prompt I use (copy and fill in)</span><button type="button" class="copy">Copy</button></div><blockquote>You are helping me, a licensed real estate agent in [CITY, STATE OR PROVINCE], write the public remarks for a new listing. Use only the facts below. Copy every number exactly. If something is not in my list, leave it out and tell me what you left out. Describe the home itself. Do not describe who might live there, the neighbours, safety, schools or nearby places of worship, because these are common fair housing risk areas. No exclamation marks, no "nestled", "stunning", "boasts" or "won't last". Two short paragraphs, under [CHARACTER LIMIT] characters including spaces. Then list every number you used and the fact it came from. FACTS: [PASTE FACT SHEET]</blockquote></div>
+    <div class="prompt s"><div class="ph"><span>The prompt (copy and fill in)</span><button type="button" class="copy">Copy</button></div><blockquote>You are helping me, a licensed agent in [CITY, STATE OR PROVINCE], write the public remarks for a new listing. Use only the facts below. Copy every number exactly. If something is not in my list, leave it out and tell me. Describe the home only. Do not describe who might live there, the neighbours, safety, schools or places of worship. No exclamation marks. Under [CHARACTER LIMIT] characters. Then list every number you used and where it came from. FACTS: [PASTE FACT SHEET]</blockquote></div>
+    <div class="prompt t"><div class="ph"><span>Copy this prompt</span><button type="button" class="copy">Copy</button></div><blockquote>Write the public listing for this home. Use only these facts. Copy every number exactly. Describe the home only, not who should live there. Do not talk about schools, safety, neighbours or churches. Then list every number you used. FACTS: [PASTE FACT SHEET]</blockquote></div>
+
+    <div class="tools" data-group="listing">
+      <p class="tl">Steps in your tool</p>
+      <div class="seg toolseg" role="group" aria-label="Choose a tool">
+        <button type="button" data-tool="chatgpt" aria-pressed="true">ChatGPT</button>
+        <button type="button" data-tool="claude" aria-pressed="false">Claude</button>
+        <button type="button" data-tool="gemini" aria-pressed="false">Gemini</button>
+        <button type="button" data-tool="listing" aria-pressed="false">Listing tool</button>
+      </div>
+      <div class="tool" data-tool="chatgpt">
+        <h3>In ChatGPT</h3>
+        <ol class="d">
+          <li>Open ChatGPT. The free plan can run this prompt. Projects are listed on every plan on <a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">OpenAI's pricing page</a> (checked 27 Nov 2026; the page showed no prices that day, so check the price at checkout).</li>
+          <li>Create a Project called "Listings". In its instructions, paste the standing rules from the prompt above and two or three descriptions you wrote yourself.</li>
+          <li>Start a new chat in the project. Paste the fact sheet and ask for the draft.</li>
+          <li>Ask for changes one at a time, and add "keep every fact and number exactly the same" to each one.</li>
+          <li>Run the review prompt from the next section in a fresh chat.</li>
+        </ol>
+        <ol class="s">
+          <li>The free plan can run this prompt. OpenAI's pricing page showed no prices when I checked on 27 Nov 2026, so check at checkout (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">OpenAI</a>).</li>
+          <li>Make a Project called "Listings". Put the rules and two of your own past listings in it.</li>
+          <li>Start a new chat in the project. Paste the fact sheet.</li>
+          <li>Ask for one change at a time. Add "keep every fact and number the same".</li>
+        </ol>
+        <ol class="t">
+          <li>The free plan works. If you upgrade, check the price at checkout (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">OpenAI</a>).</li>
+          <li>Make a Project called "Listings". Put the prompt rules in it.</li>
+          <li>Paste your fact sheet in a new chat.</li>
+        </ol>
+      </div>
+      <div class="tool" data-tool="claude" hidden>
+        <h3>In Claude</h3>
+        <ol class="d">
+          <li>Open Claude. Free includes up to 5 projects; Pro is US$20 a month or US$17 a month billed yearly, before tax (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>, checked 27 Nov 2026). Anthropic priced Pro at C$28 plus tax at its Canada launch in June 2024 (<a href="https://www.anthropic.com/news/introducing-claude-to-canada" target="_blank" rel="noopener">Anthropic</a>); check your own upgrade page for today's CAD price. With Ontario's 13% HST, C$28 comes to C$31.64.</li>
+          <li>Create a Project called "Listings" and put the rules in its instructions. Add your past descriptions as files.</li>
+          <li>Ask for two drafts: one that leads with the best interior feature and one that leads with the outdoor space. Ask for the character count of each.</li>
+          <li>Run the review prompt in a new chat.</li>
+        </ol>
+        <ol class="s">
+          <li>Free includes up to 5 projects. Pro is US$20 a month before tax (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude</a>). At its Canada launch in 2024, Anthropic priced Pro at C$28 plus tax (<a href="https://www.anthropic.com/news/introducing-claude-to-canada" target="_blank" rel="noopener">Anthropic</a>). Check your own upgrade page.</li>
+          <li>Make a Project called "Listings" with the rules in it.</li>
+          <li>Ask for two drafts and the character count of each.</li>
+        </ol>
+        <ol class="t">
+          <li>Free has up to 5 projects. Pro is US$20 a month before tax (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude</a>).</li>
+          <li>Make a Project called "Listings". Put the rules in it.</li>
+          <li>Ask for two drafts.</li>
+        </ol>
+      </div>
+      <div class="tool" data-tool="gemini" hidden>
+        <h3>In Gemini</h3>
+        <p class="d">Gemini works the same way in a chat, and it fits agents whose notes and photos already live in Gmail and Google Drive. In Canada, Google AI Pro is C$26.99 a month and includes Gemini in Gmail and Docs (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google Canada</a>, checked 27 Nov 2026, tax not stated on the page).</p>
+        <p class="s">Gemini works the same way. It suits agents who keep notes in Gmail and Google Drive. In Canada, Google AI Pro is C$26.99 a month (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google Canada</a>).</p>
+        <p class="t">Gemini works the same way. It is handy if you use Gmail (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google Canada</a>).</p>
+      </div>
+      <div class="tool" data-tool="listing" hidden>
+        <h3>In a listing tool</h3>
+        <p class="d">A dedicated tool is worth paying for only if it reads your listing record so facts cannot drop out, holds each remarks field to its character limit and flags people-describing words. One Canadian example, built in Hamilton, holds Ontario remarks to the smaller of the Matrix and Realm limits (public 2,000 characters; showing 400 on Matrix, 250 on Realm) and has a free tier with 50 generations a month, paid plans from C$49 a month (<a href="https://www.listinglaunchpad.com/guides/ai-mls-description-generator" target="_blank" rel="noopener">Listing Launchpad</a>, vendor's own figures, updated 23 Oct 2026). I have not tested it.</p>
+        <p class="s">Pay for a listing tool only if it reads your listing record, keeps each field under its limit and flags words about people. One Hamilton-made tool has a free tier and paid plans from C$49 a month, by its own figures (<a href="https://www.listinglaunchpad.com/guides/ai-mls-description-generator" target="_blank" rel="noopener">Listing Launchpad</a>). I have not tested it.</p>
+        <p class="t">Some tools are made for listings. Pick one that checks words about people. I have not tested them.</p>
+      </div>
+    </div>
+  </div>
+
+  <figure class="widewrap">
+    <p class="figtitle"><span class="d">Every number in the draft traces back to the sheet</span><span class="s">Fact sheet, then prompt, then draft</span><span class="t">Fact sheet, then prompt, then draft</span></p>
+    <p class="made">Made-up example</p>
+    <div class="trace">
+      <div class="col"><p class="k">1 · Fact sheet</p>
+        <ul><li>Built <b>1925</b></li><li>Bedrooms <b>3</b></li><li>Bathrooms <b>1.5</b></li><li>Above grade <b>1,250 sq ft</b></li><li>Lot <b>22 ft</b></li><li>Furnace <b>2022</b></li></ul>
+      </div>
+      <div class="col"><p class="k">2 · Prompt</p>
+        <p><span class="ds">Use only these facts. Copy every number exactly. Describe the home, not the people. List every number you used.</span><span class="t">Use only these facts. Talk about the home. List every number.</span></p>
+      </div>
+      <div class="col"><p class="k">3 · Draft and the numbers it used</p>
+        <p>This <mark>1925</mark> brick semi has <mark>3</mark> bedrooms, <mark>1.5</mark> bathrooms and <mark>1,250</mark> square feet above grade. The main floor runs front to back, with the kitchen at the rear opening to a fenced yard on a <mark>22</mark>-foot lot. The furnace was replaced in <mark>2022</mark>. The home is about <mark class="off">400 metres</mark> from a bus stop and <mark class="off">1 kilometre</mark> from a public park.</p>
+        <table class="used ds">
+          <thead><tr><th>Number</th><th>From the sheet?</th></tr></thead>
+          <tbody>
+            <tr><td>1925, 3, 1.5, 1,250, 22, 2022</td><td>Yes</td></tr>
+            <tr class="bad"><td>400 m, 1 km</td><td>No: add each distance to the sheet with its source</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <figcaption><span class="ds">The draft is Draft B from Question 4, which I wrote myself as an example. Solid underline: the number is on the sheet. Dashed: it is not.</span><span class="t">I wrote this sample myself. The two dashed numbers were not on the sheet.</span></figcaption>
+  </figure>
+</section>
+
+<!-- 3 -->
+<section class="q" id="q3">
+  <div class="wrap">
+    <p class="eyebrow">Question 3 of 9</p>
+    <h2>What do fair housing and advertising rules say about AI copy?</h2>
+    <div class="prose">
+      <p class="answer d">The rules do not care who or what wrote the copy. They care what the ad says to an ordinary reader, and they hold you, the licensee, responsible for it.</p>
+      <p class="answer s">The rules look at what the ad says, not who wrote it. You are responsible for it.</p>
+      <p class="answer t">The rules look at what the ad says. You are in charge of it, not the AI.</p>
+    </div>
+  </div>
+  <div class="widewrap">
+    <div class="where2">
+      <div>
+        <h3>In the US</h3>
+        <ul class="d">
+          <li><strong>The law.</strong> The Fair Housing Act makes it unlawful to publish any notice, statement or ad for the sale or rental of a dwelling that indicates a preference, limitation or discrimination based on race, color, religion, sex, handicap, familial status or national origin (<a href="https://www.law.cornell.edu/uscode/text/42/3604" target="_blank" rel="noopener">42 U.S.C. 3604(c)</a>). HUD's rule covers words, phrases, photos and symbols, and also choosing media or locations that keep groups from seeing the ad (<a href="https://www.law.cornell.edu/cfr/text/24/100.75" target="_blank" rel="noopener">24 CFR 100.75</a>).</li>
+          <li><strong>HUD's 2024 guidance on housing ads on digital platforms (ad targeting and delivery) is withdrawn.</strong> HUD withdrew it effective 17 Sep 2025 and says it "should not be relied upon as authoritative", while actions that break the Act "continue to be subject to enforcement" (<a href="https://public-inspection.federalregister.gov/2026-06624.pdf" target="_blank" rel="noopener">Federal Register notice FR-6571-N-01, published 6 Apr 2026</a>). Many courses and vendor pages still cite it as HUD's AI guidance, though the notice does not mention AI. The law it interpreted has not changed.</li>
+          <li><strong>NAR.</strong> NAR's Code of Ethics, which binds REALTORS (members), also covers this. Articles 2 and 12 require you to avoid exaggeration and misrepresentation and to present a true picture in advertising. NAR's broker AI policy template lists phrases like "perfect for young families" and "quiet, mature community", and references to nearby houses of worship, as examples to avoid, and says agents are "fully accountable for any AI-generated content they use, share or publish" (<a href="https://www.nar.realtor/news/real-estate-news/technology/faster-cheaper-riskier-what-brokers-should-know-before-putting-ai-to-work" target="_blank" rel="noopener">NAR, 23 Oct 2026</a>).</li>
+          <li><strong>States.</strong> California's regulator says responsibility for misleading AI advertising "rests with the licensee and their responsible broker, not the technology provider", and since 1 Jan 2026 California requires a disclosure on digitally altered listing images plus access to the original (<a href="https://dre.ca.gov/Licensees/Advisories/Advisory_2026_03_17_AI_in_California_Real_Estate.html" target="_blank" rel="noopener">California DRE advisory, 17 Mar 2026</a>). Wisconsin's photo rule starts 1 Jan 2027 (<a href="https://www.nar.realtor/news/real-estate-news/technology/faster-cheaper-riskier-what-brokers-should-know-before-putting-ai-to-work" target="_blank" rel="noopener">NAR</a>). Check your own state and MLS. Many states and cities also protect more groups than federal law, such as source of income or age, so check those rules too.</li>
+          <li><strong>Disclosing AI-written text.</strong> I found no federal rule that requires it. Photo and video edits are where the disclosure rules are.</li>
+        </ul>
+        <p class="d"><strong>NAR Code, Articles 10 and 12.</strong> In the 2026 Code, effective 1 Jan 2026, Article 10 says REALTORS shall not deny equal professional services for reasons of race, color, religion and the other characteristics it lists. Article 12 says they "shall present a true picture in their advertising, marketing, and other representations" and must make clear they are a real estate professional (<a href="https://www.nar.realtor/about-nar/governing-documents/code-of-ethics/2026-code-of-ethics-standards-of-practice" target="_blank" rel="noopener">NAR Code of Ethics 2026</a>).</p>
+        <ul class="s">
+          <li>The Fair Housing Act bans housing ads that show a preference based on race, color, religion, sex, disability, family status or national origin (<a href="https://www.law.cornell.edu/uscode/text/42/3604" target="_blank" rel="noopener">42 U.S.C. 3604</a>). This covers words, photos and where you place the ad (<a href="https://www.law.cornell.edu/cfr/text/24/100.75" target="_blank" rel="noopener">24 CFR 100.75</a>).</li>
+          <li>HUD's 2024 guidance on online housing ads was withdrawn on 17 Sep 2025. The law itself still applies (<a href="https://public-inspection.federalregister.gov/2026-06624.pdf" target="_blank" rel="noopener">Federal Register</a>).</li>
+          <li>NAR says to avoid phrases like "perfect for young families" or "quiet, mature community". Agents are "fully accountable" for AI content (<a href="https://www.nar.realtor/news/real-estate-news/technology/faster-cheaper-riskier-what-brokers-should-know-before-putting-ai-to-work" target="_blank" rel="noopener">NAR</a>).</li>
+          <li>California says the agent and broker are responsible, not the AI company. It also requires a note on edited listing photos (<a href="https://dre.ca.gov/Licensees/Advisories/Advisory_2026_03_17_AI_in_California_Real_Estate.html" target="_blank" rel="noopener">California DRE</a>).</li>
+          <li>Many US states and cities protect more groups than federal law, such as source of income or age. Check your state.</li>
+        </ul>
+        <ul class="t">
+          <li>The law bans ads that favour or leave out people because of race, color, religion, sex, disability, having children under 18, or national origin (the country you or your family come from) (<a href="https://www.law.cornell.edu/uscode/text/42/3604" target="_blank" rel="noopener">42 U.S.C. 3604</a>).</li>
+          <li>A 2024 HUD guide about online housing ads was pulled back in 2025. The law still applies (<a href="https://public-inspection.federalregister.gov/2026-06624.pdf" target="_blank" rel="noopener">Federal Register</a>).</li>
+          <li>NAR says not to write "perfect for young families" (<a href="https://www.nar.realtor/news/real-estate-news/technology/faster-cheaper-riskier-what-brokers-should-know-before-putting-ai-to-work" target="_blank" rel="noopener">NAR</a>).</li>
+          <li>Many US states protect more groups too. Check your state.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>In Canada</h3>
+        <ul class="d">
+          <li><strong>Ontario's code is wider than the US federal list.</strong> In Ontario, housing is protected on grounds that include age, family status, marital status, receipt of public assistance, sexual orientation, gender identity and gender expression, as well as race, religion, disability and others. The Ontario Human Rights Commission's rule for ads is to describe the unit, not the ideal tenant, and it flags phrases like "Seeking mature couple", "Suitable for single professional" and "No ODSP" (<a href="https://www.ohrc.on.ca/en/writing-fair-rental-housing-ad-fact-sheet" target="_blank" rel="noopener">OHRC fact sheet</a>). That sheet is written for rentals; the principle is the same for sale ads. Other provinces have their own codes, so check yours.</li>
+          <li><strong>Ontario (RECO).</strong> AI does not change your duties under TRESA. Verify all AI content before you rely on it or share it, label AI-modified or virtually staged images, keep brokerage identification on AI-made ads, and get explicit written consent before client details or contract terms go into an AI tool. RECO cites TRESA s. 37 (false advertising) and Code of Ethics s. 5 (misrepresentation) (<a href="https://www.reco.on.ca/agents-and-brokerages/reco-bulletins/reco-guidance-use-of-artificial-intelligence/" target="_blank" rel="noopener">RECO, updated 22 Oct 2026</a>).</li>
+          <li><strong>British Columbia (BCFSA).</strong> Licensees "remain fully accountable", should review AI output thoroughly, label altered photos and videos, get clients' informed consent before using their information, and tell clients when AI tools are used. It cites Real Estate Services Rules ss. 34, 40 and 41 among others (<a href="https://www.bcfsa.ca/industry-resources/real-estate-professional-resources/knowledge-base/guidelines/artificial-intelligence-guideline" target="_blank" rel="noopener">BCFSA guideline, 22 Feb 2024</a>).</li>
+          <li><strong>Alberta (RECA).</strong> Review everything AI produces; relying on unreviewed AI content "may be negligent"; disclose AI-generated or altered images; no client personal information into an AI tool without written consent (<a href="https://www.reca.ca/wp-content/uploads/Use-of-Artificial-Intelligence.pdf" target="_blank" rel="noopener">RECA bulletin</a>, no date shown).</li>
+          <li><strong>One BC case shows the risk (no AI was involved).</strong> In BC, Lori Evans was fined C$6,000 (C$5,000 under Rule 34 and C$1,000 under Rule 41) after virtually staged and edited MLS photos went undisclosed while a buyer's offers rose from C$400,000 to C$490,000. The penalty was confirmed on 4 Sep 2024 (<a href="https://www.bcfsa.ca/media/3822/download" target="_blank" rel="noopener">Evans (Re), 2024 BCSRE 59</a>). It was about photos, not text, but it shows how the advertising rules apply to edited content.</li>
+          <li><strong>CREA.</strong> Its 1 June 2026 principles are transparency, accuracy and accountability, and REALTORS "must remain fully accountable", with Code Articles 13 and 15 on advertising (<a href="https://www.crea.ca/media-hub/news/laci-soutient-lutilisation-responsable-de-lia-dans-le-secteur-immobilier/" target="_blank" rel="noopener">CREA</a>).</li>
+          <li><strong>Quebec.</strong> I could not open OACIQ's own pages for this draft. Quebec agents should check OACIQ's advertising guideline and French-language rules before using these prompts. <span class="note">[DAN TO CONFIRM whether to add a Quebec block after a direct check.]</span></li>
+        </ul>
+        <ul class="s">
+          <li>Ontario's Human Rights Code protects more groups than US federal law, including age, marital status and people who get public assistance. The rule is: describe the unit, not the person (written for rentals; the same idea applies to sale ads) (<a href="https://www.ohrc.on.ca/en/writing-fair-rental-housing-ad-fact-sheet" target="_blank" rel="noopener">OHRC</a>).</li>
+          <li><strong>Ontario (RECO):</strong> check all AI content, label edited photos, keep your brokerage name on ads, and get written consent before client details go into AI (<a href="https://www.reco.on.ca/agents-and-brokerages/reco-bulletins/reco-guidance-use-of-artificial-intelligence/" target="_blank" rel="noopener">RECO</a>).</li>
+          <li><strong>BC (BCFSA):</strong> you stay fully accountable. Review AI work, label edited photos and tell clients when you use AI (<a href="https://www.bcfsa.ca/industry-resources/real-estate-professional-resources/knowledge-base/guidelines/artificial-intelligence-guideline" target="_blank" rel="noopener">BCFSA</a>).</li>
+          <li><strong>Alberta (RECA):</strong> using unchecked AI content "may be negligent" (<a href="https://www.reca.ca/wp-content/uploads/Use-of-Artificial-Intelligence.pdf" target="_blank" rel="noopener">RECA</a>).</li>
+          <li>One BC case shows the risk (no AI was involved): an agent was fined C$6,000 after edited photos were not disclosed. The buyer's offers went from C$400,000 to C$490,000 (<a href="https://www.bcfsa.ca/media/3822/download" target="_blank" rel="noopener">BCFSA decision</a>).</li>
+          <li>CREA's principles are transparency, accuracy and accountability (<a href="https://www.crea.ca/media-hub/news/laci-soutient-lutilisation-responsable-de-lia-dans-le-secteur-immobilier/" target="_blank" rel="noopener">CREA</a>).</li>
+          <li>Quebec agents should check OACIQ's rules first. <span class="note">[DAN TO CONFIRM Quebec block.]</span></li>
+        </ul>
+        <ul class="t">
+          <li>Ontario protects more groups than US federal law, like age and marital status. Describe the home, not the person. This rule is for rentals, but it is smart for sales too (<a href="https://www.ohrc.on.ca/en/writing-fair-rental-housing-ad-fact-sheet" target="_blank" rel="noopener">OHRC</a>).</li>
+          <li>Ontario's regulator says: check AI work, label edited photos, and get written consent before client details go into AI (<a href="https://www.reco.on.ca/agents-and-brokerages/reco-bulletins/reco-guidance-use-of-artificial-intelligence/" target="_blank" rel="noopener">RECO</a>).</li>
+          <li>BC and Alberta say the same thing: you are responsible (<a href="https://www.bcfsa.ca/industry-resources/real-estate-professional-resources/knowledge-base/guidelines/artificial-intelligence-guideline" target="_blank" rel="noopener">BCFSA</a>, <a href="https://www.reca.ca/wp-content/uploads/Use-of-Artificial-Intelligence.pdf" target="_blank" rel="noopener">RECA</a>).</li>
+          <li>A BC agent was fined C$6,000 for edited photos she did not disclose (not an AI case) (<a href="https://www.bcfsa.ca/media/3822/download" target="_blank" rel="noopener">BCFSA</a>).</li>
+          <li>In Quebec, check OACIQ's rules. <span class="note">[DAN TO CONFIRM.]</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <figure class="widewrap">
+    <p class="figtitle"><span class="ds">Who the ad rules protect: US federal list and Ontario's code</span><span class="t">US federal groups (7) and Ontario groups</span></p>
+    <div class="groups">
+      <div>
+        <h3>US federal (7 groups)</h3>
+        <p class="k">Fair Housing Act, <a href="https://www.law.cornell.edu/uscode/text/42/3604" target="_blank" rel="noopener">42 U.S.C. 3604(c)</a></p>
+        <ul><li>Race</li><li>Color</li><li>Religion</li><li>Sex</li><li>Disability (the Act says "handicap")</li><li>Familial status (children under 18)</li><li>National origin</li></ul>
+        <p class="foot">Many US states and cities protect more groups, such as source of income or age. Check your state.</p>
+      </div>
+      <div>
+        <h3>Ontario (14 grounds for housing)</h3>
+        <p class="k">As listed on the <a href="https://www.ohrc.on.ca/en/writing-fair-rental-housing-ad-fact-sheet" target="_blank" rel="noopener">OHRC fact sheet</a>. Outlined in rust: not named on the US federal list.</p>
+        <ul><li>Race, colour or ethnic origin</li><li>Religious beliefs or practices</li><li>Sex, including pregnancy</li><li>Disability</li><li>Family status</li><li>Ancestry</li><li>Place of origin</li><li class="add">Age</li><li class="add">Marital status</li><li class="add">Receipt of public assistance</li><li class="add">Sexual orientation</li><li class="add">Gender identity</li><li class="add">Gender expression</li><li class="add">Citizenship</li></ul>
+        <p class="foot">Other provinces have their own codes. Check yours.</p>
+      </div>
+    </div>
+    <figcaption>Ancestry and place of origin overlap with the US "national origin" ground, so they are not outlined. The OHRC sheet is written for rentals; the same idea applies to sale ads.</figcaption>
+  </figure>
+</section>
+
+<div class="band">
+  <div class="wrap">
+    <p class="eyebrow">If you remember one thing</p>
+    <p><span class="ds">The rules judge what the ad says, not who or what wrote it. Describe the home, never the people who might live there, and read every word before it goes out.</span><span class="t">Describe the home, not the people. You are in charge of what the ad says, not the AI.</span></p>
+  </div>
+</div>
+
+<!-- 4 -->
+<section class="q" id="q4">
+  <div class="wrap">
+    <p class="eyebrow">Question 4 of 9</p>
+    <h2>How do I check AI copy before it goes live?</h2>
+    <div class="prose">
+      <p class="answer d">Check it mechanically, not by feel: scan for people-words, compare every number with your fact sheet, and keep private details out of public fields. A polished draft can still have one invented feature or one risky phrase in it.</p>
+      <p class="answer s">Check it like a checklist: look for words about people, match every number to your fact sheet, and keep private details out.</p>
+      <p class="answer t">Use a checklist. Look for words about people. Match every number to your fact sheet.</p>
+      <p class="d">To show what this looks like, I wrote a short word-list check and ran it on a <strong>made-up listing</strong>: a 1925 brick semi in Hamilton, Ontario, with 3 bedrooms, 1.5 bathrooms, 1,250 square feet above grade, a 22-foot lot and a 2022 furnace. The house, the street and both drafts below are invented for this example. I wrote Draft A myself to show the kinds of things AI drafts often contain; it is not real AI output.</p>
+      <p class="s">I tested a small checker on a <strong>made-up listing</strong>: a 1925 brick semi in Hamilton with 3 bedrooms, 1.5 baths and 1,250 square feet. I wrote both drafts myself as examples. Draft A shows what to catch. Draft B shows clean copy.</p>
+      <p class="t">I tried a small checker on a <strong>made-up home</strong> in Hamilton. I wrote two sample listings myself. One was full of mistakes. One was clean.</p>
+    </div>
+    <div class="d">
+      <p class="made">Made-up example</p>
+      <div class="drafts">
+        <div><h3>Draft A: what to catch (excerpt)</h3><p>"<u>Welcome home!</u> <u>Nestled</u> on a <u>quiet</u>, <u>family-friendly</u> street, this <u>stunning</u> 3 bedroom, <span class="num">2 bath</span> semi is <u>perfect for a young family</u> or a <u>professional couple</u>. <u>Boasting</u> <span class="num">1,400 sq ft</span>, a renovated kitchen and hardwood throughout, it is steps to <u>great schools</u>, a <u>safe neighbourhood</u> and walking distance to <u>St. Example Church</u>..."</p><small>Excerpt; the full draft is 366 characters. Underlined: phrases of the kinds the scan flags. Dashed box: numbers that are not on the fact sheet. The renovated kitchen and hardwood are also not on the sheet.</small></div>
+        <div><h3>Draft B: clean copy</h3><p>"This 1925 brick semi has 3 bedrooms, 1.5 bathrooms and 1,250 square feet above grade. The main floor runs front to back, with the kitchen at the rear opening to a fenced yard on a 22-foot lot. The furnace was replaced in 2022. The home is about <span class="num">400 metres</span> from a bus stop and <span class="num">1 kilometre</span> from a public park."</p><small>307 characters. The two distances were not on my fact sheet.</small></div>
+      </div>
+      <div class="prose"><p>A short script scanned both drafts against a word list built from NAR's examples, the Ontario Human Rights Commission's examples and common listing clichés, and compared every number with the fact sheet.</p></div>
+    </div>
+  </div>
+  <figure class="wrap">
+    <p class="figtitle"><span class="ds">What the scan found in each draft</span><span class="t">What the checker found</span></p>
+    <div class="pairs" role="table" aria-label="Scan results for Draft A and Draft B">
+      <div class="pair" role="row"><div class="l" role="rowheader"><span class="d">Words about people<small>Who should live there</small></span><span class="s">Words about people</span><span class="t">Words about people</span></div>
+        <div class="bb" role="cell"><div class="row"><span><span class="ds">A</span><span class="t">Messy</span></span><span class="tr"><span class="f a" style="width:42.9%"></span><span class="v">3</span></span></div><div class="row"><span><span class="ds">B</span><span class="t">Clean</span></span><span class="tr"><span class="f" style="width:0%"></span><span class="v">0</span></span></div></div></div>
+      <div class="pair" role="row"><div class="l" role="rowheader"><span class="d">Words about the area that can steer<small>Safe, schools, church, quiet</small></span><span class="s">Words about the area that can steer buyers</span><span class="t">Words about the area</span></div>
+        <div class="bb" role="cell"><div class="row"><span><span class="ds">A</span><span class="t">Messy</span></span><span class="tr"><span class="f a" style="width:71.4%"></span><span class="v">5</span></span></div><div class="row"><span><span class="ds">B</span><span class="t">Clean</span></span><span class="tr"><span class="f" style="width:0%"></span><span class="v">0</span></span></div></div></div>
+      <div class="pair" role="row"><div class="l" role="rowheader"><span class="d">Hype or claims you cannot back up</span><span class="s">Hype you cannot prove</span><span class="t">Hype words</span></div>
+        <div class="bb" role="cell"><div class="row"><span><span class="ds">A</span><span class="t">Messy</span></span><span class="tr"><span class="f a" style="width:100%"></span><span class="v">7</span></span></div><div class="row"><span><span class="ds">B</span><span class="t">Clean</span></span><span class="tr"><span class="f" style="width:0%"></span><span class="v">0</span></span></div></div></div>
+      <div class="pair" role="row"><div class="l" role="rowheader">Numbers not on the fact sheet</div>
+        <div class="bb" role="cell"><div class="row"><span><span class="ds">A</span><span class="t">Messy</span></span><span class="tr"><span class="f a" style="width:28.6%"></span><span class="v">2<small class="d">2 baths, 1,400 sq ft</small></span></span></div><div class="row"><span><span class="ds">B</span><span class="t">Clean</span></span><span class="tr"><span class="f" style="width:28.6%"></span><span class="v">2<small class="d">400 m, 1 km</small></span></span></div></div></div>
+    </div>
+    <div class="ds" style="margin-top:28px">
+      <p class="figtitle" style="font-size:22px;margin-bottom:10px">Characters against the 2,000 limit</p>
+      <div class="limit">
+        <div class="lr"><span>Draft A</span><div class="track"><i class="a" style="width:18.3%"></i></div><b>366</b></div>
+        <div class="lr"><span>Draft B</span><div class="track"><i style="width:15.35%"></i></div><b>307</b></div>
+        <div class="scale"><span></span><span><em style="font-style:normal">0</em><em style="font-style:normal">1,000</em><em style="font-style:normal">2,000</em></span><span></span></div>
+      </div>
+    </div>
+    <figcaption><span class="d">Made-up example; I wrote both drafts. Bars are drawn to a 0 to 7 scale. The 2,000-character limit for Ontario public remarks on Matrix and Realm is a vendor's figure (<a href="https://www.listinglaunchpad.com/guides/ai-mls-description-generator" target="_blank" rel="noopener">Listing Launchpad</a>); check your board.</span><span class="s">Made-up example; I wrote both drafts. The 2,000 limit in Ontario comes from a vendor (<a href="https://www.listinglaunchpad.com/guides/ai-mls-description-generator" target="_blank" rel="noopener">Listing Launchpad</a>); check your board.</span><span class="t">Made-up example. I wrote both samples myself.</span></figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="prose">
+      <p class="d">Two lessons came out of it. First, the scan caught every risky phrase I planted in Draft A, but a word list cannot judge context, so a person still decides. Second, Draft B "failed" the number check because I had not put the distances on the fact sheet. That is the point: every number in public copy should trace to something you can show. The fix is to add each distance to the fact sheet with its source before you run the draft.</p>
+      <p class="d">The same scan on showing remarks flagged "bought elsewhere" and "quick close" in a showing note. The lockbox detail belongs in the agent-only showing field. The seller's situation belongs in no field at all.</p>
+      <p class="s">Draft B still had 2 numbers missing from the sheet: the distances to a bus stop and a park. I had not put them on the sheet. So every number needs a source, even in clean copy.</p>
+      <p class="t">Even the clean one had 2 numbers I forgot to put on the sheet. So check every number.</p>
+    </div>
+    <div class="prompt d"><div class="ph"><span>The review prompt (run it in a fresh chat)</span><button type="button" class="copy">Copy</button></div><blockquote>Review this listing description. 1) List every word or phrase that describes people rather than the property, or that mentions safety, schools, neighbours, age, family, religion or income, and suggest a property-only replacement. 2) List every number and every feature, and mark any that is not in my fact sheet. 3) Give the character count including spaces. Do not rewrite the description. FACT SHEET: [PASTE]. DESCRIPTION: [PASTE].</blockquote></div>
+    <div class="prompt s"><div class="ph"><span>Review prompt (use a fresh chat)</span><button type="button" class="copy">Copy</button></div><blockquote>Review this listing. 1) List any words about people, safety, schools, neighbours, age, family, religion or income, and give a property-only replacement. 2) Mark any number or feature not in my fact sheet. 3) Give the character count. Do not rewrite it. FACT SHEET: [PASTE]. DESCRIPTION: [PASTE].</blockquote></div>
+    <div class="prompt t"><div class="ph"><span>Check prompt</span><button type="button" class="copy">Copy</button></div><blockquote>Check this listing. List any words about people, schools, safety or religion. Mark any number not on my fact sheet. Do not rewrite it. FACT SHEET: [PASTE]. LISTING: [PASTE].</blockquote></div>
+    <div class="prose">
+      <p class="notep d"><span class="note">[DAN TO RUN: the main prompt and the review prompt on the made-up Hamilton fact sheet in ChatGPT and in Claude, in fresh chats, and record what each draft got wrong. Results go here as a table. Do not fill this with invented results.]</span></p>
+      <p class="notep s"><span class="note">[DAN TO RUN: both prompts on the made-up fact sheet in ChatGPT and Claude, and record the results.]</span></p>
+      <p class="notep t"><span class="note">[DAN TO RUN: the prompts in ChatGPT and Claude, and write down what happened.]</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="q" id="q5">
+  <div class="wrap">
+    <p class="eyebrow">Question 5 of 9</p>
+    <h2>How do I handle follow-ups without breaking consent rules?</h2>
+    <div class="prose">
+      <p class="answer d">Let AI draft the message, but decide yourself who it goes to and how, because consent rules depend on the channel and the country. A follow-up that sells something is a commercial message in both countries.</p>
+      <p class="answer s">Let AI write the message. You decide who gets it and how.</p>
+      <p class="answer t">AI can write the message. You choose who gets it.</p>
+    </div>
+  </div>
+  <div class="widewrap">
+    <div class="where2">
+      <div>
+        <h3>In the US</h3>
+        <ul class="d">
+          <li><strong>Texts and calls.</strong> Marketing calls to cell phones made with an autodialer or an artificial or prerecorded voice need prior express written consent: a signed agreement, electronic signature allowed, that names the number and says consent is not a condition of buying (<a href="https://www.law.cornell.edu/cfr/text/47/64.1200" target="_blank" rel="noopener">47 CFR 64.1200</a>). The same rule bars telephone solicitations before 8 a.m. or after 9 p.m. in the recipient's local time. A phone number on a website inquiry is not written consent to marketing texts. Many states add their own rules.</li>
+          <li><strong>Email.</strong> CAN-SPAM does not require consent before sending, but every commercial email needs honest headers and subject lines, a clear opt-out, a valid postal address, and opt-outs honoured within 10 business days. Each email in violation can cost up to US$53,088 (<a href="https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business" target="_blank" rel="noopener">FTC</a>).</li>
+        </ul>
+        <p class="d"><strong>Do Not Call.</strong> The national Do Not Call rules cover sales calls and text messages to cell phones, however they are dialled. You cannot make a telephone solicitation to a number on the national registry unless you have the person's signed permission or an established business relationship, which lasts 3 months after an inquiry and 18 months after a purchase or transaction (<a href="https://www.law.cornell.edu/cfr/text/47/64.1200" target="_blank" rel="noopener">47 CFR 64.1200</a>).</p>
+        <ul class="s">
+          <li>Marketing texts or calls sent with an autodialer need signed written consent first. No calls before 8 a.m. or after 9 p.m. their time (<a href="https://www.law.cornell.edu/cfr/text/47/64.1200" target="_blank" rel="noopener">47 CFR 64.1200</a>).</li>
+          <li>Marketing emails need an opt-out, your postal address and honest subject lines. Opt-outs must be honoured within 10 business days (<a href="https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business" target="_blank" rel="noopener">FTC</a>).</li>
+        </ul>
+        <p class="s"><strong>Do Not Call:</strong> sales calls and texts to numbers on the national Do Not Call list are not allowed, however you dial, unless the person gave signed permission or you have a recent business relationship. That lasts 3 months after they ask about a home and 18 months after a deal (<a href="https://www.law.cornell.edu/cfr/text/47/64.1200" target="_blank" rel="noopener">47 CFR 64.1200</a>).</p>
+        <ul class="t">
+          <li>You need signed permission before sending marketing texts with auto-dialing tools (<a href="https://www.law.cornell.edu/cfr/text/47/64.1200" target="_blank" rel="noopener">47 CFR 64.1200</a>).</li>
+          <li>Marketing emails need a way to say "stop" and your mailing address (<a href="https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business" target="_blank" rel="noopener">FTC</a>).</li>
+        </ul>
+        <p class="t">Sales calls and texts to numbers on the Do Not Call list are not allowed unless the person said yes in writing, or asked about a home in the last 3 months, or did a deal with you in the last 18 months (<a href="https://www.law.cornell.edu/cfr/text/47/64.1200" target="_blank" rel="noopener">47 CFR 64.1200</a>).</p>
+      </div>
+      <div>
+        <h3>In Canada</h3>
+        <ul class="d">
+          <li><strong>CASL covers email and text the same way.</strong> You need consent, identification and a working unsubscribe (<a href="https://crtc.gc.ca/eng/com500/faq500.htm" target="_blank" rel="noopener">CRTC CASL FAQ</a>). Implied consent lasts six months after an inquiry and two years after a transaction. Unsubscribes must be honoured without delay and within 10 business days.</li>
+          <li><strong>The clock matters.</strong> In my made-up example, a buyer who asked about the Hamilton semi on 1 June 2026 is covered by implied consent until 1 Dec 2026. A client who closed on 16 March 2026 is covered until 16 March 2028. Ask for express consent before the clock runs out, and record when and how they said yes.</li>
+        </ul>
+        <p class="d"><strong>Calls are different.</strong> CASL does not cover live or automated telemarketing calls; those follow the CRTC's Unsolicited Telecommunications Rules (<a href="https://crtc.gc.ca/eng/com500/faq500.htm" target="_blank" rel="noopener">CRTC CASL FAQ</a>). Every telemarketer must register with the National Do Not Call List, must not call numbers on it unless the call is exempt, must use a version of the list no older than 31 days, and must keep its own internal do-not-call list (<a href="https://crtc.gc.ca/eng/phone/telemarketing/reg.htm" target="_blank" rel="noopener">CRTC</a>).</p>
+        <ul class="s">
+          <li>CASL treats texts and emails the same. You need consent, your contact details and an unsubscribe (<a href="https://crtc.gc.ca/eng/com500/faq500.htm" target="_blank" rel="noopener">CRTC</a>).</li>
+          <li>Implied consent lasts 6 months after someone asks about a home, and 2 years after a deal. In my example, an inquiry on 1 June 2026 is covered until 1 Dec 2026.</li>
+        </ul>
+        <p class="s"><strong>Calls are different:</strong> CASL does not cover sales calls (<a href="https://crtc.gc.ca/eng/com500/faq500.htm" target="_blank" rel="noopener">CRTC</a>). Sales calls follow the CRTC's telemarketing rules. You must register with the National Do Not Call List and not call numbers on it unless the call is exempt (<a href="https://crtc.gc.ca/eng/phone/telemarketing/reg.htm" target="_blank" rel="noopener">CRTC</a>).</p>
+        <ul class="t">
+          <li>You need permission before you send marketing texts or emails (<a href="https://crtc.gc.ca/eng/com500/faq500.htm" target="_blank" rel="noopener">CRTC</a>).</li>
+          <li>If someone asked about a home, you have permission for 6 months. After they buy or sell with you, you have 2 years.</li>
+        </ul>
+        <p class="t">Phone calls have their own rules. Sign up with the National Do Not Call List. Do not call numbers on it, unless the rules say your kind of call is allowed (<a href="https://crtc.gc.ca/eng/phone/telemarketing/reg.htm" target="_blank" rel="noopener">CRTC</a>).</p>
+      </div>
+    </div>
+  </div>
+  <figure class="widewrap">
+    <p class="figtitle"><span class="ds">What each channel needs before you send</span><span class="t">Text, email and call: what each needs</span></p>
+    <div class="grid3">
+      <table class="stack">
+        <thead><tr><th></th><th>Text</th><th>Email</th><th>Sales call</th></tr></thead>
+        <tbody>
+          <tr><td>US</td>
+            <td class="wrapc" data-l="Text"><span class="ds">Signed written consent before autodialed marketing texts. Do Not Call list applies to texts to cell phones.</span><span class="t">Signed permission first for marketing texts sent by auto-texting tools. The Do Not Call list counts.</span></td>
+            <td class="wrapc" data-l="Email"><span class="ds">No consent needed first. Opt-out, postal address, honest subject line. Opt-outs honoured within 10 business days.</span><span class="t">A way to say "stop" and your address.</span></td>
+            <td class="wrapc" data-l="Sales call"><span class="ds">Not to Do Not Call numbers unless signed permission, or an inquiry in the last 3 months or a deal in the last 18. Only 8 a.m. to 9 p.m. their time.</span><span class="t">Not to Do Not Call numbers, unless they said yes in writing or were in touch recently.</span></td></tr>
+          <tr><td>Canada</td>
+            <td class="wrapc" data-l="Text"><span class="ds">CASL: consent, your contact details, an unsubscribe. Implied consent: 6 months after an inquiry, 2 years after a deal.</span><span class="t">Their permission. 6 months after they ask, 2 years after a deal.</span></td>
+            <td class="wrapc" data-l="Email"><span class="ds">The same as a text under CASL. Unsubscribes honoured within 10 business days.</span><span class="t">The same as a text.</span></td>
+            <td class="wrapc" data-l="Sales call"><span class="ds">Not CASL. Register with the National Do Not Call List and skip numbers on it unless the call is exempt.</span><span class="t">Sign up with the Do Not Call List. Skip numbers on it, unless your kind of call is allowed.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <figcaption>From <a href="https://www.law.cornell.edu/cfr/text/47/64.1200" target="_blank" rel="noopener">47 CFR 64.1200</a>, the <a href="https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business" target="_blank" rel="noopener">FTC CAN-SPAM guide</a>, the <a href="https://crtc.gc.ca/eng/com500/faq500.htm" target="_blank" rel="noopener">CRTC CASL FAQ</a> and the <a href="https://crtc.gc.ca/eng/phone/telemarketing/reg.htm" target="_blank" rel="noopener">CRTC telemarketing rules</a>. Many US states add their own rules. General information, not legal advice.</figcaption>
+  </figure>
+  <figure class="widewrap">
+    <p class="figtitle"><span class="ds">The CASL clock, in my made-up example</span><span class="t">How long permission lasts in Canada</span></p>
+    <p class="made">Made-up example</p>
+    <div class="clock">
+      <div class="lanes2">
+        <div class="today" style="left:40.19%"><span>Today, 27 Nov 2026</span></div>
+        <div class="clane"><span class="lab2"><span class="ds">Inquiry 1 Jun 2026: implied consent to 1 Dec 2026 (6 months)</span><span class="t">Asked about a home on 1 Jun 2026: 6 months</span></span><div class="bar2"><div class="seg2 a" style="left:18.39%;width:22.29%"></div></div></div>
+        <div class="clane"><span class="lab2"><span class="ds">Closed 16 Mar 2026: implied consent to 16 Mar 2028 (2 years)</span><span class="t">Bought or sold with you on 16 Mar 2026: 2 years</span></span><div class="bar2"><div class="seg2" style="left:9.01%;width:89.04%"></div></div></div>
+      </div>
+      <div class="axis"><span>Jan 2026</span><span>Apr</span><span>Jul</span><span>Oct</span><span>Jan 2027</span><span>Apr</span><span>Jul</span><span>Oct</span><span>Jan 2028</span></div>
+    </div>
+    <figcaption><span class="ds">The buyer's six months run out four days after today. Ask for express consent before the clock runs out, and record when and how they said yes. Periods from the <a href="https://crtc.gc.ca/eng/com500/faq500.htm" target="_blank" rel="noopener">CRTC CASL FAQ</a>.</span><span class="t">Ask for a clear yes before the time runs out (<a href="https://crtc.gc.ca/eng/com500/faq500.htm" target="_blank" rel="noopener">CRTC</a>).</span></figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="prompt d"><div class="ph"><span>Follow-up prompt</span><button type="button" class="copy">Copy</button></div><blockquote>Draft a short follow-up text and a follow-up email to a buyer who viewed [ADDRESS] yesterday. Use only these facts: [WHAT THEY ASKED, WHAT YOU PROMISED]. Text under 300 characters. Email under 120 words with one question at the end. Include my name, brokerage and [CONTACT DETAILS: mailing address, plus phone, email or website], and an unsubscribe line. Do not mention the seller's situation, price flexibility or anything about the buyer's family, background or finances.</blockquote></div>
+    <div class="prompt s"><div class="ph"><span>Follow-up prompt</span><button type="button" class="copy">Copy</button></div><blockquote>Write a short text and a short email to a buyer who saw [ADDRESS] yesterday. Use only these facts: [FACTS]. Include my name, brokerage, [CONTACT DETAILS: mailing address, plus phone, email or website] and an unsubscribe line. Do not mention the seller's situation or anything about the buyer's family or money.</blockquote></div>
+    <div class="prompt t"><div class="ph"><span>Follow-up prompt</span><button type="button" class="copy">Copy</button></div><blockquote>Write a short text to a buyer who saw [ADDRESS]. Include my name, brokerage, [MAILING ADDRESS AND PHONE OR EMAIL] and a way to stop messages. Do not mention the seller's plans.</blockquote></div>
+    <div class="prose d">
+      <p>In a CRM, the AI is usually a drafter. Follow Up Boss, for example, says AI features are included on all plans but many rely on its Calling add-on; Grow is US$69 per user a month, plus tax where applicable (<a href="https://www.followupboss.com/pricing" target="_blank" rel="noopener">Follow Up Boss pricing</a>, checked 27 Nov 2026, USD only).</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="q" id="q6">
+  <div class="wrap">
+    <p class="eyebrow">Question 6 of 9</p>
+    <h2>How do I turn showing feedback into notes for the seller?</h2>
+    <div class="prose">
+      <p class="answer d">Collect feedback about the home, price and terms, let AI group it into themes, and leave out anything about who the buyers are. The weekly summary is where your judgement matters most.</p>
+      <p class="answer s">Collect comments about the home, price and terms. Let AI group them. Leave out anything about who the buyers are.</p>
+      <p class="answer t">Collect comments about the home and price. Leave out anything about the buyers themselves.</p>
+    </div>
+    <ol class="test">
+      <li><span><span class="d">Send the buyer's agent a short question set within a day of the showing: how interested, how the price compared, what they liked, what held them back, and whether they would come back.</span><span class="s">Ask the buyer's agent a few short questions within a day.</span><span class="t">Ask the buyer's agent a few questions.</span></span></li>
+      <li><span><span class="d">Paste the answers, with names removed, into ChatGPT, Claude or Gemini with the prompt below. Before you paste anything about a client, check the tool's data settings (whether chats are used to train models) and whether your brokerage has an approved AI tool or plan.</span><span class="s">Remove names, then paste the answers into ChatGPT, Claude or Gemini with the prompt below. Check if your brokerage has an approved AI tool. Turn off chat training in settings if you can.</span><span class="t">Remove names. Check if your brokerage has an approved AI tool. Turn off chat training in settings if you can. Then paste the answers into AI.</span></span></li>
+      <li><span><span class="d">Read the summary against the raw notes before it goes to your seller. Alberta's regulator gives an example of an AI meeting summary that wrongly attributed a family member's poor credit to a client, and the client's offer expired (<a href="https://www.reca.ca/wp-content/uploads/Use-of-Artificial-Intelligence.pdf" target="_blank" rel="noopener">RECA bulletin</a>).</span><span class="s">Check the summary against your notes. Alberta's regulator gives an example of an AI summary that mixed up who had poor credit, and the client's offer expired (<a href="https://www.reca.ca/wp-content/uploads/Use-of-Artificial-Intelligence.pdf" target="_blank" rel="noopener">RECA</a>).</span><span class="t">Check the summary against your notes.</span></span></li>
+    </ol>
+    <div class="prompt d"><div class="ph"><span>Seller update prompt</span><button type="button" class="copy">Copy</button></div><blockquote>Turn these showing notes into a seller update for [ADDRESS] for the week of [DATE]. Sections: showings this week; what buyers liked (top three themes); what held buyers back (top three themes, grouped as price, condition, layout or location); one recommendation; any decision the seller needs to make, with a date. Count how many showings mentioned each theme. Leave out every comment about the buyers themselves, their family, background or religion, and any comment about the people in the neighbourhood. Notes: [PASTE NOTES WITH NAMES REMOVED].</blockquote></div>
+    <div class="prompt s"><div class="ph"><span>Seller update prompt</span><button type="button" class="copy">Copy</button></div><blockquote>Turn these notes into a seller update for [ADDRESS]. Sections: showings; top three things buyers liked; top three concerns; one recommendation; any decision needed, with a date. Leave out all comments about the buyers or the neighbours. Notes: [PASTE].</blockquote></div>
+    <div class="prompt t"><div class="ph"><span>Seller update prompt</span><button type="button" class="copy">Copy</button></div><blockquote>Make a seller update from these notes. Show what buyers liked and what worried them. Leave out comments about the buyers or neighbours. NOTES: [PASTE]</blockquote></div>
+    <div class="prose">
+      <p class="d"><strong>Privacy.</strong> In Canada, the federal privacy commissioner and provincial regulators say generative AI does not sit outside privacy law, and that you should use de-identified information in prompts where you can (<a href="https://www.priv.gc.ca/en/privacy-topics/technology/artificial-intelligence/gd_principles_ai" target="_blank" rel="noopener">OPC principles, 7 Dec 2023</a>). In the US, I did not research state privacy laws for this piece; follow your brokerage's policy.</p>
+      <p class="s">In Canada, privacy regulators say AI tools are covered by privacy law. Remove personal details where you can (<a href="https://www.priv.gc.ca/en/privacy-topics/technology/artificial-intelligence/gd_principles_ai" target="_blank" rel="noopener">OPC</a>).</p>
+    </div>
+  </div>
+  <figure class="widewrap">
+    <p class="figtitle"><span class="ds">A sample seller update</span><span class="t">A sample seller update</span></p>
+    <p class="made">Made-up example</p>
+    <div class="update">
+      <div class="main">
+        <h3>Seller update: the brick semi</h3>
+        <p class="k">Week of [DATE] · made-up listing, Hamilton</p>
+        <h4>Showings this week</h4>
+        <p>5 showings, 4 feedback replies.</p>
+        <h4>What buyers liked</h4>
+        <ol><li>Bright main floor that runs front to back (3 of 4)</li><li>Fenced yard off the kitchen (2 of 4)</li><li>2022 furnace (2 of 4)</li></ol>
+        <h4>What held buyers back</h4>
+        <ol><li>Price, compared with recent semis (2 of 4)</li><li>Condition: one full bathroom only (2 of 4)</li><li>Layout: small third bedroom (1 of 4)</li></ol>
+        <h4>One recommendation</h4>
+        <p>Add a floor plan with room sizes to the listing photos.</p>
+        <h4>Decision needed</h4>
+        <p>Price review: yes or no by [DATE].</p>
+      </div>
+      <div class="side">
+        <h4>Removed before summarising</h4>
+        <ul><li>Buyer and buyer's agent names</li><li>Comments about the buyers' family, background or religion</li><li>Comments about the people in the neighbourhood</li><li>"Bought elsewhere" and "quick close", flagged by my <span class="ds">scan</span><span class="t">checker</span> in a showing note</li><li>The lockbox detail (agent-only showing field)</li></ul>
+      </div>
+    </div>
+    <figcaption>Every showing, count and comment here is invented to show the layout. It follows the five sections of the seller update prompt.</figcaption>
+  </figure>
+</section>
+
+<!-- 7 -->
+<section class="q" id="q7">
+  <div class="wrap">
+    <p class="eyebrow">Question 7 of 9</p>
+    <h2>What is the agent version of this job, and where must I approve?</h2>
+    <div class="prose">
+      <p class="answer d">An AI agent can now pull the week's notes together, draft the follow-ups and build the seller update on its own. The agents whose help pages I could open, <a href="https://support.claude.com/en/articles/12902446-claude-in-chrome-permissions-guide" target="_blank" rel="noopener">Claude in Chrome</a> and <a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Tasks in Gemini</a>, ask before sensitive steps by default, and Claude in Chrome lets you switch that off. I could not confirm what ChatGPT Work or Muse asks you to approve. Keep it on for anything a client or the public sees.</p>
+      <p class="answer s">An AI agent can gather notes and write drafts alone. The two agents I could check (Claude in Chrome and Gemini) ask before they send, pay or post. Some let you turn that off. Keep it on.</p>
+      <p class="answer t">Some AI tools can do many steps alone. They can stop and ask before they send or post. Some let you turn this off. Keep it on.</p>
+    </div>
+    <div class="tools" data-group="agent">
+      <p class="tl">Agents by tool</p>
+      <div class="seg toolseg" role="group" aria-label="Choose a tool">
+        <button type="button" data-tool="chatgpt" aria-pressed="true">ChatGPT</button>
+        <button type="button" data-tool="claude" aria-pressed="false">Claude</button>
+        <button type="button" data-tool="gemini" aria-pressed="false">Gemini</button>
+        <button type="button" data-tool="muse" aria-pressed="false">Muse</button>
+      </div>
+      <div class="tool" data-tool="chatgpt">
+        <h3>In ChatGPT</h3>
+        <p class="d">ChatGPT Work is listed on Plus and Pro on desktop, web and mobile, and in a limited form on Free and Go (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">OpenAI pricing</a>). I could not open OpenAI's help page for it on 27 Nov 2026, so check what it asks you to approve before you rely on it.</p>
+        <p class="s">ChatGPT Work is on Plus and Pro, with limited use on Free (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">OpenAI</a>). I could not open its help page, so check what it asks first.</p>
+        <p class="t">ChatGPT Work can do longer jobs (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">OpenAI</a>). I could not check what it asks you to approve. Check before you use it.</p>
+      </div>
+      <div class="tool" data-tool="claude" hidden>
+        <h3>In Claude</h3>
+        <p class="d">Claude in Chrome, on paid plans, can fill a CRM form from your showing notes in your own browser. You choose Manually approve, Automatically approve or Skip all approvals. It cannot make purchases or create accounts in any mode, and Anthropic advises staying close for "messages sent as you" (<a href="https://support.claude.com/en/articles/12902446-claude-in-chrome-permissions-guide" target="_blank" rel="noopener">Claude in Chrome permissions guide</a>). Claude Duet, which drafts and waits for your approval before it sends, is a US-only waitlist preview for now (<a href="https://claude.com/resources/articles/claude-duet" target="_blank" rel="noopener">Anthropic, 21 Oct 2026</a>).</p>
+        <p class="s">Claude in Chrome can fill forms in your browser on paid plans. It cannot buy things or make accounts (<a href="https://support.claude.com/en/articles/12902446-claude-in-chrome-permissions-guide" target="_blank" rel="noopener">Anthropic</a>). Claude Duet is US-only for now (<a href="https://claude.com/resources/articles/claude-duet" target="_blank" rel="noopener">Anthropic</a>).</p>
+        <p class="t">Claude in Chrome can fill forms. It cannot buy things (<a href="https://support.claude.com/en/articles/12902446-claude-in-chrome-permissions-guide" target="_blank" rel="noopener">Anthropic</a>).</p>
+      </div>
+      <div class="tool" data-tool="gemini" hidden>
+        <h3>In Gemini</h3>
+        <p class="d">Tasks in Gemini is available without a subscription in Canada and the US. It asks for confirmation before sending messages, submitting forms or making purchases, allows up to 15 tasks at once, and does not work with work or school Google accounts for now (<a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Google help</a>). If your email runs on Google Workspace for business, that is a real limit.</p>
+        <p class="s">Tasks is free in Canada and the US. It asks before sending messages or forms. It does not work with work or school accounts yet (<a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Google</a>).</p>
+        <p class="t">Tasks is free in Canada and the US. It asks before sending (<a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Google</a>).</p>
+      </div>
+      <div class="tool" data-tool="muse" hidden>
+        <h3>In Muse</h3>
+        <p class="d"><span class="note">[DAN TO CONFIRM: how you use Muse for neighbourhood research and what it asks before acting. Meta's help page did not load for me on 27 Nov 2026, so no plan or price is given here.]</span></p>
+        <p class="s"><span class="note">[DAN TO CONFIRM how you use it.]</span></p>
+        <p class="t"><span class="note">[DAN TO CONFIRM.]</span></p>
+      </div>
+    </div>
+    <div class="prose">
+      <p class="d">Agents still get ordinary jobs wrong. In ShellBench, a test of 12 models on 100 everyday tasks published 24 Nov 2026, the best model passed 62.5% of attempts (<a href="https://arxiv.org/abs/2611.32946" target="_blank" rel="noopener">arXiv</a>). That is why the approval step is not optional.</p>
+      <p class="d"><strong>Where a person must approve:</strong> sending any message to a client, buyer agent or lead; publishing or changing a listing; posting to social media; anything with money; and anything involving a client's personal information.</p>
+      <p class="s"><strong>You approve:</strong> every message to a client or lead, every listing change, every social post, anything with money or a client's personal details.</p>
+      <p class="s">In one test of 100 everyday computer tasks (not real estate tasks), the best AI agent passed 62.5% of attempts (<a href="https://arxiv.org/abs/2611.32946" target="_blank" rel="noopener">ShellBench</a>). So you approve anything that goes out.</p>
+      <p class="t"><strong>Your rule:</strong> you say yes before any AI tool sends a message, changes a listing, posts, or pays.</p>
+      <p class="t">In one test of 100 everyday computer tasks (not real estate tasks), the best AI agent passed 62.5% of them (<a href="https://arxiv.org/abs/2611.32946" target="_blank" rel="noopener">ShellBench</a>). So you check everything that goes out.</p>
+    </div>
+  </div>
+  <figure class="widewrap">
+    <p class="figtitle"><span class="ds">An agent's weekly run, with the stops where you approve</span><span class="t">A weekly run with stop signs</span></p>
+    <div class="flow run">
+      <div class="stage"><p class="k">Alone</p><h3>Gather notes</h3><p><span class="ds">Pulls the week's showing feedback together.</span><span class="t">Collects notes.</span></p></div>
+      <div class="stage"><p class="k">Alone</p><h3>Draft follow-ups</h3><p><span class="ds">Writes texts and emails from your facts.</span><span class="t">Writes messages.</span></p></div>
+      <div class="stage"><p class="k">Alone</p><h3>Seller update</h3><p><span class="ds">Builds the weekly summary for the seller.</span><span class="t">Writes the update.</span></p></div>
+      <div class="stage gate"><p class="k">You approve</p><h3>Send</h3><p><span class="ds">Any message to a client, buyer agent or lead.</span><span class="t">Any message.</span></p></div>
+      <div class="stage gate"><p class="k">You approve</p><h3>Publish</h3><p><span class="ds">Any new or changed listing.</span><span class="t">Any listing change.</span></p></div>
+      <div class="stage gate"><p class="k">You approve</p><h3>Post</h3><p><span class="ds">Any social post, and anything with money.</span><span class="t">Any post or payment.</span></p></div>
+    </div>
+    <figcaption>Grey: steps an agent can do on its own. Rust: the stops where a person approves.</figcaption>
+  </figure>
+</section>
+
+<!-- 8 -->
+<section class="q" id="q8">
+  <div class="wrap">
+    <p class="eyebrow">Question 8 of 9</p>
+    <h2>What does a workflow across tools look like?</h2>
+    <div class="prose">
+      <p class="answer d">Here is the simple version I would set up for a solo agent: research, draft, check, then file, with you approving at each hand-off.</p>
+      <p class="answer s">Research, draft, check, then file. You approve at each step.</p>
+      <p class="answer t">Five steps. You check each one.</p>
+    </div>
+  </div>
+  <figure class="widewrap">
+    <div class="strip">
+      <div><span class="n">1</span><h3><span class="d">Neighbourhood facts with sources</span><span class="s">Area facts with sources</span><span class="t">Find area facts</span></h3><p class="tool2">Muse or Gemini</p><p class="hand d">Hands off: a sourced fact list</p><p class="chk"><span class="d">Verify each fact and distance against its source</span><span class="s">Check each fact</span><span class="t">You check them</span></p></div>
+      <div><span class="n">2</span><h3><span class="d">Listing, posts, follow-up templates</span><span class="s">Drafts</span><span class="t">Write drafts</span></h3><p class="tool2">Claude or ChatGPT</p><p class="hand d">Hands off: drafts plus a "numbers used" list</p><p class="chk"><span class="d">Line-by-line against the fact sheet</span><span class="s">Match to the fact sheet</span><span class="t">You match them to your facts</span></p></div>
+      <div><span class="n">3</span><h3><span class="d">Fair housing and number check</span><span class="s">Fair housing check</span><span class="t">Check for risky words</span></h3><p class="tool2"><span class="d">Fresh chat, plus the word scan</span><span class="s">Fresh chat and word list</span><span class="t">A fresh chat</span></p><p class="hand d">Hands off: a flag list</p><p class="chk"><span class="d">You decide what stays</span><span class="st">You decide</span></p></div>
+      <div><span class="n">4</span><h3>Graphics</h3><p class="tool2"><span class="ds">Canva or similar</span><span class="t">Canva</span></p><p class="hand d">Hands off: images</p><p class="chk"><span class="d">Any edited photo labelled, original kept</span><span class="st">You label edited photos</span></p></div>
+      <div><span class="n">5</span><h3><span class="d">Follow-ups and showing notes</span><span class="s">Follow-ups and notes</span><span class="t">Follow-ups</span></h3><p class="tool2">Your CRM</p><p class="hand d">Hands off: drafts and summaries</p><p class="chk"><span class="d">Read before send or file</span><span class="s">Read before sending</span><span class="t">You read them before sending</span></p></div>
+    </div>
+  </figure>
+  <div class="wrap">
+    <div class="prose">
+      <p class="d"><strong>Cost, checked 27 Nov 2026, before tax:</strong> Claude Pro at US$20 a month (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude</a>) or Google AI Pro at C$26.99 a month in Canada (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google Canada</a>) covers steps 2 and 3 for one agent; Gemini also covers step 1. Follow Up Boss Grow is US$69 per user a month, and many of its AI features need the Calling add-on (US$39 per user a month, or US$33 billed yearly) (<a href="https://www.followupboss.com/pricing" target="_blank" rel="noopener">Follow Up Boss</a>). I did not include Canva or Muse prices because I could not open their own pricing pages that day. <span class="note">[DAN TO CONFIRM Canva and Muse prices from their own pages.]</span></p>
+      <p class="s">Claude Pro (US$20 a month, <a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude</a>) or Google AI Pro (C$26.99 a month in Canada, <a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google Canada</a>) covers steps 2 and 3; Gemini also covers step 1. Follow Up Boss Grow is US$69 a month per user, and many of its AI features need the Calling add-on (US$39) (<a href="https://www.followupboss.com/pricing" target="_blank" rel="noopener">Follow Up Boss</a>). Prices are before tax.</p>
+      <p class="t">Cost: Claude Pro is US$20 a month (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude</a>). Google AI Pro is C$26.99 a month in Canada (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google Canada</a>). Prices are before tax.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="q" id="q9">
+  <div class="wrap">
+    <p class="eyebrow">Question 9 of 9</p>
+    <h2>What should I do this week?</h2>
+    <ul class="check">
+      <li><label><input type="checkbox" id="c1"><span><span class="d">Write a fact sheet template and use it for your next listing, before any AI sees it.</span><span class="s">Make a fact sheet for your next listing before using AI.</span><span class="t">Make a fact sheet for your next listing.</span></span></label></li>
+      <li><label><input type="checkbox" id="c2"><span><span class="d">Save the listing prompt and the review prompt in a Project in ChatGPT or Claude.</span><span class="s">Save the listing and review prompts in a Project.</span><span class="t">Save the prompts in a Project.</span></span></label></li>
+      <li><label><input type="checkbox" id="c3"><span><span class="d">Make a "never paste" list: client names, offer terms, lockbox codes, the seller's situation.</span><span class="s">Write a "never paste" list.</span><span class="t">Make a "never paste" list.</span></span></label></li>
+      <li><label><input type="checkbox" id="c4"><span><span class="d">Read your own regulator's AI guidance (RECO, BCFSA, RECA, your state commission) and your MLS photo rules.</span><span class="s">Read your regulator's AI guidance and your MLS photo rules.</span><span class="t">Read your regulator's AI rules.</span></span></label></li>
+      <li><label><input type="checkbox" id="c5"><span><span class="d">Check where each lead in your CRM came from and whether you have consent to text or email them. In Canada, note the six-month and two-year dates.</span><span class="s">Check consent for every lead you text or email.</span><span class="t">Check who said yes to your texts and emails.</span></span></label></li>
+      <li class="ds"><label><input type="checkbox" id="c6"><span><span class="d">Ask your broker whether you need written client consent before using AI on their file.</span><span class="s">Ask your broker about client consent for AI.</span></span></label></li>
+    </ul>
+    <p style="margin:14px 0 0;font-size:13px;color:var(--muted)">Your ticks are saved on this device only.</p>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>How Leverage Strategies helps</h2>
+  <p class="d">I help agents and small brokerages set up these prompts, projects and checks in the tools they already pay for, and train the team to use them the same way every time. I do not give legal advice; your broker or lawyer should review consent wording and policies.</p>
+  <p class="s">I set up these prompts and checks in the tools you already use, and train your team. I do not give legal advice.</p>
+  <p class="t">I can set up these prompts and checks for you and your team. I do not give legal advice.</p>
+  <p><span class="note">[BOOK A CALL LINK]</span></p>
+</section>
+
+<div class="wrap">
+  <div class="sources st" style="padding-top:0">
+    <h2>Words to know</h2>
+    <table class="s">
+      <thead><tr><th>Word</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td>Fact sheet</td><td class="wrapc">A list of true facts about the home that you give the AI</td></tr>
+        <tr><td>Prompt</td><td class="wrapc">The instructions you type into an AI tool</td></tr>
+        <tr><td>Fair housing</td><td class="wrapc">Rules that ban housing ads that favour or exclude groups of people</td></tr>
+        <tr><td>Steering</td><td class="wrapc">Pushing buyers toward or away from an area because of who lives there</td></tr>
+        <tr><td>Consent</td><td class="wrapc">A person's yes to get your messages</td></tr>
+        <tr><td>CASL</td><td class="wrapc">Canada's anti-spam law for emails and texts</td></tr>
+        <tr><td>AI agent</td><td class="wrapc">An AI tool that does several steps on its own</td></tr>
+        <tr><td>Virtual staging</td><td class="wrapc">Adding furniture to a photo with software</td></tr>
+      </tbody>
+    </table>
+    <table class="t">
+      <thead><tr><th>Word</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td>Fact sheet</td><td class="wrapc">A list of true facts about the home</td></tr>
+        <tr><td>Prompt</td><td class="wrapc">What you type to tell the AI what to do</td></tr>
+        <tr><td>Fair housing</td><td class="wrapc">Rules that stop ads from leaving people out</td></tr>
+        <tr><td>Consent</td><td class="wrapc">Permission to send someone messages. They can give it, or it can come from a recent inquiry or deal</td></tr>
+        <tr><td>AI agent</td><td class="wrapc">An AI tool that does many steps by itself</td></tr>
+        <tr><td>Regulator</td><td class="wrapc">The group that makes and checks the rules for agents</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sources">
+    <h2>Sources</h2>
+    <p>All pages opened 27 Nov 2026 unless noted. <span class="st">Every number in this guide comes from these pages.</span></p>
+    <ul>
+      <li>NAR, <a href="https://www.nar.realtor/news/real-estate-news/technology/the-tech-real-estate-agents-rely-on-most-in-2026" target="_blank" rel="noopener">The tech real estate agents rely on most in 2026</a></li>
+      <li>NAR, <a href="https://www.nar.realtor/news/real-estate-news/technology/faster-cheaper-riskier-what-brokers-should-know-before-putting-ai-to-work" target="_blank" rel="noopener">Faster, cheaper, riskier? What brokers should know before putting AI to work</a>, 23 Oct 2026</li>
+      <li>Originality.ai, <a href="https://originality.ai/blog/likely-ai-canadian-real-estate-listings-study" target="_blank" rel="noopener">Likely AI Canadian real estate listings study</a> (vendor-run test)</li>
+      <li><a href="https://www.law.cornell.edu/uscode/text/42/3604" target="_blank" rel="noopener">42 U.S.C. 3604</a> and <a href="https://www.law.cornell.edu/cfr/text/24/100.75" target="_blank" rel="noopener">24 CFR 100.75</a>, Cornell LII</li>
+      <li>HUD, <a href="https://public-inspection.federalregister.gov/2026-06624.pdf" target="_blank" rel="noopener">Notification of withdrawal of FHEO guidance documents</a>, Federal Register, 6 Apr 2026</li>
+      <li>California DRE, <a href="https://dre.ca.gov/Licensees/Advisories/Advisory_2026_03_17_AI_in_California_Real_Estate.html" target="_blank" rel="noopener">Advisory on AI in California real estate</a>, 17 Mar 2026</li>
+      <li>NAR, <a href="https://www.nar.realtor/about-nar/governing-documents/code-of-ethics/2026-code-of-ethics-standards-of-practice" target="_blank" rel="noopener">2026 Code of Ethics and Standards of Practice</a></li>
+      <li>RECO, <a href="https://www.reco.on.ca/agents-and-brokerages/reco-bulletins/reco-guidance-use-of-artificial-intelligence/" target="_blank" rel="noopener">Guidance: use of artificial intelligence</a>, updated 22 Oct 2026</li>
+      <li>BCFSA, <a href="https://www.bcfsa.ca/industry-resources/real-estate-professional-resources/knowledge-base/guidelines/artificial-intelligence-guideline" target="_blank" rel="noopener">Artificial intelligence guideline</a>, 22 Feb 2024</li>
+      <li>BCFSA, <a href="https://www.bcfsa.ca/media/3822/download" target="_blank" rel="noopener">Evans (Re), 2024 BCSRE 59</a></li>
+      <li>RECA, <a href="https://www.reca.ca/wp-content/uploads/Use-of-Artificial-Intelligence.pdf" target="_blank" rel="noopener">Use of artificial intelligence</a></li>
+      <li>CREA, <a href="https://www.crea.ca/media-hub/news/laci-soutient-lutilisation-responsable-de-lia-dans-le-secteur-immobilier/" target="_blank" rel="noopener">Supports responsible AI use in real estate</a>, 1 Jun 2026</li>
+      <li>Ontario Human Rights Commission, <a href="https://www.ohrc.on.ca/en/writing-fair-rental-housing-ad-fact-sheet" target="_blank" rel="noopener">Writing a fair rental housing ad</a></li>
+      <li><a href="https://www.law.cornell.edu/cfr/text/47/64.1200" target="_blank" rel="noopener">47 CFR 64.1200</a>, Cornell LII</li>
+      <li>FTC, <a href="https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business" target="_blank" rel="noopener">CAN-SPAM Act compliance guide</a></li>
+      <li>CRTC, <a href="https://crtc.gc.ca/eng/com500/faq500.htm" target="_blank" rel="noopener">CASL frequently asked questions</a> and <a href="https://crtc.gc.ca/eng/phone/telemarketing/reg.htm" target="_blank" rel="noopener">telemarketing rules</a></li>
+      <li>OPC, <a href="https://www.priv.gc.ca/en/privacy-topics/technology/artificial-intelligence/gd_principles_ai" target="_blank" rel="noopener">Principles for responsible, trustworthy and privacy-protective generative AI</a>, 7 Dec 2023</li>
+      <li><a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">OpenAI pricing</a>, <a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>, <a href="https://www.anthropic.com/news/introducing-claude-to-canada" target="_blank" rel="noopener">Anthropic Canada launch</a> (5 Jun 2024), <a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google AI plans, Canada</a>, <a href="https://www.followupboss.com/pricing" target="_blank" rel="noopener">Follow Up Boss pricing</a></li>
+      <li><a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Google: tasks in Gemini</a>, <a href="https://support.claude.com/en/articles/12902446-claude-in-chrome-permissions-guide" target="_blank" rel="noopener">Claude in Chrome permissions guide</a>, <a href="https://claude.com/resources/articles/claude-duet" target="_blank" rel="noopener">Claude Duet</a></li>
+      <li><a href="https://www.listinglaunchpad.com/guides/ai-mls-description-generator" target="_blank" rel="noopener">Listing Launchpad guide</a> (vendor), <a href="https://arxiv.org/abs/2611.32946" target="_blank" rel="noopener">ShellBench</a> (preprint)</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="site">
+  <span>Leverage Strategies · Dan Albasry · Toronto</span>
+  <span>General information, not legal advice. Last checked November 27, 2026.</span>
+</footer>
+
+<div class="seg float" role="group" aria-label="Reading level">
+  <span class="lab">Reading level</span>
+  <button type="button" data-v="t" aria-pressed="true">Starter</button>
+  <button type="button" data-v="s" aria-pressed="false">Simple</button>
+  <button type="button" data-v="d" aria-pressed="false">Detailed</button>
+</div>
+
+<script>
+{
+  const KEY='leverage-notes-level', TKEY='leverage-tool', BOX='leverage-realestate-checks';
+  const body=document.body, buttons=document.querySelectorAll('.seg button[data-v]');
+  const store=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+  const load=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+  const current=()=>body.classList.contains('lv-t')?'t':body.classList.contains('lv-s')?'s':'d';
+  const paint=v=>{
+    body.classList.remove('lv-d','lv-s','lv-t'); body.classList.add('lv-'+v);
+    buttons.forEach(b=>b.setAttribute('aria-pressed', b.dataset.v===v?'true':'false'));
+  };
+  // Keep the reader in the same section, at about the same depth, when they switch.
+  const setLevel=v=>{
+    if(v===current()) return;
+    const secs=document.querySelectorAll('section.q'); let anchor=null;
+    secs.forEach(s=>{ if(s.getBoundingClientRect().top<=120) anchor=s; });
+    let progress=0;
+    if(anchor){ const r=anchor.getBoundingClientRect(); progress=Math.min(1,Math.max(0,(120-r.top)/Math.max(1,r.height))); }
+    paint(v); store(KEY,v);
+    if(anchor){ const r2=anchor.getBoundingClientRect(); window.scrollTo({top:window.pageYOffset+r2.top-120+progress*r2.height,behavior:'auto'}); }
+  };
+  buttons.forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.v)));
+  const saved=load(KEY); paint(saved==='d'||saved==='s'||saved==='t' ? saved : 't');
+
+  // Tool switch: one choice for every tool group on the page; ChatGPT by default.
+  const groups=document.querySelectorAll('.tools');
+  const showTool=(g,t)=>{
+    if(!g.querySelector('.tool[data-tool="'+t+'"]')) return false;
+    g.querySelectorAll('.tool').forEach(p=>{p.hidden=p.dataset.tool!==t});
+    g.querySelectorAll('.toolseg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tool===t?'true':'false'));
+    return true;
+  };
+  const setTool=t=>{groups.forEach(g=>showTool(g,t)); store(TKEY,t);};
+  groups.forEach(g=>{
+    g.querySelectorAll('.toolseg button').forEach(b=>b.addEventListener('click',()=>{
+      const top=g.getBoundingClientRect().top; setTool(b.dataset.tool);
+      const d=g.getBoundingClientRect().top-top; if(d) window.scrollBy(0,d);
+    }));
+  });
+  const savedTool=load(TKEY)||'chatgpt';
+  groups.forEach(g=>{ if(!showTool(g,savedTool)) showTool(g,'chatgpt'); });
+
+  // Copy buttons for prompts.
+  document.querySelectorAll('.prompt .copy').forEach(btn=>btn.addEventListener('click',()=>{
+    const q=btn.closest('.prompt').querySelector('blockquote'); const text=q.textContent;
+    const done=()=>{btn.textContent='Copied'; setTimeout(()=>{btn.textContent='Copy'},1600);};
+    const fallback=()=>{const r=document.createRange(); r.selectNodeContents(q); const s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='Selected, press copy';};
+    try{ navigator.clipboard.writeText(text).then(done,fallback); }catch(e){ fallback(); }
+  }));
+
+  // Checklist ticks are remembered on this device only.
+  let ticks={};
+  try{ticks=JSON.parse(load(BOX)||'{}')||{}}catch(e){ticks={}}
+  document.querySelectorAll('.check input').forEach(box=>{
+    box.checked=!!ticks[box.id];
+    box.addEventListener('change',()=>{ticks[box.id]=box.checked; store(BOX,JSON.stringify(ticks));});
+  });
+}
+</script>
+
+</body></html>

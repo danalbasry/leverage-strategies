@@ -1,0 +1,1141 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Your First Three AI Wins</title><meta name="description" content="Workshop 1 for independent small business owners in the US and Canada: three hours, three weekly jobs set up in AI, and a way to check its work. Three reading levels."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"><style>
+/* VOICE: calm, plain, first person; a workshop guide, not a sales page.
+   IDEA: three hours, three wins, planned so the week after is what counts.
+   PICTURE: the three-hour agenda drawn to scale, wins in the accent.
+   COLOUR and TYPE: the site's "G. Combined" direction: paper, ink, one rust accent; Instrument Serif and Sans.
+   LAYOUT: one reading column, figures up to 1040px, one dark band, a floating level switch. Light theme by choice. */
+:root{
+  color-scheme: light;
+  --paper:#F8F6F1; --ink:#141412; --body:#3A3832; --muted:#5A584F; --rule:#CFCBC0; --panel:#EDE9DF; --accent:#7A2E1A;
+  --display:'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --text:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --col:680px; --wide:1040px;
+}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+.eyebrow{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 24px}
+.widewrap{max-width:var(--wide);margin:0 auto;padding:0 24px}
+figure.wrap,figure.widewrap{margin:44px auto}
+
+/* three reading levels: .d detailed, .s simple, .t starter, .ds detailed+simple, .st simple+starter */
+body.lv-d .s, body.lv-d .t, body.lv-d .st{display:none !important}
+body.lv-s .d, body.lv-s .t{display:none !important}
+body.lv-t .d, body.lv-t .s, body.lv-t .ds{display:none !important}
+body.lv-s .prose{font-size:19px;line-height:1.75}
+body.lv-t .prose{font-size:20px;line-height:1.8}
+
+header.site{padding:24px 32px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink)}
+header.site .mark{font-family:var(--display);font-size:32px;line-height:1}
+header.site .where{font-size:14px;color:var(--muted)}
+
+.hero{max-width:var(--wide);margin:0 auto;padding:72px 24px 0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:end}
+.hero h1{font-size:clamp(44px,6.4vw,80px);line-height:1.02;letter-spacing:-.02em;margin-top:24px}
+.hero .lede{margin:28px 0 0;font-size:21px;line-height:1.6;color:var(--body)}
+.hero .by{margin:28px 0 0;font-size:14px;color:var(--muted)}
+.hero figure{margin:0}
+.hero img{width:100%;max-height:620px;object-fit:cover;object-position:center 30%;border:1px solid var(--rule)}
+@media (max-width:820px){.hero{grid-template-columns:1fr;gap:32px;padding-top:56px}.hero img{max-height:520px}}
+
+.versions{margin:56px auto 0;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:22px 0}
+.versions p{margin:0;font-size:16px;color:var(--body);flex:1 1 300px}
+.seg{display:inline-flex;border:1px solid var(--ink);background:var(--paper)}
+.seg button{font:500 14px/1 var(--text);letter-spacing:.04em;padding:14px 16px;min-height:44px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button + button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.float{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:20;box-shadow:0 6px 24px rgba(20,20,18,.18)}
+.float .lab{display:flex;align-items:center;padding:0 14px 0 16px;font-size:13px;color:var(--muted);border-right:1px solid var(--rule)}
+@media (max-width:520px){.float .lab{display:none}.seg button{padding:14px 13px}}
+
+.toc{margin:56px auto 0}
+.toc ol{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--ink)}
+.toc li{border-bottom:1px solid var(--rule)}
+.toc a{display:flex;gap:20px;align-items:baseline;padding:14px 0;text-decoration:none;font-family:var(--display);font-size:24px;line-height:1.2}
+.toc a span.n{font:400 13px var(--text);color:var(--muted);flex:0 0 20px;font-variant-numeric:tabular-nums}
+
+section.q{padding:96px 0 0;scroll-margin-top:12px}
+section.q h2{font-size:clamp(34px,5vw,52px);line-height:1.06;margin:14px 0 28px}
+.prose p{margin:0 0 20px;color:var(--body)}
+.prose p.answer{font-size:1.14em;line-height:1.55;color:var(--ink)}
+.prose strong{color:var(--ink);font-weight:600}
+.prose ul,.prose ol{margin:0 0 20px;padding-left:22px;color:var(--body)}
+.prose li{margin:0 0 10px}
+.key{font-family:var(--display);font-size:clamp(28px,4vw,38px);line-height:1.15;color:var(--ink);margin:36px 0;padding:28px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.key em{color:var(--accent)}
+
+figure{margin:44px auto}
+figcaption{margin-top:12px;font-size:13px;line-height:1.5;color:var(--muted)}
+.figtitle{margin:0 0 18px;font-family:var(--display);font-size:26px;line-height:1.15}
+
+/* ladder */
+.ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end;border-bottom:1px solid var(--ink)}
+.rung{border:1px solid var(--ink);border-bottom:0;padding:18px 18px 20px;background:var(--paper)}
+.rung:nth-child(1){min-height:200px}.rung:nth-child(2){min-height:250px}.rung:nth-child(3){min-height:300px;background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.rung .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.rung h3{font-size:30px;line-height:1.1;margin:6px 0 10px}
+.rung p{margin:0;font-size:15.5px;line-height:1.55;color:var(--body)}
+.rung p.ex{margin-top:12px;padding-top:12px;border-top:1px solid var(--rule)}
+@media (max-width:700px){.ladder{grid-template-columns:1fr;border-bottom:0}.rung,.rung:nth-child(n){min-height:0;border-bottom:1px solid var(--ink)}.rung:nth-child(3){border-bottom-color:var(--accent)}}
+
+/* test list */
+.test{list-style:none;margin:0 0 24px;padding:0;border-top:1px solid var(--ink);counter-reset:tq}
+.test li{counter-increment:tq;display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.test li::before{content:counter(tq);font-family:var(--display);font-size:30px;line-height:1;color:var(--accent)}
+
+/* flow diagram */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px}
+.stage{position:relative;border:1px solid var(--ink);padding:16px 16px 18px;background:var(--paper)}
+.stage .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.stage h3{font-size:25px;line-height:1.1;margin:6px 0 8px}
+.stage p{margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.stage:not(:last-child)::after{content:"\2192";position:absolute;right:-29px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--muted)}
+.stage.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.repair{margin-top:36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:28px;align-items:start;border-top:1px dashed var(--ink);padding-top:22px}
+.repair h3{font-size:28px;line-height:1.1}
+.repair .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.repair ol{margin:0;padding-left:20px;font-size:15.5px;line-height:1.55;color:var(--body)}
+.repair li{margin-bottom:6px}
+@media (max-width:820px){.flow{grid-template-columns:1fr;gap:30px}.stage:not(:last-child)::after{content:"\2193";right:auto;left:22px;top:auto;bottom:-29px;transform:none}.repair{grid-template-columns:1fr;gap:12px}}
+
+/* bars */
+.bars{display:grid;gap:18px}
+.bar{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;align-items:center}
+.bar .l{font-size:15px;line-height:1.35;color:var(--ink)}
+.bar .l small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.bar .tr{display:flex;align-items:center;gap:12px}
+.bar .f{height:30px;background:#A8A397;min-width:2px}
+.bar .f.hot{background:var(--accent)}
+.bar .f.ink{background:var(--ink)}
+.bar .v{font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:560px){.bar{grid-template-columns:1fr;gap:6px}}
+
+/* business finder */
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.pick button{font:500 15px var(--text);min-height:44px;padding:10px 14px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.pick button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.biz{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink);border-left:1px solid var(--rule)}
+.biz li{padding:18px 20px 20px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);transition:background .25s}
+.biz li.on{background:var(--panel);box-shadow:inset 3px 0 0 var(--accent)}
+.biz h3{font-size:27px;line-height:1.1;margin:0 0 10px}
+.biz dl{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 12px;font-size:15px;line-height:1.5}
+.biz dt{font:500 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.biz dd{margin:0;color:var(--body)}
+@media (max-width:640px){.biz{grid-template-columns:1fr}}
+
+.box{margin:36px 0;padding:24px 26px;background:var(--panel);border:1px solid var(--ink)}
+.box h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.box p{margin:0 0 12px;font-size:16.5px;line-height:1.6;color:var(--body)}
+.box p:last-child{margin-bottom:0}
+
+/* two countries */
+.where2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;margin:36px 0;border:1px solid var(--ink)}
+.where2 > div{padding:24px 26px;background:var(--panel)}
+.where2 > div + div{border-left:1px solid var(--ink)}
+@media (max-width:600px){.where2 > div + div{border-left:0;border-top:1px solid var(--ink)}}
+.where2 h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2 ul{margin:0;padding-left:18px;font-size:15.5px;line-height:1.6;color:var(--body)}
+.where2 li{margin-bottom:10px}
+
+/* numbered risks */
+.steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink);counter-reset:st}
+.steps li{counter-increment:st;display:grid;grid-template-columns:64px 1fr;gap:8px;padding:26px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(st);font-family:var(--display);font-size:54px;line-height:.9;color:var(--accent)}
+.steps h3{font-size:28px;line-height:1.15;margin:0 0 8px}
+.steps p{margin:0;color:var(--body);font-size:.96em}
+
+.skip{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.skip li{display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.skip li::before{content:"\00D7";font-family:var(--display);font-size:36px;line-height:.8;color:var(--accent)}
+
+table{border-collapse:collapse;width:100%;font-size:15.5px;line-height:1.45}
+th{font:500 12.5px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 14px 10px 0;border-bottom:1px solid var(--ink)}
+td{padding:13px 14px 13px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--body)}
+td:first-child{color:var(--ink);font-weight:500;white-space:nowrap}
+
+.band{background:var(--ink);color:var(--paper);margin-top:96px;padding:64px 0}
+.band p.eyebrow{color:#B5B1A6;font-family:var(--text);font-size:13px;line-height:1.4;margin:0}
+.band p{margin:16px 0 0;font-family:var(--display);font-size:clamp(24px,3.4vw,32px);line-height:1.3;color:var(--paper)}
+
+.note{display:inline;background:#F3E3DC;color:var(--accent);font-size:.92em;padding:1px 6px}
+
+.check{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.check li{border-bottom:1px solid var(--rule)}
+.check label{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:20px 0;cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;width:24px;height:24px;margin:4px 0 0;border:1.5px solid var(--ink);background:var(--paper);display:grid;place-content:center;cursor:pointer}
+.check input:checked{background:var(--ink)}
+.check input:checked::after{content:"";width:11px;height:6px;border-left:2px solid var(--paper);border-bottom:2px solid var(--paper);transform:rotate(-45deg) translate(1px,-1px)}
+.check span{color:var(--ink)}
+
+.cta{border-top:1px solid var(--ink);margin-top:96px;padding:88px 24px;text-align:center}
+.cta h2{font-size:clamp(40px,6vw,68px);line-height:1.04}
+.cta p{max-width:600px;margin:22px auto 0;color:var(--body)}
+
+.sources{padding:72px 0 0}
+.sources h2{font-size:34px;margin:0 0 8px}
+.sources ul{margin:18px 0 0;padding-left:20px;font-size:15px;line-height:1.6;color:var(--body)}
+.sources li{margin-bottom:8px}
+.sources p{font-size:15px;color:var(--muted);margin:0}
+footer.site{margin-top:88px;border-top:1px solid var(--ink);padding:24px 32px 110px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.biz li{transition:none}}
+
+/* phone article additions */
+.log{border:1px solid var(--ink);background:#fff;padding:18px 0 8px;box-shadow:0 18px 40px rgba(20,20,18,.08)}
+.log .hd{display:flex;justify-content:space-between;align-items:baseline;padding:0 20px 12px;border-bottom:1px solid var(--rule)}
+.log .hd b{font-family:var(--display);font-weight:400;font-size:28px}
+.log .hd span{font-size:13px;color:var(--muted)}
+.log ul{list-style:none;margin:0;padding:0}
+.log li{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:12px 20px;border-bottom:1px solid var(--panel)}
+.log li:last-child{border-bottom:0}
+.log .ic{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--accent);position:relative}
+.log .ic::after{content:"";position:absolute;left:5px;top:9px;width:9px;height:1.5px;background:var(--accent);transform:rotate(-35deg)}
+.log .who{font-size:16px;color:var(--accent);line-height:1.3}
+.log .who small{display:block;font-size:13px;color:var(--muted)}
+.log .tm{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.verdict{margin:48px 0 0;padding:26px 28px;border:1px solid var(--ink);background:var(--panel);box-shadow:inset 0 3px 0 var(--accent)}
+.verdict h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+.verdict p{margin:0;font-family:var(--display);font-size:clamp(24px,3.2vw,30px);line-height:1.25;color:var(--ink)}
+.lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.lane{border:1px solid var(--ink);padding:18px}
+.lane h3{font-size:26px;line-height:1.1;margin:4px 0 8px}
+.lane .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.lane p{margin:10px 0 0;font-size:15px;line-height:1.5;color:var(--body)}
+.day{display:flex;height:26px;border:1px solid var(--ink);margin-top:10px}
+.day i{display:block;height:100%}
+.day .p{background:#A8A397}.day .a{background:var(--accent)}.day .pa{background:repeating-linear-gradient(135deg,#A8A397 0 6px,var(--accent) 6px 12px)}
+.daykey{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px}
+.legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:14px;color:var(--body)}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px}
+.legend .lp::before{background:#A8A397}.legend .la::before{background:var(--accent)}.legend .lpa::before{background:repeating-linear-gradient(135deg,#A8A397 0 3px,var(--accent) 3px 6px)}
+@media (max-width:760px){.lanes{grid-template-columns:1fr}}
+.dots{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:6px;max-width:560px}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--ink)}
+.dots i.m{background:transparent;border:1.5px solid #A8A397}
+.dots i.v{background:var(--accent)}
+.dotkey{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:14px;color:var(--body)}
+.dotkey span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.dotkey .a::before{background:var(--ink)}.dotkey .m::before{border:1.5px solid #A8A397}.dotkey .v::before{background:var(--accent)}
+.bar .f.cad{background:repeating-linear-gradient(135deg,#A8A397 0 6px,#CFCBC0 6px 12px)}
+.scroll{overflow-x:auto}
+@media (max-width:600px){.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--rule)}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8.5em;white-space:normal}.stack td::before{content:attr(data-l);float:inline-start;width:8em;margin-inline-start:-8.5em;font:500 12px/1.9 var(--text);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}.stack td:first-child{font-weight:600}}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+th.n{text-align:right}
+
+
+.hero.one{grid-template-columns:1fr}
+.flow5{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:none}
+.flow5 li{border:1px solid var(--ink);padding:16px 14px 18px;background:var(--paper)}
+.flow5 li.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.flow5 .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.flow5 h3{font-size:24px;line-height:1.1;margin:6px 0 8px}
+.flow5 li > p:not(.k){margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.flow5 li > p.get{margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink)}
+body.lv-t .flow5 li > p.get{display:none}
+.float{transition:opacity .2s}.float.away{opacity:0;pointer-events:none}
+@media (max-width:600px){.stack.two td::before{content:none}.stack.two td{padding-inline-start:0}.stack.two td:first-child{padding-top:10px}table.score td{padding-inline-start:10em}table.score td::before{width:9.5em;margin-inline-start:-10em}}
+.check{margin-left:0;padding-left:0}
+.after6{margin:14px 0 0;font-size:14px;color:var(--muted)}
+@media (max-width:820px){.flow5{grid-template-columns:1fr}}
+.tablewrap{margin:8px 0 28px}
+.prose table td:first-child{white-space:normal}
+table.score tr.chosen td{background:var(--panel)}
+table.score tr.chosen td:first-child{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px}
+table.score tr.gated td{color:#8A877D}
+.madeup{margin:20px 0 6px;color:var(--accent)}
+.toolgroup{margin:28px 0 32px;border-top:1px solid var(--ink);padding-top:18px}
+.toolseg{margin-bottom:16px}
+.toolblock{background:var(--panel);border:1px solid var(--ink);padding:20px 24px}
+.toolblock .toolname{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.toolblock ol{margin:0 0 12px}
+.toolblock p{font-size:15px}
+.toolgroup.js .toolblock{display:none}
+.toolgroup.js .toolblock.on{display:block}
+.bar .f.empty{background:transparent;border:1.5px dashed #A8A397;height:30px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.prose h3{font-size:26px;margin:28px 0 10px}
+@media (max-width:600px){.stack td:first-child{padding-inline-start:0}.stack td:first-child::before{content:none}table.score tr.chosen td:first-child{padding-left:10px}}
+.float{bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+
+/* café worked example additions */
+.toolseg{display:flex;flex-wrap:wrap;width:max-content;max-width:100%}
+.toolseg button{padding:12px 14px}
+.toolseg button + button{border-left:1px solid var(--rule)}
+@media (max-width:520px){.toolseg{width:100%}.toolseg button{flex:1 1 auto;padding:12px 10px;font-size:13px}}
+.toolblock h3{font-size:22px}
+.toolblock ul,.toolblock ol{font-size:15.5px}
+.where2 > div{min-width:0}
+.where2 p{margin:0 0 10px;font-size:15.5px;line-height:1.6;color:var(--body)}
+.where2 p:last-child{margin-bottom:0}
+.prompt{margin:24px 0 32px;border:1px solid var(--ink);background:#fff;padding:20px 22px 18px;box-shadow:inset 3px 0 0 var(--accent)}
+.prompt .pl{margin:0 0 8px;font:600 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.prompt .ptext{margin:0 0 14px;font-size:17px;line-height:1.6;color:var(--ink)}
+.prompt .copy{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.prompt .copy:hover{background:var(--ink);color:var(--paper)}
+.card{border:1px solid var(--ink);background:var(--panel);padding:22px 24px 24px;box-shadow:inset 0 3px 0 var(--accent)}
+.card .madeup{margin:0 0 4px}
+.card h3{font-size:34px;line-height:1.1;margin:0 0 14px}
+.card dl{margin:0;display:grid;grid-template-columns:92px minmax(0,1fr);gap:8px 14px;font-size:15.5px;line-height:1.5}
+.card dt{font:500 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card dd{margin:0;color:var(--body)}
+.flow5.cafe li.on .get{color:var(--accent)}
+.jobs{list-style:none;margin:0 0 12px;padding:0;border-top:1px solid var(--ink)}
+.jobs li{display:grid;grid-template-columns:96px 1fr;gap:4px 12px;padding:14px 0;border-bottom:1px solid var(--rule);font-size:18px;color:var(--ink)}
+.jobs li small{grid-column:2;font-size:14px;color:var(--muted)}
+.jobs .mk{font:600 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase}
+.jobs li.yes{background:var(--panel);box-shadow:inset 3px 0 0 var(--accent);padding-left:12px}
+.jobs li.yes .mk{color:var(--accent)}
+.jobs li.no{color:#8A877D}.jobs li.no .mk{color:var(--muted)}
+/* chart */
+.chart{display:grid;grid-template-columns:56px minmax(0,1fr);gap:8px;align-items:stretch}
+.yax{display:flex;flex-direction:column;justify-content:space-between;font-size:12px;color:var(--muted);text-align:right;padding-bottom:22px;font-variant-numeric:tabular-nums}
+.plot{position:relative;border-left:1px solid var(--ink);border-bottom:0}
+.days{display:grid;grid-template-columns:repeat(31,minmax(0,1fr));gap:3px;height:300px;align-items:end;position:relative;z-index:1}
+.days .c{display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-width:0}
+.bar2{display:block;position:relative;background:#A8A397;min-height:2px;border-bottom:1px solid var(--ink)}
+.c.we .bar2{background:var(--ink)}
+.dn{display:block;height:22px;padding-top:4px;font-size:11px;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+.drop{position:absolute;left:50%;top:-14px;width:8px;height:8px;margin-left:-4px;background:var(--accent);border-radius:0 50% 50% 50%;transform:rotate(45deg)}
+.tag{position:absolute;bottom:calc(100% + 18px);left:50%;transform:translateX(-50%);font:500 12px var(--text);color:var(--accent);white-space:nowrap}
+.roadband{position:absolute;top:0;bottom:22px;left:calc(12 / 31 * 100%);width:calc(5 / 31 * 100%);background:repeating-linear-gradient(135deg,rgba(122,46,26,.10) 0 6px,rgba(122,46,26,0) 6px 12px);border-left:1px dashed var(--accent);border-right:1px dashed var(--accent);z-index:0}
+.roadband span{position:absolute;top:6px;left:6px;font:500 12px var(--text);color:var(--accent);white-space:nowrap}
+.chartfig .legend .lw::before{background:#A8A397}.chartfig .legend .lwe::before{background:var(--ink)}
+.chartfig .legend .lr::before{background:var(--accent);border-radius:0 50% 50% 50%;transform:rotate(45deg);width:9px;height:9px}
+.chartfig .legend .lroad::before{background:repeating-linear-gradient(135deg,rgba(122,46,26,.3) 0 3px,transparent 3px 6px);border:1px dashed var(--accent)}
+@media (max-width:640px){.days{height:220px;gap:2px}.dn{font-size:9px}.chart{grid-template-columns:44px minmax(0,1fr)}.yax{font-size:11px}.roadband span{font-size:11px;top:-20px;left:0}.tag{font-size:11px}}
+/* before / after template */
+.ba{display:grid;grid-template-columns:40px minmax(0,1fr);gap:10px;height:240px}
+.ba-y{writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;color:var(--muted);text-align:center}
+.ba-plot{display:grid;grid-template-columns:repeat(2,minmax(0,160px));gap:48px;align-items:end;border-left:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:0 32px}
+.ba-col{display:flex;flex-direction:column;align-items:stretch;height:100%;justify-content:flex-end;position:relative}
+.ba-bar{display:block;height:70%;border:1.5px dashed #A8A397;border-bottom:0}
+.ba-l{position:absolute;top:100%;left:0;right:0;padding-top:6px;text-align:center;font-size:14px;color:var(--ink)}
+.ba-l small{display:block;font-size:12px;color:var(--muted)}
+.ba + figcaption{margin-top:52px}
+/* agent rows */
+.agentrows{list-style:none;margin:0 0 12px;padding:0;border-top:1px solid var(--ink)}
+.agentrows li{display:grid;grid-template-columns:110px minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule);font-size:16px}
+.agentrows .aj{font-family:var(--display);font-size:22px;line-height:1.1}
+.agentrows .aa{color:var(--body)}
+.agentrows .ap{color:var(--ink);font-weight:500}
+@media (max-width:600px){.agentrows li{grid-template-columns:1fr;gap:4px}}
+.stop{display:inline-block;width:12px;height:12px;background:var(--accent);margin-right:8px;vertical-align:-1px;clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%)}
+table.agent td:nth-child(3){color:var(--ink);font-weight:500}
+.prose blockquote{margin:0 0 20px;padding:4px 0 4px 18px;border-left:3px solid var(--accent)}
+.sources ul{word-break:break-word}
+section.q.st{display:block}
+body.lv-d section.q.st{display:none}
+.prose .where2 h3,.prose .box h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.prose .where2 p,.prose .where2 li{font-size:.86em}
+.prose .toolblock p,.prose .toolblock li{font-size:.86em;line-height:1.6}
+.tag{bottom:calc(100% + 16px);writing-mode:vertical-rl;transform:translateX(-50%) rotate(180deg);z-index:3;background:var(--paper);padding:2px 0;line-height:1}
+body.lv-t .flow5.cafe li > p.get{display:block}
+@media (max-width:640px){.dn:not(.k){color:transparent}}
+.prose .where2 ul,.prose .toolblock ol,.prose .toolblock ul{font-size:inherit}
+.prose .where2 li,.prose .toolblock li{font-size:.86em;line-height:1.6}
+.checked{margin:-24px 0 28px;font-size:14px !important;color:var(--muted) !important}
+/* chart scale: bars area = days height minus the 22px label row */
+.yax{position:relative;display:block;padding:0;height:300px}
+.yax span{position:absolute;right:0;transform:translateY(-50%);margin-top:0}
+.yax span:nth-child(1){top:0 !important}
+.yax span:nth-child(2){top:139px !important}
+.yax span:nth-child(3){top:278px !important}
+.grid{position:absolute;left:0;right:0;top:0;height:278px;border-top:1px solid var(--rule);border-bottom:1px solid var(--ink);background:linear-gradient(var(--rule),var(--rule)) 0 50%/100% 1px no-repeat;z-index:0}
+.bar2{border-bottom:0}
+.days .c{justify-content:flex-start}
+.days .c .bar2{margin-top:auto}
+.c{display:grid !important;grid-template-rows:278px 22px}
+.c .bar2{align-self:end;max-height:278px}
+.c .dn{align-self:start}
+.plot{border-left:1px solid var(--ink)}
+@media (max-width:640px){
+ .yax{height:220px}.yax span:nth-child(2){top:99px !important}.yax span:nth-child(3){top:198px !important}
+ .grid{height:198px}.c{grid-template-rows:198px 22px}.c .bar2{max-height:198px}
+ .roadband span{display:none}
+ .toolseg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}
+ .toolseg button + button{border-left:0}
+ .toolseg button{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+}
+.roadband{bottom:auto;height:278px}
+@media (max-width:640px){.roadband{height:198px}}
+.c{grid-template-columns:minmax(0,1fr)}.c .bar2{width:100%}.days{align-items:stretch}
+details.data{margin-top:16px;border-top:1px solid var(--rule);padding-top:12px;max-width:680px}
+details.data summary{cursor:pointer;font:500 15px var(--text);color:var(--ink);min-height:44px;display:flex;align-items:center}
+details.data p{font-size:14px;color:var(--muted);margin:4px 0 10px}
+details.data pre{margin:12px 0 0;max-height:260px;overflow:auto;background:#fff;border:1px solid var(--rule);padding:12px;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;color:var(--body)}
+.copydata{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+
+/* workshop 1 additions */
+.figslot{display:block}
+.figslot > figure{margin:40px auto}
+.k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+
+/* agenda drawn to scale */
+.agbar{list-style:none;margin:0;padding:0;display:flex;border-left:1px solid var(--ink)}
+.agbar li{flex:var(--m) 1 0;display:grid;grid-template-rows:22px 64px auto auto auto;padding:0 6px 0 0;border-right:1px solid var(--paper)}
+.agbar .tm{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;padding-left:6px;border-left:1px solid var(--ink);margin-left:-1px}
+.agbar .blk{display:block;background:#A8A397;margin-right:-6px}
+.agbar li.win .blk{background:var(--accent)}
+.agbar li.ag .blk{background:var(--ink)}
+.agbar li.brk .blk{background:repeating-linear-gradient(135deg,#CFCBC0 0 5px,transparent 5px 10px)}
+.agbar .nm{font-family:var(--display);font-size:21px;line-height:1.1;margin:10px 0 2px 6px}
+.agbar li.win .nm{color:var(--accent)}
+.agbar .sb{font-size:13px;line-height:1.35;color:var(--body);margin-left:6px}
+.agbar .mn{font-size:12px;color:var(--muted);margin:4px 0 0 6px}
+.agbar li.end{flex:0 0 0;padding:0;border:0}
+.agbar li.end .tm{position:relative;left:-34px;border-left:0;text-align:right;width:34px;padding:0}
+.agendafig .legend .lwin::before{background:var(--accent)}
+.agendafig .legend .lag::before{background:var(--ink)}
+.agendafig .legend .lother::before{background:#A8A397}
+@media (max-width:760px){
+  .agbar{flex-direction:column;border-left:0;border-top:1px solid var(--ink)}
+  .agbar li{display:grid;grid-template-columns:44px minmax(0,1fr) auto;grid-template-rows:auto auto auto;column-gap:12px;padding:12px 0;border-right:0;border-bottom:1px solid var(--rule)}
+  .agbar .tm{grid-row:1/3;border-left:0;padding:3px 0 0;margin:0}
+  .agbar .nm{grid-column:2;margin:0;font-size:22px}
+  .agbar .sb{grid-column:2;margin:0}
+  .agbar .mn{grid-column:3;grid-row:1;margin:4px 0 0;white-space:nowrap}
+  .agbar .blk{grid-column:2/4;grid-row:3;height:10px;width:calc(var(--m) / 35 * 100%);margin:8px 0 0}
+  .agbar li.end{display:none}
+}
+
+/* agenda table */
+table.agenda tr.win td{background:var(--panel)}
+table.agenda tr.win td:first-child{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px}
+table.agenda tr.brk td{color:var(--muted);font-style:italic}
+table.agenda td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:600px){table.agenda tr.win td:first-child{padding-left:10px}table.agenda tr.brk td:empty{display:none}}
+
+/* scoring rule */
+.formula{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr) 28px minmax(0,.8fr);align-items:stretch;gap:8px}
+.formula .term{border:1px solid var(--ink);padding:14px 16px;background:var(--paper)}
+.formula .term.res{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.formula .v{margin:6px 0 0;font-family:var(--display);font-size:22px;line-height:1.2;color:var(--ink)}
+.formula .op{align-self:center;text-align:center;font-family:var(--display);font-size:32px;color:var(--muted)}
+.gate{margin-top:16px;border:1px dashed var(--accent);padding:16px 18px}
+.gate .k{color:var(--accent)}
+.gate ul{margin:10px 0 0;padding-left:20px;font-size:16px;line-height:1.55;color:var(--body)}
+.scorefig .out{margin:14px 0 0;font-family:var(--display);font-size:24px;line-height:1.25;color:var(--ink)}
+@media (max-width:600px){.formula{grid-template-columns:1fr}.formula .op{font-size:26px;line-height:1}}
+
+/* free plan grid */
+.freegrid{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.freegrid li{display:grid;grid-template-columns:150px 150px minmax(0,1fr);gap:6px 16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--rule)}
+.freegrid .ex{font-family:var(--display);font-size:22px;line-height:1.1;color:var(--ink)}
+.freegrid .ex small{display:block;font:400 13px var(--text);color:var(--muted);margin-top:2px}
+.freegrid .mk{font:600 12px/1.6 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.freegrid .mk::before{content:"";display:inline-block;width:10px;height:6px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg) translate(1px,-2px);margin-right:8px}
+.freegrid li.part .mk{color:var(--ink)}
+.freegrid li.part .mk::before{width:10px;height:0;border-left:0;transform:none;vertical-align:4px}
+.freegrid .tx{font-size:15.5px;line-height:1.5;color:var(--body)}
+@media (max-width:600px){.freegrid li{grid-template-columns:1fr}}
+
+/* sample file */
+.filecard{border:1px solid var(--ink);background:#fff;padding:18px 20px 8px;box-shadow:inset 3px 0 0 var(--accent)}
+.filecard .madeup{margin:0 0 4px}
+.filecard .fn{margin:0;font:500 17px ui-monospace,Menlo,Consolas,monospace;color:var(--ink);word-break:break-all}
+.filecard .fm{margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--muted)}
+.filecard details.data{border-top:1px solid var(--rule)}
+
+/* fact sheet */
+.card.fact{margin:24px 0 28px}
+.card.fact h3{font-size:30px;margin:0}
+.card.fact .sub{margin:2px 0 12px;font-size:14px !important;color:var(--muted) !important}
+.card.fact ul{margin:0 0 16px;padding-left:20px;font-size:.88em;line-height:1.6;color:var(--body)}
+.card.fact .copy,.hnote .copy{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.card.fact .copy:hover,.hnote .copy:hover,.copydata:hover{background:var(--ink);color:var(--paper)}
+.prompt .ptext p{margin:0 0 10px;font-size:17px;line-height:1.6;color:var(--ink)}
+.prompt .ptext p:last-child{margin-bottom:0}
+.prompt .ptext{margin:0 0 14px}
+
+/* agent flow */
+.agentfig .flow5 li > p:not(.k){font-size:15px}
+.agentfig .flow5 li .k{color:var(--muted)}
+.agentfig .flow5 li.on .k{color:var(--accent)}
+.agentfig .rule{margin:18px 0 0;font-family:var(--display);font-size:26px;line-height:1.25;color:var(--ink)}
+
+/* week after */
+.flow3{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.flow3 li{border:1px solid var(--ink);padding:16px 16px 18px;position:relative}
+.flow3 li:last-child{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.flow3 h3{font-size:24px;line-height:1.1;margin:6px 0 8px}
+.flow3 li > p:not(.k){margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+@media (max-width:700px){.flow3{grid-template-columns:1fr}}
+
+/* four checks */
+.prose ol.checks4{list-style:none;padding:0;margin:0 0 24px;border-top:1px solid var(--ink);counter-reset:ck}
+.prose ol.checks4 li{counter-increment:ck;display:grid;grid-template-columns:44px minmax(0,1fr);gap:6px;padding:14px 0;border-bottom:1px solid var(--rule)}
+.prose ol.checks4 li::before{content:counter(ck);font-family:var(--display);font-size:34px;line-height:.95;color:var(--accent)}
+
+/* answer key */
+table.akey td:first-child{font-weight:600;color:var(--ink)}
+table.akey tr:nth-child(4) td{background:#F3E3DC}
+
+/* one country box */
+.where2.one{grid-template-columns:1fr}
+
+/* handout */
+.handout{border:1.5px solid var(--ink);background:#fff;padding:26px 28px 22px;margin:8px 0 14px;box-shadow:0 14px 36px rgba(20,20,18,.07)}
+.handout .hhd{border-bottom:1px solid var(--ink);padding-bottom:12px;margin-bottom:16px}
+.handout .hhd h3{font-size:30px;line-height:1.1;margin:4px 0 0}
+.handout p{margin:0 0 14px;font-size:16px !important;line-height:1.6 !important;color:var(--body)}
+.handout p:last-child{margin-bottom:0}
+.handout strong{color:var(--accent)}
+.handout .blank{display:inline-block;width:7.5em;max-width:40%;border-bottom:1px solid var(--ink);height:1.1em;vertical-align:-3px;margin:0 6px 0 2px}
+.hnote{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:0 0 20px}
+.hnote span{font-size:14px;color:var(--muted)}
+table.akey tr:nth-child(4) td{padding-left:10px;padding-right:10px}
+.prose h3{line-height:1.15}
+.prose ol.checks4 li{display:block;position:relative;padding:14px 0 14px 50px}
+.prose ol.checks4 li::before{position:absolute;left:0;top:14px}
+
+</style>
+<script>document.body.classList.add("lv-t")</script>
+<header class="site"><span class="mark">Leverage</span><span class="where">Workshops · Workshop 1</span></header><div class="hero one"><div><p class="eyebrow"><span class="d">Detailed version · 23 minute read</span><span class="s">Simple version · 17 minute read</span><span class="t">Starter version · 9 minute read</span></p><h1>Workshop 1: Your first three AI wins</h1><p class="lede">In three hours, you leave with three weekly jobs set up in AI, ready to draft for you in a tool you can afford, and a simple way to check its work.</p><p class="by">By Dan Albasry · November 26, 2026 · For small business owners in the US and Canada</p></div></div>
+<div class="wrap"><div class="versions"><p><strong>Three ways to read this.</strong> Starter is the easiest. Simple says everything in plain words. Detailed has every number and source. Switch any time with the button at the bottom of your screen.</p><div class="seg" role="group" aria-label="Choose a reading level"><button type="button" data-v="t" aria-pressed="true">Starter</button><button type="button" data-v="s" aria-pressed="false">Simple</button><button type="button" data-v="d" aria-pressed="false">Detailed</button></div></div>
+<div class="prose d" style="margin-top:48px"><p><span class="note">[DAN: A SHORT REAL SCENE, 3 TO 5 SENTENCES, FROM A ROOM WHERE YOU TAUGHT OWNERS TO USE AI, OR FROM ONE OWNER'S FIRST TRY. NO CLIENT NAME, NO DETAILS THAT IDENTIFY THEM.]</span></p>
+<p>Most owners don't need another talk about what AI might do one day. They need an afternoon where they do real work in it, with someone beside them, and go home with something that keeps working. That's what this workshop is for. It's the first in my workshop series for independent small businesses: restaurants, shops, service firms, makers and trades, usually 1 to 50 people. <span class="note">[DAN: CONFIRM HOW OFTEN YOU'LL RUN IT, FOR EXAMPLE MONTHLY.]</span></p>
+<p>The design is simple. Writing is the top use of AI among US small businesses, and answering customers and summarizing your numbers are jobs where a person can check the result before it goes anywhere, so those are the three wins we build. People who keep using a new tool usually had a good first try and someone to share it with, so the last block of the day is about the week after, not the slides.</p></div>
+<div class="prose s" style="margin-top:48px"><p><span class="note">[DAN: THE SAME SHORT REAL SCENE AS THE DETAILED VERSION, IN SIMPLER WORDS.]</span></p>
+<p>Most owners don't need another talk about AI. They need an afternoon of real work in it, with someone beside them, and something that keeps working when they get home. That's this workshop. It's the first in my series for small businesses like restaurants, shops, service firms, makers and trades. <span class="note">[DAN: CONFIRM HOW OFTEN YOU'LL RUN IT, FOR EXAMPLE MONTHLY.]</span></p>
+<p>Writing is the top use of AI in US small businesses. Answering customers and summing up your numbers are jobs a person can check first. So those are the three jobs we build. People keep using a new tool when their first try goes well and they have someone to share it with. So the last part of the day is about the week after.</p></div>
+<div class="prose t" style="margin-top:48px"><p><span class="note">[DAN: THE SAME SHORT REAL SCENE, IN VERY SIMPLE WORDS.]</span></p>
+<p>This is a hands-on workshop for small business owners. You do real work with AI, with help next to you. You go home with three jobs that keep working. <span class="note">[DAN: CONFIRM HOW OFTEN YOU'LL RUN IT.]</span></p></div>
+</div>
+<figure class="widewrap agendafig"><p class="figtitle">The three hours, drawn to scale</p><ol class="agbar" aria-label="Workshop agenda"><li class="" style="--m:15"><span class="tm">0:00</span><span class="blk"></span><span class="nm">Start safe</span><span class="sb">What never goes in</span><span class="mn">15 min</span></li><li class="" style="--m:20"><span class="tm">0:15</span><span class="blk"></span><span class="nm">Pick three jobs</span><span class="sb">Score and gate</span><span class="mn">20 min</span></li><li class="win" style="--m:30"><span class="tm">0:35</span><span class="blk"></span><span class="nm">Win 1</span><span class="sb">Answer customers</span><span class="mn">30 min</span></li><li class="win" style="--m:35"><span class="tm">1:05</span><span class="blk"></span><span class="nm">Win 2</span><span class="sb">Write it</span><span class="mn">35 min</span></li><li class="brk" style="--m:10"><span class="tm">1:40</span><span class="blk"></span><span class="nm">Break</span><span class="sb"></span><span class="mn">10 min</span></li><li class="win" style="--m:30"><span class="tm">1:50</span><span class="blk"></span><span class="nm">Win 3</span><span class="sb">Sum up and check</span><span class="mn">30 min</span></li><li class="ag" style="--m:20"><span class="tm">2:20</span><span class="blk"></span><span class="nm">Agent</span><span class="sb">Watch it stop</span><span class="mn">20 min</span></li><li class="" style="--m:20"><span class="tm">2:40</span><span class="blk"></span><span class="nm">Make it stick</span><span class="sb">Day, partner, check-in</span><span class="mn">20 min</span></li><li class="end" aria-hidden="true"><span class="tm">3:00</span></li></ol><div class="legend"><span class="lwin">The three wins</span><span class="lag">Agent, approvals on</span><span class="lother">Setup and planning</span></div><figcaption>Each win block ends with five minutes to save your own version. Accounts and your fact sheet are done before the day.</figcaption></figure>
+<div class="wrap"><nav class="toc" aria-label="In this guide"><p class="eyebrow">The workshop, question by question</p><ol><li><a href="#q1"><span class="n">1</span><span>Is this workshop for me, and what will I walk out with?</span></a></li><li><a href="#q2"><span class="n">2</span><span>What happens in the three hours?</span></a></li><li><a href="#q3"><span class="n">3</span><span>Which three jobs make the best first wins?</span></a></li><li><a href="#q4"><span class="n">4</span><span>Which tool do we use, and what does it cost?</span></a></li><li><a href="#q5"><span class="n">5</span><span>How does each exercise run?</span></a></li><li><a href="#q6"><span class="n">6</span><span>How do we check what the AI gave us?</span></a></li><li><a href="#q7"><span class="n">7</span><span>What happens the week after?</span></a></li><li><a href="#q8"><span class="n">8</span><span>What does the room need?</span></a></li><li><a href="#q9"><span class="n">9</span><span>The one-page handout</span></a></li></ol></nav></div>
+<section class="q" id="q1"><div class="wrap"><p class="eyebrow">Question 1 of 9</p><h2>Is this workshop for me, and what will I walk out with?</h2>
+<div class="prose d"><p class="answer">It's for you if you run or manage a small business, you've tried AI a little or not at all, and you want it doing real work by next week. You don't need any technical skill, and you don't need to pay for anything to take part. You do need a laptop, a free account on one AI tool set up before the day, and three things written down: your refund or booking policy, a one-page fact sheet for this week, and five jobs that come back every week. I send the steps and a checklist a week ahead.</p>
+<p>You walk out with:</p>
+<ul>
+<li><strong>Three jobs set up.</strong> One saved workspace (a Project in ChatGPT or Claude, or a skill in Gemini) for each of your three jobs, holding your own facts and instructions so next week starts where you left off. Each win block ends with five minutes to save your own version.</li>
+<li><strong>One checking routine.</strong> Four checks you run on anything the AI gives you before it goes anywhere.</li>
+<li><strong>One small agent, tried safely.</strong> A small job you hand to an agent yourself, watching where it stops for your approval.</li>
+<li><strong>A plan for the week after.</strong> The day you'll do your first job, a partner from the room, and a 15-minute check-in a week later.</li>
+<li><strong>The one-page handout</strong> at the end of this page.</li>
+</ul>
+<p><strong>Who it isn't for.</strong> If you want custom software built, or AI making decisions about customers, staff or money without a person checking, this isn't the place to start. If your business handles health records or other sensitive personal information, you're still welcome, but every exercise uses made-up data and we talk about your rules before you touch real files.</p>
+<p><strong>Free options near you.</strong> You don't have to come to mine. There's good free help in both countries, and I'd rather you go somewhere than nowhere.</p>
+<div class="where2"><div><h3>In the US</h3><ul>
+<li>SCORE runs free live webinars, such as "6 Time-Saving AI Tips Shared by Real Business Owners" on December 1, 2026, presented by a Grow with Google national coach (<a href="https://www.score.org/business-education/6-time-saving-ai-tips-shared-by-real-business-owners/" rel="noopener" target="_blank">SCORE</a>).</li>
+<li>The U.S. Chamber's Small Business B(AI)sics is free: online courses plus in-person workshops run by state and local chambers, aiming to reach 40,000 small businesses, funded by Google.org (<a href="https://www.uschamber.com/small-business/u-s-chamber-of-commerce-and-u-s-chamber-foundation-launch-free-ai-training-courses-for-small-businesses-nationwide" rel="noopener" target="_blank">U.S. Chamber</a>).</li>
+<li>OpenAI is training around 150 Small Business Development Center advisors to run in-person training, with a goal of reaching at least 1,000 small businesses (<a href="https://openai.com/index/helping-small-businesses-put-ai-to-work/" rel="noopener" target="_blank">OpenAI</a>).</li>
+<li>OpenAI's OpenWorks pilot gives independently owned US small businesses in 20 listed communities free one-on-one help from a local partner and 3 months of ChatGPT Business at no cost. Partners host a monthly workshop (<a href="https://openai.com/openworks/" rel="noopener" target="_blank">OpenAI</a>).</li>
+</ul></div><div><h3>In Canada</h3><ul>
+<li>OpenWorks is open to US businesses only, so a Canadian owner can't get its free help or free ChatGPT Business months (<a href="https://openai.com/openworks/" rel="noopener" target="_blank">OpenAI</a>).</li>
+<li>Venture for Canada's AI at Work is a new free national workshop series, announced November 13, 2026, with virtual sessions on December 1 and 10 and an in-person session at Northeastern University's Toronto campus on December 8. Attendees new to Claude Max get one free month of it (<a href="https://perspectives.ventureforcanada.ca/article/venture-for-canada-launches-ai-at-work-hands-on-responsible-ai-training-for-canadian-smes" rel="noopener" target="_blank">Venture for Canada</a>).</li>
+<li>Canada has no national network of free local business advisors like the US one. Look at your public library, your local small business centre and your chamber of commerce. <span class="note">[DAN: ADD THE ONTARIO AND QUEBEC CENTRES YOU RECOMMEND, WITH LINKS.]</span></li>
+</ul></div></div></div>
+<div class="prose s"><p class="answer">It's for you if you run or manage a small business and want AI doing real work by next week. You don't need tech skills. You don't need to pay for anything. You need a laptop and a free account on one AI tool, set up before the day. You also bring your refund or booking policy, a one-page fact sheet for this week, and a list of five weekly jobs. I send a checklist a week ahead.</p>
+<p>You walk out with:</p>
+<ul>
+<li><strong>Three jobs set up.</strong> A saved space for each job (a Project in ChatGPT or Claude, or a skill in Gemini) that holds your facts and instructions. Each win ends with five minutes to save your own version.</li>
+<li><strong>Four checks</strong> to run on anything AI gives you.</li>
+<li><strong>One small agent</strong>, given a job by you, that stops and asks before it sends.</li>
+<li><strong>A plan for next week:</strong> the day you'll start, a partner from the room, and a 15-minute check-in.</li>
+<li><strong>A one-page handout.</strong></li>
+</ul>
+<p><strong>Who it isn't for.</strong> If you want custom software, or AI making decisions about customers, staff or money with no person checking, start somewhere else. If you handle health records or other private information, you're welcome, but we only use made-up data.</p>
+<p><strong>Free help near you.</strong> You don't have to come to mine.</p>
+<div class="where2"><div><h3>In the US</h3><ul>
+<li>SCORE runs free online sessions, like "6 Time-Saving AI Tips Shared by Real Business Owners" on December 1, 2026 (<a href="https://www.score.org/business-education/6-time-saving-ai-tips-shared-by-real-business-owners/" rel="noopener" target="_blank">SCORE</a>).</li>
+<li>The U.S. Chamber's Small Business B(AI)sics has free online courses and local workshops (<a href="https://www.uschamber.com/small-business/u-s-chamber-of-commerce-and-u-s-chamber-foundation-launch-free-ai-training-courses-for-small-businesses-nationwide" rel="noopener" target="_blank">U.S. Chamber</a>).</li>
+<li>OpenAI is training about 150 small business advisors to teach in person (<a href="https://openai.com/index/helping-small-businesses-put-ai-to-work/" rel="noopener" target="_blank">OpenAI</a>).</li>
+<li>OpenAI's OpenWorks gives US small businesses in 20 listed communities free local help and 3 months of ChatGPT Business at no cost (<a href="https://openai.com/openworks/" rel="noopener" target="_blank">OpenAI</a>).</li>
+</ul></div><div><h3>In Canada</h3><ul>
+<li>OpenWorks is for US businesses only (<a href="https://openai.com/openworks/" rel="noopener" target="_blank">OpenAI</a>).</li>
+<li>Venture for Canada's AI at Work is new and free, with online sessions on December 1 and 10 and one in Toronto on December 8, 2026 (<a href="https://perspectives.ventureforcanada.ca/article/venture-for-canada-launches-ai-at-work-hands-on-responsible-ai-training-for-canadian-smes" rel="noopener" target="_blank">Venture for Canada</a>).</li>
+<li>Also try your library, your local small business centre and your chamber of commerce. <span class="note">[DAN: ADD THE ONTARIO AND QUEBEC CENTRES YOU RECOMMEND.]</span></li>
+</ul></div></div></div>
+<div class="prose t"><p class="answer">It's for you if you run a small business and you're new to AI. You don't need tech skills. You don't need to pay. Bring a laptop. Before the day, set up a free AI account, switch off training, and write down your policy, this week's facts and five jobs you do every week. I send a checklist.</p>
+<p>You leave with:</p>
+<ul>
+<li>Three jobs set up and saved.</li>
+<li>Four checks for anything AI gives you.</li>
+<li>One small agent that asks before it sends.</li>
+<li>A start day and a partner for next week.</li>
+<li>A one-page handout.</li>
+</ul>
+<p><strong>Free help near you.</strong></p>
+<div class="where2"><div><h3>In the US</h3><p>SCORE and the U.S. Chamber run free AI classes (<a href="https://www.score.org/business-education/6-time-saving-ai-tips-shared-by-real-business-owners/" rel="noopener" target="_blank">SCORE</a>, <a href="https://www.uschamber.com/small-business/u-s-chamber-of-commerce-and-u-s-chamber-foundation-launch-free-ai-training-courses-for-small-businesses-nationwide" rel="noopener" target="_blank">U.S. Chamber</a>). OpenAI's OpenWorks gives free local help in 20 US communities (<a href="https://openai.com/openworks/" rel="noopener" target="_blank">OpenAI</a>).</p></div><div><h3>In Canada</h3><p>OpenWorks is for US businesses only (<a href="https://openai.com/openworks/" rel="noopener" target="_blank">OpenAI</a>). Venture for Canada has new free AI classes in December 2026 (<a href="https://perspectives.ventureforcanada.ca/article/venture-for-canada-launches-ai-at-work-hands-on-responsible-ai-training-for-canadian-smes" rel="noopener" target="_blank">Venture for Canada</a>). Ask your library too.</p></div></div></div>
+</div></section>
+<section class="q" id="q2"><div class="wrap"><p class="eyebrow">Question 2 of 9</p><h2>What happens in the three hours?</h2>
+<div class="prose d"><p class="answer">Seven blocks, with a break in the middle. Every block ends with something saved, so nothing depends on remembering it later. The pre-work (accounts, training switched off, your policy and fact sheet) is done before the day, so the room starts working in the first 15 minutes.</p>
+<div class="tablewrap"><table class="stack agenda"><thead><tr>
+<th>Time</th>
+<th>Block</th>
+<th>What you do</th>
+<th>What you leave the block with</th>
+</tr></thead><tbody><tr><td data-l="Time">0:00 to 0:15</td><td data-l="Block">Start safe</td><td data-l="What you do">What never goes into an AI tool; switch off model training; check everyone can sign in</td><td data-l="What you leave the block with">Your tool set up safely</td></tr><tr><td data-l="Time">0:15 to 0:35</td><td data-l="Block">Pick your three jobs</td><td data-l="What you do">List the jobs that repeat every week, score them, apply the safety gate</td><td data-l="What you leave the block with">Your three jobs, written down</td></tr><tr class="win"><td data-l="Time">0:35 to 1:05</td><td data-l="Block">Win 1: answer customers</td><td data-l="What you do">Exercise 1: draft replies from your own policy</td><td data-l="What you leave the block with">A saved reply helper</td></tr><tr class="win"><td data-l="Time">1:05 to 1:40</td><td data-l="Block">Win 2: write it</td><td data-l="What you do">Exercise 2: start the research for the two-tool version, write a week of posts from your fact sheet while it runs, then write one researched post</td><td data-l="What you leave the block with">A saved post helper and one researched post</td></tr><tr class="brk"><td data-l="Time">1:40 to 1:50</td><td data-l="Block">Break</td><td data-l="What you do"></td><td data-l="What you leave the block with"></td></tr><tr class="win"><td data-l="Time">1:50 to 2:20</td><td data-l="Block">Win 3: summarize and check</td><td data-l="What you do">Exercise 3: summarize a sales file, then check it against the answer key</td><td data-l="What you leave the block with">The four checks, practised</td></tr><tr><td data-l="Time">2:20 to 2:40</td><td data-l="Block">Hand one job to an agent</td><td data-l="What you do">Give an agent one small job and watch it stop for your review</td><td data-l="What you leave the block with">A small agent you control</td></tr><tr><td data-l="Time">2:40 to 3:00</td><td data-l="Block">Make it stick</td><td data-l="What you do">Pick your first day, pair up, book the day-7 check-in</td><td data-l="What you leave the block with">Your plan for the week after</td></tr></tbody></table></div>
+<p><strong>Starting safe comes first.</strong> Before anyone types a prompt, we go through what never goes into an AI tool in the room: customer names and contact details, card and bank numbers, passwords, staff records and health information. Every exercise uses your business facts (prices, policies, hours) and made-up customers. Two three-hour workshops in Chinchilla, Australia, put guardrails first too: "Guardrails came before a single prompt", according to the trainer's own case study (<a href="https://tracysheen.com/case-studies/chinchilla-business-focus-ai-workshops" rel="noopener" target="_blank">Tracy Sheen</a>).</p>
+<p><strong>If the Wi-Fi fails.</strong> Everyone has the prompts on the printed handout, phones can run ChatGPT, Claude and Gemini apps on mobile data, and people pair up on whichever laptop is connected.</p></div>
+<div class="prose s"><p class="answer">Seven parts, with a break. Each part ends with something saved. Accounts and your fact sheet are done before the day.</p>
+<div class="tablewrap"><table class="stack agenda"><thead><tr>
+<th>Time</th>
+<th>Part</th>
+<th>What you do</th>
+</tr></thead><tbody><tr><td data-l="Time">0:00 to 0:15</td><td data-l="Part">Start safe</td><td data-l="What you do">Learn what never goes into AI; switch off training; sign in</td></tr><tr><td data-l="Time">0:15 to 0:35</td><td data-l="Part">Pick your three jobs</td><td data-l="What you do">List and score the jobs you do every week</td></tr><tr class="win"><td data-l="Time">0:35 to 1:05</td><td data-l="Part">Win 1: answer customers</td><td data-l="What you do">Draft replies from your own policy</td></tr><tr class="win"><td data-l="Time">1:05 to 1:40</td><td data-l="Part">Win 2: write it</td><td data-l="What you do">Start the research, write a week of posts while it runs, then write one researched post</td></tr><tr class="brk"><td data-l="Time">1:40 to 1:50</td><td data-l="Part">Break</td><td data-l="What you do"></td></tr><tr class="win"><td data-l="Time">1:50 to 2:20</td><td data-l="Part">Win 3: sum up and check</td><td data-l="What you do">Sum up a sales file, then check it</td></tr><tr><td data-l="Time">2:20 to 2:40</td><td data-l="Part">Try an agent</td><td data-l="What you do">Give an agent one small job and watch it stop for your OK</td></tr><tr><td data-l="Time">2:40 to 3:00</td><td data-l="Part">Make it stick</td><td data-l="What you do">Pick your start day and a partner</td></tr></tbody></table></div>
+<p><strong>Safety comes first.</strong> Before anyone types, we agree what never goes into AI: customer names and contact details, card and bank numbers, passwords, staff records and health information. We use made-up customers. Two three-hour workshops in Australia put safety first too, according to the trainer's own case study (<a href="https://tracysheen.com/case-studies/chinchilla-business-focus-ai-workshops" rel="noopener" target="_blank">Tracy Sheen</a>).</p>
+<p><strong>If the Wi-Fi fails,</strong> the prompts are on the printed handout, phone apps work on mobile data, and people pair up.</p></div>
+<div class="prose t"><p class="answer">Seven parts, with a break in the middle.</p>
+<ol>
+<li><strong>Start safe</strong> (15 minutes). What never goes into AI.</li>
+<li><strong>Pick your three jobs</strong> (20 minutes).</li>
+<li><strong>Answer customers</strong> (30 minutes).</li>
+<li><strong>Write posts</strong> (35 minutes). Use two tools together too.</li>
+</ol>
+<p><strong>Break</strong> (10 minutes).</p>
+<ol start="5">
+<li><strong>Sum up a file and check it</strong> (30 minutes).</li>
+<li><strong>Try an agent</strong> (20 minutes).</li>
+<li><strong>Make it stick</strong> (20 minutes). Pick your start day and a partner.</li>
+</ol>
+<p>Each win ends with five minutes to save your own version.</p>
+<p>Safety comes first. Never put these into AI: customer names and phone numbers, card or bank numbers, passwords, staff records or health information. We use made-up customers.</p></div>
+</div></section>
+<section class="q" id="q3"><div class="wrap"><p class="eyebrow">Question 3 of 9</p><h2>Which three jobs make the best first wins?</h2>
+<div class="prose d"><p class="answer">Write it, answer customers, and summarize your numbers. Writing is the top use among small businesses that use AI, and all three are jobs where a person can check the result before it goes anywhere.</p>
+<p>The surveys agree on the first one. Among US small employer firms that use AI, 83% use it for writing or marketing, 61% for individual productivity and 51% for planning or analysis (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve Banks, 2026 Report on Employer Firms</a>). In Canada, the most common uses among businesses using AI are data analytics (36.6%), text analytics (34.5%) and virtual agents or chatbots (28.2%) (<a href="https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2026010-eng.htm" rel="noopener" target="_blank">Statistics Canada</a>).</p>
+<p>What owners don't do yet matters too. Only 6% of US small business workers who use AI use it mainly to automate workflows with minimal human involvement; 64% use it for personal productivity, such as drafting, summarizing and brainstorming (an Ipsos survey commissioned by the <a href="https://www.uschamberfoundation.org/workforce/half-of-small-business-workers-use-ai-most-to-boost-productivity-not-automate-jobs" rel="noopener" target="_blank">U.S. Chamber of Commerce Foundation</a>). And only 7% of AI-using US firms said AI was fully built into their business (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve Banks</a>). That's why the first wins are drafts a person checks, not automations that run on their own.</p>
+<p><strong>But your three jobs come from your week, not from a survey.</strong> In block 2 everyone lists the jobs that come back every week and scores each one the way I do with clients: hours per week times how easy the result is to check (3 easy, 2 medium, 1 hard). Then the safety gate: a job waits for later if the AI's answer would reach a customer with no one reading it, if it moves money or changes records, or if it involves hiring, health or legal advice. The top three that pass are your three.</p>
+</div></div><div class="d figslot"><figure class="wrap scorefig"><p class="figtitle">How each owner picks their three jobs</p><div class="formula"><div class="term"><p class="k">Hours a week</p><p class="v">the job takes now</p></div><span class="op">&times;</span><div class="term"><p class="k">Easy to check</p><p class="v">3 easy · 2 medium · 1 hard</p></div><span class="op">=</span><div class="term res"><p class="k">Score</p><p class="v">highest first</p></div></div><div class="gate"><p class="k"><span class="stop" aria-hidden="true"></span>Then the safety gate. A job waits for later if:</p><ul><li>the AI’s answer would reach a customer with no one reading it</li><li>it moves money or changes records</li><li>it involves hiring, health or legal advice</li></ul></div><p class="out">The top three that pass the gate are your three jobs.</p></figure></div><div class="wrap"><div class="prose d">
+<p class="eyebrow madeup">Made-up example businesses</p><div class="tablewrap"><table class="stack"><thead><tr>
+<th>Kind of business (made-up examples)</th>
+<th>Win 1: answer customers</th>
+<th>Win 2: write it</th>
+<th>Win 3: summarize your numbers</th>
+</tr></thead><tbody><tr><td data-l="Kind of business (made-up examples)">Café or restaurant</td><td data-l="Win 1: answer customers">Replies to reviews and catering questions</td><td data-l="Win 2: write it">The week's specials and posts</td><td data-l="Win 3: summarize your numbers">Last week's sales</td></tr><tr><td data-l="Kind of business (made-up examples)">Shop</td><td data-l="Win 1: answer customers">Replies about stock, returns and hours</td><td data-l="Win 2: write it">Product descriptions and posts</td><td data-l="Win 3: summarize your numbers">Best and worst sellers</td></tr><tr><td data-l="Kind of business (made-up examples)">Service firm</td><td data-l="Win 1: answer customers">Replies to quote requests</td><td data-l="Win 2: write it">Proposals from call notes</td><td data-l="Win 3: summarize your numbers">Hours billed against budget</td></tr><tr><td data-l="Kind of business (made-up examples)">Maker or manufacturer</td><td data-l="Win 1: answer customers">Order status replies</td><td data-l="Win 2: write it">Spec sheets and supplier emails</td><td data-l="Win 3: summarize your numbers">Supplier price lists</td></tr><tr><td data-l="Kind of business (made-up examples)">Trades</td><td data-l="Win 1: answer customers">"When can you come?" replies</td><td data-l="Win 2: write it">Quotes from site notes</td><td data-l="Win 3: summarize your numbers">Jobs and invoices outstanding</td></tr></tbody></table></div></div>
+<div class="prose s"><p class="answer">Write things, answer customers, and sum up your numbers. Writing is the top use, and a person can check all three before they go anywhere.</p>
+<p>Among US small businesses that use AI, 83% use it for writing or marketing (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve Banks</a>). In Canada, the top uses are data analytics (36.6%), text analytics (34.5%) and chatbots (28.2%) (<a href="https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2026010-eng.htm" rel="noopener" target="_blank">Statistics Canada</a>). Only 6% of US small business workers who use AI use it mainly to run whole tasks with little human help (an Ipsos survey for the <a href="https://www.uschamberfoundation.org/workforce/half-of-small-business-workers-use-ai-most-to-boost-productivity-not-automate-jobs" rel="noopener" target="_blank">U.S. Chamber Foundation</a>). So we start with drafts a person checks.</p>
+<p><strong>Your three jobs come from your own week.</strong> You list the jobs you do every week. You score each one: hours a week times how easy it is to check (3 is easy, 1 is hard). Then a safety test: a job waits if AI's answer would reach a customer with no one reading it, if it moves money, or if it's about hiring, health or legal advice. Your top three safe jobs win.</p>
+</div></div><div class="s figslot"><figure class="wrap scorefig"><p class="figtitle">How each owner picks their three jobs</p><div class="formula"><div class="term"><p class="k">Hours a week</p><p class="v">the job takes now</p></div><span class="op">&times;</span><div class="term"><p class="k">Easy to check</p><p class="v">3 easy · 2 medium · 1 hard</p></div><span class="op">=</span><div class="term res"><p class="k">Score</p><p class="v">highest first</p></div></div><div class="gate"><p class="k"><span class="stop" aria-hidden="true"></span>Then the safety gate. A job waits for later if:</p><ul><li>the AI’s answer would reach a customer with no one reading it</li><li>it moves money or changes records</li><li>it involves hiring, health or legal advice</li></ul></div><p class="out">The top three that pass the gate are your three jobs.</p></figure></div><div class="wrap"><div class="prose s">
+<p class="eyebrow madeup">Made-up example businesses</p><div class="tablewrap"><table class="stack"><thead><tr>
+<th>Kind of business (made-up examples)</th>
+<th>Answer customers</th>
+<th>Write it</th>
+<th>Sum up your numbers</th>
+</tr></thead><tbody><tr><td data-l="Kind of business (made-up examples)">Café or restaurant</td><td data-l="Answer customers">Reply to reviews</td><td data-l="Write it">The week's specials</td><td data-l="Sum up your numbers">Last week's sales</td></tr><tr><td data-l="Kind of business (made-up examples)">Shop</td><td data-l="Answer customers">Reply about stock and returns</td><td data-l="Write it">Product descriptions</td><td data-l="Sum up your numbers">Best and worst sellers</td></tr><tr><td data-l="Kind of business (made-up examples)">Service firm</td><td data-l="Answer customers">Reply to quote requests</td><td data-l="Write it">Proposals from call notes</td><td data-l="Sum up your numbers">Hours against budget</td></tr><tr><td data-l="Kind of business (made-up examples)">Maker</td><td data-l="Answer customers">Order status replies</td><td data-l="Write it">Supplier emails</td><td data-l="Sum up your numbers">Supplier price lists</td></tr><tr><td data-l="Kind of business (made-up examples)">Trades</td><td data-l="Answer customers">"When can you come?" replies</td><td data-l="Write it">Quotes from site notes</td><td data-l="Sum up your numbers">Unpaid invoices</td></tr></tbody></table></div></div>
+<div class="prose t"><p class="answer">Writing, answering customers, and summing up your numbers. Writing is the top use. A person can check all three before anything goes out.</p>
+<p>In the US, 83 in 100 small businesses that use AI use it for writing or marketing (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve Banks</a>). Only 6 in 100 workers who use AI let it run whole tasks with little help (a survey for the <a href="https://www.uschamberfoundation.org/workforce/half-of-small-business-workers-use-ai-most-to-boost-productivity-not-automate-jobs" rel="noopener" target="_blank">U.S. Chamber Foundation</a>).</p>
+<p>You pick your own three jobs. List the jobs you do every week. Pick ones that take time and are easy to check. Score each one: hours a week times how easy it is to check (3 is easy, 1 is hard). Example: replying to emails takes 3 hours a week and is easy to check (3). 3 × 3 = 9. Skip anything that talks to customers by itself, moves money, changes records, or is about hiring, health or the law.</p>
+</div></div><div class="t figslot"><figure class="wrap scorefig"><p class="figtitle">How each owner picks their three jobs</p><div class="formula"><div class="term"><p class="k">Hours a week</p><p class="v">the job takes now</p></div><span class="op">&times;</span><div class="term"><p class="k">Easy to check</p><p class="v">3 easy · 2 medium · 1 hard</p></div><span class="op">=</span><div class="term res"><p class="k">Score</p><p class="v">highest first</p></div></div><div class="gate"><p class="k"><span class="stop" aria-hidden="true"></span>Then the safety gate. A job waits for later if:</p><ul><li>the AI’s answer would reach a customer with no one reading it</li><li>it moves money or changes records</li><li>it involves hiring, health or legal advice</li></ul></div><p class="out">The top three that pass the gate are your three jobs.</p></figure></div><div class="wrap"><div class="prose t"></div>
+</div></section>
+<section class="q" id="q4"><div class="wrap"><p class="eyebrow">Question 4 of 9</p><h2>Which tool do we use, and what does it cost?</h2>
+<div class="prose d"><p class="answer">Use the free plan of the tool you already have an account with. Every exercise can be done on a free plan (where a step needs a paid plan, I say so), and the room mixes ChatGPT, Claude, Gemini and Copilot. You pay only if you decide afterwards that one job is worth it.</p>
+<p>Before anyone types, we switch off model training, because on personal accounts your chats can be used to improve the vendor's models depending on your settings:</p>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Turn off "Model improvement" in Settings, under Data controls. A Temporary Chat won't appear in your history or help improve OpenAI's models (<a href="https://openai.com/consumer-privacy/" rel="noopener" target="_blank">OpenAI</a>). ChatGPT Business doesn't train on your business data by default (<a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">OpenAI</a>).</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Turn off "Model Improvement" in your Privacy Settings. Incognito chats are not used to improve Claude, even with Model Improvement on (<a href="https://privacy.claude.com/en/articles/10023580-is-my-data-used-to-train-claude-models" rel="noopener" target="_blank">Anthropic</a>).</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Google says that, depending on your settings, it uses your Gemini history to train generative AI models, and a subset of chats is read by human reviewers and kept for up to three years. You can turn History off, or use a Temporary Chat, which isn't used for training (<a href="https://support.google.com/gemini/answer/13594961" rel="noopener" target="_blank">Google</a>).</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>If your business already pays for Microsoft 365, sign in to Copilot with your work account, not a personal one. <span class="note">[DAN: CONFIRM THE COPILOT PRIVACY SETTING ON MICROSOFT'S OWN PAGE BEFORE THE WORKSHOP; I COULDN'T OPEN IT TODAY.]</span></p></div></div>
+<p>I couldn't find a training opt-out for Meta AI on Meta's own pages, so in the room I use it only with made-up facts.</p>
+<p><strong>If you decide to pay.</strong> Prices from the vendors' own pages, checked November 26, 2026. Tax is extra everywhere.</p>
+<div class="where2"><div><h3>In the US</h3><ul>
+<li><a href="https://openai.com/chatgpt/pricing/" rel="noopener" target="_blank">ChatGPT Plus</a>: US$20 a month. <a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">ChatGPT Business</a>: US$20 per user a month billed yearly, US$25 monthly, from 2 users.</li>
+<li><a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude Pro</a>: US$17 a month billed yearly (US$200 up front) or US$20 monthly; it includes Claude in Chrome and scheduled tasks. Claude Team: US$20 per seat a month billed yearly, US$25 monthly.</li>
+<li><a href="https://gemini.google/subscriptions/" rel="noopener" target="_blank">Google AI Plus</a>: US$4.99 a month. Google AI Pro: US$19.99 a month.</li>
+<li><a href="https://www.microsoft.com/en-us/microsoft-365/blog/2025/12/02/microsoft-365-copilot-business-the-future-of-work-for-small-businesses/" rel="noopener" target="_blank">Microsoft 365 Copilot Business</a>: US$21 per user a month.</li>
+</ul></div><div><h3>In Canada</h3><ul>
+<li><a href="https://gemini.google/ca/subscriptions/?hl=en-CA" rel="noopener" target="_blank">Google AI Plus</a>: CA$6.99 a month. Google AI Pro: CA$26.99 a month. Google AI plans are for ages 18 and over.</li>
+<li>Claude Pro: CA$28 a month plus tax, the price Anthropic announced when it launched in Canada (<a href="https://www.anthropic.com/news/introducing-claude-to-canada" rel="noopener" target="_blank">Anthropic</a>). That announcement is from 2024, so confirm at checkout.</li>
+<li>ChatGPT and Microsoft show their Canadian prices at checkout. Add GST/HST (and PST or QST where it applies) to every price.</li>
+</ul></div></div>
+<p class="checked">Prices checked November 26, 2026.</p>
+</div></div><div class="d figslot"><figure class="wrap toolsfig"><p class="figtitle">Can you do it on a free plan?</p><ul class="freegrid"><li class="yes"><span class="ex">Exercise 1<small>Answer customers</small></span><span class="mk">Free plan works</span><span class="tx">Free in all four tools. Projects are on ChatGPT’s free plan; Claude’s free plan allows up to 5.</span></li><li class="yes"><span class="ex">Exercise 2<small>Write posts</small></span><span class="mk">Free plan works</span><span class="tx">Free. Gemini’s free plan includes Deep Research for the research step.</span></li><li class="yes"><span class="ex">Exercise 3<small>Sum up a file</small></span><span class="mk">Free plan works</span><span class="tx">Free by uploading the file to a chat. Ask Gemini in Sheets and Copilot in Excel need a paid plan.</span></li><li class="part"><span class="ex">Agent<small>Hand one job over</small></span><span class="mk">One tool free</span><span class="tx">Free only in Gemini (Tasks, 18 and over). Claude and ChatGPT need a paid plan.</span></li></ul><figcaption>From the vendors’ own plan pages, checked November 26, 2026.</figcaption></figure></div><div class="wrap"><div class="prose d">
+<p>I left Grok out of the room. Its plans changed in October 2026 and I couldn't confirm them on xAI's own pages today.</p>
+<p><strong>In an OpenWorks room.</strong> If I run this as an OpenWorks partner in the US, attendees' businesses get 3 months of ChatGPT Business at no cost (<a href="https://openai.com/openworks/" rel="noopener" target="_blank">OpenAI</a>), and ChatGPT Business doesn't train on business data by default (<a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">OpenAI</a>). Then the whole room works in ChatGPT and the training step is already done. <span class="note">[DAN: NAME THE US COMMUNITY YOU WOULD SERVE AS A PARTNER.]</span></p></div>
+<div class="prose s"><p class="answer">Use the free plan of a tool you already have. Every exercise can be done for free; I say where a step needs a paid plan. You only pay later if one job is worth it.</p>
+<p>First, we switch off training, so your chats aren't used to improve the company's AI:</p>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Turn off "Model improvement" in Settings, under Data controls. Temporary Chats don't help improve OpenAI's models (<a href="https://openai.com/consumer-privacy/" rel="noopener" target="_blank">OpenAI</a>). ChatGPT Business doesn't train on your business data by default (<a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">OpenAI</a>).</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Turn off "Model Improvement" in Privacy Settings. Incognito chats are never used to improve Claude (<a href="https://privacy.claude.com/en/articles/10023580-is-my-data-used-to-train-claude-models" rel="noopener" target="_blank">Anthropic</a>).</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Depending on your settings, Google uses your Gemini history to train its AI, and people may read some chats. Turn History off or use a Temporary Chat, which isn't used for training (<a href="https://support.google.com/gemini/answer/13594961" rel="noopener" target="_blank">Google</a>).</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>If your business pays for Microsoft 365, sign in with your work account. <span class="note">[DAN: CONFIRM THE COPILOT PRIVACY SETTING BEFORE THE WORKSHOP.]</span></p></div></div>
+<p>I couldn't find a way to switch off training in Meta AI on Meta's own pages, so I only use it with made-up facts.</p>
+<p><strong>If you decide to pay</strong> (checked November 26, 2026, before tax):</p>
+<div class="where2"><div><h3>In the US</h3><ul>
+<li><a href="https://openai.com/chatgpt/pricing/" rel="noopener" target="_blank">ChatGPT Plus</a>: US$20 a month. <a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">ChatGPT Business</a>: US$20 a person a month paid yearly, US$25 monthly, for 2 people or more.</li>
+<li><a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude Pro</a>: US$17 a month paid yearly, or US$20 monthly. Claude Team: US$20 a person paid yearly, US$25 monthly.</li>
+<li><a href="https://gemini.google/subscriptions/" rel="noopener" target="_blank">Google AI Plus</a>: US$4.99 a month. Google AI Pro: US$19.99.</li>
+<li><a href="https://www.microsoft.com/en-us/microsoft-365/blog/2025/12/02/microsoft-365-copilot-business-the-future-of-work-for-small-businesses/" rel="noopener" target="_blank">Microsoft 365 Copilot Business</a>: US$21 a person a month.</li>
+</ul></div><div><h3>In Canada</h3><ul>
+<li><a href="https://gemini.google/ca/subscriptions/?hl=en-CA" rel="noopener" target="_blank">Google AI Plus</a>: CA$6.99 a month. Google AI Pro: CA$26.99. For ages 18 and over.</li>
+<li>Claude Pro: CA$28 a month plus tax, from Anthropic's 2024 Canada launch (<a href="https://www.anthropic.com/news/introducing-claude-to-canada" rel="noopener" target="_blank">Anthropic</a>). Check at checkout.</li>
+<li>ChatGPT and Microsoft show Canadian prices at checkout. Add GST/HST (and PST or QST where it applies).</li>
+</ul></div></div>
+<p class="checked">Prices checked November 26, 2026.</p>
+</div></div><div class="s figslot"><figure class="wrap toolsfig"><p class="figtitle">Can you do it on a free plan?</p><ul class="freegrid"><li class="yes"><span class="ex">Exercise 1<small>Answer customers</small></span><span class="mk">Free plan works</span><span class="tx">Free in all four tools. Projects are on ChatGPT’s free plan; Claude’s free plan allows up to 5.</span></li><li class="yes"><span class="ex">Exercise 2<small>Write posts</small></span><span class="mk">Free plan works</span><span class="tx">Free. Gemini’s free plan includes Deep Research for the research step.</span></li><li class="yes"><span class="ex">Exercise 3<small>Sum up a file</small></span><span class="mk">Free plan works</span><span class="tx">Free by uploading the file to a chat. Ask Gemini in Sheets and Copilot in Excel need a paid plan.</span></li><li class="part"><span class="ex">Agent<small>Hand one job over</small></span><span class="mk">One tool free</span><span class="tx">Free only in Gemini (Tasks, 18 and over). Claude and ChatGPT need a paid plan.</span></li></ul><figcaption>From the vendors’ own plan pages, checked November 26, 2026.</figcaption></figure></div><div class="wrap"><div class="prose s">
+<p>I left Grok out. Its plans changed in October 2026 and I couldn't check them on xAI's own pages today.</p>
+<p><strong>In an OpenWorks room</strong> in the US, businesses get 3 months of ChatGPT Business free (<a href="https://openai.com/openworks/" rel="noopener" target="_blank">OpenAI</a>), and it doesn't train on business data by default. Then everyone works in ChatGPT. <span class="note">[DAN: NAME THE US COMMUNITY YOU WOULD SERVE.]</span></p></div>
+<div class="prose t"><p class="answer">Use the free plan of ChatGPT, Claude, Gemini or Copilot. You can do every exercise for free.</p>
+<p>First, switch off training, so the company doesn't use your chats to improve its AI:</p>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Settings, then Data controls. Turn off "Model improvement" (<a href="https://openai.com/consumer-privacy/" rel="noopener" target="_blank">OpenAI</a>).</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Privacy Settings. Turn off "Model Improvement" (<a href="https://privacy.claude.com/en/articles/10023580-is-my-data-used-to-train-claude-models" rel="noopener" target="_blank">Anthropic</a>).</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Turn History off, or use a Temporary Chat (<a href="https://support.google.com/gemini/answer/13594961" rel="noopener" target="_blank">Google</a>).</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>Use your work account if your business pays for Microsoft 365. <span class="note">[DAN: CONFIRM THE COPILOT PRIVACY SETTING.]</span></p></div></div>
+<p><strong>If you pay later</strong> (before tax):</p>
+<div class="where2"><div><h3>In the US</h3><p>ChatGPT Plus is US$20 a month (<a href="https://openai.com/chatgpt/pricing/" rel="noopener" target="_blank">OpenAI</a>). Claude Pro is US$20 a month, or US$17 a month if you pay for a year (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>). Google AI Plus is US$4.99 a month (<a href="https://gemini.google/subscriptions/" rel="noopener" target="_blank">Google</a>).</p></div><div><h3>In Canada</h3><p>Google AI Plus is CA$6.99 a month (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" rel="noopener" target="_blank">Google Canada</a>). Claude Pro was CA$28 a month when it came to Canada (<a href="https://www.anthropic.com/news/introducing-claude-to-canada" rel="noopener" target="_blank">Anthropic</a>). Check prices when you sign up. Tax is extra.</p></div></div>
+<p class="checked">Prices checked November 26, 2026.</p>
+</div></div><div class="t figslot"><figure class="wrap toolsfig"><p class="figtitle">Can you do it on a free plan?</p><ul class="freegrid"><li class="yes"><span class="ex">Exercise 1<small>Answer customers</small></span><span class="mk">Free plan works</span><span class="tx">Free in all four tools. Projects are on ChatGPT’s free plan; Claude’s free plan allows up to 5.</span></li><li class="yes"><span class="ex">Exercise 2<small>Write posts</small></span><span class="mk">Free plan works</span><span class="tx">Free. Gemini’s free plan includes Deep Research for the research step.</span></li><li class="yes"><span class="ex">Exercise 3<small>Sum up a file</small></span><span class="mk">Free plan works</span><span class="tx">Free by uploading the file to a chat. Ask Gemini in Sheets and Copilot in Excel need a paid plan.</span></li><li class="part"><span class="ex">Agent<small>Hand one job over</small></span><span class="mk">One tool free</span><span class="tx">Free only in Gemini (Tasks, 18 and over). Claude and ChatGPT need a paid plan.</span></li></ul><figcaption>From the vendors’ own plan pages, checked November 26, 2026.</figcaption></figure></div><div class="wrap"><div class="prose t"></div>
+</div></section>
+<section class="q" id="q5"><div class="wrap"><p class="eyebrow">Question 5 of 9</p><h2>How does each exercise run?</h2>
+<div class="prose d"><p class="answer">Each exercise uses the same prompt shape, so you only learn one (words in [brackets] are for you to fill in): what the business is, what to do, the facts to use, and what the answer should look like. That shape is what all four vendors recommend in their own guides. OpenAI says to treat a prompt "like a 'handoff' to a new intern" (<a href="https://developers.openai.com/cookbook/examples/chatgpt/chatgpt_prompt_guide/chatgpt_prompt_guide" rel="noopener" target="_blank">OpenAI</a>); Anthropic says to think of Claude "as a brilliant but new employee who lacks context on your norms and workflows" (<a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices" rel="noopener" target="_blank">Anthropic</a>); Google says to provide context and break big jobs into smaller prompts (<a href="https://support.google.com/a/users/answer/14200040?hl=en" rel="noopener" target="_blank">Google</a>); Microsoft names four parts: context, goal, source and expectations (<a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt" rel="noopener" target="_blank">Microsoft</a>).</p>
+<h3>Exercise 1: answer customers (30 minutes)</h3>
+<p>You turn a customer message into a reply you check and send yourself. The AI never sends anything.</p>
+<p>The prompt (fill in the brackets):</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>I run [business], a [type of business] in [city]. Our policy: [for example, refunds within 14 days with a receipt; we never argue in public replies]. Draft a reply to the customer message below. Warm, and offer [one concrete fix]. Use only the facts I&#x27;ve given you. If the message asks something my policy doesn&#x27;t cover, say so instead of guessing. Give me two versions: a public reply under 50 words and a private reply under 120 words. End each with one line starting &quot;Check before sending:&quot;.</p><p>Customer message: [paste a made-up message, or a real one with the name, email, phone and order number removed]</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><ol>
+<li>Create a Project for the job and add your policy as a file or in the instructions. Projects are on the Free plan (<a href="https://chatgpt.com/pricing/" rel="noopener" target="_blank">ChatGPT</a>).</li>
+<li>Paste the prompt in a chat inside the Project.</li>
+<li>Edit in the chat ("Shorter. Keep the offer."), then copy the reply and send it yourself.</li>
+</ol></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><ol>
+<li>Click Projects, then New Project. Add your policy and two replies you've liked as examples. The Free plan allows up to 5 Projects (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>).</li>
+<li>Paste the prompt. Ask Claude to quote the policy line it relied on, so you can check it.</li>
+<li>Copy the reply out and send it yourself.</li>
+</ol></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><ol>
+<li>Paste the prompt in a new chat.</li>
+<li>To reuse it, save the instructions as a skill. Don't build a Gem: Google says Gems are going away on personal accounts and moving to skills from November 2026 (<a href="https://support.google.com/gemini/answer/15146780" rel="noopener" target="_blank">Google</a>).</li>
+</ol></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>Paste the prompt into Copilot Chat. Microsoft's own guide asks you to give context, a goal, a source and your expectations, which is the same shape (<a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt" rel="noopener" target="_blank">Microsoft</a>).</p></div></div>
+<h3>Exercise 2: a week of posts from your own facts (35 minutes)</h3>
+<p>You write seven posts in which every fact comes from a one-page sheet you supply. The rule is the lesson: the AI may only use your facts.</p>
+<p>You bring the sheet as pre-work: your business name, what you sell, this week's real items with prices, one event with a date, one offer with an end date, and your hours. Here's a made-up sheet we use as a sample in the room:</p>
+<div class="card fact"><p class="eyebrow madeup">Made-up example business</p><h3>Harbour Street Bakery</h3><p class="sub">Fact sheet for this week</p><ul><li>Sourdough loaf $9.</li><li>Cinnamon buns $4.50 each, $24 for six.</li><li>Holiday cookie boxes $35, order by December 18.</li><li>Open Tuesday to Sunday, 7 am to 3 pm.</li><li>Saturday December 12: free coffee tasting 9 to 11 am.</li></ul><button type="button" class="copy copyplain" data-label="Copy the fact sheet" data-text="Harbour Street Bakery fact sheet
+Sourdough loaf $9.
+Cinnamon buns $4.50 each, $24 for six.
+Holiday cookie boxes $35, order by December 18.
+Open Tuesday to Sunday, 7 am to 3 pm.
+Saturday December 12: free coffee tasting 9 to 11 am.">Copy the fact sheet</button></div>
+<p>The prompt:</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Here is my fact sheet: [paste it]. Write 7 posts, one for each day, Monday to Sunday. Each post: one fact only, under 60 words, one call to action, no more than 3 hashtags. Use ONLY the facts on the sheet. If a post needs a fact that isn&#x27;t there, write [MISSING FACT] instead of making one up. Give me a table: Day, Post, Fact used.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<p>Then check every row: the "Fact used" column must match your sheet. With the sample sheet, a post that mentions Monday hours or a price for coffee has invented something, because neither is on the sheet.</p>
+<p><strong>The two-tool version (15 minutes, research started first).</strong> One tool finds the information, another turns it into the finished thing, and you check in between. This is how I work myself. Research tools can take several minutes, so you start the research at the beginning of the block and write your seven posts while it runs.</p>
+<ol>
+<li><strong>Research.</strong> Ask a research tool: "What are [businesses like yours] in [your city] posting about for the holidays this year? Give me a short report with a link for every fact. Don't invent prices."</li>
+<li><strong>Check.</strong> Open two or three of the links. Cross out anything you can't confirm.</li>
+<li><strong>Write.</strong> Paste the checked research and your fact sheet into ChatGPT or Claude: "Using ONLY the research and facts below, write one post for my business. Keep the source link for every claim. If something isn't answered, write [NOT FOUND]."</li>
+<li><strong>Check again</strong> before you post.</li>
+</ol>
+<div class="toolgroup" data-def="gemini"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="muse" aria-pressed="false">Muse</button><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Gemini's free plan includes Deep Research (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" rel="noopener" target="_blank">Google</a>). It's my default research tool in a Canadian room, because the free plan and its Canadian price are on Google's own Canadian page.</p></div><div class="toolblock" data-tool="muse"><p class="toolname">In Muse</p><p>If you already use Meta's Muse agent, it can do the research step. Meta says Muse is free for most uses (<a href="https://www.iphoneincanada.ca/2026/09/29/meta-launches-muse-for-small-business-in-canada/" rel="noopener" target="_blank">iPhone in Canada</a>). Muse for Small Business connects to Instagram and Facebook Pages, and Meta says nothing is published, sent or spent without your approval.</p></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Use ChatGPT's search for the research step, then a new chat inside your post Project for the writing step, so the two jobs stay separate.</p></div></div>
+<h3>Exercise 3: summarize a file, then check it (30 minutes)</h3>
+<p>You ask AI to summarize a sales file, then check its answer against an answer key I worked out in code. Everyone uses the same made-up file: 31 days of October sales for Laneway Coffee, a made-up Toronto café, with the weather and notes for each day. It's the sample file from my worked example of a café's first month <span class="note">[LINK TO THE CAFÉ ARTICLE]</span>.</p>
+</div></div><div class="d figslot"><figure class="wrap csvfig"><div class="filecard"><p class="eyebrow madeup">Made-up sample file</p><p class="fn">laneway-october.csv</p><p class="fm">31 rows · one per day in October 2026 · date, day, transactions, revenue in CAD, weather, top seller, notes</p><details class="data"><summary>Show the file and copy it</summary><p>Copy the rows into a text file and save it as laneway-october.csv. It opens in Excel, Google Sheets, ChatGPT, Claude, Gemini or Copilot. All of it is made up.</p><button type="button" class="copy copydata" data-label="Copy the data">Copy the data</button><pre class="csvdata">Date,Day,Transactions,Revenue (CAD),Weather,Top seller,Notes
+2026-10-01,Thursday,124,1085.11,Dry,Breakfast sandwich,
+2026-10-02,Friday,140,1318.98,Dry,Oat latte,
+2026-10-03,Saturday,141,1448.01,Rain,Breakfast sandwich,
+2026-10-04,Sunday,177,1823.66,Dry,Drip coffee,
+2026-10-05,Monday,120,1042.89,Dry,Drip coffee,
+2026-10-06,Tuesday,120,1099.85,Dry,Oat latte,
+2026-10-07,Wednesday,130,1193.79,Dry,Oat latte,
+2026-10-08,Thursday,129,1160.57,Dry,Oat latte,
+2026-10-09,Friday,109,1030.97,Rain,Drip coffee,
+2026-10-10,Saturday,142,1540.53,Rain,Breakfast sandwich,
+2026-10-11,Sunday,180,2012.28,Dry,Oat latte,
+2026-10-12,Monday,56,513.59,Dry,Oat latte,&quot;Thanksgiving (Canada), short hours&quot;
+2026-10-13,Tuesday,90,823.3,Dry,Oat latte,Road work out front
+2026-10-14,Wednesday,92,848.15,Dry,Drip coffee,Road work out front
+2026-10-15,Thursday,94,848.59,Dry,Pumpkin spice latte,Road work out front
+2026-10-16,Friday,107,1019.01,Dry,Pumpkin spice latte,Road work out front
+2026-10-17,Saturday,129,1438.77,Dry,Drip coffee,Road work out front
+2026-10-18,Sunday,174,1837.49,Dry,Breakfast sandwich,
+2026-10-19,Monday,134,1250.15,Dry,Pumpkin spice latte,
+2026-10-20,Tuesday,129,1118.84,Dry,Pumpkin spice latte,
+2026-10-21,Wednesday,97,924.73,Rain,Pumpkin spice latte,
+2026-10-22,Thursday,102,955.19,Rain,Pumpkin spice latte,
+2026-10-23,Friday,146,1328.11,Dry,Pumpkin spice latte,
+2026-10-24,Saturday,195,2052.17,Dry,Pumpkin spice latte,
+2026-10-25,Sunday,213,2338.01,Dry,Pumpkin spice latte,
+2026-10-26,Monday,125,1158.58,Dry,Oat latte,
+2026-10-27,Tuesday,97,893.46,Rain,Pumpkin spice latte,
+2026-10-28,Wednesday,132,1152.27,Dry,Pumpkin spice latte,
+2026-10-29,Thursday,135,1228.03,Dry,Pumpkin spice latte,
+2026-10-30,Friday,151,1431.99,Dry,Breakfast sandwich,
+2026-10-31,Saturday,200,2139.67,Dry,Pumpkin spice latte,</pre></details></div></figure></div><div class="wrap"><div class="prose d">
+<p>The prompt:</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Here are last month&#x27;s daily sales for my café. In plain words, what&#x27;s going on, and what are 3 things I should try next week? Show the numbers you used. Compare weekdays with weekdays and weekends with weekends. Leave out unusual days, like holidays or road work, and say which ones. Tell me anything the file can&#x27;t answer.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Attach the CSV file to a chat and paste the prompt. Then ask: "Before finishing, list any assumptions you made." That line comes from OpenAI's own prompting guide (<a href="https://developers.openai.com/cookbook/examples/chatgpt/chatgpt_prompt_guide/chatgpt_prompt_guide" rel="noopener" target="_blank">OpenAI</a>).</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Click the + button, attach the file and paste the prompt (<a href="https://support.claude.com/en/articles/8241126-uploading-files-to-claude" rel="noopener" target="_blank">Claude Help Center</a>). Ask Claude to work out the totals with code, so the arithmetic is computed, not guessed.</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Open the file in Google Sheets, click Ask Gemini at the top right and paste the prompt. It needs an eligible Workspace or Google AI plan (<a href="https://support.google.com/docs/answer/14356410" rel="noopener" target="_blank">Google</a>). On a free account, upload the file to a Gemini chat instead.</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>Attach the file in Copilot Chat and paste the prompt. Copilot inside Excel needs a paid Microsoft 365 plan.</p></div></div>
+<p><strong>The answer key.</strong> I worked these out in code from the 31 rows:</p>
+<div class="tablewrap"><table class="stack two akey"><thead><tr>
+<th>Check</th>
+<th>What a good answer says</th>
+</tr></thead><tbody><tr><td data-l="Check">Total</td><td data-l="What a good answer says">$40,056.74 (CAD) from 4,110 transactions</td></tr><tr><td data-l="Check">Weekends</td><td data-l="What a good answer says">A normal dry weekend day took in about 70% more than a normal dry weekday ($2,033.88 against $1,197.63)</td></tr><tr><td data-l="Check">Rain</td><td data-l="What a good answer says">Rainy weekdays took in about 21% less than normal dry weekdays</td></tr><tr><td data-l="Check">The trap</td><td data-l="What a good answer says">Averaging all rain days against all dry days gives about 15%, because two rain days were Saturdays and the dry days include Canadian Thanksgiving (October 12) and a week of road work</td></tr><tr><td data-l="Check">What it can't answer</td><td data-l="What a good answer says">Profit, staffing and waste, because the file has no costs, hours or waste</td></tr></tbody></table></div>
+<p>Then the room compares answers. If one person's tool says 15% and another's says 21%, the group works out why.</p>
+<h3>The agent exercise: hand one job to an agent (20 minutes)</h3>
+<p>An agent is an AI tool you give a goal instead of a single question; it works through the steps and comes back when it needs you. Each person gives an agent one small job, watches it stop for review, and learns the rule for the day: <strong>an agent drafts; a person sends, pays and posts.</strong></p>
+<p>The job everyone tries reads nothing private: "Look up today's weather and any events or road closures near [your street and city]. Tell me in three lines what could change how busy we are today, with a link for each. Then send that summary to my own email address." The last step is there on purpose, so you see the agent stop before it sends.</p>
+<div class="toolgroup" data-def="gemini"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Tasks in Gemini are free in Canada and the US, with no Google AI subscription. You need to be 18 or over, use a personal Google account, and have History on (<a href="https://support.google.com/gemini/answer/17094507?hl=en&amp;co=GENIE.Platform%3DDesktop" rel="noopener" target="_blank">Google</a>). Use a personal account with no business email in it. Tasks need History on, so if you turned it off in block 1, turn it on for this block knowing your chats may be used for training, and turn it off again afterwards. At gemini.google.com, click Task below the text box, paste the job and submit it. Google says some tasks "may require your confirmation" and that Gemini asks for your review before actions such as sending communications, making purchases or submitting web forms. When it stops before sending, read the email first, then decide. Google also warns against putting sign-in details, payment details or sensitive information into a task, and against scheduling sensitive tasks, because a schedule that runs while you're offline may complete an action you didn't intend.</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Needs a paid plan. Claude Pro includes scheduled tasks and Claude in Chrome (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>). In Cowork, set the approval mode to Manual, so Claude pauses and you choose Allow or Deny for each request. Anthropic's own advice is to stay close for work with real consequences, such as money, messages sent as you and important files (<a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="noopener" target="_blank">Claude Help Center</a>).</p></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Scheduled tasks aren't on the Free plan (<a href="https://chatgpt.com/pricing/" rel="noopener" target="_blank">ChatGPT</a>). If you pay for ChatGPT, set the same job up and keep approvals on.</p></div></div>
+</div></div><div class="d figslot"><figure class="widewrap agentfig"><p class="figtitle">The agent exercise, step by step</p><ol class="flow5"><li class=""><p class="k">You</p><h3>Give the job</h3><p>Weather and road closures near your street, then send the summary to your own email.</p></li><li class=""><p class="k">Agent</p><h3>Looks it up</h3><p>Searches the web and keeps a link for each fact.</p></li><li class=""><p class="k">Agent</p><h3>Drafts three lines</h3><p>What could change how busy you are today.</p></li><li class="on"><p class="k">Agent</p><h3>Stops and asks</h3><p>Before it sends anything, it waits for your review.</p></li><li class=""><p class="k">You</p><h3>Read, then decide</h3><p>Send it, fix it, or stop it.</p></li></ol><p class="rule"><span class="stop" aria-hidden="true"></span>An agent drafts. A person sends, pays and posts.</p></figure></div><div class="wrap"><div class="prose d">
+<p><strong>Where a person must approve, always:</strong> anything sent to a customer or supplier, anything paid or ordered, anything posted, and any change to a record. Nobody switches approvals off in the room, and nobody points an agent at a business inbox on the day.</p></div>
+<div class="prose s"><p class="answer">Every prompt has the same shape (fill in the words in [brackets]): what your business is, what to do, the facts to use, and what the answer should look like. All four big AI companies teach this shape. OpenAI says to treat a prompt "like a 'handoff' to a new intern" (<a href="https://developers.openai.com/cookbook/examples/chatgpt/chatgpt_prompt_guide/chatgpt_prompt_guide" rel="noopener" target="_blank">OpenAI</a>). Anthropic says to treat Claude like a "brilliant but new employee" (<a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices" rel="noopener" target="_blank">Anthropic</a>). Google says to give context (<a href="https://support.google.com/a/users/answer/14200040?hl=en" rel="noopener" target="_blank">Google</a>). Microsoft lists context, goal, source and expectations (<a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt" rel="noopener" target="_blank">Microsoft</a>).</p>
+<h3>Exercise 1: answer customers (30 minutes)</h3>
+<p>You turn a customer message into a reply. You check it and send it yourself. AI never sends anything.</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>I run [business], a [type of business] in [city]. Our policy: [for example, refunds within 14 days with a receipt]. Draft a reply to the customer message below. Warm, and offer [one fix]. Use only the facts I&#x27;ve given you. If my policy doesn&#x27;t cover something, say so instead of guessing. Give me a public reply under 50 words and a private reply under 120 words. End each with &quot;Check before sending:&quot;.</p><p>Customer message: [a made-up message, or a real one with the name, email, phone and order number removed]</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Make a Project for this job and add your policy. Projects are on the free plan (<a href="https://chatgpt.com/pricing/" rel="noopener" target="_blank">ChatGPT</a>). Paste the prompt, fix the reply in the chat, then send it yourself.</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Click Projects, then New Project. Add your policy and two replies you liked. The free plan allows up to 5 Projects (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>). Paste the prompt. Ask Claude which policy line it used.</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Paste the prompt. To reuse it, save it as a skill, not a Gem. Google says Gems are moving to skills on personal accounts from November 2026 (<a href="https://support.google.com/gemini/answer/15146780" rel="noopener" target="_blank">Google</a>).</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>Paste the prompt into Copilot Chat. Microsoft's guide uses the same shape (<a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt" rel="noopener" target="_blank">Microsoft</a>).</p></div></div>
+<h3>Exercise 2: a week of posts from your own facts (35 minutes)</h3>
+<p>You write seven posts where every fact comes from your own one-page sheet. AI may only use your facts.</p>
+<div class="card fact"><p class="eyebrow madeup">Made-up example business</p><h3>Harbour Street Bakery</h3><p class="sub">Fact sheet for this week</p><ul><li>Sourdough loaf $9.</li><li>Cinnamon buns $4.50 each, $24 for six.</li><li>Holiday cookie boxes $35, order by December 18.</li><li>Open Tuesday to Sunday, 7 am to 3 pm.</li><li>Saturday December 12: free coffee tasting 9 to 11 am.</li></ul><button type="button" class="copy copyplain" data-label="Copy the fact sheet" data-text="Harbour Street Bakery fact sheet
+Sourdough loaf $9.
+Cinnamon buns $4.50 each, $24 for six.
+Holiday cookie boxes $35, order by December 18.
+Open Tuesday to Sunday, 7 am to 3 pm.
+Saturday December 12: free coffee tasting 9 to 11 am.">Copy the fact sheet</button></div>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Here is my fact sheet: [paste it]. Write 7 posts, one for each day, Monday to Sunday. Each post: one fact only, under 60 words, one call to action, no more than 3 hashtags. Use ONLY the facts on the sheet. If a post needs a fact that isn&#x27;t there, write [MISSING FACT]. Give me a table: Day, Post, Fact used.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<p>Check every row against your sheet. With the sample, a post about Monday hours or a coffee price has made something up.</p>
+<p><strong>Two tools together (15 minutes).</strong> One tool finds information. Another writes the post. You check in between. Research can take a few minutes, so start it first and write your seven posts while it runs.</p>
+<ol>
+<li><strong>Research:</strong> "What are [businesses like yours] in [your city] posting about for the holidays? Give me a short report with a link for every fact. Don't invent prices."</li>
+<li><strong>Check:</strong> open two or three links. Cross out what you can't confirm.</li>
+<li><strong>Write:</strong> paste the checked research and your fact sheet into ChatGPT or Claude: "Using ONLY this, write one post. Keep the source links. If something isn't answered, write [NOT FOUND]."</li>
+<li><strong>Check again</strong> before you post.</li>
+</ol>
+<div class="toolgroup" data-def="gemini"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="muse" aria-pressed="false">Muse</button><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Gemini's free plan includes Deep Research (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" rel="noopener" target="_blank">Google</a>). It's my default research tool in a Canadian room.</p></div><div class="toolblock" data-tool="muse"><p class="toolname">In Muse</p><p>If you use Meta's Muse agent, it can do the research. Meta says it's free for most uses and won't post, send or spend without your OK (<a href="https://www.iphoneincanada.ca/2026/09/29/meta-launches-muse-for-small-business-in-canada/" rel="noopener" target="_blank">iPhone in Canada</a>).</p></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Use ChatGPT's search for the research, then a new chat in your post Project for the writing.</p></div></div>
+<h3>Exercise 3: sum up a file, then check it (30 minutes)</h3>
+<p>Everyone sums up the same made-up file: 31 days of October sales for Laneway Coffee, a made-up Toronto café. Then you check the answer against my answer key. <span class="note">[LINK TO THE CAFÉ ARTICLE]</span></p>
+</div></div><div class="s figslot"><figure class="wrap csvfig"><div class="filecard"><p class="eyebrow madeup">Made-up sample file</p><p class="fn">laneway-october.csv</p><p class="fm">31 rows · one per day in October 2026 · date, day, transactions, revenue in CAD, weather, top seller, notes</p><details class="data"><summary>Show the file and copy it</summary><p>Copy the rows into a text file and save it as laneway-october.csv. It opens in Excel, Google Sheets, ChatGPT, Claude, Gemini or Copilot. All of it is made up.</p><button type="button" class="copy copydata" data-label="Copy the data">Copy the data</button><pre class="csvdata">Date,Day,Transactions,Revenue (CAD),Weather,Top seller,Notes
+2026-10-01,Thursday,124,1085.11,Dry,Breakfast sandwich,
+2026-10-02,Friday,140,1318.98,Dry,Oat latte,
+2026-10-03,Saturday,141,1448.01,Rain,Breakfast sandwich,
+2026-10-04,Sunday,177,1823.66,Dry,Drip coffee,
+2026-10-05,Monday,120,1042.89,Dry,Drip coffee,
+2026-10-06,Tuesday,120,1099.85,Dry,Oat latte,
+2026-10-07,Wednesday,130,1193.79,Dry,Oat latte,
+2026-10-08,Thursday,129,1160.57,Dry,Oat latte,
+2026-10-09,Friday,109,1030.97,Rain,Drip coffee,
+2026-10-10,Saturday,142,1540.53,Rain,Breakfast sandwich,
+2026-10-11,Sunday,180,2012.28,Dry,Oat latte,
+2026-10-12,Monday,56,513.59,Dry,Oat latte,&quot;Thanksgiving (Canada), short hours&quot;
+2026-10-13,Tuesday,90,823.3,Dry,Oat latte,Road work out front
+2026-10-14,Wednesday,92,848.15,Dry,Drip coffee,Road work out front
+2026-10-15,Thursday,94,848.59,Dry,Pumpkin spice latte,Road work out front
+2026-10-16,Friday,107,1019.01,Dry,Pumpkin spice latte,Road work out front
+2026-10-17,Saturday,129,1438.77,Dry,Drip coffee,Road work out front
+2026-10-18,Sunday,174,1837.49,Dry,Breakfast sandwich,
+2026-10-19,Monday,134,1250.15,Dry,Pumpkin spice latte,
+2026-10-20,Tuesday,129,1118.84,Dry,Pumpkin spice latte,
+2026-10-21,Wednesday,97,924.73,Rain,Pumpkin spice latte,
+2026-10-22,Thursday,102,955.19,Rain,Pumpkin spice latte,
+2026-10-23,Friday,146,1328.11,Dry,Pumpkin spice latte,
+2026-10-24,Saturday,195,2052.17,Dry,Pumpkin spice latte,
+2026-10-25,Sunday,213,2338.01,Dry,Pumpkin spice latte,
+2026-10-26,Monday,125,1158.58,Dry,Oat latte,
+2026-10-27,Tuesday,97,893.46,Rain,Pumpkin spice latte,
+2026-10-28,Wednesday,132,1152.27,Dry,Pumpkin spice latte,
+2026-10-29,Thursday,135,1228.03,Dry,Pumpkin spice latte,
+2026-10-30,Friday,151,1431.99,Dry,Breakfast sandwich,
+2026-10-31,Saturday,200,2139.67,Dry,Pumpkin spice latte,</pre></details></div></figure></div><div class="wrap"><div class="prose s">
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Here are last month&#x27;s daily sales for my café. In plain words, what&#x27;s going on, and what are 3 things I should try next week? Show the numbers you used. Compare weekdays with weekdays and weekends with weekends. Leave out unusual days, like holidays or road work, and say which ones. Tell me anything the file can&#x27;t answer.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Attach the file and paste the prompt. Then add: "Before finishing, list any assumptions you made." That line is from OpenAI's own guide (<a href="https://developers.openai.com/cookbook/examples/chatgpt/chatgpt_prompt_guide/chatgpt_prompt_guide" rel="noopener" target="_blank">OpenAI</a>).</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Click the + button, add the file and paste the prompt (<a href="https://support.claude.com/en/articles/8241126-uploading-files-to-claude" rel="noopener" target="_blank">Claude Help Center</a>). Ask Claude to add up the totals with code.</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Open the file in Google Sheets and click Ask Gemini at the top right. That needs an eligible plan (<a href="https://support.google.com/docs/answer/14356410" rel="noopener" target="_blank">Google</a>). On a free account, upload the file to a chat instead.</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>Attach the file in Copilot Chat. Copilot inside Excel needs a paid plan.</p></div></div>
+<p><strong>The answer key</strong> (worked out in code):</p>
+<div class="tablewrap"><table class="stack two akey"><thead><tr>
+<th>Check</th>
+<th>A good answer says</th>
+</tr></thead><tbody><tr><td data-l="Check">Total</td><td data-l="A good answer says">$40,056.74 (CAD) from 4,110 sales</td></tr><tr><td data-l="Check">Weekends</td><td data-l="A good answer says">A normal weekend day took in about 70% more than a normal weekday</td></tr><tr><td data-l="Check">Rain</td><td data-l="A good answer says">Rainy weekdays took in about 21% less than normal dry weekdays</td></tr><tr><td data-l="Check">The trap</td><td data-l="A good answer says">Mixing all rain days with all dry days gives about 15%, which is wrong. Some rain days were Saturdays, and the dry days include Canadian Thanksgiving (October 12) and road work</td></tr><tr><td data-l="Check">What it can't answer</td><td data-l="A good answer says">Profit, staffing and waste</td></tr></tbody></table></div>
+<p>Then the room compares answers and works out who got the trap.</p>
+<h3>Try an agent (20 minutes)</h3>
+<p>An agent is an AI tool you give a goal. It works through the steps and asks you when it needs you. The rule for the day: <strong>an agent drafts; a person sends, pays and posts.</strong></p>
+<p>The job reads nothing private: "Look up today's weather and any events or road closures near [your street and city]. Tell me in three lines what could change how busy we are today, with a link for each. Then send that summary to my own email address." The last step shows you the agent stopping before it sends.</p>
+<div class="toolgroup" data-def="gemini"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Tasks in Gemini are free in Canada and the US. You must be 18 or over, use a personal Google account, and have History on (<a href="https://support.google.com/gemini/answer/17094507?hl=en&amp;co=GENIE.Platform%3DDesktop" rel="noopener" target="_blank">Google</a>). Use a personal account with no business email in it. If you turned History off earlier, turn it on for this part only, knowing chats may be used for training, and turn it off again afterwards. Click Task below the text box, paste the job and submit. Google says Gemini asks for your review before things like sending messages or buying things. Read the email before you say yes. Don't type passwords or payment details into a task, and don't schedule anything sensitive: a schedule that runs while you're offline might do something you didn't mean.</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Needs a paid plan: Claude Pro includes scheduled tasks (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>). Set Cowork to Manual, so Claude asks before each step. Anthropic says to stay close for work with real consequences, like money, messages sent as you and important files (<a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="noopener" target="_blank">Claude Help Center</a>).</p></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Scheduled tasks aren't on the free plan (<a href="https://chatgpt.com/pricing/" rel="noopener" target="_blank">ChatGPT</a>). On a paid plan, set it up the same way and keep approvals on.</p></div></div>
+</div></div><div class="s figslot"><figure class="widewrap agentfig"><p class="figtitle">The agent exercise, step by step</p><ol class="flow5"><li class=""><p class="k">You</p><h3>Give the job</h3><p>Weather and road closures near your street, then send the summary to your own email.</p></li><li class=""><p class="k">Agent</p><h3>Looks it up</h3><p>Searches the web and keeps a link for each fact.</p></li><li class=""><p class="k">Agent</p><h3>Drafts three lines</h3><p>What could change how busy you are today.</p></li><li class="on"><p class="k">Agent</p><h3>Stops and asks</h3><p>Before it sends anything, it waits for your review.</p></li><li class=""><p class="k">You</p><h3>Read, then decide</h3><p>Send it, fix it, or stop it.</p></li></ol><p class="rule"><span class="stop" aria-hidden="true"></span>An agent drafts. A person sends, pays and posts.</p></figure></div><div class="wrap"><div class="prose s">
+<p><strong>A person always approves:</strong> anything sent to a customer or supplier, anything paid or ordered, anything posted, and any change to a record. Nobody points an agent at a business inbox on the day.</p></div>
+<div class="prose t"><p class="answer">Every prompt has four parts: your business, what to do, your facts, and what you want back. Fill in the words in [brackets].</p>
+<h3>Exercise 1: answer customers</h3>
+<p>AI writes a reply. You check it and send it yourself.</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>I run [business] in [city]. Our policy: [your rule]. Write a short, friendly reply to this customer message. Use only my facts. If my policy doesn&#x27;t cover it, say so. End with &quot;Check before sending:&quot;.</p><p>Message: [a made-up message]</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Make a Project for this job and add your policy. Projects are free (<a href="https://chatgpt.com/pricing/" rel="noopener" target="_blank">ChatGPT</a>).</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Make a Project and add your policy. The free plan has up to 5 Projects (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>).</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Paste the prompt. Save it as a skill to use again (<a href="https://support.google.com/gemini/answer/15146780" rel="noopener" target="_blank">Google</a>).</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>Paste the prompt into Copilot Chat.</p></div></div>
+<h3>Exercise 2: a week of posts from your facts</h3>
+<p>You write a short fact sheet. AI writes seven posts using only those facts.</p>
+<div class="card fact"><p class="eyebrow madeup">Made-up example business</p><h3>Harbour Street Bakery</h3><p class="sub">Fact sheet for this week</p><ul><li>Sourdough loaf $9.</li><li>Cinnamon buns $4.50.</li><li>Holiday cookie boxes $35, order by December 18.</li><li>Open Tuesday to Sunday, 7 am to 3 pm.</li><li>Free coffee tasting Saturday December 12, 9 to 11 am.</li></ul><button type="button" class="copy copyplain" data-label="Copy the fact sheet" data-text="Harbour Street Bakery fact sheet
+Sourdough loaf $9.
+Cinnamon buns $4.50.
+Holiday cookie boxes $35, order by December 18.
+Open Tuesday to Sunday, 7 am to 3 pm.
+Free coffee tasting Saturday December 12, 9 to 11 am.">Copy the fact sheet</button></div>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Here are my facts: [paste]. Write 7 short posts, one a day. Use ONLY these facts. If a fact is missing, write [MISSING FACT]. Give me a table: Day, Post, Fact used.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<p>Check each post against your sheet. A post about Monday hours or a coffee price made something up.</p>
+<p><strong>Two tools together.</strong> One tool finds information with links. You check the links. Another tool writes the post from what you checked. Start the research first. Write your seven posts while it runs.</p>
+<ol>
+<li>Ask the research tool: "What are [businesses like yours] in [your city] posting about for the holidays? Give me a short report with a link for every fact."</li>
+<li>Open two links. Cross out what you can't confirm.</li>
+<li>Ask ChatGPT or Claude: "Using ONLY this research and my facts, write one post. Keep the links. If something is missing, write [NOT FOUND]."</li>
+</ol>
+<div class="toolgroup" data-def="gemini"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="muse" aria-pressed="false">Muse</button><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Gemini's free plan can do the research (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" rel="noopener" target="_blank">Google</a>).</p></div><div class="toolblock" data-tool="muse"><p class="toolname">In Muse</p><p>Meta's Muse agent can do the research too. Meta says it's free for most uses (<a href="https://www.iphoneincanada.ca/2026/09/29/meta-launches-muse-for-small-business-in-canada/" rel="noopener" target="_blank">iPhone in Canada</a>).</p></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Use ChatGPT's search for the research, then a new chat to write.</p></div></div>
+<h3>Exercise 3: sum up a file, then check it</h3>
+<p>Everyone uses the same made-up sales file from a pretend café. AI sums it up. Then you check it with my answer key. <span class="note">[LINK TO THE CAFÉ ARTICLE]</span></p>
+</div></div><div class="t figslot"><figure class="wrap csvfig"><div class="filecard"><p class="eyebrow madeup">Made-up sample file</p><p class="fn">laneway-october.csv</p><p class="fm">31 rows · one per day in October 2026 · date, day, transactions, revenue in CAD, weather, top seller, notes</p><details class="data"><summary>Show the file and copy it</summary><p>Copy the rows into a text file and save it as laneway-october.csv. It opens in Excel, Google Sheets, ChatGPT, Claude, Gemini or Copilot. All of it is made up.</p><button type="button" class="copy copydata" data-label="Copy the data">Copy the data</button><pre class="csvdata">Date,Day,Transactions,Revenue (CAD),Weather,Top seller,Notes
+2026-10-01,Thursday,124,1085.11,Dry,Breakfast sandwich,
+2026-10-02,Friday,140,1318.98,Dry,Oat latte,
+2026-10-03,Saturday,141,1448.01,Rain,Breakfast sandwich,
+2026-10-04,Sunday,177,1823.66,Dry,Drip coffee,
+2026-10-05,Monday,120,1042.89,Dry,Drip coffee,
+2026-10-06,Tuesday,120,1099.85,Dry,Oat latte,
+2026-10-07,Wednesday,130,1193.79,Dry,Oat latte,
+2026-10-08,Thursday,129,1160.57,Dry,Oat latte,
+2026-10-09,Friday,109,1030.97,Rain,Drip coffee,
+2026-10-10,Saturday,142,1540.53,Rain,Breakfast sandwich,
+2026-10-11,Sunday,180,2012.28,Dry,Oat latte,
+2026-10-12,Monday,56,513.59,Dry,Oat latte,&quot;Thanksgiving (Canada), short hours&quot;
+2026-10-13,Tuesday,90,823.3,Dry,Oat latte,Road work out front
+2026-10-14,Wednesday,92,848.15,Dry,Drip coffee,Road work out front
+2026-10-15,Thursday,94,848.59,Dry,Pumpkin spice latte,Road work out front
+2026-10-16,Friday,107,1019.01,Dry,Pumpkin spice latte,Road work out front
+2026-10-17,Saturday,129,1438.77,Dry,Drip coffee,Road work out front
+2026-10-18,Sunday,174,1837.49,Dry,Breakfast sandwich,
+2026-10-19,Monday,134,1250.15,Dry,Pumpkin spice latte,
+2026-10-20,Tuesday,129,1118.84,Dry,Pumpkin spice latte,
+2026-10-21,Wednesday,97,924.73,Rain,Pumpkin spice latte,
+2026-10-22,Thursday,102,955.19,Rain,Pumpkin spice latte,
+2026-10-23,Friday,146,1328.11,Dry,Pumpkin spice latte,
+2026-10-24,Saturday,195,2052.17,Dry,Pumpkin spice latte,
+2026-10-25,Sunday,213,2338.01,Dry,Pumpkin spice latte,
+2026-10-26,Monday,125,1158.58,Dry,Oat latte,
+2026-10-27,Tuesday,97,893.46,Rain,Pumpkin spice latte,
+2026-10-28,Wednesday,132,1152.27,Dry,Pumpkin spice latte,
+2026-10-29,Thursday,135,1228.03,Dry,Pumpkin spice latte,
+2026-10-30,Friday,151,1431.99,Dry,Breakfast sandwich,
+2026-10-31,Saturday,200,2139.67,Dry,Pumpkin spice latte,</pre></details></div></figure></div><div class="wrap"><div class="prose t">
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Here are last month&#x27;s daily sales for my café. In plain words, what&#x27;s going on? Show the numbers you used. Compare weekdays with weekdays. Leave out unusual days, like holidays or road work. Tell me what the file can&#x27;t answer.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Attach the file and paste the prompt.</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Click +, add the file and paste the prompt (<a href="https://support.claude.com/en/articles/8241126-uploading-files-to-claude" rel="noopener" target="_blank">Claude Help Center</a>).</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Upload the file to a chat and paste the prompt.</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>Attach the file in Copilot Chat.</p></div></div>
+<p><strong>The answer key:</strong> the total is $40,056.74 from 4,110 sales. A normal weekend day took in about 70% more than a weekday. Rainy weekdays took in about 21% less than normal dry weekdays. If AI says rain cost 15%, it compared all rainy days with all dry days. That mixes in weekends, Thanksgiving and road work.</p>
+<h3>Try an agent</h3>
+<p>An agent is an AI tool you give a goal. It does the steps and asks you when it needs you. <strong>The agent drafts. A person sends, pays and posts.</strong></p>
+<p>Open Gemini (it's free) and type this job: "Look up today's weather and any road closures near [your street and city]. Tell me in three lines what could change how busy we are, with a link for each. Then send it to my own email." Watch it stop and ask you before it sends.</p>
+<div class="toolgroup" data-def="gemini"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Tasks in Gemini are free in Canada and the US for people 18 and over. Use a personal Google account with no business email in it. Tasks need History on. If you turned it off, turn it on for this part only. While it's on, your chats may be used for training. Turn it off after. Don't type passwords or card numbers into a task. Click Task, paste the job and submit. Gemini asks you before some actions, like sending a message (<a href="https://support.google.com/gemini/answer/17094507?hl=en&amp;co=GENIE.Platform%3DDesktop" rel="noopener" target="_blank">Google</a>). Read it before you say yes.</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Needs Claude Pro (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>). Set it to Manual, so it asks you before each step (<a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="noopener" target="_blank">Claude Help Center</a>).</p></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Use Gemini for this part; it's free. In ChatGPT, it needs a paid plan (<a href="https://chatgpt.com/pricing/" rel="noopener" target="_blank">ChatGPT</a>).</p></div></div>
+</div></div><div class="t figslot"><figure class="widewrap agentfig"><p class="figtitle">The agent exercise, step by step</p><ol class="flow5"><li class=""><p class="k">You</p><h3>Give the job</h3><p>Weather and road closures near your street, then send the summary to your own email.</p></li><li class=""><p class="k">Agent</p><h3>Looks it up</h3><p>Searches the web and keeps a link for each fact.</p></li><li class=""><p class="k">Agent</p><h3>Drafts three lines</h3><p>What could change how busy you are today.</p></li><li class="on"><p class="k">Agent</p><h3>Stops and asks</h3><p>Before it sends anything, it waits for your review.</p></li><li class=""><p class="k">You</p><h3>Read, then decide</h3><p>Send it, fix it, or stop it.</p></li></ol><p class="rule"><span class="stop" aria-hidden="true"></span>An agent drafts. A person sends, pays and posts.</p></figure></div><div class="wrap"><div class="prose t">
+<p>Never switch approvals off. Never point an agent at your business email on the day.</p></div>
+</div></section>
+<section class="q" id="q6"><div class="wrap"><p class="eyebrow">Question 6 of 9</p><h2>How do we check what the AI gave us?</h2>
+<div class="prose d"><p class="answer">Check it against something you trust, because AI tools still make mistakes on exactly this kind of work. In a benchmark posted in November 2026 (a preprint, not yet peer-reviewed, with strict pass-or-fail grading), the best AI tested passed only 38.3% of its attempts at 70 realistic workplace spreadsheet requests (<a href="https://arxiv.org/abs/2611.17766" rel="noopener" target="_blank">GDP.xlsx, arXiv</a>). The authors' company, Surge AI, sells evaluation services. And when models summarize a document, even the best on Vectara's leaderboard adds something the document didn't say in 1.8% of summaries; GPT-4o does it in 9.6% and Claude Opus 5.5 in 9.9% (<a href="https://raw.githubusercontent.com/vectara/hallucination-leaderboard/main/README.md" rel="noopener" target="_blank">Vectara</a>). Vectara sells AI search tools and its own model does the judging, so read that as a vendor-run test. US owners already know this: accuracy was the top challenge AI users reported, named by 46% (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve Banks</a>).</p>
+<p>Four checks I teach in every room:</p>
+<ol class="checks4">
+<li><strong>Check numbers against the source, not against the AI.</strong> Open the file and compare the totals. For the sample file: $40,056.74 from 4,110.</li>
+<li><strong>Ask which rows, pages or links it used.</strong> If it can't say, don't use the answer. The Government of Canada's own guide says the same: "Don't use generative AI tools as search engines unless sources are provided so that you can verify the content" (<a href="https://www.canada.ca/en/government/system/digital-government/digital-government-innovations/responsible-use-ai/generative-ai/guide-use-generative-ai.html" rel="noopener" target="_blank">Government of Canada</a>).</li>
+<li><strong>Compare like with like.</strong> Weekdays against weekdays, this month against the same month. The 15% rain answer fails this check.</li>
+<li><strong>Ask what it can't answer.</strong> If it gives advice the facts can't support, it's guessing.</li>
+</ol>
+<p><strong>Start with low-stakes jobs.</strong> The same Canadian guide gives a useful line: start with low-risk uses, such as an internal email or a draft that a person reviews, before higher-risk ones, such as a public chatbot or a summary of client information (<a href="https://www.canada.ca/en/government/system/digital-government/digital-government-innovations/responsible-use-ai/generative-ai/guide-use-generative-ai.html" rel="noopener" target="_blank">Government of Canada</a>). That's the order of the three wins.</p></div>
+<div class="prose s"><p class="answer">Check it against something you trust, because AI still makes mistakes. In a November 2026 test (not yet reviewed by other experts, with strict pass-or-fail marking), the best AI passed only 38.3% of its tries at 70 real-world spreadsheet tasks (<a href="https://arxiv.org/abs/2611.17766" rel="noopener" target="_blank">GDP.xlsx</a>). The authors' company sells AI testing services. When AI sums up a document, even the best model adds something untrue in 1.8% of summaries, and common ones do it in about 1 in 10 (<a href="https://raw.githubusercontent.com/vectara/hallucination-leaderboard/main/README.md" rel="noopener" target="_blank">Vectara</a>, a test run by a company that sells AI tools). In the US, accuracy was the top problem AI users reported (46%) (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve Banks</a>).</p>
+<p>Four checks:</p>
+<ol class="checks4">
+<li><strong>Check numbers against the source.</strong> For the sample: $40,056.74 from 4,110 sales.</li>
+<li><strong>Ask which rows or links it used.</strong> The Government of Canada says: "Don't use generative AI tools as search engines unless sources are provided so that you can verify the content" (<a href="https://www.canada.ca/en/government/system/digital-government/digital-government-innovations/responsible-use-ai/generative-ai/guide-use-generative-ai.html" rel="noopener" target="_blank">Government of Canada</a>).</li>
+<li><strong>Compare like with like.</strong> Weekdays with weekdays.</li>
+<li><strong>Ask what it can't answer.</strong></li>
+</ol>
+<p><strong>Start with low-risk jobs</strong>, like an internal email or a draft a person reviews, before a public chatbot or a summary of client information. That's the Canadian government's advice too.</p></div>
+<div class="prose t"><p class="answer">Check it, because AI still makes mistakes. In one test, the best AI passed fewer than 4 in 10 tries at real spreadsheet tasks (<a href="https://arxiv.org/abs/2611.17766" rel="noopener" target="_blank">GDP.xlsx</a>). The test was strict, and its authors sell AI testing. In the US, wrong answers were the top problem for owners who use AI (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve Banks</a>).</p>
+<p>Four checks:</p>
+<ol class="checks4">
+<li>Do the numbers match your own file?</li>
+<li>Which rows or links did it use? Canada's government says not to use AI like a search engine unless it shows sources (<a href="https://www.canada.ca/en/government/system/digital-government/digital-government-innovations/responsible-use-ai/generative-ai/guide-use-generative-ai.html" rel="noopener" target="_blank">Government of Canada</a>).</li>
+<li>Did it compare like with like?</li>
+<li>Did it say what it can't answer?</li>
+</ol></div>
+</div></section>
+<section class="q" id="q7"><div class="wrap"><p class="eyebrow">Question 7 of 9</p><h2>What happens the week after?</h2>
+<div class="prose d"><p class="answer">The week after decides whether any of this sticks, so it's planned before you leave. Before the last block ends, everyone writes down one job, the day they'll do it, and the name of a partner from the room. A week later we meet for 15 minutes online and each person shows one thing they did.</p>
+</div></div><div class="d figslot"><figure class="wrap weekfig"><p class="figtitle">The week after</p><ol class="flow3"><li><p class="k">Before you leave</p><h3>Write it down</h3><p>One job, the day you’ll do it, and a partner from the room.</p></li><li><p class="k">Your first-job day</p><h3>Do the job</h3><p>Use the saved workspace. Keep a timed log, editing included.</p></li><li><p class="k">Day 7</p><h3>Check in, 15 minutes</h3><p>Online. Each person shows one thing they did.</p></li></ol></figure></div><div class="wrap"><div class="prose d">
+<p>Here's the evidence behind that design, and how strong it is:</p>
+<ul>
+<li><strong>Skills fade without use.</strong> A 2025 review of 457 reports found that, without use, half of the accuracy people gained in training was lost after about 6.5 months (<a href="https://pubmed.ncbi.nlm.nih.gov/40455501/" rel="noopener" target="_blank">Tatel and Ackerman, Psychological Bulletin</a>). That study is about practical skills in general, not AI, so read it as a warning, not a forecast.</li>
+<li><strong>Peers matter.</strong> In two studies of more than 1,000 employees in Germany and the US, published in July 2026, peer support and feedback mattered both for using what people learned and for passing it on to colleagues (<a href="https://www.frontiersin.org/journals/organizational-psychology/articles/10.3389/forgp.2026.1705256/full" rel="noopener" target="_blank">Mehner, Rothenbusch and Kauffeld, Frontiers in Organizational Psychology</a>).</li>
+<li><strong>Start from a real job.</strong> After OpenAI's Small Business Jam with 530 owners in five US cities, its first lesson was "Start with workflow-first learning", and another was "Use peer community to accelerate learning." 78% left with a working workflow and 92% said they'd apply what they learned within 30 days. That's OpenAI's own report, and those are same-day answers, not measured use (<a href="https://static1.squarespace.com/static/5f564ff2fba1f67df8209641/t/6a57dcfefc35b9012d02eb89/1784143130499/ChatGPT_Small+Business+Jam+Report.pdf" rel="noopener" target="_blank">OpenAI</a>).</li>
+<li><strong>Training time and coaching.</strong> In BCG's survey of more than 10,600 workers in 11 countries, people who got five or more hours of training, especially in person and with coaching, were "significantly more likely to become regular users". Only 36% felt adequately trained (<a href="https://www.bcg.com/press/26june2025-beyond-ai-adoption-full-potential" rel="noopener" target="_blank">BCG</a>). BCG sells AI consulting, so that's its own survey.</li>
+</ul>
+<p>The 15-minute check-in itself isn't something a study has tested at that exact timing. It's my design, built on the peer and feedback evidence above.</p>
+<p><strong>How I'll know it worked.</strong> Three numbers for every workshop: confidence out of 5 at the start and the end, how many people saved all three jobs before leaving, and how many did their first job in the first week (asked at the check-in). <span class="note">[DAN: RESULTS FROM THE FIRST RUN, WHEN YOU HAVE THEM.]</span></p>
+<p><strong>One honest example of counting.</strong> Lilach Bullock, who runs a solo marketing business in the UK, logged every AI-assisted task for 30 days, counting the editing time too. She saved 9 hours 40 minutes net. Proposals fell from 45 minutes to about 22, but video captions lost about 40 minutes. Her rule: "AI saves time on structured, repeatable, low-personality tasks, and costs time on voice-driven work" (<a href="https://smalloffice.space/case-9-hours-40-minutes-honestly-counted" rel="noopener" target="_blank">The SmallOffice Brief</a>, her own figures). That's the kind of log I ask you to keep for your three jobs.</p></div>
+<div class="prose s"><p class="answer">You plan it before you leave: one job, the day you'll do it, and a partner from the room. A week later we meet online for 15 minutes and each person shows one thing.</p>
+</div></div><div class="s figslot"><figure class="wrap weekfig"><p class="figtitle">The week after</p><ol class="flow3"><li><p class="k">Before you leave</p><h3>Write it down</h3><p>One job, the day you’ll do it, and a partner from the room.</p></li><li><p class="k">Your first-job day</p><h3>Do the job</h3><p>Use the saved workspace. Keep a timed log, editing included.</p></li><li><p class="k">Day 7</p><h3>Check in, 15 minutes</h3><p>Online. Each person shows one thing they did.</p></li></ol></figure></div><div class="wrap"><div class="prose s">
+<ul>
+<li><strong>Skills fade if you don't use them.</strong> One big review found that, without use, people lost half of what they gained in training after about 6.5 months (<a href="https://pubmed.ncbi.nlm.nih.gov/40455501/" rel="noopener" target="_blank">Psychological Bulletin</a>). That study is about practical skills in general, not AI.</li>
+<li><strong>Peers help.</strong> Two 2026 studies of more than 1,000 workers found support and feedback from colleagues helped people use what they learned (<a href="https://www.frontiersin.org/journals/organizational-psychology/articles/10.3389/forgp.2026.1705256/full" rel="noopener" target="_blank">Frontiers in Organizational Psychology</a>).</li>
+<li><strong>Start from a real job.</strong> After OpenAI's workshop for 530 owners, its first lesson was to start from real, repeated work. 78% left with a working process and 92% said they'd use it within 30 days. That's OpenAI's own report, and those are same-day answers (<a href="https://static1.squarespace.com/static/5f564ff2fba1f67df8209641/t/6a57dcfefc35b9012d02eb89/1784143130499/ChatGPT_Small+Business+Jam+Report.pdf" rel="noopener" target="_blank">OpenAI</a>).</li>
+<li><strong>Hours and coaching.</strong> In a BCG survey, people with five or more hours of training, especially in person with coaching, were more likely to use AI regularly (<a href="https://www.bcg.com/press/26june2025-beyond-ai-adoption-full-potential" rel="noopener" target="_blank">BCG</a>, its own survey).</li>
+</ul>
+<p>No study has tested a 15-minute check-in at exactly one week. That's my design, based on the peer and feedback research.</p>
+<p><strong>How I'll know it worked:</strong> confidence out of 5 at the start and end, how many saved all three jobs, and how many did their first job in week one. <span class="note">[DAN: RESULTS FROM THE FIRST RUN.]</span></p>
+<p><strong>Keep a log.</strong> Lilach Bullock, a UK solo business owner, logged her AI use for 30 days, editing time included. She saved 9 hours 40 minutes overall. Proposals got faster, but video captions took longer (<a href="https://smalloffice.space/case-9-hours-40-minutes-honestly-counted" rel="noopener" target="_blank">The SmallOffice Brief</a>, her own figures). Keep the same kind of log for your three jobs.</p></div>
+<div class="prose t"><p class="answer">Before you leave, you write down one job, the day you'll do it, and a partner from the room. A week later we meet online for 15 minutes.</p>
+</div></div><div class="t figslot"><figure class="wrap weekfig"><p class="figtitle">The week after</p><ol class="flow3"><li><p class="k">Before you leave</p><h3>Write it down</h3><p>One job, the day you’ll do it, and a partner from the room.</p></li><li><p class="k">Your first-job day</p><h3>Do the job</h3><p>Use the saved workspace. Keep a timed log, editing included.</p></li><li><p class="k">Day 7</p><h3>Check in, 15 minutes</h3><p>Online. Each person shows one thing they did.</p></li></ol></figure></div><div class="wrap"><div class="prose t">
+<p>Skills fade if you don't use them (<a href="https://pubmed.ncbi.nlm.nih.gov/40455501/" rel="noopener" target="_blank">Psychological Bulletin</a>). Help from people around you makes it more likely you keep going (<a href="https://www.frontiersin.org/journals/organizational-psychology/articles/10.3389/forgp.2026.1705256/full" rel="noopener" target="_blank">Frontiers in Organizational Psychology</a>). That's why you leave with a partner and a check-in.</p></div>
+</div></section>
+<section class="q" id="q8"><div class="wrap"><p class="eyebrow">Question 8 of 9</p><h2>What does the room need?</h2>
+<div class="prose d"><p class="answer">A small group, working Wi-Fi, a laptop each and accounts set up before the day. These are my rules for hosting it, and the ones I'd give anyone running their own version.</p>
+<ul>
+<li><strong>Group size.</strong> My rule is up to 16 people with me and one helper. The Carpentries, a non-profit that runs hands-on technical workshops, recommends "1 helper for every 8-10 students, not counting the two instructors" (<a href="https://carpentrieshandbook.readthedocs.io/en/latest/topic_folders/hosts_instructors/hosts_instructors_checklist.html" rel="noopener" target="_blank">The Carpentries</a>), so a bigger room needs more helpers.</li>
+<li><strong>Pre-work first.</strong> A week ahead, everyone gets a checklist: open a free account on one tool (and a personal Google account for the agent block), switch off model training, write your policy and a one-page fact sheet, and list five weekly jobs. The Carpentries checklist does the same, emailing learners the setup requirements before the day. Check each tool's minimum age: Google AI plans, for example, are for ages 18 and over (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" rel="noopener" target="_blank">Google</a>). Anyone without an account on the day pairs with someone who has one.</li>
+<li><strong>Wi-Fi and power.</strong> Test the real connection with the real number of laptops before the day, and bring power bars.</li>
+<li><strong>Access.</strong> Ask about access needs when people register, choose a step-free room, use a microphone and provide the handout in large print on request. The Carpentries checklist asks hosts to "Ensure your location is accessible."</li>
+<li><strong>The data rules.</strong> Customer details stay out of every tool in the room. In the US, never use AI to write fake customer reviews: the FTC's rule bans fake reviews, including ones from "someone who does not exist, such as AI-generated fake reviews" (<a href="https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials" rel="noopener" target="_blank">FTC</a>).</li>
+</ul>
+<div class="where2 one"><div><h3>In Canada</h3><p>PIPEDA sets the rules for how businesses collect, use and disclose personal information, and Alberta, British Columbia and Quebec have their own similar private-sector laws (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/pipeda_brief/" rel="noopener" target="_blank">Office of the Privacy Commissioner</a>). Pasting a customer list into a chatbot can count as a disclosure of personal information, which is why the room uses made-up customers. The Competition Act bans false or misleading representations, including misuse of testimonials (<a href="https://competition-bureau.canada.ca/en/node/121" rel="noopener" target="_blank">Competition Bureau</a>). <span class="note">[DAN: FOR A QUEBEC ROOM, ADD A NOTE ON QUEBEC'S PRIVACY LAW AND A FRENCH VERSION OF THE HANDOUT.]</span></p></div></div>
+<p><strong>Where and when.</strong> <span class="note">[DAN: DATE, VENUE, PRICE (OR FREE), HOW TO REGISTER.]</span></p></div>
+<div class="prose s"><p class="answer">A small group, good Wi-Fi, a laptop each and accounts set up before the day.</p>
+<ul>
+<li><strong>Group size:</strong> my rule is up to 16 people, with me and one helper. The Carpentries, a non-profit that runs hands-on workshops, suggests "1 helper for every 8-10 students" (<a href="https://carpentrieshandbook.readthedocs.io/en/latest/topic_folders/hosts_instructors/hosts_instructors_checklist.html" rel="noopener" target="_blank">The Carpentries</a>).</li>
+<li><strong>Pre-work first:</strong> a week ahead, everyone gets a checklist: a free account, training off, a personal Google account for the agent part, your policy, your fact sheet and five weekly jobs. Check each tool's minimum age; Google AI plans are 18 and over. No account? Pair with someone.</li>
+<li><strong>Wi-Fi and power:</strong> test the real connection with every laptop on it. Bring power bars.</li>
+<li><strong>Access:</strong> ask about access needs at sign-up, use a step-free room and a microphone, and offer a large-print handout.</li>
+<li><strong>Data rules:</strong> no customer details in any tool. In the US, never use AI to write fake reviews. The FTC bans fake reviews, including "AI-generated fake reviews" (<a href="https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials" rel="noopener" target="_blank">FTC</a>).</li>
+</ul>
+<div class="where2 one"><div><h3>In Canada</h3><p>PIPEDA covers how businesses use personal information, and Alberta, British Columbia and Quebec have their own similar laws (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/pipeda_brief/" rel="noopener" target="_blank">Privacy Commissioner</a>). Pasting a customer list into a chatbot shares their information, so we use made-up customers. The Competition Act bans misleading claims, including fake testimonials (<a href="https://competition-bureau.canada.ca/en/node/121" rel="noopener" target="_blank">Competition Bureau</a>). <span class="note">[DAN: FOR A QUEBEC ROOM, ADD A QUEBEC PRIVACY NOTE AND A FRENCH HANDOUT.]</span></p></div></div>
+<p><strong>Where and when:</strong> <span class="note">[DAN: DATE, VENUE, PRICE (OR FREE), HOW TO REGISTER.]</span></p></div>
+<div class="prose t"><ul>
+<li>My rule: up to 16 people, with me and one helper. Bigger groups need more helpers (<a href="https://carpentrieshandbook.readthedocs.io/en/latest/topic_folders/hosts_instructors/hosts_instructors_checklist.html" rel="noopener" target="_blank">The Carpentries</a>).</li>
+<li>Accounts set up before the day.</li>
+<li>If the Wi-Fi fails, use the printed prompts and phone apps, and pair up.</li>
+<li>Good Wi-Fi and power bars.</li>
+<li>A step-free room and a microphone.</li>
+<li>No customer details in any tool. Never use AI to write fake reviews (<a href="https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials" rel="noopener" target="_blank">FTC</a>). In Canada, privacy law covers customer information (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/pipeda_brief/" rel="noopener" target="_blank">Privacy Commissioner</a>).</li>
+</ul>
+<p><strong>Where and when:</strong> <span class="note">[DAN: DATE, VENUE, PRICE (OR FREE), HOW TO REGISTER.]</span></p></div>
+</div></section>
+<section class="q" id="q9"><div class="wrap"><p class="eyebrow">Question 9 of 9</p><h2>The one-page handout</h2>
+<div class="prose d"><p class="answer">Everything from the day on one page, to keep beside your keyboard.</p></div><div class="prose d"><div class="handout"><div class="hhd"><p class="eyebrow">Leverage Strategies · Workshop 1</p><h3>Your first three AI wins</h3></div><p><strong>My three jobs:</strong> 1. <span class="blank"></span> 2. <span class="blank"></span> 3. <span class="blank"></span></p><p><strong>The prompt shape.</strong> I run [business] in [city]. [What to do.] Use only these facts: [facts]. If something's missing, say so instead of guessing. Give me [format].</p><p><strong>Never paste:</strong> customer names or contact details, card or bank numbers, passwords, staff records, health information.</p><p><strong>Before you start:</strong> model training off (ChatGPT: Data controls; Claude: Privacy Settings; Gemini: History off or a Temporary Chat; turn History on only for a Gemini task).</p><p><strong>The four checks:</strong> numbers against the source; which rows or links it used; like with like; what it can't answer.</p><p><strong>The agent rule:</strong> an agent drafts; a person sends, pays and posts. Approvals stay on.</p><p><strong>My first job is on:</strong> <span class="blank"></span> <strong>My partner from the room:</strong> <span class="blank"></span> <strong>Day-7 check-in:</strong> <span class="blank"></span></p></div><p class="hnote"><button type="button" class="copy copyplain" data-label="Copy the handout" data-text="Workshop 1: Your first three AI wins
+
+My three jobs: 1. ______ 2. ______ 3. ______
+The prompt shape. I run [business] in [city]. [What to do.] Use only these facts: [facts]. If something&#x27;s missing, say so instead of guessing. Give me [format].
+Never paste: customer names or contact details, card or bank numbers, passwords, staff records, health information.
+Before you start: model training off (ChatGPT: Data controls; Claude: Privacy Settings; Gemini: History off or a Temporary Chat; turn History on only for a Gemini task).
+The four checks: numbers against the source; which rows or links it used; like with like; what it can&#x27;t answer.
+The agent rule: an agent drafts; a person sends, pays and posts. Approvals stay on.
+My first job is on: ______ My partner from the room: ______ Day-7 check-in: ______">Copy the handout</button><span>Paste it into a document to print, or copy it by hand.</span></p></div>
+<div class="prose s"><p class="answer">Keep it beside your keyboard.</p></div><div class="prose s"><div class="handout"><div class="hhd"><p class="eyebrow">Leverage Strategies · Workshop 1</p><h3>Your first three AI wins</h3></div><p><strong>My three jobs:</strong> 1. <span class="blank"></span> 2. <span class="blank"></span> 3. <span class="blank"></span></p><p><strong>The prompt shape:</strong> I run [business] in [city]. [What to do.] Use only these facts: [facts]. If something's missing, say so. Give me [format].</p><p><strong>Never paste:</strong> customer names or contact details, card or bank numbers, passwords, staff records, health information.</p><p><strong>Before you start:</strong> training off (ChatGPT: Data controls; Claude: Privacy Settings; Gemini: History off or Temporary Chat; turn History on only for a Gemini task).</p><p><strong>The four checks:</strong> numbers against the source; which rows or links; like with like; what it can't answer.</p><p><strong>The agent rule:</strong> an agent drafts; a person sends, pays and posts.</p><p><strong>My first job is on:</strong> <span class="blank"></span> <strong>My partner:</strong> <span class="blank"></span> <strong>Check-in:</strong> <span class="blank"></span></p></div><p class="hnote"><button type="button" class="copy copyplain" data-label="Copy the handout" data-text="Workshop 1: Your first three AI wins
+
+My three jobs: 1. ______ 2. ______ 3. ______
+The prompt shape: I run [business] in [city]. [What to do.] Use only these facts: [facts]. If something&#x27;s missing, say so. Give me [format].
+Never paste: customer names or contact details, card or bank numbers, passwords, staff records, health information.
+Before you start: training off (ChatGPT: Data controls; Claude: Privacy Settings; Gemini: History off or Temporary Chat; turn History on only for a Gemini task).
+The four checks: numbers against the source; which rows or links; like with like; what it can&#x27;t answer.
+The agent rule: an agent drafts; a person sends, pays and posts.
+My first job is on: ______ My partner: ______ Check-in: ______">Copy the handout</button><span>Paste it into a document to print, or copy it by hand.</span></p></div>
+<div class="prose t"></div><div class="prose t"><div class="handout"><div class="hhd"><p class="eyebrow">Leverage Strategies · Workshop 1</p><h3>Your first three AI wins</h3></div><p><strong>My three jobs:</strong> 1. <span class="blank"></span> 2. <span class="blank"></span> 3. <span class="blank"></span></p><p><strong>Prompt:</strong> I run [business] in [city]. [What to do.] Use only these facts: [facts]. If something's missing, say so.</p><p><strong>Never paste:</strong> customer details, card or bank numbers, passwords, staff records, health information.</p><p><strong>Training off:</strong> ChatGPT Data controls; Claude Privacy Settings; Gemini History off; turn History on only for a Gemini task.</p><p><strong>Four checks:</strong> numbers, sources, like with like, what it can't answer.</p><p><strong>Agent rule:</strong> the agent drafts; a person sends, pays and posts.</p><p><strong>I start on:</strong> <span class="blank"></span> <strong>My partner:</strong> <span class="blank"></span> <strong>Check-in:</strong> <span class="blank"></span></p></div><p class="hnote"><button type="button" class="copy copyplain" data-label="Copy the handout" data-text="Workshop 1: Your first three AI wins
+
+My three jobs: 1. ______ 2. ______ 3. ______
+Prompt: I run [business] in [city]. [What to do.] Use only these facts: [facts]. If something&#x27;s missing, say so.
+Never paste: customer details, card or bank numbers, passwords, staff records, health information.
+Training off: ChatGPT Data controls; Claude Privacy Settings; Gemini History off; turn History on only for a Gemini task.
+Four checks: numbers, sources, like with like, what it can&#x27;t answer.
+Agent rule: the agent drafts; a person sends, pays and posts.
+I start on: ______ My partner: ______ Check-in: ______">Copy the handout</button><span>Paste it into a document to print, or copy it by hand.</span></p></div>
+</div></section>
+<section class="q" id="check"><div class="wrap"><p class="eyebrow">This week</p><h2>Your checklist for this week</h2>
+<div class="prose d"><ul class="check"><li><label><input type="checkbox" id="cd0"><span>Write down five jobs that come back every week, and roughly how long each takes.</span></label></li><li><label><input type="checkbox" id="cd1"><span>Open a free account on one AI tool and switch off model training.</span></label></li><li><label><input type="checkbox" id="cd2"><span>Do Exercise 1 on one real customer message, with the name, email, phone and order number removed.</span></label></li><li><label><input type="checkbox" id="cd3"><span>Pick a partner who&#x27;ll compare notes with you next week.</span></label></li><li><label><input type="checkbox" id="cd4"><span><span class="note">[BOOK A CALL LINK]</span> or register for the next workshop.</span></label></li></ul></div>
+<div class="prose s"><ul class="check"><li><label><input type="checkbox" id="cs0"><span>Write down five jobs you do every week and how long each takes.</span></label></li><li><label><input type="checkbox" id="cs1"><span>Open a free AI account and switch off training.</span></label></li><li><label><input type="checkbox" id="cs2"><span>Try Exercise 1 on one customer message, with the name, email, phone and order number removed.</span></label></li><li><label><input type="checkbox" id="cs3"><span>Pick a partner to compare notes with next week.</span></label></li><li><label><input type="checkbox" id="cs4"><span><span class="note">[BOOK A CALL LINK]</span> or sign up for the next workshop.</span></label></li></ul></div>
+<div class="prose t"><ul class="check"><li><label><input type="checkbox" id="ct0"><span>Write down five jobs you do every week.</span></label></li><li><label><input type="checkbox" id="ct1"><span>Open a free AI account and switch off training.</span></label></li><li><label><input type="checkbox" id="ct2"><span>Try Exercise 1 on one customer message.</span></label></li><li><label><input type="checkbox" id="ct3"><span>Pick a partner.</span></label></li></ul></div>
+</div></section>
+<section class="cta"><h2>How Leverage Strategies helps</h2>
+<div class="d"><p>I run this workshop for groups of independent small business owners, and I work with owners one-on-one afterwards on the three jobs they chose. You choose the jobs. I sit beside you while you build them in your own tools. I won't promise a number before we've measured one.</p></div>
+<div class="s"><p>I run this workshop for groups of small business owners, then work with owners one-on-one on the three jobs they chose. You choose the jobs. I sit beside you while you build them. I won't promise a number before we've measured one.</p></div>
+<div class="t"><p>I run this workshop for small business owners. Then I help you one-on-one with your three jobs. You pick the jobs. I won't promise a number before we measure one.</p></div>
+<p><span class="note">[BOOK A CALL LINK]</span></p></section>
+<section class="q st" id="words"><div class="wrap"><p class="eyebrow">Words to know</p><h2>Words to know</h2>
+<div class="prose s"><div class="tablewrap"><table class="stack two"><thead><tr>
+<th>Word</th>
+<th>What it means</th>
+</tr></thead><tbody><tr><td data-l="Word">AI tool</td><td data-l="What it means">An app like ChatGPT, Claude, Gemini or Copilot that writes and answers questions.</td></tr><tr><td data-l="Word">Prompt</td><td data-l="What it means">What you type to ask the AI for something.</td></tr><tr><td data-l="Word">Project</td><td data-l="What it means">A saved space in ChatGPT or Claude with your files and instructions for one job.</td></tr><tr><td data-l="Word">Skill</td><td data-l="What it means">Gemini's saved set of instructions and files for one job.</td></tr><tr><td data-l="Word">Agent</td><td data-l="What it means">An AI tool you give a goal. It does the steps and asks you when it needs you.</td></tr><tr><td data-l="Word">Model training</td><td data-l="What it means">When a company uses your chats to improve its AI. You can usually switch it off.</td></tr><tr><td data-l="Word">Free plan</td><td data-l="What it means">The version of a tool you can use without paying, with limits.</td></tr><tr><td data-l="Word">Made-up example</td><td data-l="What it means">A business or file invented to show the steps. It isn't real.</td></tr><tr><td data-l="Word">PIPEDA</td><td data-l="What it means">Canada's main privacy law for businesses.</td></tr></tbody></table></div></div>
+<div class="prose t"><div class="tablewrap"><table class="stack two"><thead><tr>
+<th>Word</th>
+<th>What it means</th>
+</tr></thead><tbody><tr><td data-l="Word">AI</td><td data-l="What it means">A computer helper that can write and answer questions.</td></tr><tr><td data-l="Word">Prompt</td><td data-l="What it means">What you type to ask AI for something.</td></tr><tr><td data-l="Word">Project</td><td data-l="What it means">A saved space for one job in ChatGPT or Claude.</td></tr><tr><td data-l="Word">Skill</td><td data-l="What it means">Gemini's saved space for one job.</td></tr><tr><td data-l="Word">Agent</td><td data-l="What it means">An AI tool that does the steps of a job and asks you when it needs you.</td></tr><tr><td data-l="Word">Training</td><td data-l="What it means">When a company uses your chats to improve its AI.</td></tr><tr><td data-l="Word">Free plan</td><td data-l="What it means">The version you can use without paying.</td></tr><tr><td data-l="Word">Made-up example</td><td data-l="What it means">A pretend business that shows the steps.</td></tr></tbody></table></div></div>
+</div></section>
+<div class="sources"><div class="wrap"><h2>Sources</h2><p>All pages opened November 26, 2026. Prices checked the same day.</p>
+<ul>
+<li><a href="https://openai.com/openworks/" rel="noopener" target="_blank">OpenAI, OpenWorks</a>. Pilot for independently owned US small businesses. US.</li>
+<li><a href="https://www.score.org/business-education/6-time-saving-ai-tips-shared-by-real-business-owners/" rel="noopener" target="_blank">SCORE, 6 Time-Saving AI Tips Shared by Real Business Owners</a>. December 1, 2026. US.</li>
+<li><a href="https://www.uschamber.com/small-business/u-s-chamber-of-commerce-and-u-s-chamber-foundation-launch-free-ai-training-courses-for-small-businesses-nationwide" rel="noopener" target="_blank">U.S. Chamber of Commerce, Small Business B(AI)sics launch</a>. April 29, 2026. US.</li>
+<li><a href="https://openai.com/index/helping-small-businesses-put-ai-to-work/" rel="noopener" target="_blank">OpenAI, Helping small businesses put AI to work</a>. September 30, 2026. US. Vendor announcement.</li>
+<li><a href="https://perspectives.ventureforcanada.ca/article/venture-for-canada-launches-ai-at-work-hands-on-responsible-ai-training-for-canadian-smes" rel="noopener" target="_blank">Venture for Canada, AI at Work launch</a>. November 13, 2026. Canada.</li>
+<li><a href="https://tracysheen.com/case-studies/chinchilla-business-focus-ai-workshops" rel="noopener" target="_blank">Tracy Sheen, Chinchilla Business Focus AI workshops</a>. November 19, 2026. Australia. Trainer's own case study; outcomes self-reported.</li>
+<li><a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve Banks, 2026 Report on Employer Firms</a>. Fielded September 3 to November 14, 2025; 6,525 firms; convenience sample. US.</li>
+<li><a href="https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2026010-eng.htm" rel="noopener" target="_blank">Statistics Canada, AI use by businesses in Canada, second quarter of 2026</a>. Released June 11, 2026; 9,251 businesses responded. Canada.</li>
+<li><a href="https://www.uschamberfoundation.org/workforce/half-of-small-business-workers-use-ai-most-to-boost-productivity-not-automate-jobs" rel="noopener" target="_blank">U.S. Chamber of Commerce Foundation and Ipsos, Main Street AI Monitor</a>. June 17, 2026; 1,070 workers. US.</li>
+<li><a href="https://openai.com/consumer-privacy/" rel="noopener" target="_blank">OpenAI, Consumer privacy</a>. Vendor page.</li>
+<li><a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">OpenAI, ChatGPT Business pricing</a>. USD.</li>
+<li><a href="https://openai.com/chatgpt/pricing/" rel="noopener" target="_blank">OpenAI, ChatGPT pricing</a>. USD.</li>
+<li><a href="https://chatgpt.com/pricing/" rel="noopener" target="_blank">ChatGPT, Plans</a>. Plan features.</li>
+<li><a href="https://privacy.claude.com/en/articles/10023580-is-my-data-used-to-train-claude-models" rel="noopener" target="_blank">Anthropic, Is my data used to train Claude models?</a>. Vendor page.</li>
+<li><a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude, Plans and pricing</a>. USD; tax extra.</li>
+<li><a href="https://www.anthropic.com/news/introducing-claude-to-canada" rel="noopener" target="_blank">Anthropic, Introducing Claude to Canada</a>. June 5, 2024. CAD.</li>
+<li><a href="https://support.google.com/gemini/answer/13594961" rel="noopener" target="_blank">Google, Gemini Apps Privacy Hub</a>. Updated November 24, 2026.</li>
+<li><a href="https://gemini.google/subscriptions/" rel="noopener" target="_blank">Google AI plans (US)</a>. USD.</li>
+<li><a href="https://gemini.google/ca/subscriptions/?hl=en-CA" rel="noopener" target="_blank">Google AI plans (Canada)</a>. CAD.</li>
+<li><a href="https://www.microsoft.com/en-us/microsoft-365/blog/2025/12/02/microsoft-365-copilot-business-the-future-of-work-for-small-businesses/" rel="noopener" target="_blank">Microsoft, Microsoft 365 Copilot Business</a>. December 2, 2025. USD.</li>
+<li><a href="https://developers.openai.com/cookbook/examples/chatgpt/chatgpt_prompt_guide/chatgpt_prompt_guide" rel="noopener" target="_blank">OpenAI, ChatGPT Enterprise Prompting Guide</a>. Vendor guide.</li>
+<li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices" rel="noopener" target="_blank">Anthropic, Prompting best practices</a>. Vendor guide.</li>
+<li><a href="https://support.google.com/a/users/answer/14200040?hl=en" rel="noopener" target="_blank">Google, Tips to write prompts for Gemini</a>. Vendor guide.</li>
+<li><a href="https://learn.microsoft.com/en-us/training/modules/write-effective-prompts-do-more-prompting/2-write-effective-prompt" rel="noopener" target="_blank">Microsoft Learn, Write an effective prompt</a>. Vendor guide.</li>
+<li><a href="https://support.google.com/gemini/answer/15146780" rel="noopener" target="_blank">Google, Use Gems in Gemini Apps</a>. Vendor help page.</li>
+<li><a href="https://www.iphoneincanada.ca/2026/09/29/meta-launches-muse-for-small-business-in-canada/" rel="noopener" target="_blank">iPhone in Canada, Meta launches Muse for Small Business in Canada</a>. September 29, 2026. Canada.</li>
+<li><a href="https://support.google.com/docs/answer/14356410" rel="noopener" target="_blank">Google, Collaborate with Gemini in Google Sheets</a>. Vendor help page.</li>
+<li><a href="https://support.claude.com/en/articles/8241126-uploading-files-to-claude" rel="noopener" target="_blank">Claude Help Center, Uploading files to Claude</a>. Vendor help page.</li>
+<li><a href="https://support.google.com/gemini/answer/17094507?hl=en&amp;co=GENIE.Platform%3DDesktop" rel="noopener" target="_blank">Google, Manage your tasks and workflows in Gemini Apps</a>. Vendor help page.</li>
+<li><a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="noopener" target="_blank">Claude Help Center, Get started with Claude Cowork</a>. Vendor help page.</li>
+<li><a href="https://arxiv.org/abs/2611.17766" rel="noopener" target="_blank">Garre, Mehta and Chen, GDP.xlsx, arXiv</a>. Submitted November 13, 2026. Preprint.</li>
+<li><a href="https://raw.githubusercontent.com/vectara/hallucination-leaderboard/main/README.md" rel="noopener" target="_blank">Vectara, Hallucination Leaderboard</a>. Updated November 24, 2026. Vendor-run benchmark.</li>
+<li><a href="https://www.canada.ca/en/government/system/digital-government/digital-government-innovations/responsible-use-ai/generative-ai/guide-use-generative-ai.html" rel="noopener" target="_blank">Government of Canada, Guide on the use of generative AI</a>. Canada.</li>
+<li><a href="https://pubmed.ncbi.nlm.nih.gov/40455501/" rel="noopener" target="_blank">Tatel and Ackerman, Procedural skill retention and decay, Psychological Bulletin</a>. June 2025.</li>
+<li><a href="https://www.frontiersin.org/journals/organizational-psychology/articles/10.3389/forgp.2026.1705256/full" rel="noopener" target="_blank">Mehner, Rothenbusch and Kauffeld, Frontiers in Organizational Psychology</a>. July 27, 2026.</li>
+<li><a href="https://static1.squarespace.com/static/5f564ff2fba1f67df8209641/t/6a57dcfefc35b9012d02eb89/1784143130499/ChatGPT_Small+Business+Jam+Report.pdf" rel="noopener" target="_blank">OpenAI, Small Business Jam: An After-Action Report</a>. December 2025. US. Vendor report.</li>
+<li><a href="https://www.bcg.com/press/26june2025-beyond-ai-adoption-full-potential" rel="noopener" target="_blank">BCG, AI at Work 2025 press release</a>. June 26, 2025. Vendor survey.</li>
+<li><a href="https://smalloffice.space/case-9-hours-40-minutes-honestly-counted" rel="noopener" target="_blank">The SmallOffice Brief, 9 hours 40 minutes, honestly counted</a>. October 30, 2026. UK. Owner's own figures.</li>
+<li><a href="https://carpentrieshandbook.readthedocs.io/en/latest/topic_folders/hosts_instructors/hosts_instructors_checklist.html" rel="noopener" target="_blank">The Carpentries Handbook, host and instructor checklists</a>.</li>
+<li><a href="https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials" rel="noopener" target="_blank">FTC, final rule banning fake reviews and testimonials</a>. August 14, 2024. US.</li>
+<li><a href="https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/pipeda_brief/" rel="noopener" target="_blank">Office of the Privacy Commissioner of Canada, PIPEDA in brief</a>. Canada.</li>
+<li><a href="https://competition-bureau.canada.ca/en/node/121" rel="noopener" target="_blank">Competition Bureau Canada, Deceptive marketing practices</a>. Canada.</li>
+<li>Sample café sales file (made up, 31 days of October 2026, CAD), offered on the café worked example page. The answer key is computed from it.</li>
+</ul></div></div>
+<footer class="site"><span>Leverage Strategies · Dan Albasry</span><span>Prices and dates checked November 26, 2026</span></footer>
+<div class="seg float" role="group" aria-label="Reading level"><span class="lab">Reading level</span><button type="button" data-v="t" aria-pressed="true">Starter</button><button type="button" data-v="s" aria-pressed="false">Simple</button><button type="button" data-v="d" aria-pressed="false">Detailed</button></div>
+<script>
+{
+  const KEY='leverage-notes-level', TKEY='leverage-tool', BOX='leverage-workshop1-checks';
+  const body=document.body, buttons=document.querySelectorAll('.seg button[data-v]');
+  const store=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+  const load=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+  const current=()=>body.classList.contains('lv-t')?'t':body.classList.contains('lv-s')?'s':'d';
+  const paint=v=>{body.classList.remove('lv-d','lv-s','lv-t');body.classList.add('lv-'+v);buttons.forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v?'true':'false'));};
+  const setLevel=v=>{
+    if(v===current()) return;
+    const secs=document.querySelectorAll('section.q'); let anchor=null;
+    secs.forEach(s=>{ if(s.offsetParent!==null && s.getBoundingClientRect().top<=120) anchor=s; });
+    let progress=0;
+    if(anchor){const r=anchor.getBoundingClientRect();progress=Math.min(1,Math.max(0,(120-r.top)/Math.max(1,r.height)));}
+    paint(v); store(KEY,v);
+    if(anchor && anchor.offsetParent!==null){const r2=anchor.getBoundingClientRect();window.scrollTo({top:window.pageYOffset+r2.top-120+progress*r2.height,behavior:'auto'});}
+  };
+  buttons.forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.v)));
+  const fl=document.querySelector('.float'), inl=document.querySelector('.versions');
+  if(fl&&inl&&'IntersectionObserver' in window){fl.classList.add('away');new IntersectionObserver(es=>es.forEach(e=>fl.classList.toggle('away',e.isIntersecting||e.boundingClientRect.top>0))).observe(inl);}
+  const saved=load(KEY); paint(saved==='d'||saved==='s'||saved==='t'?saved:'t');
+
+  // Tool switch: each group opens on its first tool (ChatGPT in most); a saved choice is shared by every group that has that tool.
+  const groups=document.querySelectorAll('.toolgroup');
+  const setTool=(t,init)=>{
+    groups.forEach(g=>{
+      const has=b=>g.querySelector('.toolblock[data-tool="'+b+'"]');
+      const first=g.querySelector('.toolblock');
+      if(!has(t)&&!init) return; // a choice only moves the groups that have that tool
+      const use=(t&&has(t))?t:(g.dataset.def&&has(g.dataset.def)?g.dataset.def:(first?first.dataset.tool:''));
+      g.querySelectorAll('.toolblock').forEach(b=>b.classList.toggle('on',b.dataset.tool===use));
+      g.querySelectorAll('.toolseg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tool===use?'true':'false'));
+    });
+  };
+  groups.forEach(g=>{g.classList.add('js');g.querySelectorAll('.toolseg button').forEach(b=>b.addEventListener('click',()=>{setTool(b.dataset.tool);store(TKEY,b.dataset.tool);}));});
+  const st=load(TKEY); setTool(st&&/^[a-z]+$/.test(st)?st:null,true);
+
+  let ticks={}; try{ticks=JSON.parse(load(BOX)||'{}')||{}}catch(e){ticks={}}
+  document.querySelectorAll('.check input').forEach(box=>{box.checked=!!ticks[box.id];box.addEventListener('change',()=>{ticks[box.id]=box.checked;store(BOX,JSON.stringify(ticks));});});
+
+  const copy=(btn,txt,selNode)=>{
+    const label=btn.dataset.label||btn.textContent;
+    const fail=()=>{
+      if(selNode){try{const r=document.createRange();r.selectNodeContents(selNode);const s=window.getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}}
+      btn.textContent=selNode?'Selected: copy with your keyboard':'Select the text to copy';
+    };
+    try{navigator.clipboard.writeText(txt).then(()=>{btn.textContent='Copied';setTimeout(()=>{btn.textContent=label},1600)},fail);}catch(e){fail()}
+  };
+  document.querySelectorAll('.copydata').forEach(btn=>btn.addEventListener('click',()=>{const pre=btn.closest('details').querySelector('pre');copy(btn,pre.textContent,pre);}));
+  document.querySelectorAll('.prompt .copy').forEach(btn=>btn.addEventListener('click',()=>{
+    const box=btn.parentElement.querySelector('.ptext');
+    const txt=[...box.querySelectorAll('p')].map(p=>p.textContent).join('\n\n');
+    copy(btn,txt,box);
+  }));
+  document.querySelectorAll('.copyplain').forEach(btn=>btn.addEventListener('click',()=>copy(btn,btn.dataset.text,btn.closest('.card')||btn.closest('.prose').querySelector('.handout'))));
+}
+
+</script>
+</body></html>

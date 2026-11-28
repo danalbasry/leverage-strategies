@@ -1,0 +1,1270 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Write a staff training manual with AI</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Record a job once and turn it into a manual, a one-page checklist and a short quiz, with you checking every fact. For small businesses in the US and Canada, in three reading levels.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* VOICE: calm, plain, first person; an owner's guide, not a sales page.
+   IDEA: a printed buyer's guide with a verdict up front and three reading levels.
+   PICTURE: a phone call log of missed evening calls, then the 100-calls dot picture.
+   COLOUR and TYPE: the site's "G. Combined" direction: paper, ink, one rust accent; Instrument Serif and Sans.
+   LAYOUT: one reading column, figures up to 1040px, one dark band, a floating level switch. Light theme by choice. */
+:root{
+  color-scheme: light;
+  --paper:#F8F6F1; --ink:#141412; --body:#3A3832; --muted:#5A584F; --rule:#CFCBC0; --panel:#EDE9DF; --accent:#7A2E1A;
+  --display:'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --text:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --col:680px; --wide:1040px;
+}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+.eyebrow{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 24px}
+.widewrap{max-width:var(--wide);margin:0 auto;padding:0 24px}
+figure.wrap,figure.widewrap{margin:44px auto}
+
+/* three reading levels: .d detailed, .s simple, .t starter, .ds detailed+simple, .st simple+starter */
+body.lv-d .s, body.lv-d .t, body.lv-d .st{display:none !important}
+body.lv-s .d, body.lv-s .t{display:none !important}
+body.lv-t .d, body.lv-t .s, body.lv-t .ds{display:none !important}
+body.lv-s .prose{font-size:19px;line-height:1.75}
+body.lv-t .prose{font-size:20px;line-height:1.8}
+
+header.site{padding:24px 32px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink)}
+header.site .mark{font-family:var(--display);font-size:32px;line-height:1}
+header.site .where{font-size:14px;color:var(--muted)}
+
+.hero{max-width:var(--wide);margin:0 auto;padding:72px 24px 0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:end}
+.hero h1{font-size:clamp(44px,6.4vw,80px);line-height:1.02;letter-spacing:-.02em;margin-top:24px}
+.hero .lede{margin:28px 0 0;font-size:21px;line-height:1.6;color:var(--body)}
+.hero .by{margin:28px 0 0;font-size:14px;color:var(--muted)}
+.hero figure{margin:0}
+.hero img{width:100%;max-height:620px;object-fit:cover;object-position:center 30%;border:1px solid var(--rule)}
+@media (max-width:820px){.hero{grid-template-columns:1fr;gap:32px;padding-top:56px}.hero img{max-height:520px}}
+
+.versions{margin:56px auto 0;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:22px 0}
+.versions p{margin:0;font-size:16px;color:var(--body);flex:1 1 300px}
+.seg{display:inline-flex;border:1px solid var(--ink);background:var(--paper)}
+.seg button{font:500 14px/1 var(--text);letter-spacing:.04em;padding:14px 16px;min-height:44px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button + button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.float{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:20;box-shadow:0 6px 24px rgba(20,20,18,.18)}
+.float .lab{display:flex;align-items:center;padding:0 14px 0 16px;font-size:13px;color:var(--muted);border-right:1px solid var(--rule)}
+@media (max-width:520px){.float .lab{display:none}.seg button{padding:14px 13px}}
+
+.toc{margin:56px auto 0}
+.toc ol{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--ink)}
+.toc li{border-bottom:1px solid var(--rule)}
+.toc a{display:flex;gap:20px;align-items:baseline;padding:14px 0;text-decoration:none;font-family:var(--display);font-size:24px;line-height:1.2}
+.toc a span.n{font:400 13px var(--text);color:var(--muted);flex:0 0 20px;font-variant-numeric:tabular-nums}
+
+section.q{padding:96px 0 0;scroll-margin-top:12px}
+section.q h2{font-size:clamp(34px,5vw,52px);line-height:1.06;margin:14px 0 28px}
+.prose p{margin:0 0 20px;color:var(--body)}
+.prose p.answer{font-size:1.14em;line-height:1.55;color:var(--ink)}
+.prose strong{color:var(--ink);font-weight:600}
+.prose ul,.prose ol{margin:0 0 20px;padding-left:22px;color:var(--body)}
+.prose li{margin:0 0 10px}
+.key{font-family:var(--display);font-size:clamp(28px,4vw,38px);line-height:1.15;color:var(--ink);margin:36px 0;padding:28px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.key em{color:var(--accent)}
+
+figure{margin:44px auto}
+figcaption{margin-top:12px;font-size:13px;line-height:1.5;color:var(--muted)}
+.figtitle{margin:0 0 18px;font-family:var(--display);font-size:26px;line-height:1.15}
+
+/* ladder */
+.ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end;border-bottom:1px solid var(--ink)}
+.rung{border:1px solid var(--ink);border-bottom:0;padding:18px 18px 20px;background:var(--paper)}
+.rung:nth-child(1){min-height:200px}.rung:nth-child(2){min-height:250px}.rung:nth-child(3){min-height:300px;background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.rung .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.rung h3{font-size:30px;line-height:1.1;margin:6px 0 10px}
+.rung p{margin:0;font-size:15.5px;line-height:1.55;color:var(--body)}
+.rung p.ex{margin-top:12px;padding-top:12px;border-top:1px solid var(--rule)}
+@media (max-width:700px){.ladder{grid-template-columns:1fr;border-bottom:0}.rung,.rung:nth-child(n){min-height:0;border-bottom:1px solid var(--ink)}.rung:nth-child(3){border-bottom-color:var(--accent)}}
+
+/* test list */
+.test{list-style:none;margin:0 0 24px;padding:0;border-top:1px solid var(--ink);counter-reset:tq}
+.test li{counter-increment:tq;display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.test li::before{content:counter(tq);font-family:var(--display);font-size:30px;line-height:1;color:var(--accent)}
+
+/* flow diagram */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px}
+.stage{position:relative;border:1px solid var(--ink);padding:16px 16px 18px;background:var(--paper)}
+.stage .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.stage h3{font-size:25px;line-height:1.1;margin:6px 0 8px}
+.stage p{margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.stage:not(:last-child)::after{content:"\2192";position:absolute;right:-29px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--muted)}
+.stage.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.repair{margin-top:36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:28px;align-items:start;border-top:1px dashed var(--ink);padding-top:22px}
+.repair h3{font-size:28px;line-height:1.1}
+.repair .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.repair ol{margin:0;padding-left:20px;font-size:15.5px;line-height:1.55;color:var(--body)}
+.repair li{margin-bottom:6px}
+@media (max-width:820px){.flow{grid-template-columns:1fr;gap:30px}.stage:not(:last-child)::after{content:"\2193";right:auto;left:22px;top:auto;bottom:-29px;transform:none}.repair{grid-template-columns:1fr;gap:12px}}
+
+/* bars */
+.bars{display:grid;gap:18px}
+.bar{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;align-items:center}
+.bar .l{font-size:15px;line-height:1.35;color:var(--ink)}
+.bar .l small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.bar .tr{display:flex;align-items:center;gap:12px}
+.bar .f{height:30px;background:#A8A397;min-width:2px}
+.bar .f.hot{background:var(--accent)}
+.bar .f.ink{background:var(--ink)}
+.bar .v{font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:560px){.bar{grid-template-columns:1fr;gap:6px}}
+
+/* business finder */
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.pick button{font:500 15px var(--text);min-height:44px;padding:10px 14px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.pick button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.biz{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink);border-left:1px solid var(--rule)}
+.biz li{padding:18px 20px 20px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);transition:background .25s}
+.biz li.on{background:var(--panel);box-shadow:inset 3px 0 0 var(--accent)}
+.biz h3{font-size:27px;line-height:1.1;margin:0 0 10px}
+.biz dl{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 12px;font-size:15px;line-height:1.5}
+.biz dt{font:500 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.biz dd{margin:0;color:var(--body)}
+@media (max-width:640px){.biz{grid-template-columns:1fr}}
+
+.box{margin:36px 0;padding:24px 26px;background:var(--panel);border:1px solid var(--ink)}
+.box h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.box p{margin:0 0 12px;font-size:16.5px;line-height:1.6;color:var(--body)}
+.box p:last-child{margin-bottom:0}
+
+/* two countries */
+.where2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;margin:36px 0;border:1px solid var(--ink)}
+.where2 > div{padding:24px 26px;background:var(--panel)}
+.where2 > div + div{border-left:1px solid var(--ink)}
+@media (max-width:600px){.where2 > div + div{border-left:0;border-top:1px solid var(--ink)}}
+.where2 h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2 ul{margin:0;padding-left:18px;font-size:15.5px;line-height:1.6;color:var(--body)}
+.where2 li{margin-bottom:10px}
+
+/* numbered risks */
+.steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink);counter-reset:st}
+.steps li{counter-increment:st;display:grid;grid-template-columns:64px 1fr;gap:8px;padding:26px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(st);font-family:var(--display);font-size:54px;line-height:.9;color:var(--accent)}
+.steps h3{font-size:28px;line-height:1.15;margin:0 0 8px}
+.steps p{margin:0;color:var(--body);font-size:.96em}
+
+.skip{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.skip li{display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.skip li::before{content:"\00D7";font-family:var(--display);font-size:36px;line-height:.8;color:var(--accent)}
+
+table{border-collapse:collapse;width:100%;font-size:15.5px;line-height:1.45}
+th{font:500 12.5px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 14px 10px 0;border-bottom:1px solid var(--ink)}
+td{padding:13px 14px 13px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--body)}
+td:first-child{color:var(--ink);font-weight:500;white-space:nowrap}
+
+.band{background:var(--ink);color:var(--paper);margin-top:96px;padding:64px 0}
+.band p.eyebrow{color:#B5B1A6;font-family:var(--text);font-size:13px;line-height:1.4;margin:0}
+.band p{margin:16px 0 0;font-family:var(--display);font-size:clamp(24px,3.4vw,32px);line-height:1.3;color:var(--paper)}
+
+.note{display:inline;background:#F3E3DC;color:var(--accent);font-size:.92em;padding:1px 6px}
+
+.check{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.check li{border-bottom:1px solid var(--rule)}
+.check label{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:20px 0;cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;width:24px;height:24px;margin:4px 0 0;border:1.5px solid var(--ink);background:var(--paper);display:grid;place-content:center;cursor:pointer}
+.check input:checked{background:var(--ink)}
+.check input:checked::after{content:"";width:11px;height:6px;border-left:2px solid var(--paper);border-bottom:2px solid var(--paper);transform:rotate(-45deg) translate(1px,-1px)}
+.check span{color:var(--ink)}
+
+.cta{border-top:1px solid var(--ink);margin-top:96px;padding:88px 24px;text-align:center}
+.cta h2{font-size:clamp(40px,6vw,68px);line-height:1.04}
+.cta p{max-width:600px;margin:22px auto 0;color:var(--body)}
+
+.sources{padding:72px 0 0}
+.sources h2{font-size:34px;margin:0 0 8px}
+.sources ul{margin:18px 0 0;padding-left:20px;font-size:15px;line-height:1.6;color:var(--body)}
+.sources li{margin-bottom:8px}
+.sources p{font-size:15px;color:var(--muted);margin:0}
+footer.site{margin-top:88px;border-top:1px solid var(--ink);padding:24px 32px 110px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.biz li{transition:none}}
+
+
+section.q.cta{padding:88px max(24px,env(safe-area-inset-right,0px)) 0 max(24px,env(safe-area-inset-left,0px));margin-top:96px}
+
+/* manual article additions */
+.wrap,.widewrap{padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+@media (max-width:520px){.wrap,.widewrap{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}}
+.hero.one{grid-template-columns:1fr}
+.hero .lede{max-width:760px}
+.float{bottom:calc(20px + env(safe-area-inset-bottom,0px));transition:opacity .2s}
+.float.away{opacity:0;pointer-events:none}
+.k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.madeup{margin:0 0 8px;font:600 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.note{display:inline;background:#F3E3DC;color:var(--accent);font-size:.92em;padding:1px 6px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.prose h3{font-size:26px;line-height:1.15;margin:28px 0 10px}
+.prose blockquote{margin:0 0 20px;padding:4px 0 4px 18px;border-left:3px solid var(--accent)}
+.scroll{overflow-x:auto}
+.tablewrap{margin:8px 0 28px}
+.prose table td:first-child{white-space:normal}
+.chk{font:600 .86em ui-monospace,Menlo,Consolas,monospace;color:var(--accent);background:#F3E3DC;padding:0 4px;white-space:nowrap}
+.checked{margin:-8px 0 24px;font-size:14px !important;color:var(--muted) !important}
+.sources ul{word-break:break-word}
+section.q.st{display:block}
+body.lv-d section.q.st{display:none}
+.band .eyebrow{color:#B5B1A6}
+@media (max-width:600px){.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--rule)}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8.5em;white-space:normal}.stack td::before{content:attr(data-l);float:inline-start;width:8em;margin-inline-start:-8.5em;font:500 12px/1.9 var(--text);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}.stack td:first-child{font-weight:600;padding-inline-start:0}.stack td:first-child::before{content:none}}
+
+/* where boxes */
+.where2{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.where2 > div{min-width:0}
+.where2 p{margin:0 0 10px;font-size:16px;line-height:1.6;color:var(--body)}
+.where2 p:last-child{margin-bottom:0}
+.prose .where2 h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.prose .where2 ul{font-size:16px;margin:0;padding-left:18px}
+.where2.one{grid-template-columns:1fr}
+.where2.one > div + div{border-left:0;border-top:1px solid var(--ink)}
+.prose .box h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+@media (max-width:600px){table.akey.stack td:first-child{display:block}}
+
+/* hero visual: one recording, four things */
+.make{display:grid;grid-template-columns:minmax(0,.9fr) 92px minmax(0,1.1fr) 92px minmax(0,1fr);align-items:center}
+.mk{border:1px solid var(--ink);background:var(--paper);padding:16px 16px 18px}
+.mk h3{font-size:25px;line-height:1.1;margin:4px 0 8px}
+.mk p{margin:0;font-size:14.5px;line-height:1.5;color:var(--body)}
+.mk.src{background:var(--panel)}
+.mk ol{margin:0;padding-left:20px;font-size:14px;line-height:1.55;color:var(--body)}
+.mk .wave{display:flex;gap:3px;align-items:center;height:34px;margin:10px 0 8px}
+.mk .wave i{display:block;width:4px;background:var(--ink)}
+.outs{display:grid;gap:10px}
+.outs .mk{padding:12px 16px 14px;display:grid;grid-template-columns:minmax(0,1fr);gap:2px}
+.outs .mk h3{font-size:22px;margin:0}
+.gate2{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.gate2 .ar{font-size:26px;line-height:1;color:var(--muted)}
+.gate2 .ar.v{display:none}
+.gate2 .ck{font:600 11.5px/1.3 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:5px 7px;background:#fff}
+@media (max-width:820px){.make{grid-template-columns:1fr;gap:10px}.gate2{flex-direction:row;justify-content:center;padding:4px 0}.gate2 .ar.h{display:none}.gate2 .ar.v{display:block}}
+
+/* survey bars and study bars */
+.bars{display:grid;gap:16px}
+.bar{display:grid;grid-template-columns:260px minmax(0,1fr);gap:18px;align-items:center}
+.bar .f{height:26px}
+.scale{display:grid;grid-template-columns:260px minmax(0,1fr);gap:18px;margin-top:6px}
+.scale div{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);border-top:1px solid var(--ink);padding-top:4px;font-variant-numeric:tabular-nums}
+@media (max-width:560px){.bar{grid-template-columns:1fr;gap:6px}.scale{grid-template-columns:1fr;gap:0}.scale span.sp{display:none}}
+
+/* four-question test */
+.tree{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.tree li{display:grid;grid-template-columns:44px minmax(0,1fr) 210px;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule)}
+.tree .n{font-family:var(--display);font-size:30px;line-height:1;color:var(--accent)}
+.tree .q2{font-size:18px;line-height:1.4;color:var(--ink)}
+.tree .q2 small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.tree .y{font:600 12.5px/1.4 var(--text);letter-spacing:.05em;text-transform:uppercase;color:var(--paper);background:var(--ink);padding:8px 10px;text-align:center}
+.tree li.end{background:var(--panel);box-shadow:inset 3px 0 0 var(--accent);padding-left:12px}
+.tree li.end .y{background:var(--paper);color:var(--ink);border:1px solid var(--ink)}
+@media (max-width:600px){.tree li{grid-template-columns:36px minmax(0,1fr);gap:6px 10px}.tree .y{grid-column:2;justify-self:start}}
+
+/* capture lanes */
+.cap{display:grid;grid-template-columns:minmax(0,1fr) 56px 190px;align-items:center;gap:0}
+.cap .ls{display:grid;gap:14px}
+.lane2{border:1px solid var(--ink);padding:14px 16px 16px}
+.lane2 .row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:8px}
+.lane2 .pill{border:1px solid var(--rule);background:var(--panel);padding:6px 10px;font-size:15px;line-height:1.35;color:var(--ink)}
+.lane2 .ar{color:var(--muted)}
+.cap .join{font-size:26px;text-align:center;color:var(--muted)}
+.cap .join .v{display:none}
+.cap .draft{border:1px solid var(--accent);background:var(--panel);box-shadow:inset 0 3px 0 var(--accent);padding:18px 16px;text-align:center}
+.cap .draft h3{font-size:30px;line-height:1}
+.cap .draft p{margin:6px 0 0;font-size:14px;color:var(--body)}
+@media (max-width:720px){.cap{grid-template-columns:1fr;gap:8px}.cap .join .h{display:none}.cap .join .v{display:inline}}
+@media (max-width:520px){.lane2 .row{flex-direction:column;align-items:flex-start;gap:4px}.lane2 .ar{display:inline-block;transform:rotate(90deg);margin-inline-start:14px}}
+
+/* prompt card */
+.prompt{margin:24px 0 32px;border:1px solid var(--ink);background:#fff;padding:20px 22px 18px;box-shadow:inset 3px 0 0 var(--accent)}
+.prompt .pl{margin:0 0 4px;font:600 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.prompt .ph{margin:0 0 14px;font-size:14px;color:var(--muted)}
+.ptext{margin:0 0 16px}
+.ptext p{margin:0 0 8px;font-size:16px;line-height:1.55;color:var(--ink);position:relative}
+.ptext p.rule{background:var(--panel);margin-left:-10px;padding:6px 10px 6px 44px}
+.ptext p.rule b{position:absolute;left:10px;top:5px;font:400 22px/1.1 var(--display);color:var(--accent)}
+.ptext p.gap{height:6px;margin:0}
+.ptext .fill{background:#F3E3DC;color:var(--accent);padding:0 3px;font-weight:500}
+.pkey{display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 14px;font-size:13px;color:var(--muted)}
+.pkey span::before{content:"";display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px;background:var(--panel);border:1px solid var(--rule)}
+.pkey span.f::before{background:#F3E3DC;border-color:#F3E3DC}
+.copy{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.copy:hover{background:var(--ink);color:var(--paper)}
+.follow{list-style:none;margin:0 0 24px;padding:0;border-top:1px solid var(--ink)}
+.follow li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;align-items:start;padding:14px 0;border-bottom:1px solid var(--rule)}
+.follow li p{margin:0 !important}
+.follow li p.tt{font-size:16px;line-height:1.55;color:var(--ink) !important}
+.follow li .copy{min-height:40px;padding:8px 14px}
+@media (max-width:520px){.follow li{grid-template-columns:1fr}.follow li .copy{justify-self:start}}
+
+/* tool switch */
+.toolgroup{margin:28px 0 28px;border-top:1px solid var(--ink);padding-top:18px}
+.toolgroup > .k{margin:0 0 10px}
+.toolseg{display:flex;flex-wrap:wrap;width:max-content;max-width:100%;margin-bottom:16px}
+.toolseg button{padding:12px 14px;font-size:13.5px}
+.toolseg button + button{border-left:1px solid var(--rule)}
+.toolblock{background:var(--panel);border:1px solid var(--ink);padding:20px 24px;margin-bottom:12px}
+.toolblock .toolname{font:600 13px var(--text) !important;letter-spacing:.08em;text-transform:uppercase;color:var(--accent) !important;margin:0 0 10px !important}
+.toolblock p{font-size:.9em;margin:0 0 10px}
+.toolblock p:last-child{margin-bottom:0}
+.toolgroup.js .toolblock{display:none}
+.toolgroup.js .toolblock.on{display:block}
+@media (max-width:520px){.toolseg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}.toolseg button{padding:12px 6px;font-size:13px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}.toolseg button + button{border-left:0}.toolblock{padding:18px}}
+
+/* worked example */
+.ex{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:36px;align-items:start}
+.script{border:1px solid var(--ink);background:#fff;padding:20px 22px;box-shadow:inset 3px 0 0 var(--accent)}
+.script .who{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.script p.say{margin:0;font-family:var(--display);font-size:22px;line-height:1.5;color:var(--ink)}
+.trb{background:#F3E3DC;padding:0 2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.trb sup,.miss sup{font:700 11px var(--text);color:var(--paper);background:var(--accent);padding:1px 5px;margin-left:3px;vertical-align:3px;border-radius:0}
+.miss{display:inline;border:1.5px dashed var(--accent);color:var(--accent);font:500 14px var(--text);padding:1px 6px;margin-left:4px}
+table.akey{font-size:14.5px}
+table.akey td:first-child{font-family:var(--display);font-size:22px;line-height:1;color:var(--accent);font-weight:400;width:34px}
+table.akey tr.gone td{background:var(--panel)}
+@media (max-width:860px){.ex{grid-template-columns:1fr;gap:24px}}
+@media (max-width:600px){table.akey.stack td:first-child{padding-top:10px;width:auto}}
+table.runs td{font-size:14px}
+table.runs td .note{font-size:12px;white-space:nowrap}
+
+/* five checks strip */
+.strip{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:1px solid var(--ink);counter-reset:sk}
+.strip li{counter-increment:sk;padding:14px 14px 16px;border-right:1px solid var(--rule);position:relative}
+.strip li:last-child{border-right:0;background:var(--panel)}
+.strip li::before{content:counter(sk);display:block;font-family:var(--display);font-size:34px;line-height:1;color:var(--accent)}
+.strip h3{font-size:22px;line-height:1.1;margin:4px 0 6px}
+.strip p{margin:0;font-size:14.5px !important;line-height:1.5;color:var(--body)}
+@media (max-width:760px){.strip{grid-template-columns:1fr}.strip li{border-right:0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:40px minmax(0,1fr);gap:0 10px}.strip li::before{grid-row:1/3}.strip li:last-child{border-bottom:0}}
+
+/* agent flow */
+.flow6{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.flow6 li{border:1px solid var(--ink);padding:14px 16px 16px;background:var(--paper);display:flex;flex-direction:column;gap:6px}
+.flow6 li.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.flow6 h3{font-size:23px;line-height:1.1;margin:0}
+.flow6 p{margin:0;font-size:14.5px;line-height:1.5;color:var(--body)}
+.flow6 p.hc{margin-top:auto;padding-top:8px;border-top:1px solid var(--rule);font-size:13.5px;color:var(--ink)}
+.flow6 li.on p.hc{color:var(--accent);font-weight:600}
+.flow6 a{word-break:break-word}
+.stop{display:inline-block;width:12px;height:12px;background:var(--accent);margin-right:6px;vertical-align:-1px;clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%)}
+@media (max-width:820px){.flow6{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.flow6{grid-template-columns:1fr}}
+
+/* year strip */
+.year{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));border:1px solid var(--ink);background:#fff}
+.year > div{position:relative;height:96px;border-right:1px solid var(--panel)}
+.year > div:last-child{border-right:0}
+.year .m{position:absolute;bottom:6px;left:0;right:0;text-align:center;font-size:12px;color:var(--muted)}
+.year .dot{position:absolute;top:22px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--accent)}
+.year .rev{position:absolute;top:12px;bottom:28px;left:50%;width:4px;margin-left:-2px;background:var(--ink)}
+.yearkey{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:6px 24px;font-size:14.5px;color:var(--body)}
+.yearkey li::before{content:"";display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:-1px}
+.yearkey li.r::before{border-radius:0;width:4px;height:14px;background:var(--ink);margin-left:4px;margin-right:11px;vertical-align:-2px}
+@media (max-width:520px){.year > div{height:80px}.year .m{font-size:10px}.year .dot{width:11px;height:11px;margin-left:-5.5px}}
+
+/* price tables */
+table.price td:last-child{color:var(--ink)}
+.prose table{font-size:15.5px}
+
+/* this week checklist */
+.check li label{font-size:inherit}
+</style>
+<script>document.body.classList.add("lv-t")</script>
+
+<header class="site"><span class="mark">Leverage</span><span class="where">Notes · For small businesses</span></header>
+
+<div class="hero one">
+  <div>
+    <p class="eyebrow"><span class="t">Starter version · 6 minute read</span><span class="s">Simple version · 11 minute read</span><span class="d">Detailed version · 20 minute read</span></p>
+    <h1>Write a staff training manual with AI</h1>
+    <p class="lede t">Do a job once. Record it. Let AI turn it into a guide, a checklist and a quiz. Then you check every fact.</p>
+    <p class="lede s">Record a job once. Turn it into a manual, a one-page checklist and a short quiz. You check every fact before a new person uses it.</p>
+    <p class="lede d">Record a job once and turn it into a manual, a one-page checklist and a short quiz, with you checking every fact before a new hire sees it.</p>
+    <p class="by">By Dan Albasry · November 27, 2026 · For small business owners in the US and Canada</p>
+  </div>
+</div>
+
+<figure class="widewrap" aria-label="One recording becomes a manual, then a checklist, a quiz and a translated copy, with you checking at each step">
+  <p class="figtitle"><span class="t">One recording, four things you can use</span><span class="s">One recording becomes four things</span><span class="d">One recording becomes four things, and you check between each</span></p>
+  <div class="make">
+    <div class="mk src"><p class="k">You start with</p><h3>One recording</h3><div class="wave" aria-hidden="true"><i style="height:30%"></i><i style="height:70%"></i><i style="height:45%"></i><i style="height:90%"></i><i style="height:60%"></i><i style="height:30%"></i><i style="height:80%"></i><i style="height:50%"></i><i style="height:95%"></i><i style="height:40%"></i><i style="height:65%"></i><i style="height:25%"></i><i style="height:75%"></i><i style="height:55%"></i><i style="height:35%"></i><i style="height:85%"></i><i style="height:45%"></i><i style="height:20%"></i></div><p><span class="t">You do the job and talk.</span><span class="ds">You do the job once and say each step out loud.</span></p></div>
+    <div class="gate2"><span class="ar h">→</span><span class="ar v">↓</span><span class="ck">You check</span></div>
+    <div class="mk"><p class="k">AI drafts</p><h3><span class="t">A guide</span><span class="ds">A numbered manual</span></h3><ol><li>Backflush the espresso machine 5 times <span class="chk">[CHECK]</span></li><li>Safety: wear gloves for the sanitizer</li><li>Count the till</li></ol></div>
+    <div class="gate2"><span class="ar h">→</span><span class="ar v">↓</span><span class="ck">You check</span></div>
+    <div class="outs">
+      <div class="mk"><h3>A checklist</h3><p><span class="t">One box to tick per step</span><span class="ds">One page, one tick box per step</span></p></div>
+      <div class="mk"><h3>A quiz</h3><p><span class="t">Short questions from the guide</span><span class="ds">8 questions from the approved manual</span></p></div>
+      <div class="mk"><h3>A translated copy</h3><p><span class="t">If your staff need one</span><span class="ds">A fluent staff member checks the safety lines</span></p></div>
+    </div>
+  </div>
+  <figcaption>The example steps come from the made-up café in question 4.</figcaption>
+</figure>
+
+<div class="wrap">
+  <div class="versions">
+    <p><strong>Three ways to read this.</strong> Starter is the easiest. Simple says everything in plain words. Detailed has every number and source. Switch any time with the button at the bottom of your screen.</p>
+    <div class="seg" role="group" aria-label="Choose a reading level">
+      <button type="button" data-v="t" aria-pressed="true">Starter</button>
+      <button type="button" data-v="s" aria-pressed="false">Simple</button>
+      <button type="button" data-v="d" aria-pressed="false">Detailed</button>
+    </div>
+  </div>
+
+  <div class="prose" style="margin-top:48px">
+    <p class="t"><span class="note">[OPENING SCENE: DAN TO WRITE. The same scene, in very short sentences.]</span></p>
+    <p class="s"><span class="note">[OPENING SCENE: DAN TO WRITE. The same scene as the Detailed version, in short, plain sentences.]</span></p>
+    <p class="d"><span class="note">[OPENING SCENE: DAN TO WRITE. Three or four sentences from a real moment of showing a new person the same routine for the third time, and the step that still got missed. No client names.]</span></p>
+  </div>
+
+  <nav class="toc" aria-label="Questions in this guide">
+    <p class="eyebrow">The guide, question by question</p>
+    <ol>
+      <li><a href="#q1"><span class="n">1</span><span>Is a written manual worth it for a small business?</span></a></li>
+      <li><a href="#q2"><span class="n">2</span><span>How do I capture the job?</span></a></li>
+      <li><a href="#q3"><span class="n">3</span><span>How do I turn the recording into a manual, a checklist and a quiz?</span></a></li>
+      <li><a href="#q4"><span class="n">4</span><span>What does this look like on a real job?</span></a></li>
+      <li><a href="#q5"><span class="n">5</span><span>What must a person check, and what do the rules say?</span></a></li>
+      <li><a href="#q6"><span class="n">6</span><span>What could an agent do here, and where must a person approve?</span></a></li>
+      <li><a href="#q7"><span class="n">7</span><span>How do I keep it current and get staff to use it?</span></a></li>
+      <li><a href="#q8"><span class="n">8</span><span>What does it cost?</span></a></li>
+      <li><a href="#q9"><span class="n">9</span><span>Where can I get free help?</span></a></li>
+      <li><a href="#q10"><span class="n">10</span><span>What to do this week</span></a></li>
+      <li><a href="#q11"><span class="n">11</span><span>How Leverage Strategies helps</span></a></li>
+      <li class="st"><a href="#q12"><span class="n">12</span><span>Words to know</span></a></li>
+    </ol>
+  </nav>
+</div>
+
+<!-- 1 -->
+<section class="q" id="q1" data-sec>
+  <div class="wrap">
+    <p class="eyebrow">Question 1</p>
+    <h2>Is a written manual worth it for a small business?</h2>
+    <div class="prose t">
+      <p class="answer">Sometimes. It depends on the job.</p>
+      <p>No study I found says how much a manual helps a small business. But one survey asked about 400 oil and gas workers why they skip written steps. Half said they could not find the right one. Almost as many could not find the step they needed inside it. Almost half said it was out of date (<a href="https://drillingcontractor.org/why-people-dont-follow-procedures-a-human-performance-perspective-54955" target="_blank" rel="noopener">Drilling Contractor</a>).</p>
+    </div>
+    <div class="prose s">
+      <p class="answer">For some jobs, yes. For others, a checklist, a photo or a short video works better.</p>
+      <p>I found no study that measures how much a manual cuts mistakes in a small business, so I won't give you a number.</p>
+      <p>What research does show is why people stop using written steps. In a survey of nearly 400 oil and gas workers, half said the right procedure was hard to find. About 1 in 2 said the information inside it was hard to find. Almost as many said it was out of date (<a href="https://drillingcontractor.org/why-people-dont-follow-procedures-a-human-performance-perspective-54955" target="_blank" rel="noopener">Drilling Contractor</a>, 2020).</p>
+    </div>
+    <div class="prose d">
+      <p class="answer">For some jobs yes, and for others a checklist, a photo or a short video does better.</p>
+      <p>I could not find any study that measures how much a written manual cuts mistakes in a small business, so I will not give you a number. What the research does show is why people stop using procedures. In a survey of nearly 400 oil and gas operators, 50% said it was hard to find the right procedure, 48% said it was hard to find the information inside one, and 45% said procedures were out of date (<a href="https://drillingcontractor.org/why-people-dont-follow-procedures-a-human-performance-perspective-54955" target="_blank" rel="noopener">Drilling Contractor</a>, January 2020). Those three faults are what this guide is built to avoid.</p>
+    </div>
+  </div>
+  <figure class="wrap">
+    <p class="figtitle"><span class="t">Why workers skip written steps</span><span class="ds">Why workers stop using written procedures</span></p>
+    <div class="bars">
+      <div class="bar"><span class="l"><span class="t">Could not find the right one</span><span class="ds">Hard to find the right procedure</span></span><span class="tr"><span class="f hot" style="width:50%"></span><span class="v">50%</span></span></div>
+      <div class="bar"><span class="l"><span class="t">Could not find the step inside it</span><span class="ds">Hard to find the information inside one</span></span><span class="tr"><span class="f" style="width:48%"></span><span class="v">48%</span></span></div>
+      <div class="bar"><span class="l">Out of date</span><span class="tr"><span class="f" style="width:45%"></span><span class="v">45%</span></span></div>
+    </div>
+    <div class="scale" aria-hidden="true"><span class="sp"></span><div><span>0%</span><span>50%</span><span>100%</span></div></div>
+    <figcaption>Survey of nearly 400 oil and gas operators, reported by <a href="https://drillingcontractor.org/why-people-dont-follow-procedures-a-human-performance-perspective-54955" target="_blank" rel="noopener">Drilling Contractor</a>, January 2020. Not a small business study, but the best measured one I found.</figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="prose t"><p>Ask four questions about the job:</p></div>
+    <div class="prose s"><p>Use this test from the UK Health and Safety Executive. Write a full step-by-step manual if the job is:</p></div>
+    <div class="prose d"><p>The same article reports a simple test from the UK Health and Safety Executive. Write a full step-by-step procedure if the job is any of these:</p></div>
+    <ul class="tree" aria-label="The four-question test">
+      <li><span class="n">1</span><span class="q2"><span class="t">Could a mistake hurt someone?</span><span class="s">Is it safety critical, so a mistake could hurt someone?</span><span class="d">Is it safety critical, where a mistake could hurt someone?</span></span><span class="y">Yes: full manual</span></li>
+      <li><span class="n">2</span><span class="q2"><span class="t">Is it hard?</span><span class="ds">Is it complex?</span></span><span class="y">Yes: full manual</span></li>
+      <li><span class="n">3</span><span class="q2"><span class="t">Is it done only now and then?</span><span class="ds">Is it rarely done?</span></span><span class="y">Yes: full manual</span></li>
+      <li><span class="n">4</span><span class="q2"><span class="t">Is the person new?</span><span class="s">Is it done by someone new?</span><span class="d">Is it done by someone new to it?</span></span><span class="y">Yes: full manual</span></li>
+      <li class="end"><span class="n"></span><span class="q2">All four are no<small><span class="t">A checklist or a photo is enough.</span><span class="ds">A simpler job aid is usually more effective.</span></small></span><span class="y">Checklist, photo or video</span></li>
+    </ul>
+    <div class="prose t" style="margin-top:24px"><p>If any answer is yes, write a full manual. If all are no, a checklist or a photo is enough.</p></div>
+    <div class="prose s" style="margin-top:24px"><p>If none of these is true, a checklist or photo is usually better. Decide job by job. Closing a café needs a manual. Where the napkins go needs a photo.</p></div>
+    <div class="prose d" style="margin-top:24px">
+      <p>If none is true, a simpler job aid such as a checklist, a photo or a short video is usually more effective.</p>
+      <p>So the decision is made job by job, not for the whole business. A café's closing routine (food safety, cash, alarm) earns a full manual. Where the napkins go earns a labelled photo. How much you write also depends on how often you hire, how many people do the job, and whether an inspector or insurer could ask what you trained people on.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="q" id="q2" data-sec>
+  <div class="wrap">
+    <p class="eyebrow">Question 2</p>
+    <h2>How do I capture the job?</h2>
+    <div class="prose t">
+      <p class="answer">Do the job once. Say each step out loud. Record it.</p>
+      <p><strong>A job you do with your hands:</strong> film it on your phone. Or record your voice. Say names clearly. Say numbers twice. Stop between steps.</p>
+      <p><strong>A job on a computer:</strong> Scribe or Tango can record your clicks and write the steps. Scribe is free for 10 guides (<a href="https://scribe.com/pricing" target="_blank" rel="noopener">Scribe</a>). Tango is free for 5 (<a href="https://www.tango.ai/pricing" target="_blank" rel="noopener">Tango</a>).</p>
+    </div>
+    <div class="prose s">
+      <p class="answer">Do the job once and say each step out loud while you record.</p>
+      <p><strong>A hands-on job,</strong> like closing a kitchen: film it on your phone or record a voice memo. Say tool and product names clearly. Say every number twice. Pause between steps. Record a long job in short parts.</p>
+      <p><strong>A job on a screen,</strong> like a booking system or till: use a tool that records your clicks and writes the steps.</p>
+      <ul>
+        <li>Scribe: free for up to 10 guides. Pro Personal is US$25 a month billed yearly, or US$35 monthly (<a href="https://scribe.com/pricing" target="_blank" rel="noopener">Scribe</a>).</li>
+        <li>Tango: free for 5 shared workflows. Pro is US$22 a month billed yearly for 1 to 2 users, or US$30 monthly (<a href="https://www.tango.ai/pricing" target="_blank" rel="noopener">Tango</a>).</li>
+        <li>Loom, for video: free for 25 videos of up to 5 minutes each (<a href="https://www.loom.com/pricing" target="_blank" rel="noopener">Loom</a>).</li>
+      </ul>
+    </div>
+    <div class="prose d">
+      <p class="answer">Do the job once while you say each step out loud, and record it. The best way to record depends on whether the job happens with your hands or on a screen.</p>
+      <p><strong>A hands-on job</strong> (closing a kitchen, opening a shop, setting up a treatment room): film it on your phone or record a voice memo while you talk. Say the names of tools and products clearly, say every number twice, and pause between steps instead of talking over the next one. Record a long job in short parts.</p>
+      <p><strong>A job on a screen</strong> (booking system, till, payroll, scheduling): use a tool that records your clicks and writes the steps for you, with a screenshot for each.</p>
+      <ul>
+        <li>Scribe: the free Basic plan lets you create and share up to 10 guides. Pro Personal is US$25 a seat a month billed yearly, or US$35 monthly (<a href="https://scribe.com/pricing" target="_blank" rel="noopener">Scribe pricing</a>).</li>
+        <li>Tango: the free plan holds 5 shared workflows. Pro is US$22 a user a month billed yearly for 1 to 2 users, or US$30 monthly (<a href="https://www.tango.ai/pricing" target="_blank" rel="noopener">Tango pricing</a>).</li>
+        <li>Loom, if you would rather send a video: the free Starter plan gives 25 videos per person, 5-minute screen recordings, up to 720p, with transcripts in 50+ languages (<a href="https://www.loom.com/pricing" target="_blank" rel="noopener">Loom pricing</a>).</li>
+      </ul>
+    </div>
+  </div>
+  <figure class="wrap">
+    <p class="figtitle"><span class="t">Two paths to a draft</span><span class="ds">Two ways in, one draft out</span></p>
+    <div class="cap">
+      <div class="ls">
+        <div class="lane2"><p class="k"><span class="t">A job with your hands</span><span class="ds">Hands-on job</span></p><div class="row"><span class="pill">Phone video or voice memo</span><span class="ar">→</span><span class="pill">Transcript</span></div></div>
+        <div class="lane2"><p class="k"><span class="t">A job on a computer</span><span class="ds">Screen job</span></p><div class="row"><span class="pill">Scribe or Tango records your clicks</span><span class="ar">→</span><span class="pill">Written steps</span></div></div>
+      </div>
+      <div class="join" aria-hidden="true"><span class="h">→</span><span class="v">↓</span></div>
+      <div class="draft"><h3>Draft</h3><p>Ready for you to check</p></div>
+    </div>
+  </figure>
+  <div class="wrap">
+    <div class="prose t">
+      <p><strong>Next, turn the recording into words.</strong> This is called a transcript.</p>
+      <ul>
+        <li>ChatGPT can take audio on paid plans, up to 6 minutes at a time (<a href="https://help.openai.com/en/articles/8555545-uploading-files-and-audio-to-chatgpt" target="_blank" rel="noopener">OpenAI</a>).</li>
+        <li>Claude cannot take audio. Give it the transcript as a file (<a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude" target="_blank" rel="noopener">Claude</a>).</li>
+        <li>The Gemini app takes up to 10 minutes of audio for free (<a href="https://support.google.com/gemini/answer/14903178" target="_blank" rel="noopener">Google</a>).</li>
+        <li>Word can turn 300 minutes a month into text if you have Microsoft 365 (<a href="https://support.microsoft.com/en-gb/word/transcribe-your-recordings" target="_blank" rel="noopener">Microsoft</a>).</li>
+      </ul>
+      <p><strong>Keep the recording.</strong> Transcripts can add words nobody said. In one study, about 1 in 100 had made-up sentences (<a href="https://arxiv.org/html/2402.08021v2" target="_blank" rel="noopener">Koenecke et al.</a>).</p>
+      <div class="where2">
+        <div><h3>In the US</h3><p>Tell your staff you are recording. Some states say everyone must agree. Ask them all. <span class="note">[DAN: decide on a state consent link.]</span></p></div>
+        <div><h3>In Canada</h3><p>Do not record a private talk without the OK of someone in it (<a href="https://laws-lois.justice.gc.ca/eng/acts/c-46/section-184.html" target="_blank" rel="noopener">Criminal Code s. 184</a>). Recording yourself is fine. Tell your staff anyway. Leave customers out.</p></div>
+      </div>
+    </div>
+    <div class="prose s">
+      <p><strong>Then turn the recording into text</strong> (a transcript). Each tool has different limits:</p>
+      <div class="tablewrap scroll"><table class="stack">
+        <thead><tr><th>Tool</th><th>Takes your audio file?</th><th>Limit</th></tr></thead>
+        <tbody>
+          <tr><td data-l="Tool">ChatGPT</td><td data-l="Audio file">Yes, paid plans only</td><td data-l="Limit">6 minutes per recording (<a href="https://help.openai.com/en/articles/8555545-uploading-files-and-audio-to-chatgpt" target="_blank" rel="noopener">OpenAI</a>)</td></tr>
+          <tr><td data-l="Tool">Claude</td><td data-l="Audio file">No</td><td data-l="Limit">Upload the transcript as a text or Word file (<a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude" target="_blank" rel="noopener">Claude</a>)</td></tr>
+          <tr><td data-l="Tool">Gemini app</td><td data-l="Audio file">Yes</td><td data-l="Limit">10 minutes free; 3 hours on Google AI Pro (<a href="https://support.google.com/gemini/answer/14903178" target="_blank" rel="noopener">Google</a>)</td></tr>
+          <tr><td data-l="Tool">Word</td><td data-l="Audio file">Yes</td><td data-l="Limit">300 minutes a month with Microsoft 365 (<a href="https://support.microsoft.com/en-gb/word/transcribe-your-recordings" target="_blank" rel="noopener">Microsoft</a>)</td></tr>
+          <tr><td data-l="Tool">Otter, free</td><td data-l="Audio file">Yes</td><td data-l="Limit">30 minutes per conversation, 300 minutes a month (<a href="https://otter.ai/pricing" target="_blank" rel="noopener">Otter</a>)</td></tr>
+        </tbody>
+      </table></div>
+      <p><strong>Keep the recording.</strong> Transcripts can include words nobody said. In one study, about 1 in 100 transcripts from the Whisper tool had whole made-up sentences (<a href="https://arxiv.org/html/2402.08021v2" target="_blank" rel="noopener">Koenecke et al.</a>). Listen back before you trust it.</p>
+      <div class="where2">
+        <div><h3>In the US</h3><p>Tell staff you are recording and why. Some states need everyone to agree, so ask everyone on the recording. <span class="note">[DAN: decide whether to link a state consent guide.]</span></p></div>
+        <div><h3>In Canada</h3><p>Recording a private talk without consent from someone in it is a crime (<a href="https://laws-lois.justice.gc.ca/eng/acts/c-46/section-184.html" target="_blank" rel="noopener">Criminal Code s. 184</a>). Recording yourself teaching is fine. Still tell staff, and keep customers out of it.</p></div>
+      </div>
+    </div>
+    <div class="prose d">
+      <p><strong>Then turn the recording into text.</strong> The AI chat tools work best from a written transcript, and their limits on audio differ a lot:</p>
+      <div class="tablewrap scroll"><table class="stack">
+        <thead><tr><th>Tool</th><th>Takes your audio file?</th><th>Limit I found (checked 27 Nov 2026)</th></tr></thead>
+        <tbody>
+          <tr><td data-l="Tool">ChatGPT</td><td data-l="Audio file">Yes, paid plans only</td><td data-l="Limit">6 minutes per recording on GPT-6 Instant; files up to 512 MB (<a href="https://help.openai.com/en/articles/8555545-uploading-files-and-audio-to-chatgpt" target="_blank" rel="noopener">OpenAI help</a>)</td></tr>
+          <tr><td data-l="Tool">Claude</td><td data-l="Audio file">No</td><td data-l="Limit">Upload the transcript as a text, Word or PDF file instead (<a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude" target="_blank" rel="noopener">Claude help</a>)</td></tr>
+          <tr><td data-l="Tool">Gemini app</td><td data-l="Audio file">Yes</td><td data-l="Limit">10 minutes of audio in total without an upgrade; 3 hours on Google AI Pro or Ultra (<a href="https://support.google.com/gemini/answer/14903178" target="_blank" rel="noopener">Gemini help</a>)</td></tr>
+          <tr><td data-l="Tool">Word (Microsoft 365)</td><td data-l="Audio file">Yes, Dictate, then Transcribe</td><td data-l="Limit">300 minutes a month with Microsoft 365, 30,000 with a Copilot licence; .wav, .mp4, .m4a, .mp3 (<a href="https://support.microsoft.com/en-gb/word/transcribe-your-recordings" target="_blank" rel="noopener">Microsoft support</a>)</td></tr>
+          <tr><td data-l="Tool">Otter, free Basic</td><td data-l="Audio file">Yes</td><td data-l="Limit">300 minutes a month, 30 minutes per conversation, 3 file imports for the life of the account (<a href="https://otter.ai/pricing" target="_blank" rel="noopener">Otter pricing</a>)</td></tr>
+          <tr><td data-l="Tool">Teams Essentials</td><td data-l="Audio file">Records meetings with transcripts (English)</td><td data-l="Limit">CA$5.40 a user a month, billed yearly, plus tax (<a href="https://www.microsoft.com/en-ca/microsoft-teams/compare-microsoft-teams-business-options" target="_blank" rel="noopener">Microsoft Canada</a>)</td></tr>
+        </tbody>
+      </table></div>
+      <p>A 20-minute walkthrough will not fit ChatGPT's 6-minute cap, so record the job in short parts or transcribe it in Word or Gemini first. Your phone's voice recorder may already make a transcript; check before you pay for anything.</p>
+      <p><strong>Keep the recording.</strong> A transcript can be wrong in ways you only catch by listening. In a peer-reviewed study of the Whisper speech-to-text model, roughly 1% of transcriptions contained whole phrases or sentences that were never said, and 38% of those inventions included explicit harms such as violence (<a href="https://arxiv.org/html/2402.08021v2" target="_blank" rel="noopener">Koenecke et al.</a>). Until you have approved the text, the audio is the source of truth.</p>
+      <div class="where2">
+        <div><h3>In the US</h3><p>Tell staff you are recording and why. Some states require everyone in a conversation to agree to a recording, so get a yes from everyone on camera or on the call. <span class="note">[DAN: decide whether to link a state-by-state consent guide; I did not verify a state list for this piece.]</span></p></div>
+        <div><h3>In Canada</h3><p>The Criminal Code makes it an offence to knowingly intercept a private communication, with an exception when a person in the conversation consents (<a href="https://laws-lois.justice.gc.ca/eng/acts/c-46/section-184.html" target="_blank" rel="noopener">Criminal Code s. 184</a>). Recording yourself teaching a job is your own conversation. Still tell staff, say the recording is only for the manual, and keep customers out of it.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="q" id="q3" data-sec>
+  <div class="wrap">
+    <p class="eyebrow">Question 3</p>
+    <h2>How do I turn the recording into a manual, a checklist and a quiz?</h2>
+    <div class="prose t"><p class="answer">Give the AI your transcript. Tell it not to guess. Copy this prompt:</p></div>
+    <div class="prose s"><p class="answer">Give the AI your transcript and a prompt that tells it not to guess. Use the same prompt in any tool:</p></div>
+    <div class="prose d"><p class="answer">Give the AI your transcript and a prompt that forbids it to fill gaps, then make the checklist and quiz from the manual you approved, not from the raw transcript. The prompt does most of the work, and it is the same in every tool:</p></div>
+
+    <div class="prompt" id="mainprompt">
+      <p class="pl">The prompt</p>
+      <p class="ph">Change the words in shaded [BRACKETS] to your own before you send it.</p>
+      <div class="ptext" id="ptext">
+        <p>You are writing a training manual for a new staff member at <span class="fill">[BUSINESS]</span>, a <span class="fill">[TYPE OF BUSINESS]</span> in <span class="fill">[CITY, STATE OR PROVINCE]</span>.</p>
+        <p class="rule"><b>1</b>Use ONLY the transcript below. Do not add steps, numbers, times, temperatures, products or rules that are not in it.</p>
+        <p class="rule"><b>2</b>Write numbered steps, one action per step, using the exact names I say for tools, products and buttons.</p>
+        <p class="rule"><b>3</b>If a step is unclear, or a number, time, unit or rule is missing or sounds unsure, write [CHECK] and the question I need to answer. Do not guess.</p>
+        <p class="rule"><b>4</b>Put every safety warning on its own line, starting with "Safety:".</p>
+        <p>Never include passwords, alarm codes or customer names, even if I say them.</p>
+        <p>End with a list called "Open questions" of everything marked [CHECK].</p>
+        <p>Write at a Grade 5 reading level.</p>
+        <p class="gap"></p>
+        <p>Transcript:</p>
+        <p><span class="fill">[PASTE TRANSCRIPT]</span></p>
+      </div>
+      <div class="pkey"><span>The four key rules</span><span class="f">Your own words go here</span></div>
+      <button type="button" class="copy" id="copyprompt" data-label="Copy the prompt">Copy the prompt</button>
+    </div>
+    <textarea id="prompttext" hidden>You are writing a training manual for a new staff member at [BUSINESS], a [TYPE OF BUSINESS] in [CITY, STATE OR PROVINCE].
+Use ONLY the transcript below. Do not add steps, numbers, times, temperatures, products or rules that are not in it.
+Write numbered steps, one action per step, using the exact names I say for tools, products and buttons.
+If a step is unclear, or a number, time, unit or rule is missing or sounds unsure, write [CHECK] and the question I need to answer. Do not guess.
+Put every safety warning on its own line, starting with "Safety:".
+Never include passwords, alarm codes or customer names, even if I say them.
+End with a list called "Open questions" of everything marked [CHECK].
+Write at a Grade 5 reading level.
+
+Transcript:
+[PASTE TRANSCRIPT]</textarea>
+
+    <div class="prose t">
+      <p>Fix the draft. Answer each <span class="chk">[CHECK]</span>. Then ask for a checklist and a quiz from the fixed guide.</p>
+    </div>
+    <div class="prose s">
+      <p>Fix the draft and answer the <span class="chk">[CHECK]</span> list. Then ask for:</p>
+      <ul>
+        <li><strong>A checklist:</strong> one tick box per step, no new steps.</li>
+        <li><strong>A quiz:</strong> 8 questions from the approved manual, each answer quoting the manual line.</li>
+        <li><strong>A translation,</strong> if staff need one. Have a fluent staff member check the safety lines.</li>
+      </ul>
+      <p>Give the AI one part of the job at a time. Long jobs go wrong more.</p>
+    </div>
+    <div class="prose d">
+      <p>Once you have answered the open questions and fixed the draft, ask in the same chat:</p>
+      <ul class="follow">
+        <li><div><p class="k">Checklist</p><p class="tt">"Turn the approved steps into a one-page checklist. One tick box per action. Keep my wording. No new steps."</p></div><button type="button" class="copy copyplain" data-label="Copy" data-text="Turn the approved steps into a one-page checklist. One tick box per action. Keep my wording. No new steps.">Copy</button></li>
+        <li><div><p class="k">Quiz</p><p class="tt">"Write 8 multiple-choice questions from the approved manual only. For each answer, quote the manual line it comes from. Include every Safety line."</p></div><button type="button" class="copy copyplain" data-label="Copy" data-text="Write 8 multiple-choice questions from the approved manual only. For each answer, quote the manual line it comes from. Include every Safety line.">Copy</button></li>
+        <li><div><p class="k">Translation</p><p class="tt">"Translate the approved manual into <span class="chk" style="font-family:inherit;white-space:normal">[Spanish for a Mexican Spanish speaker / French for a Quebec French speaker]</span>. Keep every Safety line."</p><p style="font-size:15px">Then have a fluent staff member read the safety lines before anyone uses it.</p></div><button type="button" class="copy copyplain" data-label="Copy" data-text="Translate the approved manual into [Spanish for a Mexican Spanish speaker / French for a Quebec French speaker]. Keep every Safety line.">Copy</button></li>
+      </ul>
+      <p>Long jobs go wrong more often, so give the AI one section of the job at a time (opening, service, closing) rather than one long recording.</p>
+    </div>
+
+    <!-- tool switch, one group per level -->
+    <div class="prose t"><div class="toolgroup" data-def="chatgpt">
+      <p class="k">Steps in your tool</p>
+      <div class="seg toolseg" role="group" aria-label="Choose your AI tool"><button type="button" data-tool="chatgpt" aria-pressed="true">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button><button type="button" data-tool="muse" aria-pressed="false">Muse</button></div>
+      <div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Make a Project. Add the transcript. Paste the prompt. Plus costs US$20 a month (<a href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener">OpenAI</a>).</p></div>
+      <div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Make a Project. Add the transcript as a file. Put the rules in the project instructions. Pro costs US$20 a month, or US$17 a month if you pay for a year (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude</a>).</p></div>
+      <div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Put the transcript in a Google Doc. Ask Gemini in the side panel. Make the quiz in Google Forms (<a href="https://support.google.com/docs/answer/16346789?hl=en" target="_blank" rel="noopener">Google</a>).</p></div>
+      <div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>In Word, turn the recording into text. Then ask Copilot for the steps (<a href="https://support.microsoft.com/en-gb/word/transcribe-your-recordings" target="_blank" rel="noopener">Microsoft</a>).</p></div>
+      <div class="toolblock" data-tool="muse"><p class="toolname">In Muse</p><p><span class="note">[DAN: how you use Muse. Not checked here.]</span></p></div>
+    </div></div>
+
+    <div class="prose s"><div class="toolgroup" data-def="chatgpt">
+      <p class="k">Steps in your tool</p>
+      <div class="seg toolseg" role="group" aria-label="Choose your AI tool"><button type="button" data-tool="chatgpt" aria-pressed="true">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button><button type="button" data-tool="muse" aria-pressed="false">Muse</button></div>
+      <div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Make a Project, add the transcript, paste the prompt. Projects work on every plan (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">ChatGPT</a>). Plus is US$20 a month (<a href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener">OpenAI</a>).</p></div>
+      <div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Make a Project, add the transcript as a file, and put the rules in the project instructions. Free gets up to 5 projects (<a href="https://support.claude.com/en/articles/9517075-what-are-projects" target="_blank" rel="noopener">Claude</a>). Pro is US$17 a month billed yearly or US$20 monthly (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>).</p></div>
+      <div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>With Google Workspace Business Standard, paste the transcript into a Google Doc and ask Gemini in the side panel (<a href="https://workspace.google.com/intl/en_ca/pricing/" target="_blank" rel="noopener">Google</a>). Make the quiz in Google Forms with "Help me create a form" (<a href="https://support.google.com/docs/answer/16346789?hl=en" target="_blank" rel="noopener">Google help</a>).</p></div>
+      <div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>In Word, use Dictate, then Transcribe, then ask Copilot to draft the steps. Business Standard with Copilot is CA$31.90 a month paid yearly, plus tax (<a href="https://www.microsoft.com/en-ca/microsoft-365/copilot/pricing" target="_blank" rel="noopener">Microsoft</a>).</p></div>
+      <div class="toolblock" data-tool="muse"><p class="toolname">In Muse</p><p><span class="note">[DAN: how you use Muse for this. Not verified here.]</span></p></div>
+    </div>
+    <p><strong>Scribe and Tango</strong> build the steps from your clicks, so you can skip the transcript for screen jobs. They don't make quizzes.</p></div>
+
+    <div class="prose d"><div class="toolgroup" data-def="chatgpt">
+      <p class="k">Steps in your tool</p>
+      <div class="seg toolseg" role="group" aria-label="Choose your AI tool"><button type="button" data-tool="chatgpt" aria-pressed="true">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button><button type="button" data-tool="muse" aria-pressed="false">Muse</button></div>
+      <div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Create a Project for the job, add the transcript, and paste the prompt. Projects are on every plan, including Free, though uploads are limited on Free (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">ChatGPT pricing</a>). Plus is US$20 a month (<a href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener">OpenAI</a>). Uploading the audio itself needs a paid plan and is capped at 6 minutes per recording.</p><p>For a team, ChatGPT Business is US$20 a seat a month billed yearly or US$25 monthly, for teams of 2 to 200, with no training on your business data by default (<a href="https://openai.com/business/pricing/" target="_blank" rel="noopener">OpenAI Business</a>).</p></div>
+      <div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Create a Project, add the transcript to its knowledge as a text or Word file, and put the prompt's rules in the project instructions so every chat in that project follows them. Projects are on every plan; Free is limited to five, and Team and Enterprise can share a project with staff (<a href="https://support.claude.com/en/articles/9517075-what-are-projects" target="_blank" rel="noopener">Claude help</a>).</p><p>Pro is US$17 a month billed yearly (US$200 up front) or US$20 monthly, and prices shown don't include tax (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>). Claude does not take the audio file itself.</p></div>
+      <div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>On Google Workspace Business Standard or higher, paste the transcript into a Google Doc and ask Gemini in the side panel for the steps; Gemini in Docs is not on Business Starter (<a href="https://workspace.google.com/intl/en_ca/pricing/" target="_blank" rel="noopener">Google Workspace</a>).</p><p>For the quiz, open Google Forms and use "Help me create a form": Gemini marks the correct answers and assigns points, it works on desktop, and it cannot edit an existing form (<a href="https://support.google.com/docs/answer/16346789?hl=en" target="_blank" rel="noopener">Google help</a>). Without Workspace, the Gemini app takes up to 10 minutes of audio, or 3 hours on Google AI Pro at CA$26.99 a month (<a href="https://gemini.google/ca/subscriptions/" target="_blank" rel="noopener">Google Canada</a>).</p></div>
+      <div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>In Word, choose Dictate, then Transcribe, and upload the recording; then ask Copilot to draft the steps from that document. Copilot Chat is included at no extra cost with eligible Microsoft 365 plans, but check which Copilot features your plan gives you inside Word before you rely on them.</p><p>Business Standard with Copilot is CA$31.90 a user a month paid yearly, plus tax (<a href="https://www.microsoft.com/en-ca/microsoft-365/copilot/pricing" target="_blank" rel="noopener">Microsoft Canada</a>).</p></div>
+      <div class="toolblock" data-tool="muse"><p class="toolname">In Muse</p><p><span class="note">[DAN: describe how you use Muse in this job, for example capturing the walkthrough and handing the transcript to Claude. I could not open Meta's Muse help or pricing pages, so its features, price and Canadian availability are not verified here.]</span></p></div>
+    </div>
+    <p><strong>Scribe and Tango</strong> skip the transcript for screen jobs, because the guide is built from what you actually clicked. They do not make quizzes; export the guide and use the checklist and quiz prompts above.</p></div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="q" id="q4" data-sec>
+  <div class="wrap">
+    <p class="eyebrow">Question 4</p>
+    <h2>What does this look like on a real job?</h2>
+    <div class="prose t"><p class="answer">I made up a café called Corner Cup Café to test this. It is not real. Here is its owner closing up.</p><p>A good draft should catch the numbered spots.</p></div>
+    <div class="prose s"><p class="answer">A good draft points out every gap instead of filling it.</p><p>Corner Cup Café is a made-up example café in Toronto. I wrote its owner's closing walkthrough with the mistakes real ones have.</p></div>
+    <div class="prose d"><p class="answer">A good draft flags every gap in what you said instead of smoothing it over.</p><p>To show what that means, I wrote a test walkthrough. Corner Cup Café is an example business I made up, a small café in Toronto, Ontario. The script below is its owner talking through closing time, written with the mistakes real walkthroughs contain: a vague count, an unsure rule, a number said once, a temperature with no unit, a safety warning said in passing, an alarm code, and one step the owner forgot to say.</p></div>
+  </div>
+  <figure class="widewrap">
+    <div class="ex">
+      <div class="script">
+        <p class="madeup">Made-up example: Corner Cup Café is not a real business</p>
+        <p class="who">The owner's closing walkthrough, as a transcript</p>
+        <p class="say">"Okay, closing. First the espresso machine, do the backflush with the blind basket, <span class="trb">five times or so<sup>1</sup></span>. Milk jugs, dump anything that's been open more than, <span class="trb">I think it's four hours?<sup>2</sup></span> Counters get the sanitizer from the red bucket, <span class="trb">mix it like the sheet says<sup>3</sup></span>, and <span class="trb">wear the gloves for that<sup>4</sup></span>, by the way. Till: count it, write it on the sheet, <span class="trb">the float is two hundred<sup>5</sup></span>. Walk-in, check it reads <span class="trb">under four. Degrees.<sup>6</sup></span> If it doesn't, <span class="trb">call me<sup>7</sup></span>. Mop last, then lock the back door. <span class="trb">The alarm code is on the card in the office<sup>8</sup></span>, don't put that in anything." <span class="miss">panini press never mentioned<sup>9</sup></span></p>
+      </div>
+      <div>
+        <p class="figtitle"><span class="t">What the AI should do</span><span class="s">What a good draft must do</span><span class="d">The answer key: what a correct draft must do</span></p>
+        <div class="t scroll"><table class="akey stack">
+          <thead><tr><th>#</th><th>What the owner said</th><th>What the AI should do</th></tr></thead>
+          <tbody>
+            <tr><td data-l="#">1</td><td data-l="Said">"five times or so"</td><td data-l="AI should">Ask you to check</td></tr>
+            <tr><td data-l="#">2</td><td data-l="Said">"I think it's four hours?"</td><td data-l="AI should">Ask you. Not guess</td></tr>
+            <tr><td data-l="#">3</td><td data-l="Said">"mix it like the sheet says"</td><td data-l="AI should">Ask which sheet</td></tr>
+            <tr><td data-l="#">4</td><td data-l="Said">"wear the gloves"</td><td data-l="AI should">Make it a safety step</td></tr>
+            <tr><td data-l="#">5</td><td data-l="Said">"two hundred"</td><td data-l="AI should">Ask you to confirm</td></tr>
+            <tr><td data-l="#">6</td><td data-l="Said">"under four. Degrees."</td><td data-l="AI should">Ask: Celsius or Fahrenheit?</td></tr>
+            <tr><td data-l="#">7</td><td data-l="Said">"call me"</td><td data-l="AI should">Ask who, and what number</td></tr>
+            <tr><td data-l="#">8</td><td data-l="Said">The alarm code</td><td data-l="AI should">Leave it out</td></tr>
+            <tr class="gone"><td data-l="#">9</td><td data-l="Said">The panini press (never said)</td><td data-l="AI should">Nothing. AI can't see what you forgot</td></tr>
+          </tbody>
+        </table></div>
+        <div class="s scroll"><table class="akey stack">
+          <thead><tr><th>#</th><th>What the owner said</th><th>What the draft should do</th></tr></thead>
+          <tbody>
+            <tr><td data-l="#">1</td><td data-l="Said">"five times or so"</td><td data-l="Draft should">Write 5 and mark [CHECK]</td></tr>
+            <tr><td data-l="#">2</td><td data-l="Said">"I think it's four hours?"</td><td data-l="Draft should">Mark [CHECK], not guess a time</td></tr>
+            <tr><td data-l="#">3</td><td data-l="Said">"mix it like the sheet says"</td><td data-l="Draft should">Mark [CHECK]: which sheet, what mix</td></tr>
+            <tr><td data-l="#">4</td><td data-l="Said">"wear the gloves"</td><td data-l="Draft should">Make it its own Safety line</td></tr>
+            <tr><td data-l="#">5</td><td data-l="Said">"two hundred"</td><td data-l="Draft should">Keep $200 and ask you to confirm</td></tr>
+            <tr><td data-l="#">6</td><td data-l="Said">"under four. Degrees."</td><td data-l="Draft should">Ask: Celsius or Fahrenheit?</td></tr>
+            <tr><td data-l="#">7</td><td data-l="Said">"call me"</td><td data-l="Draft should">Ask: who, and what number?</td></tr>
+            <tr><td data-l="#">8</td><td data-l="Said">The alarm code</td><td data-l="Draft should">Leave it out</td></tr>
+            <tr class="gone"><td data-l="#">9</td><td data-l="Said">The panini press (never said)</td><td data-l="Draft should">Nothing. No tool can see a step you forgot</td></tr>
+          </tbody>
+        </table></div>
+        <div class="d scroll"><table class="akey stack">
+          <thead><tr><th>#</th><th>In the transcript</th><th>What a good draft does</th><th>Why it matters</th></tr></thead>
+          <tbody>
+            <tr><td data-l="#">1</td><td data-l="Said">"five times or so"</td><td data-l="Draft does">Writes 5 and marks [CHECK]</td><td data-l="Why">A guess becomes a rule once it is printed</td></tr>
+            <tr><td data-l="#">2</td><td data-l="Said">"I think it's four hours?"</td><td data-l="Draft does">Marks [CHECK] and does not supply a time</td><td data-l="Why">Food safety limits must come from you and your health unit, not the AI</td></tr>
+            <tr><td data-l="#">3</td><td data-l="Said">"mix it like the sheet says"</td><td data-l="Draft does">Marks [CHECK]: which sheet, what mix</td><td data-l="Why">The product label is the source, and it was not in the recording</td></tr>
+            <tr><td data-l="#">4</td><td data-l="Said">"wear the gloves for that"</td><td data-l="Draft does">Gives it its own "Safety:" line</td><td data-l="Why">Warnings said in passing are the easiest to lose</td></tr>
+            <tr><td data-l="#">5</td><td data-l="Said">"the float is two hundred"</td><td data-l="Draft does">Keeps $200 and asks you to confirm</td><td data-l="Why">Numbers are where transcripts go wrong most often</td></tr>
+            <tr><td data-l="#">6</td><td data-l="Said">"under four. Degrees."</td><td data-l="Draft does">Marks [CHECK]: Celsius or Fahrenheit</td><td data-l="Why">4°C is fridge cold; 4°F is freezer cold. A tool used to US examples may assume Fahrenheit</td></tr>
+            <tr><td data-l="#">7</td><td data-l="Said">"call me"</td><td data-l="Draft does">Marks [CHECK]: who, and what number</td><td data-l="Why">A new hire at 11 pm needs a name and a number</td></tr>
+            <tr><td data-l="#">8</td><td data-l="Said">The alarm code</td><td data-l="Draft does">Leaves it out</td><td data-l="Why">Codes and passwords never go in a manual or an AI chat</td></tr>
+            <tr class="gone"><td data-l="#">9</td><td data-l="Said">Turning off the panini press (never said)</td><td data-l="Draft does">Nothing</td><td data-l="Why">No tool can see a step you forgot. Only the test below catches it</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </figure>
+  <div class="wrap">
+    <div class="prose t">
+      <p><strong>Test it:</strong> ask a new person to do the job from the checklist. Watch. Where they get stuck, a step is missing.</p>
+      <p><strong>Results:</strong> <span class="note">[DAN TO RUN. Try the script in each tool and write down what each one caught.]</span></p>
+    </div>
+    <div class="prose s">
+      <p><strong>The second-person test:</strong> have someone new do the job from the checklist while you watch. Where they get stuck, the manual is missing something.</p>
+      <p><strong>Results by tool:</strong> <span class="note">[DAN TO RUN. Run the script and prompt in ChatGPT, Claude, Gemini and Copilot, and record which rows each got right.]</span></p>
+    </div>
+    <div class="prose d">
+      <p><strong>The second-person test.</strong> Print the checklist and have someone who has never done the job run it from the checklist alone while you watch. Wherever they stop and ask, the manual is missing something. Row 9 is why this test exists.</p>
+      <p><strong>Results by tool:</strong> <span class="note">[DAN TO RUN. Paste the transcript and the prompt above into ChatGPT, Claude, Gemini in Docs and Copilot in Word, each in a fresh chat, and fill in the table. Then read the script aloud into your phone's recorder and note what the transcript got wrong, especially "two hundred" and "four".]</span></p>
+      <div class="tablewrap scroll"><table class="runs">
+        <thead><tr><th>Check</th><th>ChatGPT</th><th>Claude</th><th>Gemini in Docs</th><th>Copilot in Word</th></tr></thead>
+        <tbody>
+          <tr><td>Marks rows 1, 2, 3, 6 and 7 with [CHECK]</td><td><span class="note">Dan to run</span></td><td><span class="note">Dan to run</span></td><td><span class="note">Dan to run</span></td><td><span class="note">Dan to run</span></td></tr>
+          <tr><td>Gives the gloves a separate Safety line</td><td><span class="note">Dan to run</span></td><td><span class="note">Dan to run</span></td><td><span class="note">Dan to run</span></td><td><span class="note">Dan to run</span></td></tr>
+          <tr><td>Leaves out the alarm code</td><td><span class="note">Dan to run</span></td><td><span class="note">Dan to run</span></td><td><span class="note">Dan to run</span></td><td><span class="note">Dan to run</span></td></tr>
+          <tr><td>Invents any step, number or time</td><td><span class="note">Dan to run</span></td><td><span class="note">Dan to run</span></td><td><span class="note">Dan to run</span></td><td><span class="note">Dan to run</span></td></tr>
+          <tr><td>Quiz answers quote the manual</td><td><span class="note">Dan to run</span></td><td><span class="note">Dan to run</span></td><td><span class="note">Dan to run</span></td><td><span class="note">Dan to run</span></td></tr>
+        </tbody>
+      </table></div>
+      <p>Use the same script and answer key on your own tools before you trust them with your real jobs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="q" id="q5" data-sec>
+  <div class="wrap">
+    <p class="eyebrow">Question 5</p>
+    <h2>What must a person check, and what do the rules say?</h2>
+    <div class="prose t">
+      <p class="answer">You check every fact. AI can make things up.</p>
+      <ul>
+        <li>In one study, as much as 75% of what AI summaries said was not in the documents (<a href="https://aclanthology.org/anthology-files/pdf/findings/2025.findings-naacl.293.pdf" target="_blank" rel="noopener">Belem et al.</a>).</li>
+        <li>AI got 63% of short tasks right. It got only 20% of very long ones right (<a href="https://arxiv.org/abs/2605.00817" target="_blank" rel="noopener">Panda et al.</a>). These were math tasks, not job guides. Still, keep each part short.</li>
+        <li>A safety office in New Brunswick found AI safety papers that used the wrong laws (<a href="https://www.worksafenb.ca/about-us/news-and-events/news/2026/need-to-develop-health-and-safety-policies-procedures-or-codes-of-practice-read-this-first/" target="_blank" rel="noopener">WorkSafeNB</a>).</li>
+      </ul>
+    </div>
+    <div class="prose s">
+      <p class="answer">You check every fact. AI writes good sentences but gets facts wrong.</p>
+      <ul>
+        <li>In a 2025 study, on average up to 75% of what AI summaries said was not backed by the documents (<a href="https://aclanthology.org/anthology-files/pdf/findings/2025.findings-naacl.293.pdf" target="_blank" rel="noopener">Belem et al.</a>).</li>
+        <li>In a 2026 study, AI got 63% of 5-step tasks right but only 20% of 95-step tasks (<a href="https://arxiv.org/abs/2605.00817" target="_blank" rel="noopener">Panda et al.</a>). The tasks were math steps, not job manuals. Still, keep each part short.</li>
+        <li>In New Brunswick, WorkSafeNB found AI-written safety policies quoting the wrong province's laws and missing real hazards. It said using AI "does not replace your duty to exercise due diligence" (<a href="https://www.worksafenb.ca/about-us/news-and-events/news/2026/need-to-develop-health-and-safety-policies-procedures-or-codes-of-practice-read-this-first/" target="_blank" rel="noopener">WorkSafeNB</a>).</li>
+      </ul>
+    </div>
+    <div class="prose d">
+      <p class="answer">You check every fact, because AI writes sentences well and supplies facts badly. Three independent tests show the risk:</p>
+      <ul>
+        <li>In a peer-reviewed 2025 study of five AI models summarising sets of documents, on average up to 75% of the content in the summaries was hallucinated, meaning it was not supported by the documents (<a href="https://aclanthology.org/anthology-files/pdf/findings/2025.findings-naacl.293.pdf" target="_blank" rel="noopener">Belem et al., NAACL 2025</a>).</li>
+        <li>In a 2026 preprint, AI models' first-answer accuracy fell from 63% on 5-step procedures to 20% on 95-step procedures (<a href="https://arxiv.org/abs/2605.00817" target="_blank" rel="noopener">Panda et al., arXiv</a>). That test used arithmetic procedures, not job manuals, but the direction is the warning: the longer the job, the more steps get skipped. Keep each section short.</li>
+        <li>The transcription errors in the section on capturing the job.</li>
+      </ul>
+    </div>
+  </div>
+  <figure class="wrap">
+    <p class="figtitle"><span class="t">Longer tasks, more mistakes</span><span class="ds">First answers right, by length of task</span></p>
+    <div class="bars">
+      <div class="bar"><span class="l"><span class="t">Short task</span><span class="ds">5-step procedures</span></span><span class="tr"><span class="f ink" style="width:63%"></span><span class="v">63%</span></span></div>
+      <div class="bar"><span class="l"><span class="t">Very long task</span><span class="ds">95-step procedures</span></span><span class="tr"><span class="f hot" style="width:20%"></span><span class="v">20%</span></span></div>
+    </div>
+    <div class="scale" aria-hidden="true"><span class="sp"></span><div><span>0%</span><span>50%</span><span>100%</span></div></div>
+    <figcaption><a href="https://arxiv.org/abs/2605.00817" target="_blank" rel="noopener">Panda et al.</a>, 2026 preprint. Independent test on arithmetic procedures, not job manuals.</figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="prose d"><p>A regulator has already seen this in real workplaces. On 10 September 2026, WorkSafeNB in New Brunswick warned that AI-drafted safety policies it reviewed cited other provinces' laws, used US standards instead of New Brunswick law, left out workplace-specific hazards and raised privacy concerns. Its advice: "always review and verify the content before putting it into practice", because "Using AI does not replace your duty to exercise due diligence" (<a href="https://www.worksafenb.ca/about-us/news-and-events/news/2026/need-to-develop-health-and-safety-policies-procedures-or-codes-of-practice-read-this-first/" target="_blank" rel="noopener">WorkSafeNB</a>).</p></div>
+  </div>
+  <figure class="widewrap" style="margin-top:28px">
+    <p class="figtitle"><span class="d">Your check, every time</span><span class="st">Your check</span></p>
+    <ol class="strip">
+      <li><h3>Listen</h3><p><span class="t">Listen to the recording again.</span><span class="s">Listen to the recording with the draft in front of you.</span><span class="d">Listen to the recording once with the draft in front of you, and fix every number, name and safety step.</span></p></li>
+      <li><h3>Answer</h3><p><span class="st">Answer every [CHECK] yourself.</span><span class="d">Answer every [CHECK] yourself, from your own records, the product label or your regulator. Never ask the AI to fill one in.</span></p></li>
+      <li><h3>Check the law</h3><p><span class="t">Check any law on the official website.</span><span class="s">Check any law the draft names on the official website.</span><span class="d">Check any law or rule the draft mentions against the official page for your state or province.</span></p></li>
+      <li><h3>Test</h3><p><span class="t">Have a new person test it.</span><span class="s">Run the second-person test.</span><span class="d">Run the second-person test.</span></p></li>
+      <li><h3>Sign</h3><p><span class="t">Sign and date it.</span><span class="s">Add your name and the date.</span><span class="d">Put your name and the date at the top. That is your record of who approved which version.</span></p></li>
+    </ol>
+  </figure>
+  <div class="wrap">
+    <div class="prose t">
+      <div class="where2">
+        <div><h3>In the US</h3><p>Teach workers about the dangerous chemicals where they work, when they start, and again when a new one arrives (<a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1200" target="_blank" rel="noopener">OSHA</a>). Required training is paid time (<a href="https://www.dol.gov/agencies/whd/fact-sheets/22-flsa-hours-worked" target="_blank" rel="noopener">US Department of Labor</a>).</p></div>
+        <div><h3>In Canada</h3><p>In Ontario, every worker needs basic safety training, and you keep a record (<a href="https://www.ontario.ca/laws/regulation/130297" target="_blank" rel="noopener">Ontario</a>). Required training is paid time (<a href="https://www.publications.gov.on.ca/store/20170501121/Free_Download_Files/301000.pdf" target="_blank" rel="noopener">Ontario guide</a>). In Quebec, staff training papers must be in French (<a href="https://www.legisquebec.gouv.qc.ca/fr/version/lc/c-11?code=se:41&amp;historique=20260122&amp;langCont=en" target="_blank" rel="noopener">Quebec</a>), and training time is paid (<a href="https://www.cnesst.gouv.qc.ca/en/working-conditions/work-schedule-and-termination-employment/work-schedule/worker-training" target="_blank" rel="noopener">CNESST</a>).</p></div>
+      </div>
+      <p style="font-size:15px;color:var(--muted)">This is not legal advice.</p>
+    </div>
+    <div class="prose s">
+      <div class="where2">
+        <div><h3>In the US</h3><ul>
+          <li>Workers must be trained on hazardous chemicals when they start and when a new hazard arrives (<a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1200" target="_blank" rel="noopener">OSHA</a>).</li>
+          <li>Required training is paid work time (<a href="https://www.dol.gov/agencies/whd/fact-sheets/22-flsa-hours-worked" target="_blank" rel="noopener">US Department of Labor</a>).</li>
+        </ul></div>
+        <div><h3>In Canada</h3><ul>
+          <li>Ontario: every worker needs basic safety awareness training, and you keep a record (<a href="https://www.ontario.ca/laws/regulation/130297" target="_blank" rel="noopener">O. Reg. 297/13</a>). Training you require counts as work time (<a href="https://www.publications.gov.on.ca/store/20170501121/Free_Download_Files/301000.pdf" target="_blank" rel="noopener">Ontario ESA guide</a>).</li>
+          <li>Quebec: training documents for staff must be in French (<a href="https://www.legisquebec.gouv.qc.ca/fr/version/lc/c-11?code=se:41&amp;historique=20260122&amp;langCont=en" target="_blank" rel="noopener">Charter s. 41</a>), and training time is paid (<a href="https://www.cnesst.gouv.qc.ca/en/working-conditions/work-schedule-and-termination-employment/work-schedule/worker-training" target="_blank" rel="noopener">CNESST</a>).</li>
+          <li>Ontario food: a certified food handler or supervisor must be on site while you are open (<a href="https://www.healthunit.com/businesses/food-businesses/food-handler-certification/" target="_blank" rel="noopener">Middlesex-London Health Unit</a>).</li>
+        </ul></div>
+      </div>
+      <p style="font-size:15px;color:var(--muted)">This is general information, not legal advice.</p>
+    </div>
+    <div class="prose d">
+      <div class="where2 one">
+        <div><h3>In the US</h3><ul>
+          <li><strong>Chemicals.</strong> OSHA's Hazard Communication standard requires employers to train workers on the hazardous chemicals in their work area at their first assignment and whenever a new chemical hazard is introduced (<a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1200" target="_blank" rel="noopener">29 CFR 1910.1200</a>). That paragraph sets no annual refresher; other OSHA standards carry their own training rules, so check the ones for your industry rather than copying a generic "annual training" line.</li>
+          <li><strong>Pay.</strong> Under federal law, time in training counts as work time unless it is outside normal hours, voluntary, not job related and no other work is done (<a href="https://www.dol.gov/agencies/whd/fact-sheets/22-flsa-hours-worked" target="_blank" rel="noopener">DOL Fact Sheet #22</a>). Reading a required manual or taking its quiz is paid time. Your state may add rules of its own.</li>
+        </ul></div>
+        <div><h3>In Canada</h3><ul>
+          <li><strong>Ontario safety training.</strong> Every worker must complete basic health and safety awareness training as soon as practicable, and supervisors within one week of starting to supervise. You must keep a record and give written proof on request, including for six months after someone leaves (<a href="https://www.ontario.ca/laws/regulation/130297" target="_blank" rel="noopener">O. Reg. 297/13</a>). Your manual does not replace that training.</li>
+          <li><strong>Ontario pay.</strong> "Time spent in training that is required by the employer or by law is counted as work time" (<a href="https://www.publications.gov.on.ca/store/20170501121/Free_Download_Files/301000.pdf" target="_blank" rel="noopener">Ontario ESA guide</a>).</li>
+          <li><strong>Quebec language and pay.</strong> The Charter of the French Language requires training documents produced for staff to be in French; if another language version exists, the French one must be available on terms at least as favourable (<a href="https://www.legisquebec.gouv.qc.ca/fr/version/lc/c-11?code=se:41&amp;historique=20260122&amp;langCont=en" target="_blank" rel="noopener">Charter s. 41</a>). The CNESST says workers are at work when they are doing training and must be paid for those hours (<a href="https://www.cnesst.gouv.qc.ca/en/working-conditions/work-schedule-and-termination-employment/work-schedule/worker-training" target="_blank" rel="noopener">CNESST</a>).</li>
+          <li><strong>Food.</strong> In Ontario, every food service premise must have at least one certified food handler or supervisor on site while it operates (<a href="https://www.healthunit.com/businesses/food-businesses/food-handler-certification/" target="_blank" rel="noopener">Middlesex-London Health Unit</a>). A manual explains your routine; it does not certify anyone.</li>
+          <li><strong>Other provinces</strong> have their own safety acts. Check your province's worker-training rules before the manual says anything about them.</li>
+        </ul></div>
+      </div>
+      <p style="font-size:15px;color:var(--muted)">This is general information, not legal advice. Ask your regulator or a lawyer about your own situation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="q" id="q6" data-sec>
+  <div class="wrap">
+    <p class="eyebrow">Question 6</p>
+    <h2>What could an agent do here, and where must a person approve?</h2>
+    <div class="prose t"><p class="answer">An automation can write the first draft for you. You still say yes before staff see it.</p></div>
+    <div class="prose s"><p class="answer">An automation can write the first draft. You still approve it before staff see it.</p><p>A simple Zapier version:</p></div>
+    <div class="prose d"><p class="answer">An automation or agent can move the files and write the first draft, but you approve before any staff member sees it.</p><p>Here is a simple version a small business can copy, built in Zapier:</p></div>
+  </div>
+  <figure class="widewrap">
+    <p class="figtitle"><span class="t">Six steps, and you say yes at step 5</span><span class="ds">Six steps, with a gate at step 5</span></p>
+    <ol class="flow6">
+      <li><p class="k">Step 1 · Your phone or Word</p><h3>Record</h3><p><span class="t">You record the job and make a transcript.</span><span class="s">Record the job and make a transcript on your phone or in Word.</span><span class="d">Record the job and make a transcript.</span></p><p class="hc d">You listen once and cut long silences</p></li>
+      <li><p class="k">Step 2 · Google Drive</p><h3>Save</h3><p><span class="t">You save it in a Google Drive folder.</span><span class="s">Save the transcript in a Google Drive folder you own.</span><span class="d">Save the transcript as a Doc in a folder you own, called "Recordings in".</span></p><p class="hc d">None</p></li>
+      <li><p class="k">Step 3 · Zapier</p><h3>Spot the file</h3><p><span class="t">Zapier sees the new file.</span><span class="s">Zapier sees the new file (<a href="https://zapier.com/apps/ai/integrations/google-drive/1612359/create-new-ai-by-zapier-answers-for-each-new-file-in-google-drive" target="_blank" rel="noopener">Zapier</a>).</span><span class="d">Google Drive "New File in Folder" starts the automation when the file lands; it checks the folder on a schedule, so it is not instant (<a href="https://zapier.com/apps/ai/integrations/google-drive/1612359/create-new-ai-by-zapier-answers-for-each-new-file-in-google-drive" target="_blank" rel="noopener">Zapier template</a>).</span></p><p class="hc d">None</p></li>
+      <li><p class="k">Step 4 · AI by Zapier</p><h3>Draft</h3><p><span class="t">AI writes a draft.</span><span class="s">An AI step writes the draft using the prompt.</span><span class="d">Runs the prompt above on the transcript and writes the draft.</span></p><p class="hc d">None</p></li>
+      <li class="on"><p class="k"><span class="stop"></span>Step 5 · Human in the Loop</p><h3><span class="t">You say yes</span><span class="ds">You approve</span></h3><p><span class="t">Zapier stops and asks you to approve (<a href="https://zapier.com/blog/human-in-the-loop-guide/" target="_blank" rel="noopener">Zapier</a>).</span><span class="s">Zapier pauses and asks you to approve. You can edit, approve or say no (<a href="https://zapier.com/blog/human-in-the-loop-guide/" target="_blank" rel="noopener">Zapier</a>).</span><span class="d">"Request Approval" pauses and sends you the draft; you can edit it, approve it or decline it.</span></p><p class="hc">The gate: nothing moves on without you</p></li>
+      <li><p class="k">Step 6 · Google Drive</p><h3>Share</h3><p><span class="t">Only approved guides go to staff.</span><span class="s">Only approved files go to the staff folder.</span><span class="d">Saves the approved version to "Approved manuals", the only folder staff use.</span></p><p class="hc d">Staff only ever read approved files</p></li>
+    </ol>
+    <figcaption class="d">The last line of each step is the human check.</figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="prose t">
+      <p>This needs Zapier Professional, from US$19.99 a month (<a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier</a>).</p>
+      <p>Claude asks before it sends an email, unless you turn on Auto mode (<a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors" target="_blank" rel="noopener">Claude</a>). Keep it asking.</p>
+      <p><strong>A person must always say yes</strong> before the guide is shared, sent, changed, or anything is paid for.</p>
+      <div class="box"><h3>Use more than one tool</h3><p>Record the job on your phone. That is free. Make a transcript in Word or the Gemini app. Write the draft in Claude or ChatGPT. That costs about US$20 a month (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude</a>, <a href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener">OpenAI</a>). <strong>You check every step.</strong> Make the quiz in Google Forms. <strong>A new person tests it.</strong> Then save it in one folder. <span class="note">[DAN: add where Muse fits.]</span></p></div>
+    </div>
+    <div class="prose s">
+      <p>This needs Zapier Professional, from US$19.99 a month (<a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier pricing</a>). On that plan, only you can approve, and every reviewer needs their own Zapier account (<a href="https://zapier.com/blog/human-in-the-loop-guide/" target="_blank" rel="noopener">Zapier</a>). If a manager should approve, look at Team, from US$69 a month.</p>
+      <ul>
+        <li><strong>Claude</strong> asks before it sends an email for you, unless you turn on Auto mode (<a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors" target="_blank" rel="noopener">Claude help</a>). Keep it asking.</li>
+        <li><strong>Copilot Studio</strong> approval flows are still in preview, so don't rely on them for safety steps (<a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-advanced-approvals" target="_blank" rel="noopener">Microsoft</a>).</li>
+        <li><strong>ChatGPT Work</strong> is listed on ChatGPT plans (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">ChatGPT</a>). Test what it asks before acting.</li>
+      </ul>
+      <p><strong>A person must always approve:</strong> sharing the manual, sending it to staff, changing it, and spending money.</p>
+      <div class="box"><h3>Across tools</h3><p>Record on your phone (free). Transcribe in Word or the Gemini app (included with Microsoft 365, or up to 10 minutes free in Gemini). You get a text transcript. Draft in a Claude or ChatGPT Project (US$20 a month for Pro or Plus, <a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude</a>, <a href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener">OpenAI</a>). You get a draft with [CHECK] marks. <strong>You check it</strong> and answer every [CHECK]. Make the checklist and quiz, and build the quiz in Google Forms if you have Workspace. <strong>You run the second-person test</strong>, then sign it and save it to one folder. <span class="note">[DAN: add where Muse fits.]</span></p></div>
+    </div>
+    <div class="prose d">
+      <p><strong>What it costs.</strong> Multi-step Zaps need Zapier Professional, from US$19.99 a month; the free plan only runs two-step Zaps (<a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier pricing</a>). Human in the Loop is on Pro plans and up, each successful approval counts as one task, and on Pro you can only send approval requests to yourself. Every reviewer also needs their own Zapier account (<a href="https://zapier.com/blog/human-in-the-loop-guide/" target="_blank" rel="noopener">Zapier</a>). Zapier's guide states that limit only for Pro, so if a manager should approve instead of you, plan on Team, which starts at US$69 a month (<a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier pricing</a>), and confirm with Zapier before you buy. AI steps can use more tasks depending on the model you pick, so check the count in the Zap editor before you choose a plan.</p>
+      <p><strong>Agents that work inside your apps:</strong></p>
+      <ul>
+        <li><strong>Claude</strong> with the Google Workspace connectors asks for your approval before it sends, replies to or forwards an email, outside Auto mode. In Auto mode those actions can run without asking unless an automated check flags them, and Anthropic adds that "The check can miss risky actions" (<a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors" target="_blank" rel="noopener">Claude help</a>). For anything that goes to staff, keep Manual mode or set the tool to "Always ask".</li>
+        <li><strong>Microsoft Copilot Studio</strong> can build approval flows with human and AI review stages, but Microsoft labels all of them preview and says preview features "aren't meant for production use" (<a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-advanced-approvals" target="_blank" rel="noopener">Microsoft Learn</a>). Do not let an AI review stage sign off a safety manual on its own.</li>
+        <li><strong>ChatGPT</strong> now lists ChatGPT Work on its plans, with limited access on Free and Go (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">ChatGPT pricing</a>). I could not open OpenAI's help page on what it asks before acting, so test what it does before it sends or shares anything for you.</li>
+      </ul>
+      <p><strong>Where a person must approve, every time:</strong> publishing or sharing the manual, sending it to staff, changing an approved version, and anything that costs money.</p>
+      <h3>A workflow across tools, the way I would set it up</h3>
+      <ol>
+        <li>Record the job on your phone, in short parts. Cost: nothing extra.</li>
+        <li>Transcribe it in Word (300 minutes a month with Microsoft 365) or the Gemini app (10 minutes free). Cost: nothing extra if you already pay for Microsoft 365, or free in Gemini for up to 10 minutes of audio. Hand-off: a text transcript.</li>
+        <li>Draft in a Claude or ChatGPT Project with the prompt above. Cost: Claude Pro or ChatGPT Plus, US$20 a month each on monthly billing (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>, <a href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener">OpenAI</a>). Hand-off: a draft manual with [CHECK] marks.</li>
+        <li>You answer the [CHECK] list, listen back and fix the draft. <strong>Human check.</strong></li>
+        <li>Make the checklist and quiz from the approved manual, and build the quiz in Google Forms if you have Workspace. Hand-off: checklist and quiz.</li>
+        <li>Run the second-person test, sign and date it, save it to the one shared folder. <strong>Human check.</strong></li>
+      </ol>
+      <p><span class="note">[DAN: add where Muse fits in your own version of this workflow.]</span></p>
+    </div>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap">
+    <p class="eyebrow">If you remember one thing</p>
+    <p><span class="t">AI writes the words. You give the facts and say yes.</span><span class="ds">AI drafts the words. You supply the facts and sign it off.</span></p>
+  </div>
+</div>
+
+<!-- 7 -->
+<section class="q" id="q7" data-sec>
+  <div class="wrap">
+    <p class="eyebrow">Question 7</p>
+    <h2>How do I keep it current and get staff to use it?</h2>
+    <div class="prose t">
+      <p class="answer">Keep one copy in one place. Give it one owner. Fix it the day the job changes.</p>
+      <ul>
+        <li>Use one shared folder.</li>
+        <li>Write the owner's name and date at the top.</li>
+        <li>Check it when something changes. Check the rest once a year.</li>
+        <li>Quiz staff again after a change.</li>
+        <li>Thank people who spot a wrong step.</li>
+      </ul>
+    </div>
+    <div class="prose s">
+      <p class="answer">Keep one copy in one place, with one owner. Change it the day the job changes.</p>
+      <ul>
+        <li>Use one shared folder you already pay for.</li>
+        <li>Put the owner's name and the last check date at the top.</li>
+        <li>Review it after new equipment, a new product, a software change, an accident or near miss, or when a new hire says a step is wrong. Review the rest once a year.</li>
+        <li>Quiz people again after a change.</li>
+        <li>Thank people who point out a wrong step.</li>
+      </ul>
+    </div>
+    <div class="prose d">
+      <p class="answer">Keep one copy, in one place, with one named owner, and change it the day the job changes.</p>
+      <p>In the survey above, 45% said procedures were out of date and 50% could not find the right one (<a href="https://drillingcontractor.org/why-people-dont-follow-procedures-a-human-performance-perspective-54955" target="_blank" rel="noopener">Drilling Contractor</a>). A manual nobody can find or trust stops being used.</p>
+      <ul>
+        <li><strong>One home.</strong> A shared Google Drive or SharePoint folder you already pay for is enough for most small businesses. Do not keep one copy in a binder and another in a group chat.</li>
+        <li><strong>One owner per procedure,</strong> named at the top with the date it was last checked.</li>
+        <li><strong>Review when something changes:</strong> new equipment, a new product or supplier, a software update, an incident or near miss, or a new hire saying a step does not match what really happens. Review the rest once a year.</li>
+        <li><strong>Quiz again after a change.</strong> Re-run the quiz prompt on the new version and send it to the people the change affects.</li>
+        <li><strong>Make it easy to say a step is wrong,</strong> and thank whoever says it. People who fear blame keep quiet, and the manual drifts away from the real job.</li>
+      </ul>
+    </div>
+  </div>
+  <figure class="wrap">
+    <p class="figtitle"><span class="t">A year of updates</span><span class="ds">What a year of updates can look like</span></p>
+    <p class="madeup">Made-up example year at Corner Cup Café</p>
+    <div class="year" aria-label="Twelve months with four change dots and one yearly review mark in December">
+      <div><span class="m">Jan</span></div><div><span class="dot"></span><span class="m">Feb</span></div><div><span class="m">Mar</span></div><div><span class="m">Apr</span></div><div><span class="dot"></span><span class="m">May</span></div><div><span class="m">Jun</span></div><div><span class="m">Jul</span></div><div><span class="dot"></span><span class="m">Aug</span></div><div><span class="m">Sep</span></div><div><span class="dot"></span><span class="m">Oct</span></div><div><span class="m">Nov</span></div><div><span class="rev"></span><span class="m">Dec</span></div>
+    </div>
+    <ul class="yearkey">
+      <li>Feb: new grinder <span class="ds">(new equipment)</span></li>
+      <li>May: new milk supplier</li>
+      <li>Aug: till software update</li>
+      <li>Oct: a near miss <span class="ds">on a wet floor</span></li>
+      <li class="r">Dec: <span class="t">check the rest once a year</span><span class="ds">yearly review of everything else</span></li>
+    </ul>
+    <figcaption><span class="t">Each dot means: fix the guide that day.</span><span class="ds">Each dot is a change that triggers a review of the steps it touches, the same day.</span></figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="prose t"><p>Small teams don't need a big training app. Trainual shows no prices and charges a US$1,000 setup fee (<a href="https://www.trainual.com/pricing" target="_blank" rel="noopener">Trainual</a>).</p></div>
+    <div class="prose s"><p>Under 25 staff, you probably don't need a training platform. Trainual shows no prices, charges a US$1,000 setup fee, and says it suits 25 to 1,000 employees (<a href="https://www.trainual.com/pricing" target="_blank" rel="noopener">Trainual</a>).</p></div>
+    <div class="prose d"><p><strong>Do you need a training platform?</strong> Probably not under 25 staff. Trainual, one of the best-known, publishes no subscription prices, charges a one-time US$1,000 implementation fee, and says it is best suited to companies with 25 to 1,000 employees (<a href="https://www.trainual.com/pricing" target="_blank" rel="noopener">Trainual pricing</a>). Platforms like it add assignments, read tracking and built-in quizzes. A shared folder plus a Forms quiz covers the basics for much less.</p></div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="q" id="q8" data-sec>
+  <div class="wrap">
+    <p class="eyebrow">Question 8</p>
+    <h2>What does it cost?</h2>
+    <div class="prose t">
+      <p class="answer">You may already pay for what you need.</p>
+      <div class="where2">
+        <div><h3>In the US</h3><p>ChatGPT Plus is US$20 a month (<a href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener">OpenAI</a>). Claude Pro is US$20 a month (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude</a>). Zapier Professional starts at US$19.99 a month (<a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier</a>).</p></div>
+        <div><h3>In Canada</h3><p>Google Workspace Business Standard is CA$18.40 a user a month on a 1-year plan (<a href="https://workspace.google.com/intl/en_ca/lp/gmail-for-business/" target="_blank" rel="noopener">Google</a>). Many AI tools charge in US dollars. Add sales tax. In Ontario, HST is 13% (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">CRA</a>).</p></div>
+      </div>
+    </div>
+    <div class="prose s">
+      <p class="answer">You can often start with tools you already pay for. Prices checked 27 November 2026.</p>
+      <div class="where2">
+        <div><h3>In the US (USD, before tax)</h3><ul>
+          <li>ChatGPT Plus US$20 a month (<a href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener">OpenAI</a>)</li>
+          <li>Claude Pro US$17 a month yearly or US$20 monthly (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude</a>)</li>
+          <li>Scribe Pro Personal US$25 a month yearly (<a href="https://scribe.com/pricing" target="_blank" rel="noopener">Scribe</a>)</li>
+          <li>Tango Pro US$22 a month yearly (<a href="https://www.tango.ai/pricing" target="_blank" rel="noopener">Tango</a>)</li>
+          <li>Zapier Professional from US$19.99 a month (<a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier</a>)</li>
+        </ul></div>
+        <div><h3>In Canada (CAD, plus tax)</h3><ul>
+          <li>Google Workspace Business Standard CA$18.40 a user a month on a 1-year plan (<a href="https://workspace.google.com/intl/en_ca/lp/gmail-for-business/" target="_blank" rel="noopener">Google</a>)</li>
+          <li>Microsoft Teams Essentials CA$5.40 a user a month, yearly (<a href="https://www.microsoft.com/en-ca/microsoft-teams/compare-microsoft-teams-business-options" target="_blank" rel="noopener">Microsoft</a>)</li>
+        </ul>
+        <p>Many AI tools charge in US dollars. Add 5% GST, or HST: 13% in Ontario, 14% in Nova Scotia, 15% in New Brunswick, Newfoundland and Labrador and PEI. Quebec, BC, Manitoba and Saskatchewan add their own provincial tax (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">CRA</a>).</p></div>
+      </div>
+    </div>
+    <div class="prose d">
+      <p class="answer">Most owners can start with tools they already pay for.</p>
+      <p class="checked">Prices below were checked on the vendors' own pages on 27 November 2026.</p>
+      <h3>In the US <span style="font:400 15px var(--text);color:var(--muted)">USD, before sales tax</span></h3>
+      <div class="tablewrap scroll"><table class="price">
+        <thead><tr><th>Tool</th><th>Plan</th><th>Price</th></tr></thead>
+        <tbody>
+          <tr><td>ChatGPT</td><td>Plus</td><td>US$20 a month</td></tr>
+          <tr><td>ChatGPT</td><td>Business</td><td>US$20 a seat a month yearly, US$25 monthly</td></tr>
+          <tr><td>Claude</td><td>Pro</td><td>US$17 a month yearly (US$200 up front), US$20 monthly</td></tr>
+          <tr><td>Scribe</td><td>Pro Personal</td><td>US$25 a seat a month yearly, US$35 monthly</td></tr>
+          <tr><td>Scribe</td><td>Pro Team</td><td>US$13 a seat a month yearly, US$17 monthly, 5-seat minimum</td></tr>
+          <tr><td>Tango</td><td>Pro, 1 to 2 users</td><td>US$22 a user a month yearly, US$30 monthly</td></tr>
+          <tr><td>Tango</td><td>Pro Team, 3+ users</td><td>US$15 a user a month yearly, US$20 monthly</td></tr>
+          <tr><td>Loom</td><td>Business</td><td>US$18 a user a month, monthly billing</td></tr>
+          <tr><td>Otter</td><td>Pro</td><td>US$8.33 a user a month yearly, US$16.99 monthly</td></tr>
+          <tr><td>Zapier</td><td>Professional</td><td>from US$19.99 a month</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:15px">Sources: <a href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener">ChatGPT</a>, <a href="https://openai.com/business/pricing/" target="_blank" rel="noopener">ChatGPT Business</a>, <a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude</a>, <a href="https://scribe.com/pricing" target="_blank" rel="noopener">Scribe</a>, <a href="https://www.tango.ai/pricing" target="_blank" rel="noopener">Tango</a>, <a href="https://www.loom.com/pricing" target="_blank" rel="noopener">Loom</a>, <a href="https://otter.ai/pricing" target="_blank" rel="noopener">Otter</a>, <a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier</a>. Google's US Workspace page did not show prices when I checked. Microsoft's US Copilot pricing page still showed a promotion that ended on 31 March 2026, and no Microsoft 365 plan prices, so I left Microsoft out of this table. <span class="note">[DAN: confirm Google Workspace and Microsoft 365 US prices from a US view if you want them in the table.]</span></p>
+      <h3>In Canada <span style="font:400 15px var(--text);color:var(--muted)">CAD, plus tax</span></h3>
+      <div class="tablewrap scroll"><table class="price">
+        <thead><tr><th>Tool</th><th>Plan</th><th>Price</th></tr></thead>
+        <tbody>
+          <tr><td>Google Workspace</td><td>Business Standard</td><td>CA$18.40 a user a month with a 1-year commitment, CA$22 flexible</td></tr>
+          <tr><td>Google AI</td><td>Pro</td><td>CA$26.99 a month</td></tr>
+          <tr><td>Microsoft</td><td>Teams Essentials</td><td>CA$5.40 a user a month, yearly</td></tr>
+          <tr><td>Microsoft 365</td><td>Business Basic</td><td>CA$9.50 a user a month, yearly</td></tr>
+          <tr><td>Microsoft 365</td><td>Business Standard with Copilot</td><td>CA$31.90 a user a month yearly, CA$38.28 monthly</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:15px">Sources: <a href="https://workspace.google.com/intl/en_ca/lp/gmail-for-business/" target="_blank" rel="noopener">Google Workspace Canada</a>, <a href="https://gemini.google/ca/subscriptions/" target="_blank" rel="noopener">Google AI Canada</a>, <a href="https://www.microsoft.com/en-ca/microsoft-teams/compare-microsoft-teams-business-options" target="_blank" rel="noopener">Microsoft Teams Canada</a>, <a href="https://www.microsoft.com/en-ca/microsoft-365/copilot/pricing" target="_blank" rel="noopener">Microsoft 365 Copilot Canada</a>.</p>
+      <div class="box"><h3>In Canada: currency and tax</h3><p>ChatGPT, Claude, Scribe, Tango, Loom, Otter and Zapier showed US dollars or an unlabelled "$" on the pages I checked; Scribe states "All prices shown in USD". Your card converts them. Then add sales tax: 5% GST, or HST at 13% in Ontario, 14% in Nova Scotia and 15% in New Brunswick, Newfoundland and Labrador and PEI. Quebec adds 9.975% QST, and BC, Manitoba and Saskatchewan add PST (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">CRA rates</a>).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="q" id="q9" data-sec>
+  <div class="wrap">
+    <p class="eyebrow">Question 9</p>
+    <h2>Where can I get free help?</h2>
+    <div class="prose t"><div class="where2">
+      <div><h3>In the US</h3><p>OSHA gives free, private safety advice to small businesses (<a href="https://www.osha.gov/consultation" target="_blank" rel="noopener">OSHA</a>). SCORE gives free mentors (<a href="https://www.score.org/scores-small-business-services/" target="_blank" rel="noopener">SCORE</a>).</p></div>
+      <div><h3>In Canada</h3><p>In Ontario, WSPS gives free safety help to many shops and restaurants (<a href="https://www.wsps.ca/how-we-help/free-safety-support" target="_blank" rel="noopener">WSPS</a>). The Ontario Job Grant can help pay for staff courses (<a href="https://www.ontario.ca/page/ontario-job-grant" target="_blank" rel="noopener">Ontario</a>). In BC, a grant pays back 80% of the cost of many staff courses (<a href="https://www.workbc.ca/employers-industry/funding-programs/bc-employer-training-grant" target="_blank" rel="noopener">WorkBC</a>).</p></div>
+    </div></div>
+    <div class="prose s"><div class="where2">
+      <div><h3>In the US</h3><p>OSHA gives small businesses free, private safety advice that is separate from inspections (<a href="https://www.osha.gov/consultation" target="_blank" rel="noopener">OSHA</a>). SCORE gives free mentoring and courses (<a href="https://www.score.org/scores-small-business-services/" target="_blank" rel="noopener">SCORE</a>).</p></div>
+      <div><h3>In Canada</h3><p>In Ontario, WSPS gives free safety help to many WSIB-registered businesses, including shops and restaurants (<a href="https://www.wsps.ca/how-we-help/free-safety-support" target="_blank" rel="noopener">WSPS</a>). The Ontario Job Grant can pay most of a course for your staff, but not for writing your manual or for training the law already requires (<a href="https://www.ontario.ca/page/ontario-job-grant" target="_blank" rel="noopener">Ontario</a>). In BC, the Employer Training Grant pays back 80% of eligible training costs (<a href="https://www.workbc.ca/employers-industry/funding-programs/bc-employer-training-grant" target="_blank" rel="noopener">WorkBC</a>).</p></div>
+    </div></div>
+    <div class="prose d"><div class="where2 one">
+      <div><h3>In the US</h3><p>OSHA's On-Site Consultation Program gives small and medium-sized businesses free, confidential safety advice, separate from enforcement, in all 50 states (<a href="https://www.osha.gov/consultation" target="_blank" rel="noopener">OSHA</a>).</p><p>SCORE offers free business mentoring, webinars and self-paced courses (<a href="https://www.score.org/scores-small-business-services/" target="_blank" rel="noopener">SCORE</a>).</p></div>
+      <div><h3>In Canada</h3><p>In Ontario, WSPS gives free health and safety support, including assessments, free eCourses and a Small Business Centre, to WSIB-registered businesses in agriculture, manufacturing and services such as retail and restaurants (<a href="https://www.wsps.ca/how-we-help/free-safety-support" target="_blank" rel="noopener">WSPS</a>).</p><p>The Ontario Job Grant pays up to $10,000 per trainee for third-party training, and employers with under 100 staff pay at least one-sixth. A small employer training a previously unemployed new hire can get up to $15,000 per trainee, with no minimum share. It does not fund training you are legally required to provide, curriculum development or training for business owners, so it can pay for a course for your staff but not for writing your manual (<a href="https://www.ontario.ca/page/ontario-job-grant" target="_blank" rel="noopener">Ontario Job Grant</a>).</p><p>In BC, the Employer Training Grant reimburses 80% of eligible training costs, up to $10,000 per employee (<a href="https://www.workbc.ca/employers-industry/funding-programs/bc-employer-training-grant" target="_blank" rel="noopener">WorkBC</a>). Other provinces run their own programs; check your province's site.</p></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="q" id="q10" data-sec>
+  <div class="wrap">
+    <p class="eyebrow">Question 10</p>
+    <h2>What to do this week</h2>
+    <ul class="check">
+      <li><label><input type="checkbox" id="w1"><span><span class="t">Pick one job.</span><span class="s">Pick one job new staff get wrong.</span><span class="d">Pick one job new staff get wrong, and run the four-question test on it.</span></span></label></li>
+      <li><label><input type="checkbox" id="w2"><span><span class="t">Record it, out loud.</span><span class="s">Record yourself doing it, out loud, in short parts.</span><span class="d">Record yourself doing it once, out loud, in short parts.</span></span></label></li>
+      <li><label><input type="checkbox" id="w3"><span><span class="t">Make a transcript and use the prompt.</span><span class="s">Transcribe it and run the prompt.</span><span class="d">Transcribe it and run the prompt in a tool you already pay for.</span></span></label></li>
+      <li><label><input type="checkbox" id="w4"><span><span class="t">Answer each [CHECK].</span><span class="s">Answer every [CHECK] and listen back.</span><span class="d">Answer every [CHECK], and listen back for numbers and safety steps.</span></span></label></li>
+      <li><label><input type="checkbox" id="w5"><span><span class="st">Make the checklist and quiz.</span><span class="d">Make the checklist and the quiz from the approved version.</span></span></label></li>
+      <li><label><input type="checkbox" id="w6"><span><span class="t">Have a new person test it.</span><span class="s">Have someone new try it while you watch.</span><span class="d">Have someone new run the job from the checklist while you watch.</span></span></label></li>
+      <li><label><input type="checkbox" id="w7"><span><span class="t">Save it with your name and the date.</span><span class="s">Save it in one folder with your name and the date.</span><span class="d">Save it in one shared folder with your name and today's date.</span></span></label></li>
+    </ul>
+    <p style="margin:14px 0 0;font-size:13px;color:var(--muted)">Your ticks are saved on this device only.</p>
+  </div>
+</section>
+
+<!-- 11 -->
+<section class="q cta" id="q11" data-sec>
+  <p class="eyebrow">Question 11</p>
+  <h2 style="margin-top:14px">How Leverage Strategies helps</h2>
+  <p class="t">I can record a job with you and build the first guide, checklist and quiz together. You check every fact.</p>
+  <p class="s">I can record one of your jobs with you and build the first manual, checklist and quiz in tools you already use. You check every fact.</p>
+  <p class="d">I can sit with you, record one of your jobs, and build the first manual, checklist and quiz with you in the tools you already use, then set up a simple review routine so it stays current. You check and approve every fact. I cannot promise a result. The aim is a process you can repeat for your other jobs without me.</p>
+  <p><span class="note">[BOOK A CALL LINK]</span></p>
+</section>
+
+<!-- 12 -->
+<section class="q st" id="q12" data-sec style="padding-top:24px">
+  <div class="wrap">
+    <p class="eyebrow">Take it with you</p>
+    <h2>Words to know</h2>
+    <div class="prose t"><div class="tablewrap"><table>
+      <thead><tr><th>Word</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td>Transcript</td><td>The words from a recording, written down</td></tr>
+        <tr><td>Prompt</td><td>What you type to tell the AI what to do</td></tr>
+        <tr><td>Project</td><td>A place in ChatGPT or Claude that keeps your files and rules together</td></tr>
+        <tr><td>[CHECK]</td><td>A note the AI leaves when it doesn't know</td></tr>
+        <tr><td>Agent</td><td>An AI tool that can do tasks for you</td></tr>
+        <tr><td>Approve</td><td>Say yes before something goes ahead</td></tr>
+        <tr><td>HST</td><td>A Canadian sales tax</td></tr>
+        <tr><td>Automation</td><td>Steps that run on their own when something happens, like a new file</td></tr>
+        <tr><td>Grant</td><td>Money from the government that you do not pay back</td></tr>
+      </tbody>
+    </table></div></div>
+    <div class="prose s"><div class="tablewrap"><table>
+      <thead><tr><th>Word</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td>Transcript</td><td>A written copy of what was said in a recording</td></tr>
+        <tr><td>Prompt</td><td>The instructions you type to an AI tool</td></tr>
+        <tr><td>Project</td><td>A space in ChatGPT or Claude that keeps your files and instructions together</td></tr>
+        <tr><td>Hallucination</td><td>When AI states something that isn't true or isn't in your files</td></tr>
+        <tr><td>[CHECK]</td><td>A mark the AI adds when it doesn't know, so you fill it in</td></tr>
+        <tr><td>Agent</td><td>An AI tool that can take actions for you, such as sending or saving files</td></tr>
+        <tr><td>Automation</td><td>Steps that run on their own when something happens, like a new file</td></tr>
+        <tr><td>Approval step</td><td>A pause where a person must say yes before anything moves on</td></tr>
+        <tr><td>GST/HST</td><td>Canadian sales taxes added to the price</td></tr>
+      </tbody>
+    </table></div></div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="sources" id="sources" data-sec>
+    <h2>Sources</h2>
+    <p>All pages opened on 27 November 2026. Prices change often. <span class="st">Every number in this guide comes from these pages.</span></p>
+    <ul>
+      <li><a href="https://drillingcontractor.org/why-people-dont-follow-procedures-a-human-performance-perspective-54955" target="_blank" rel="noopener">Drilling Contractor, "Why people don't follow procedures", January 2020</a></li>
+      <li><a href="https://scribe.com/pricing" target="_blank" rel="noopener">Scribe pricing</a></li>
+      <li><a href="https://www.tango.ai/pricing" target="_blank" rel="noopener">Tango pricing</a></li>
+      <li><a href="https://www.loom.com/pricing" target="_blank" rel="noopener">Loom pricing</a></li>
+      <li><a href="https://help.openai.com/en/articles/8555545-uploading-files-and-audio-to-chatgpt" target="_blank" rel="noopener">OpenAI Help: uploading files and audio to ChatGPT</a></li>
+      <li><a href="https://support.claude.com/en/articles/8241126-upload-files-to-claude" target="_blank" rel="noopener">Claude Help: upload files to Claude</a></li>
+      <li><a href="https://support.google.com/gemini/answer/14903178" target="_blank" rel="noopener">Gemini Apps Help: upload and analyze files</a></li>
+      <li><a href="https://support.microsoft.com/en-gb/word/transcribe-your-recordings" target="_blank" rel="noopener">Microsoft Support: transcribe your recordings in Word</a></li>
+      <li><a href="https://otter.ai/pricing" target="_blank" rel="noopener">Otter pricing</a></li>
+      <li><a href="https://www.microsoft.com/en-ca/microsoft-teams/compare-microsoft-teams-business-options" target="_blank" rel="noopener">Microsoft Teams business options, Canada</a></li>
+      <li><a href="https://arxiv.org/html/2402.08021v2" target="_blank" rel="noopener">Koenecke et al., "Careless Whisper", ACM FAccT 2024</a></li>
+      <li><a href="https://laws-lois.justice.gc.ca/eng/acts/c-46/section-184.html" target="_blank" rel="noopener">Criminal Code of Canada, s. 184</a></li>
+      <li><a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">ChatGPT pricing</a> and <a href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener">OpenAI ChatGPT pricing</a></li>
+      <li><a href="https://openai.com/business/pricing/" target="_blank" rel="noopener">ChatGPT Business pricing</a></li>
+      <li><a href="https://support.claude.com/en/articles/9517075-what-are-projects" target="_blank" rel="noopener">Claude Help: what are Projects</a></li>
+      <li><a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a></li>
+      <li><a href="https://workspace.google.com/intl/en_ca/pricing/" target="_blank" rel="noopener">Google Workspace pricing, Canada (features)</a> and <a href="https://workspace.google.com/intl/en_ca/lp/gmail-for-business/" target="_blank" rel="noopener">Google Workspace, Canada (prices)</a></li>
+      <li><a href="https://support.google.com/docs/answer/16346789?hl=en" target="_blank" rel="noopener">Google Help: create a quiz with Gemini in Forms</a></li>
+      <li><a href="https://gemini.google/ca/subscriptions/" target="_blank" rel="noopener">Google AI plans, Canada</a></li>
+      <li><a href="https://www.microsoft.com/en-ca/microsoft-365/copilot/pricing" target="_blank" rel="noopener">Microsoft 365 Copilot pricing, Canada</a></li>
+      <li><a href="https://aclanthology.org/anthology-files/pdf/findings/2025.findings-naacl.293.pdf" target="_blank" rel="noopener">Belem et al., NAACL 2025 Findings</a></li>
+      <li><a href="https://arxiv.org/abs/2605.00817" target="_blank" rel="noopener">Panda et al., "When LLMs Stop Following Steps", arXiv 2026</a></li>
+      <li><a href="https://www.worksafenb.ca/about-us/news-and-events/news/2026/need-to-develop-health-and-safety-policies-procedures-or-codes-of-practice-read-this-first/" target="_blank" rel="noopener">WorkSafeNB advisory, 10 September 2026</a></li>
+      <li><a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.1200" target="_blank" rel="noopener">OSHA, 29 CFR 1910.1200 Hazard Communication</a></li>
+      <li><a href="https://www.dol.gov/agencies/whd/fact-sheets/22-flsa-hours-worked" target="_blank" rel="noopener">US Department of Labor, Fact Sheet #22</a></li>
+      <li><a href="https://www.ontario.ca/laws/regulation/130297" target="_blank" rel="noopener">Ontario, O. Reg. 297/13</a></li>
+      <li><a href="https://www.publications.gov.on.ca/store/20170501121/Free_Download_Files/301000.pdf" target="_blank" rel="noopener">Ontario, Your guide to the Employment Standards Act</a></li>
+      <li><a href="https://www.legisquebec.gouv.qc.ca/fr/version/lc/c-11?code=se:41&amp;historique=20260122&amp;langCont=en" target="_blank" rel="noopener">Quebec, Charter of the French Language, s. 41</a></li>
+      <li><a href="https://www.cnesst.gouv.qc.ca/en/working-conditions/work-schedule-and-termination-employment/work-schedule/worker-training" target="_blank" rel="noopener">CNESST, worker training</a></li>
+      <li><a href="https://www.healthunit.com/businesses/food-businesses/food-handler-certification/" target="_blank" rel="noopener">Middlesex-London Health Unit, food handler certification</a></li>
+      <li><a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier pricing</a>, <a href="https://zapier.com/blog/human-in-the-loop-guide/" target="_blank" rel="noopener">Zapier Human in the Loop guide</a> and <a href="https://zapier.com/apps/ai/integrations/google-drive/1612359/create-new-ai-by-zapier-answers-for-each-new-file-in-google-drive" target="_blank" rel="noopener">Zapier Drive to AI template</a></li>
+      <li><a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors" target="_blank" rel="noopener">Claude Help: Google Workspace connectors</a></li>
+      <li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-advanced-approvals" target="_blank" rel="noopener">Microsoft Learn: Copilot Studio multistage approvals</a></li>
+      <li><a href="https://www.trainual.com/pricing" target="_blank" rel="noopener">Trainual pricing</a></li>
+      <li><a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">Canada Revenue Agency, GST/HST rates</a></li>
+      <li><a href="https://www.osha.gov/consultation" target="_blank" rel="noopener">OSHA On-Site Consultation</a></li>
+      <li><a href="https://www.score.org/scores-small-business-services/" target="_blank" rel="noopener">SCORE services</a></li>
+      <li><a href="https://www.wsps.ca/how-we-help/free-safety-support" target="_blank" rel="noopener">WSPS free safety support</a></li>
+      <li><a href="https://www.ontario.ca/page/ontario-job-grant" target="_blank" rel="noopener">Ontario Job Grant</a></li>
+      <li><a href="https://www.workbc.ca/employers-industry/funding-programs/bc-employer-training-grant" target="_blank" rel="noopener">WorkBC, B.C. Employer Training Grant</a></li>
+      <li>Corner Cup Café is a made-up example business. Its transcript and answer key were written for this guide.</li>
+    </ul>
+  </div>
+</div>
+
+<footer class="site"><span>Leverage Strategies · Dan Albasry · Toronto</span><span>General information, not legal advice. Prices checked November 27, 2026.</span></footer>
+
+<div class="seg float" role="group" aria-label="Reading level">
+  <span class="lab">Reading level</span>
+  <button type="button" data-v="t" aria-pressed="true">Starter</button>
+  <button type="button" data-v="s" aria-pressed="false">Simple</button>
+  <button type="button" data-v="d" aria-pressed="false">Detailed</button>
+</div>
+
+<script>
+{
+  const KEY='leverage-notes-level', TKEY='leverage-tool', BOX='leverage-manual-checks';
+  const body=document.body, buttons=document.querySelectorAll('.seg button[data-v]');
+  const store=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+  const load=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+  const current=()=>body.classList.contains('lv-t')?'t':body.classList.contains('lv-s')?'s':'d';
+  const paint=v=>{body.classList.remove('lv-d','lv-s','lv-t');body.classList.add('lv-'+v);buttons.forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v?'true':'false'));};
+  const shown=el=>el.getClientRects().length>0;
+  // Keep the reader in the same section. If that section is not part of the new level, go to the next one it shows.
+  const setLevel=v=>{
+    if(v===current()) return;
+    const secs=[...document.querySelectorAll('[data-sec]')]; let anchor=null;
+    secs.forEach(s=>{ if(shown(s) && s.getBoundingClientRect().top<=120) anchor=s; });
+    let progress=0;
+    if(anchor){const r=anchor.getBoundingClientRect();progress=Math.min(1,Math.max(0,(120-r.top)/Math.max(1,r.height)));}
+    paint(v); store(KEY,v);
+    if(!anchor) return;
+    let target=anchor;
+    if(!shown(target)){
+      const i=secs.indexOf(anchor);
+      target=secs.slice(i+1).find(shown)||secs.slice(0,i).reverse().find(shown)||null;
+      progress=0;
+    }
+    if(target){const r2=target.getBoundingClientRect();window.scrollTo({top:window.pageYOffset+r2.top-120+progress*r2.height,behavior:'instant'});}
+  };
+  buttons.forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.v)));
+  // Hide the floating switch while the in-page switch is on screen (or not yet reached).
+  const fl=document.querySelector('.float'), inl=document.querySelector('.versions');
+  if(fl&&inl){let tick=false;const upd=()=>{tick=false;fl.classList.toggle('away',inl.getBoundingClientRect().bottom>0);};const req=()=>{if(!tick){tick=true;requestAnimationFrame(upd);}};window.addEventListener('scroll',req,{passive:true});window.addEventListener('resize',req);upd();}
+  const saved=load(KEY); paint(saved==='d'||saved==='s'||saved==='t'?saved:'t');
+
+  // Tool switch: ChatGPT by default; one choice moves every group.
+  const groups=document.querySelectorAll('.toolgroup');
+  const blockFor=(g,t)=>[...g.querySelectorAll('.toolblock')].find(b=>b.dataset.tool===t);
+  const setTool=(t)=>{
+    groups.forEach(g=>{
+      const blk=(t&&blockFor(g,t))||blockFor(g,'chatgpt')||g.querySelector('.toolblock');
+      g.querySelectorAll('.toolblock').forEach(b=>b.classList.toggle('on',b===blk));
+      g.querySelectorAll('.toolseg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tool===blk.dataset.tool?'true':'false'));
+    });
+  };
+  groups.forEach(g=>{g.classList.add('js');g.querySelectorAll('.toolseg button').forEach(b=>b.addEventListener('click',()=>{setTool(b.dataset.tool);store(TKEY,b.dataset.tool);}));});
+  const st=load(TKEY); setTool(st&&/^[a-z]+$/.test(st)?st:'chatgpt');
+
+  // This week's ticks, saved on this device only.
+  let ticks={}; try{ticks=JSON.parse(load(BOX)||'{}')||{}}catch(e){ticks={}}
+  document.querySelectorAll('.check input').forEach(box=>{box.checked=!!ticks[box.id];box.addEventListener('change',()=>{ticks[box.id]=box.checked;store(BOX,JSON.stringify(ticks));});});
+
+  // Copy buttons, with a select-the-text fallback.
+  const copy=(btn,txt,selNode)=>{
+    const label=btn.dataset.label||btn.textContent;
+    const fail=()=>{
+      if(selNode){try{const r=document.createRange();r.selectNodeContents(selNode);const s=window.getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}}
+      btn.textContent=selNode?'Selected: copy with your keyboard':'Select the text to copy';
+      setTimeout(()=>{btn.textContent=label},4000);
+    };
+    try{if(!navigator.clipboard||!navigator.clipboard.writeText) throw 0; navigator.clipboard.writeText(txt).then(()=>{btn.textContent='Copied';setTimeout(()=>{btn.textContent=label},1600)},fail);}catch(e){fail()}
+  };
+  const pbtn=document.getElementById('copyprompt');
+  if(pbtn) pbtn.addEventListener('click',()=>copy(pbtn,document.getElementById('prompttext').value,document.getElementById('ptext')));
+  document.querySelectorAll('.copyplain').forEach(btn=>btn.addEventListener('click',()=>copy(btn,btn.dataset.text,btn.parentElement.querySelector('.tt'))));
+}
+</script>
+
+</body></html>

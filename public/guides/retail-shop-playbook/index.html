@@ -1,0 +1,473 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Retail Shop Playbook</title>
+<meta name="description" content="How an independent shop can use AI today, reorder from the right numbers, and keep a person on every order, price and claim. US and Canada, three reading levels.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Site direction "G. Combined": paper, ink, one rust accent; Instrument Serif and Sans.
+   One reading column, figures up to 1040px, one dark band, floating level switch. Light theme by choice, as on the phone article. */
+:root{
+  color-scheme: light;
+  --paper:#F8F6F1; --ink:#141412; --body:#3A3832; --muted:#5A584F; --rule:#CFCBC0; --panel:#EDE9DF; --accent:#7A2E1A; --bar:#A8A397; --notebg:#F3E3DC; --white:#FFFFFF;
+  --display:'Instrument Serif','Iowan Old Style',Georgia,serif;
+  --text:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --col:680px; --wide:1040px;
+}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;overflow-wrap:anywhere}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+.eyebrow{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 24px}
+
+/* levels: .d detailed, .s simple, .t starter, .ds, .st */
+.lv-d .s,.lv-d .t,.lv-d .st{display:none !important}
+.lv-s .d,.lv-s .t{display:none !important}
+.lv-t .d,.lv-t .s,.lv-t .ds{display:none !important}
+.lv-s .prose{font-size:19px;line-height:1.75}
+.lv-t .prose{font-size:20px;line-height:1.8}
+
+header.site{padding:24px 32px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink)}
+header.site .mark{font-family:var(--display);font-size:32px;line-height:1}
+header.site .where{font-size:14px;color:var(--muted)}
+.hero{max-width:var(--col);margin:0 auto;padding:72px 24px 0}
+.hero h1{font-size:clamp(42px,6.4vw,74px);line-height:1.02;letter-spacing:-.02em;margin-top:22px}
+.hero .lede p{margin:26px 0 0;font-size:21px;line-height:1.6;color:var(--body)}
+.hero .by{margin:24px 0 0;font-size:14px;color:var(--muted)}
+
+.versions{margin:48px 0 0;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:22px 0}
+.versions p{margin:0;font-size:16px;color:var(--body);flex:1 1 300px}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--ink);background:var(--paper)}
+.seg button{font:500 14px/1 var(--text);letter-spacing:.04em;padding:14px 16px;min-height:44px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button + button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.float{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:20;box-shadow:0 6px 24px rgba(20,20,18,.18);flex-wrap:nowrap}
+.float .lab{display:flex;align-items:center;padding:0 14px 0 16px;font-size:13px;color:var(--muted);border-right:1px solid var(--rule)}
+@media (max-width:520px){.float .lab{display:none}.seg button{padding:14px 13px}}
+
+.toc{margin:56px 0 0}
+.toc ol{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--ink)}
+.toc li{border-bottom:1px solid var(--rule)}
+.toc a{display:flex;gap:20px;align-items:baseline;padding:14px 0;text-decoration:none;font-family:var(--display);font-size:24px;line-height:1.2}
+.toc a span.n{font:400 13px var(--text);color:var(--muted);flex:0 0 20px;font-variant-numeric:tabular-nums}
+
+.intro{margin-top:48px}
+section.q{padding:96px 0 0;scroll-margin-top:12px}
+section.q h2{font-size:clamp(34px,5vw,52px);line-height:1.06;margin:14px 0 28px}
+.prose > p{margin:0 0 20px;color:var(--body)}
+.prose > p:first-child{font-size:1.14em;line-height:1.55;color:var(--ink)}
+.prose strong{color:var(--ink);font-weight:600}
+.prose ul,.prose ol{margin:0 0 22px;padding-left:22px;color:var(--body)}
+.prose li{margin:0 0 10px}
+.prose li p{margin:0}
+.phold{margin:0 0 20px}
+.note{display:inline;background:var(--notebg);color:var(--accent);font-size:.92em;padding:1px 6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+.where2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:28px 0;border:1px solid var(--ink)}
+.where2 > div{padding:22px 24px;background:var(--panel)}
+.where2 > div + div{border-left:1px solid var(--ink)}
+@media (max-width:600px){.where2 > div + div{border-left:0;border-top:1px solid var(--ink)}}
+.where2 h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2 p{margin:0;font-size:16px;line-height:1.6;color:var(--body)}
+.where2 p > strong:first-child{display:none}
+
+.tools{margin:28px 0;border:1px solid var(--ink)}
+.tools .tsw{display:flex;border:0;border-bottom:1px solid var(--ink);width:100%}
+.tools .tsw button{flex:1 1 auto}
+.tool{padding:20px 24px;background:var(--panel)}
+.tool p{margin:0;color:var(--body)}
+.tool p > strong:first-child{display:none}
+.tool[hidden]{display:none}
+
+.copy{position:relative;margin:24px 0 28px;border:1px solid var(--ink);background:var(--white)}
+.copy pre{margin:0;padding:20px 22px 64px;white-space:pre-wrap;font:15.5px/1.6 var(--text);color:var(--ink)}
+.copy .cp{position:absolute;right:12px;bottom:12px;font:500 14px var(--text);min-height:40px;padding:8px 16px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer}
+
+.scroll{overflow-x:auto;margin:8px 0 28px;-webkit-overflow-scrolling:touch}
+.scroll.ex{border:1px solid var(--ink);padding:0 14px;background:var(--white)}
+.exlabel{margin:20px 0 8px !important;font:600 13px var(--text) !important;letter-spacing:.08em;text-transform:uppercase;color:var(--accent) !important}
+table{border-collapse:collapse;width:100%;font-size:15.5px;line-height:1.45}
+th{font:500 12.5px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 14px 10px 0;border-bottom:1px solid var(--ink);vertical-align:bottom}
+td{padding:12px 14px 12px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--body)}
+td:first-child{color:var(--ink);font-weight:500}
+.scroll.wide table{min-width:560px}
+.scroll.ex table{min-width:720px;font-variant-numeric:tabular-nums}
+
+figure{margin:36px 0}
+figcaption{margin-top:12px;font-size:13px;line-height:1.5;color:var(--muted)}
+.figtitle{margin:0 0 18px !important;font-family:var(--display);font-size:26px !important;line-height:1.15;color:var(--ink) !important}
+.bars{display:grid;gap:12px}
+.bar{display:grid;grid-template-columns:170px minmax(0,1fr);gap:16px;align-items:center}
+.bar .l{font-size:15px;line-height:1.3;color:var(--ink)}
+.bar .l small{display:block;font-size:13px;color:var(--muted)}
+.bar .tr{display:flex;align-items:center;gap:12px}
+.bar .f{height:28px;background:var(--bar);min-width:2px}
+.bar .f.hot{background:var(--accent)}
+.bar .v{font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums}
+@media (max-width:560px){.bar{grid-template-columns:1fr;gap:4px}}
+
+.mug{position:relative;display:flex;height:56px;border:1px solid var(--ink);margin:44px 0 8px}
+.mug .seg{display:flex;align-items:center;padding:0 10px;font-size:14px;line-height:1.2;color:var(--paper);border:0;overflow:hidden;white-space:nowrap}
+.mug .can{background:var(--accent)}
+.mug .imp{background:var(--bar);color:var(--ink)}
+.mug .ln{position:absolute;top:-38px;bottom:-6px;width:0;border-left:2px dashed var(--ink)}
+.mug .ln b{position:absolute;top:0;left:6px;font:500 12px/1.2 var(--text);white-space:nowrap;color:var(--ink)}
+.mug .ln.hi b{left:auto;right:6px}
+@media (max-width:520px){.mug .seg{font-size:12px;padding:0 6px}.mug .ln b{font-size:11px}}
+
+.map{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0}
+.map span{flex:1 1 110px;padding:12px 14px;border:1px solid var(--ink);font-size:15px;line-height:1.3;position:relative;background:var(--paper)}
+.map span.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+
+.loopl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;counter-reset:none}
+.loopl li{border:1px solid var(--ink);padding:14px;margin:0;background:var(--paper);display:flex;flex-direction:column;gap:6px}
+.loopl li.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.loopl .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.loopl .h{font-family:var(--display);font-size:22px;line-height:1.1;color:var(--ink)}
+.loopl .ap{font:600 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+@media (max-width:760px){.loopl{grid-template-columns:1fr 1fr}}
+@media (max-width:420px){.loopl{grid-template-columns:1fr}}
+
+.check{list-style:none !important;margin:0 0 22px;padding:0 !important;border-top:1px solid var(--ink)}
+.check li{border-bottom:1px solid var(--rule);margin:0 !important}
+.check label{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:16px 0;cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;width:24px;height:24px;margin:4px 0 0;border:1.5px solid var(--ink);background:var(--paper);display:grid;place-content:center;cursor:pointer}
+.check input:checked{background:var(--ink)}
+.check input:checked::after{content:"";width:11px;height:6px;border-left:2px solid var(--paper);border-bottom:2px solid var(--paper);transform:rotate(-45deg) translate(1px,-1px)}
+.check span{color:var(--ink)}
+
+.band{background:var(--ink);color:var(--paper);margin-top:96px;padding:64px 0}
+.band .eyebrow{color:var(--rule)}
+.band p.big{margin:16px 0 0;font-family:var(--display);font-size:clamp(24px,3.4vw,32px);line-height:1.3;color:var(--paper)}
+.sources{padding:72px 0 0}
+.sources h2{font-size:34px;margin:0 0 8px}
+.sources ul{margin:18px 0 0;padding-left:20px;font-size:15px;line-height:1.6;color:var(--body)}
+.sources li{margin-bottom:8px}
+.sources p{font-size:15px;color:var(--muted);margin:0}
+footer.site{margin-top:88px;border-top:1px solid var(--ink);padding:24px 32px 120px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+<div id="page" class="lv-t">
+<header class="site"><span class="mark">Leverage</span><span class="where">Notes · For local businesses</span></header>
+
+<div class="hero">
+  <p class="eyebrow"><span class="d">Industry playbook · Detailed</span><span class="s">Industry playbook · Simple version</span><span class="t">Industry playbook · Easiest version</span></p>
+  <h1>Retail shop playbook, with inventory and reordering</h1>
+  <div class="lede d"><p>Use AI where it already helps a small shop today, reorder from the right numbers, and keep a person on every order, price and claim.</p></div>
+  <div class="lede s"><p>Use AI where it already helps a small shop, reorder from the right numbers, and keep a person in charge of every order, price and claim.</p>
+</div>
+  <div class="lede t"><p>Let AI help in your shop. Order the right amount. Keep a person in charge of every order, price and claim.</p>
+</div>
+  <p class="by">By Dan Albasry · November 27, 2026 · For shop owners in the US and Canada</p>
+</div>
+
+<div class="wrap">
+  <div class="versions">
+    <p><strong>Three ways to read this.</strong> Starter is the easiest. Simple says everything in plain words. Detailed has every number and source. Switch any time with the button at the bottom of your screen.</p>
+    <div class="seg" role="group" aria-label="Choose a reading level">
+      <button type="button" data-v="t" aria-pressed="true">Starter</button>
+      <button type="button" data-v="s" aria-pressed="false">Simple</button>
+      <button type="button" data-v="d" aria-pressed="false">Detailed</button>
+    </div>
+  </div>
+  <div class="intro">
+    <div class="prose d"><p class="phold"><span class="note">[DAN: A SHORT REAL SCENE, 3 TO 5 SENTENCES. FOR EXAMPLE A SHOP OWNER WHO REORDERED A SLOW ITEM AND RAN OUT OF A FAST ONE, OR WHO ASKED A CHATBOT WHAT TO ORDER AND GOT A CONFIDENT WRONG ANSWER. NO CLIENT NAME, NOTHING THAT IDENTIFIES THEM.]</span></p>
+<p>This is the playbook I'd use with an independent shop: gift stores, boutiques, bookstores, hardware and home stores. It covers the jobs AI does well in a shop, what your till already does for reordering, a worked reorder example with an answer key, the agent version of the job, the rules for product copy in the US and Canada, and how to set up a small team. If you want the reorder dashboard itself, I built it separately in <span class="note">[LINK: #3 BUILD: AN INVENTORY DASHBOARD FROM YOUR SALES EXPORT]</span>. This page is about deciding what to do with it.</p>
+<p>The honest frame: there is no single right setup. What works depends on which till you use, whether you are in the US or Canada, how many years of sales history you have, and how much of your stock is steady sellers versus seasonal or one-off lines. I'll say where each of those changes the answer.</p>
+<figure class="map" aria-label="How the playbook flows"><span class="m">Till data</span><span class="m">Reorder check</span><span class="m">AI draft</span><span class="m on">You approve</span><span class="m">Supplier</span></figure></div>
+    <div class="prose s"><p class="phold"><span class="note">[DAN: SAME SHORT REAL SCENE AS THE DETAILED TAB, IN PLAIN WORDS.]</span></p>
+<p>This is the playbook I'd use with a small independent shop. It covers what AI does well in a shop, what your till already does, a worked reorder example, what an AI agent can do, the rules for product copy, and how to set up your team. The reorder dashboard itself is in a separate guide: <span class="note">[LINK: #3 BUILD: AN INVENTORY DASHBOARD FROM YOUR SALES EXPORT]</span>.</p>
+
+<p>There is no single right setup. It depends on your till, your country, how many years of sales you have, and how seasonal your stock is.</p>
+
+<figure class="map" aria-label="How the playbook flows"><span class="m">Till data</span><span class="m">Reorder check</span><span class="m">AI draft</span><span class="m on">You approve</span><span class="m">Supplier</span></figure></div>
+    <div class="prose t"><p class="phold"><span class="note">[DAN: SAME SHORT REAL SCENE, IN VERY PLAIN WORDS.]</span></p>
+<p>This guide is for small shops. It shows what AI does well, what your till already does, how to work out an order, what an AI helper can do, and what you can say on labels. The reorder tool is in another guide: <span class="note">[LINK: #3]</span>.</p>
+
+<p>The right setup depends on your till, your country, and your sales.</p>
+
+<figure class="map" aria-label="How the playbook flows"><span class="m">Sales</span><span class="m">Check</span><span class="m">AI draft</span><span class="m on">You say yes</span><span class="m">Supplier</span></figure></div>
+  </div>
+  <nav class="toc" aria-label="Sections in this guide">
+    <p class="eyebrow">In this guide</p>
+    <ol><li><a href="#q1"><span class="n">1</span><span>Which jobs in a shop is AI actually good at today?</span></a></li><li><a href="#q2"><span class="n">2</span><span>What does my till already do for reordering?</span></a></li><li><a href="#q3"><span class="n">3</span><span>How do I work out what to reorder, and when?</span></a></li><li><a href="#q4"><span class="n">4</span><span>How do I ask ChatGPT or Claude about my sales file?</span></a></li><li><a href="#q5"><span class="n">5</span><span>Can an agent do the reordering for me?</span></a></li><li><a href="#q6"><span class="n">6</span><span>What can I say on product listings and signs?</span></a></li><li><a href="#q7"><span class="n">7</span><span>How do I set up AI for my shop team?</span></a></li><li><a href="#q8"><span class="n">8</span><span>What should I do this week?</span></a></li><li><a href="#q9"><span class="n">9</span><span>How Leverage Strategies helps</span></a></li></ol>
+  </nav>
+</div>
+
+<section class="q" id="q1"><div class="wrap"><p class="eyebrow">Question 1 of 7</p><h2>Which jobs in a shop is AI actually good at today?</h2><div class="prose d"><p>AI is good today at four shop jobs: drafting product copy and signs, answering routine customer questions, answering questions about your own sales, and drafting a reorder list. It is not good at deciding on its own what to buy, setting prices, or knowing anything about your suppliers that isn't written down.</p>
+<p>Retail is behind other industries, which is a reason to start small, not a reason to wait.</p>
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> About 14% of retail businesses were using AI as of May 3, 2026, against 19.8% of all US businesses, in the Census Bureau's Business Trends and Outlook Survey (<a href="https://www.census.gov/library/stories/2026/05/ai-use-businesses.html">US Census Bureau</a>).</p></div><div><h3>In Canada</h3><p><strong>In Canada.</strong> 19.2% of Canadian businesses used AI to produce goods or deliver services in the 12 months before the Q2 2026 survey, up from 12.2% a year earlier (<a href="https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2026010-eng.htm">Statistics Canada</a>). A year earlier, only 5.7% of retail businesses planned to use AI in the next 12 months, against 14.5% of all businesses (<a href="https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2025011-eng.htm">Statistics Canada</a>).</p></div></div>
+<p>Here is how I rank the jobs for a small shop, from first win to last:</p>
+<div class="scroll"><table><tr><th>Job</th><th>Why it works</th><th>Where a person stays in</th></tr><tr><td>Product descriptions, shelf signs, listings</td><td>The AI writes from a fact sheet you give it</td><td>You check every price, size and claim</td></tr><tr><td>Questions about your own sales</td><td>Your till or a sales file holds the facts</td><td>You check the numbers against the file</td></tr><tr><td>Reorder drafts</td><td>The sums are simple and repeat every week</td><td>You approve, send and pay</td></tr><tr><td>Customer messages and review replies</td><td>The same questions come up again and again</td><td>You post replies; you handle refunds and anything personal</td></tr></table></div>
+</div><div class="prose s"><p>AI is good at four shop jobs today. It can write product copy and signs. It can answer common customer questions. It can answer questions about your own sales. It can draft a reorder list. It should not decide on its own what to buy or what to charge.</p>
+
+<p>Shops are slower than other businesses to start with AI.</p>
+
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> About 14 in 100 retail businesses used AI in May 2026. Across all US businesses it was about 20 in 100 (<a href="https://www.census.gov/library/stories/2026/05/ai-use-businesses.html">US Census Bureau</a>).</p>
+</div><div><h3>In Canada</h3><p><strong>In Canada.</strong> About 19 in 100 businesses used AI in the year before mid-2026, up from about 12 in 100 a year earlier (<a href="https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2026010-eng.htm">Statistics Canada</a>). In 2025, fewer than 6 in 100 shops planned to start (<a href="https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2025011-eng.htm">Statistics Canada</a>).</p>
+</div></div>
+<div class="scroll"><table><tr><th>Job</th><th>Why it works</th><th>What you still do</th></tr><tr><td>Product copy and signs</td><td>AI writes from your fact sheet</td><td>Check every price, size and claim</td></tr><tr><td>Questions about your sales</td><td>The facts are in your till or file</td><td>Check the numbers</td></tr><tr><td>Reorder drafts</td><td>The sums repeat every week</td><td>Approve, send and pay</td></tr><tr><td>Customer messages</td><td>The same questions come up</td><td>Post replies yourself</td></tr></table>
+</div>
+</div><div class="prose t"><p>AI is good at four jobs. It can write about your products. It can answer common questions. It can tell you about your sales. It can make a first list of what to order. You make the choices.</p>
+
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> About 14 in 100 shops used AI in May 2026 (<a href="https://www.census.gov/library/stories/2026/05/ai-use-businesses.html">US Census Bureau</a>).</p>
+</div><div><h3>In Canada</h3><p><strong>In Canada.</strong> About 19 in 100 businesses used AI by mid-2026 (<a href="https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2026010-eng.htm">Statistics Canada</a>).</p>
+</div></div>
+<div class="scroll"><table><tr><th>Job</th><th>You still</th></tr><tr><td>Write about products</td><td>Check prices and facts</td></tr><tr><td>Answer sales questions</td><td>Check the numbers</td></tr><tr><td>Draft an order list</td><td>Say yes, send, pay</td></tr><tr><td>Answer customers</td><td>Post the reply yourself</td></tr></table>
+</div>
+</div></div></section>
+<section class="q" id="q2"><div class="wrap"><p class="eyebrow">Question 2 of 7</p><h2>What does my till already do for reordering?</h2><div class="prose d"><p>Your till already does the watching on most plans: it can warn you when an item drops below a number you set. That warning is a rule you set, not AI. The forecasting, where software looks at sales history and suggests what to order, is newer, varies a lot by till, and is often on a paid plan or US only.</p>
+<div class="scroll wide"><table><tr><th>Till</th><th>Low-stock warning</th><th>Suggests what to order</th><th>Notes</th></tr><tr><td>Square</td><td>US: listed as a feature, plan not stated on the pricing page. Canada: included on Free</td><td>Canada: suggested automatic purchase orders on Plus, which you review and send. US: Squaremates restocking, in beta</td><td>US Plus is US$49 a month per location; Canada retail Plus is C$79</td></tr><tr><td>Shopify</td><td>Set it up yourself with Shopify Flow</td><td>Sidekick recommends what to buy and how much, and drafts the purchase order</td><td>Stocky was switched off on August 31, 2026</td></tr><tr><td>Lightspeed Retail (X-Series)</td><td>Yes</td><td>Demand forecasting that turns into draft purchase orders</td><td>Needs the Plus plan with the Advanced Reporting and Insights add-on</td></tr></table></div>
+<p>Sources: <a href="https://squareup.com/us/en/pricing">Square US pricing</a>, <a href="https://squareup.com/ca/en/point-of-sale/retail/pricing">Square Canada retail pricing</a>, <a href="https://help.shopify.com/en/manual/inventory-and-locations/transitioning-from-stocky">Shopify Help Center</a>, <a href="https://www.shopify.com/blog/enhanced-inventory-management">Shopify blog, June 17, 2026</a>, <a href="https://x-series-support.lightspeedhq.com/hc/en-us/articles/27946369696027-Using-demand-forecasting-with-reports-to-create-purchase-orders">Lightspeed support</a>. Prices checked November 27, 2026, before tax.</p>
+<p><strong>If you were on Stocky.</strong> Shopify delisted its Stocky inventory app on February 2, 2026 and switched it off on August 31, 2026. Shopify says you have read-only access to export your data "for at least 90 days after that date", and historical purchase orders can't be imported (<a href="https://help.shopify.com/en/manual/inventory-and-locations/transitioning-from-stocky">Shopify Help Center</a>). If you still have Stocky data, export it now.</p>
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> Shopify POS Pro, which adds inventory counts, purchase orders and low-stock alerts across locations, is US$89 a month per location, billed yearly (<a href="https://www.shopify.com/pos/pricing">Shopify</a>).</p></div><div><h3>In Canada</h3><p><strong>In Canada.</strong> Shopify POS Pro is C$119 a month per location, billed yearly (<a href="https://www.shopify.com/ca/pos/pricing">Shopify Canada</a>). Square Canada's retail Plus plan is C$79 a month per location with a 30-day free trial (<a href="https://squareup.com/ca/en/point-of-sale/retail/pricing">Square Canada</a>). Neither page says whether tax is included, so plan for GST/HST (or GST plus PST or QST) on top.</p></div></div>
+<p>I couldn't open Clover's own pricing or help pages today, so Clover isn't in the table. <span class="note">[DAN: ADD CLOVER IF YOU CAN CONFIRM ITS LOW-STOCK AND PURCHASE ORDER FEATURES ON CLOVER'S OWN PAGE.]</span></p>
+</div><div class="prose s"><p>Most tills can warn you when stock gets low. You set the number. That is a rule, not AI. Tills that suggest what to order are newer, and often cost more or are US only.</p>
+
+<div class="scroll"><table><tr><th>Till</th><th>Low-stock warning</th><th>Suggests what to order</th></tr><tr><td>Square</td><td>Canada: free. US: listed, plan not stated</td><td>Canada: suggested orders on Plus (C$79 a month). US: Squaremates restocking, still in testing</td></tr><tr><td>Shopify</td><td>Set it up with Shopify Flow</td><td>Sidekick suggests what to buy and drafts the order</td></tr><tr><td>Lightspeed</td><td>Yes</td><td>Forecasts on the Plus plan with an add-on</td></tr></table>
+</div>
+<p>Sources: <a href="https://squareup.com/us/en/pricing">Square US</a>, <a href="https://squareup.com/ca/en/point-of-sale/retail/pricing">Square Canada</a>, <a href="https://help.shopify.com/en/manual/inventory-and-locations/transitioning-from-stocky">Shopify</a>, <a href="https://x-series-support.lightspeedhq.com/hc/en-us/articles/27946369696027-Using-demand-forecasting-with-reports-to-create-purchase-orders">Lightspeed</a>. Checked November 27, 2026, before tax.</p>
+
+<p><strong>If you used Stocky.</strong> Shopify turned off its Stocky app on August 31, 2026. You can export your data for at least 90 days after that (<a href="https://help.shopify.com/en/manual/inventory-and-locations/transitioning-from-stocky">Shopify</a>). Export it now.</p>
+
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> Shopify POS Pro is US$89 a month per location, billed yearly (<a href="https://www.shopify.com/pos/pricing">Shopify</a>). Square Plus is US$49 a month per location (<a href="https://squareup.com/us/en/pricing">Square</a>).</p>
+</div><div><h3>In Canada</h3><p><strong>In Canada.</strong> Shopify POS Pro is C$119 a month per location, billed yearly (<a href="https://www.shopify.com/ca/pos/pricing">Shopify Canada</a>). Plan to add GST/HST or your provincial tax.</p>
+</div></div>
+<p class="phold"><span class="note">[DAN: ADD CLOVER IF YOU CAN CONFIRM IT ON CLOVER'S OWN PAGE.]</span></p>
+</div><div class="prose t"><p>Most tills can tell you when stock is low. You pick the number. Some tills can also suggest what to order. Those are newer and may cost more.</p>
+
+<div class="scroll"><table><tr><th>Till</th><th>Low stock warning</th><th>Suggests orders</th></tr><tr><td>Square</td><td>Yes in Canada, for free</td><td>Canada: on Plus. US: Squaremates, still in testing</td></tr><tr><td>Shopify</td><td>Set it up with Shopify Flow</td><td>Yes, with Sidekick</td></tr><tr><td>Lightspeed</td><td>Yes</td><td>On the Plus plan, with an add-on</td></tr></table>
+</div>
+<p>Sources: <a href="https://squareup.com/ca/en/point-of-sale/retail/pricing">Square Canada</a>, <a href="https://help.shopify.com/en/manual/inventory-and-locations/transitioning-from-stocky">Shopify</a>, <a href="https://x-series-support.lightspeedhq.com/hc/en-us/articles/27946369696027-Using-demand-forecasting-with-reports-to-create-purchase-orders">Lightspeed</a>.</p>
+
+<p><strong>Stocky is gone.</strong> Shopify turned off Stocky on August 31, 2026. Save your old data now (<a href="https://help.shopify.com/en/manual/inventory-and-locations/transitioning-from-stocky">Shopify</a>).</p>
+
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> Square Plus costs US$49 a month for each shop (<a href="https://squareup.com/us/en/pricing">Square</a>).</p>
+</div><div><h3>In Canada</h3><p><strong>In Canada.</strong> Square Plus for shops costs C$79 a month for each shop, before tax (<a href="https://squareup.com/ca/en/point-of-sale/retail/pricing">Square Canada</a>).</p>
+</div></div>
+</div></div></section>
+<section class="q" id="q3"><div class="wrap"><p class="eyebrow">Question 3 of 7</p><h2>How do I work out what to reorder, and when?</h2><div class="prose d"><p>Reorder when what you have plus what is already on the way drops to your reorder point: the units you sell a day, times the supplier's lead time, plus a few days of safety stock. Then order enough to get you to the next order, rounded up to the supplier's case size.</p>
+<p>The <span class="note">[LINK: #3]</span> dashboard does these sums for you. What I want to show here is the one mistake that trips up most reorder sums, because it makes every tool, AI or not, order too little of your best sellers.</p>
+<p><strong>The stockout trap.</strong> If an item was out of stock for two weeks, it sold nothing in those two weeks. Divide its sales by all the days in the period and it looks slower than it is, so you order less of exactly the item customers wanted. Lightspeed's own forecast avoids this: it divides units sold over a 42-day lookback by the days the item was in stock, not all 42 (<a href="https://x-series-support.lightspeedhq.com/hc/en-us/articles/27946369696027-Using-demand-forecasting-with-reports-to-create-purchase-orders">Lightspeed support</a>). A chatbot won't do that unless you give it the out-of-stock days and tell it to.</p>
+<p><strong>Worked example (made-up shop).</strong> Harbour Street Gifts is a made-up gift shop. I gave it eight items with 42 days of sales, days out of stock, stock on hand, stock already on order, supplier lead time and case size. Then I computed the answer key in Python with these rules: daily rate counts in-stock days only, reorder point is lead time plus 7 days of safety stock, and each order covers lead time plus 28 days plus safety stock, minus on hand and on order, rounded up to a full case.</p>
+<p class="exlabel">Made-up example shop</p><div class="scroll ex"><table><tr><th>Item</th><th>Sold in 42 days</th><th>Days out of stock</th><th>On hand + on order</th><th>Lead time</th><th>Reorder now?</th><th>Order (answer key)</th><th>Order if you ignore stockouts</th></tr><tr><td>Beeswax candle, large</td><td>84</td><td>0</td><td>22</td><td>14 days</td><td>Yes</td><td>84 (7 cases of 12)</td><td>84</td></tr><tr><td>Wool socks, grey</td><td>63</td><td>14</td><td>0</td><td>10 days</td><td>Yes</td><td>102 (17 cases of 6)</td><td>72</td></tr><tr><td>Local honey 250 g</td><td>126</td><td>0</td><td>84</td><td>7 days</td><td>No</td><td>0</td><td>0</td></tr><tr><td>Puzzle, 1000 pieces</td><td>21</td><td>0</td><td>30</td><td>21 days</td><td>No</td><td>0</td><td>0</td></tr><tr><td>Ceramic mug</td><td>42</td><td>0</td><td>9</td><td>28 days</td><td>Yes</td><td>54 (9 cases of 6)</td><td>54</td></tr><tr><td>Greeting cards, assorted</td><td>210</td><td>0</td><td>140</td><td>10 days</td><td>No</td><td>0</td><td>0</td></tr><tr><td>Linen tea towel</td><td>35</td><td>7</td><td>16</td><td>14 days</td><td>Yes</td><td>40 (4 cases of 10)</td><td>30</td></tr><tr><td>Kids' rain boots</td><td>6</td><td>0</td><td>18</td><td>30 days</td><td>No</td><td>0</td><td>0</td></tr></table></div>
+<p>Four items need ordering, 280 units in all. Ignore the stockouts and you order 240: 30 too few grey socks and 10 too few tea towels, the two items customers were already asking for. The socks sold 63 in 42 days, which looks like 1.5 a day, but they only sold for 28 days, so the real rate is 2.25 a day.</p>
+<figure class="chart"><p class="figtitle">Order if you forget sold-out days, against the right order</p><div class="bars"><div class="bar"><span class="l">Wool socks<small>forget sold-out days</small></span><span class="tr"><span class="f" style="width:70.6%"></span><span class="v">72</span></span></div><div class="bar"><span class="l">Wool socks<small>right order</small></span><span class="tr"><span class="f hot" style="width:100.0%"></span><span class="v">102</span></span></div><div class="bar"><span class="l">Linen tea towels<small>forget sold-out days</small></span><span class="tr"><span class="f" style="width:29.4%"></span><span class="v">30</span></span></div><div class="bar"><span class="l">Linen tea towels<small>right order</small></span><span class="tr"><span class="f hot" style="width:39.2%"></span><span class="v">40</span></span></div></div><figcaption>Made-up example shop, Harbour Street Gifts. Units to order, worked out in code.</figcaption></figure>
+<p><strong>What this example can't show.</strong> It has no seasons. A 42-day rate in early November will under-order gift lines for December and over-order summer lines in spring. If you have two or more years of sales, look at the same weeks last year before you order for a season. If you don't, keep more safety stock and ask your supplier what usually sells when. Lead times also get longer before the holidays, so use the holiday lead time, not the normal one. And it knows nothing about minimum orders or price breaks; those come from your supplier.</p></div><div class="prose s"><p>Reorder when your stock, plus what is already coming, drops to your reorder point. The reorder point is what you sell in a day, times the days the supplier takes to deliver, plus a few spare days. Then order enough to last until next time, in full cases.</p>
+
+<p>The <span class="note">[LINK: #3]</span> dashboard does these sums. Here is the most common mistake.</p>
+
+<p><strong>The stockout trap.</strong> If an item was sold out for two weeks, it sold nothing in those weeks. It looks slow, so you order less. But customers wanted it. Lightspeed's forecast fixes this by counting only the days the item was in stock (<a href="https://x-series-support.lightspeedhq.com/hc/en-us/articles/27946369696027-Using-demand-forecasting-with-reports-to-create-purchase-orders">Lightspeed</a>). A chatbot won't, unless you tell it.</p>
+
+<p><strong>Worked example (made-up shop).</strong> Harbour Street Gifts is not a real shop. I gave it eight items and worked out the right orders in code.</p>
+
+<p class="exlabel">Made-up example shop</p><div class="scroll ex"><table><tr><th>Item</th><th>Sold in 42 days</th><th>Days sold out</th><th>In stock + coming</th><th>Order now?</th><th>Right order</th><th>Order if you forget sold-out days</th></tr><tr><td>Beeswax candle</td><td>84</td><td>0</td><td>22</td><td>Yes</td><td>84</td><td>84</td></tr><tr><td>Wool socks</td><td>63</td><td>14</td><td>0</td><td>Yes</td><td>102</td><td>72</td></tr><tr><td>Local honey</td><td>126</td><td>0</td><td>84</td><td>No</td><td>0</td><td>0</td></tr><tr><td>Puzzle</td><td>21</td><td>0</td><td>30</td><td>No</td><td>0</td><td>0</td></tr><tr><td>Ceramic mug</td><td>42</td><td>0</td><td>9</td><td>Yes</td><td>54</td><td>54</td></tr><tr><td>Greeting cards</td><td>210</td><td>0</td><td>140</td><td>No</td><td>0</td><td>0</td></tr><tr><td>Linen tea towel</td><td>35</td><td>7</td><td>16</td><td>Yes</td><td>40</td><td>30</td></tr><tr><td>Kids' rain boots</td><td>6</td><td>0</td><td>18</td><td>No</td><td>0</td><td>0</td></tr></table>
+</div>
+<p>Four items need ordering, 280 units in all. Forget the sold-out days and you order 240. You get 30 too few socks and 10 too few tea towels, the items people wanted most.</p>
+
+<figure class="chart"><p class="figtitle">Order if you forget sold-out days, against the right order</p><div class="bars"><div class="bar"><span class="l">Wool socks<small>forget sold-out days</small></span><span class="tr"><span class="f" style="width:70.6%"></span><span class="v">72</span></span></div><div class="bar"><span class="l">Wool socks<small>right order</small></span><span class="tr"><span class="f hot" style="width:100.0%"></span><span class="v">102</span></span></div><div class="bar"><span class="l">Linen tea towels<small>forget sold-out days</small></span><span class="tr"><span class="f" style="width:29.4%"></span><span class="v">30</span></span></div><div class="bar"><span class="l">Linen tea towels<small>right order</small></span><span class="tr"><span class="f hot" style="width:39.2%"></span><span class="v">40</span></span></div></div><figcaption>Made-up example shop, Harbour Street Gifts. Units to order, worked out in code.</figcaption></figure>
+<p><strong>What it can't show.</strong> Seasons. Six weeks of sales in November will order too little for December. If you have two years of sales, look at the same weeks last year. Delivery also takes longer before the holidays.</p>
+</div><div class="prose t"><p>Order when your stock gets close to running out before new stock can arrive. Look at how many you sell each day. Look at how many days the supplier needs. Add a few spare days. Order in full boxes.</p>
+
+<p><strong>The sold-out trap.</strong> If an item was sold out, it sold zero. That makes it look slow. But people wanted it. Only count the days it was on the shelf.</p>
+
+<p><strong>Example (made-up shop).</strong> Harbour Street Gifts is not real. Wool socks sold 63 pairs in 42 days. But they were sold out for 14 of those days. So they really sold a bit more than 2 pairs a day, not 1 and a half. The right order is 102 pairs. If you forget the sold-out days, you order only 72.</p>
+
+<div class="scroll"><table><tr><th>Item</th><th>Right order</th><th>If you forget sold-out days</th></tr><tr><td>Beeswax candle</td><td>84</td><td>84</td></tr><tr><td>Wool socks</td><td>102</td><td>72</td></tr><tr><td>Ceramic mug</td><td>54</td><td>54</td></tr><tr><td>Linen tea towel</td><td>40</td><td>30</td></tr></table>
+</div>
+<p>The other four items did not need ordering. I worked this out in code.</p>
+
+<figure class="chart"><p class="figtitle">Socks: 72 or 102?</p><div class="bars"><div class="bar"><span class="l">Wool socks<small>forget sold-out days</small></span><span class="tr"><span class="f" style="width:70.6%"></span><span class="v">72</span></span></div><div class="bar"><span class="l">Wool socks<small>right order</small></span><span class="tr"><span class="f hot" style="width:100.0%"></span><span class="v">102</span></span></div></div><figcaption>Made-up example shop, Harbour Street Gifts. Units to order, worked out in code.</figcaption></figure>
+<p><strong>Watch the seasons.</strong> Last month's sales can't tell you about December. If you can, look at the same weeks last year.</p>
+</div></div></section>
+<section class="q" id="q4"><div class="wrap"><p class="eyebrow">Question 4 of 7</p><h2>How do I ask ChatGPT or Claude about my sales file?</h2><div class="prose d"><p>Export two files, clean them, upload them, ask a precise question, and check the answer against the file before you order anything. The checking is not optional: in GDP.xlsx, a benchmark of 70 realistic workplace spreadsheet tasks published November 13, 2026, the best of 20 model setups met every requirement on only 38.3% of attempts, and the median setup on 19.3% (<a href="https://arxiv.org/abs/2611.17766">Garre, Mehta and Chen, arXiv</a>). That's an independent test by a firm that sells evaluation work, not by the AI makers. It means fewer than 4 in 10 fully right, even at the top.</p>
+<p><strong>Get the files ready.</strong></p>
+<ol><li>Export sales by item for the last 6 to 8 weeks (date, SKU, item, quantity sold, net sales), and a stock file (SKU, on hand, on order, supplier, lead time, case size).</li><li>One header row, one row per record, no merged cells, numbers stored as numbers.</li><li>Add a column for days out of stock, even if it's a rough count from memory. That one column fixes the stockout trap.</li></ol>
+<div class="tools"><div class="seg tsw" role="group" aria-label="Choose your AI tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button></div><div class="tool" data-tool="chatgpt"><p><strong>In ChatGPT.</strong> Make a Project for the shop so your files and standing instructions stay together. Attach the two files and ask. OpenAI's limit for CSV files and spreadsheets is "approximately 50MB, depending on the size of each row" (<a href="https://help.openai.com/en/articles/8555545-file-uploads-faq">OpenAI Help Center</a>). A file can upload and still not be fully analysed, so ask it to list the rows it used.</p></div><div class="tool" data-tool="claude"><p><strong>In Claude.</strong> Make a Project, add the files, and ask. Claude runs code on the file and can hand back a spreadsheet with working formulas. The limit is 30MB per file for uploads and downloads, on every plan including Free (<a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude">Claude Help Center</a>). If your export is bigger, cut it to the columns you need.</p></div><div class="tool" data-tool="gemini"><p><strong>In Gemini.</strong> If your sales sheet lives in Google Sheets, Gemini can work on it in the side panel. That needs Google Workspace Business Standard or Plus; Business Starter doesn't include Gemini in Sheets (<a href="https://knowledge.workspace.google.com/admin/billing/ai-features-and-pricing-updates-for-google-workspace-business-editions">Google Workspace Help</a>).</p></div></div>
+<p><strong>The prompt I use (copy it):</strong></p>
+<div class="copy"><pre>Use only the two attached files. For each SKU: daily rate = units sold in the last 42 days divided by the days it was in stock (42 minus days out of stock). Reorder point = daily rate times (lead time + 7). Reorder if on hand plus on order is at or below the reorder point. Order quantity = daily rate times (lead time + 28 + 7), minus on hand and on order, rounded up to a full case. Show a table with every SKU, the numbers you used and your result. List any SKU you skipped and why. Do not guess missing values; write MISSING.</pre><button type="button" class="cp">Copy</button></div>
+<p><strong>Test it before you trust it.</strong> Paste the Harbour Street table above (without the last three columns) into ChatGPT or Claude with this prompt and compare its answer with the answer key. <span class="note">[DAN: RUN THIS TEST IN CHATGPT AND CLAUDE, RECORD WHAT EACH GOT RIGHT AND WRONG ON WHICH DATE AND PLAN, AND ADD IT HERE. NO RESULTS UNTIL YOU'VE RUN IT.]</span></p>
+</div><div class="prose s"><p>Export your files, clean them, upload them, ask an exact question, and check the answer before you order. In a 2026 test of 70 real spreadsheet tasks, the best AI got everything right only about 4 times in 10. The middle one got it right about 2 times in 10 (<a href="https://arxiv.org/abs/2611.17766">GDP.xlsx, arXiv</a>).</p>
+
+<p><strong>Get the files ready.</strong></p>
+
+<ol><li>Export 6 to 8 weeks of sales by item, and a stock file with on hand, on order, supplier, delivery days and case size.</li><li>Keep one header row and one row per item. No merged cells.</li><li>Add a column for days sold out.</li></ol>
+
+<div class="tools"><div class="seg tsw" role="group" aria-label="Choose your AI tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button></div><div class="tool" data-tool="chatgpt"><p><strong>In ChatGPT.</strong> Make a Project for your shop and attach the files. Spreadsheets can be up to about 50MB (<a href="https://help.openai.com/en/articles/8555545-file-uploads-faq">OpenAI</a>). Ask it to list the rows it used.</p>
+</div><div class="tool" data-tool="claude"><p><strong>In Claude.</strong> Make a Project and add the files. Each file can be up to 30MB, on every plan (<a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude">Claude Help Center</a>).</p>
+</div><div class="tool" data-tool="gemini"><p><strong>In Gemini.</strong> If your sheet is in Google Sheets, Gemini can work on it. You need Google Workspace Business Standard or Plus (<a href="https://knowledge.workspace.google.com/admin/billing/ai-features-and-pricing-updates-for-google-workspace-business-editions">Google</a>).</p>
+</div></div>
+<p><strong>The prompt (copy it):</strong></p>
+
+<div class="copy"><pre>Use only the two attached files. For each item: daily rate = units sold in 42 days divided by days in stock. Reorder point = daily rate times (delivery days + 7). Reorder if on hand plus on order is at or below that. Order = daily rate times (delivery days + 35), minus on hand and on order, rounded up to a full case. Show every item and your sums. Write MISSING for anything missing.</pre><button type="button" class="cp">Copy</button></div>
+<p><strong>Test it.</strong> Give the AI the Harbour Street table without the last three columns and compare. <span class="note">[DAN: RUN THIS IN CHATGPT AND CLAUDE AND ADD WHAT EACH GOT RIGHT AND WRONG.]</span></p>
+
+</div><div class="prose t"><p>Save your sales from your till as a file. Give it to the AI. Ask a clear question. Then check the answer. In a 2026 test, even the best AI got spreadsheet jobs fully right only about 4 times in 10 (<a href="https://arxiv.org/abs/2611.17766">GDP.xlsx, arXiv</a>).</p>
+
+<ol><li>Save 6 to 8 weeks of sales, and a list of your stock.</li><li>Add how many days each item was sold out.</li><li>Give both files to the AI.</li></ol>
+
+<div class="tools"><div class="seg tsw" role="group" aria-label="Choose your AI tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button></div><div class="tool" data-tool="chatgpt"><p><strong>In ChatGPT.</strong> Make a Project for your shop. Add the files. Files can be up to about 50MB (<a href="https://help.openai.com/en/articles/8555545-file-uploads-faq">OpenAI</a>).</p>
+</div><div class="tool" data-tool="claude"><p><strong>In Claude.</strong> Make a Project. Add the files. Each file can be up to 30MB (<a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude">Claude Help Center</a>).</p>
+</div><div class="tool" data-tool="gemini"><p><strong>In Gemini.</strong> If your sales are in Google Sheets, Gemini can help. You need a paid Google Workspace plan, Business Standard or higher (<a href="https://knowledge.workspace.google.com/admin/billing/ai-features-and-pricing-updates-for-google-workspace-business-editions">Google</a>).</p>
+</div></div>
+<div class="copy"><pre>Use only my two files. For each item, count only the days it was in stock. Tell me what to order and how many, in full boxes. Show your sums. Write MISSING if something is missing.</pre><button type="button" class="cp">Copy</button></div>
+<p class="phold"><span class="note">[DAN: RUN THE HARBOUR STREET TEST IN CHATGPT AND CLAUDE AND ADD WHAT HAPPENED.]</span></p>
+</div></div></section>
+<section class="q" id="q5"><div class="wrap"><p class="eyebrow">Question 5 of 7</p><h2>Can an agent do the reordering for me?</h2><div class="prose d"><p>An agent can do most of the work around a reorder, but not the order itself. Today the agents that work best for a shop are the ones inside your till or store admin, because they see live stock without a file export. Every serious one stops before money moves: it drafts, you approve, you send and pay.</p>
+<p>What each one does today:</p>
+<ul><li><strong>Shopify Sidekick.</strong> Recommends what to reorder from your sales history and drafts the purchase order, "pre-filled with the products, quantities, and cost prices" (<a href="https://www.shopify.com/blog/enhanced-inventory-management">Shopify blog</a>). It "presents changes for your review before applying them" (<a href="https://help.shopify.com/en/manual/ai-powered-tools/sidekick">Shopify Help Center</a>). Included in Shopify plans.</li><li><strong>Square Squaremates.</strong> Generally available since November 12, 2026, to US sellers, at no extra cost. A restocking feature, in beta, can check what's low, prepare an order and build it on a supplier's own website, "ready for the seller to complete" (<a href="https://squareup.com/us/en/press/introducing-squaremates">Square</a>). Not available to Multi-Account Suite sellers.</li><li><strong>Claude in Chrome.</strong> Can work in a supplier's website using your logins. It became available on every paid Claude plan on August 26, 2026, and now approves actions it judges safe by itself unless you switch that off in settings (<a href="https://claude.com/resources/articles/claude-in-chrome-generally-available">Anthropic</a>). If you use it on a supplier site, switch manual approval back on.</li><li><strong>Muse for Small Business (Meta).</strong> Free with usage limits, with connections to Shopify, QuickBooks, Stripe and others (<a href="https://techcrunch.com/2026/09/29/meta-is-expanding-its-ai-agent-muse-to-small-businesses/">TechCrunch</a>). Meta has said Muse will not publish content, send messages or make purchases without your approval (<a href="https://live.euronext.com/en/financial-news/meta-expands-muse-ai-agent-small-businesses">Reuters via Euronext</a>). Good for research and drafting around the order, such as comparing suppliers or planning stock for a promotion.</li><li><strong>ChatGPT.</strong> Can run longer, multi-step jobs and scheduled tasks on paid plans. I couldn't open OpenAI's help page for this today. <span class="note">[DAN: CONFIRM THE CURRENT NAME (CHATGPT WORK?), PLAN AND APPROVAL CONTROLS ON OPENAI'S OWN PAGE BEFORE PUBLISHING.]</span></li></ul>
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> If you're on Square, Squaremates is the closest thing to a till that drafts a supplier order for you, and you still complete it.</p></div><div><h3>In Canada</h3><p><strong>In Canada.</strong> Squaremates is for US sellers only, and Square hasn't announced a Canada date. Canadian Square shops get suggested automatic purchase orders on the Plus plan instead, which you review and send. Shopify's Sidekick works in Canada on every plan.</p></div></div>
+<p><strong>The weekly reorder, as an agent job.</strong> This is the version I'd set up for a one-location shop:</p>
+<div class="scroll"><table><tr><th>Step</th><th>Who or what</th><th>Where a person approves</th></tr><tr><td>1. Monday morning, find items at or below their reorder point</td><td>Till rule (Shopify Flow, or Square's low-stock alert)</td><td>Nobody yet: it only flags</td></tr><tr><td>2. Draft the reorder list with quantities</td><td>Sidekick, or Claude or ChatGPT on the two files with the prompt above</td><td>Nobody yet: it's a draft</td></tr><tr><td>3. Check the list</td><td>You: walk the shelf for the top five lines, remove anything already on order, sanity-check quantities against last month</td><td>You approve or fix every line</td></tr><tr><td>4. Send the order</td><td>You, by email or the supplier's site</td><td>You press send; the agent never has send or pay rights</td></tr><tr><td>5. Receive and match</td><td>You: check the delivery against the order before you pay the bill</td><td>You pay</td></tr></table></div>
+<p>What agents still get wrong: the arithmetic and completeness (the 38.3% result above), stockouts read as low demand, and anything not in the data, like a supplier's minimum order. And in Visa's shopping benchmark of November 5, 2026, AI models failed 42.8% of shopping runs, and more than half the failed runs still ended in a purchase (<a href="https://www.businesswire.com/news/home/20261105169310/en/Visa-Releases-First-of-Its-Kind-Industry-Benchmark-for-AI-Shopping-Almost-Half-of-Test-Runs-Fail">Visa via Business Wire</a>). That's the case for never giving an agent the power to pay.</p>
+<figure class="loop"><p class="figtitle">The weekly reorder loop</p><ol class="loopl"><li class=""><span class="k">1 · Till rule</span><span class="h">Find low items</span></li><li class=""><span class="k">2 · AI</span><span class="h">Draft the list</span></li><li class="on"><span class="k">3 · You</span><span class="h">Check the list</span><span class="ap">Approve every line</span></li><li class=""><span class="k">4 · You</span><span class="h">Send the order</span></li><li class="on"><span class="k">5 · You</span><span class="h">Check delivery, then pay</span><span class="ap">You pay</span></li></ol><figcaption>Repeats every week. The AI never sends or pays.</figcaption></figure></div><div class="prose s"><p>An agent can do most of the work around an order, but not the order itself. The best ones live inside your till or store, because they can see your stock. All of them stop before money moves. They draft, you approve, you send and pay.</p>
+
+<ul><li><strong>Shopify Sidekick</strong> suggests what to reorder and fills in the order for you to check (<a href="https://www.shopify.com/blog/enhanced-inventory-management">Shopify</a>). It shows changes for review before they happen (<a href="https://help.shopify.com/en/manual/ai-powered-tools/sidekick">Shopify</a>).</li><li><strong>Square Squaremates</strong> is for US sellers, at no extra cost. A test feature can build an order on a supplier's website for you to finish (<a href="https://squareup.com/us/en/press/introducing-squaremates">Square</a>).</li><li><strong>Claude in Chrome</strong> can work on a supplier's website. It approves steps it thinks are safe unless you turn that off (<a href="https://claude.com/resources/articles/claude-in-chrome-generally-available">Anthropic</a>). Turn it off for supplier sites.</li><li><strong>Muse for Small Business</strong> from Meta is free with limits and connects to Shopify and QuickBooks (<a href="https://techcrunch.com/2026/09/29/meta-is-expanding-its-ai-agent-muse-to-small-businesses/">TechCrunch</a>). Meta says it won't buy or send without your OK (<a href="https://live.euronext.com/en/financial-news/meta-expands-muse-ai-agent-small-businesses">Reuters via Euronext</a>).</li><li><strong>ChatGPT</strong> can run longer jobs on paid plans. <span class="note">[DAN: CONFIRM THE NAME AND PLAN ON OPENAI'S PAGE.]</span></li></ul>
+
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> On Square, Squaremates comes closest to drafting a supplier order for you.</p>
+</div><div><h3>In Canada</h3><p><strong>In Canada.</strong> Squaremates is US only, with no Canada date. Square Canada's Plus plan suggests orders for you to check and send. Sidekick works in Canada.</p>
+</div></div>
+<div class="scroll"><table><tr><th>Step</th><th>Who</th><th>Where you approve</th></tr><tr><td>1. Find low items</td><td>Your till's low-stock rule</td><td>Not yet</td></tr><tr><td>2. Draft the list</td><td>Sidekick, Claude or ChatGPT</td><td>Not yet</td></tr><tr><td>3. Check the list</td><td>You, at the shelf</td><td>Yes, every line</td></tr><tr><td>4. Send the order</td><td>You</td><td>You press send</td></tr><tr><td>5. Check the delivery, then pay</td><td>You</td><td>You pay</td></tr></table>
+</div>
+<p>In a 2026 Visa test, AI shopping agents failed about 4 in 10 shopping tasks, and in more than half of those they still bought something (<a href="https://www.businesswire.com/news/home/20261105169310/en/Visa-Releases-First-of-Its-Kind-Industry-Benchmark-for-AI-Shopping-Almost-Half-of-Test-Runs-Fail">Visa</a>). Never give an agent the power to pay.</p>
+
+<figure class="loop"><p class="figtitle">The weekly reorder loop</p><ol class="loopl"><li class=""><span class="k">1 · Till rule</span><span class="h">Find low items</span></li><li class=""><span class="k">2 · AI</span><span class="h">Draft the list</span></li><li class="on"><span class="k">3 · You</span><span class="h">Check the list</span><span class="ap">Approve every line</span></li><li class=""><span class="k">4 · You</span><span class="h">Send the order</span></li><li class="on"><span class="k">5 · You</span><span class="h">Check delivery, then pay</span><span class="ap">You pay</span></li></ol><figcaption>Repeats every week. The AI never sends or pays.</figcaption></figure></div><div class="prose t"><p>An agent is an AI that does steps for you. It can make the order list. It should not send the order or pay. You do that.</p>
+
+<ul><li><strong>Shopify Sidekick</strong> can suggest an order and fill it in for you to check (<a href="https://www.shopify.com/blog/enhanced-inventory-management">Shopify</a>).</li><li><strong>Square Squaremates</strong> can build an order on a supplier's website for you to finish. It is for US shops only (<a href="https://squareup.com/us/en/press/introducing-squaremates">Square</a>).</li><li><strong>Claude in Chrome</strong> can use websites for you. Turn on "ask me first" in settings for supplier sites (<a href="https://claude.com/resources/articles/claude-in-chrome-generally-available">Anthropic</a>).</li><li><strong>Muse</strong> from Meta is free to start. Meta says it won't buy or send without your OK (<a href="https://live.euronext.com/en/financial-news/meta-expands-muse-ai-agent-small-businesses">Reuters via Euronext</a>).</li><li><strong>ChatGPT</strong> can do longer jobs on paid plans. <span class="note">[DAN: CONFIRM ON OPENAI'S PAGE.]</span></li></ul>
+
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> Square shops can try Squaremates.</p>
+</div><div><h3>In Canada</h3><p><strong>In Canada.</strong> Squaremates is not in Canada yet. Shopify's Sidekick works in Canada.</p>
+</div></div>
+<p><strong>Your weekly order, step by step:</strong></p>
+
+<ol><li>Your till finds low items.</li><li>The AI makes a list.</li><li>You check the list at the shelf.</li><li>You send the order.</li><li>You check the delivery, then pay.</li></ol>
+
+<p>In a 2026 Visa test, AI shoppers failed about 4 in 10 tasks, and often still bought something (<a href="https://www.businesswire.com/news/home/20261105169310/en/Visa-Releases-First-of-Its-Kind-Industry-Benchmark-for-AI-Shopping-Almost-Half-of-Test-Runs-Fail">Visa</a>). Never let AI pay.</p>
+
+<figure class="loop"><p class="figtitle">Your weekly order</p><ol class="loopl"><li class=""><span class="k">1 · Till rule</span><span class="h">Find low items</span></li><li class=""><span class="k">2 · AI</span><span class="h">Draft the list</span></li><li class="on"><span class="k">3 · You</span><span class="h">Check the list</span><span class="ap">Approve every line</span></li><li class=""><span class="k">4 · You</span><span class="h">Send the order</span></li><li class="on"><span class="k">5 · You</span><span class="h">Check delivery, then pay</span><span class="ap">You pay</span></li></ol><figcaption>Repeats every week. The AI never sends or pays.</figcaption></figure></div></div></section>
+<section class="q" id="q6"><div class="wrap"><p class="eyebrow">Question 6 of 7</p><h2>What can I say on product listings and signs?</h2><div class="prose d"><p>You can say anything that's true and that you can prove, and the shop owns every claim the AI writes. Three claims trip shops up most: where a product is made, "was" prices, and French in Quebec.</p>
+<p><strong>Where it's made.</strong></p>
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> An unqualified "Made in USA" claim needs the product to be "all or virtually all" made in the US, and flags or maps can make the claim for you. A qualified claim such as "Made in U.S. from Imported Parts" is the honest form when parts come from abroad (<a href="https://www.ftc.gov/business-guidance/resources/complying-made-usa-standard">FTC</a>).</p></div><div><h3>In Canada</h3><p><strong>In Canada.</strong> For non-food products, "Product of Canada" needs at least 98% of total direct costs incurred in Canada and the last substantial transformation in Canada. "Made in Canada" needs at least 51%, the last substantial transformation in Canada, and a qualifying statement such as "Made in Canada with imported parts". A maple leaf or flag can count as the claim (<a href="https://competition-bureau.canada.ca/en/how-we-foster-competition/education-and-outreach/publications/product-canada-and-made-canada-claims">Competition Bureau, March 7, 2025</a>).</p></div></div>
+<p><strong>Worked example (made-up product).</strong> Harbour Street Gifts decorates an imported blank mug in Toronto. I added up its direct costs: blank mug from Portugal C$3.10, decal printed in Ontario C$0.45, decorating labour C$2.80, kiln firing and direct overhead C$0.40. That's C$6.75 in all, of which C$3.65 (54.1%) is Canadian. So "Product of Canada" fails. The 51% cost test for "Made in Canada with imported parts" passes, but the claim also needs the last substantial transformation in Canada, and whether decorating a finished mug counts is a judgment I wouldn't leave to an AI or make without advice. The safe line is the literal truth: "Decorated by hand in Toronto." In the US, "Made in USA" would fail outright.</p>
+<p><strong>"Was" prices.</strong></p>
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> A former price must be "the actual, bona fide price at which the article was offered to the public on a regular basis for a reasonably substantial period of time". The FTC's own example of a false claim is raising a pen from $7.50 to $10 for a few days and then advertising "Were $10, Now Only $7.50" (<a href="https://www.law.cornell.edu/cfr/text/16/233.1">16 CFR 233.1</a>).</p></div><div><h3>In Canada</h3><p><strong>In Canada.</strong> Your own "regular price" must pass one of two tests: you sold a substantial volume at that price or higher within a reasonable period, or you offered it at that price or higher in good faith for a substantial period (<a href="https://laws-lois.justice.gc.ca/eng/acts/c-34/section-74.01.html">Competition Act, s. 74.01</a>). Keep your price history by item so you can show it.</p></div></div>
+<p><strong>In Quebec.</strong> Signs, labels and websites have their own French-language rules. Have a fluent French speaker check anything an AI translates, and check the Office québécois de la langue française's current guidance for signs. <span class="note">[DAN: ADD THE CURRENT QUEBEC SIGN RULE FROM AN OFFICIAL PAGE; THE OLD "MARKEDLY PREDOMINANT" REGULATION I FOUND WAS REVOKED ON JUNE 1, 2025.]</span></p>
+<p><strong>The instruction I</strong><strong>'d put in a</strong><strong> shop's copy Project:</strong></p>
+<div class="copy"><pre>Write only from the attached fact sheet. Never invent a price, size, material, origin or benefit. Never write Made in USA, Made in Canada, Product of Canada, a flag or a maple leaf unless the fact sheet says so and says why. If a fact is missing, write [CHECK]. After each draft, list every claim and the fact-sheet line it came from.</pre><button type="button" class="cp">Copy</button></div>
+<figure class="chart"><p class="figtitle">Where the C$6.75 mug cost comes from</p><div class="mug"><span class="seg can" style="width:54.07%">Canadian C$3.65</span><span class="seg imp" style="width:45.93%">Imported C$3.10</span><i class="ln" style="left:51%"><b>51% Made in Canada</b></i><i class="ln hi" style="left:98%"><b>98% Product of Canada</b></i></div><figcaption>Made-up product. C$3.65 of C$6.75 is about 54.1%: over the 51% line, under the 98% line.</figcaption></figure></div><div class="prose s"><p>You can say what is true and what you can prove. The shop is responsible for every word the AI writes. Watch three things: where it was made, "was" prices, and French in Quebec.</p>
+
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> "Made in USA" means all or nearly all made in the US. A flag can count as the claim. If parts are imported, say "Made in U.S. from Imported Parts" (<a href="https://www.ftc.gov/business-guidance/resources/complying-made-usa-standard">FTC</a>).</p>
+</div><div><h3>In Canada</h3><p><strong>In Canada.</strong> "Product of Canada" needs at least 98% of the direct costs in Canada. "Made in Canada" needs at least 51%, plus words like "with imported parts". Both need the last big step of making it to happen in Canada. A maple leaf can count as the claim (<a href="https://competition-bureau.canada.ca/en/how-we-foster-competition/education-and-outreach/publications/product-canada-and-made-canada-claims">Competition Bureau</a>).</p>
+</div></div>
+<p><strong>Worked example (made-up product).</strong> Harbour Street Gifts decorates an imported mug in Toronto. Its costs are C$6.75. C$3.65 of that, about 54%, is Canadian. So "Product of Canada" fails. The 51% test passes, but whether decorating a mug counts as the last big step is a question for an adviser, not an AI. The safe words: "Decorated by hand in Toronto."</p>
+
+<div class="where2"><div><h3>"Was" prices, in the US</h3><p><strong>"Was" prices, in the US.</strong> The old price must be a real price you charged for a fair length of time. Raising a price for a few days, then "cutting" it, is false (<a href="https://www.law.cornell.edu/cfr/text/16/233.1">16 CFR 233.1</a>).</p>
+</div><div><h3>"Was" prices, in Canada</h3><p><strong>"Was" prices, in Canada.</strong> Your regular price must pass one of two tests: you sold a lot at that price, or you offered it at that price for a good while (<a href="https://laws-lois.justice.gc.ca/eng/acts/c-34/section-74.01.html">Competition Act</a>). Keep your price history.</p>
+</div></div>
+<p><strong>In Quebec.</strong> Signs, labels and websites have French rules. Have a fluent speaker check AI French. <span class="note">[DAN: ADD THE CURRENT QUEBEC SIGN RULE FROM AN OFFICIAL PAGE.]</span></p>
+
+<div class="copy"><pre>Write only from the attached fact sheet. Never invent a price, size, material or origin. Never write Made in USA, Made in Canada, a flag or a maple leaf unless the fact sheet says so. Write [CHECK] if a fact is missing.</pre><button type="button" class="cp">Copy</button></div>
+<figure class="chart"><p class="figtitle">Where the C$6.75 mug cost comes from</p><div class="mug"><span class="seg can" style="width:54.07%">Canadian C$3.65</span><span class="seg imp" style="width:45.93%">Imported C$3.10</span><i class="ln" style="left:51%"><b>51% Made in Canada</b></i><i class="ln hi" style="left:98%"><b>98% Product of Canada</b></i></div><figcaption>Made-up product. C$3.65 of C$6.75 is about 54.1%: over the 51% line, under the 98% line.</figcaption></figure></div><div class="prose t"><p>Only say what is true. You are responsible for what the AI writes.</p>
+
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> "Made in USA" means all or nearly all of it was made in the US. A flag counts too (<a href="https://www.ftc.gov/business-guidance/resources/complying-made-usa-standard">FTC</a>).</p>
+</div><div><h3>In Canada</h3><p><strong>In Canada.</strong> "Made in Canada" needs at least 51% of the costs in Canada, plus words like "with imported parts". "Product of Canada" needs 98%. A maple leaf counts too (<a href="https://competition-bureau.canada.ca/en/how-we-foster-competition/education-and-outreach/publications/product-canada-and-made-canada-claims">Competition Bureau</a>).</p>
+</div></div>
+<p><strong>Example (made-up product).</strong> A shop paints an imported mug in Toronto. About 54% of the cost is Canadian. That is not enough for "Product of Canada". The safe words are "Decorated by hand in Toronto."</p>
+
+<p><strong>"Was" prices.</strong> Only show an old price if you really charged it for a good while (<a href="https://www.law.cornell.edu/cfr/text/16/233.1">US rule</a>, <a href="https://laws-lois.justice.gc.ca/eng/acts/c-34/section-74.01.html">Canada rule</a>).</p>
+
+<p><strong>In Quebec.</strong> Signs and labels need French. Ask a French speaker to check AI French. <span class="note">[DAN: ADD THE CURRENT QUEBEC RULE.]</span></p>
+
+<figure class="chart"><p class="figtitle">Mug cost: how much is Canadian?</p><div class="mug"><span class="seg can" style="width:54.07%">Canadian C$3.65</span><span class="seg imp" style="width:45.93%">Imported C$3.10</span><i class="ln" style="left:51%"><b>51% Made in Canada</b></i><i class="ln hi" style="left:98%"><b>98% Product of Canada</b></i></div><figcaption>Made-up product. C$3.65 of C$6.75 is about 54.1%: over the 51% line, under the 98% line.</figcaption></figure></div></div></section>
+<section class="q" id="q7"><div class="wrap"><p class="eyebrow">Question 7 of 7</p><h2>How do I set up AI for my shop team?</h2><div class="prose d"><p>Put staff on one business workspace, not personal accounts, because business plans don't train on your data by default and give you one admin and one bill. The full setup is in <span class="note">[LINK: #5 SET UP YOUR TEAM'S AI RIGHT: THE FIRST HOUR]</span>. The prices for a small shop:</p>
+<div class="scroll wide"><table><tr><th>Plan</th><th>Standard seat, billed yearly</th><th>Billed monthly</th><th>Note</th></tr><tr><td>ChatGPT Business</td><td>US$20 a user a month</td><td>US$25</td><td>"No training on your business data by default" (<a href="https://openai.com/business/pricing/">OpenAI</a>)</td></tr><tr><td>Claude Team</td><td>US$20 a seat a month</td><td>US$25</td><td>Teams of 2 to 150; prices exclude tax (<a href="https://claude.com/pricing">Anthropic</a>)</td></tr><tr><td>Google Workspace Business Standard (Gemini included)</td><td>US$14 / C$18.40 a user a month</td><td>US$16.80 / C$22.00</td><td>Gemini in Sheets included; your content isn't used to train models outside your domain (<a href="https://knowledge.workspace.google.com/admin/billing/ai-features-and-pricing-updates-for-google-workspace-business-editions">Google</a>)</td></tr></table></div>
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> Independently owned US small businesses accepted into OpenAI's OpenWorks pilot get three months of ChatGPT Business at no cost and one-on-one help from a partner (<a href="https://openai.com/openworks/">OpenAI</a>). One of OpenWorks' published examples is a gift shop, Tiny Things in Fargo, North Dakota, which used ChatGPT to build an inventory dashboard tracking more than 1,000 products.</p></div><div><h3>In Canada</h3><p><strong>In Canada.</strong> Google publishes CAD prices; OpenAI and Anthropic show local prices at checkout, which I couldn't confirm from their pages today. <span class="note">[DAN: CHECK THE CAD SEAT PRICE ON OPENAI'S AND ANTHROPIC'S CHECKOUT FROM CANADA.]</span> All three are before tax, so add GST/HST or your provincial sales tax.</p></div></div>
+<p>If staff use Microsoft 365 every day, Copilot may fit better. I couldn't confirm its Canadian prices on Microsoft's page today, so I've left it out of the table.</p></div><div class="prose s"><p>Put your staff on one business account, not personal ones. Business plans don't train on your data by default. Full steps are in <span class="note">[LINK: #5]</span>.</p>
+
+<div class="scroll"><table><tr><th>Plan</th><th>Per person, billed yearly</th><th>Billed monthly</th></tr><tr><td>ChatGPT Business</td><td>US$20</td><td>US$25</td></tr><tr><td>Claude Team</td><td>US$20</td><td>US$25</td></tr><tr><td>Google Workspace Business Standard, Gemini included</td><td>US$14 / C$18.40</td><td>US$16.80 / C$22.00</td></tr></table>
+</div>
+<p>Sources: <a href="https://openai.com/business/pricing/">OpenAI</a>, <a href="https://claude.com/pricing">Anthropic</a>, <a href="https://knowledge.workspace.google.com/admin/billing/ai-features-and-pricing-updates-for-google-workspace-business-editions">Google</a>.</p>
+
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> Small US shops in OpenAI's OpenWorks pilot get three months of ChatGPT Business free. One example is a gift shop in Fargo that built an inventory dashboard for more than 1,000 products (<a href="https://openai.com/openworks/">OpenAI</a>).</p>
+</div><div><h3>In Canada</h3><p><strong>In Canada.</strong> Google lists prices in Canadian dollars. <span class="note">[DAN: CHECK CAD PRICES AT OPENAI AND ANTHROPIC CHECKOUT.]</span> Add GST/HST or your provincial tax.</p>
+</div></div></div><div class="prose t"><p>Put your staff on one work account. Do not use personal accounts for shop work. Work plans don't learn from your data by default (<a href="https://openai.com/business/pricing/">OpenAI</a>). More steps are in <span class="note">[LINK: #5]</span>.</p>
+
+<div class="where2"><div><h3>In the US</h3><p><strong>In the US.</strong> ChatGPT Business and Claude Team cost about US$20 a person a month on a yearly plan (<a href="https://openai.com/business/pricing/">OpenAI</a>, <a href="https://claude.com/pricing">Anthropic</a>).</p>
+</div><div><h3>In Canada</h3><p><strong>In Canada.</strong> Google Workspace Business Standard, with Gemini, is C$18.40 a person a month on a yearly plan, before tax (<a href="https://knowledge.workspace.google.com/admin/billing/ai-features-and-pricing-updates-for-google-workspace-business-editions">Google</a>).</p>
+</div></div></div></div></section>
+<section class="q" id="q8"><div class="wrap"><p class="eyebrow">This week</p><h2>What should I do this week?</h2><div class="prose d"><ul class="check"><li><label><input type="checkbox" id="cd0"><span>Check what your till does: switch on low-stock alerts (Square) or set up a low-stock Flow (Shopify).</span></label></li><li><label><input type="checkbox" id="cd1"><span>If you were ever on Stocky, export your data now.</span></label></li><li><label><input type="checkbox" id="cd2"><span>Export 6 to 8 weeks of sales by item and a stock file; add days out of stock, lead time and case size.</span></label></li><li><label><input type="checkbox" id="cd3"><span>Run the reorder prompt on your files and check five lines by hand against the shelf.</span></label></li><li><label><input type="checkbox" id="cd4"><span>Make a fact sheet for your top 20 products and rewrite their listings from it.</span></label></li><li><label><input type="checkbox" id="cd5"><span>Check every "Made in" claim, flag and maple leaf on your shelves and site against the rules above.</span></label></li><li><label><input type="checkbox" id="cd6"><span>Move staff off personal AI accounts onto one business workspace.</span></label></li></ul></div><div class="prose s"><ul class="check"><li><label><input type="checkbox" id="cs0"><span>Turn on low-stock alerts in your till.</span></label></li><li><label><input type="checkbox" id="cs1"><span>If you used Stocky, export your data now.</span></label></li><li><label><input type="checkbox" id="cs2"><span>Export your sales and stock, and add days sold out.</span></label></li><li><label><input type="checkbox" id="cs3"><span>Run the reorder prompt and check five lines at the shelf.</span></label></li><li><label><input type="checkbox" id="cs4"><span>Make a fact sheet for your top 20 products.</span></label></li><li><label><input type="checkbox" id="cs5"><span>Check every "Made in" claim, flag and maple leaf.</span></label></li><li><label><input type="checkbox" id="cs6"><span>Move staff onto one business AI account.</span></label></li></ul></div><div class="prose t"><ul class="check"><li><label><input type="checkbox" id="ct0"><span>Turn on low-stock alerts.</span></label></li><li><label><input type="checkbox" id="ct1"><span>If you used Stocky, save your data.</span></label></li><li><label><input type="checkbox" id="ct2"><span>Save your sales and stock files.</span></label></li><li><label><input type="checkbox" id="ct3"><span>Try the order prompt. Check five items at the shelf.</span></label></li><li><label><input type="checkbox" id="ct4"><span>Write a fact sheet for your top 20 products.</span></label></li><li><label><input type="checkbox" id="ct5"><span>Check every "Made in" label and flag.</span></label></li><li><label><input type="checkbox" id="ct6"><span>Put staff on one work AI account.</span></label></li></ul></div></div></section>
+<section class="q" id="q9"><div class="wrap"><p class="eyebrow">Working together</p><h2>How Leverage Strategies helps</h2><div class="prose d"><p>I can help an independent shop with exactly this: setting the reorder numbers, building the weekly check on your own till data, writing the product-copy rules your staff use, and training the team so it keeps running without me. I don't promise a result; I'll show you what changed in your own numbers. <span class="note">[BOOK A CALL LINK]</span></p></div><div class="prose s"><p>I can help an independent shop set reorder numbers, build a weekly check on their own data, write copy rules for staff, and train the team. I don't promise results. I'll show you what changed in your own numbers. <span class="note">[BOOK A CALL LINK]</span></p>
+</div><div class="prose t"><p>I can help a small shop set up its order numbers, a weekly check, and staff training. I don't promise results. I show you what changed. <span class="note">[BOOK A CALL LINK]</span></p>
+</div></div></section>
+<section class="q" id="words"><div class="wrap"><p class="eyebrow st">Glossary</p><h2 class="st">Words to know</h2><div class="prose s"><div class="scroll"><table><tr><th>Word</th><th>What it means</th></tr><tr><td>Till</td><td>The system you ring up sales on (point of sale)</td></tr><tr><td>SKU</td><td>A code for one item, like a product number</td></tr><tr><td>Lead time</td><td>Days between ordering and the stock arriving</td></tr><tr><td>Reorder point</td><td>The stock level that tells you to order again</td></tr><tr><td>Safety stock</td><td>A few spare days of stock in case of delays</td></tr><tr><td>Case pack</td><td>How many units come in one box from the supplier</td></tr><tr><td>Stockout</td><td>When an item is sold out</td></tr><tr><td>Agent</td><td>An AI that does steps for you, not just answers</td></tr><tr><td>Purchase order</td><td>The list you send a supplier to order stock</td></tr></table>
+</div></div><div class="prose t"><div class="scroll"><table><tr><th>Word</th><th>Meaning</th></tr><tr><td>Till</td><td>Where you ring up sales</td></tr><tr><td>Lead time</td><td>Days for an order to arrive</td></tr><tr><td>Sold out</td><td>No stock left on the shelf</td></tr><tr><td>Agent</td><td>An AI that does steps for you</td></tr><tr><td>Order list</td><td>What you plan to buy from a supplier</td></tr><tr><td>Fact sheet</td><td>A list of true facts about each product</td></tr></table>
+</div></div></div></section>
+
+<div class="band"><div class="wrap">
+  <p class="eyebrow">The rule for every tool</p>
+  <p class="big">The AI drafts. You check the shelf, press send and pay.</p>
+</div></div>
+
+<div class="wrap sources" id="sources">
+  <h2>Sources</h2>
+  <p>All opened November 27, 2026.</p>
+<ul><li><a href="https://www.census.gov/library/stories/2026/05/ai-use-businesses.html">US Census Bureau, AI use by businesses, May 2026</a></li><li><a href="https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2026010-eng.htm">Statistics Canada, AI use, Q2 2026</a></li><li><a href="https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2025011-eng.htm">Statistics Canada, AI use, Q3 2025</a></li><li><a href="https://squareup.com/us/en/pricing">Square US pricing</a></li><li><a href="https://squareup.com/ca/en/point-of-sale/retail/pricing">Square Canada retail pricing</a></li><li><a href="https://squareup.com/us/en/press/introducing-squaremates">Square, Introducing Squaremates, November 12, 2026</a></li><li><a href="https://help.shopify.com/en/manual/inventory-and-locations/transitioning-from-stocky">Shopify Help Center, migrating from Stocky</a></li><li><a href="https://www.shopify.com/blog/enhanced-inventory-management">Shopify blog, Managing inventory in Shopify just got easier, June 17, 2026</a></li><li><a href="https://help.shopify.com/en/manual/ai-powered-tools/sidekick">Shopify Help Center, Sidekick</a></li><li><a href="https://www.shopify.com/pos/pricing">Shopify POS pricing, US</a> and <a href="https://www.shopify.com/ca/pos/pricing">Canada</a></li><li><a href="https://x-series-support.lightspeedhq.com/hc/en-us/articles/27946369696027-Using-demand-forecasting-with-reports-to-create-purchase-orders">Lightspeed X-Series support, demand forecasting</a></li><li><a href="https://arxiv.org/abs/2611.17766">GDP.xlsx, arXiv:2611.17766, November 13, 2026</a></li><li><a href="https://www.businesswire.com/news/home/20261105169310/en/Visa-Releases-First-of-Its-Kind-Industry-Benchmark-for-AI-Shopping-Almost-Half-of-Test-Runs-Fail">Visa Agentic Commerce Benchmark, November 5, 2026</a></li><li><a href="https://help.openai.com/en/articles/8555545-file-uploads-faq">OpenAI Help Center, file uploads FAQ</a></li><li><a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude">Claude Help Center, create and edit files</a></li><li><a href="https://claude.com/resources/articles/claude-in-chrome-generally-available">Anthropic, Claude in Chrome is generally available, August 26, 2026</a></li><li><a href="https://techcrunch.com/2026/09/29/meta-is-expanding-its-ai-agent-muse-to-small-businesses/">TechCrunch, Muse for small businesses, September 29, 2026</a></li><li><a href="https://live.euronext.com/en/financial-news/meta-expands-muse-ai-agent-small-businesses">Reuters via Euronext, Muse approvals</a></li><li><a href="https://www.ftc.gov/business-guidance/resources/complying-made-usa-standard">FTC, Complying with the Made in USA Standard</a></li><li><a href="https://www.law.cornell.edu/cfr/text/16/233.1">16 CFR 233.1, former price comparisons</a></li><li><a href="https://competition-bureau.canada.ca/en/how-we-foster-competition/education-and-outreach/publications/product-canada-and-made-canada-claims">Competition Bureau, Product of Canada and Made in Canada claims, March 7, 2025</a></li><li><a href="https://laws-lois.justice.gc.ca/eng/acts/c-34/section-74.01.html">Competition Act, s. 74.01</a></li><li><a href="https://openai.com/business/pricing/">OpenAI, ChatGPT Business pricing</a></li><li><a href="https://claude.com/pricing">Anthropic, Claude pricing</a></li><li><a href="https://knowledge.workspace.google.com/admin/billing/ai-features-and-pricing-updates-for-google-workspace-business-editions">Google Workspace Help, Business editions pricing</a></li><li><a href="https://openai.com/openworks/">OpenAI, OpenWorks</a></li></ul>
+</div>
+
+<footer class="site"><span>Leverage Strategies · Dan Albasry</span><span>Prices checked November 27, 2026. Check the vendor's page before you buy.</span></footer>
+
+<div class="seg float" role="group" aria-label="Reading level">
+  <span class="lab">Reading level</span>
+  <button type="button" data-v="t" aria-pressed="true">Starter</button>
+  <button type="button" data-v="s" aria-pressed="false">Simple</button>
+  <button type="button" data-v="d" aria-pressed="false">Detailed</button>
+</div>
+</div>
+
+<script>
+(function(){
+  var page=document.getElementById('page');
+  function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+  function put(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+  function current(){
+    var secs=document.querySelectorAll('section.q'),best=null;
+    for(var i=0;i<secs.length;i++){var r=secs[i].getBoundingClientRect();if(r.top<window.innerHeight*0.35)best=secs[i];}
+    return best;
+  }
+  function setLevel(v,keep){
+    var anchor=keep?current():null,off=anchor?anchor.getBoundingClientRect().top:0;
+    page.classList.remove('lv-d','lv-s','lv-t');page.classList.add('lv-'+v);
+    var b=document.querySelectorAll('button[data-v]');
+    for(var i=0;i<b.length;i++)b[i].setAttribute('aria-pressed',b[i].getAttribute('data-v')===v?'true':'false');
+    if(anchor){window.scrollTo({top:window.scrollY+anchor.getBoundingClientRect().top-Math.max(off,12),behavior:'auto'});}
+    put('leverage-notes-level',v);
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-v]');if(b){setLevel(b.getAttribute('data-v'),!!b.closest('.float'));return;}
+    var t=e.target.closest('button[data-tool]');if(t){setTool(t.getAttribute('data-tool'));put('leverage-tool',t.getAttribute('data-tool'));return;}
+    var c=e.target.closest('.cp');if(c){
+      var pre=c.parentNode.querySelector('pre'),txt=pre.textContent;
+      function done(m){c.textContent=m;setTimeout(function(){c.textContent='Copy'},1800);}
+      function fallback(){try{var r=document.createRange();r.selectNodeContents(pre);var s=window.getSelection();s.removeAllRanges();s.addRange(r);done('Selected, press copy');}catch(err){done('Select the text to copy');}}
+      try{navigator.clipboard.writeText(txt).then(function(){done('Copied')},fallback);}catch(err){fallback();}
+    }
+  });
+  function setTool(id){
+    var groups=document.querySelectorAll('.tools');
+    for(var g=0;g<groups.length;g++){
+      var has=groups[g].querySelector('.tool[data-tool="'+id+'"]')?id:'chatgpt';
+      var tools=groups[g].querySelectorAll('.tool');for(var i=0;i<tools.length;i++)tools[i].hidden=tools[i].getAttribute('data-tool')!==has;
+      var bs=groups[g].querySelectorAll('button[data-tool]');for(var j=0;j<bs.length;j++)bs[j].setAttribute('aria-pressed',bs[j].getAttribute('data-tool')===has?'true':'false');
+    }
+  }
+  var lv=get('leverage-notes-level');setLevel(lv==='d'||lv==='s'||lv==='t'?lv:'t',false);
+  var tl=get('leverage-tool');setTool(tl||'chatgpt');
+})();
+</script>
+
+</body></html>

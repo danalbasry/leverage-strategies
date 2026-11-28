@@ -1,0 +1,1256 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Run your business from your phone with AI</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Five phone set-ups for small business owners, with the checks that keep a phone mistake from reaching a customer. US and Canada, three reading levels.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* IDEA: a field note for owners who work between jobs. The phone catches the work; a person checks it.
+   PROOF: two made-up worked examples (a painter's quote and a receipt) with answer keys computed in code.
+   COLOUR and TYPE: the site's "G. Combined" direction: paper, ink, one rust accent; Instrument Serif and Sans.
+   LAYOUT: one reading column, figures up to 1040px, one dark band, floating level switch. Light theme by choice. */
+:root{
+  color-scheme: light;
+  --paper:#F8F6F1; --ink:#141412; --body:#3A3832; --muted:#5A584F; --rule:#CFCBC0; --panel:#EDE9DF; --accent:#7A2E1A;
+  --tint:#F3E3DC; --mid:#A8A397; --sheet:#FFFFFF; --bandmuted:#B5B1A6;
+  --display:'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --text:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --col:680px; --wide:1040px;
+  --gl:max(20px, env(safe-area-inset-left, 0px)); --gr:max(20px, env(safe-area-inset-right, 0px));
+}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+.eyebrow{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:var(--col);margin:0 auto;padding-left:var(--gl);padding-right:var(--gr);box-sizing:content-box}
+.widewrap{max-width:var(--wide);margin:0 auto;padding-left:var(--gl);padding-right:var(--gr);box-sizing:content-box}
+@media (max-width:760px){.wrap,.widewrap{box-sizing:border-box;max-width:100%}}
+
+/* three reading levels: .d detailed, .s simple, .t starter, .ds detailed+simple, .st simple+starter */
+body.lv-d .s, body.lv-d .t, body.lv-d .st{display:none !important}
+body.lv-s .d, body.lv-s .t{display:none !important}
+body.lv-t .d, body.lv-t .s, body.lv-t .ds{display:none !important}
+body.lv-s .prose{font-size:19px;line-height:1.75}
+body.lv-t .prose{font-size:20px;line-height:1.8}
+
+header.site{padding-block:24px;padding-left:max(32px, env(safe-area-inset-left, 0px));padding-right:max(32px, env(safe-area-inset-right, 0px));display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink)}
+header.site .mark{font-family:var(--display);font-size:32px;line-height:1}
+header.site .where{font-size:14px;color:var(--muted)}
+@media (max-width:520px){header.site{padding-left:var(--gl);padding-right:var(--gr)}}
+
+.hero{padding-top:72px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:56px;align-items:end}
+.hero h1{font-size:clamp(44px,6.6vw,82px);line-height:1.02;letter-spacing:-.02em;margin-top:22px}
+.hero .lede{margin:26px 0 0;font-size:21px;line-height:1.6;color:var(--body);max-width:600px}
+.hero .by{margin:24px 0 0;font-size:14px;color:var(--muted)}
+.hero figure{margin:0}
+@media (max-width:860px){.hero{grid-template-columns:1fr;gap:40px;padding-top:56px}}
+
+/* phone drawings */
+.phone{width:100%;max-width:300px;margin:0 auto;border:1.5px solid var(--ink);border-radius:34px;padding:14px 12px 18px;background:var(--sheet);box-shadow:0 18px 40px rgba(20,20,18,.08)}
+.phone .notch{width:84px;height:16px;margin:0 auto 12px;border-radius:999px;background:var(--ink)}
+.phone .scr{display:grid;gap:10px}
+.bub{padding:10px 12px;font-size:13.5px;line-height:1.45;color:var(--ink);border:1px solid var(--rule);background:var(--panel);border-radius:14px 14px 14px 4px}
+.bub.me{background:var(--ink);color:var(--paper);border-color:var(--ink);border-radius:14px 14px 4px 14px;justify-self:end;max-width:92%}
+.bub .k{display:block;font:600 10.5px var(--text);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;opacity:.75}
+.wave{display:flex;gap:3px;align-items:center;height:18px;margin-top:6px}
+.wave i{display:block;width:3px;background:currentColor;opacity:.8}
+.thumbrcpt{display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:center;padding:8px;border:1px solid var(--rule);border-radius:12px}
+.thumbrcpt .paper{height:64px;background:var(--paper);border:1px solid var(--rule);background-image:repeating-linear-gradient(180deg,transparent 0 9px,var(--rule) 9px 10px);background-position:0 8px}
+.thumbrcpt p{margin:0;font-size:13px;line-height:1.4;color:var(--body)}
+.thumbrcpt b{display:block;color:var(--ink);font-weight:600}
+.lines{display:grid;gap:6px;padding:4px 2px}
+.lines i{display:block;height:7px;background:var(--rule);border-radius:4px}
+.sendrow{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--muted)}
+.sendbtn{font:600 12px var(--text);letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;border:1.5px solid var(--accent);color:var(--accent);border-radius:999px}
+
+.versions{margin:56px auto 0;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:22px 0}
+.versions p{margin:0;font-size:16px;color:var(--body);flex:1 1 300px}
+.seg{display:inline-flex;border:1px solid var(--ink);background:var(--paper);flex-wrap:wrap}
+.seg button{font:500 14px/1 var(--text);letter-spacing:.04em;padding:14px 16px;min-height:44px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button + button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.float{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);z-index:20;box-shadow:0 6px 24px rgba(20,20,18,.18);flex-wrap:nowrap}
+.float .lab{display:flex;align-items:center;padding:0 14px 0 16px;font-size:13px;color:var(--muted);border-right:1px solid var(--rule);white-space:nowrap}
+@media (max-width:520px){.float .lab{display:none}.seg button{padding:14px 13px}}
+
+.toc{margin:56px auto 0}
+.toc ol{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--ink)}
+.toc li{border-bottom:1px solid var(--rule)}
+.toc a{display:flex;gap:20px;align-items:baseline;padding:14px 0;text-decoration:none;font-family:var(--display);font-size:24px;line-height:1.2}
+.toc a span.n{font:400 13px var(--text);color:var(--muted);flex:0 0 22px;font-variant-numeric:tabular-nums}
+@media (max-width:520px){.toc a{font-size:21px;gap:14px}}
+
+section.q{padding:96px 0 0;scroll-margin-top:12px}
+section.q h2{font-size:clamp(34px,5vw,52px);line-height:1.06;margin:14px 0 28px}
+.prose p{margin:0 0 20px;color:var(--body)}
+.prose p.answer{font-size:1.14em;line-height:1.55;color:var(--ink)}
+.prose strong{color:var(--ink);font-weight:600}
+.prose ul,.prose ol{margin:0 0 20px;padding-left:22px;color:var(--body)}
+.prose li{margin:0 0 10px}
+.prose h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:28px 0 10px}
+
+figure{margin:44px auto}
+figure.wrap,figure.widewrap{margin-top:48px;margin-bottom:48px}
+figcaption{margin-top:12px;font-size:13px;line-height:1.5;color:var(--muted)}
+.figtitle{margin:0 0 18px;font-family:var(--display);font-size:26px;line-height:1.15}
+
+.note{display:inline;background:var(--tint);color:var(--accent);font-size:.92em;padding:1px 6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.note b{font-weight:600}
+p.notep{background:var(--tint);color:var(--accent);padding:14px 18px;border-left:3px solid var(--accent);font-size:16px;line-height:1.55}
+p.notep b{font-weight:600;letter-spacing:.04em}
+
+table{border-collapse:collapse;width:100%;font-size:15.5px;line-height:1.45}
+th{font:500 12.5px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 14px 10px 0;border-bottom:1px solid var(--ink);vertical-align:bottom}
+td{padding:13px 14px 13px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--body)}
+td:first-child{color:var(--ink);font-weight:500}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:480px){.keytbl{font-size:14px}.keytbl th{white-space:normal;padding-right:8px}.keytbl td{padding-right:8px}.keytbl td.n{padding-right:0}}
+tr.tot td{color:var(--ink);font-weight:600;border-bottom:1px solid var(--ink)}
+.tbl{margin:8px 0 28px}
+@media (max-width:600px){
+  .stack thead{display:none}
+  .stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--rule)}
+  .stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8.5em}
+  .stack td::before{content:attr(data-l);float:inline-start;width:8em;margin-inline-start:-8.5em;font:500 12px/1.9 var(--text);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+  .stack td:first-child{font-weight:600;padding-inline-start:0}
+  .stack td:first-child::before{display:none}
+}
+
+/* where boxes */
+.where2{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin:28px 0;border:1px solid var(--ink)}
+.where2 > div{padding:22px 24px;background:var(--panel)}
+.where2 > div + div{border-left:1px solid var(--ink)}
+@media (max-width:600px){.where2 > div + div{border-left:0;border-top:1px solid var(--ink)}}
+.where2 h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2 p{margin:0;font-size:16px;line-height:1.6;color:var(--body)}
+
+/* copy blocks */
+.copy{margin:28px 0;border:1px solid var(--ink);background:var(--sheet)}
+.copy .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 12px 10px 18px;border-bottom:1px solid var(--rule)}
+.copy .bar span{font:500 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.copy button{font:500 14px var(--text);min-height:40px;padding:8px 14px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer;white-space:nowrap}
+.copy button.done{background:var(--ink);color:var(--paper)}
+.copy pre{margin:0;padding:18px 18px 20px;font-family:var(--mono);font-size:14.5px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.copy pre mark{background:var(--tint);color:var(--accent);font-weight:600;padding:0 3px}
+
+/* tool switch */
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:32px 0 0;padding-top:18px;border-top:1px solid var(--ink)}
+.toolbar .eyebrow{flex:0 0 auto}
+.toolseg button{padding:12px 14px;font-size:14px}
+.toolblocks{border-bottom:1px solid var(--rule);padding:22px 0 6px}
+.prose .toolblock h3{font:400 28px/1.1 var(--display);letter-spacing:0;text-transform:none;margin:0 0 10px;color:var(--ink)}
+.prose .toolblock h3 + p{margin-top:0}
+.prose .toolblock h3.sub{margin-top:26px}
+@media (max-width:560px){.toolbar .toolseg{display:flex;flex-wrap:wrap;width:100%}.toolbar .toolseg button{flex:1 1 auto;padding:12px 8px;font-size:13px;letter-spacing:0}.toolbar .toolseg button + button{border-left:1px solid var(--rule)}}
+.toolblock[hidden]{display:none !important}
+
+/* catch / check */
+.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.split > div{padding:24px 24px 26px}
+.split > div + div{border-left:1px solid var(--ink);background:var(--panel);box-shadow:inset 0 3px 0 var(--accent)}
+.split h3{font-size:34px;line-height:1.05;margin:0 0 16px}
+.split .k{font:500 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.split > div + div .k{color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:15px;line-height:1.2;padding:8px 12px;border:1px solid var(--ink);background:var(--sheet);color:var(--ink)}
+.chip.you{background:var(--ink);color:var(--paper)}
+@media (max-width:640px){.split{grid-template-columns:1fr}.split > div + div{border-left:0;border-top:1px solid var(--ink)}}
+
+/* three-panel figures */
+.panels{display:grid;grid-template-columns:minmax(0,1fr) 36px minmax(0,1fr) 36px minmax(0,1fr);align-items:start}
+.panels .arr{align-self:center;text-align:center;font-size:22px;color:var(--muted)}
+.panel{border:1px solid var(--ink);background:var(--sheet);padding:16px 16px 18px}
+.panel .k{font:600 11px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.panel.key{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.panel.key .k{color:var(--accent)}
+.panel p{margin:0;font-size:14.5px;line-height:1.5;color:var(--body)}
+.mini{width:100%;font-size:13.5px}
+.mini td{padding:5px 8px 5px 0;border-bottom:1px solid var(--rule)}
+.mini td:first-child{font-weight:400;color:var(--body)}
+.mini tr:last-child td{border-bottom:0}
+.mini td.n{padding-right:0}
+.circ{display:inline-block;border:2px solid var(--accent);border-radius:999px;padding:2px 10px;margin:-4px -4px;color:var(--accent);font-weight:600}
+.ghost{color:var(--muted);font-style:italic}
+@media (max-width:820px){.panels{grid-template-columns:1fr;gap:0}.panels .arr{padding:8px 0}.panels .arr span{display:inline-block;transform:rotate(90deg)}}
+
+/* receipt */
+.rcpts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.rcpt{background:var(--sheet);border:1px solid var(--ink);padding:16px 16px 18px;font-family:var(--mono);font-size:13px;line-height:1.7;color:var(--ink);box-shadow:0 14px 30px rgba(20,20,18,.07)}
+.rcpt .ex{font:600 11px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+.rcpt .r{display:flex;justify-content:space-between;gap:10px}
+.rcpt .r.sum{border-top:1px dashed var(--mid);margin-top:6px;padding-top:6px;font-weight:600}
+.rcpt.bad{border-color:var(--accent)}
+.hl{background:var(--tint);color:var(--accent);font-weight:700;outline:1.5px solid var(--accent);padding:0 2px}
+.rowcard{border:1px solid var(--ink);background:var(--sheet);font-size:13.5px}
+.rowcard .ex{font:600 11px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0;padding:12px 14px;border-bottom:1px solid var(--rule)}
+.rowcard dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;padding:12px 14px 14px}
+.rowcard dt{font:500 11.5px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.rowcard dd{margin:0;font-family:var(--mono);color:var(--ink);text-align:right}
+@media (max-width:860px){.rcpts{grid-template-columns:1fr;max-width:420px}}
+
+/* reply figure */
+.reply{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start;max-width:720px}
+.chat{border:1px solid var(--ink);background:var(--sheet);padding:16px;display:grid;gap:12px}
+.chat .k{font:600 11px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
+.chat .bub{font-size:14.5px}
+.struck{text-decoration:line-through;text-decoration-color:var(--accent);text-decoration-thickness:2px;color:var(--muted)}
+.why{font-size:12.5px;color:var(--accent);margin:-4px 0 0}
+.tap{display:flex;align-items:center;gap:10px;justify-self:end;font-size:13px;color:var(--ink)}
+.tap .dot{width:26px;height:26px;border-radius:50%;border:2px solid var(--accent);box-shadow:0 0 0 5px var(--tint)}
+@media (max-width:640px){.reply{grid-template-columns:1fr}}
+
+/* lock screen */
+.lock{max-width:300px;margin:0 auto;border:1.5px solid var(--ink);border-radius:34px;padding:22px 16px 26px;background:var(--ink);color:var(--paper);text-align:center}
+.lock .tm{font-family:var(--display);font-size:64px;line-height:1;margin:6px 0 4px}
+.lock .dt{font-size:13px;color:var(--bandmuted);margin:0 0 18px}
+.lock .card{text-align:left;background:#2A2925;border:1px solid #3C3A35;border-radius:16px;padding:12px 14px}
+.lock .card .k{font:600 10.5px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--bandmuted);margin:0 0 8px}
+.lock .card p{margin:0 0 6px;font-size:14px;line-height:1.4;color:var(--paper)}
+.lock .card p.safe{margin:10px 0 0;padding-top:8px;border-top:1px solid #3C3A35;color:var(--tint);font-weight:600}
+
+/* home screen */
+.homefig{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:40px;align-items:center}
+.home{border:1.5px solid var(--ink);border-radius:34px;padding:26px 20px 30px;background:var(--panel)}
+.home .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px 12px}
+.app{display:grid;justify-items:center;gap:6px}
+.app i{display:block;width:100%;max-width:52px;aspect-ratio:1;border-radius:13px;background:var(--rule)}
+.app span{font-size:10.5px;line-height:1.2;color:var(--muted);text-align:center}
+.app.hot i{background:var(--accent);box-shadow:0 0 0 3px var(--paper),0 0 0 4.5px var(--accent)}
+.app.hot span{color:var(--ink);font-weight:600}
+.homesteps{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink);counter-reset:hs}
+.homesteps li{counter-increment:hs;display:grid;grid-template-columns:44px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);font-size:16px;line-height:1.5;color:var(--ink)}
+.homesteps li::before{content:counter(hs);font-family:var(--display);font-size:32px;line-height:.9;color:var(--accent)}
+@media (max-width:700px){.homefig{grid-template-columns:1fr;gap:28px}.home{max-width:300px;width:100%;margin:0 auto}}
+
+/* agent strip */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px}
+.stage{position:relative;border:1px solid var(--ink);padding:16px 16px 18px;background:var(--paper)}
+.stage .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.stage h3{font-size:26px;line-height:1.1;margin:6px 0 8px}
+.stage p{margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.stage:not(:last-child)::after{content:"\2192";position:absolute;right:-29px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--muted)}
+.stage.you{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.stage.you .k{color:var(--accent)}
+.check2{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--rule);font-size:13px;color:var(--accent);line-height:1.35}
+.hand{flex:0 0 18px;width:18px;height:20px;position:relative}
+.hand::before{content:"";position:absolute;left:2px;bottom:0;width:14px;height:11px;border-radius:3px 3px 6px 6px;background:var(--accent)}
+.hand::after{content:"";position:absolute;left:3px;top:0;width:12px;height:10px;background:repeating-linear-gradient(90deg,var(--accent) 0 2.4px,transparent 2.4px 3.6px)}
+@media (max-width:820px){.flow{grid-template-columns:1fr;gap:30px}.stage:not(:last-child)::after{content:"\2193";right:auto;left:22px;top:auto;bottom:-29px;transform:none}}
+
+/* never icons */
+.never{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:640px}
+.nv{display:grid;justify-items:center;gap:10px;text-align:center}
+.nv .bub2{position:relative;width:120px;height:88px;border:1.5px solid var(--ink);border-radius:18px 18px 18px 4px;background:var(--sheet);display:grid;place-items:center}
+.nv .bub2::after{content:"";position:absolute;left:-6px;right:-6px;top:50%;height:3px;background:var(--accent);transform:rotate(-28deg)}
+.nv span{font-size:15px;color:var(--ink)}
+.ic-card{width:56px;height:38px;border:1.5px solid var(--ink);border-radius:5px;background:linear-gradient(180deg,transparent 8px,var(--ink) 8px 14px,transparent 14px)}
+.ic-id{width:56px;height:40px;border:1.5px solid var(--ink);border-radius:5px;position:relative}
+.ic-id::before{content:"";position:absolute;left:7px;top:8px;width:14px;height:14px;border-radius:50%;background:var(--ink)}
+.ic-id::after{content:"";position:absolute;left:28px;top:10px;width:20px;height:16px;background:repeating-linear-gradient(180deg,var(--ink) 0 2px,transparent 2px 7px)}
+.ic-med{width:40px;height:40px;position:relative}
+.ic-med::before,.ic-med::after{content:"";position:absolute;background:var(--ink)}
+.ic-med::before{left:14px;top:0;width:12px;height:40px}
+.ic-med::after{left:0;top:14px;width:40px;height:12px}
+@media (max-width:480px){.never{gap:12px}.nv .bub2{width:92px;height:72px}.nv span{font-size:14px}}
+
+.agents{list-style:none;margin:0 0 24px;padding:0;border-top:1px solid var(--ink)}
+.agents li{padding:16px 0;border-bottom:1px solid var(--rule);color:var(--body);margin:0}
+.prose ul.agents{padding-left:0}
+
+.band{background:var(--ink);color:var(--paper);margin-top:96px;padding-block:64px}
+.band p.eyebrow{color:var(--bandmuted);font-family:var(--text);font-size:13px;line-height:1.4;margin:0}
+.band p.big{margin:16px 0 0;font-family:var(--display);font-size:clamp(30px,4.6vw,46px);line-height:1.15;color:var(--paper)}
+.band p.big em{font-style:italic;color:var(--tint)}
+
+.check{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.check li{border-bottom:1px solid var(--rule)}
+.check label{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:18px 0;cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;width:24px;height:24px;margin:4px 0 0;border:1.5px solid var(--ink);background:var(--paper);display:grid;place-content:center;cursor:pointer}
+.check input:checked{background:var(--ink)}
+.check input:checked::after{content:"";width:11px;height:6px;border-left:2px solid var(--paper);border-bottom:2px solid var(--paper);transform:rotate(-45deg) translate(1px,-1px)}
+.check span{color:var(--ink)}
+
+.cta{border-top:1px solid var(--ink);margin-top:96px;padding-block:88px;text-align:center}
+.cta h2{font-size:clamp(40px,6vw,68px);line-height:1.04}
+.cta p{max-width:600px;margin:22px auto 0;color:var(--body)}
+
+.sources h2{font-size:34px;margin:0 0 8px}
+.sources ul{margin:18px 0 0;padding-left:20px;font-size:15px;line-height:1.6;color:var(--body)}
+.sources li{margin-bottom:8px}
+.sources p{font-size:15px;color:var(--muted);margin:0}
+.sources h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:28px 0 0}
+section.q.sources{padding-top:72px}
+footer.site{margin-top:88px;border-top:1px solid var(--ink);padding-top:24px;padding-bottom:calc(110px + env(safe-area-inset-bottom, 0px));padding-left:max(32px, env(safe-area-inset-left, 0px));padding-right:max(32px, env(safe-area-inset-right, 0px));display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:var(--muted)}
+@media (max-width:520px){footer.site{padding-left:var(--gl);padding-right:var(--gr)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<script>
+(function(){var v='t';try{var s=localStorage.getItem('leverage-notes-level');if(s==='d'||s==='s'||s==='t')v=s;}catch(e){}var go=function(){document.body.classList.add('lv-'+v)};if(document.body)go();else document.addEventListener('DOMContentLoaded',go);})();
+</script>
+
+<header class="site">
+  <span class="mark">Leverage</span>
+  <span class="where">Notes · For small business owners</span>
+</header>
+
+<div class="hero widewrap">
+  <div>
+    <p class="eyebrow"><span class="d">Field note · Detailed version</span><span class="s">Field note · Simple version</span><span class="t">Field note · Starter version</span></p>
+    <h1>Run your business from your phone with AI</h1>
+    <p class="lede d">Five phone set-ups that can save you time between jobs, and the checks that keep a phone mistake from reaching a customer.</p>
+    <p class="lede s">Five phone set-ups that can save you time, and the checks that keep you safe.</p>
+    <p class="lede t">Five ways to use AI on your phone, and how to stay safe.</p>
+    <p class="by">By Dan Albasry · November 27, 2026 · For owners in the US and Canada</p>
+  </div>
+  <figure aria-label="Illustration of a phone screen at a job site: a voice note, a receipt photo and a draft reply waiting to be checked">
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="scr">
+        <div class="bub me"><span class="k">Voice note</span>"Quote for Ana Lopez, two bedrooms, four cans of paint at 62 dollars, 14 hours of labour at 55 dollars, Ontario."<div class="wave" aria-hidden="true"><i style="height:6px"></i><i style="height:12px"></i><i style="height:16px"></i><i style="height:9px"></i><i style="height:14px"></i><i style="height:5px"></i><i style="height:11px"></i><i style="height:16px"></i><i style="height:7px"></i><i style="height:12px"></i><i style="height:4px"></i></div></div>
+        <div class="thumbrcpt"><span class="paper" aria-hidden="true"></span><p><b>Receipt photo</b>Card number covered</p></div>
+        <div class="bub"><span class="k">Draft reply</span><div class="lines" aria-hidden="true"><i style="width:95%"></i><i style="width:80%"></i><i style="width:60%"></i></div></div>
+        <div class="sendrow"><span>Not sent. Waiting for you.</span><span class="sendbtn">Send</span></div>
+      </div>
+    </div>
+    <figcaption><span class="ds">Illustration. The painter, the customer and the job are made-up examples used below.</span><span class="t">A made-up example.</span></figcaption>
+  </figure>
+</div>
+
+<div class="wrap">
+  <div class="prose" style="margin-top:56px">
+    <p class="notep"><b>Placeholder, opening scene:</b> <span class="d">Dan to write one real moment when he ran part of his work from his phone, for example a quote started in the truck or a receipt snapped at the counter. Two or three sentences. No invented details or quotes.</span><span class="s">Dan to write one real moment when he ran part of his work from his phone. Two or three sentences. No invented details.</span><span class="t">Dan to write a real moment when he ran his work from his phone. Two or three short sentences.</span></p>
+  </div>
+
+  <div class="versions">
+    <p><strong>Three ways to read this.</strong> Starter is the easiest. Simple says everything in plain words. Detailed has every number and source. Switch any time with the button at the bottom of your screen.</p>
+    <div class="seg" role="group" aria-label="Choose a reading level">
+      <button type="button" data-v="t" aria-pressed="true">Starter</button>
+      <button type="button" data-v="s" aria-pressed="false">Simple</button>
+      <button type="button" data-v="d" aria-pressed="false">Detailed</button>
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Questions in this guide">
+    <p class="eyebrow">Ten questions, in order</p>
+    <ol>
+      <li><a href="#q1"><span class="n">1</span><span>What can AI on your phone do well, and what should wait?</span></a></li>
+      <li><a href="#q2"><span class="n">2</span><span>Set-up 1: a voice note into a task list or quote</span></a></li>
+      <li><a href="#q3"><span class="n">3</span><span>Set-up 2: a receipt photo into a line for your books</span></a></li>
+      <li><a href="#q4"><span class="n">4</span><span>Set-up 3: help replying to a customer</span></a></li>
+      <li><a href="#q5"><span class="n">5</span><span>Set-up 4: a morning check of calendar and email</span></a></li>
+      <li><a href="#q6"><span class="n">6</span><span>Set-up 5: your most-used prompt one tap away</span></a></li>
+      <li><a href="#q7"><span class="n">7</span><span>Can an agent do these jobs for me?</span></a></li>
+      <li><a href="#q8"><span class="n">8</span><span>What should stay off the phone, or off AI?</span></a></li>
+      <li><a href="#q9"><span class="n">9</span><span>What does it cost?</span></a></li>
+      <li><a href="#q10"><span class="n">10</span><span>What can I do this week?</span></a></li>
+    </ol>
+  </nav>
+</div>
+
+<!-- 1 -->
+<section class="q" id="q1">
+  <div class="wrap">
+    <p class="eyebrow">Question 1 of 10</p>
+    <h2>What can AI on your phone do well, and what should wait?</h2>
+    <div class="prose">
+      <p class="answer d">Your phone is great for catching work the moment it happens, and weak for checking it.</p>
+      <p class="answer s">Your phone is great for catching work as it happens. It is weak for checking it.</p>
+      <p class="answer t">The phone is good for catching work. It is not good for checking it.</p>
+      <div class="d">
+        <p>Speak a note in the truck, snap a receipt at the counter, ask a quick question while you stand in front of the job. Then check anything with a number, a name, a date or a price on a bigger screen, or slowly on the phone, before it reaches a customer or your books.</p>
+        <p>That split is the whole article. How much you lean on the phone depends on three things:</p>
+        <ul>
+          <li><strong>Your job.</strong> A painter quoting on site needs voice and camera. A bookkeeper needs a desk most of the day.</li>
+          <li><strong>How costly a mistake is.</strong> A wrong grocery list costs nothing. A wrong total on a quote costs money and trust.</li>
+          <li><strong>Who sees the result.</strong> Anything a customer sees, anything that moves money, and anything you post gets a human check first. Every time.</li>
+        </ul>
+        <p>The five set-ups below are the jobs where the phone earns its place. Each one shows the steps in the apps that do it well, and where you must check.</p>
+      </div>
+      <div class="s">
+        <p>Talk a note, snap a receipt, ask a quick question. Then check every number, name, date and price before a customer sees it.</p>
+        <p>How much you use the phone depends on your job, how much a mistake costs, and who sees the result. Anything a customer sees, anything that moves money, and anything you post gets a human check first.</p>
+      </div>
+      <div class="t">
+        <p>Talk, take a photo, ask a question. Then check every number before a customer sees it.</p>
+        <p>A person checks anything a customer sees. A person checks anything that moves money. How much you use your phone depends on your job.</p>
+      </div>
+    </div>
+  </div>
+  <figure class="widewrap">
+    <div class="split">
+      <div>
+        <p class="k">On the phone</p>
+        <h3><span class="ds">Phone: catch it</span><span class="t">Catch it</span></h3>
+        <div class="chips"><span class="chip">Voice note</span><span class="chip">Photo</span><span class="chip">Quick question</span></div>
+      </div>
+      <div>
+        <p class="k">A person, before it goes out</p>
+        <h3><span class="ds">Check before it counts</span><span class="t">Check it</span></h3>
+        <div class="chips"><span class="chip you">Numbers</span><span class="chip you">Names</span><span class="chip you">Dates</span><span class="chip you">Prices</span><span class="chip you"><span class="ds">Anything a customer sees</span><span class="t">What a customer sees</span></span></div>
+      </div>
+    </div>
+  </figure>
+</section>
+
+<div class="band">
+  <div class="wrap">
+    <p class="eyebrow">If you remember one thing</p>
+    <p class="big">The phone catches it. <em>A person checks it before it counts.</em></p>
+  </div>
+</div>
+
+<!-- 2 -->
+<section class="q" id="q2">
+  <div class="wrap">
+    <p class="eyebrow">Question 2 of 10 · Set-up 1</p>
+    <h2>Set-up 1: How do I turn a voice note into a task list or a quote draft?</h2>
+    <div class="prose">
+      <p class="answer d">Use dictation, read the words, then ask for the list or quote.</p>
+      <p class="answer s">Speak, read the words, then ask for the list or quote. Use the microphone (dictation) so you see the text first.</p>
+      <p class="answer t">Talk. Read the words. Then ask for a list or a quote.</p>
+      <p class="d">Dictation turns your speech into text you can see before you send it, so you catch a misheard number early. Voice conversation modes talk back and are faster, but you only see the words afterwards.</p>
+      <p class="d"><strong>A worked example (made-up business, for illustration).</strong> <em>Maple Street Painting</em> is an example business, not a real client. The owner dictates: "Quote for Ana Lopez, two bedrooms, walls and ceilings, two coats, four cans of paint at 62 dollars, 14 hours of labour at 55 dollars, Ontario." The prompt:</p>
+      <p class="s"><strong>Example (a made-up business):</strong> <em>Maple Street Painting</em> says: "Quote for Ana Lopez, two bedrooms, four cans of paint at 62 dollars, 14 hours of labour at 55 dollars, Ontario."</p>
+      <p class="t"><strong>Example (made-up):</strong> a painter says "4 cans at 62 dollars, 14 hours at 55 dollars, Ontario."</p>
+    </div>
+    <div class="copy d">
+      <div class="bar"><span>The prompt</span><button type="button" data-copy="p1d">Copy prompt</button></div>
+<pre id="p1d">Turn this into a quote draft: line items with quantity, unit price and line total, then subtotal, tax and total. Use only numbers I said. If a number is missing, write MISSING. Do not add anything I did not say.</pre>
+    </div>
+    <div class="copy s">
+      <div class="bar"><span>Prompt</span><button type="button" data-copy="p1s">Copy prompt</button></div>
+<pre id="p1s">Turn this into a quote draft with line items, subtotal, tax and total. Use only numbers I said. Write MISSING if a number is missing.</pre>
+    </div>
+    <div class="d">
+      <div class="prose"><p><strong>Answer key (worked out in code, not by the AI):</strong></p></div>
+      <div class="tbl"><table class="keytbl">
+        <thead><tr><th>Line</th><th class="n">Qty</th><th class="n">Unit price (CAD)</th><th class="n">Line total (CAD)</th></tr></thead>
+        <tbody>
+          <tr><td>Paint</td><td class="n">4 cans</td><td class="n">62.00</td><td class="n">248.00</td></tr>
+          <tr><td>Labour</td><td class="n">14 hours</td><td class="n">55.00</td><td class="n">770.00</td></tr>
+          <tr><td>Subtotal</td><td></td><td></td><td class="n">1,018.00</td></tr>
+          <tr><td>HST 13% (Ontario)</td><td></td><td></td><td class="n">132.34</td></tr>
+          <tr class="tot"><td>Total</td><td></td><td></td><td class="n">1,150.34</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose"><p>Compare the app's draft with this key line by line. If any line differs, the draft is wrong, however tidy it looks. <span class="note"><b>Dan to run:</b> dictate this exact note into ChatGPT, Claude and Gemini on the phone and record whether each total matched 1,150.34.</span></p></div>
+    </div>
+    <div class="prose s">
+      <p><strong>The right answer (worked out in code):</strong> paint 248.00, labour 770.00, subtotal 1,018.00, HST 13% 132.34, total <strong>1,150.34</strong>. If the app's total is different, the draft is wrong. <span class="note"><b>Dan to run:</b> try this in each app and record the totals.</span></p>
+    </div>
+    <div class="prose t">
+      <p>The right total is <strong>1,150.34</strong>. I worked it out with code. If the app says something else, it is wrong. <span class="note"><b>Dan to run</b></span></p>
+    </div>
+  </div>
+  <figure class="widewrap">
+    <p class="figtitle"><span class="ds">From voice note to a checked quote</span><span class="t">Talk, then check the total</span></p>
+    <div class="panels">
+      <div class="panel"><p class="k">1 · The voice note</p><div class="bub me" style="font-size:14px">"Four cans of paint at 62 dollars, 14 hours of labour at 55 dollars, Ontario."</div></div>
+      <div class="arr" aria-hidden="true"><span>&#8594;</span></div>
+      <div class="panel"><p class="k">2 · The app's draft quote</p>
+        <table class="mini"><tbody>
+          <tr><td>Paint</td><td class="n ghost">?</td></tr>
+          <tr><td>Labour</td><td class="n ghost">?</td></tr>
+          <tr><td>Subtotal</td><td class="n ghost">?</td></tr>
+          <tr><td>HST</td><td class="n ghost">?</td></tr>
+          <tr><td><strong>Total</strong></td><td class="n ghost">?</td></tr>
+        </tbody></table>
+        <p style="margin-top:10px;font-size:13px">Your app fills this in. Compare it with the key.</p>
+      </div>
+      <div class="arr" aria-hidden="true"><span>&#8594;</span></div>
+      <div class="panel key"><p class="k">3 · The answer key</p>
+        <table class="mini"><tbody>
+          <tr><td>Paint 4 x 62.00</td><td class="n">248.00</td></tr>
+          <tr><td>Labour 14 x 55.00</td><td class="n">770.00</td></tr>
+          <tr><td>Subtotal</td><td class="n">1,018.00</td></tr>
+          <tr><td>HST 13%</td><td class="n">132.34</td></tr>
+          <tr><td><strong>Total</strong></td><td class="n"><span class="circ">1,150.34</span></td></tr>
+        </tbody></table>
+      </div>
+    </div>
+    <figcaption><span class="ds">Made-up example. Amounts in Canadian dollars, Ontario HST at 13%. The key was computed in code, not by an AI.</span><span class="t">Made-up example. The right total is circled.</span></figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="toolbar">
+      <p class="eyebrow">Show steps for</p>
+      <div class="seg toolseg" role="group" aria-label="Choose your AI tool">
+        <button type="button" data-tool="chatgpt" aria-pressed="true">ChatGPT</button>
+        <button type="button" data-tool="claude" aria-pressed="false">Claude</button>
+        <button type="button" data-tool="gemini" aria-pressed="false">Gemini</button>
+        <button type="button" data-tool="copilot" aria-pressed="false">Copilot</button>
+        <button type="button" data-tool="muse" aria-pressed="false">Muse</button>
+      </div>
+    </div>
+    <div class="toolblocks prose">
+      <div class="toolblock" data-tools="chatgpt">
+        <h3>In ChatGPT</h3>
+        <p class="d">Open a new chat, tap the microphone in the message box, speak, read the text, then send it with the prompt above. The waveform button starts a spoken conversation instead. <span class="note"><b>Dan to run:</b> confirm both buttons and labels in the current app.</span></p>
+        <p class="s">Tap the microphone, speak, read, send with the prompt.</p>
+        <p class="t">Tap the mic. Talk. Read. Send.</p>
+      </div>
+      <div class="toolblock" data-tools="claude" hidden>
+        <h3>In Claude</h3>
+        <p class="d">Tap the microphone to dictate, check the text in the box, then send with the prompt. The sound-wave button starts voice mode. Claude Free includes the app; paid plans add scheduling (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>).</p>
+        <p class="s">Tap the microphone, check the text, send with the prompt.</p>
+        <p class="t">Tap the mic. Talk. Read. Send.</p>
+      </div>
+      <div class="toolblock" data-tools="gemini copilot" hidden>
+        <h3>In Gemini or Copilot</h3>
+        <p class="d">Tap the microphone or voice control in the app, speak, then paste the prompt in the same chat. <span class="note"><b>Dan to run:</b> confirm the button labels.</span></p>
+        <p class="s">Tap the microphone or voice button, then paste the prompt. <span class="note"><b>Dan to run:</b> confirm the button labels.</span></p>
+        <p class="t">Tap the mic or voice button. Talk. Ask for the quote. <span class="note"><b>Dan to run:</b> check the button names.</span></p>
+      </div>
+      <div class="toolblock" data-tools="muse" hidden>
+        <h3>In Muse</h3>
+        <p class="d">Tap Voice before your prompt, then ask for the list or quote. Muse came to Canada on 18 September 2026 on iPhone and the web, with Android not confirmed at launch (<a href="https://www.iphoneincanada.ca/2026/09/18/metas-muse-ai-agent-is-now-available-in-canada/" target="_blank" rel="noopener">iPhone in Canada</a>). Meta says "Muse and Muse subscriptions are in limited testing and aren't available in all locations yet" (<a href="https://www.meta.com/help/subscriptions/1021145227643680/" target="_blank" rel="noopener">Meta</a>), so I would not build quoting on it yet.</p>
+        <p class="s">Tap Voice. Meta says Muse is still "in limited testing" (<a href="https://www.meta.com/help/subscriptions/1021145227643680/" target="_blank" rel="noopener">Meta</a>), so don't rely on it for quotes yet.</p>
+        <p class="t">Tap Voice. Muse is new, so check it extra carefully.</p>
+      </div>
+    </div>
+    <div class="where2 d">
+      <div><h3>In the US</h3><p>Sales tax rules for services vary by state. Tell the AI your rule; never let it guess the tax.</p></div>
+      <div><h3>In Canada</h3><p>Say your province. HST is 13% in Ontario, as in the key above (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">CRA</a>); other provinces differ, so give the AI your rate.</p></div>
+    </div>
+    <div class="where2 s">
+      <div><h3>In the US</h3><p>Tell the AI your state's tax rule. Don't let it guess.</p></div>
+      <div><h3>In Canada</h3><p>Tell it your province's rate. Ontario HST is 13% (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">CRA</a>).</p></div>
+    </div>
+    <div class="where2 t">
+      <div><h3>In the US</h3><p>Tell the AI your tax rule.</p></div>
+      <div><h3>In Canada</h3><p>Tell the AI your province. Ontario tax is 13% (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">CRA</a>).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="q" id="q3">
+  <div class="wrap">
+    <p class="eyebrow">Question 3 of 10 · Set-up 2</p>
+    <h2>Set-up 2: How do I turn a photo of a receipt into a line for my books?</h2>
+    <div class="prose">
+      <p class="answer d">Photograph it flat in good light, ask for fixed fields, check the total against the paper, then paste the row into your books.</p>
+      <p class="answer s">Take a flat, well-lit photo. Ask for set fields. Check the total against the paper. Then copy the row into your books.</p>
+      <p class="answer t">Take a clear photo. Ask for the date, store and total. Tell it to write UNCLEAR, not guess. Check the total on the paper.</p>
+      <p class="d">The output is a draft row, not a posted entry. Faded receipts are where every app is most likely to get a number wrong, and the wrong answer usually looks just as neat as a right one.</p>
+      <p class="d">The prompt:</p>
+    </div>
+    <div class="copy d">
+      <div class="bar"><span>The prompt</span><button type="button" data-copy="p2d">Copy prompt</button></div>
+<pre id="p2d">Read this receipt. Give me one row: Date, Store, Subtotal, Tax, Total, Category. If you cannot read a field, write UNCLEAR. Do not guess. Then tell me whether the line items add up to the subtotal.</pre>
+    </div>
+    <div class="copy s">
+      <div class="bar"><span>Prompt</span><button type="button" data-copy="p2s">Copy prompt</button></div>
+<pre id="p2s">Give me one row: Date, Store, Subtotal, Tax, Total, Category. Write UNCLEAR if you can't read something. Don't guess.</pre>
+    </div>
+    <div class="prose">
+      <p class="d"><strong>Worked example (made-up receipt, for illustration).</strong> Two rollers at 8.99, one tray at 6.49, three rolls of tape at 5.25. Answer key (computed in code): subtotal 40.22, HST 13% 5.23, total 45.45. If the app misreads the tape as 5.75 and works out the totals itself, it reports 47.14, and its sums agree with its own misread. Compare against the printed total, 45.45. <span class="note"><b>Dan to run:</b> photograph a printed copy of this sample receipt in each app and record the totals.</span></p>
+      <p class="s"><strong>Example (made-up receipt):</strong> 2 rollers at 8.99, 1 tray at 6.49, 3 tapes at 5.25. Right answer: subtotal 40.22, HST 5.23, total <strong>45.45</strong>. If the app reads the tape as 5.75 and adds up its own numbers, it says 47.14. Its sums still agree with its mistake. Check against the printed total, 45.45. <span class="note"><b>Dan to run</b></span></p>
+      <p class="t"><strong>Example (made-up):</strong> 2 rollers at 8.99, 1 tray at 6.49, 3 tapes at 5.25. The right total is <strong>45.45</strong>. If the AI misreads one price, it may say 47.14. It will still look neat. <span class="note"><b>Dan to run</b></span></p>
+    </div>
+  </div>
+  <figure class="widewrap">
+    <p class="figtitle"><span class="ds">One misread digit, and the sums still agree</span><span class="t">A receipt and a row</span></p>
+    <div class="rcpts">
+      <div class="rcpt">
+        <p class="ex">Made-up receipt</p>
+        <div class="r"><span>2 x Roller 8.99</span><span>17.98</span></div>
+        <div class="r"><span>1 x Tray 6.49</span><span>6.49</span></div>
+        <div class="r"><span>3 x Tape 5.25</span><span>15.75</span></div>
+        <div class="r sum"><span>Subtotal</span><span>40.22</span></div>
+        <div class="r"><span>HST 13%</span><span>5.23</span></div>
+        <div class="r sum"><span>Total</span><span>45.45</span></div>
+      </div>
+      <div class="rowcard">
+        <p class="ex">The row, read correctly</p>
+        <dl><dt>Subtotal</dt><dd>40.22</dd><dt>Tax</dt><dd>5.23</dd><dt>Total</dt><dd>45.45</dd></dl>
+        <p class="ex" style="border-top:1px solid var(--rule);border-bottom:0;color:var(--accent)">Matches the printed total</p>
+      </div>
+      <div class="rcpt bad ds">
+        <p class="ex">The same receipt, misread</p>
+        <div class="r"><span>2 x Roller 8.99</span><span>17.98</span></div>
+        <div class="r"><span>1 x Tray 6.49</span><span>6.49</span></div>
+        <div class="r"><span>3 x Tape 5.<span class="hl">7</span>5</span><span>17.25</span></div>
+        <div class="r sum"><span>Subtotal</span><span>41.72</span></div>
+        <div class="r"><span>HST 13%</span><span>5.42</span></div>
+        <div class="r sum"><span>Total</span><span>47.14</span></div>
+      </div>
+    </div>
+    <figcaption><span class="ds">Made-up receipt. One digit read as 7 instead of 2 gives 47.14, and every sum on the misread version still adds up. Only the printed total, 45.45, catches it.</span><span class="t">Made-up example.</span></figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="toolbar d">
+      <p class="eyebrow">Show steps for</p>
+      <div class="seg toolseg" role="group" aria-label="Choose your AI tool">
+        <button type="button" data-tool="chatgpt" aria-pressed="true">ChatGPT</button>
+        <button type="button" data-tool="claude" aria-pressed="false">Claude</button>
+        <button type="button" data-tool="gemini" aria-pressed="false">Gemini</button>
+        <button type="button" data-tool="copilot" aria-pressed="false">Copilot</button>
+      </div>
+    </div>
+    <div class="toolblocks prose" style="border-top:0">
+      <div class="toolblock d" data-tools="chatgpt">
+        <h3>In ChatGPT</h3>
+        <p>New chat, tap +, take a photo or choose one, paste the prompt.</p>
+      </div>
+      <div class="toolblock d" data-tools="claude" hidden>
+        <h3>In Claude</h3>
+        <p>New chat, tap + or the paperclip, choose Camera or Photos, paste the prompt.</p>
+      </div>
+      <div class="toolblock d" data-tools="gemini copilot" hidden>
+        <h3>In Gemini or Copilot</h3>
+        <p>Tap + or the camera control, add the photo, paste the prompt. <span class="note"><b>Dan to run:</b> confirm the button labels.</span></p>
+      </div>
+      <div class="toolblock st" data-tools="chatgpt claude gemini copilot">
+        <h3>In ChatGPT, Claude, Gemini and Copilot</h3>
+        <p class="s">Tap + or the camera, add the photo, paste the prompt. <span class="note"><b>Dan to run:</b> confirm the button labels in Gemini and Copilot.</span></p>
+        <p class="t">Tap + or the camera. Add the photo. Ask. <span class="note"><b>Dan to run:</b> check the button names.</span></p>
+      </div>
+    </div>
+    <div class="prose" style="margin-top:24px">
+      <p class="d"><strong>Before you upload:</strong> cover the card number. A receipt photo can show card digits, your address and loyalty numbers.</p>
+      <p class="s"><strong>Cover the card number before you upload.</strong></p>
+      <p class="t"><strong>Cover your card number first.</strong></p>
+    </div>
+    <div class="where2 d">
+      <div><h3>In the US</h3><p>Keep the original receipt or a clear photo as your record; the AI's row is not the record. The IRS general rule is to keep records for 3 years, longer in some cases (<a href="https://www.irs.gov/businesses/small-businesses-self-employed/how-long-should-i-keep-records" target="_blank" rel="noopener">IRS</a>).</p></div>
+      <div><h3>In Canada</h3><p>The CRA says you must keep records and supporting documents for six years from the end of the last tax year they relate to (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/keeping-records/where-keep-your-records-long-request-permission-destroy-them-early.html" target="_blank" rel="noopener">CRA</a>). Keep the photo; the AI row is only a summary of it.</p></div>
+    </div>
+    <div class="where2 s">
+      <div><h3>In the US</h3><p>Keep the receipt or a clear photo as your record. The IRS general rule is 3 years, longer in some cases (<a href="https://www.irs.gov/businesses/small-businesses-self-employed/how-long-should-i-keep-records" target="_blank" rel="noopener">IRS</a>).</p></div>
+      <div><h3>In Canada</h3><p>The CRA says keep records for six years from the end of the tax year they relate to (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/keeping-records/where-keep-your-records-long-request-permission-destroy-them-early.html" target="_blank" rel="noopener">CRA</a>).</p></div>
+    </div>
+    <div class="where2 t">
+      <div><h3>In the US</h3><p>Keep the receipt photo. The IRS says keep records 3 years, sometimes longer (<a href="https://www.irs.gov/businesses/small-businesses-self-employed/how-long-should-i-keep-records" target="_blank" rel="noopener">IRS</a>).</p></div>
+      <div><h3>In Canada</h3><p>Keep records for six years (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/keeping-records/where-keep-your-records-long-request-permission-destroy-them-early.html" target="_blank" rel="noopener">CRA</a>).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="q" id="q4">
+  <div class="wrap">
+    <p class="eyebrow">Question 4 of 10 · Set-up 3</p>
+    <h2>Set-up 3: How do I get help replying to a customer without the AI sending it?</h2>
+    <div class="prose">
+      <p class="answer d">Paste the customer's message and the facts the reply must contain, ask for a draft, then send it yourself from your own app.</p>
+      <p class="answer s">Paste the message and your facts. Ask for a draft. Send it yourself.</p>
+      <p class="answer t">Paste the message. Give the facts. Ask for a draft. You press Send.</p>
+      <p class="d">The draft never goes out on its own. The costliest mistake here is a promise you never made, such as "done by Friday", so the prompt forbids additions.</p>
+      <p class="s">The worst mistake is a promise you never made, so the prompt says "do not add anything".</p>
+      <p class="t">Tell the AI: "Do not add any promise."</p>
+    </div>
+    <div class="copy d">
+      <div class="bar"><span>The prompt</span><button type="button" data-copy="p3d">Copy prompt</button></div>
+<pre id="p3d">Draft a reply to this customer in my voice, under 80 words, friendly and plain. Facts: <mark>[price]</mark>, <mark>[date]</mark>, <mark>[what is included]</mark>. Do not add any promise, date or price I did not give you. Give me one version for a text and one for an email.</pre>
+    </div>
+    <div class="copy s">
+      <div class="bar"><span>Prompt</span><button type="button" data-copy="p3s">Copy prompt</button></div>
+<pre id="p3s">Draft a reply to this customer. Facts: <mark>[price]</mark>, <mark>[date]</mark>, <mark>[what is included]</mark>. Do not add any promise, date or price I did not give you.</pre>
+    </div>
+  </div>
+  <figure class="widewrap">
+    <p class="figtitle"><span class="d">The draft, with the added promise struck out</span><span class="s">A draft with an invented promise crossed out</span><span class="t">You press Send</span></p>
+    <div class="reply">
+      <div class="chat">
+        <p class="k">The customer's text</p>
+        <div class="bub"><div class="lines" aria-hidden="true"><i style="width:90%"></i><i style="width:70%"></i></div></div>
+        <p class="k" style="margin-top:6px">The AI's draft</p>
+        <div class="bub me">Thanks for asking. The price is [price] and it includes [what is included]. <span class="struck">We'll have it done by Friday.</span></div>
+        <p class="why ds">Struck out: a promise you never gave the AI.</p>
+        <p class="why t">Crossed out: a promise you never made.</p>
+      </div>
+      <div class="chat">
+        <p class="k">Your messages app</p>
+        <div class="bub me">Thanks for asking. The price is [price] and it includes [what is included].</div>
+        <div class="tap"><span class="dot" aria-hidden="true"></span><span><strong>You</strong> press Send</span></div>
+      </div>
+    </div>
+    <figcaption><span class="ds">Illustration. The bracketed words are the facts you fill in. The struck line is the kind of addition the prompt forbids.</span><span class="t">Illustration.</span></figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="toolbar">
+      <p class="eyebrow">Show steps for</p>
+      <div class="seg toolseg" role="group" aria-label="Choose your AI tool">
+        <button type="button" data-tool="chatgpt" aria-pressed="true">ChatGPT</button>
+        <button type="button" data-tool="claude" aria-pressed="false">Claude</button>
+        <button type="button" data-tool="gemini" aria-pressed="false">Gemini</button>
+        <button type="button" data-tool="copilot" aria-pressed="false">Copilot</button>
+      </div>
+    </div>
+    <div class="toolblocks prose">
+      <div class="toolblock" data-tools="chatgpt claude">
+        <h3>In ChatGPT and in Claude</h3>
+        <p class="d">Paste or dictate the message and the facts, use the prompt, then copy the draft into Messages, WhatsApp or Mail and send it yourself.</p>
+        <p class="s">Paste, ask, copy the draft into your messages, send.</p>
+        <p class="t">Paste, ask, copy, send.</p>
+      </div>
+      <div class="toolblock" data-tools="gemini" hidden>
+        <h3>In Gemini (inside Gmail)</h3>
+        <p class="d">In the Gmail app, reply to the email, tap Help me write, type your instruction, tap Create, edit, then tap Insert, per Google's iPhone steps (<a href="https://support.google.com/mail/answer/13955415?hl=en&amp;co=GENIE.Platform%3DiOS" target="_blank" rel="noopener">Google</a>). You send it. <span class="note"><b>Dan to run:</b> confirm the phone buttons on Android.</span></p>
+        <p class="s">Reply, tap Help me write, type what you want, tap Create, then Insert (<a href="https://support.google.com/mail/answer/13955415?hl=en&amp;co=GENIE.Platform%3DiOS" target="_blank" rel="noopener">Google</a>). <span class="note"><b>Dan to run:</b> confirm on Android.</span></p>
+        <p class="t">Tap Help me write (<a href="https://support.google.com/mail/answer/13955415" target="_blank" rel="noopener">Google</a>).</p>
+      </div>
+      <div class="toolblock" data-tools="copilot" hidden>
+        <h3>In Copilot (inside Outlook)</h3>
+        <p class="d">Copilot in Outlook is included with eligible Microsoft 365 business plans, per Microsoft's Canadian pricing page (<a href="https://www.microsoft.com/en-ca/copilot/pricing/business" target="_blank" rel="noopener">Microsoft</a>). Open the email, use Copilot to draft, edit, then send yourself.</p>
+        <p class="s">Included with eligible Microsoft 365 business plans (<a href="https://www.microsoft.com/en-ca/copilot/pricing/business" target="_blank" rel="noopener">Microsoft</a>).</p>
+        <p class="t">Comes with some business plans (<a href="https://www.microsoft.com/en-ca/copilot/pricing/business" target="_blank" rel="noopener">Microsoft</a>).</p>
+      </div>
+    </div>
+    <div class="where2 d">
+      <div><h3>In the US</h3><p>Gmail's Help me write works on a personal Google account in the US (<a href="https://support.google.com/mail/answer/13955415" target="_blank" rel="noopener">Google</a>).</p></div>
+      <div><h3>In Canada</h3><p>Google says Help me write on a personal Google account is "restricted to the US only". A Canadian owner needs a Google Workspace account or a Google AI plan (<a href="https://support.google.com/mail/answer/13955415" target="_blank" rel="noopener">Google</a>). Google AI Plus, from CA$6.99 a month, lists Gemini in Gmail (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google Canada</a>). A quote the customer asked for does not need CASL consent, but it must still identify you and include a way to unsubscribe (<a href="https://crtc.gc.ca/eng/com500/info.htm" target="_blank" rel="noopener">CRTC</a>). A marketing follow-up later is a different message and does.</p></div>
+    </div>
+    <div class="where2 s">
+      <div><h3>In the US</h3><p>Help me write works on a personal Gmail account.</p></div>
+      <div><h3>In Canada</h3><p>On a personal Gmail account it is "restricted to the US only". You need Workspace or a Google AI plan, from CA$6.99 a month (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google Canada</a>). A quote the customer asked for does not need CASL consent (<a href="https://crtc.gc.ca/eng/com500/info.htm" target="_blank" rel="noopener">CRTC</a>). It must still say who you are and how to unsubscribe. Marketing messages do need consent.</p></div>
+    </div>
+    <div class="where2 t">
+      <div><h3>In the US</h3><p>Help me write works on personal Gmail.</p></div>
+      <div><h3>In Canada</h3><p>On personal Gmail it is US only. You need a paid Google plan, from CA$6.99 a month (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google</a>). You can send a quote the customer asked for. Say who you are and how to stop messages (<a href="https://crtc.gc.ca/eng/com500/info.htm" target="_blank" rel="noopener">CRTC</a>).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="q" id="q5">
+  <div class="wrap">
+    <p class="eyebrow">Question 5 of 10 · Set-up 4</p>
+    <h2>Set-up 4: How do I get a morning check of my calendar and email?</h2>
+    <div class="prose">
+      <p class="answer d">Connect your calendar and email to one app, then ask one question each morning, or schedule it.</p>
+      <p class="answer s">Connect your calendar and email to one app. Ask one question each morning, or schedule it.</p>
+      <p class="answer t">Link your calendar and email to one app. Ask: "What is on today? Who needs a reply? Don't send anything."</p>
+      <p class="d">Free plans can do part of this, but automatic, on-time briefs usually need a paid plan, so choose by where your calendar lives and whether you will pay.</p>
+    </div>
+    <div class="copy d">
+      <div class="bar"><span>The prompt</span><button type="button" data-copy="p4d">Copy prompt</button></div>
+<pre id="p4d">What is on my calendar today, and which unread emails need a reply? List meetings with times, then emails with one line each. Read only. Do not send, reply, accept or change anything.</pre>
+    </div>
+    <div class="copy s">
+      <div class="bar"><span>Prompt</span><button type="button" data-copy="p4s">Copy prompt</button></div>
+<pre id="p4s">What is on my calendar today, and which emails need a reply? Read only. Don't send or change anything.</pre>
+    </div>
+  </div>
+  <figure class="wrap">
+    <div class="lock" aria-label="Illustration of a phone lock screen at 7:30 a.m. with a short brief">
+      <p class="dt">Morning brief</p>
+      <p class="tm">7:30</p>
+      <p class="dt">a.m.</p>
+      <div class="card">
+        <p class="k">Your day</p>
+        <p>3 meetings today</p>
+        <p>2 emails to answer</p>
+        <p class="safe">Nothing was sent.</p>
+      </div>
+    </div>
+    <figcaption style="text-align:center"><span class="ds">Illustration of a read-only morning brief.</span><span class="t">A short morning list.</span></figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="toolbar">
+      <p class="eyebrow">Show steps for</p>
+      <div class="seg toolseg" role="group" aria-label="Choose your AI tool">
+        <button type="button" data-tool="chatgpt" aria-pressed="true">ChatGPT</button>
+        <button type="button" data-tool="claude" aria-pressed="false">Claude</button>
+        <button type="button" data-tool="gemini" aria-pressed="false">Gemini</button>
+        <button type="button" data-tool="copilot" aria-pressed="false">Copilot</button>
+        <button type="button" data-tool="muse" aria-pressed="false">Muse</button>
+      </div>
+    </div>
+    <div class="toolblocks prose">
+      <div class="toolblock" data-tools="chatgpt">
+        <h3>In ChatGPT</h3>
+        <div class="d">
+          <p>Connect Gmail and Google Calendar in Settings, then ask the question. To repeat it, ask ChatGPT for a scheduled task. OpenAI's help says scheduled tasks are open to Free, Go, Plus, Pro, Business, Enterprise and Edu, with up to 3 active tasks on Free and Go, 5 on Plus, 10 on Business and Edu, and 15 on Pro and Enterprise. Free can schedule a one-time task or one that runs at most once a day, in a flexible window; hourly schedules and exact times need a paid plan. Tasks don't support voice chats, and phone alerts need a task created in the mobile app (<a href="https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt" target="_blank" rel="noopener">OpenAI</a>).</p>
+          <p>OpenAI's pricing page marks Scheduled tasks "No" on Free, which differs from the help article (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">OpenAI pricing</a>). I could not confirm whether a Free task can read Gmail and Calendar.</p>
+        </div>
+        <p class="s">Connect Gmail and Calendar in Settings, then ask. You can also make it a scheduled task: up to 3 active tasks on Free, 5 on Plus. Free runs at most once a day, at a rough time (<a href="https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt" target="_blank" rel="noopener">OpenAI</a>). It is not confirmed that Free tasks can read Gmail and Calendar.</p>
+        <p class="t">Link Gmail and Calendar. Ask. You can also set a scheduled task (<a href="https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt" target="_blank" rel="noopener">OpenAI</a>).</p>
+      </div>
+      <div class="toolblock" data-tools="claude" hidden>
+        <h3>In Claude</h3>
+        <p class="d">Connect Gmail and Google Calendar under Connectors, then ask the question. To have it run by itself, scheduled tasks are on paid plans (Pro, Max, Ultra, Team, Enterprise), set up in Claude Cowork on desktop or web; the phone shows the results. They run "even when your computer is asleep", unless you pick a folder on your computer (<a href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork" target="_blank" rel="noopener">Anthropic</a>). If a connector is set to "Always ask", a scheduled run may wait for your answer or finish without that tool (same page).</p>
+        <p class="s">Connect Gmail and Calendar. Scheduling is on paid plans, set up in Claude Cowork on desktop or web; the phone shows the results (<a href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork" target="_blank" rel="noopener">Anthropic</a>).</p>
+        <p class="t">Link Gmail and Calendar. Auto runs need a paid plan and are set up on a computer (<a href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork" target="_blank" rel="noopener">Anthropic</a>).</p>
+      </div>
+      <div class="toolblock" data-tools="gemini" hidden>
+        <h3>In Gemini</h3>
+        <p class="d">Use the Gemini app with your Google account, type @Gmail and @Google Calendar, then ask. Read the sources under the answer before you act.</p>
+        <p class="s">Type @Gmail and @Google Calendar, then ask.</p>
+        <p class="t">Type @Gmail and @Google Calendar. Ask.</p>
+      </div>
+      <div class="toolblock" data-tools="copilot" hidden>
+        <h3>In Copilot</h3>
+        <p class="d">If your mail is in Outlook, use Copilot in Outlook or the Copilot app with your Microsoft account.</p>
+        <p class="s">Use Copilot in Outlook if your mail is in Outlook.</p>
+        <p class="t">Use it in Outlook.</p>
+      </div>
+      <div class="toolblock" data-tools="muse" hidden>
+        <h3>In Muse</h3>
+        <p class="d">Connect Gmail or your calendar, then ask. <span class="note"><b>Dan to confirm from his own Muse use:</b> whether Muse can repeat this each morning.</span> By default Muse "will not take many important actions, like sending an email, without your approval", and many connectors can be set to retrieve only (<a href="https://www.meta.com/help/superintelligence/1687253048996149/" target="_blank" rel="noopener">Meta</a>). Choose retrieve only.</p>
+        <p class="s">Connect your email. Pick "retrieve only". Muse asks before sending email by default (<a href="https://www.meta.com/help/superintelligence/1687253048996149/" target="_blank" rel="noopener">Meta</a>).</p>
+        <p class="t">Link your email. Pick "retrieve only" (<a href="https://www.meta.com/help/superintelligence/1687253048996149/" target="_blank" rel="noopener">Meta</a>).</p>
+      </div>
+    </div>
+    <div class="where2 d">
+      <div><h3>In the US</h3><p>Google's built-in Daily Brief needs you to "be 18 or over and in the US", on a personal account, in English, and be eligible for Personal Intelligence; Google is rolling it out gradually (<a href="https://support.google.com/gemini/answer/17077455" target="_blank" rel="noopener">Google</a>).</p></div>
+      <div><h3>In Canada</h3><p>Daily Brief is not available, so use the question above in Gemini, or a scheduled task in Claude or ChatGPT.</p></div>
+    </div>
+    <div class="where2 s">
+      <div><h3>In the US</h3><p>Google's Daily Brief is for people 18+ in the US, on personal accounts, and is rolling out gradually (<a href="https://support.google.com/gemini/answer/17077455" target="_blank" rel="noopener">Google</a>).</p></div>
+      <div><h3>In Canada</h3><p>No Daily Brief. Use the prompt above instead.</p></div>
+    </div>
+    <div class="where2 t">
+      <div><h3>In the US</h3><p>Google's Daily Brief is US only (<a href="https://support.google.com/gemini/answer/17077455" target="_blank" rel="noopener">Google</a>).</p></div>
+      <div><h3>In Canada</h3><p>No Daily Brief. Ask the question yourself.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="q" id="q6">
+  <div class="wrap">
+    <p class="eyebrow">Question 6 of 10 · Set-up 5</p>
+    <h2>Set-up 5: How do I put my most-used prompt one tap away?</h2>
+    <div class="prose">
+      <p class="answer d">Save the prompt once, then put the shortcut on your home screen.</p>
+      <p class="answer s">Save the prompt once. Put a shortcut on your home screen.</p>
+      <p class="answer t">Save your prompt once. Put a button on your home screen.</p>
+      <p class="d">Most app widgets only open a new chat, so the prompt has to live somewhere: a pinned chat, a project, or a phone shortcut.</p>
+    </div>
+  </div>
+  <figure class="widewrap">
+    <div class="homefig">
+      <div class="home" aria-label="Illustration of a home screen with one icon labelled Draft customer reply">
+        <div class="grid">
+          <div class="app"><i></i><span>&#160;</span></div><div class="app"><i></i><span>&#160;</span></div><div class="app"><i></i><span>&#160;</span></div><div class="app"><i></i><span>&#160;</span></div>
+          <div class="app"><i></i><span>&#160;</span></div><div class="app hot"><i></i><span>Draft customer reply</span></div><div class="app"><i></i><span>&#160;</span></div><div class="app"><i></i><span>&#160;</span></div>
+          <div class="app"><i></i><span>&#160;</span></div><div class="app"><i></i><span>&#160;</span></div><div class="app"><i></i><span>&#160;</span></div><div class="app"><i></i><span>&#160;</span></div>
+        </div>
+      </div>
+      <div class="ds">
+        <p class="figtitle">The three steps that made it, in Claude on iPhone</p>
+        <ol class="homesteps">
+          <li><span>In Shortcuts, add an Ask Claude action with your fixed prompt.</span></li>
+          <li><span>Name it "Draft customer reply".</span></li>
+          <li><span>Add it to your Home Screen.</span></li>
+        </ol>
+      </div>
+      <div class="t"><p class="figtitle">One button on a home screen</p></div>
+    </div>
+    <figcaption><span class="ds">Illustration. Steps from <a href="https://support.claude.com/en/articles/10263469-use-claude-app-intents-shortcuts-and-widgets-on-ios" target="_blank" rel="noopener">Anthropic's iOS help page</a>.</span><span class="t">Illustration.</span></figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="toolbar">
+      <p class="eyebrow">Show steps for</p>
+      <div class="seg toolseg" role="group" aria-label="Choose your AI tool">
+        <button type="button" data-tool="chatgpt" aria-pressed="true">ChatGPT</button>
+        <button type="button" data-tool="claude" aria-pressed="false">Claude</button>
+        <button type="button" data-tool="copilot" aria-pressed="false">Copilot</button>
+      </div>
+    </div>
+    <div class="toolblocks prose">
+      <div class="toolblock" data-tools="chatgpt">
+        <h3>In ChatGPT</h3>
+        <p class="d">Keep the prompt in one chat and pin it, then add the ChatGPT widget so the app is one tap away. <span class="note"><b>Dan to run:</b> confirm pinning on the phone.</span></p>
+        <p class="s">Pin the chat that holds your prompt, then add the widget.</p>
+        <p class="t">Pin the chat with your prompt.</p>
+      </div>
+      <div class="toolblock" data-tools="claude" hidden>
+        <h3>In Claude (iPhone)</h3>
+        <p class="d">Open Shortcuts, add an Ask Claude action, type your fixed prompt with Shortcut Input where the customer's message goes, name it, and add it to your Home Screen or Share Sheet. Anthropic's own example is a "Summarize with Claude" shortcut. These features need iOS 18 or later, and widget taps count toward your usage limit (<a href="https://support.claude.com/en/articles/10263469-use-claude-app-intents-shortcuts-and-widgets-on-ios" target="_blank" rel="noopener">Anthropic</a>).</p>
+        <p class="s">In Shortcuts, add Ask Claude with your prompt, then add it to your Home Screen. Needs iOS 18 (<a href="https://support.claude.com/en/articles/10263469-use-claude-app-intents-shortcuts-and-widgets-on-ios" target="_blank" rel="noopener">Anthropic</a>).</p>
+        <p class="t">Make a shortcut with Ask Claude (<a href="https://support.claude.com/en/articles/10263469-use-claude-app-intents-shortcuts-and-widgets-on-ios" target="_blank" rel="noopener">Anthropic</a>).</p>
+        <h3 class="sub">In Claude (Android)</h3>
+        <p class="d">Add the Claude widget for one-tap chat, camera or dictation, and keep the prompt in a Project you open each time.</p>
+        <p class="s">Add the widget and keep your prompt in a Project.</p>
+        <p class="t">Add the widget. Keep the prompt in a Project.</p>
+      </div>
+      <div class="toolblock" data-tools="copilot" hidden>
+        <h3>In Copilot (iPhone)</h3>
+        <p class="d">The widget starts a chat, voice, dictation or camera, and the Action Button can be set to "Talk to Microsoft Copilot". Microsoft says the widget is iOS only for now (<a href="https://support.microsoft.com/en-us/microsoft-365-copilot/add-a-microsoft-365-copilot-widget-and-action-button-on-ios-devices" target="_blank" rel="noopener">Microsoft</a>).</p>
+        <p class="s">Add the widget, or set the Action Button. iPhone only for now (<a href="https://support.microsoft.com/en-us/microsoft-365-copilot/add-a-microsoft-365-copilot-widget-and-action-button-on-ios-devices" target="_blank" rel="noopener">Microsoft</a>).</p>
+        <p class="t">Add the widget (<a href="https://support.microsoft.com/en-us/microsoft-365-copilot/add-a-microsoft-365-copilot-widget-and-action-button-on-ios-devices" target="_blank" rel="noopener">Microsoft</a>).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="q" id="q7">
+  <div class="wrap">
+    <p class="eyebrow">Question 7 of 10</p>
+    <h2>Can an agent do these jobs for me?</h2>
+    <div class="prose">
+      <p class="answer d">Yes for the preparing, no for the sending and paying.</p>
+      <p class="answer s">It can prepare. You still send and pay.</p>
+      <p class="answer t">An agent is an AI that does things for you. It can get things ready. You still send and pay.</p>
+      <p class="d">An agent is an AI that takes actions, not just writes text. Hand it the repeat work, and keep a person on anything a customer sees or that moves money.</p>
+      <p class="s">An agent is an AI that takes actions.</p>
+      <p class="d"><strong>What you can hand over today:</strong></p>
+      <ul class="agents d">
+        <li><strong>Gemini Tasks</strong> (free, Canada named in Google's launch): multi-step errands through your Google apps, such as adding dates from emails to your calendar. Google says it asks before clicking Buy and lets you set a spending cap, but you can also set actions to "Always allow" (<a href="https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/" target="_blank" rel="noopener">Google</a>). Do not use "Always allow" for anything that spends or sends.</li>
+        <li><strong>ChatGPT agent</strong>: can take steps on the web for you. OpenAI's launch post (July 2025, which OpenAI now marks as outdated) says it asks your permission before actions with real-world consequences, such as a purchase, and that sending emails needs your active oversight (<a href="https://openai.com/index/introducing-chatgpt-agent/" target="_blank" rel="noopener">OpenAI</a>). <span class="note"><b>Dan to confirm:</b> current plans and how it asks today; OpenAI's help page did not open.</span></li>
+        <li><strong>ChatGPT scheduled tasks</strong> (all plans, with limits): a one-time or repeating task, such as a reminder or the morning check (<a href="https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt" target="_blank" rel="noopener">OpenAI</a>).</li>
+        <li><strong>Claude scheduled tasks</strong> (paid plans): the morning check above, run on a schedule.</li>
+        <li><strong>Muse</strong>: asks before sending email by default (<a href="https://www.meta.com/help/superintelligence/1687253048996149/" target="_blank" rel="noopener">Meta</a>). <span class="note"><b>Dan to confirm from his own Muse use:</b> recurring checks and reminders.</span></li>
+      </ul>
+      <ul class="agents s">
+        <li><strong>Gemini Tasks</strong> is free and named for Canada. It asks before buying and lets you set a spending cap (<a href="https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/" target="_blank" rel="noopener">Google</a>). Don't turn on "Always allow" for spending or sending.</li>
+        <li><strong>ChatGPT agent</strong> can take steps on the web for you. OpenAI's 2025 launch post, now marked outdated, says it asks your permission before actions with real-world consequences, like a purchase, and that sending emails needs you watching (<a href="https://openai.com/index/introducing-chatgpt-agent/" target="_blank" rel="noopener">OpenAI</a>). <span class="note"><b>Dan to confirm:</b> how it asks today.</span></li>
+        <li><strong>ChatGPT</strong> can run a one-time or repeating scheduled task, like a reminder (<a href="https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt" target="_blank" rel="noopener">OpenAI</a>).</li>
+        <li><strong>Claude</strong> can run your morning check on a schedule (paid).</li>
+        <li><strong>Muse</strong> asks before it sends email (<a href="https://www.meta.com/help/superintelligence/1687253048996149/" target="_blank" rel="noopener">Meta</a>). <span class="note"><b>Dan to confirm from his own Muse use:</b> reminders.</span></li>
+      </ul>
+      <ul class="agents t">
+        <li><strong>Gemini Tasks</strong> is free in Canada. It asks before it buys (<a href="https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/" target="_blank" rel="noopener">Google</a>).</li>
+        <li><strong>ChatGPT agent</strong> can do steps on the web for you. OpenAI says it asks before it buys (<a href="https://openai.com/index/introducing-chatgpt-agent/" target="_blank" rel="noopener">OpenAI</a>). <span class="note"><b>Dan to confirm:</b> how it works today.</span></li>
+        <li><strong>ChatGPT</strong> can remind you at a set time with a scheduled task (<a href="https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt" target="_blank" rel="noopener">OpenAI</a>).</li>
+        <li><strong>Claude</strong> can run your morning check (paid).</li>
+        <li><strong>Muse</strong> asks before it sends email. <span class="note"><b>Dan to confirm from his own Muse use:</b> reminders.</span></li>
+      </ul>
+      <p class="d"><strong>What agents still get wrong:</strong> they misread, they act on stale information, and they follow instructions too literally. Every vendor above puts the final check on you.</p>
+      <p><strong><span class="d">A workflow across tools (example, free plans):</span><span class="s">Example workflow (free plans):</span><span class="t">Example:</span></strong></p>
+    </div>
+  </div>
+  <figure class="widewrap" style="margin-top:20px">
+    <div class="flow">
+      <div class="stage"><p class="k">Step 1 · On site</p><h3><span class="ds">Photo and voice note</span><span class="t">Talk the job in</span></h3>
+        <p class="d">Take a photo and dictate the job into Claude or ChatGPT. Ask for the quote draft with the prompt from Set-up 1.</p>
+        <p class="s">Photo and voice note into Claude or ChatGPT.</p>
+        <p class="t">Talk the job into Claude or ChatGPT.</p></div>
+      <div class="stage you"><p class="k">Step 2 · Human check</p><h3>You check</h3>
+        <p class="d">Compare every line against your own price list. Fix it.</p>
+        <p class="s">You check every line.</p>
+        <p class="t">You check it.</p>
+        <div class="check2"><span class="hand" aria-hidden="true"></span>A person does this</div></div>
+      <div class="stage you"><p class="k">Step 3 · Human approval</p><h3>You send</h3>
+        <p class="d">Paste the checked quote into your invoicing app or email and send it yourself.</p>
+        <p class="s">You send the quote yourself.</p>
+        <p class="t">You send it.</p>
+        <div class="check2"><span class="hand" aria-hidden="true"></span>A person does this</div></div>
+      <div class="stage"><p class="k">Step 4 · Agent</p><h3>Reminder</h3>
+        <p class="d">Ask ChatGPT for a one-time scheduled task to remind you in three days to follow up (<a href="https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt" target="_blank" rel="noopener">OpenAI</a>). It reminds you; it does not message the customer.</p>
+        <p class="s">A one-time ChatGPT scheduled task reminds you to follow up in three days.</p>
+        <p class="t">ChatGPT reminds you to follow up in three days.</p></div>
+    </div>
+  </figure>
+  <div class="wrap">
+    <div class="prose">
+      <p class="d">Tools: Claude or ChatGPT, your own email, ChatGPT scheduled tasks. Cost: CA$0 on free plans, with usage limits. The human checks are steps 2 and 3.</p>
+      <p class="s">Steps 2 and 3 are yours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="q" id="q8">
+  <div class="wrap">
+    <p class="eyebrow">Question 8 of 10</p>
+    <h2>What should stay off the phone, or off AI?</h2>
+    <div class="prose">
+      <p class="answer d">Card numbers, ID and health details never go into an AI chat, a text or an email.</p>
+      <p class="answer s">Never put card numbers, ID or health details into an AI chat, a text or an email.</p>
+      <p class="answer t">Never put card numbers, ID or health details into AI, texts or email.</p>
+      <p class="d">Use a payment link or a terminal for cards, and a secure form for ID.</p>
+      <p class="s">Use a payment link or a terminal.</p>
+    </div>
+  </div>
+  <figure class="wrap">
+    <div class="never">
+      <div class="nv"><div class="bub2"><span class="ic-card" aria-hidden="true"></span></div><span>Card numbers</span></div>
+      <div class="nv"><div class="bub2"><span class="ic-id" aria-hidden="true"></span></div><span>ID</span></div>
+      <div class="nv"><div class="bub2"><span class="ic-med" aria-hidden="true"></span></div><span>Health details</span></div>
+    </div>
+    <figcaption><span class="ds">None of these go into a chat bubble: AI, text or email.</span><span class="t">Keep these out of chats.</span></figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="prose">
+      <ul class="d">
+        <li><strong>Lock the phone</strong> with a long passcode and Face ID or fingerprint, set auto-lock, and turn on Find My or Find Hub.</li>
+        <li><strong>Turn off training</strong> on personal accounts. OpenAI says it may use content from its individual services to train models unless you opt out, and does not use content from its business offerings (<a href="https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance" target="_blank" rel="noopener">OpenAI</a>). In Claude, turn off "Help improve our AI models" under Settings, then Privacy; new chats are then not used for future training (<a href="https://privacy.claude.com/en/articles/12109829-how-do-i-change-my-model-improvement-privacy-settings" target="_blank" rel="noopener">Anthropic</a>). In Muse the setting is on when you first use it; turn it off under Data controls, and Meta says the change also applies to past interactions (<a href="https://www.meta.com/help/superintelligence/1047255454427887/" target="_blank" rel="noopener">Meta</a>). Google says reviewed Gemini chats are kept for up to three years and asks you not to enter "confidential information that you wouldn't want a reviewer to see" (<a href="https://support.google.com/gemini/answer/13594961?hl=en" target="_blank" rel="noopener">Google</a>).</li>
+        <li><strong>No money moves on a call or text alone.</strong> Call back on a number you already had.</li>
+      </ul>
+      <ul class="s">
+        <li>Lock your phone and turn on Find My or Find Hub.</li>
+        <li>Turn off training on personal AI accounts (<a href="https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance" target="_blank" rel="noopener">OpenAI</a>). In Claude, turn off "Help improve our AI models" in Settings, Privacy (<a href="https://privacy.claude.com/en/articles/12109829-how-do-i-change-my-model-improvement-privacy-settings" target="_blank" rel="noopener">Anthropic</a>). In Muse it is on at first; turn it off in Data controls (<a href="https://www.meta.com/help/superintelligence/1047255454427887/" target="_blank" rel="noopener">Meta</a>). Google keeps reviewed chats up to three years (<a href="https://support.google.com/gemini/answer/13594961?hl=en" target="_blank" rel="noopener">Google</a>).</li>
+        <li>No money moves on a call or text alone.</li>
+      </ul>
+      <ul class="t">
+        <li>Lock your phone.</li>
+        <li>Turn off training in your AI apps (<a href="https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance" target="_blank" rel="noopener">OpenAI</a>). In ChatGPT, look in Settings, then Data Controls. <span class="note"><b>Dan to run:</b> check the switch name.</span> In Claude, turn off "Help improve our AI models" (<a href="https://privacy.claude.com/en/articles/12109829-how-do-i-change-my-model-improvement-privacy-settings" target="_blank" rel="noopener">Anthropic</a>).</li>
+        <li>Don't send money because of a call or text. Call back first.</li>
+      </ul>
+    </div>
+    <div class="where2 d">
+      <div><h3>In the US</h3><p>The FTC's guide for businesses says take stock of the personal information you hold, keep only what you need, lock it, dispose of what you don't need, and plan ahead for incidents such as a lost or stolen laptop (<a href="https://www.ftc.gov/business-guidance/resources/protecting-personal-information-guide-business" target="_blank" rel="noopener">FTC</a>). A phone full of customer details deserves the same care.</p></div>
+      <div><h3>In Canada</h3><p>Under PIPEDA, small businesses must report breaches that pose a real risk of significant harm, notify the people affected, and keep records of all breaches for two years (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-for-businesses/privacy-breaches-at-your-business/gd_pb_201810/" target="_blank" rel="noopener">OPC</a>). A lost phone with no lock, full of customer details, can be one.</p></div>
+    </div>
+    <div class="where2 s">
+      <div><h3>In the US</h3><p>The FTC tells businesses to keep only the personal information they need, lock it, and plan for a lost device (<a href="https://www.ftc.gov/business-guidance/resources/protecting-personal-information-guide-business" target="_blank" rel="noopener">FTC</a>).</p></div>
+      <div><h3>In Canada</h3><p>Under PIPEDA, small businesses must report serious breaches and keep breach records for two years (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-for-businesses/privacy-breaches-at-your-business/gd_pb_201810/" target="_blank" rel="noopener">OPC</a>).</p></div>
+    </div>
+    <div class="where2 t">
+      <div><h3>In the US</h3><p>Keep only the customer data you need, and lock it (<a href="https://www.ftc.gov/business-guidance/resources/protecting-personal-information-guide-business" target="_blank" rel="noopener">FTC</a>).</p></div>
+      <div><h3>In Canada</h3><p>A serious data leak must be reported (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-for-businesses/privacy-breaches-at-your-business/gd_pb_201810/" target="_blank" rel="noopener">OPC</a>).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="q" id="q9">
+  <div class="wrap">
+    <p class="eyebrow">Question 9 of 10</p>
+    <h2>What does it cost?</h2>
+    <div class="prose">
+      <p class="answer d">The free plans cover all five set-ups with limits. You pay for higher limits, more or more frequent scheduled tasks, or AI inside Gmail and Outlook.</p>
+      <p class="answer s">Free plans cover all five set-ups, with limits.</p>
+      <p class="answer t">Free plans do all five. Paid plans give more.</p>
+      <p><span class="d">Prices checked 27 November 2026, before tax.</span><span class="st">Checked 27 November 2026, before tax.</span></p>
+    </div>
+    <div class="tbl d"><table class="stack">
+      <thead><tr><th>Tool</th><th>Free plan</th><th>First paid step</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Claude</td><td data-l="Free plan">Yes</td><td data-l="First paid">Pro $20 a month, or $17 a month billed yearly, currency not shown; Anthropic's Canada page (June 2024) says CA$28 + tax</td><td data-l="Source"><a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude</a>, <a href="https://www.anthropic.com/news/introducing-claude-to-canada" target="_blank" rel="noopener">Anthropic Canada</a></td></tr>
+        <tr><td>Gemini / Google AI</td><td data-l="Free plan">Yes</td><td data-l="First paid">Google AI Plus CA$6.99/month; Pro CA$26.99/month</td><td data-l="Source"><a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google Canada</a></td></tr>
+        <tr><td>Muse</td><td data-l="Free plan">Yes, with a usage limit</td><td data-l="First paid">Power $20/month; Maximum $100/month (currency not shown)</td><td data-l="Source"><a href="https://www.meta.com/help/subscriptions/1021145227643680/" target="_blank" rel="noopener">Meta</a></td></tr>
+        <tr><td>Microsoft 365 with Copilot</td><td data-l="Free plan">Copilot app is free</td><td data-l="First paid">Business Standard with Copilot CA$31.90/user/month paid yearly</td><td data-l="Source"><a href="https://www.microsoft.com/en-ca/copilot/pricing/business" target="_blank" rel="noopener">Microsoft Canada</a></td></tr>
+        <tr><td>ChatGPT</td><td data-l="Free plan">Yes, limited voice chats and uploads</td><td data-l="First paid">Plus $20 a month, currency not shown</td><td data-l="Source"><a href="https://help.openai.com/en/articles/6950777" target="_blank" rel="noopener">OpenAI Help</a>, <a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">OpenAI pricing</a></td></tr>
+        <tr><td>Apple Intelligence</td><td data-l="Free plan">Included on supported iPhones</td><td data-l="First paid">None</td><td data-l="Source"><a href="https://support.apple.com/en-ca/121115" target="_blank" rel="noopener">Apple</a></td></tr>
+      </tbody>
+    </table></div>
+    <div class="tbl s"><table class="stack">
+      <thead><tr><th>Tool</th><th>Free</th><th>First paid step</th></tr></thead>
+      <tbody>
+        <tr><td>Claude</td><td data-l="Free">Yes</td><td data-l="First paid">$20 a month, currency not shown (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude</a>). Anthropic's 2024 Canada launch said CA$28 + tax (<a href="https://www.anthropic.com/news/introducing-claude-to-canada" target="_blank" rel="noopener">Anthropic</a>); check the app for today's CAD price</td></tr>
+        <tr><td>Google AI</td><td data-l="Free">Yes</td><td data-l="First paid">Plus CA$6.99/month (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google</a>)</td></tr>
+        <tr><td>Muse</td><td data-l="Free">Yes, with a usage limit</td><td data-l="First paid">Power $20/month, currency not shown (<a href="https://www.meta.com/help/subscriptions/1021145227643680/" target="_blank" rel="noopener">Meta</a>)</td></tr>
+        <tr><td>Microsoft 365 with Copilot</td><td data-l="Free">App free</td><td data-l="First paid">CA$31.90/user/month, paid yearly (<a href="https://www.microsoft.com/en-ca/copilot/pricing/business" target="_blank" rel="noopener">Microsoft</a>)</td></tr>
+        <tr><td>ChatGPT</td><td data-l="Free">Yes, limited voice chats and uploads</td><td data-l="First paid">Plus $20 a month, currency not shown (<a href="https://help.openai.com/en/articles/6950777" target="_blank" rel="noopener">OpenAI Help Center</a>)</td></tr>
+        <tr><td>Apple Intelligence</td><td data-l="Free">On supported iPhones</td><td data-l="First paid">None</td></tr>
+      </tbody>
+    </table></div>
+    <div class="t">
+      <div class="tbl"><table class="stack">
+        <thead><tr><th>Tool</th><th>Free</th><th>First paid step</th></tr></thead>
+        <tbody>
+          <tr><td>Claude</td><td data-l="Free">Yes</td><td data-l="First paid">$20 a month, currency not shown (Anthropic's 2024 Canada launch said CA$28 + tax; check the app for today's CAD price)</td></tr>
+          <tr><td>Google AI</td><td data-l="Free">Yes</td><td data-l="First paid">CA$6.99 a month</td></tr>
+          <tr><td>Muse</td><td data-l="Free">Yes</td><td data-l="First paid">$20 a month, currency not shown</td></tr>
+          <tr><td>Microsoft 365 with Copilot</td><td data-l="Free">App free</td><td data-l="First paid">CA$31.90 a user a month, yearly</td></tr>
+          <tr><td>ChatGPT</td><td data-l="Free">Yes</td><td data-l="First paid">Plus $20 a month, currency not shown</td></tr>
+          <tr><td>Apple Intelligence</td><td data-l="Free">On newer iPhones</td><td data-l="First paid">None</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose"><p style="font-size:16px">Sources: <a href="https://www.anthropic.com/news/introducing-claude-to-canada" target="_blank" rel="noopener">Anthropic</a>, <a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude</a>, <a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google</a>, <a href="https://www.meta.com/help/subscriptions/1021145227643680/" target="_blank" rel="noopener">Meta</a>, <a href="https://www.microsoft.com/en-ca/copilot/pricing/business" target="_blank" rel="noopener">Microsoft</a>, <a href="https://help.openai.com/en/articles/6950777" target="_blank" rel="noopener">OpenAI</a>.</p></div>
+    </div>
+    <div class="where2 d">
+      <div><h3>In the US</h3><p>Sales tax on software subscriptions depends on your state.</p></div>
+      <div><h3>In Canada</h3><p>GST/HST is added on top of these prices. Claude's page says "Prices shown don't include applicable tax", and Microsoft's says "plus applicable tax".</p></div>
+    </div>
+    <div class="where2 s">
+      <div><h3>In the US</h3><p>Sales tax depends on your state.</p></div>
+      <div><h3>In Canada</h3><p>Add GST/HST.</p></div>
+    </div>
+    <div class="where2 t">
+      <div><h3>In the US</h3><p>Tax depends on your state.</p></div>
+      <div><h3>In Canada</h3><p>Add GST/HST.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="q" id="q10">
+  <div class="wrap">
+    <p class="eyebrow">Question 10 of 10</p>
+    <h2>What can I do this week?</h2>
+    <ul class="check">
+      <li><label><input type="checkbox" id="c1"><span><span class="d">Lock your phone, set auto-lock, and turn on Find My or Find Hub.</span><span class="s">Lock your phone and turn on Find My or Find Hub.</span><span class="t">Lock your phone.</span></span></label></li>
+      <li><label><input type="checkbox" id="c2"><span><span class="d">Turn off model training on each AI app you use for business.</span><span class="st">Turn off training in your AI apps.</span></span></label></li>
+      <li><label><input type="checkbox" id="c3"><span><span class="d">Do Set-up 1 with the Maple Street example and check the total against 1,150.34.</span><span class="s">Try the Maple Street example. Check for 1,150.34.</span><span class="t">Try the painter example. Look for 1,150.34.</span></span></label></li>
+      <li><label><input type="checkbox" id="c4"><span><span class="d">Photograph one real receipt with the card number covered, and check the row against the paper.</span><span class="s">Photograph one receipt with the card covered. Check the total.</span><span class="t">Photo one receipt. Cover the card. Check the total.</span></span></label></li>
+      <li><label><input type="checkbox" id="c5"><span><span class="d">Save one reply prompt as a pinned chat, project or shortcut.</span><span class="s">Save one reply prompt as a shortcut or pinned chat.</span><span class="t">Save one prompt as a button.</span></span></label></li>
+      <li><label><input type="checkbox" id="c6"><span><span class="d">Connect your calendar to one app, read only, and ask the morning question once.</span><span class="s">Ask the morning question once, read only.</span><span class="t">Ask the morning question once.</span></span></label></li>
+    </ul>
+    <p style="margin:14px 0 0;font-size:13px;color:var(--muted)">Your ticks are saved on this device only.</p>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap" style="max-width:600px">
+    <h2>How Leverage Strategies helps</h2>
+    <p class="d">I set this up with owners on their own phones: which app fits your work, the prompts for your quotes and replies, and where the human checks go. You leave with it working on your phone and a one-page sheet of your prompts.</p>
+    <p class="s">I set this up with you on your own phone: the right app, your prompts, and where the checks go.</p>
+    <p class="t">I set this up with you on your phone.</p>
+    <p><span class="note"><b>Placeholder:</b> Book a call link</span></p>
+  </div>
+</section>
+
+<section class="q sources st" id="words">
+  <div class="wrap">
+    <h2>Words to know</h2>
+    <table class="s">
+      <thead><tr><th>Word</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td>Dictation</td><td>The phone types what you say, so you can read it first</td></tr>
+        <tr><td>Voice mode</td><td>A spoken back-and-forth with the AI</td></tr>
+        <tr><td>Prompt</td><td>The instructions you give the AI</td></tr>
+        <tr><td>Widget</td><td>A small button on your home screen that opens an app</td></tr>
+        <tr><td>Shortcut</td><td>A saved set of steps you run with one tap</td></tr>
+        <tr><td>Project</td><td>A folder in Claude that keeps your instructions and chats together</td></tr>
+        <tr><td>Connector</td><td>A link that lets an AI app read your email or calendar</td></tr>
+        <tr><td>Agent</td><td>An AI that takes actions, not just writes text</td></tr>
+        <tr><td>Scheduled task</td><td>A job the AI runs by itself at a set time</td></tr>
+        <tr><td>Model training</td><td>When a company uses chats to improve its AI</td></tr>
+        <tr><td>HST / GST</td><td>Canadian sales taxes added to prices</td></tr>
+        <tr><td>CASL</td><td>Canada's anti-spam law for business messages</td></tr>
+        <tr><td>PIPEDA</td><td>Canada's privacy law for businesses</td></tr>
+      </tbody>
+    </table>
+    <table class="t">
+      <thead><tr><th>Word</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td>Prompt</td><td>What you tell the AI to do</td></tr>
+        <tr><td>Dictation</td><td>The phone types what you say</td></tr>
+        <tr><td>Widget</td><td>A small button on your home screen</td></tr>
+        <tr><td>Shortcut</td><td>Saved steps you run with one tap</td></tr>
+        <tr><td>Project</td><td>A folder in Claude for your prompt and chats</td></tr>
+        <tr><td>Agent</td><td>An AI that does things for you</td></tr>
+        <tr><td>Training</td><td>When a company uses chats to improve its AI</td></tr>
+        <tr><td>GST/HST</td><td>Canadian sales tax</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="q sources d" id="sources">
+  <div class="wrap">
+    <h2>Sources</h2>
+    <p>All pages opened 27 November 2026 unless noted.</p>
+    <ul>
+      <li>Anthropic, <a href="https://claude.com/pricing" target="_blank" rel="noopener">Plans and pricing</a></li>
+      <li>Anthropic, <a href="https://www.anthropic.com/news/introducing-claude-to-canada" target="_blank" rel="noopener">Introducing Claude to Canada</a> (5 June 2024)</li>
+      <li>Anthropic, <a href="https://support.claude.com/en/articles/10263469-use-claude-app-intents-shortcuts-and-widgets-on-ios" target="_blank" rel="noopener">Use Claude app intents, shortcuts and widgets on iOS</a></li>
+      <li>Anthropic, <a href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork" target="_blank" rel="noopener">Schedule recurring tasks in Claude Cowork</a></li>
+      <li>Google, <a href="https://support.google.com/mail/answer/13955415" target="_blank" rel="noopener">Draft emails with Gemini in Gmail</a></li>
+      <li>Google, <a href="https://support.google.com/gemini/answer/17077455" target="_blank" rel="noopener">Get started with your daily brief in Gemini Apps</a></li>
+      <li>Google, <a href="https://support.google.com/gemini/answer/13594961?hl=en" target="_blank" rel="noopener">Gemini Apps Privacy Hub</a></li>
+      <li>Google, <a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google AI plans, Canada</a></li>
+      <li>Google, <a href="https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/" target="_blank" rel="noopener">Tasks in Gemini</a> (17 November 2026)</li>
+      <li>Meta, <a href="https://www.meta.com/help/subscriptions/1021145227643680/" target="_blank" rel="noopener">About Muse subscriptions</a></li>
+      <li>Meta, <a href="https://www.meta.com/help/superintelligence/1687253048996149/" target="_blank" rel="noopener">How Muse works with Connectors</a></li>
+      <li>Microsoft, <a href="https://www.microsoft.com/en-ca/copilot/pricing/business" target="_blank" rel="noopener">Copilot plans and pricing for business, Canada</a></li>
+      <li>Microsoft, <a href="https://support.microsoft.com/en-us/microsoft-365-copilot/add-a-microsoft-365-copilot-widget-and-action-button-on-ios-devices" target="_blank" rel="noopener">Add a Copilot widget and Action Button on iOS</a></li>
+      <li>Apple, <a href="https://support.apple.com/en-ca/121115" target="_blank" rel="noopener">Get started with Apple Intelligence (Canada)</a></li>
+      <li>OpenAI, <a href="https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance" target="_blank" rel="noopener">How your data is used to improve model performance</a></li>
+      <li>Canada Revenue Agency, <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/keeping-records/where-keep-your-records-long-request-permission-destroy-them-early.html" target="_blank" rel="noopener">Where to keep your records and for how long</a></li>
+      <li>CRTC, <a href="https://crtc.gc.ca/eng/com500/info.htm" target="_blank" rel="noopener">Canada's anti-spam legislation: information</a></li>
+      <li>Office of the Privacy Commissioner of Canada, <a href="https://www.priv.gc.ca/en/privacy-topics/privacy-for-businesses/privacy-breaches-at-your-business/gd_pb_201810/" target="_blank" rel="noopener">Mandatory reporting of breaches</a></li>
+      <li>OpenAI, <a href="https://help.openai.com/en/articles/10291617-scheduled-tasks-in-chatgpt" target="_blank" rel="noopener">Scheduled tasks in ChatGPT</a></li>
+      <li>OpenAI, <a href="https://help.openai.com/en/articles/6950777" target="_blank" rel="noopener">ChatGPT Plus</a> and <a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">pricing page</a></li>
+      <li>Anthropic, <a href="https://privacy.claude.com/en/articles/12109829-how-do-i-change-my-model-improvement-privacy-settings" target="_blank" rel="noopener">Change model improvement privacy settings</a></li>
+      <li>Meta, <a href="https://www.meta.com/help/superintelligence/1047255454427887/" target="_blank" rel="noopener">How Muse handles your privacy, safety and security</a></li>
+      <li>iPhone in Canada, <a href="https://www.iphoneincanada.ca/2026/09/18/metas-muse-ai-agent-is-now-available-in-canada/" target="_blank" rel="noopener">Muse available in Canada</a> (18 September 2026)</li>
+      <li>IRS, <a href="https://www.irs.gov/businesses/small-businesses-self-employed/how-long-should-i-keep-records" target="_blank" rel="noopener">How long should I keep records?</a></li>
+      <li>FTC, <a href="https://www.ftc.gov/business-guidance/resources/protecting-personal-information-guide-business" target="_blank" rel="noopener">Protecting personal information: a guide for business</a></li>
+      <li>Canada Revenue Agency, <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">GST/HST rates by province</a></li>
+      <li>OpenAI, <a href="https://openai.com/index/introducing-chatgpt-agent/" target="_blank" rel="noopener">Introducing ChatGPT agent</a> (17 July 2025, marked outdated by OpenAI)</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="site">
+  <span>Leverage Strategies · Dan Albasry · Toronto</span>
+  <span>General information, not tax or legal advice. Prices checked November 27, 2026.</span>
+</footer>
+
+<div class="seg float" role="group" aria-label="Reading level">
+  <span class="lab">Reading level</span>
+  <button type="button" data-v="t" aria-pressed="true">Starter</button>
+  <button type="button" data-v="s" aria-pressed="false">Simple</button>
+  <button type="button" data-v="d" aria-pressed="false">Detailed</button>
+</div>
+
+<script>
+{
+  const KEY='leverage-notes-level', TOOLKEY='leverage-tool', BOX='leverage-phone-checks';
+  const body=document.body;
+  const levelButtons=document.querySelectorAll('.seg button[data-v]');
+  const store=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+  const load=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+  const current=()=>body.classList.contains('lv-t')?'t':body.classList.contains('lv-s')?'s':'d';
+  const shown=el=>el.getClientRects().length>0;
+  const paint=v=>{
+    body.classList.remove('lv-d','lv-s','lv-t'); body.classList.add('lv-'+v);
+    levelButtons.forEach(b=>b.setAttribute('aria-pressed', b.dataset.v===v?'true':'false'));
+  };
+  // Keep the reader in the same section when they switch level. If that section is hidden
+  // at the new level, land on the nearest section that is visible there.
+  const setLevel=v=>{
+    if(v===current()) return;
+    const secs=[...document.querySelectorAll('section.q')];
+    let anchor=null;
+    secs.filter(shown).forEach(s=>{ if(s.getBoundingClientRect().top<=120) anchor=s; });
+    let progress=0;
+    if(anchor){ const r=anchor.getBoundingClientRect(); progress=Math.min(1,Math.max(0,(120-r.top)/Math.max(1,r.height))); }
+    paint(v); store(KEY,v);
+    if(!anchor) return;
+    let target=anchor;
+    if(!shown(target)){
+      const i=secs.indexOf(anchor);
+      target=secs.slice(i+1).find(shown)||secs.slice(0,i).reverse().find(shown)||null;
+      progress=0;
+    }
+    if(target){ const r2=target.getBoundingClientRect(); window.scrollTo({top:window.pageYOffset+r2.top-120+progress*r2.height,behavior:'auto'}); }
+  };
+  levelButtons.forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.v)));
+  const saved=load(KEY); paint(saved==='d'||saved==='s'||saved==='t' ? saved : 't');
+
+  // Tool switch: one choice for the whole page, ChatGPT by default. A group that has no
+  // steps for the chosen tool shows its first tool instead.
+  const groups=[...document.querySelectorAll('.toolbar')].map(bar=>({
+    buttons:[...bar.querySelectorAll('.toolseg button')],
+    blocks:[...bar.nextElementSibling.querySelectorAll('.toolblock')]
+  }));
+  const setTool=t=>{
+    groups.forEach(g=>{
+      const have=g.buttons.map(b=>b.dataset.tool);
+      const use=have.includes(t)?t:have[0];
+      g.buttons.forEach(b=>b.setAttribute('aria-pressed', b.dataset.tool===use?'true':'false'));
+      g.blocks.forEach(el=>{ el.hidden = !el.dataset.tools.split(' ').includes(use); });
+    });
+  };
+  groups.forEach(g=>g.buttons.forEach(b=>b.addEventListener('click',()=>{ setTool(b.dataset.tool); store(TOOLKEY,b.dataset.tool); })));
+  const known=['chatgpt','claude','gemini','copilot','muse'];
+  const savedTool=load(TOOLKEY);
+  setTool(known.includes(savedTool)?savedTool:'chatgpt');
+
+  // Copy buttons.
+  document.querySelectorAll('[data-copy]').forEach(btn=>{
+    const label=btn.textContent;
+    btn.addEventListener('click',()=>{
+      const pre=document.getElementById(btn.dataset.copy);
+      const text=pre.textContent;
+      const ok=()=>{ btn.textContent='Copied'; btn.classList.add('done'); setTimeout(()=>{btn.textContent=label;btn.classList.remove('done')},1800); };
+      const fallback=()=>{ try{ const r=document.createRange(); r.selectNodeContents(pre); const s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='Selected, press copy'; setTimeout(()=>{btn.textContent=label},2400);}catch(e){} };
+      try{ navigator.clipboard.writeText(text).then(ok,fallback); }catch(e){ fallback(); }
+    });
+  });
+
+  // This week's ticks are remembered on this device only.
+  let ticks={};
+  try{ticks=JSON.parse(load(BOX)||'{}')||{}}catch(e){ticks={}}
+  document.querySelectorAll('.check input').forEach(box=>{
+    box.checked=!!ticks[box.id];
+    box.addEventListener('change',()=>{ticks[box.id]=box.checked; store(BOX,JSON.stringify(ticks));});
+  });
+}
+</script>
+
+</body></html>

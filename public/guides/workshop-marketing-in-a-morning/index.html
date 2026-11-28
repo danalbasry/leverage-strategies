@@ -1,0 +1,858 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Workshop 2: Marketing in a morning</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Workshop 2 for independent small business owners in the US and Canada: one morning for a month of posts, review replies and an updated Google Business Profile. Three reading levels.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* LAYOUT: one reading column (680px), figures to 1040px, one dark ink band, floating level switch. G. Combined: paper, ink, one rust accent. Light theme by choice. */
+:root{
+  color-scheme: light;
+  --paper:#F8F6F1; --ink:#141412; --body:#3A3832; --muted:#5A584F; --rule:#CFCBC0; --panel:#EDE9DF; --accent:#7A2E1A;
+  --display:'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --text:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --col:680px; --wide:1040px;
+}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+.eyebrow{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 24px}
+.widewrap{max-width:var(--wide);margin:0 auto;padding:0 24px}
+figure.wrap,figure.widewrap{margin:44px auto}
+
+/* three reading levels: .d detailed, .s simple, .t starter, .ds detailed+simple, .st simple+starter */
+body.lv-d .s, body.lv-d .t, body.lv-d .st{display:none !important}
+body.lv-s .d, body.lv-s .t{display:none !important}
+body.lv-t .d, body.lv-t .s, body.lv-t .ds{display:none !important}
+body.lv-s .prose{font-size:19px;line-height:1.75}
+body.lv-t .prose{font-size:20px;line-height:1.8}
+
+header.site{padding:24px 32px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink)}
+header.site .mark{font-family:var(--display);font-size:32px;line-height:1}
+header.site .where{font-size:14px;color:var(--muted)}
+
+.hero{max-width:var(--wide);margin:0 auto;padding:72px 24px 0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:end}
+.hero h1{font-size:clamp(44px,6.4vw,80px);line-height:1.02;letter-spacing:-.02em;margin-top:24px}
+.hero .lede{margin:28px 0 0;font-size:21px;line-height:1.6;color:var(--body)}
+.hero .by{margin:28px 0 0;font-size:14px;color:var(--muted)}
+.hero figure{margin:0}
+.hero img{width:100%;max-height:620px;object-fit:cover;object-position:center 30%;border:1px solid var(--rule)}
+@media (max-width:820px){.hero{grid-template-columns:1fr;gap:32px;padding-top:56px}.hero img{max-height:520px}}
+
+.versions{margin:56px auto 0;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:22px 0}
+.versions p{margin:0;font-size:16px;color:var(--body);flex:1 1 300px}
+.seg{display:inline-flex;border:1px solid var(--ink);background:var(--paper)}
+.seg button{font:500 14px/1 var(--text);letter-spacing:.04em;padding:14px 16px;min-height:44px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button + button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.float{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:20;box-shadow:0 6px 24px rgba(20,20,18,.18)}
+.float .lab{display:flex;align-items:center;padding:0 14px 0 16px;font-size:13px;color:var(--muted);border-right:1px solid var(--rule)}
+@media (max-width:520px){.float .lab{display:none}.seg button{padding:14px 13px}}
+
+.toc{margin:56px auto 0}
+.toc ol{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--ink)}
+.toc li{border-bottom:1px solid var(--rule)}
+.toc a{display:flex;gap:20px;align-items:baseline;padding:14px 0;text-decoration:none;font-family:var(--display);font-size:24px;line-height:1.2}
+.toc a span.n{font:400 13px var(--text);color:var(--muted);flex:0 0 20px;font-variant-numeric:tabular-nums}
+
+section.q{padding:96px 0 0;scroll-margin-top:12px}
+section.q h2{font-size:clamp(34px,5vw,52px);line-height:1.06;margin:14px 0 28px}
+.prose p{margin:0 0 20px;color:var(--body)}
+.prose p.answer{font-size:1.14em;line-height:1.55;color:var(--ink)}
+.prose strong{color:var(--ink);font-weight:600}
+.prose ul,.prose ol{margin:0 0 20px;padding-left:22px;color:var(--body)}
+.prose li{margin:0 0 10px}
+.key{font-family:var(--display);font-size:clamp(28px,4vw,38px);line-height:1.15;color:var(--ink);margin:36px 0;padding:28px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.key em{color:var(--accent)}
+
+figure{margin:44px auto}
+figcaption{margin-top:12px;font-size:13px;line-height:1.5;color:var(--muted)}
+.figtitle{margin:0 0 18px;font-family:var(--display);font-size:26px;line-height:1.15}
+
+/* ladder */
+.ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end;border-bottom:1px solid var(--ink)}
+.rung{border:1px solid var(--ink);border-bottom:0;padding:18px 18px 20px;background:var(--paper)}
+.rung:nth-child(1){min-height:200px}.rung:nth-child(2){min-height:250px}.rung:nth-child(3){min-height:300px;background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.rung .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.rung h3{font-size:30px;line-height:1.1;margin:6px 0 10px}
+.rung p{margin:0;font-size:15.5px;line-height:1.55;color:var(--body)}
+.rung p.ex{margin-top:12px;padding-top:12px;border-top:1px solid var(--rule)}
+@media (max-width:700px){.ladder{grid-template-columns:1fr;border-bottom:0}.rung,.rung:nth-child(n){min-height:0;border-bottom:1px solid var(--ink)}.rung:nth-child(3){border-bottom-color:var(--accent)}}
+
+/* test list */
+.test{list-style:none;margin:0 0 24px;padding:0;border-top:1px solid var(--ink);counter-reset:tq}
+.test li{counter-increment:tq;display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.test li::before{content:counter(tq);font-family:var(--display);font-size:30px;line-height:1;color:var(--accent)}
+
+/* flow diagram */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px}
+.stage{position:relative;border:1px solid var(--ink);padding:16px 16px 18px;background:var(--paper)}
+.stage .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.stage h3{font-size:25px;line-height:1.1;margin:6px 0 8px}
+.stage p{margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.stage:not(:last-child)::after{content:"\2192";position:absolute;right:-29px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--muted)}
+.stage.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.repair{margin-top:36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:28px;align-items:start;border-top:1px dashed var(--ink);padding-top:22px}
+.repair h3{font-size:28px;line-height:1.1}
+.repair .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.repair ol{margin:0;padding-left:20px;font-size:15.5px;line-height:1.55;color:var(--body)}
+.repair li{margin-bottom:6px}
+@media (max-width:820px){.flow{grid-template-columns:1fr;gap:30px}.stage:not(:last-child)::after{content:"\2193";right:auto;left:22px;top:auto;bottom:-29px;transform:none}.repair{grid-template-columns:1fr;gap:12px}}
+
+/* bars */
+.bars{display:grid;gap:18px}
+.bar{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;align-items:center}
+.bar .l{font-size:15px;line-height:1.35;color:var(--ink)}
+.bar .l small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.bar .tr{display:flex;align-items:center;gap:12px}
+.bar .f{height:30px;background:#A8A397;min-width:2px}
+.bar .f.hot{background:var(--accent)}
+.bar .f.ink{background:var(--ink)}
+.bar .v{font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:560px){.bar{grid-template-columns:1fr;gap:6px}}
+
+/* business finder */
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.pick button{font:500 15px var(--text);min-height:44px;padding:10px 14px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.pick button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.biz{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink);border-left:1px solid var(--rule)}
+.biz li{padding:18px 20px 20px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);transition:background .25s}
+.biz li.on{background:var(--panel);box-shadow:inset 3px 0 0 var(--accent)}
+.biz h3{font-size:27px;line-height:1.1;margin:0 0 10px}
+.biz dl{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 12px;font-size:15px;line-height:1.5}
+.biz dt{font:500 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.biz dd{margin:0;color:var(--body)}
+@media (max-width:640px){.biz{grid-template-columns:1fr}}
+
+.box{margin:36px 0;padding:24px 26px;background:var(--panel);border:1px solid var(--ink)}
+.box h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.box p{margin:0 0 12px;font-size:16.5px;line-height:1.6;color:var(--body)}
+.box p:last-child{margin-bottom:0}
+
+/* two countries */
+.where2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;margin:36px 0;border:1px solid var(--ink)}
+.where2 > div{padding:24px 26px;background:var(--panel)}
+.where2 > div + div{border-left:1px solid var(--ink)}
+@media (max-width:600px){.where2 > div + div{border-left:0;border-top:1px solid var(--ink)}}
+.where2 h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2 ul{margin:0;padding-left:18px;font-size:15.5px;line-height:1.6;color:var(--body)}
+.where2 li{margin-bottom:10px}
+
+/* numbered risks */
+.steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink);counter-reset:st}
+.steps li{counter-increment:st;display:grid;grid-template-columns:64px 1fr;gap:8px;padding:26px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(st);font-family:var(--display);font-size:54px;line-height:.9;color:var(--accent)}
+.steps h3{font-size:28px;line-height:1.15;margin:0 0 8px}
+.steps p{margin:0;color:var(--body);font-size:.96em}
+
+.skip{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.skip li{display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.skip li::before{content:"\00D7";font-family:var(--display);font-size:36px;line-height:.8;color:var(--accent)}
+
+table{border-collapse:collapse;width:100%;font-size:15.5px;line-height:1.45}
+th{font:500 12.5px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 14px 10px 0;border-bottom:1px solid var(--ink)}
+td{padding:13px 14px 13px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--body)}
+td:first-child{color:var(--ink);font-weight:500;white-space:nowrap}
+
+.band{background:var(--ink);color:var(--paper);margin-top:96px;padding:64px 0}
+.band p.eyebrow{color:#B5B1A6;font-family:var(--text);font-size:13px;line-height:1.4;margin:0}
+.band p{margin:16px 0 0;font-family:var(--display);font-size:clamp(24px,3.4vw,32px);line-height:1.3;color:var(--paper)}
+
+.note{display:inline;background:#F3E3DC;color:var(--accent);font-size:.92em;padding:1px 6px}
+
+.check{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.check li{border-bottom:1px solid var(--rule)}
+.check label{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:20px 0;cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;width:24px;height:24px;margin:4px 0 0;border:1.5px solid var(--ink);background:var(--paper);display:grid;place-content:center;cursor:pointer}
+.check input:checked{background:var(--ink)}
+.check input:checked::after{content:"";width:11px;height:6px;border-left:2px solid var(--paper);border-bottom:2px solid var(--paper);transform:rotate(-45deg) translate(1px,-1px)}
+.check span{color:var(--ink)}
+
+.cta{border-top:1px solid var(--ink);margin-top:96px;padding:88px 24px;text-align:center}
+.cta h2{font-size:clamp(40px,6vw,68px);line-height:1.04}
+.cta p{max-width:600px;margin:22px auto 0;color:var(--body)}
+
+.sources{padding:72px 0 0}
+.sources h2{font-size:34px;margin:0 0 8px}
+.sources ul{margin:18px 0 0;padding-left:20px;font-size:15px;line-height:1.6;color:var(--body)}
+.sources li{margin-bottom:8px}
+.sources p{font-size:15px;color:var(--muted);margin:0}
+footer.site{margin-top:88px;border-top:1px solid var(--ink);padding:24px 32px 110px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.biz li{transition:none}}
+
+/* phone article additions */
+.log{border:1px solid var(--ink);background:#fff;padding:18px 0 8px;box-shadow:0 18px 40px rgba(20,20,18,.08)}
+.log .hd{display:flex;justify-content:space-between;align-items:baseline;padding:0 20px 12px;border-bottom:1px solid var(--rule)}
+.log .hd b{font-family:var(--display);font-weight:400;font-size:28px}
+.log .hd span{font-size:13px;color:var(--muted)}
+.log ul{list-style:none;margin:0;padding:0}
+.log li{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:12px 20px;border-bottom:1px solid var(--panel)}
+.log li:last-child{border-bottom:0}
+.log .ic{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--accent);position:relative}
+.log .ic::after{content:"";position:absolute;left:5px;top:9px;width:9px;height:1.5px;background:var(--accent);transform:rotate(-35deg)}
+.log .who{font-size:16px;color:var(--accent);line-height:1.3}
+.log .who small{display:block;font-size:13px;color:var(--muted)}
+.log .tm{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.verdict{margin:48px 0 0;padding:26px 28px;border:1px solid var(--ink);background:var(--panel);box-shadow:inset 0 3px 0 var(--accent)}
+.verdict h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+.verdict p{margin:0;font-family:var(--display);font-size:clamp(24px,3.2vw,30px);line-height:1.25;color:var(--ink)}
+.lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.lane{border:1px solid var(--ink);padding:18px}
+.lane h3{font-size:26px;line-height:1.1;margin:4px 0 8px}
+.lane .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.lane p{margin:10px 0 0;font-size:15px;line-height:1.5;color:var(--body)}
+.day{display:flex;height:26px;border:1px solid var(--ink);margin-top:10px}
+.day i{display:block;height:100%}
+.day .p{background:#A8A397}.day .a{background:var(--accent)}.day .pa{background:repeating-linear-gradient(135deg,#A8A397 0 6px,var(--accent) 6px 12px)}
+.daykey{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px}
+.legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:14px;color:var(--body)}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px}
+.legend .lp::before{background:#A8A397}.legend .la::before{background:var(--accent)}.legend .lpa::before{background:repeating-linear-gradient(135deg,#A8A397 0 3px,var(--accent) 3px 6px)}
+@media (max-width:760px){.lanes{grid-template-columns:1fr}}
+.dots{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:6px;max-width:560px}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--ink)}
+.dots i.m{background:transparent;border:1.5px solid #A8A397}
+.dots i.v{background:var(--accent)}
+.dotkey{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:14px;color:var(--body)}
+.dotkey span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.dotkey .a::before{background:var(--ink)}.dotkey .m::before{border:1.5px solid #A8A397}.dotkey .v::before{background:var(--accent)}
+.bar .f.cad{background:repeating-linear-gradient(135deg,#A8A397 0 6px,#CFCBC0 6px 12px)}
+.scroll{overflow-x:auto}
+@media (max-width:600px){.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--rule)}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8.5em;white-space:normal}.stack td::before{content:attr(data-l);float:inline-start;width:8em;margin-inline-start:-8.5em;font:500 12px/1.9 var(--text);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}.stack td:first-child{font-weight:600}}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+th.n{text-align:right}
+
+
+.hero.one{grid-template-columns:1fr}
+.flow5{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:none}
+.flow5 li{border:1px solid var(--ink);padding:16px 14px 18px;background:var(--paper)}
+.flow5 li.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.flow5 .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.flow5 h3{font-size:24px;line-height:1.1;margin:6px 0 8px}
+.flow5 li > p:not(.k){margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.flow5 li > p.get{margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink)}
+body.lv-t .flow5 li > p.get{display:none}
+.float{transition:opacity .2s}.float.away{opacity:0;pointer-events:none}
+@media (max-width:600px){.stack.two td::before{content:none}.stack.two td{padding-inline-start:0}.stack.two td:first-child{padding-top:10px}table.score td{padding-inline-start:10em}table.score td::before{width:9.5em;margin-inline-start:-10em}}
+.check{margin-left:0;padding-left:0}
+.after6{margin:14px 0 0;font-size:14px;color:var(--muted)}
+@media (max-width:820px){.flow5{grid-template-columns:1fr}}
+.tablewrap{margin:8px 0 28px}
+.prose table td:first-child{white-space:normal}
+table.score tr.chosen td{background:var(--panel)}
+table.score tr.chosen td:first-child{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px}
+table.score tr.gated td{color:#8A877D}
+.madeup{margin:20px 0 6px;color:var(--accent)}
+.toolgroup{margin:28px 0 32px;border-top:1px solid var(--ink);padding-top:18px}
+.toolseg{margin-bottom:16px}
+.toolblock{background:var(--panel);border:1px solid var(--ink);padding:20px 24px}
+.toolblock .toolname{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.toolblock ol{margin:0 0 12px}
+.toolblock p{font-size:15px}
+.toolgroup.js .toolblock{display:none}
+.toolgroup.js .toolblock.on{display:block}
+.bar .f.empty{background:transparent;border:1.5px dashed #A8A397;height:30px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.prose h3{font-size:26px;margin:28px 0 10px}
+@media (max-width:600px){.stack td:first-child{padding-inline-start:0}.stack td:first-child::before{content:none}table.score tr.chosen td:first-child{padding-left:10px}}
+.float{bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+
+/* café worked example additions */
+.toolseg{display:flex;flex-wrap:wrap;width:max-content;max-width:100%}
+.toolseg button{padding:12px 14px}
+.toolseg button + button{border-left:1px solid var(--rule)}
+@media (max-width:520px){.toolseg{width:100%}.toolseg button{flex:1 1 auto;padding:12px 10px;font-size:13px}}
+.toolblock h3{font-size:22px}
+.toolblock ul,.toolblock ol{font-size:15.5px}
+.where2 > div{min-width:0}
+.where2 p{margin:0 0 10px;font-size:15.5px;line-height:1.6;color:var(--body)}
+.where2 p:last-child{margin-bottom:0}
+.prompt{margin:24px 0 32px;border:1px solid var(--ink);background:#fff;padding:20px 22px 18px;box-shadow:inset 3px 0 0 var(--accent)}
+.prompt .pl{margin:0 0 8px;font:600 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.prompt .ptext{margin:0 0 14px;font-size:17px;line-height:1.6;color:var(--ink)}
+.prompt .copy{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.prompt .copy:hover{background:var(--ink);color:var(--paper)}
+.card{border:1px solid var(--ink);background:var(--panel);padding:22px 24px 24px;box-shadow:inset 0 3px 0 var(--accent)}
+.card .madeup{margin:0 0 4px}
+.card h3{font-size:34px;line-height:1.1;margin:0 0 14px}
+.card dl{margin:0;display:grid;grid-template-columns:92px minmax(0,1fr);gap:8px 14px;font-size:15.5px;line-height:1.5}
+.card dt{font:500 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card dd{margin:0;color:var(--body)}
+.flow5.cafe li.on .get{color:var(--accent)}
+.jobs{list-style:none;margin:0 0 12px;padding:0;border-top:1px solid var(--ink)}
+.jobs li{display:grid;grid-template-columns:96px 1fr;gap:4px 12px;padding:14px 0;border-bottom:1px solid var(--rule);font-size:18px;color:var(--ink)}
+.jobs li small{grid-column:2;font-size:14px;color:var(--muted)}
+.jobs .mk{font:600 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase}
+.jobs li.yes{background:var(--panel);box-shadow:inset 3px 0 0 var(--accent);padding-left:12px}
+.jobs li.yes .mk{color:var(--accent)}
+.jobs li.no{color:#8A877D}.jobs li.no .mk{color:var(--muted)}
+/* chart */
+.chart{display:grid;grid-template-columns:56px minmax(0,1fr);gap:8px;align-items:stretch}
+.yax{display:flex;flex-direction:column;justify-content:space-between;font-size:12px;color:var(--muted);text-align:right;padding-bottom:22px;font-variant-numeric:tabular-nums}
+.plot{position:relative;border-left:1px solid var(--ink);border-bottom:0}
+.days{display:grid;grid-template-columns:repeat(31,minmax(0,1fr));gap:3px;height:300px;align-items:end;position:relative;z-index:1}
+.days .c{display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-width:0}
+.bar2{display:block;position:relative;background:#A8A397;min-height:2px;border-bottom:1px solid var(--ink)}
+.c.we .bar2{background:var(--ink)}
+.dn{display:block;height:22px;padding-top:4px;font-size:11px;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+.drop{position:absolute;left:50%;top:-14px;width:8px;height:8px;margin-left:-4px;background:var(--accent);border-radius:0 50% 50% 50%;transform:rotate(45deg)}
+.tag{position:absolute;bottom:calc(100% + 18px);left:50%;transform:translateX(-50%);font:500 12px var(--text);color:var(--accent);white-space:nowrap}
+.roadband{position:absolute;top:0;bottom:22px;left:calc(12 / 31 * 100%);width:calc(5 / 31 * 100%);background:repeating-linear-gradient(135deg,rgba(122,46,26,.10) 0 6px,rgba(122,46,26,0) 6px 12px);border-left:1px dashed var(--accent);border-right:1px dashed var(--accent);z-index:0}
+.roadband span{position:absolute;top:6px;left:6px;font:500 12px var(--text);color:var(--accent);white-space:nowrap}
+.chartfig .legend .lw::before{background:#A8A397}.chartfig .legend .lwe::before{background:var(--ink)}
+.chartfig .legend .lr::before{background:var(--accent);border-radius:0 50% 50% 50%;transform:rotate(45deg);width:9px;height:9px}
+.chartfig .legend .lroad::before{background:repeating-linear-gradient(135deg,rgba(122,46,26,.3) 0 3px,transparent 3px 6px);border:1px dashed var(--accent)}
+@media (max-width:640px){.days{height:220px;gap:2px}.dn{font-size:9px}.chart{grid-template-columns:44px minmax(0,1fr)}.yax{font-size:11px}.roadband span{font-size:11px;top:-20px;left:0}.tag{font-size:11px}}
+/* before / after template */
+.ba{display:grid;grid-template-columns:40px minmax(0,1fr);gap:10px;height:240px}
+.ba-y{writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;color:var(--muted);text-align:center}
+.ba-plot{display:grid;grid-template-columns:repeat(2,minmax(0,160px));gap:48px;align-items:end;border-left:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:0 32px}
+.ba-col{display:flex;flex-direction:column;align-items:stretch;height:100%;justify-content:flex-end;position:relative}
+.ba-bar{display:block;height:70%;border:1.5px dashed #A8A397;border-bottom:0}
+.ba-l{position:absolute;top:100%;left:0;right:0;padding-top:6px;text-align:center;font-size:14px;color:var(--ink)}
+.ba-l small{display:block;font-size:12px;color:var(--muted)}
+.ba + figcaption{margin-top:52px}
+/* agent rows */
+.agentrows{list-style:none;margin:0 0 12px;padding:0;border-top:1px solid var(--ink)}
+.agentrows li{display:grid;grid-template-columns:110px minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule);font-size:16px}
+.agentrows .aj{font-family:var(--display);font-size:22px;line-height:1.1}
+.agentrows .aa{color:var(--body)}
+.agentrows .ap{color:var(--ink);font-weight:500}
+@media (max-width:600px){.agentrows li{grid-template-columns:1fr;gap:4px}}
+.stop{display:inline-block;width:12px;height:12px;background:var(--accent);margin-right:8px;vertical-align:-1px;clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%)}
+table.agent td:nth-child(3){color:var(--ink);font-weight:500}
+.prose blockquote{margin:0 0 20px;padding:4px 0 4px 18px;border-left:3px solid var(--accent)}
+.sources ul{word-break:break-word}
+section.q.st{display:block}
+body.lv-d section.q.st{display:none}
+.prose .where2 h3,.prose .box h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.prose .where2 p,.prose .where2 li{font-size:.86em}
+.prose .toolblock p,.prose .toolblock li{font-size:.86em;line-height:1.6}
+.tag{bottom:calc(100% + 16px);writing-mode:vertical-rl;transform:translateX(-50%) rotate(180deg);z-index:3;background:var(--paper);padding:2px 0;line-height:1}
+body.lv-t .flow5.cafe li > p.get{display:block}
+@media (max-width:640px){.dn:not(.k){color:transparent}}
+.prose .where2 ul,.prose .toolblock ol,.prose .toolblock ul{font-size:inherit}
+.prose .where2 li,.prose .toolblock li{font-size:.86em;line-height:1.6}
+.checked{margin:-24px 0 28px;font-size:14px !important;color:var(--muted) !important}
+/* chart scale: bars area = days height minus the 22px label row */
+.yax{position:relative;display:block;padding:0;height:300px}
+.yax span{position:absolute;right:0;transform:translateY(-50%);margin-top:0}
+.yax span:nth-child(1){top:0 !important}
+.yax span:nth-child(2){top:139px !important}
+.yax span:nth-child(3){top:278px !important}
+.grid{position:absolute;left:0;right:0;top:0;height:278px;border-top:1px solid var(--rule);border-bottom:1px solid var(--ink);background:linear-gradient(var(--rule),var(--rule)) 0 50%/100% 1px no-repeat;z-index:0}
+.bar2{border-bottom:0}
+.days .c{justify-content:flex-start}
+.days .c .bar2{margin-top:auto}
+.c{display:grid !important;grid-template-rows:278px 22px}
+.c .bar2{align-self:end;max-height:278px}
+.c .dn{align-self:start}
+.plot{border-left:1px solid var(--ink)}
+@media (max-width:640px){
+ .yax{height:220px}.yax span:nth-child(2){top:99px !important}.yax span:nth-child(3){top:198px !important}
+ .grid{height:198px}.c{grid-template-rows:198px 22px}.c .bar2{max-height:198px}
+ .roadband span{display:none}
+ .toolseg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}
+ .toolseg button + button{border-left:0}
+ .toolseg button{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+}
+.roadband{bottom:auto;height:278px}
+@media (max-width:640px){.roadband{height:198px}}
+.c{grid-template-columns:minmax(0,1fr)}.c .bar2{width:100%}.days{align-items:stretch}
+details.data{margin-top:16px;border-top:1px solid var(--rule);padding-top:12px;max-width:680px}
+details.data summary{cursor:pointer;font:500 15px var(--text);color:var(--ink);min-height:44px;display:flex;align-items:center}
+details.data p{font-size:14px;color:var(--muted);margin:4px 0 10px}
+details.data pre{margin:12px 0 0;max-height:260px;overflow:auto;background:#fff;border:1px solid var(--rule);padding:12px;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;color:var(--body)}
+.copydata{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+
+/* workshop 1 additions */
+.figslot{display:block}
+.figslot > figure{margin:40px auto}
+.k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+
+/* agenda drawn to scale */
+.agbar{list-style:none;margin:0;padding:0;display:flex;border-left:1px solid var(--ink)}
+.agbar li{flex:var(--m) 1 0;display:grid;grid-template-rows:22px 64px auto auto auto;padding:0 6px 0 0;border-right:1px solid var(--paper)}
+.agbar .tm{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;padding-left:6px;border-left:1px solid var(--ink);margin-left:-1px}
+.agbar .blk{display:block;background:#A8A397;margin-right:-6px}
+.agbar li.win .blk{background:var(--accent)}
+.agbar li.ag .blk{background:var(--ink)}
+.agbar li.brk .blk{background:repeating-linear-gradient(135deg,#CFCBC0 0 5px,transparent 5px 10px)}
+.agbar .nm{font-family:var(--display);font-size:21px;line-height:1.1;margin:10px 0 2px 6px}
+.agbar li.win .nm{color:var(--accent)}
+.agbar .sb{font-size:13px;line-height:1.35;color:var(--body);margin-left:6px}
+.agbar .mn{font-size:12px;color:var(--muted);margin:4px 0 0 6px}
+.agbar li.end{flex:0 0 0;padding:0;border:0}
+.agbar li.end .tm{position:relative;left:-34px;border-left:0;text-align:right;width:34px;padding:0}
+.agendafig .legend .lwin::before{background:var(--accent)}
+.agendafig .legend .lag::before{background:var(--ink)}
+.agendafig .legend .lother::before{background:#A8A397}
+@media (max-width:760px){
+  .agbar{flex-direction:column;border-left:0;border-top:1px solid var(--ink)}
+  .agbar li{display:grid;grid-template-columns:44px minmax(0,1fr) auto;grid-template-rows:auto auto auto;column-gap:12px;padding:12px 0;border-right:0;border-bottom:1px solid var(--rule)}
+  .agbar .tm{grid-row:1/3;border-left:0;padding:3px 0 0;margin:0}
+  .agbar .nm{grid-column:2;margin:0;font-size:22px}
+  .agbar .sb{grid-column:2;margin:0}
+  .agbar .mn{grid-column:3;grid-row:1;margin:4px 0 0;white-space:nowrap}
+  .agbar .blk{grid-column:2/4;grid-row:3;height:10px;width:calc(var(--m) / 35 * 100%);margin:8px 0 0}
+  .agbar li.end{display:none}
+}
+
+/* agenda table */
+table.agenda tr.win td{background:var(--panel)}
+table.agenda tr.win td:first-child{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px}
+table.agenda tr.brk td{color:var(--muted);font-style:italic}
+table.agenda td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:600px){table.agenda tr.win td:first-child{padding-left:10px}table.agenda tr.brk td:empty{display:none}}
+
+/* scoring rule */
+.formula{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr) 28px minmax(0,.8fr);align-items:stretch;gap:8px}
+.formula .term{border:1px solid var(--ink);padding:14px 16px;background:var(--paper)}
+.formula .term.res{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.formula .v{margin:6px 0 0;font-family:var(--display);font-size:22px;line-height:1.2;color:var(--ink)}
+.formula .op{align-self:center;text-align:center;font-family:var(--display);font-size:32px;color:var(--muted)}
+.gate{margin-top:16px;border:1px dashed var(--accent);padding:16px 18px}
+.gate .k{color:var(--accent)}
+.gate ul{margin:10px 0 0;padding-left:20px;font-size:16px;line-height:1.55;color:var(--body)}
+.scorefig .out{margin:14px 0 0;font-family:var(--display);font-size:24px;line-height:1.25;color:var(--ink)}
+@media (max-width:600px){.formula{grid-template-columns:1fr}.formula .op{font-size:26px;line-height:1}}
+
+/* free plan grid */
+.freegrid{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.freegrid li{display:grid;grid-template-columns:150px 150px minmax(0,1fr);gap:6px 16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--rule)}
+.freegrid .ex{font-family:var(--display);font-size:22px;line-height:1.1;color:var(--ink)}
+.freegrid .ex small{display:block;font:400 13px var(--text);color:var(--muted);margin-top:2px}
+.freegrid .mk{font:600 12px/1.6 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.freegrid .mk::before{content:"";display:inline-block;width:10px;height:6px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg) translate(1px,-2px);margin-right:8px}
+.freegrid li.part .mk{color:var(--ink)}
+.freegrid li.part .mk::before{width:10px;height:0;border-left:0;transform:none;vertical-align:4px}
+.freegrid .tx{font-size:15.5px;line-height:1.5;color:var(--body)}
+@media (max-width:600px){.freegrid li{grid-template-columns:1fr}}
+
+/* sample file */
+.filecard{border:1px solid var(--ink);background:#fff;padding:18px 20px 8px;box-shadow:inset 3px 0 0 var(--accent)}
+.filecard .madeup{margin:0 0 4px}
+.filecard .fn{margin:0;font:500 17px ui-monospace,Menlo,Consolas,monospace;color:var(--ink);word-break:break-all}
+.filecard .fm{margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--muted)}
+.filecard details.data{border-top:1px solid var(--rule)}
+
+/* fact sheet */
+.card.fact{margin:24px 0 28px}
+.card.fact h3{font-size:30px;margin:0}
+.card.fact .sub{margin:2px 0 12px;font-size:14px !important;color:var(--muted) !important}
+.card.fact ul{margin:0 0 16px;padding-left:20px;font-size:.88em;line-height:1.6;color:var(--body)}
+.card.fact .copy,.hnote .copy{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.card.fact .copy:hover,.hnote .copy:hover,.copydata:hover{background:var(--ink);color:var(--paper)}
+.prompt .ptext p{margin:0 0 10px;font-size:17px;line-height:1.6;color:var(--ink)}
+.prompt .ptext p:last-child{margin-bottom:0}
+.prompt .ptext{margin:0 0 14px}
+
+/* agent flow */
+.agentfig .flow5 li > p:not(.k){font-size:15px}
+.agentfig .flow5 li .k{color:var(--muted)}
+.agentfig .flow5 li.on .k{color:var(--accent)}
+.agentfig .rule{margin:18px 0 0;font-family:var(--display);font-size:26px;line-height:1.25;color:var(--ink)}
+
+/* week after */
+.flow3{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.flow3 li{border:1px solid var(--ink);padding:16px 16px 18px;position:relative}
+.flow3 li:last-child{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.flow3 h3{font-size:24px;line-height:1.1;margin:6px 0 8px}
+.flow3 li > p:not(.k){margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+@media (max-width:700px){.flow3{grid-template-columns:1fr}}
+
+/* four checks */
+.prose ol.checks4{list-style:none;padding:0;margin:0 0 24px;border-top:1px solid var(--ink);counter-reset:ck}
+.prose ol.checks4 li{counter-increment:ck;display:grid;grid-template-columns:44px minmax(0,1fr);gap:6px;padding:14px 0;border-bottom:1px solid var(--rule)}
+.prose ol.checks4 li::before{content:counter(ck);font-family:var(--display);font-size:34px;line-height:.95;color:var(--accent)}
+
+/* answer key */
+table.akey td:first-child{font-weight:600;color:var(--ink)}
+table.akey tr:nth-child(4) td{background:#F3E3DC}
+
+/* one country box */
+.where2.one{grid-template-columns:1fr}
+
+/* handout */
+.handout{border:1.5px solid var(--ink);background:#fff;padding:26px 28px 22px;margin:8px 0 14px;box-shadow:0 14px 36px rgba(20,20,18,.07)}
+.handout .hhd{border-bottom:1px solid var(--ink);padding-bottom:12px;margin-bottom:16px}
+.handout .hhd h3{font-size:30px;line-height:1.1;margin:4px 0 0}
+.handout p{margin:0 0 14px;font-size:16px !important;line-height:1.6 !important;color:var(--body)}
+.handout p:last-child{margin-bottom:0}
+.handout strong{color:var(--accent)}
+.handout .blank{display:inline-block;width:7.5em;max-width:40%;border-bottom:1px solid var(--ink);height:1.1em;vertical-align:-3px;margin:0 6px 0 2px}
+.hnote{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:0 0 20px}
+.hnote span{font-size:14px;color:var(--muted)}
+table.akey tr:nth-child(4) td{padding-left:10px;padding-right:10px}
+.prose h3{line-height:1.15}
+.prose ol.checks4 li{display:block;position:relative;padding:14px 0 14px 50px}
+.prose ol.checks4 li::before{position:absolute;left:0;top:14px}
+
+
+/* workshop 2 additions */
+.hero .lede{max-width:760px}
+@media (max-width:760px){.agbar .blk{width:calc(var(--m) / 45 * 100%)}}
+.bar .f.ext{background:repeating-linear-gradient(135deg,#A8A397 0 4px,transparent 4px 8px);border:1px solid #A8A397;height:30px}
+.keyfig{margin:28px 0 36px}
+.keygrid{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;border-top:1px solid var(--ink);padding-top:18px}
+.keygrid .k{margin:0 0 10px}
+.keyfig .bar{grid-template-columns:150px minmax(0,1fr);gap:12px}
+.keyfig .bar .l{font-size:14px}
+.keyfig .bar .v{font-size:20px;white-space:normal}
+.keyfig .bar .f{height:22px}
+.keyfig .bar .f.ext{height:22px}
+.dotline{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:12px;align-items:center;margin:0 0 10px}
+.dotline .l{font-size:14px;color:var(--ink)}
+.dotline .v{font-family:var(--display);font-size:20px;white-space:nowrap}
+.dotrow{display:grid;grid-template-columns:repeat(18,minmax(0,16px));gap:4px}
+.dotrow i{display:block;aspect-ratio:1;border-radius:50%;background:transparent;border:1.5px solid #A8A397}
+.dotrow i.v{background:var(--accent);border-color:var(--accent)}
+.keyfig .bars{gap:10px}
+@media (max-width:560px){.keyfig .bar{grid-template-columns:1fr;gap:4px}.dotline{grid-template-columns:1fr auto}.dotline .l{grid-column:1/3}.dotrow{grid-template-columns:repeat(18,minmax(0,1fr))}}
+table.akey tr.trap td{background:#F3E3DC}
+table.akey tr.trap td:first-child{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px}
+.card.fact p{margin:0 0 10px;font-size:.92em;line-height:1.6;color:var(--body)}
+.card.fact p:last-child{margin-bottom:0}
+.card.fact .madeup{font-size:12px;margin:0 0 8px}
+.prose .box{margin:24px 0}
+.band .eyebrow{color:#B5B1A6}
+.toolgroup .toolseg button{font-size:13.5px}
+@media print{
+  body{background:#fff}
+  body > *:not([data-print]){display:none !important}
+  section[data-print]{padding:0}
+  section[data-print] > .wrap > .eyebrow, section[data-print] h2, section[data-print] .answer, .hnote{display:none !important}
+  .handout{box-shadow:none;border:1px solid #000;margin:0;break-inside:avoid}
+}
+.keyfig .bar .tr{min-width:0}
+.keyfig .bar .v{font-size:18px;flex:1 1 auto;min-width:0}
+.dotline .v{font-size:18px}
+
+</style>
+<script>document.body.classList.add("lv-t")</script>
+<header class="site"><span class="mark">Leverage</span><span class="where">Workshops · Workshop 2</span></header><div class="hero one"><div><p class="eyebrow"><span class="t">Starter version · 7 minute read</span><span class="s">Simple version · 12 minute read</span><span class="d">Detailed version · 23 minute read</span></p><h1>Workshop 2: Marketing in a morning</h1><p class="lede t">In one morning, you get a month of posts, replies to your reviews, and a fixed-up Google listing. You also learn what AI must never make up.</p><p class="lede s">In one morning, you leave with a month of posts drafted from your own facts, replies to your recent reviews, and an updated Google Business Profile. You also learn what AI must never make up, and the rules about reviews.</p><p class="lede d">In one morning, you leave with a month of posts drafted from your own facts, replies written for your recent reviews, and an updated Google Business Profile, and you know what AI must never make up and what the rules say about reviews.</p><p class="by">By Dan Albasry · November 27, 2026 · For small business owners in the US and Canada</p></div></div><div class="wrap"><div class="versions"><p><strong>Three ways to read this.</strong> Starter is the easiest. Simple says everything in plain words. Detailed has every number and source. Switch any time with the button at the bottom of your screen.</p><div class="seg" role="group" aria-label="Choose a reading level"><button type="button" data-v="t" aria-pressed="true">Starter</button><button type="button" data-v="s" aria-pressed="false">Simple</button><button type="button" data-v="d" aria-pressed="false">Detailed</button></div></div><div class="prose t" style="margin-top:48px"><p><span class="note">[OPENING SCENE: DAN, 3 SHORT SENTENCES FROM A REAL MOMENT. NO CLIENT NAME.]</span></p><p>Many owners do their own marketing. They know they should post, answer reviews and keep their Google listing right. Most weeks, there's no time for all three. This workshop gives you one morning to do all three.</p><p>One rule for the day: AI writes a first try from your facts. You check it. You post it.</p></div><div class="prose s" style="margin-top:48px"><p><span class="note">[OPENING SCENE: DAN, 3 TO 5 SHORT SENTENCES FROM A REAL MOMENT. NO CLIENT NAME, NOTHING THAT IDENTIFIES ANYONE.]</span></p><p>Most owners I meet do their own marketing when they can find a minute. They know they should post, answer reviews and keep their Google listing up to date. Most weeks, they don't get to all three. This is the second workshop in my series for small local businesses. It spends one morning on the three marketing jobs customers actually see.</p><p>The rule for the whole morning: AI writes drafts from facts you give it. You check them and you post them.</p></div><div class="prose d" style="margin-top:48px"><p><span class="note">[OPENING SCENE: DAN, 3 TO 5 SENTENCES FROM A REAL MOMENT, FOR EXAMPLE AN OWNER STARING AT AN EMPTY POSTING CALENDAR OR A REVIEW LEFT UNANSWERED FOR WEEKS. NO CLIENT NAME, NOTHING THAT IDENTIFIES ANYONE.]</span></p><p>Most owners I meet do their own marketing in the gaps of the day. They know they should post, answer reviews and keep their Google listing current, and they rarely get to all three. This is the second workshop in my series for independent small businesses: cafés, shops, salons, trades and service firms, usually 1 to 50 people. Workshop 1 set up three weekly jobs in AI. This one spends a whole morning on the three marketing jobs that customers actually see.</p><p>The design rests on one rule: AI drafts from facts you give it, and a person checks and posts. Every block ends with something saved, and nothing goes public from the room without the owner reading it first.</p></div></div><figure class="widewrap agendafig"><p class="figtitle">The three hours, drawn to scale</p><ol class="agbar" aria-label="Workshop agenda"><li class="" style="--m:10"><span class="tm">0:00</span><span class="blk"></span><span class="nm">Start safe</span><span class="sb">What never goes in</span><span class="mn">10 min</span></li><li class="" style="--m:20"><span class="tm">0:10</span><span class="blk"></span><span class="nm">Your numbers</span><span class="sb">Exercise 1</span><span class="mn">20 min</span></li><li class="win" style="--m:45"><span class="tm">0:30</span><span class="blk"></span><span class="nm">A month of posts</span><span class="sb">Exercise 2</span><span class="mn">45 min</span></li><li class="brk" style="--m:10"><span class="tm">1:15</span><span class="blk"></span><span class="nm">Break</span><span class="sb"></span><span class="mn">10 min</span></li><li class="win" style="--m:35"><span class="tm">1:25</span><span class="blk"></span><span class="nm">Reviews</span><span class="sb">Exercise 3</span><span class="mn">35 min</span></li><li class="win" style="--m:30"><span class="tm">2:00</span><span class="blk"></span><span class="nm">Google profile</span><span class="sb">Exercise 4</span><span class="mn">30 min</span></li><li class="ag" style="--m:20"><span class="tm">2:30</span><span class="blk"></span><span class="nm">Two tools and an agent</span><span class="sb">Exercise 5</span><span class="mn">20 min</span></li><li class="" style="--m:10"><span class="tm">2:50</span><span class="blk"></span><span class="nm">Make it stick</span><span class="sb">Date and partner</span><span class="mn">10 min</span></li><li class="end" aria-hidden="true"><span class="tm">3:00</span></li></ol><div class="legend"><span class="lwin">The three marketing jobs customers see</span><span class="lag">Agent, drafts only</span><span class="lother">Setup and planning</span></div><figcaption>Accounts, the fact sheet and access to your Google profile and pages are done before the day.</figcaption></figure><div class="wrap"><nav class="toc" aria-label="In this guide"><p class="eyebrow">The workshop, question by question</p><ol><li><a href="#q1"><span class="n">1</span><span>Is this workshop for me, and what will I walk out with?</span></a></li><li><a href="#q2"><span class="n">2</span><span>What marketing actually brings in local customers?</span></a></li><li><a href="#q3"><span class="n">3</span><span>What happens in the three hours?</span></a></li><li><a href="#q4"><span class="n">4</span><span>Which tool do we use, and what does it cost?</span></a></li><li><a href="#q5"><span class="n">5</span><span>How does each exercise run?</span></a></li><li><a href="#q6"><span class="n">6</span><span>What are the rules on reviews and ads?</span></a></li><li><a href="#q7"><span class="n">7</span><span>What happens after the morning?</span></a></li><li><a href="#q8"><span class="n">8</span><span>The one-page handout</span></a></li><li><a href="#q9"><span class="n">9</span><span>Your checklist for this week</span></a></li><li><a href="#q10"><span class="n">10</span><span>How Leverage Strategies helps</span></a></li><li class="st"><a href="#q11"><span class="n">11</span><span>Words to know</span></a></li></ol></nav></div><section class="q" id="q1" data-sec><div class="wrap"><p class="eyebrow">Question 1</p><h2>Is this workshop for me, and what will I walk out with?</h2><div class="prose t"><p class="answer">Yes, if you run a small business and do your own marketing. You don't need tech skills. Free plans work.</p>
+<p>Bring a laptop, one free AI account, your Google listing login, your Facebook or Instagram login, and one page of facts for next month.</p>
+<p>You leave with:</p>
+<ul><li><strong>A month of posts</strong>, checked.</li><li><strong>Replies to your reviews.</strong></li><li><strong>A fixed-up Google listing.</strong></li><li><strong>A safe way to ask for reviews.</strong></li><li><strong>A one-page handout.</strong></li></ul>
+<p><strong>Who it isn't for.</strong> People who want AI to post on its own, with nobody checking.</p>
+<p><strong>Free help near you.</strong></p>
+<div class="where2"><div><h3>In the US</h3><p>Google has a free AI course for US small businesses. Sign up by December 15, 2026 (<a href="https://grow.google/ai-for-small-businesses/" rel="noopener" target="_blank">Google</a>). OpenAI plans to train about 150 small business advisors to run three-hour classes (<a href="https://openai.com/index/helping-small-businesses-put-ai-to-work/" rel="noopener" target="_blank">OpenAI</a>).</p></div><div><h3>In Canada</h3><p>Google's free course is for the US only. Ask your library or local business centre. <span class="note">[DAN: ADD CANADIAN CENTRES.]</span></p></div></div></div><div class="prose s"><p class="answer">It's for you if you run a small business and do your own marketing. You don't need tech skills. Every exercise works on a free plan. Bring a laptop, a free account on one AI tool, access to your Google Business Profile and your Facebook or Instagram page, and a one-page fact sheet for next month.</p>
+<p>You walk out with:</p>
+<ul><li><strong>A month of posts.</strong> Every price and date checked against your fact sheet.</li><li><strong>Replies to your recent reviews.</strong> AI helps on Google. You write the Yelp ones yourself.</li><li><strong>An updated Google profile.</strong> Holiday hours, a short description and the right categories.</li><li><strong>A way to ask for reviews</strong> that follows each site's rules.</li><li><strong>The one-page handout</strong> at the end.</li></ul>
+<p><strong>Who it isn't for.</strong> It's not for people who want software to post and reply on its own, with nobody reading first.</p>
+<p><strong>Free options near you.</strong></p>
+<div class="where2"><div><h3>In the US</h3><p>Google offers a free AI certificate to US small businesses with 500 or fewer employees and an EIN. Sign up by December 15, 2026 (<a href="https://grow.google/ai-for-small-businesses/" rel="noopener" target="_blank">Google</a>). OpenAI plans to train about 150 small business advisors to run three-hour workshops (<a href="https://openai.com/index/helping-small-businesses-put-ai-to-work/" rel="noopener" target="_blank">OpenAI</a>).</p></div><div><h3>In Canada</h3><p>Google's free certificate is for US businesses only. Try your library, your local small business centre or your chamber of commerce. <span class="note">[DAN: ADD CANADIAN CENTRES WITH LINKS.]</span></p></div></div></div><div class="prose d"><p class="answer">It's for you if you run a small business, you do your own marketing, and you want a month of it done before lunch. You don't need technical skill, and every exercise works on a free plan. You need a laptop, a free account on one AI tool, access to your Google Business Profile and your Facebook or Instagram page, and a one-page fact sheet for next month. I send the checklist a week ahead.</p>
+<p>You walk out with:</p>
+<ul><li><strong>A month of posts, drafted and checked.</strong> Every price, date and offer traced back to your fact sheet.</li><li><strong>Replies to your recent reviews.</strong> Written for Google with AI's help, and written by you for Yelp.</li><li><strong>An updated Google Business Profile.</strong> Hours for the holidays, a description under Google's limit, and the right categories.</li><li><strong>A review-asking routine that follows each platform's rules.</strong></li><li><strong>The one-page handout</strong> at the end of this page.</li></ul>
+<p><strong>Who it isn't for.</strong> If you want ads managed for you, or software that posts and replies on its own with nobody reading first, this isn't the place to start. If your business handles health information, you're welcome, but we talk through what never goes in a public reply before you touch a real review.</p>
+<p><strong>Free options near you.</strong> You don't have to come to mine.</p>
+<div class="where2"><div><h3>In the US</h3><p>Grow with Google offers its Google AI Professional Certificate at no cost to US small businesses with 500 employees or fewer and a valid EIN, plus three months of Google AI Pro and Google Workspace Business Standard. Enrol by December 15, 2026 and redeem by December 31, 2026 (<a href="https://grow.google/ai-for-small-businesses/" rel="noopener" target="_blank">Google</a>).</p><p>OpenAI plans to train around 150 Small Business Development Center advisors to run three-hour, hands-on workshops, aiming to reach at least 1,000 small businesses in person (<a href="https://openai.com/index/helping-small-businesses-put-ai-to-work/" rel="noopener" target="_blank">OpenAI</a>).</p></div><div><h3>In Canada</h3><p>Google's free certificate offer above is for US businesses only (<a href="https://grow.google/ai-for-small-businesses/" rel="noopener" target="_blank">Google</a>). Look at your public library, your local small business centre and your chamber of commerce. <span class="note">[DAN: ADD THE ONTARIO AND QUEBEC CENTRES YOU RECOMMEND, WITH LINKS, AND THE CURRENT STATUS OF ANY GRANT YOU MENTION.]</span></p></div></div></div></div></section>
+<section class="q" id="q2" data-sec><div class="wrap"><p class="eyebrow">Question 2</p><h2>What marketing actually brings in local customers?</h2><div class="prose t"><p class="answer">Reviews and your Google listing matter most.</p>
+<p>In a US survey, almost everyone read reviews. About 9 in 10 people want the owner to reply (<a href="https://www.brightlocal.com/research/local-consumer-review-survey/" rel="noopener" target="_blank">BrightLocal</a>).</p>
+<p>Answer every review, not just some. 8 in 10 people said they'd likely pick a business that answers them all. Half don't like copy-and-paste replies (<a href="https://www.brightlocal.com/research/local-consumer-review-survey/" rel="noopener" target="_blank">BrightLocal</a>). BrightLocal sells marketing tools, so this is their own survey.</p>
+<figure class="chartfig"><p class="figtitle">Likely to use the business</p><div class="bars">
+<div class="bar"><span class="l">Replies to all reviews</span><span class="tr"><span class="f hot" style="width:80%"></span><span class="v">80%</span></span></div>
+<div class="bar"><span class="l">Replies only to negative reviews</span><span class="tr"><span class="f" style="width:47%"></span><span class="v">47%</span></span></div>
+<div class="bar"><span class="l">Replies only to positive reviews</span><span class="tr"><span class="f" style="width:45%"></span><span class="v">45%</span></span></div>
+</div><figcaption>US, vendor survey, 2026. Share of 1,002 US adults who said they were likely to use a business that replies this way. Bars start at zero. Source: <a href="https://www.brightlocal.com/research/local-consumer-review-survey/" rel="noopener" target="_blank">BrightLocal Local Consumer Review Survey 2026</a>.</figcaption></figure>
+<p>Posting most weeks helps. A company that sells posting tools found that people who posted most weeks got about 5 times more likes and comments per post (<a href="https://buffer.com/resources/consistent-posting-study/" rel="noopener" target="_blank">Buffer</a>). That's likes, not sales.</p>
+<div class="where2 one"><div><h3>In Canada</h3><p>I found no Canadian survey like this. In Canada, 2 in 3 owners using online tools said lack of time is their biggest problem (<a href="https://www.cfib-fcei.ca/en/research-economic-analysis/sme-digital-presence" rel="noopener" target="_blank">CFIB</a>).</p></div></div></div><div class="prose s"><p class="answer">Reviews and your Google listing matter most. Posts come after them.</p>
+<p>In a 2026 survey of about 1,000 US adults, almost everyone (97%) read reviews of local businesses. About 9 in 10 (89%) expect the owner to reply. About half (47%) won't use a business with fewer than 20 reviews (<a href="https://www.brightlocal.com/research/local-consumer-review-survey/" rel="noopener" target="_blank">BrightLocal</a>). BrightLocal sells marketing software, so this is a company's own survey.</p>
+<p>Replying to every review works better than replying to some. 80% said they'd likely use a business that answers all its reviews. Only 45% said that about one that answers only the good ones. And half said a copy-and-paste reply would put them off (<a href="https://www.brightlocal.com/research/local-consumer-review-survey/" rel="noopener" target="_blank">BrightLocal</a>). So we rewrite every AI draft in your own words.</p>
+<figure class="chartfig"><p class="figtitle">Likely to use the business</p><div class="bars">
+<div class="bar"><span class="l">Replies to all reviews</span><span class="tr"><span class="f hot" style="width:80%"></span><span class="v">80%</span></span></div>
+<div class="bar"><span class="l">Replies only to negative reviews</span><span class="tr"><span class="f" style="width:47%"></span><span class="v">47%</span></span></div>
+<div class="bar"><span class="l">Replies only to positive reviews</span><span class="tr"><span class="f" style="width:45%"></span><span class="v">45%</span></span></div>
+</div><figcaption>US, vendor survey, 2026. Share of 1,002 US adults who said they were likely to use a business that replies this way. Bars start at zero. Source: <a href="https://www.brightlocal.com/research/local-consumer-review-survey/" rel="noopener" target="_blank">BrightLocal Local Consumer Review Survey 2026</a>.</figcaption></figure>
+<p>Posting helps when you do it every week. Buffer, a company that sells posting tools, studied over 100,000 of its users. People who posted in most weeks got about 5 times more likes and comments per post than people who rarely posted (<a href="https://buffer.com/resources/consistent-posting-study/" rel="noopener" target="_blank">Buffer</a>). That's likes, not sales. I found no study showing that more posts bring more sales, so I won't promise that.</p>
+<div class="where2 one"><div><h3>In Canada</h3><p>I found no Canadian survey like this one, so the numbers above are from the US. A 2025 survey of 2,478 Canadian owners found 59% use Facebook and 52% use Google Business Profile or Maps. Among owners using digital tools, 66% said lack of time was their biggest problem (<a href="https://www.cfib-fcei.ca/en/research-economic-analysis/sme-digital-presence" rel="noopener" target="_blank">CFIB</a>).</p></div></div></div><div class="prose d"><p class="answer">Reviews and your Google listing come first, and posting comes after them. That's what the evidence supports, even though posting is what most owners spend their time on.</p>
+<p>Reviews are checked by almost everyone. In BrightLocal's 2026 survey of 1,002 US adults, 97% read reviews for local businesses, 89% expect owners to respond, and 47% won't use a business with fewer than 20 reviews. Recency counts too: 74% look for reviews from the last three months (<a href="https://www.brightlocal.com/research/local-consumer-review-survey/" rel="noopener" target="_blank">BrightLocal</a>). BrightLocal sells local marketing software, so this is a vendor survey.</p>
+<p>Replying to every review beats replying to some. In the same survey, 80% said they were likely to use a business that responds to all its reviews, against 45% for one that answers only positive reviews and 47% for one that answers only negative ones. And 50% said a templated or generic reply would put them off (<a href="https://www.brightlocal.com/research/local-consumer-review-survey/" rel="noopener" target="_blank">BrightLocal</a>). That last number is why every AI draft in the room gets rewritten in your own words.</p>
+<p>AI is now part of how people find you. The share of BrightLocal's respondents using AI tools for local recommendations rose from 6% in 2025 to 45% in 2026 (<a href="https://www.brightlocal.com/research/local-consumer-review-survey/" rel="noopener" target="_blank">BrightLocal</a>). AI tools draw on the same public reviews and listings, so I expect this morning's work to help there too. That's my reasoning, not a measured result: I found no study that tests it.</p>
+<figure class="chartfig"><p class="figtitle">Likely to use the business</p><div class="bars">
+<div class="bar"><span class="l">Replies to all reviews</span><span class="tr"><span class="f hot" style="width:80%"></span><span class="v">80%</span></span></div>
+<div class="bar"><span class="l">Replies only to negative reviews</span><span class="tr"><span class="f" style="width:47%"></span><span class="v">47%</span></span></div>
+<div class="bar"><span class="l">Replies only to positive reviews</span><span class="tr"><span class="f" style="width:45%"></span><span class="v">45%</span></span></div>
+</div><figcaption>US, vendor survey, 2026. Share of 1,002 US adults who said they were likely to use a business that replies this way. Bars start at zero. Source: <a href="https://www.brightlocal.com/research/local-consumer-review-survey/" rel="noopener" target="_blank">BrightLocal Local Consumer Review Survey 2026</a>.</figcaption></figure>
+<p>Posting helps when it's steady. Buffer looked at more than 100,000 of its own users over 26 weeks: people who posted in 20 or more of those weeks got about 5 times the median engagement per post of people who posted in 4 weeks or fewer (<a href="https://buffer.com/resources/consistent-posting-study/" rel="noopener" target="_blank">Buffer</a>). Buffer sells scheduling software and measured likes, comments and shares, not sales. I found no study showing that posting more brings a local business more sales, so I won't promise that.</p>
+<div class="where2 one"><div><h3>In Canada</h3><p>I found no Canadian survey like BrightLocal's on how customers find local businesses, so the numbers above are US numbers. On the business side, CFIB's September 2025 survey of 2,478 Canadian small business owners found 78% have a website, 59% use Facebook, 52% use Google Business Profile or Maps and 41% use Instagram. Among businesses using digital tools, 66% said lack of time was their biggest obstacle (<a href="https://www.cfib-fcei.ca/en/research-economic-analysis/sme-digital-presence" rel="noopener" target="_blank">CFIB</a>). That's the problem this morning is built for.</p></div></div>
+<p>So the morning runs in that order of value: posts first because they take the longest to draft, then reviews, then the Google profile, which most owners haven't touched in months.</p></div></div></section>
+<section class="q" id="q3" data-sec><div class="wrap"><p class="eyebrow">Question 3</p><h2>What happens in the three hours?</h2><div class="prose t"><div class="tablewrap scroll"><table class="stack agenda"><thead><tr><th>Time</th><th>What you do</th></tr></thead><tbody><tr><td data-l="Time">0:00 to 0:10</td><td data-l="What you do">Learn what never goes into AI</td></tr><tr><td data-l="Time">0:10 to 0:30</td><td data-l="What you do">Exercise 1: see what your sales say</td></tr><tr class="win"><td data-l="Time">0:30 to 1:15</td><td data-l="What you do">Exercise 2: write a month of posts</td></tr><tr class="brk"><td data-l="Time">1:15 to 1:25</td><td data-l="What you do">Break</td></tr><tr class="win"><td data-l="Time">1:25 to 2:00</td><td data-l="What you do">Exercise 3: answer reviews</td></tr><tr class="win"><td data-l="Time">2:00 to 2:30</td><td data-l="What you do">Exercise 4: fix your Google listing</td></tr><tr><td data-l="Time">2:30 to 2:50</td><td data-l="What you do">Exercise 5: two tools and an agent</td></tr><tr><td data-l="Time">2:50 to 3:00</td><td data-l="What you do">Pick your next date</td></tr></tbody></table></div>
+<p><strong>Never put into AI:</strong> customer names, emails, phone numbers, card numbers, passwords or health details.</p></div><div class="prose s"><p class="answer">Eight short blocks and a break. You set up your accounts before the day, so we start working right away.</p>
+<div class="tablewrap scroll"><table class="stack agenda"><thead><tr><th>Time</th><th>Block</th><th>What you do</th></tr></thead><tbody><tr><td data-l="Time">0:00 to 0:10</td><td data-l="Block">Start safe</td><td data-l="What you do">Learn what never goes into AI</td></tr><tr><td data-l="Time">0:10 to 0:30</td><td data-l="Block">Let your numbers pick</td><td data-l="What you do">Exercise 1: find quiet days and best sellers</td></tr><tr class="win"><td data-l="Time">0:30 to 1:15</td><td data-l="Block">A month of posts</td><td data-l="What you do">Exercise 2: draft and check a month</td></tr><tr class="brk"><td data-l="Time">1:15 to 1:25</td><td data-l="Block">Break</td><td data-l="What you do"></td></tr><tr class="win"><td data-l="Time">1:25 to 2:00</td><td data-l="Block">Reviews</td><td data-l="What you do">Exercise 3: reply and set up asking</td></tr><tr class="win"><td data-l="Time">2:00 to 2:30</td><td data-l="Block">Your Google profile</td><td data-l="What you do">Exercise 4: hours, description, one post</td></tr><tr><td data-l="Time">2:30 to 2:50</td><td data-l="Block">Two tools and an agent</td><td data-l="What you do">Exercise 5: research, write, try an agent</td></tr><tr><td data-l="Time">2:50 to 3:00</td><td data-l="Block">Make it stick</td><td data-l="What you do">Pick your next date and a partner</td></tr></tbody></table></div>
+<p><strong>Starting safe.</strong> Never put customer names, emails, phone numbers, order numbers, card numbers, passwords or health details into an AI chat.</p></div><div class="prose d"><p class="answer">Eight blocks with a break. Pre-work (accounts, the fact sheet, access to your Google profile and pages) is done before the day, so the room starts working in the first ten minutes.</p>
+<div class="tablewrap scroll"><table class="stack agenda"><thead><tr><th>Time</th><th>Block</th><th>What you do</th><th>What you leave with</th></tr></thead><tbody><tr><td data-l="Time">0:00 to 0:10</td><td data-l="Block">Start safe</td><td data-l="What you do">What never goes into an AI tool or a public reply</td><td data-l="What you leave with">Your tool set up, customer details kept out</td></tr><tr><td data-l="Time">0:10 to 0:30</td><td data-l="Block">Let your numbers pick</td><td data-l="What you do">Exercise 1: find your quiet days and best sellers in a sales file</td><td data-l="What you leave with">Three things worth posting about</td></tr><tr class="win"><td data-l="Time">0:30 to 1:15</td><td data-l="Block">A month of posts</td><td data-l="What you do">Exercise 2: draft a month from your fact sheet, then check every fact</td><td data-l="What you leave with">A checked calendar, ready to schedule</td></tr><tr class="brk"><td data-l="Time">1:15 to 1:25</td><td data-l="Block">Break</td><td data-l="What you do"></td><td data-l="What you leave with"></td></tr><tr class="win"><td data-l="Time">1:25 to 2:00</td><td data-l="Block">Reviews</td><td data-l="What you do">Exercise 3: reply to your recent reviews; set up a compliant ask</td><td data-l="What you leave with">Replies posted or saved, a review link and QR code</td></tr><tr class="win"><td data-l="Time">2:00 to 2:30</td><td data-l="Block">Your Google profile</td><td data-l="What you do">Exercise 4: hours, description, categories, one post</td><td data-l="What you leave with">An updated profile</td></tr><tr><td data-l="Time">2:30 to 2:50</td><td data-l="Block">Two tools and an agent</td><td data-l="What you do">Exercise 5: research in one tool, write in another, then try an agent</td><td data-l="What you leave with">A repeatable monthly routine</td></tr><tr><td data-l="Time">2:50 to 3:00</td><td data-l="Block">Make it stick</td><td data-l="What you do">Book next month's session with yourself; pair up</td><td data-l="What you leave with">Your date and partner</td></tr></tbody></table></div>
+<p><strong>Starting safe.</strong> Before anyone types, we go through what never goes into an AI chat: customer names, emails, phone numbers, order numbers, card numbers, passwords and any health details. For reviews, you paraphrase the complaint instead of pasting a review that contains private details.</p>
+<p><strong>If the Wi-Fi fails.</strong> All prompts are on the printed handout, and the ChatGPT, Claude and Gemini phone apps work on mobile data.</p></div></div></section>
+<section class="q" id="q4" data-sec><div class="wrap"><p class="eyebrow">Question 4</p><h2>Which tool do we use, and what does it cost?</h2><div class="prose t"><p class="answer">Use a free plan. You only pay if you want the AI to save your facts or write drafts on a schedule. Prices checked November 27, 2026. Tax is extra.</p>
+<div class="where2"><div><h3>In the US</h3><p>ChatGPT Plus is $20 a month (<a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus" rel="noopener" target="_blank">OpenAI</a>). Claude Pro is US$20 a month (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>).</p></div><div><h3>In Canada</h3><p>Claude Pro is CA$28 a month plus tax. Check at checkout (<a href="https://www.anthropic.com/news/introducing-claude-to-canada" rel="noopener" target="_blank">Anthropic</a>). Canva Pro is CA$142 a year (<a href="https://www.canva.com/en_ca/pricing/" rel="noopener" target="_blank">Canva</a>).</p></div></div>
+<p class="checked">Prices checked November 27, 2026.</p></div><div class="prose s"><p class="answer">Use the free plan of the tool you already have. You'd only pay to save your facts in a Project or to run drafts on a schedule. Prices below are from the companies' own pages, checked November 27, 2026. Tax is extra.</p>
+<div class="where2"><div><h3>In the US</h3><p>ChatGPT Plus: $20 a month (<a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus" rel="noopener" target="_blank">OpenAI</a>). Claude Pro: US$20 a month, or US$17 a month if you pay for a year (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>). Gemini in Google Docs and Sheets needs Workspace Business Standard or higher (<a href="https://workspace.google.com/pricing/" rel="noopener" target="_blank">Google</a>). <span class="note">[DAN: CANVA US PRICE.]</span></p></div><div><h3>In Canada</h3><p>Claude Pro: CA$28 a month plus tax, from Anthropic's 2024 Canada launch, so check at checkout (<a href="https://www.anthropic.com/news/introducing-claude-to-canada" rel="noopener" target="_blank">Anthropic</a>). Canva Pro: CA$142 a year. Canva adds tax by postal code (<a href="https://www.canva.com/en_ca/pricing/" rel="noopener" target="_blank">Canva</a>). ChatGPT shows its Canadian price at checkout. Add GST/HST to every price.</p></div></div>
+<p class="checked">Prices checked November 27, 2026.</p>
+<p>You schedule Facebook and Instagram posts in Meta Business Suite, and Google posts in your Google profile. <span class="note">[DAN: CONFIRM HOW FAR AHEAD META BUSINESS SUITE LETS YOU SCHEDULE.]</span></p></div><div class="prose d"><p class="answer">Use the free plan of the tool you already have. Every exercise runs on a free plan, and the room mixes ChatGPT, Claude, Gemini and Copilot. You'd pay only if you want your facts saved in a Project and drafts that run on a schedule.</p>
+<p>If you decide to pay, these are the prices on the vendors' own pages, checked November 27, 2026. Tax is extra.</p>
+<div class="where2"><div><h3>In the US</h3><p>ChatGPT Plus: $20 a month (<a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus" rel="noopener" target="_blank">OpenAI</a>). It includes Projects and scheduled tasks (<a href="https://chatgpt.com/pricing" rel="noopener" target="_blank">ChatGPT</a>).</p><p>Claude Pro: US$17 a month billed yearly (US$200 up front) or US$20 monthly; it includes Projects, scheduled tasks and Claude in Chrome. Claude Team: US$20 per seat a month billed yearly, US$25 monthly (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>).</p><p>Google Workspace: Gemini in Docs and Sheets starts at Business Standard; Business Starter gets the Gemini app and Gemini in Gmail, but not Gemini in Docs or Sheets (<a href="https://workspace.google.com/pricing/" rel="noopener" target="_blank">Google</a>). The page didn't show prices when I checked, so look on the day.</p><p>Canva: I couldn't confirm the US price on Canva's own page today. <span class="note">[DAN: CHECK CANVA.COM/PRICING IN US DOLLARS.]</span></p></div><div><h3>In Canada</h3><p>Claude Pro: CA$28 a month plus tax, the price Anthropic announced when it launched in Canada (<a href="https://www.anthropic.com/news/introducing-claude-to-canada" rel="noopener" target="_blank">Anthropic</a>). That announcement is from June 2024, so confirm at checkout.</p><p>Canva Pro: CA$142 a year for one person. Canva Business: CA$260 a year per person. Canva says prices exclude tax and adds GST and provincial tax by postal code before you pay (<a href="https://www.canva.com/en_ca/pricing/" rel="noopener" target="_blank">Canva</a>).</p><p>ChatGPT shows its Canadian price at checkout. Add GST/HST (and PST or QST where it applies) to every price.</p></div></div>
+<p class="checked">Prices checked November 27, 2026.</p>
+<p>The cheapest honest setup is one paid AI plan, or none, plus the free tools you already have. You don't need a review-management platform to do this month's work.</p>
+<p><strong>Scheduling tools.</strong> Meta Business Suite schedules Facebook and Instagram posts, and Google Business Profile schedules its own posts. I couldn't open Meta's pages today to confirm current scheduling limits, so check how far ahead your account lets you schedule before the day. <span class="note">[DAN: CONFIRM META BUSINESS SUITE'S SCHEDULING WINDOW IN YOUR OWN ACCOUNT.]</span></p></div></div></section>
+<section class="q" id="q5" data-sec><div class="wrap"><p class="eyebrow">Question 5</p><h2>How does each exercise run?</h2><div class="prose t"><p class="answer">Each prompt says: your business, the job, your facts, and what you want back. Fill in the [brackets]. Our examples use a made-up café called Laneway Coffee.</p>
+<h3>Exercise 1: let your numbers pick the posts (20 minutes)</h3>
+<p>You ask AI what a month of sales shows. Then you check it.</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Here are my café's sales for last month. Which days are quiet? What sells best now? Show your numbers. What can't this file tell me?</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt" data-tools="chatgpt"><p class="toolname">In ChatGPT</p><p>Attach the file. Paste the prompt.</p></div><div class="toolblock" data-tool="claude" data-tools="claude"><p class="toolname">In Claude</p><p>Attach the file. Ask Claude to use code for the math.</p></div><div class="toolblock" data-tool="gemini" data-tools="gemini"><p class="toolname">In Gemini</p><p>Upload the file to a chat.</p></div><div class="toolblock" data-tool="copilot" data-tools="copilot"><p class="toolname">In Copilot</p><p>Attach the file in Copilot Chat.</p></div></div>
+<p><strong>Answer key:</strong> Monday to Thursday are quiet. Pumpkin spice latte sold best late in October. The file can't say if it will still sell in December. That's the trap.</p>
+<figure class="keyfig"><p class="k madeup">Made-up café file, answer key drawn</p><p class="figtitle">What the 31 days of October say</p>
+<div class="keygrid">
+<div><p class="k">Sales on a normal day</p><div class="bars"><div class="bar"><span class="l">Monday to Thursday</span><span class="tr"><span class="f " style="width:55.5%"></span><span class="f ext" style="width:3.1%;margin-left:-12px"></span><span class="v">about $1,110 to $1,173</span></span></div><div class="bar"><span class="l">Friday</span><span class="tr"><span class="f ink" style="width:68.0%"></span><span class="v">about $1,360</span></span></div></div></div>
+<div><p class="k">Spend per transaction, normal days</p><div class="bars"><div class="bar"><span class="l">Weekend</span><span class="tr"><span class="f hot" style="width:62.5%"></span><span class="v">$10.71</span></span></div><div class="bar"><span class="l">Weekday</span><span class="tr"><span class="f " style="width:53.0%"></span><span class="v">$9.08</span></span></div></div></div>
+<div><p class="k">Days pumpkin spice latte was the top seller</p>
+<div class="dotline"><span class="l">From October 19</span><span class="dotrow" role="img" aria-label="11 of 13 days"><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="m"></i><i class="m"></i></span><span class="v">11 of 13</span></div>
+<div class="dotline"><span class="l">October 1 to 18</span><span class="dotrow" role="img" aria-label="2 of 18 days"><i class="v"></i><i class="v"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i></span><span class="v">2 of 18</span></div></div>
+</div><figcaption>Worked out in code from the made-up Laneway Coffee file. Normal days are dry days with no holiday or road work. Bars start at zero. The trap: none of this says what will sell in December. <span class="note">[CAFE SAMPLE FILE LINK]</span></figcaption></figure>
+<h3>Exercise 2: a month of posts from your own facts (45 minutes)</h3>
+<p>You write a month of posts. Every price and date must come from your fact sheet.</p>
+<div class="card fact"><p class="k madeup">Made-up example</p><p><strong>Made-up example:</strong> Gingerbread oat latte $6.25. Closed December 25 and 26. Gift card bonus until December 24. Live music Saturday December 12, 10 to noon.</p></div>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Here are my facts: [paste]. Write [16] posts, [4] a week, with dates. Use ONLY my facts. If a fact is missing, write [CHECK].</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt" data-tools="chatgpt"><p class="toolname">In ChatGPT</p><p>Paste it in a chat.</p></div><div class="toolblock" data-tool="claude" data-tools="claude"><p class="toolname">In Claude</p><p>Paste it in a chat. Ask Claude which fact each post uses.</p></div><div class="toolblock" data-tool="gemini" data-tools="gemini"><p class="toolname">In Gemini</p><p>Paste it in a chat.</p></div><div class="toolblock" data-tool="copilot" data-tools="copilot"><p class="toolname">In Copilot</p><p>Ask Copilot to use your fact sheet in Word.</p></div></div>
+<p><strong>Spot the mistakes</strong> in these made-up posts: "Latte $5.75." "Open Boxing Day." "Gift card bonus all month."</p>
+<p><strong>Answer key:</strong> The latte is $6.25. The café is closed December 26. The bonus ends December 24.</p>
+<h3>Exercise 3: reply to your reviews, and ask for more (35 minutes)</h3>
+<p>You answer every review. Bad ones first.</p>
+<div class="card fact"><p class="k madeup">Made-up example</p><p><strong>Made-up review:</strong> "Waited 15 minutes and my sandwich was cold. I told them about my nut allergy. Mark T."</p></div>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Write a short reply. First name only. Say sorry once. Ask them to call [phone]. No discounts. Don't mention any health details.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<p>A good reply says sorry for the wait. It does not mention the allergy.</p>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button></div><div class="toolblock" data-tool="chatgpt" data-tools="chatgpt"><p class="toolname">In ChatGPT</p><p>Paste the prompt and review. Post the reply yourself.</p></div><div class="toolblock" data-tool="claude" data-tools="claude"><p class="toolname">In Claude</p><p>Paste the prompt. Delete anything Claude made up.</p></div><div class="toolblock" data-tool="gemini" data-tools="gemini"><p class="toolname">In Gemini</p><p>If your listing is connected, ask Gemini for a draft. Read it first.</p></div></div>
+<div class="box"><p><strong>On Yelp, write it yourself.</strong> Yelp doesn't allow reviews written with AI (<a href="https://blog.yelp.com/news/how-yelp-continues-to-protect-your-content-in-the-age-of-ai/" rel="noopener" target="_blank">Yelp</a>). So write Yelp replies yourself.</p></div>
+<p><strong>Asking for reviews:</strong></p>
+<ul><li><strong>Google:</strong> ask every customer. Use your free review QR code (<a href="https://support.google.com/business/answer/16816815" rel="noopener" target="_blank">Google</a>). Never give a reward for a review (<a href="https://support.google.com/contributionpolicy/answer/7400114" rel="noopener" target="_blank">Google</a>).</li><li><strong>Yelp:</strong> don't ask at all (<a href="https://biz.yelp.com/support-center/Reviews/Best_Practices/Don-t-Ask-for-Reviews/en-US" rel="noopener" target="_blank">Yelp</a>).</li></ul>
+<div class="where2"><div><h3>In Canada</h3><p>Emails and texts asking for reviews need the customer's OK, your business name and a way to say stop (<a href="https://crtc.gc.ca/eng/com500/faq500.htm" rel="noopener" target="_blank">CRTC</a>).</p></div><div><h3>In Quebec</h3><p>If a customer writes in French, reply in French (<a href="https://educaloi.qc.ca/capsules/exigences-linguistiques-exploiter-une-entreprise-au-quebec/" rel="noopener" target="_blank">Éducaloi</a>).</p></div></div>
+<h3>Exercise 4: update your Google Business Profile (30 minutes)</h3>
+<p>You fix your Google listing (<a href="https://support.google.com/business/answer/14368911" rel="noopener" target="_blank">Google</a>):</p>
+<ol><li>Name: the same as your sign.</li><li>Holiday hours: add them.</li><li>Description: 750 letters and spaces or less. No links. No prices.</li><li>One post with a date.</li></ol>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Write a Google description from these facts: [facts]. Under 700 characters. No links or prices.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<p>Read it before you paste it. Google says to check its AI writing (<a href="https://support.google.com/business/answer/13682007" rel="noopener" target="_blank">Google</a>).</p>
+<h3>Exercise 5: two tools and an agent (20 minutes)</h3>
+<p>One tool finds local events. Another writes the posts. You check in between.</p>
+<ol><li>Ask a research tool for local events, with links.</li><li>Open the links. Cross out what's wrong.</li><li>Ask ChatGPT or Claude to write posts from your checked list.</li><li>You check and post.</li></ol>
+<div class="toolgroup" data-def="chatgptclaude"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="muse" aria-pressed="false">Muse</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="chatgptclaude" aria-pressed="false">ChatGPT or Claude</button></div><div class="toolblock" data-tool="muse" data-tools="muse"><p class="toolname">In Muse</p><p>I use Muse, Meta's AI agent, for research. Meta says it doesn't post or spend without your OK (<a href="https://about.fb.com/news/2026/09/introducing-muse-small-business/amp/" rel="noopener" target="_blank">Meta</a>).</p></div><div class="toolblock" data-tool="gemini" data-tools="gemini"><p class="toolname">In Gemini</p><p>Gemini can find events too.</p></div><div class="toolblock" data-tool="chatgptclaude" data-tools="chatgpt claude chatgptclaude"><p class="toolname">In ChatGPT or Claude</p><p>Use one chat to find and one to write.</p></div></div>
+<p><strong>The agent:</strong> Gemini can work on your Google listing if you connect it (<a href="https://support.google.com/business/answer/17142585" rel="noopener" target="_blank">Google</a>). We tell it: "Draft only. Don't publish."</p>
+<p><strong>You always approve:</strong> posts, replies, listing changes, and anything that costs money.</p></div><div class="prose s"><p class="answer">Every prompt has four parts: your business, the job, your facts, and what you want back. Fill in the [brackets]. The examples use a made-up café called Laneway Coffee.</p>
+<h3>Exercise 1: let your numbers pick the posts (20 minutes)</h3>
+<p>You ask AI what your sales say, then check its answer against my answer key. We use a made-up file of 31 days of October sales.</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Here are last month's daily sales for my café. Which days are quiet, what is selling best right now, and how much more do people spend on weekends? Compare dry, normal days only, and say which days you left out. Show your numbers. Then tell me what this file can't tell me.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt" data-tools="chatgpt"><p class="toolname">In ChatGPT</p><p>Attach the file and paste the prompt.</p></div><div class="toolblock" data-tool="claude" data-tools="claude"><p class="toolname">In Claude</p><p>Attach the file and ask Claude to do the math with code.</p></div><div class="toolblock" data-tool="gemini" data-tools="gemini"><p class="toolname">In Gemini</p><p>Upload the file to a chat, or use Gemini in Google Sheets.</p></div><div class="toolblock" data-tool="copilot" data-tools="copilot"><p class="toolname">In Copilot</p><p>Attach the file in Copilot Chat.</p></div></div>
+<p><strong>Answer key</strong> (worked out in code):</p>
+<div class="tablewrap scroll"><table class="stack akey"><thead><tr><th>Check</th><th>Right answer</th></tr></thead><tbody><tr><td data-l="Check">Quiet days</td><td data-l="Right answer">Monday to Thursday, about $1,110 to $1,173 a day</td></tr><tr><td data-l="Check">Best seller</td><td data-l="Right answer">Pumpkin spice latte, top on 11 of 13 days from October 19</td></tr><tr><td data-l="Check">Weekend spend</td><td data-l="Right answer">About $10.71 per sale on weekends, $9.08 on weekdays</td></tr><tr><td data-l="Check">Left out</td><td data-l="Right answer">Thanksgiving, the road work week and rain days</td></tr><tr class="trap"><td data-l="Check">Can't tell you</td><td data-l="Right answer">Whether pumpkin spice will still sell in December</td></tr></tbody></table></div>
+<p>That last row is the trap. If a tool plans December around pumpkin spice, it went past your file.</p>
+<figure class="keyfig"><p class="k madeup">Made-up café file, answer key drawn</p><p class="figtitle">What the 31 days of October say</p>
+<div class="keygrid">
+<div><p class="k">Sales on a normal day</p><div class="bars"><div class="bar"><span class="l">Monday to Thursday</span><span class="tr"><span class="f " style="width:55.5%"></span><span class="f ext" style="width:3.1%;margin-left:-12px"></span><span class="v">about $1,110 to $1,173</span></span></div><div class="bar"><span class="l">Friday</span><span class="tr"><span class="f ink" style="width:68.0%"></span><span class="v">about $1,360</span></span></div></div></div>
+<div><p class="k">Spend per transaction, normal days</p><div class="bars"><div class="bar"><span class="l">Weekend</span><span class="tr"><span class="f hot" style="width:62.5%"></span><span class="v">$10.71</span></span></div><div class="bar"><span class="l">Weekday</span><span class="tr"><span class="f " style="width:53.0%"></span><span class="v">$9.08</span></span></div></div></div>
+<div><p class="k">Days pumpkin spice latte was the top seller</p>
+<div class="dotline"><span class="l">From October 19</span><span class="dotrow" role="img" aria-label="11 of 13 days"><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="m"></i><i class="m"></i></span><span class="v">11 of 13</span></div>
+<div class="dotline"><span class="l">October 1 to 18</span><span class="dotrow" role="img" aria-label="2 of 18 days"><i class="v"></i><i class="v"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i></span><span class="v">2 of 18</span></div></div>
+</div><figcaption>Worked out in code from the made-up Laneway Coffee file. Normal days are dry days with no holiday or road work. Bars start at zero. The trap: none of this says what will sell in December. <span class="note">[CAFE SAMPLE FILE LINK]</span></figcaption></figure>
+<h3>Exercise 2: a month of posts from your own facts (45 minutes)</h3>
+<p>You write a month of posts where every price and date comes from your fact sheet. If a fact is missing, the AI must write [CHECK].</p>
+<div class="card fact"><p class="k madeup">Made-up example</p><p><strong>Made-up example: Laneway Coffee, December.</strong> Open Monday to Friday 7 to 5, weekends 8 to 5. December 24: 8 to 2. Closed December 25, 26 and January 1. Gingerbread oat latte $6.25. Drip coffee $3.25. Gift cards: buy $50, get $10 extra, until December 24. Saturday December 12: live music, 10 to noon.</p></div>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Here is my fact sheet for [month]: [paste it]. Write [16] posts, [4] a week, each dated, under 80 words. Use ONLY my facts. If a fact is missing, write [CHECK]. Write like me: [your style]. Give me a table: Date, Post, Fact used.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt" data-tools="chatgpt"><p class="toolname">In ChatGPT</p><p>Paste it in a chat. On Plus, save your facts in a Project.</p></div><div class="toolblock" data-tool="claude" data-tools="claude"><p class="toolname">In Claude</p><p>Paste it in a chat. On Pro, save your facts in a Project. Ask Claude to quote the fact each post uses.</p></div><div class="toolblock" data-tool="gemini" data-tools="gemini"><p class="toolname">In Gemini</p><p>Paste it in a chat, or draft in Google Docs on a Workspace plan.</p></div><div class="toolblock" data-tool="copilot" data-tools="copilot"><p class="toolname">In Copilot</p><p>Ask Copilot to draft from your fact sheet in Word.</p></div></div>
+<p><strong>Spot the mistakes.</strong> I wrote five made-up drafts with mistakes in them:</p>
+<ol><li>"Gingerbread oat latte, $5.75."</li><li>"Live music December 12. Free entry!"</li><li>"We're open Boxing Day, 8 to 2."</li><li>"Gift card bonus all month long."</li><li>"Pumpkin spice is still our number one."</li></ol>
+<p><strong>Answer key.</strong> (1) It's $6.25. (2) The sheet doesn't say free. (3) Closed December 26. (4) Ends December 24. (5) That's October's data.</p>
+<p>Then check your own posts: price, date, offer end date, photo, link.</p>
+<h3>Exercise 3: reply to your reviews, and ask for more (35 minutes)</h3>
+<p>You answer every recent review, bad ones first. Google says to keep it short, use the person's name, skip deals, and never share private information (<a href="https://support.google.com/business/answer/3474122" rel="noopener" target="_blank">Google</a>).</p>
+<div class="card fact"><p class="k madeup">Made-up example</p><p><strong>Made-up review, 2 stars:</strong> "Waited 15 minutes and my sandwich was cold. I told them about my nut allergy and nobody seemed to care. Mark T."</p></div>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Draft a 2 to 3 sentence reply to this review. First name only. Apologise once. Say only what we'll really do. Ask them to call [phone]. No discounts. Don't repeat any health or personal details. Don't invent facts.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<p>A good reply thanks Mark, says sorry for the wait and the cold sandwich, and asks him to call. It does not mention his allergy in public.</p>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button></div><div class="toolblock" data-tool="chatgpt" data-tools="chatgpt"><p class="toolname">In ChatGPT</p><p>Paste the prompt and the review. Post your edited reply in Google yourself.</p></div><div class="toolblock" data-tool="claude" data-tools="claude"><p class="toolname">In Claude</p><p>Paste the prompt. Ask Claude which facts in its draft didn't come from you, and delete them.</p></div><div class="toolblock" data-tool="gemini" data-tools="gemini"><p class="toolname">In Gemini</p><p>If your profile is connected, ask Gemini to draft a reply, and read it first.</p></div></div>
+<div class="box"><p><strong>On Yelp, write it yourself.</strong> Yelp doesn't allow reviews written or edited with AI tools, though spell-check is fine (<a href="https://blog.yelp.com/news/how-yelp-continues-to-protect-your-content-in-the-age-of-ai/" rel="noopener" target="_blank">Yelp</a>). To be safe, write your Yelp replies yourself.</p></div>
+<p><strong>Asking for reviews.</strong></p>
+<ul><li><strong>Google:</strong> ask every customer the same way. Get your review link and QR code from your profile on a computer (<a href="https://support.google.com/business/answer/16816815" rel="noopener" target="_blank">Google</a>). Never offer a reward, and never ask only happy customers (<a href="https://support.google.com/contributionpolicy/answer/7400114" rel="noopener" target="_blank">Google</a>).</li><li><strong>Yelp:</strong> don't ask at all. Yelp says asking "may hurt your Yelp rating" (<a href="https://biz.yelp.com/support-center/Reviews/Best_Practices/Don-t-Ask-for-Reviews/en-US" rel="noopener" target="_blank">Yelp</a>).</li></ul>
+<div class="where2"><div><h3>In Canada</h3><p>An email or text asking for a review must follow CASL: you need consent, your business name, and a working unsubscribe (<a href="https://crtc.gc.ca/eng/com500/faq500.htm" rel="noopener" target="_blank">CRTC</a>). A QR code on the counter doesn't.</p></div><div><h3>In Quebec</h3><p>If a customer writes in French, you must reply in French (<a href="https://educaloi.qc.ca/capsules/exigences-linguistiques-exploiter-une-entreprise-au-quebec/" rel="noopener" target="_blank">Éducaloi</a>).</p></div></div>
+<h3>Exercise 4: update your Google Business Profile (30 minutes)</h3>
+<p>You fix what customers check most (<a href="https://support.google.com/business/answer/14368911" rel="noopener" target="_blank">Google</a>):</p>
+<ol><li><strong>Name:</strong> exactly as on your sign.</li><li><strong>Categories:</strong> your main one, plus up to 9 more that are true.</li><li><strong>Hours:</strong> add special hours for every holiday.</li><li><strong>Description:</strong> 750 characters or less, no links, no prices or sales.</li><li><strong>Collected info:</strong> check what Google gathered about you.</li><li><strong>One post:</strong> an Offer or Event post with dates (<a href="https://support.google.com/business/answer/7342169" rel="noopener" target="_blank">Google</a>).</li></ol>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Write a Google Business Profile description using only these facts: [facts]. Under 700 characters. No links, no prices, no sales. Tell me the character count.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<p>Count the characters yourself too. Google's own AI description tool comes with a warning: "You should review it for accuracy" (<a href="https://support.google.com/business/answer/13682007" rel="noopener" target="_blank">Google</a>).</p>
+<h3>Exercise 5: two tools and an agent (20 minutes)</h3>
+<p>One tool finds information, another writes, and you check in between. That's how I work.</p>
+<ol><li><strong>Find.</strong> Ask a research tool for local events between [dates], with a link for each.</li><li><strong>Check.</strong> Open the links. Cross out anything you can't confirm.</li><li><strong>Write.</strong> Give the list and your fact sheet to ChatGPT or Claude: "Using ONLY these, write 4 posts. If something's missing, write [CHECK]."</li><li><strong>Design.</strong> Make each image in Canva with your own photos.</li><li><strong>Approve.</strong> You read every post and schedule it yourself.</li></ol>
+<div class="toolgroup" data-def="chatgptclaude"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="muse" aria-pressed="false">Muse</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="chatgptclaude" aria-pressed="false">ChatGPT or Claude</button></div><div class="toolblock" data-tool="muse" data-tools="muse"><p class="toolname">In Muse</p><p>I use Muse, Meta's AI agent, for research. Muse for Small Business can connect to your Instagram and Facebook Pages. Meta says "nothing publishes, sends, or spends without your approval" (<a href="https://about.fb.com/news/2026/09/introducing-muse-small-business/amp/" rel="noopener" target="_blank">Meta</a>).</p></div><div class="toolblock" data-tool="gemini" data-tools="gemini"><p class="toolname">In Gemini</p><p>Gemini can do the research step, and it's the agent below.</p></div><div class="toolblock" data-tool="chatgptclaude" data-tools="chatgpt claude chatgptclaude"><p class="toolname">In ChatGPT or Claude</p><p>Use one chat to research and another to write.</p></div></div>
+<p><strong>The agent.</strong> You can connect your Google profile to Gemini. Then it can change hours, draft review replies and publish posts. You need a personal Google account, one profile only, and you must be 18 or over (<a href="https://support.google.com/business/answer/17142585" rel="noopener" target="_blank">Google</a>). In the room, we tell it: "Draft only. Don't publish anything." Then you post it yourself.</p>
+<p><strong>A person always approves:</strong> every post, every reply, every change to your profile, every message to customers, and anything that costs money.</p></div><div class="prose d"><p class="answer">Every prompt has the same shape: what the business is, what to do, the facts to use, and what the answer should look like. Words in [brackets] are for you to fill in. All examples use a made-up café, Laneway Coffee in Toronto.</p>
+<h3>Exercise 1: let your numbers pick the posts (20 minutes)</h3>
+<p>You ask AI what your own sales say is worth posting about, then check its answer against a key I worked out in code. Everyone uses the same made-up file: 31 days of October sales for Laneway Coffee, with weather and notes for each day. It's the same sample file as Workshop 1 <span class="note">[LINK TO THE CAFÉ SAMPLE FILE]</span>.</p>
+<p>The prompt:</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Here are last month's daily sales for my café. I want to plan next month's social posts. Tell me: which days are my quiet days, which item is selling best right now, and how much more a customer spends on weekends than on weekdays. Compare dry, normal days only, and say which days you left out and why. Show the numbers you used. Then tell me what this file can't tell me about marketing.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt" data-tools="chatgpt"><p class="toolname">In ChatGPT</p><p>Attach the CSV file to a chat and paste the prompt. Then ask: "List any assumptions you made."</p></div><div class="toolblock" data-tool="claude" data-tools="claude"><p class="toolname">In Claude</p><p>Attach the file with the + button and paste the prompt. Ask Claude to do the arithmetic with code, so the numbers are computed, not guessed.</p></div><div class="toolblock" data-tool="gemini" data-tools="gemini"><p class="toolname">In Gemini</p><p>Upload the file to a Gemini chat, or open it in Google Sheets and use Gemini there if your plan includes it.</p></div><div class="toolblock" data-tool="copilot" data-tools="copilot"><p class="toolname">In Copilot</p><p>Attach the file in Copilot Chat and paste the prompt.</p></div></div>
+<p><strong>The answer key.</strong> I worked these out in code from the 31 rows. "Normal days" means dry days with no holiday or road work.</p>
+<div class="tablewrap scroll"><table class="stack akey"><thead><tr><th>Check</th><th>What a good answer says</th></tr></thead><tbody><tr><td data-l="Check">Quiet days</td><td data-l="What a good answer says">Monday to Thursday, all close together: about $1,110 to $1,173 on a normal day. Friday is higher at about $1,360</td></tr><tr><td data-l="Check">Best seller now</td><td data-l="What a good answer says">Pumpkin spice latte was the top seller on 11 of the 13 days from October 19, against 2 of the 18 days before</td></tr><tr><td data-l="Check">Weekend spend</td><td data-l="What a good answer says">About $10.71 per transaction on normal weekend days, against $9.08 on normal weekdays</td></tr><tr><td data-l="Check">Biggest weekend</td><td data-l="What a good answer says">October 24 and 25 together took in $4,390.18, more than any earlier weekend</td></tr><tr><td data-l="Check">Left out</td><td data-l="What a good answer says">Thanksgiving Monday (October 12), the road work week (October 13 to 17) and the rain days</td></tr><tr class="trap"><td data-l="Check">What it can't tell you</td><td data-l="What a good answer says">Whether any post caused a sale, where customers heard about you, and whether pumpkin spice will still sell in December</td></tr></tbody></table></div>
+<p>The last row is the trap. A tool that tells you to build December around pumpkin spice lattes has gone past the file. The posts that follow from this file are weekday-morning posts, a post for the best seller while it's still selling, and a rainy-day post kept ready.</p>
+<figure class="keyfig"><p class="k madeup">Made-up café file, answer key drawn</p><p class="figtitle">What the 31 days of October say</p>
+<div class="keygrid">
+<div><p class="k">Sales on a normal day</p><div class="bars"><div class="bar"><span class="l">Monday to Thursday</span><span class="tr"><span class="f " style="width:55.5%"></span><span class="f ext" style="width:3.1%;margin-left:-12px"></span><span class="v">about $1,110 to $1,173</span></span></div><div class="bar"><span class="l">Friday</span><span class="tr"><span class="f ink" style="width:68.0%"></span><span class="v">about $1,360</span></span></div></div></div>
+<div><p class="k">Spend per transaction, normal days</p><div class="bars"><div class="bar"><span class="l">Weekend</span><span class="tr"><span class="f hot" style="width:62.5%"></span><span class="v">$10.71</span></span></div><div class="bar"><span class="l">Weekday</span><span class="tr"><span class="f " style="width:53.0%"></span><span class="v">$9.08</span></span></div></div></div>
+<div><p class="k">Days pumpkin spice latte was the top seller</p>
+<div class="dotline"><span class="l">From October 19</span><span class="dotrow" role="img" aria-label="11 of 13 days"><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i><i class="m"></i><i class="m"></i></span><span class="v">11 of 13</span></div>
+<div class="dotline"><span class="l">October 1 to 18</span><span class="dotrow" role="img" aria-label="2 of 18 days"><i class="v"></i><i class="v"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i><i class="m"></i></span><span class="v">2 of 18</span></div></div>
+</div><figcaption>Worked out in code from the made-up Laneway Coffee file. Normal days are dry days with no holiday or road work. Bars start at zero. The trap: none of this says what will sell in December. <span class="note">[CAFE SAMPLE FILE LINK]</span></figcaption></figure>
+<h3>Exercise 2: a month of posts from your own facts (45 minutes)</h3>
+<p>You draft a month of posts in which every price, date and offer comes from your fact sheet, and anything missing is flagged instead of invented. Then you check every post.</p>
+<p>You bring the fact sheet as pre-work. Here's the made-up one we use in the room:</p>
+<div class="card fact"><p class="k madeup">Made-up example</p><p><strong>Made-up example: Laneway Coffee, December fact sheet.</strong> Open Monday to Friday 7 am to 5 pm, Saturday and Sunday 8 am to 5 pm. December 24: 8 am to 2 pm. Closed December 25 and 26 and January 1. Gingerbread oat latte $6.25. Drip coffee $3.25. Breakfast sandwich $8.50. Gift cards: buy $50, get a $10 bonus card, until December 24. Saturday December 12: live acoustic music, 10 am to noon. Photos: 12 of our own, each with a one-line caption.</p></div>
+<p>The prompt:</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>I run [business], a [type of business] in [city]. Here is my fact sheet for [month]: [paste it]. Write [16] posts for Facebook and Instagram, [4] a week, each dated. Each post: under 80 words, one fact from the sheet, one call to action, no more than 3 hashtags, and a photo from my list. Use ONLY the facts on the sheet. If a post needs a fact that isn't there, write [CHECK] instead of making one up. Write like me: [3 voice rules, for example short sentences, no exclamation marks, Canadian spelling]. Give me a table: Date, Post, Fact used, Photo.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt" data-tools="chatgpt"><p class="toolname">In ChatGPT</p><p>Free: paste the prompt in a new chat. Plus: create a Project, add your fact sheet and two of your best past posts as files, and put your voice rules in the project instructions, so next month starts where you left off.</p></div><div class="toolblock" data-tool="claude" data-tools="claude"><p class="toolname">In Claude</p><p>Free: paste the prompt in a new chat. Pro: create a Project, put the voice rules in the project instructions, and add the fact sheet and two past posts to the project knowledge. Ask Claude to quote the line of the fact sheet each post relies on.</p></div><div class="toolblock" data-tool="gemini" data-tools="gemini"><p class="toolname">In Gemini</p><p>Paste the prompt in a Gemini chat. On Workspace Business Standard or higher you can draft in Docs and keep the calendar in Sheets (<a href="https://workspace.google.com/pricing/" rel="noopener" target="_blank">Google</a>).</p></div><div class="toolblock" data-tool="copilot" data-tools="copilot"><p class="toolname">In Copilot</p><p>If your fact sheet lives in Word, ask Copilot to draft from that document: "Draft 16 posts using only the prices and dates in this document."</p></div></div>
+<p><strong>The check: spot what was invented.</strong> Before anyone checks their own month, the room checks five drafts I wrote with mistakes planted in them, against the Laneway fact sheet. These are made-up examples, not output from any tool.</p>
+<ol><li>"Our gingerbread oat latte is back for $5.75. Come warm up."</li><li>"Live music Saturday December 12, 10 to noon. Free entry for everyone!"</li><li>"Boxing Day plans? We're open 8 to 2."</li><li>"Buy a $50 gift card, get $10 more, all month long."</li><li>"Pumpkin spice is still our number one. Grab one today."</li></ol>
+<p><strong>Answer key.</strong> All five have a problem. (1) The price is $6.25, not $5.75. (2) The sheet doesn't say entry is free; it should read [CHECK]. (3) The café is closed December 26; the 8 to 2 hours are for December 24. (4) The offer ends December 24, not "all month". (5) Nothing on the December sheet says that; it comes from October's sales, which is the Exercise 1 trap again.</p>
+<p>Then everyone runs the same five checks on their own month: every price matches the price list, every date is real and still ahead, every offer has its end date, the photo matches the caption, and every link works. A wrong price in a post isn't just embarrassing; it's a promise to a customer.</p>
+<p><strong>Scheduling.</strong> Paste the approved posts into Meta Business Suite for Facebook and Instagram. For your Google profile, pick the 4 to 8 posts that matter to someone searching right now (offers with end dates, events, holiday hours) and use Google's Offer and Event post types, which carry dates (<a href="https://support.google.com/business/answer/7342169" rel="noopener" target="_blank">Google</a>).</p>
+<h3>Exercise 3: reply to your reviews, and ask for more (35 minutes)</h3>
+<p>You reply to every recent review, negatives first, and set up a way of asking for reviews that follows each platform's rules. On Google, AI can help you draft. On Yelp, you write it yourself.</p>
+<p>Google's own advice for replies: keep it short, be conversational, not promotional, so no deals in a reply, address the reviewer by name and mention their specific feedback, never share a reviewer's private information, and for a complicated problem, ask them to contact you by phone or email (<a href="https://support.google.com/business/answer/3474122" rel="noopener" target="_blank">Google</a>). Google's content policy also bans posting someone's full name or medical information without consent (<a href="https://support.google.com/contributionpolicy/answer/7400114" rel="noopener" target="_blank">Google</a>).</p>
+<p>The made-up reviews we practise on:</p>
+<div class="card fact"><p class="k madeup">Made-up example</p><p><strong>Made-up review, Google, 5 stars:</strong> "Best oat latte on the street, and the barista remembered my order. Priya S."</p><p><strong>Made-up review, Google, 2 stars:</strong> "Waited 15 minutes on Saturday and my sandwich was cold. I told them about my nut allergy and nobody seemed to care. Mark T."</p></div>
+<p>The prompt:</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>I run [business] in [city]. Draft a reply to the Google review below. 2 to 3 sentences, warm and plain. Thank them by first name only. Mention [one specific detail from the review]. If something went wrong, apologise once, and say only what we will really do: [what you'll actually do]. Invite them to contact [phone or email] to talk it through. Do not offer a discount or anything in exchange. Do not repeat any health, allergy or personal details. Do not invent facts. Give me two versions.</p><p>Review: [paste the review, or a paraphrase with names and private details removed]</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<p>The 2-star review is the test. A good reply thanks Mark, apologises for the wait and the cold sandwich, and asks him to call. It does not mention his allergy in public. A reply that says "we take nut allergies seriously" repeats a health detail on a public page.</p>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button></div><div class="toolblock" data-tool="chatgpt" data-tools="chatgpt"><p class="toolname">In ChatGPT</p><p>Paste the prompt and the review in a chat. Copy your edited reply into Google Business Profile: Read reviews, then Reply (<a href="https://support.google.com/business/answer/3474050" rel="noopener" target="_blank">Google</a>).</p></div><div class="toolblock" data-tool="claude" data-tools="claude"><p class="toolname">In Claude</p><p>Paste the prompt and the review. Ask Claude to list every fact in its draft that didn't come from you, then delete those.</p></div><div class="toolblock" data-tool="gemini" data-tools="gemini"><p class="toolname">In Gemini</p><p>If you've connected your Business Profile to Gemini (see Exercise 5), ask "Help me draft a reply to my latest review" and read the draft before it goes anywhere (<a href="https://support.google.com/business/answer/17142585" rel="noopener" target="_blank">Google</a>).</p></div></div>
+<div class="box"><p><strong>On Yelp, write it yourself.</strong> Yelp says reviews drafted or revised with third-party AI tools aren't allowed, though spell-check and grammar tools are (<a href="https://blog.yelp.com/news/how-yelp-continues-to-protect-your-content-in-the-age-of-ai/" rel="noopener" target="_blank">Yelp</a>). That post is about reviews. I couldn't open Yelp's full guidelines today to see how they treat owner replies, so my rule in the room is the careful one: on Yelp, the words are yours.</p></div>
+<p><strong>Asking for reviews.</strong> The two big platforms want opposite things.</p>
+<ul><li><strong>Google:</strong> ask every customer the same way. Google gives every profile a review link and QR code (on a computer: Read reviews, then Get more reviews) and suggests putting it on receipts, in thank-you emails and in the shop (<a href="https://support.google.com/business/answer/16816815" rel="noopener" target="_blank">Google</a>). Never offer anything for a review, never ask only happy customers, never pressure people on the premises, and never have staff review the business (<a href="https://support.google.com/contributionpolicy/answer/7400114" rel="noopener" target="_blank">Google</a>).</li><li><strong>Yelp:</strong> don't ask at all. Yelp says "Proactively asking for reviews may hurt your Yelp rating" and not to ask customers, mailing lists, friends or family (<a href="https://biz.yelp.com/support-center/Reviews/Best_Practices/Don-t-Ask-for-Reviews/en-US" rel="noopener" target="_blank">Yelp</a>).</li></ul>
+<div class="where2"><div><h3>In Canada</h3><p>A review request sent by email or text counts as a commercial electronic message under CASL. You need consent, your business's identification, and an unsubscribe that works within 10 business days (<a href="https://crtc.gc.ca/eng/com500/faq500.htm" rel="noopener" target="_blank">CRTC</a>). A card at the till or a QR code on the counter needs none of that.</p></div><div><h3>In Quebec</h3><p>If a customer comments in French, you must reply in French (<a href="https://educaloi.qc.ca/capsules/exigences-linguistiques-exploiter-une-entreprise-au-quebec/" rel="noopener" target="_blank">Éducaloi</a>). Keep a French version of your reply drafts, and check AI's French with someone who speaks Quebec French before posting.</p></div></div>
+<h3>Exercise 4: update your Google Business Profile (30 minutes)</h3>
+<p>You fix the parts of your profile customers check most: hours, description, categories and one dated post. Changes are made signed in to the Google account that manages the profile.</p>
+<p>The checklist, from Google's own help pages (<a href="https://support.google.com/business/answer/14368911" rel="noopener" target="_blank">Google</a>):</p>
+<ol><li><strong>Name:</strong> exactly as on your sign. Nothing added.</li><li><strong>Categories:</strong> the most specific primary category, plus up to 9 more that are true.</li><li><strong>Hours:</strong> regular hours, then special hours for every holiday. For Laneway Coffee: December 24, 8 am to 2 pm; closed December 25, December 26 and January 1.</li><li><strong>Description:</strong> no more than 750 characters, no links, and about the business rather than promotions, prices or sales.</li><li><strong>Collected info:</strong> open Edit profile, then Collected info, and check anything Google gathered about you.</li><li><strong>One post:</strong> an Offer or Event post from your checked calendar, scheduled (<a href="https://support.google.com/business/answer/7342169" rel="noopener" target="_blank">Google</a>).</li></ol>
+<p>The description prompt:</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Write a Google Business Profile description for my business using only these facts: [what you sell, who it's for, your neighbourhood, how long you've been open, what makes you different]. Under 700 characters, because Google's limit is 750. No links, no prices, no sales or offers. Then tell me the character count.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<p>Count the characters yourself before pasting: the AI's count can be wrong. Google also has its own "Suggest description" button in some regions, and Google's warning on it is the rule for every tool: "This AI feature writes creative text. You should review it for accuracy and update as needed" (<a href="https://support.google.com/business/answer/13682007" rel="noopener" target="_blank">Google</a>).</p>
+<h3>Exercise 5: two tools and an agent (20 minutes)</h3>
+<p>One tool gathers, another writes, and you check in between, which is how I work myself. Then you try one agent that can act on your profile, and watch where it waits for you.</p>
+<p><strong>The two-tool version.</strong></p>
+<ol><li><strong>Gather.</strong> Ask a research tool: "List public events in [neighbourhood, city] between [dates] that my customers might care about, with a link for each. Don't guess dates."</li><li><strong>Check.</strong> Open the links. Cross out anything you can't confirm.</li><li><strong>Write.</strong> Paste the checked list and your fact sheet into ChatGPT or Claude: "Using ONLY these events and facts, write 4 posts that connect my business to what's happening nearby. Keep the source link for each event. If something isn't in the list, write [CHECK]."</li><li><strong>Design.</strong> Turn each approved post into an image from a saved template in Canva, with your own photos.</li><li><strong>Approve and schedule.</strong> You read the final queue and schedule it. Nothing posts on its own.</li></ol>
+<div class="toolgroup" data-def="chatgptclaude"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="muse" aria-pressed="false">Muse</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="chatgptclaude" aria-pressed="false">ChatGPT or Claude</button></div><div class="toolblock" data-tool="muse" data-tools="muse"><p class="toolname">In Muse</p><p>I use Muse, Meta's AI agent, for research myself. Muse for Small Business can connect to your Instagram professional account, Facebook Pages and Meta ad accounts and draft a campaign, and Meta says "nothing publishes, sends, or spends without your approval" (<a href="https://about.fb.com/news/2026/09/introducing-muse-small-business/amp/" rel="noopener" target="_blank">Meta</a>). Meta says the Muse agent is available in the US and Canada; the post gives no separate country list for the small business version.</p></div><div class="toolblock" data-tool="gemini" data-tools="gemini"><p class="toolname">In Gemini</p><p>Gemini can do the research step in a normal chat, and it's the agent example below.</p></div><div class="toolblock" data-tool="chatgptclaude" data-tools="chatgpt claude chatgptclaude"><p class="toolname">In ChatGPT or Claude</p><p>Use one chat for the research and a separate chat or Project for the writing, so the two jobs stay apart.</p></div></div>
+<p><strong>The agent version.</strong> Google lets you connect your Business Profile to the Gemini web app. Connected, Gemini can change hours, draft or delete review replies, summarise feedback, and create, schedule and publish posts. You must manage only one verified profile, use a personal Google account ("For now, this feature isn't available if you sign in with a work or school Google Account"), be 18 or over, use gemini.google.com and have History on (<a href="https://support.google.com/business/answer/17142585" rel="noopener" target="_blank">Google</a>). Google's page doesn't say whether Gemini asks before it publishes, so in the room we ask it to draft only: "Draft a reply to my latest review and a post for my December 24 hours. Don't publish anything." Then you read both and post them yourself.</p>
+<p>If you pay for Claude, Claude in Chrome can work in websites you're signed into (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>). I keep it asking before every action on anything public.</p>
+<p><strong>Where a person must approve, always:</strong> every post, every reply to a customer, every change to your Google profile, any message sent to a customer list, and anything that spends money.</p></div></div></section>
+<section class="q" id="q6" data-sec><div class="wrap"><p class="eyebrow">Question 6</p><h2>What are the rules on reviews and ads?</h2><div class="prose t"><p class="answer">Never write or buy fake reviews. Never hide that a reviewer works for you. This is not legal advice.</p>
+<div class="where2"><div><h3>In the US</h3><p>Fake reviews are banned, including ones made by AI (<a href="https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials" rel="noopener" target="_blank">FTC</a>). Fines can reach $53,088 each time (<a href="https://www.ftc.gov/news-events/news/press-releases/2025/12/ftc-warns-10-companies-about-possible-violations-agencys-new-consumer-review-rule" rel="noopener" target="_blank">FTC</a>).</p></div><div><h3>In Canada</h3><p>Staff who review their own workplace must say so (<a href="https://www.canada.ca/en/competition-bureau/news/2024/01/online-reviews-posted-by-employees-businesses-could-be-liable.html" rel="noopener" target="_blank">Competition Bureau</a>). Prices in ads must include required fees, but not government tax (<a href="https://competition-bureau.canada.ca/how-we-foster-competition/education-and-outreach/guide-june-2024-amendments-competition-act" rel="noopener" target="_blank">Competition Bureau</a>). In Quebec, ads must be mostly in French (<a href="https://educaloi.qc.ca/capsules/exigences-linguistiques-exploiter-une-entreprise-au-quebec/" rel="noopener" target="_blank">Éducaloi</a>).</p></div></div>
+<p><strong>Pictures:</strong> use your own photos.</p></div><div class="prose s"><p class="answer">Never write, buy or fake a review. Never hide that a reviewer works for you. This is general information, not legal advice.</p>
+<div class="where2"><div><h3>In the US</h3><p>Since October 21, 2024, the FTC bans fake reviews, including AI-written ones from "someone who does not exist" (<a href="https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials" rel="noopener" target="_blank">FTC</a>). In December 2025 it warned 10 companies that fines can reach $53,088 per violation (<a href="https://www.ftc.gov/news-events/news/press-releases/2025/12/ftc-warns-10-companies-about-possible-violations-agencys-new-consumer-review-rule" rel="noopener" target="_blank">FTC</a>). Asking only happy customers "could violate the FTC Act" (<a href="https://www.ftc.gov/business-guidance/resources/consumer-reviews-testimonials-rule-questions-answers" rel="noopener" target="_blank">FTC</a>).</p></div><div><h3>In Canada</h3><p>Staff who review their own workplace must say so, "even if they're providing their honest opinion" (<a href="https://www.canada.ca/en/competition-bureau/news/2024/01/online-reviews-posted-by-employees-businesses-could-be-liable.html" rel="noopener" target="_blank">Competition Bureau</a>). Advertised prices must include required fees, except government taxes (<a href="https://competition-bureau.canada.ca/how-we-foster-competition/education-and-outreach/guide-june-2024-amendments-competition-act" rel="noopener" target="_blank">Competition Bureau</a>). Marketing emails and texts follow CASL (<a href="https://crtc.gc.ca/eng/com500/faq500.htm" rel="noopener" target="_blank">CRTC</a>). In Quebec, ads must normally be in French, with French at least twice as big as any other language (<a href="https://educaloi.qc.ca/capsules/exigences-linguistiques-exploiter-une-entreprise-au-quebec/" rel="noopener" target="_blank">Éducaloi</a>).</p></div></div>
+<p><strong>AI images.</strong> Use your own photos. If you use an AI image, check that site's labelling rules first.</p></div><div class="prose d"><p class="answer">Never write, buy or fake a review, and never hide a connection to the business. Both countries say so in law, and the platforms add their own rules on top. This is general information, not legal advice.</p>
+<div class="where2"><div><h3>In the US</h3><p>The FTC's Consumer Review Rule took effect October 21, 2024 (<a href="https://www.ftc.gov/business-guidance/resources/consumer-reviews-testimonials-rule-questions-answers" rel="noopener" target="_blank">FTC</a>). It bans fake reviews and testimonials, including ones that pretend to be "by someone who does not exist, such as AI-generated fake reviews", payment tied to a positive or negative review, undisclosed insider reviews, and suppressing negative reviews (<a href="https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials" rel="noopener" target="_blank">FTC</a>).</p><p>Asking only happy customers isn't banned by the rule itself, but the FTC says "this practice could violate the FTC Act" (<a href="https://www.ftc.gov/business-guidance/resources/consumer-reviews-testimonials-rule-questions-answers" rel="noopener" target="_blank">FTC</a>). Google bans it outright (<a href="https://support.google.com/contributionpolicy/answer/7400114" rel="noopener" target="_blank">Google</a>).</p><p>On December 22, 2025, FTC staff sent warning letters to 10 companies about possible violations, noting civil penalties of up to $53,088 per violation (<a href="https://www.ftc.gov/news-events/news/press-releases/2025/12/ftc-warns-10-companies-about-possible-violations-agencys-new-consumer-review-rule" rel="noopener" target="_blank">FTC</a>).</p></div><div><h3>In Canada</h3><p>There's no separate fake-review rule; the Competition Act's ban on false or misleading representations covers it. The Competition Bureau warned in January 2024 that employees must disclose their connection when they review their employer, "even if they're providing their honest opinion", and that a business that allows misleading reviews could be liable (<a href="https://www.canada.ca/en/competition-bureau/news/2024/01/online-reviews-posted-by-employees-businesses-could-be-liable.html" rel="noopener" target="_blank">Competition Bureau</a>).</p><p>Advertised prices must include mandatory fees. The Bureau's guide to the June 2024 amendments says it is misleading to leave mandatory fees out of an advertised price, unless they are imposed by government, such as sales tax (<a href="https://competition-bureau.canada.ca/how-we-foster-competition/education-and-outreach/guide-june-2024-amendments-competition-act" rel="noopener" target="_blank">Competition Bureau</a>). Check that rule against every price in your month of posts.</p><p>CASL covers marketing emails and texts: consent, identification and an unsubscribe. Penalties can reach $10 million per violation for a business (<a href="https://crtc.gc.ca/eng/com500/faq500.htm" rel="noopener" target="_blank">CRTC</a>).</p><p>In Quebec, advertising must normally be in French, and where another language appears, French must take at least twice the space (<a href="https://educaloi.qc.ca/capsules/exigences-linguistiques-exploiter-une-entreprise-au-quebec/" rel="noopener" target="_blank">Éducaloi</a>). Fines run from $3,000 to $30,000 per violation (<a href="https://www.legal500.com/intelligence/canada/strategy/the-charter-of-the-french-language-new-obligations-as-of-june-2025" rel="noopener" target="_blank">Legal 500</a>).</p></div></div>
+<p><strong>AI-made images.</strong> I didn't check each platform's current AI-labelling rules today, so the room uses your own photos for posts. If you use an AI image, check that platform's own help page on labels first.</p></div></div></section>
+<section class="q" id="q7" data-sec><div class="wrap"><p class="eyebrow">Question 7</p><h2>What happens after the morning?</h2><div class="prose t"><p class="answer">Before you leave, pick a date for next month's marketing morning and a partner. Then spend 15 minutes twice a week on reviews. <span class="note">[DAN: DATE, PLACE, PRICE, HOW TO SIGN UP.]</span></p></div><div class="prose s"><p class="answer">Before you leave, you pick the date for next month's marketing morning and a partner from the room. Then it's one hour a month for posts, and 15 minutes twice a week for reviews. <span class="note">[DAN: DATE, VENUE, PRICE, HOW TO REGISTER.]</span></p></div><div class="prose d"><p class="answer">Next month is the real test, so you book it before you leave. Everyone writes down the date of their next marketing morning, about a week before the new month, and the name of a partner from the room to compare notes with.</p>
+<p>The routine on the handout is short: one hour a month for the calendar, and 15 minutes twice a week for reviews, negatives first.</p>
+<p><strong>How I'll know it worked.</strong> Three numbers for every workshop: how many people scheduled at least two weeks of posts before leaving, how many replied to every review in their last month, and how many updated their holiday hours on the day. <span class="note">[DAN: RESULTS FROM THE FIRST RUN, WHEN YOU HAVE THEM.]</span></p>
+<p><strong>Where and when.</strong> <span class="note">[DAN: DATE, VENUE, PRICE (OR FREE), HOW TO REGISTER.]</span></p></div></div></section>
+<div class="band"><div class="wrap"><p class="eyebrow">The rule for the whole morning</p><p class="d">The design rests on one rule: AI drafts from facts you give it, and a person checks and posts.</p><p class="s">The rule for the whole morning: AI writes drafts from facts you give it. You check them and you post them.</p><p class="t">One rule for the day: AI writes a first try from your facts. You check it. You post it.</p></div></div>
+<section class="q" data-print id="q8" data-sec><div class="wrap"><p class="eyebrow">Take it with you</p><h2>The one-page handout</h2><div class="prose t"><div class="handout"><div class="hhd"><p class="eyebrow">Leverage Strategies · Workshop 2</p><h3>Marketing in a morning</h3></div><p><strong>Post prompt:</strong> Use ONLY my facts. Missing? Write [CHECK].</p><p><strong>Check every post:</strong> price, date, end date, photo, link.</p><p><strong>Reply prompt:</strong> Short. First name. Sorry once. No discounts. No health details.</p><p><strong>Reviews:</strong> Google: ask everyone. Yelp: don't ask.</p><p><strong>Never paste:</strong> names, phone numbers, card numbers, passwords, health details.</p><p><strong>Agent rule:</strong> AI drafts. I post.</p><p><strong>Next date:</strong> <span class="blank"></span> <strong>Partner:</strong> <span class="blank"></span></p></div><p class="hnote"><button type="button" class="copy copyplain" data-label="Copy the handout" data-text="Workshop 2: Marketing in a morning
+
+Post prompt: Use ONLY my facts. Missing? Write [CHECK].
+Check every post: price, date, end date, photo, link.
+Reply prompt: Short. First name. Sorry once. No discounts. No health details.
+Reviews: Google: ask everyone. Yelp: don&#x27;t ask.
+Never paste: names, phone numbers, card numbers, passwords, health details.
+Agent rule: AI drafts. I post.
+Next date: ______ Partner: ______">Copy the handout</button><span>This card prints on one page from your browser.</span></p></div><div class="prose s"><div class="handout"><div class="hhd"><p class="eyebrow">Leverage Strategies · Workshop 2</p><h3>Marketing in a morning</h3></div><p><strong>Post prompt:</strong> Here is my fact sheet: [facts]. Write [16] posts, dated. Use ONLY my facts. Missing? Write [CHECK].</p><p><strong>Five checks:</strong> price, date, offer end date, photo, link.</p><p><strong>Reply prompt:</strong> 2 to 3 sentences. First name only. Sorry once. Only real promises. Call [contact]. No discounts. No health details.</p><p><strong>Reviews:</strong> Google: ask everyone the same way. Yelp: don't ask, write replies yourself.</p><p><strong>Google profile:</strong> name as on the sign, holiday hours, description under 750 characters.</p><p><strong>Never paste:</strong> names, emails, phone numbers, card numbers, passwords, health details.</p><p><strong>Agent rule:</strong> AI drafts. I post and send.</p><p><strong>Next marketing morning:</strong> <span class="blank"></span> <strong>Partner:</strong> <span class="blank"></span></p></div><p class="hnote"><button type="button" class="copy copyplain" data-label="Copy the handout" data-text="Workshop 2: Marketing in a morning
+
+Post prompt: Here is my fact sheet: [facts]. Write [16] posts, dated. Use ONLY my facts. Missing? Write [CHECK].
+Five checks: price, date, offer end date, photo, link.
+Reply prompt: 2 to 3 sentences. First name only. Sorry once. Only real promises. Call [contact]. No discounts. No health details.
+Reviews: Google: ask everyone the same way. Yelp: don&#x27;t ask, write replies yourself.
+Google profile: name as on the sign, holiday hours, description under 750 characters.
+Never paste: names, emails, phone numbers, card numbers, passwords, health details.
+Agent rule: AI drafts. I post and send.
+Next marketing morning: ______ Partner: ______">Copy the handout</button><span>This card prints on one page from your browser.</span></p></div><div class="prose d"><p class="answer">Everything from the morning on one page.</p><div class="handout"><div class="hhd"><p class="eyebrow">Leverage Strategies · Workshop 2</p><h3>Marketing in a morning</h3></div><p><strong>The post prompt.</strong> I run [business] in [city]. Here is my fact sheet: [facts]. Write [16] posts, [4] a week, dated. Use ONLY these facts. If something's missing, write [CHECK]. Table: Date, Post, Fact used, Photo.</p><p><strong>The five post checks:</strong> price matches the list; date is real and ahead; offer has its end date; photo matches; link works.</p><p><strong>The reply prompt.</strong> Draft a 2 to 3 sentence reply. First name only. One specific detail. Apologise once if needed. Say only what we'll really do. Invite them to call [contact]. No discounts. No health or personal details. No invented facts.</p><p><strong>Review rules:</strong> Google: ask everyone the same way, offer nothing. Yelp: don't ask; write replies yourself. Canada: emails and texts need consent and an unsubscribe. Quebec: French comment, French reply.</p><p><strong>Google profile:</strong> name as on the sign; best category plus up to 9; holiday hours; description under 750 characters, no links or prices; check Collected info.</p><p><strong>Never paste into AI:</strong> customer names, emails, phone numbers, order numbers, card numbers, passwords, health details.</p><p><strong>The agent rule:</strong> AI drafts. I post, reply, send and pay.</p><p><strong>My next marketing morning:</strong> <span class="blank"></span> <strong>My partner:</strong> <span class="blank"></span> <strong>Review time each week:</strong> <span class="blank"></span></p></div><p class="hnote"><button type="button" class="copy copyplain" data-label="Copy the handout" data-text="Workshop 2: Marketing in a morning
+
+The post prompt. I run [business] in [city]. Here is my fact sheet: [facts]. Write [16] posts, [4] a week, dated. Use ONLY these facts. If something&#x27;s missing, write [CHECK]. Table: Date, Post, Fact used, Photo.
+The five post checks: price matches the list; date is real and ahead; offer has its end date; photo matches; link works.
+The reply prompt. Draft a 2 to 3 sentence reply. First name only. One specific detail. Apologise once if needed. Say only what we&#x27;ll really do. Invite them to call [contact]. No discounts. No health or personal details. No invented facts.
+Review rules: Google: ask everyone the same way, offer nothing. Yelp: don&#x27;t ask; write replies yourself. Canada: emails and texts need consent and an unsubscribe. Quebec: French comment, French reply.
+Google profile: name as on the sign; best category plus up to 9; holiday hours; description under 750 characters, no links or prices; check Collected info.
+Never paste into AI: customer names, emails, phone numbers, order numbers, card numbers, passwords, health details.
+The agent rule: AI drafts. I post, reply, send and pay.
+My next marketing morning: ______ My partner: ______ Review time each week: ______">Copy the handout</button><span>This card prints on one page from your browser.</span></p></div></div></section>
+<section class="q" id="q9" data-sec><div class="wrap"><p class="eyebrow">Take it with you</p><h2>Your checklist for this week</h2><div class="prose t"><ul class="check"><li><label for="ck-t-1"><input type="checkbox" id="ck-t-1"><span>Write next month's facts on one page.</span></label></li><li><label for="ck-t-2"><input type="checkbox" id="ck-t-2"><span>Answer every Google review from the last three months.</span></label></li><li><label for="ck-t-3"><input type="checkbox" id="ck-t-3"><span>Add holiday hours on Google.</span></label></li><li><label for="ck-t-4"><input type="checkbox" id="ck-t-4"><span>Put your review QR code at the till.</span></label></li><li><label for="ck-t-5"><input type="checkbox" id="ck-t-5"><span><span class="note">[BOOK A CALL LINK]</span></span></label></li></ul></div><div class="prose s"><ul class="check"><li><label for="ck-s-6"><input type="checkbox" id="ck-s-6"><span>Write next month's fact sheet.</span></label></li><li><label for="ck-s-7"><input type="checkbox" id="ck-s-7"><span>Reply to every Google review from the last three months.</span></label></li><li><label for="ck-s-8"><input type="checkbox" id="ck-s-8"><span>Add holiday hours to your Google profile.</span></label></li><li><label for="ck-s-9"><input type="checkbox" id="ck-s-9"><span>Put your review QR code at the till.</span></label></li><li><label for="ck-s-10"><input type="checkbox" id="ck-s-10"><span><span class="note">[BOOK A CALL LINK]</span> or sign up for the next workshop.</span></label></li></ul></div><div class="prose d"><ul class="check"><li><label for="ck-d-11"><input type="checkbox" id="ck-d-11"><span>Write your fact sheet for next month: hours, holiday hours, prices, offers with end dates, events with dates.</span></label></li><li><label for="ck-d-12"><input type="checkbox" id="ck-d-12"><span>Reply to every Google review from the last three months, negatives first.</span></label></li><li><label for="ck-d-13"><input type="checkbox" id="ck-d-13"><span>Set your special hours for every holiday this month.</span></label></li><li><label for="ck-d-14"><input type="checkbox" id="ck-d-14"><span>Print your Google review QR code and put it at the till.</span></label></li><li><label for="ck-d-15"><input type="checkbox" id="ck-d-15"><span><span class="note">[BOOK A CALL LINK]</span> or register for the next workshop.</span></label></li></ul></div></div></section>
+<section class="q" id="q10" data-sec><div class="wrap"><p class="eyebrow">Take it with you</p><h2>How Leverage Strategies helps</h2><div class="prose t"><p class="answer">I run this workshop for small business owners. After, I can help you one-on-one in your own accounts. You keep control and you press publish. I don't promise results before we measure them.</p>
+<p><span class="note">[BOOK A CALL LINK]</span></p></div><div class="prose s"><p class="answer">I run this workshop for groups of small business owners. Afterwards, I work with owners one-on-one in their own accounts. You keep the logins and you press publish. I won't promise results before we've measured them.</p>
+<p><span class="note">[BOOK A CALL LINK]</span></p></div><div class="prose d"><p class="answer">I run this workshop for groups of independent small business owners, and I work with owners one-on-one afterwards on their own accounts: the fact sheet, the monthly calendar, the review routine and the profile. You keep the logins and you press publish. I won't promise a number before we've measured one.</p>
+<p><span class="note">[BOOK A CALL LINK]</span></p></div></div></section>
+<section class="q st" id="q11" data-sec><div class="wrap"><p class="eyebrow">Take it with you</p><h2>Words to know</h2><div class="prose t"><div class="tablewrap scroll"><table class="stack two"><thead><tr><th>Word</th><th>What it means</th></tr></thead><tbody><tr><td data-l="Word">Fact sheet</td><td data-l="What it means">One page of your real prices, hours and dates</td></tr><tr><td data-l="Word">Prompt</td><td data-l="What it means">What you type to tell the AI what to do</td></tr><tr><td data-l="Word">Review</td><td data-l="What it means">What a customer writes about your business online</td></tr><tr><td data-l="Word">Google listing</td><td data-l="What it means">Your free page on Google Search and Maps</td></tr><tr><td data-l="Word">Agent</td><td data-l="What it means">An AI tool that can do steps for you</td></tr><tr><td data-l="Word">QR code</td><td data-l="What it means">A square code people scan with a phone</td></tr></tbody></table></div></div><div class="prose s"><div class="tablewrap scroll"><table class="stack two"><thead><tr><th>Word</th><th>What it means</th></tr></thead><tbody><tr><td data-l="Word">Fact sheet</td><td data-l="What it means">One page of your real prices, hours, offers and dates</td></tr><tr><td data-l="Word">Prompt</td><td data-l="What it means">What you type to tell the AI what to do</td></tr><tr><td data-l="Word">Project</td><td data-l="What it means">A saved space in ChatGPT or Claude that keeps your facts and rules</td></tr><tr><td data-l="Word">Google Business Profile</td><td data-l="What it means">Your free listing on Google Search and Maps</td></tr><tr><td data-l="Word">Special hours</td><td data-l="What it means">Hours for holidays that replace your normal hours</td></tr><tr><td data-l="Word">Agent</td><td data-l="What it means">An AI tool that can take steps for you, like posting</td></tr><tr><td data-l="Word">CASL</td><td data-l="What it means">Canada's anti-spam law for marketing emails and texts</td></tr><tr><td data-l="Word">FTC</td><td data-l="What it means">The US government agency that bans fake reviews</td></tr></tbody></table></div></div></div></section><section class="sources" id="sources" data-sec><div class="wrap"><h2>Sources</h2><p>All pages opened November 27, 2026. Prices checked the same day.</p><ul><li><a href="https://grow.google/ai-for-small-businesses/" rel="noopener" target="_blank">Google, AI for Small Businesses (Grow with Google)</a>. US-only offer; deadlines December 15 and 31, 2026.</li><li><a href="https://openai.com/index/helping-small-businesses-put-ai-to-work/" rel="noopener" target="_blank">OpenAI, Helping small businesses put AI to work</a>. September 30, 2026. US. Vendor announcement.</li><li><a href="https://www.brightlocal.com/research/local-consumer-review-survey/" rel="noopener" target="_blank">BrightLocal, Local Consumer Review Survey 2026</a>. Published February 11, 2026; 1,002 US adults. Vendor survey.</li><li><a href="https://buffer.com/resources/consistent-posting-study/" rel="noopener" target="_blank">Buffer, consistent posting study</a>. January 29, 2025; 100,000+ Buffer users. Vendor data.</li><li><a href="https://www.cfib-fcei.ca/en/research-economic-analysis/sme-digital-presence" rel="noopener" target="_blank">CFIB, Small business digital presence</a>. Surveyed September 11 to 25, 2025; 2,478 owners. Canada.</li><li><a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus" rel="noopener" target="_blank">OpenAI Help Center, What is ChatGPT Plus?</a>. US price.</li><li><a href="https://chatgpt.com/pricing" rel="noopener" target="_blank">ChatGPT, Plans</a>. Plan features; prices didn't display.</li><li><a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude, Plans and pricing</a>. USD; tax extra.</li><li><a href="https://www.anthropic.com/news/introducing-claude-to-canada" rel="noopener" target="_blank">Anthropic, Introducing Claude to Canada</a>. June 5, 2024. CAD.</li><li><a href="https://workspace.google.com/pricing/" rel="noopener" target="_blank">Google Workspace, Pricing</a>. Gemini by plan; prices didn't display.</li><li><a href="https://www.canva.com/en_ca/pricing/" rel="noopener" target="_blank">Canva, Pricing (Canada)</a>. CAD; tax extra.</li><li><a href="https://support.google.com/business/answer/7342169" rel="noopener" target="_blank">Google, Create and manage posts on your Business Profile</a>.</li><li><a href="https://support.google.com/business/answer/3474122" rel="noopener" target="_blank">Google, Tips to get more reviews</a>.</li><li><a href="https://support.google.com/business/answer/3474050" rel="noopener" target="_blank">Google, Manage customer reviews</a>.</li><li><a href="https://support.google.com/contributionpolicy/answer/7400114" rel="noopener" target="_blank">Google, Maps user-generated content policy</a>.</li><li><a href="https://support.google.com/business/answer/16816815" rel="noopener" target="_blank">Google, Create a link or QR code to request reviews</a>.</li><li><a href="https://support.google.com/business/answer/14368911" rel="noopener" target="_blank">Google, Edit your Business Profile</a>.</li><li><a href="https://support.google.com/business/answer/13682007" rel="noopener" target="_blank">Google, Manage your Business Profile description</a>.</li><li><a href="https://support.google.com/business/answer/17142585" rel="noopener" target="_blank">Google, Manage your Business Profile with the Gemini web app</a>.</li><li><a href="https://blog.yelp.com/news/how-yelp-continues-to-protect-your-content-in-the-age-of-ai/" rel="noopener" target="_blank">Yelp, How Yelp continues to protect your content in the age of AI</a>. June 16, 2026.</li><li><a href="https://biz.yelp.com/support-center/Reviews/Best_Practices/Don-t-Ask-for-Reviews/en-US" rel="noopener" target="_blank">Yelp for Business, Don't ask for reviews</a>.</li><li><a href="https://about.fb.com/news/2026/09/introducing-muse-small-business/amp/" rel="noopener" target="_blank">Meta, Introducing Muse for Small Business</a>. September 29, 2026. Vendor announcement.</li><li><a href="https://www.ftc.gov/business-guidance/resources/consumer-reviews-testimonials-rule-questions-answers" rel="noopener" target="_blank">FTC, Consumer Reviews and Testimonials Rule: Questions and Answers</a>. Staff guidance. US.</li><li><a href="https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials" rel="noopener" target="_blank">FTC, final rule banning fake reviews and testimonials</a>. August 14, 2024. US.</li><li><a href="https://www.ftc.gov/news-events/news/press-releases/2025/12/ftc-warns-10-companies-about-possible-violations-agencys-new-consumer-review-rule" rel="noopener" target="_blank">FTC, warning letters to 10 companies</a>. December 22, 2025. US.</li><li><a href="https://www.canada.ca/en/competition-bureau/news/2024/01/online-reviews-posted-by-employees-businesses-could-be-liable.html" rel="noopener" target="_blank">Competition Bureau, Online reviews posted by employees</a>. January 18, 2024. Canada.</li><li><a href="https://competition-bureau.canada.ca/how-we-foster-competition/education-and-outreach/guide-june-2024-amendments-competition-act" rel="noopener" target="_blank">Competition Bureau, Guide to the June 2024 amendments</a>. June 25, 2024. Canada.</li><li><a href="https://crtc.gc.ca/eng/com500/faq500.htm" rel="noopener" target="_blank">CRTC, Frequently asked questions about CASL</a>. Canada.</li><li><a href="https://educaloi.qc.ca/capsules/exigences-linguistiques-exploiter-une-entreprise-au-quebec/" rel="noopener" target="_blank">Éducaloi, Exigences linguistiques pour exploiter une entreprise au Québec</a>. Updated September 8, 2026. Quebec.</li><li><a href="https://www.legal500.com/intelligence/canada/strategy/the-charter-of-the-french-language-new-obligations-as-of-june-2025" rel="noopener" target="_blank">Legal 500, The Charter of the French Language: new obligations as of June 2025</a>. Quebec. Law firm summary.</li><li>Sample café sales file (made up, 31 days of October 2026, CAD), the same file as Workshop 1. The Exercise 1 answer key is computed from it.</li></ul></div></section><footer class="site"><span>Leverage Strategies · Dan Albasry</span><span>Prices and dates checked November 27, 2026</span></footer><div class="seg float" role="group" aria-label="Reading level"><span class="lab">Reading level</span><button type="button" data-v="t" aria-pressed="true">Starter</button><button type="button" data-v="s" aria-pressed="false">Simple</button><button type="button" data-v="d" aria-pressed="false">Detailed</button></div><script>
+{
+  const KEY='leverage-notes-level', TKEY='leverage-tool', BOX='leverage-workshop2-checks';
+  const body=document.body, buttons=document.querySelectorAll('.seg button[data-v]');
+  const store=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+  const load=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+  const current=()=>body.classList.contains('lv-t')?'t':body.classList.contains('lv-s')?'s':'d';
+  const paint=v=>{body.classList.remove('lv-d','lv-s','lv-t');body.classList.add('lv-'+v);buttons.forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v?'true':'false'));};
+  const shown=el=>el.offsetParent!==null;
+  const setLevel=v=>{
+    if(v===current()) return;
+    const secs=[...document.querySelectorAll('[data-sec]')]; let anchor=null;
+    secs.forEach(s=>{ if(shown(s) && s.getBoundingClientRect().top<=120) anchor=s; });
+    let progress=0;
+    if(anchor){const r=anchor.getBoundingClientRect();progress=Math.min(1,Math.max(0,(120-r.top)/Math.max(1,r.height)));}
+    paint(v); store(KEY,v);
+    if(!anchor) return;
+    let target=anchor;
+    if(!shown(target)){
+      // the reader's section is not part of this level: go to the next section this level shows, or the one before
+      const i=secs.indexOf(anchor);
+      target=secs.slice(i+1).find(shown)||secs.slice(0,i).reverse().find(shown)||null;
+      progress=0;
+    }
+    if(target){const r2=target.getBoundingClientRect();window.scrollTo({top:window.pageYOffset+r2.top-120+progress*r2.height,behavior:'auto'});}
+  };
+  buttons.forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.v)));
+  const fl=document.querySelector('.float'), inl=document.querySelector('.versions');
+  if(fl&&inl&&'IntersectionObserver' in window){fl.classList.add('away');new IntersectionObserver(es=>es.forEach(e=>fl.classList.toggle('away',e.isIntersecting||e.boundingClientRect.top>0))).observe(inl);}
+  const saved=load(KEY); paint(saved==='d'||saved==='s'||saved==='t'?saved:'t');
+
+  // Tool switch: ChatGPT by default; one choice moves every group that has that tool ("ChatGPT or Claude" counts for both).
+  const groups=document.querySelectorAll('.toolgroup');
+  const blockFor=(g,t)=>[...g.querySelectorAll('.toolblock')].find(b=>(b.dataset.tools||b.dataset.tool).split(' ').includes(t));
+  const setTool=(t,init)=>{
+    groups.forEach(g=>{
+      let blk=t?blockFor(g,t):null;
+      if(!blk&&!init) return;
+      if(!blk) blk=blockFor(g,'chatgpt')||blockFor(g,g.dataset.def)||g.querySelector('.toolblock');
+      g.querySelectorAll('.toolblock').forEach(b=>b.classList.toggle('on',b===blk));
+      g.querySelectorAll('.toolseg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tool===blk.dataset.tool?'true':'false'));
+    });
+  };
+  groups.forEach(g=>{g.classList.add('js');g.querySelectorAll('.toolseg button').forEach(b=>b.addEventListener('click',()=>{setTool(b.dataset.tool);store(TKEY,b.dataset.tool);}));});
+  const st=load(TKEY); setTool(st&&/^[a-z]+$/.test(st)?st:null,true);
+
+  let ticks={}; try{ticks=JSON.parse(load(BOX)||'{}')||{}}catch(e){ticks={}}
+  document.querySelectorAll('.check input').forEach(box=>{box.checked=!!ticks[box.id];box.addEventListener('change',()=>{ticks[box.id]=box.checked;store(BOX,JSON.stringify(ticks));});});
+
+  const copy=(btn,txt,selNode)=>{
+    const label=btn.dataset.label||btn.textContent;
+    const fail=()=>{
+      if(selNode){try{const r=document.createRange();r.selectNodeContents(selNode);const s=window.getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}}
+      btn.textContent=selNode?'Selected: copy with your keyboard':'Select the text to copy';
+    };
+    try{navigator.clipboard.writeText(txt).then(()=>{btn.textContent='Copied';setTimeout(()=>{btn.textContent=label},1600)},fail);}catch(e){fail()}
+  };
+  document.querySelectorAll('.prompt .copy').forEach(btn=>btn.addEventListener('click',()=>{
+    const box=btn.parentElement.querySelector('.ptext');
+    const txt=[...box.querySelectorAll('p')].map(p=>p.textContent).join('\n\n');
+    copy(btn,txt,box);
+  }));
+  document.querySelectorAll('.copyplain').forEach(btn=>btn.addEventListener('click',()=>copy(btn,btn.dataset.text,btn.closest('.prose').querySelector('.handout'))));
+}
+
+</script>
+
+</body></html>

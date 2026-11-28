@@ -1,0 +1,949 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Supplier Price Check</title><meta name="description" content="A working supplier price check for small business owners in the US and Canada: compare this week&#39;s invoices with last time per unit, flag the rises, and decide what to do. Three reading levels."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"><style>
+/* VOICE: calm, plain, first person; a small build, not a sales page.
+   IDEA: the price per unit, not the invoice total, shows what went up.
+   PICTURE: a working price check on a made-up cafe's invoices.
+   COLOUR and TYPE: the site's "G. Combined" direction: paper, ink, one rust accent; Instrument Serif and Sans.
+   LAYOUT: one reading column, figures up to 1040px, one dark band, a floating level switch. Light theme by choice. */
+:root{
+  color-scheme: light;
+  --paper:#F8F6F1; --ink:#141412; --body:#3A3832; --muted:#5A584F; --rule:#CFCBC0; --panel:#EDE9DF; --accent:#7A2E1A;
+  --display:'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --text:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --col:680px; --wide:1040px;
+}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+.eyebrow{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 24px}
+.widewrap{max-width:var(--wide);margin:0 auto;padding:0 24px}
+figure.wrap,figure.widewrap{margin:44px auto}
+
+/* three reading levels: .d detailed, .s simple, .t starter, .ds detailed+simple, .st simple+starter */
+body.lv-d .s, body.lv-d .t, body.lv-d .st{display:none !important}
+body.lv-s .d, body.lv-s .t{display:none !important}
+body.lv-t .d, body.lv-t .s, body.lv-t .ds{display:none !important}
+body.lv-s .prose{font-size:19px;line-height:1.75}
+body.lv-t .prose{font-size:20px;line-height:1.8}
+
+header.site{padding:24px 32px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink)}
+header.site .mark{font-family:var(--display);font-size:32px;line-height:1}
+header.site .where{font-size:14px;color:var(--muted)}
+
+.hero{max-width:var(--wide);margin:0 auto;padding:72px 24px 0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:end}
+.hero h1{font-size:clamp(44px,6.4vw,80px);line-height:1.02;letter-spacing:-.02em;margin-top:24px}
+.hero .lede{margin:28px 0 0;font-size:21px;line-height:1.6;color:var(--body)}
+.hero .by{margin:28px 0 0;font-size:14px;color:var(--muted)}
+.hero figure{margin:0}
+.hero img{width:100%;max-height:620px;object-fit:cover;object-position:center 30%;border:1px solid var(--rule)}
+@media (max-width:820px){.hero{grid-template-columns:1fr;gap:32px;padding-top:56px}.hero img{max-height:520px}}
+
+.versions{margin:56px auto 0;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:22px 0}
+.versions p{margin:0;font-size:16px;color:var(--body);flex:1 1 300px}
+.seg{display:inline-flex;border:1px solid var(--ink);background:var(--paper)}
+.seg button{font:500 14px/1 var(--text);letter-spacing:.04em;padding:14px 16px;min-height:44px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button + button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.float{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:20;box-shadow:0 6px 24px rgba(20,20,18,.18)}
+.float .lab{display:flex;align-items:center;padding:0 14px 0 16px;font-size:13px;color:var(--muted);border-right:1px solid var(--rule)}
+@media (max-width:520px){.float .lab{display:none}.seg button{padding:14px 13px}}
+
+.toc{margin:56px auto 0}
+.toc ol{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--ink)}
+.toc li{border-bottom:1px solid var(--rule)}
+.toc a{display:flex;gap:20px;align-items:baseline;padding:14px 0;text-decoration:none;font-family:var(--display);font-size:24px;line-height:1.2}
+.toc a span.n{font:400 13px var(--text);color:var(--muted);flex:0 0 20px;font-variant-numeric:tabular-nums}
+
+section.q{padding:96px 0 0;scroll-margin-top:12px}
+section.q h2{font-size:clamp(34px,5vw,52px);line-height:1.06;margin:14px 0 28px}
+.prose p{margin:0 0 20px;color:var(--body)}
+.prose p.answer{font-size:1.14em;line-height:1.55;color:var(--ink)}
+.prose strong{color:var(--ink);font-weight:600}
+.prose ul,.prose ol{margin:0 0 20px;padding-left:22px;color:var(--body)}
+.prose li{margin:0 0 10px}
+.key{font-family:var(--display);font-size:clamp(28px,4vw,38px);line-height:1.15;color:var(--ink);margin:36px 0;padding:28px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.key em{color:var(--accent)}
+
+figure{margin:44px auto}
+figcaption{margin-top:12px;font-size:13px;line-height:1.5;color:var(--muted)}
+.figtitle{margin:0 0 18px;font-family:var(--display);font-size:26px;line-height:1.15}
+
+/* ladder */
+.ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end;border-bottom:1px solid var(--ink)}
+.rung{border:1px solid var(--ink);border-bottom:0;padding:18px 18px 20px;background:var(--paper)}
+.rung:nth-child(1){min-height:200px}.rung:nth-child(2){min-height:250px}.rung:nth-child(3){min-height:300px;background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.rung .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.rung h3{font-size:30px;line-height:1.1;margin:6px 0 10px}
+.rung p{margin:0;font-size:15.5px;line-height:1.55;color:var(--body)}
+.rung p.ex{margin-top:12px;padding-top:12px;border-top:1px solid var(--rule)}
+@media (max-width:700px){.ladder{grid-template-columns:1fr;border-bottom:0}.rung,.rung:nth-child(n){min-height:0;border-bottom:1px solid var(--ink)}.rung:nth-child(3){border-bottom-color:var(--accent)}}
+
+/* test list */
+.test{list-style:none;margin:0 0 24px;padding:0;border-top:1px solid var(--ink);counter-reset:tq}
+.test li{counter-increment:tq;display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.test li::before{content:counter(tq);font-family:var(--display);font-size:30px;line-height:1;color:var(--accent)}
+
+/* flow diagram */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px}
+.stage{position:relative;border:1px solid var(--ink);padding:16px 16px 18px;background:var(--paper)}
+.stage .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.stage h3{font-size:25px;line-height:1.1;margin:6px 0 8px}
+.stage p{margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.stage:not(:last-child)::after{content:"\2192";position:absolute;right:-29px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--muted)}
+.stage.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.repair{margin-top:36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:28px;align-items:start;border-top:1px dashed var(--ink);padding-top:22px}
+.repair h3{font-size:28px;line-height:1.1}
+.repair .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.repair ol{margin:0;padding-left:20px;font-size:15.5px;line-height:1.55;color:var(--body)}
+.repair li{margin-bottom:6px}
+@media (max-width:820px){.flow{grid-template-columns:1fr;gap:30px}.stage:not(:last-child)::after{content:"\2193";right:auto;left:22px;top:auto;bottom:-29px;transform:none}.repair{grid-template-columns:1fr;gap:12px}}
+
+/* bars */
+.bars{display:grid;gap:18px}
+.bar{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;align-items:center}
+.bar .l{font-size:15px;line-height:1.35;color:var(--ink)}
+.bar .l small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.bar .tr{display:flex;align-items:center;gap:12px}
+.bar .f{height:30px;background:#A8A397;min-width:2px}
+.bar .f.hot{background:var(--accent)}
+.bar .f.ink{background:var(--ink)}
+.bar .v{font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:560px){.bar{grid-template-columns:1fr;gap:6px}}
+
+/* business finder */
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.pick button{font:500 15px var(--text);min-height:44px;padding:10px 14px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.pick button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.biz{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink);border-left:1px solid var(--rule)}
+.biz li{padding:18px 20px 20px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);transition:background .25s}
+.biz li.on{background:var(--panel);box-shadow:inset 3px 0 0 var(--accent)}
+.biz h3{font-size:27px;line-height:1.1;margin:0 0 10px}
+.biz dl{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 12px;font-size:15px;line-height:1.5}
+.biz dt{font:500 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.biz dd{margin:0;color:var(--body)}
+@media (max-width:640px){.biz{grid-template-columns:1fr}}
+
+.box{margin:36px 0;padding:24px 26px;background:var(--panel);border:1px solid var(--ink)}
+.box h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.box p{margin:0 0 12px;font-size:16.5px;line-height:1.6;color:var(--body)}
+.box p:last-child{margin-bottom:0}
+
+/* two countries */
+.where2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;margin:36px 0;border:1px solid var(--ink)}
+.where2 > div{padding:24px 26px;background:var(--panel)}
+.where2 > div + div{border-left:1px solid var(--ink)}
+@media (max-width:600px){.where2 > div + div{border-left:0;border-top:1px solid var(--ink)}}
+.where2 h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2 ul{margin:0;padding-left:18px;font-size:15.5px;line-height:1.6;color:var(--body)}
+.where2 li{margin-bottom:10px}
+
+/* numbered risks */
+.steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink);counter-reset:st}
+.steps li{counter-increment:st;display:grid;grid-template-columns:64px 1fr;gap:8px;padding:26px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(st);font-family:var(--display);font-size:54px;line-height:.9;color:var(--accent)}
+.steps h3{font-size:28px;line-height:1.15;margin:0 0 8px}
+.steps p{margin:0;color:var(--body);font-size:.96em}
+
+.skip{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.skip li{display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.skip li::before{content:"\00D7";font-family:var(--display);font-size:36px;line-height:.8;color:var(--accent)}
+
+table{border-collapse:collapse;width:100%;font-size:15.5px;line-height:1.45}
+th{font:500 12.5px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 14px 10px 0;border-bottom:1px solid var(--ink)}
+td{padding:13px 14px 13px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--body)}
+td:first-child{color:var(--ink);font-weight:500;white-space:nowrap}
+
+.band{background:var(--ink);color:var(--paper);margin-top:96px;padding:64px 0}
+.band p.eyebrow{color:#B5B1A6;font-family:var(--text);font-size:13px;line-height:1.4;margin:0}
+.band p{margin:16px 0 0;font-family:var(--display);font-size:clamp(24px,3.4vw,32px);line-height:1.3;color:var(--paper)}
+
+.note{display:inline;background:#F3E3DC;color:var(--accent);font-size:.92em;padding:1px 6px}
+
+.check{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.check li{border-bottom:1px solid var(--rule)}
+.check label{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:20px 0;cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;width:24px;height:24px;margin:4px 0 0;border:1.5px solid var(--ink);background:var(--paper);display:grid;place-content:center;cursor:pointer}
+.check input:checked{background:var(--ink)}
+.check input:checked::after{content:"";width:11px;height:6px;border-left:2px solid var(--paper);border-bottom:2px solid var(--paper);transform:rotate(-45deg) translate(1px,-1px)}
+.check span{color:var(--ink)}
+
+.cta{border-top:1px solid var(--ink);margin-top:96px;padding:88px 24px;text-align:center}
+.cta h2{font-size:clamp(40px,6vw,68px);line-height:1.04}
+.cta p{max-width:600px;margin:22px auto 0;color:var(--body)}
+
+.sources{padding:72px 0 0}
+.sources h2{font-size:34px;margin:0 0 8px}
+.sources ul{margin:18px 0 0;padding-left:20px;font-size:15px;line-height:1.6;color:var(--body)}
+.sources li{margin-bottom:8px}
+.sources p{font-size:15px;color:var(--muted);margin:0}
+footer.site{margin-top:88px;border-top:1px solid var(--ink);padding:24px 32px 110px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.biz li{transition:none}}
+
+/* phone article additions */
+.log{border:1px solid var(--ink);background:#fff;padding:18px 0 8px;box-shadow:0 18px 40px rgba(20,20,18,.08)}
+.log .hd{display:flex;justify-content:space-between;align-items:baseline;padding:0 20px 12px;border-bottom:1px solid var(--rule)}
+.log .hd b{font-family:var(--display);font-weight:400;font-size:28px}
+.log .hd span{font-size:13px;color:var(--muted)}
+.log ul{list-style:none;margin:0;padding:0}
+.log li{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:12px 20px;border-bottom:1px solid var(--panel)}
+.log li:last-child{border-bottom:0}
+.log .ic{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--accent);position:relative}
+.log .ic::after{content:"";position:absolute;left:5px;top:9px;width:9px;height:1.5px;background:var(--accent);transform:rotate(-35deg)}
+.log .who{font-size:16px;color:var(--accent);line-height:1.3}
+.log .who small{display:block;font-size:13px;color:var(--muted)}
+.log .tm{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.verdict{margin:48px 0 0;padding:26px 28px;border:1px solid var(--ink);background:var(--panel);box-shadow:inset 0 3px 0 var(--accent)}
+.verdict h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+.verdict p{margin:0;font-family:var(--display);font-size:clamp(24px,3.2vw,30px);line-height:1.25;color:var(--ink)}
+.lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.lane{border:1px solid var(--ink);padding:18px}
+.lane h3{font-size:26px;line-height:1.1;margin:4px 0 8px}
+.lane .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.lane p{margin:10px 0 0;font-size:15px;line-height:1.5;color:var(--body)}
+.day{display:flex;height:26px;border:1px solid var(--ink);margin-top:10px}
+.day i{display:block;height:100%}
+.day .p{background:#A8A397}.day .a{background:var(--accent)}.day .pa{background:repeating-linear-gradient(135deg,#A8A397 0 6px,var(--accent) 6px 12px)}
+.daykey{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px}
+.legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:14px;color:var(--body)}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px}
+.legend .lp::before{background:#A8A397}.legend .la::before{background:var(--accent)}.legend .lpa::before{background:repeating-linear-gradient(135deg,#A8A397 0 3px,var(--accent) 3px 6px)}
+@media (max-width:760px){.lanes{grid-template-columns:1fr}}
+.dots{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:6px;max-width:560px}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--ink)}
+.dots i.m{background:transparent;border:1.5px solid #A8A397}
+.dots i.v{background:var(--accent)}
+.dotkey{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:14px;color:var(--body)}
+.dotkey span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.dotkey .a::before{background:var(--ink)}.dotkey .m::before{border:1.5px solid #A8A397}.dotkey .v::before{background:var(--accent)}
+.bar .f.cad{background:repeating-linear-gradient(135deg,#A8A397 0 6px,#CFCBC0 6px 12px)}
+.scroll{overflow-x:auto}
+@media (max-width:600px){.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--rule)}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8.5em;white-space:normal}.stack td::before{content:attr(data-l);float:inline-start;width:8em;margin-inline-start:-8.5em;font:500 12px/1.9 var(--text);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}.stack td:first-child{font-weight:600}}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+th.n{text-align:right}
+
+
+.hero.one{grid-template-columns:1fr}
+.flow5{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:none}
+.flow5 li{border:1px solid var(--ink);padding:16px 14px 18px;background:var(--paper)}
+.flow5 li.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.flow5 .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.flow5 h3{font-size:24px;line-height:1.1;margin:6px 0 8px}
+.flow5 li > p:not(.k){margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.flow5 li > p.get{margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink)}
+body.lv-t .flow5 li > p.get{display:none}
+.float{transition:opacity .2s}.float.away{opacity:0;pointer-events:none}
+@media (max-width:600px){.stack.two td::before{content:none}.stack.two td{padding-inline-start:0}.stack.two td:first-child{padding-top:10px}table.score td{padding-inline-start:10em}table.score td::before{width:9.5em;margin-inline-start:-10em}}
+.check{margin-left:0;padding-left:0}
+.after6{margin:14px 0 0;font-size:14px;color:var(--muted)}
+@media (max-width:820px){.flow5{grid-template-columns:1fr}}
+.tablewrap{margin:8px 0 28px}
+.prose table td:first-child{white-space:normal}
+table.score tr.chosen td{background:var(--panel)}
+table.score tr.chosen td:first-child{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px}
+table.score tr.gated td{color:#8A877D}
+.madeup{margin:20px 0 6px;color:var(--accent)}
+.toolgroup{margin:28px 0 32px;border-top:1px solid var(--ink);padding-top:18px}
+.toolseg{margin-bottom:16px}
+.toolblock{background:var(--panel);border:1px solid var(--ink);padding:20px 24px}
+.toolblock .toolname{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.toolblock ol{margin:0 0 12px}
+.toolblock p{font-size:15px}
+.toolgroup.js .toolblock{display:none}
+.toolgroup.js .toolblock.on{display:block}
+.bar .f.empty{background:transparent;border:1.5px dashed #A8A397;height:30px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.prose h3{font-size:26px;margin:28px 0 10px}
+@media (max-width:600px){.stack td:first-child{padding-inline-start:0}.stack td:first-child::before{content:none}table.score tr.chosen td:first-child{padding-left:10px}}
+.float{bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+
+/* café worked example additions */
+.toolseg{display:flex;flex-wrap:wrap;width:max-content;max-width:100%}
+.toolseg button{padding:12px 14px}
+.toolseg button + button{border-left:1px solid var(--rule)}
+@media (max-width:520px){.toolseg{width:100%}.toolseg button{flex:1 1 auto;padding:12px 10px;font-size:13px}}
+.toolblock h3{font-size:22px}
+.toolblock ul,.toolblock ol{font-size:15.5px}
+.where2 > div{min-width:0}
+.where2 p{margin:0 0 10px;font-size:15.5px;line-height:1.6;color:var(--body)}
+.where2 p:last-child{margin-bottom:0}
+.prompt{margin:24px 0 32px;border:1px solid var(--ink);background:#fff;padding:20px 22px 18px;box-shadow:inset 3px 0 0 var(--accent)}
+.prompt .pl{margin:0 0 8px;font:600 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.prompt .ptext{margin:0 0 14px;font-size:17px;line-height:1.6;color:var(--ink)}
+.prompt .copy{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.prompt .copy:hover{background:var(--ink);color:var(--paper)}
+.card{border:1px solid var(--ink);background:var(--panel);padding:22px 24px 24px;box-shadow:inset 0 3px 0 var(--accent)}
+.card .madeup{margin:0 0 4px}
+.card h3{font-size:34px;line-height:1.1;margin:0 0 14px}
+.card dl{margin:0;display:grid;grid-template-columns:92px minmax(0,1fr);gap:8px 14px;font-size:15.5px;line-height:1.5}
+.card dt{font:500 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card dd{margin:0;color:var(--body)}
+.flow5.cafe li.on .get{color:var(--accent)}
+.jobs{list-style:none;margin:0 0 12px;padding:0;border-top:1px solid var(--ink)}
+.jobs li{display:grid;grid-template-columns:96px 1fr;gap:4px 12px;padding:14px 0;border-bottom:1px solid var(--rule);font-size:18px;color:var(--ink)}
+.jobs li small{grid-column:2;font-size:14px;color:var(--muted)}
+.jobs .mk{font:600 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase}
+.jobs li.yes{background:var(--panel);box-shadow:inset 3px 0 0 var(--accent);padding-left:12px}
+.jobs li.yes .mk{color:var(--accent)}
+.jobs li.no{color:#8A877D}.jobs li.no .mk{color:var(--muted)}
+/* chart */
+.chart{display:grid;grid-template-columns:56px minmax(0,1fr);gap:8px;align-items:stretch}
+.yax{display:flex;flex-direction:column;justify-content:space-between;font-size:12px;color:var(--muted);text-align:right;padding-bottom:22px;font-variant-numeric:tabular-nums}
+.plot{position:relative;border-left:1px solid var(--ink);border-bottom:0}
+.days{display:grid;grid-template-columns:repeat(31,minmax(0,1fr));gap:3px;height:300px;align-items:end;position:relative;z-index:1}
+.days .c{display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-width:0}
+.bar2{display:block;position:relative;background:#A8A397;min-height:2px;border-bottom:1px solid var(--ink)}
+.c.we .bar2{background:var(--ink)}
+.dn{display:block;height:22px;padding-top:4px;font-size:11px;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+.drop{position:absolute;left:50%;top:-14px;width:8px;height:8px;margin-left:-4px;background:var(--accent);border-radius:0 50% 50% 50%;transform:rotate(45deg)}
+.tag{position:absolute;bottom:calc(100% + 18px);left:50%;transform:translateX(-50%);font:500 12px var(--text);color:var(--accent);white-space:nowrap}
+.roadband{position:absolute;top:0;bottom:22px;left:calc(12 / 31 * 100%);width:calc(5 / 31 * 100%);background:repeating-linear-gradient(135deg,rgba(122,46,26,.10) 0 6px,rgba(122,46,26,0) 6px 12px);border-left:1px dashed var(--accent);border-right:1px dashed var(--accent);z-index:0}
+.roadband span{position:absolute;top:6px;left:6px;font:500 12px var(--text);color:var(--accent);white-space:nowrap}
+.chartfig .legend .lw::before{background:#A8A397}.chartfig .legend .lwe::before{background:var(--ink)}
+.chartfig .legend .lr::before{background:var(--accent);border-radius:0 50% 50% 50%;transform:rotate(45deg);width:9px;height:9px}
+.chartfig .legend .lroad::before{background:repeating-linear-gradient(135deg,rgba(122,46,26,.3) 0 3px,transparent 3px 6px);border:1px dashed var(--accent)}
+@media (max-width:640px){.days{height:220px;gap:2px}.dn{font-size:9px}.chart{grid-template-columns:44px minmax(0,1fr)}.yax{font-size:11px}.roadband span{font-size:11px;top:-20px;left:0}.tag{font-size:11px}}
+/* before / after template */
+.ba{display:grid;grid-template-columns:40px minmax(0,1fr);gap:10px;height:240px}
+.ba-y{writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;color:var(--muted);text-align:center}
+.ba-plot{display:grid;grid-template-columns:repeat(2,minmax(0,160px));gap:48px;align-items:end;border-left:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:0 32px}
+.ba-col{display:flex;flex-direction:column;align-items:stretch;height:100%;justify-content:flex-end;position:relative}
+.ba-bar{display:block;height:70%;border:1.5px dashed #A8A397;border-bottom:0}
+.ba-l{position:absolute;top:100%;left:0;right:0;padding-top:6px;text-align:center;font-size:14px;color:var(--ink)}
+.ba-l small{display:block;font-size:12px;color:var(--muted)}
+.ba + figcaption{margin-top:52px}
+/* agent rows */
+.agentrows{list-style:none;margin:0 0 12px;padding:0;border-top:1px solid var(--ink)}
+.agentrows li{display:grid;grid-template-columns:110px minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule);font-size:16px}
+.agentrows .aj{font-family:var(--display);font-size:22px;line-height:1.1}
+.agentrows .aa{color:var(--body)}
+.agentrows .ap{color:var(--ink);font-weight:500}
+@media (max-width:600px){.agentrows li{grid-template-columns:1fr;gap:4px}}
+.stop{display:inline-block;width:12px;height:12px;background:var(--accent);margin-right:8px;vertical-align:-1px;clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%)}
+table.agent td:nth-child(3){color:var(--ink);font-weight:500}
+.prose blockquote{margin:0 0 20px;padding:4px 0 4px 18px;border-left:3px solid var(--accent)}
+.sources ul{word-break:break-word}
+section.q.st{display:block}
+body.lv-d section.q.st{display:none}
+.prose .where2 h3,.prose .box h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.prose .where2 p,.prose .where2 li{font-size:.86em}
+.prose .toolblock p,.prose .toolblock li{font-size:.86em;line-height:1.6}
+.tag{bottom:calc(100% + 16px);writing-mode:vertical-rl;transform:translateX(-50%) rotate(180deg);z-index:3;background:var(--paper);padding:2px 0;line-height:1}
+body.lv-t .flow5.cafe li > p.get{display:block}
+@media (max-width:640px){.dn:not(.k){color:transparent}}
+.prose .where2 ul,.prose .toolblock ol,.prose .toolblock ul{font-size:inherit}
+.prose .where2 li,.prose .toolblock li{font-size:.86em;line-height:1.6}
+.checked{margin:-24px 0 28px;font-size:14px !important;color:var(--muted) !important}
+/* chart scale: bars area = days height minus the 22px label row */
+.yax{position:relative;display:block;padding:0;height:300px}
+.yax span{position:absolute;right:0;transform:translateY(-50%);margin-top:0}
+.yax span:nth-child(1){top:0 !important}
+.yax span:nth-child(2){top:139px !important}
+.yax span:nth-child(3){top:278px !important}
+.grid{position:absolute;left:0;right:0;top:0;height:278px;border-top:1px solid var(--rule);border-bottom:1px solid var(--ink);background:linear-gradient(var(--rule),var(--rule)) 0 50%/100% 1px no-repeat;z-index:0}
+.bar2{border-bottom:0}
+.days .c{justify-content:flex-start}
+.days .c .bar2{margin-top:auto}
+.c{display:grid !important;grid-template-rows:278px 22px}
+.c .bar2{align-self:end;max-height:278px}
+.c .dn{align-self:start}
+.plot{border-left:1px solid var(--ink)}
+@media (max-width:640px){
+ .yax{height:220px}.yax span:nth-child(2){top:99px !important}.yax span:nth-child(3){top:198px !important}
+ .grid{height:198px}.c{grid-template-rows:198px 22px}.c .bar2{max-height:198px}
+ .roadband span{display:none}
+ .toolseg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}
+ .toolseg button + button{border-left:0}
+ .toolseg button{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+}
+.roadband{bottom:auto;height:278px}
+@media (max-width:640px){.roadband{height:198px}}
+.c{grid-template-columns:minmax(0,1fr)}.c .bar2{width:100%}.days{align-items:stretch}
+details.data{margin-top:16px;border-top:1px solid var(--rule);padding-top:12px;max-width:680px}
+details.data summary{cursor:pointer;font:500 15px var(--text);color:var(--ink);min-height:44px;display:flex;align-items:center}
+details.data p{font-size:14px;color:var(--muted);margin:4px 0 10px}
+details.data pre{margin:12px 0 0;max-height:260px;overflow:auto;background:#fff;border:1px solid var(--rule);padding:12px;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;color:var(--body)}
+.copydata{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+
+/* workshop 1 additions */
+.figslot{display:block}
+.figslot > figure{margin:40px auto}
+.k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+
+/* agenda drawn to scale */
+.agbar{list-style:none;margin:0;padding:0;display:flex;border-left:1px solid var(--ink)}
+.agbar li{flex:var(--m) 1 0;display:grid;grid-template-rows:22px 64px auto auto auto;padding:0 6px 0 0;border-right:1px solid var(--paper)}
+.agbar .tm{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;padding-left:6px;border-left:1px solid var(--ink);margin-left:-1px}
+.agbar .blk{display:block;background:#A8A397;margin-right:-6px}
+.agbar li.win .blk{background:var(--accent)}
+.agbar li.ag .blk{background:var(--ink)}
+.agbar li.brk .blk{background:repeating-linear-gradient(135deg,#CFCBC0 0 5px,transparent 5px 10px)}
+.agbar .nm{font-family:var(--display);font-size:21px;line-height:1.1;margin:10px 0 2px 6px}
+.agbar li.win .nm{color:var(--accent)}
+.agbar .sb{font-size:13px;line-height:1.35;color:var(--body);margin-left:6px}
+.agbar .mn{font-size:12px;color:var(--muted);margin:4px 0 0 6px}
+.agbar li.end{flex:0 0 0;padding:0;border:0}
+.agbar li.end .tm{position:relative;left:-34px;border-left:0;text-align:right;width:34px;padding:0}
+.agendafig .legend .lwin::before{background:var(--accent)}
+.agendafig .legend .lag::before{background:var(--ink)}
+.agendafig .legend .lother::before{background:#A8A397}
+@media (max-width:760px){
+  .agbar{flex-direction:column;border-left:0;border-top:1px solid var(--ink)}
+  .agbar li{display:grid;grid-template-columns:44px minmax(0,1fr) auto;grid-template-rows:auto auto auto;column-gap:12px;padding:12px 0;border-right:0;border-bottom:1px solid var(--rule)}
+  .agbar .tm{grid-row:1/3;border-left:0;padding:3px 0 0;margin:0}
+  .agbar .nm{grid-column:2;margin:0;font-size:22px}
+  .agbar .sb{grid-column:2;margin:0}
+  .agbar .mn{grid-column:3;grid-row:1;margin:4px 0 0;white-space:nowrap}
+  .agbar .blk{grid-column:2/4;grid-row:3;height:10px;width:calc(var(--m) / 35 * 100%);margin:8px 0 0}
+  .agbar li.end{display:none}
+}
+
+/* agenda table */
+table.agenda tr.win td{background:var(--panel)}
+table.agenda tr.win td:first-child{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px}
+table.agenda tr.brk td{color:var(--muted);font-style:italic}
+table.agenda td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:600px){table.agenda tr.win td:first-child{padding-left:10px}table.agenda tr.brk td:empty{display:none}}
+
+/* scoring rule */
+.formula{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr) 28px minmax(0,.8fr);align-items:stretch;gap:8px}
+.formula .term{border:1px solid var(--ink);padding:14px 16px;background:var(--paper)}
+.formula .term.res{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.formula .v{margin:6px 0 0;font-family:var(--display);font-size:22px;line-height:1.2;color:var(--ink)}
+.formula .op{align-self:center;text-align:center;font-family:var(--display);font-size:32px;color:var(--muted)}
+.gate{margin-top:16px;border:1px dashed var(--accent);padding:16px 18px}
+.gate .k{color:var(--accent)}
+.gate ul{margin:10px 0 0;padding-left:20px;font-size:16px;line-height:1.55;color:var(--body)}
+.scorefig .out{margin:14px 0 0;font-family:var(--display);font-size:24px;line-height:1.25;color:var(--ink)}
+@media (max-width:600px){.formula{grid-template-columns:1fr}.formula .op{font-size:26px;line-height:1}}
+
+/* free plan grid */
+.freegrid{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.freegrid li{display:grid;grid-template-columns:150px 150px minmax(0,1fr);gap:6px 16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--rule)}
+.freegrid .ex{font-family:var(--display);font-size:22px;line-height:1.1;color:var(--ink)}
+.freegrid .ex small{display:block;font:400 13px var(--text);color:var(--muted);margin-top:2px}
+.freegrid .mk{font:600 12px/1.6 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.freegrid .mk::before{content:"";display:inline-block;width:10px;height:6px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg) translate(1px,-2px);margin-right:8px}
+.freegrid li.part .mk{color:var(--ink)}
+.freegrid li.part .mk::before{width:10px;height:0;border-left:0;transform:none;vertical-align:4px}
+.freegrid .tx{font-size:15.5px;line-height:1.5;color:var(--body)}
+@media (max-width:600px){.freegrid li{grid-template-columns:1fr}}
+
+/* sample file */
+.filecard{border:1px solid var(--ink);background:#fff;padding:18px 20px 8px;box-shadow:inset 3px 0 0 var(--accent)}
+.filecard .madeup{margin:0 0 4px}
+.filecard .fn{margin:0;font:500 17px ui-monospace,Menlo,Consolas,monospace;color:var(--ink);word-break:break-all}
+.filecard .fm{margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--muted)}
+.filecard details.data{border-top:1px solid var(--rule)}
+
+/* fact sheet */
+.card.fact{margin:24px 0 28px}
+.card.fact h3{font-size:30px;margin:0}
+.card.fact .sub{margin:2px 0 12px;font-size:14px !important;color:var(--muted) !important}
+.card.fact ul{margin:0 0 16px;padding-left:20px;font-size:.88em;line-height:1.6;color:var(--body)}
+.card.fact .copy,.hnote .copy{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.card.fact .copy:hover,.hnote .copy:hover,.copydata:hover{background:var(--ink);color:var(--paper)}
+.prompt .ptext p{margin:0 0 10px;font-size:17px;line-height:1.6;color:var(--ink)}
+.prompt .ptext p:last-child{margin-bottom:0}
+.prompt .ptext{margin:0 0 14px}
+
+/* agent flow */
+.agentfig .flow5 li > p:not(.k){font-size:15px}
+.agentfig .flow5 li .k{color:var(--muted)}
+.agentfig .flow5 li.on .k{color:var(--accent)}
+.agentfig .rule{margin:18px 0 0;font-family:var(--display);font-size:26px;line-height:1.25;color:var(--ink)}
+
+/* week after */
+.flow3{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.flow3 li{border:1px solid var(--ink);padding:16px 16px 18px;position:relative}
+.flow3 li:last-child{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.flow3 h3{font-size:24px;line-height:1.1;margin:6px 0 8px}
+.flow3 li > p:not(.k){margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+@media (max-width:700px){.flow3{grid-template-columns:1fr}}
+
+/* four checks */
+.prose ol.checks4{list-style:none;padding:0;margin:0 0 24px;border-top:1px solid var(--ink);counter-reset:ck}
+.prose ol.checks4 li{counter-increment:ck;display:grid;grid-template-columns:44px minmax(0,1fr);gap:6px;padding:14px 0;border-bottom:1px solid var(--rule)}
+.prose ol.checks4 li::before{content:counter(ck);font-family:var(--display);font-size:34px;line-height:.95;color:var(--accent)}
+
+/* answer key */
+table.akey td:first-child{font-weight:600;color:var(--ink)}
+table.akey tr:nth-child(4) td{background:#F3E3DC}
+
+/* one country box */
+.where2.one{grid-template-columns:1fr}
+
+/* handout */
+.handout{border:1.5px solid var(--ink);background:#fff;padding:26px 28px 22px;margin:8px 0 14px;box-shadow:0 14px 36px rgba(20,20,18,.07)}
+.handout .hhd{border-bottom:1px solid var(--ink);padding-bottom:12px;margin-bottom:16px}
+.handout .hhd h3{font-size:30px;line-height:1.1;margin:4px 0 0}
+.handout p{margin:0 0 14px;font-size:16px !important;line-height:1.6 !important;color:var(--body)}
+.handout p:last-child{margin-bottom:0}
+.handout strong{color:var(--accent)}
+.handout .blank{display:inline-block;width:7.5em;max-width:40%;border-bottom:1px solid var(--ink);height:1.1em;vertical-align:-3px;margin:0 6px 0 2px}
+.hnote{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:0 0 20px}
+.hnote span{font-size:14px;color:var(--muted)}
+table.akey tr:nth-child(4) td{padding-left:10px;padding-right:10px}
+.prose h3{line-height:1.15}
+.prose ol.checks4 li{display:block;position:relative;padding:14px 0 14px 50px}
+.prose ol.checks4 li::before{position:absolute;left:0;top:14px}
+
+/* #4 price check */
+.linefig .invline{border:1px solid var(--ink);background:#fff;padding:14px 18px;margin-bottom:16px}
+.linefig .invline .madeup{margin:0 0 4px}
+.linefig .il{margin:0;font-family:var(--display);font-size:26px;line-height:1.2;display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline}
+.linefig .il span{font:400 15px var(--text);color:var(--muted)}
+.linefig .il b{font-weight:400;margin-left:auto;font-variant-numeric:tabular-nums}
+.eq{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr) 28px minmax(0,1fr);gap:8px;align-items:stretch}
+.eq .term{border:1px solid var(--ink);padding:14px 16px;background:var(--paper)}
+.eq .term.res{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.eq .v{margin:6px 0 0;font-family:var(--display);font-size:30px;line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums}
+.eq .op{align-self:center;text-align:center;font-family:var(--display);font-size:32px;color:var(--muted)}
+.linefig .was{margin:14px 0 0;font-size:16px;line-height:1.55;color:var(--body)}
+.linefig .was strong{color:var(--accent);font-weight:600}
+@media (max-width:600px){.eq{grid-template-columns:1fr}.eq .op{font-size:26px;line-height:1}.linefig .il b{margin-left:0}}
+.toolfig{border-top:1px solid var(--ink);padding-top:18px}
+.toolfig .madeup{margin:0 0 6px}
+.toolfig .toolnote{margin:-8px 0 16px;font-size:14px;color:var(--muted)}
+.pcrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0}
+.pcrow input{width:5.5em;font:500 16px var(--text);padding:10px 8px;min-height:44px;border:1px solid var(--ink);background:#fff;color:var(--ink)}
+.pcrow span{font-size:15px;color:var(--body)}
+.pcsum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--ink);margin:12px 0 16px}
+.pcsum > div{padding:14px 16px;background:var(--paper)}
+.pcsum > div + div{border-left:1px solid var(--rule)}
+.pcsum > div:nth-child(2){background:var(--panel);box-shadow:inset 0 3px 0 var(--accent)}
+.pcsum .v{margin:4px 0 0;font-family:var(--display);font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
+@media (max-width:600px){.pcsum{grid-template-columns:1fr}.pcsum > div + div{border-left:0;border-top:1px solid var(--rule)}}
+table.pc{font-size:15px}
+table.pc td small{display:block;font-size:12.5px;color:var(--muted);font-weight:400;margin-top:2px}
+table.pc td small em{color:var(--accent);font-style:normal}
+table.pc td.n,table.pc th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.pc .fl{font:600 11.5px var(--text);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+table.pc tr.up td,table.pc tr.new td{background:var(--panel)}
+table.pc tr.up td:first-child,table.pc tr.new td:first-child{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px}
+table.pc tr.up .fl,table.pc tr.new .fl{color:var(--accent)}
+table.pc tr.ok td,table.pc tr.same td{color:#6E6B62}
+table.pc tr.down .fl{color:var(--ink)}
+@media (max-width:640px){
+ table.pc thead{display:none}
+ table.pc tr{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:10px 0;border-bottom:1px solid var(--rule)}
+ table.pc td{border:0;padding:2px 0}
+ table.pc td:first-child{grid-column:1/3;white-space:normal}
+ table.pc td.n{text-align:left}
+ table.pc td.n::before,table.pc td[data-l="Flag"]::before{content:attr(data-l)": ";font:500 11px var(--text);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+ table.pc tr.up td:first-child,table.pc tr.new td:first-child{box-shadow:none;padding-left:0}
+ table.pc tr.up,table.pc tr.new{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px;background:var(--panel)}
+}
+.pcedit textarea{width:100%;min-height:180px;font:12.5px/1.5 ui-monospace,Menlo,Consolas,monospace;border:1px solid var(--rule);background:#fff;color:var(--ink);padding:10px}
+.pcedit .k{display:block;margin:10px 0 4px}
+.pcerr{color:var(--accent);font-size:14px;margin:6px 0}
+.pcerr:empty{display:none}
+.toolfig .tablewrap{overflow-x:auto}
+table.pc .fl{white-space:normal}
+@media (min-width:641px){table.pc td:last-child{width:6.5em}}
+table.pc td:last-child,table.pc th:last-child{padding-right:0}
+@media (min-width:641px){table.pc td:last-child{width:7.5em}table.pc td,table.pc th{padding-right:10px}}
+#pricecheck .pcrow button{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+#pricecheck .pcrow button:hover{background:var(--ink);color:var(--paper)}
+details.pcedit summary::before{content:"+";width:1.2em;font-weight:600;color:var(--accent)}
+details.pcedit[open] summary::before{content:"\2212"}
+
+</style>
+<script>document.body.classList.add("lv-t")</script>
+<header class="site"><span class="mark">Leverage</span><span class="where">Builds · Supplier price check</span></header><div class="hero one"><div><p class="eyebrow"><span class="d">Detailed version · 14 minute read</span><span class="s">Simple version · 10 minute read</span><span class="t">Starter version · 7 minute read</span></p><h1>Build: check supplier prices in 15 minutes, not hours</h1><p class="lede">Once your list is set up, check this week's supplier invoices against last time in about 15 minutes, catch the lines that quietly went up, and decide what to do about them, without buying new software.</p><p class="by">By Dan Albasry · November 26, 2026 · For small business owners in the US and Canada</p></div></div>
+<div class="wrap"><div class="versions"><p><strong>Three ways to read this.</strong> Starter is the easiest. Simple says everything in plain words. Detailed has every number and source. Switch any time with the button at the bottom of your screen.</p><div class="seg" role="group" aria-label="Choose a reading level"><button type="button" data-v="t" aria-pressed="true">Starter</button><button type="button" data-v="s" aria-pressed="false">Simple</button><button type="button" data-v="d" aria-pressed="false">Detailed</button></div></div>
+<div class="prose d" style="margin-top:48px"><p><span class="note">[DAN: A SHORT REAL SCENE, 3 TO 5 SENTENCES, OF AN OWNER FINDING A PRICE RISE THEY HADN'T NOTICED ON A SUPPLIER INVOICE, OR YOUR OWN FIRST TIME COMPARING INVOICES LINE BY LINE. NO CLIENT NAME, NO DETAILS THAT IDENTIFY THEM.]</span></p>
+<p>Most owners look at the total on a supplier invoice, not the price of each line. That's how a 4% rise on milk or a smaller case of cups at the same price gets paid for months before anyone notices. This guide is a small build: a price check you can run every week, a working version of it on this page with a made-up café's invoices, and the steps to make the same thing in ChatGPT or Claude with your own files.</p>
+<p>It's the same job OpenAI uses as an example on its OpenWorks page. At Sign Badgers, a sign shop in Fargo, North Dakota, a production specialist "was spending hours every week tracking inventory and comparing vendor prices". After a local partner showed her how to use Codex and ChatGPT for it, OpenAI says price checks that once took hours now take 15 to 20 minutes, and she says the improvements save her two to five hours a week (<a href="https://openai.com/openworks/" rel="noopener" target="_blank">OpenAI</a>, the company's own example; the hours saved are as the staff member reports them).</p></div>
+<div class="prose s" style="margin-top:48px"><p><span class="note">[DAN: THE SAME SHORT REAL SCENE AS THE DETAILED VERSION, IN SIMPLER WORDS.]</span></p>
+<p>Most owners look at the total on a supplier invoice, not the price of each line. That's how a small rise on milk, or a smaller box of cups at the same price, gets paid for months. This guide gives you a weekly price check, a working version of it on this page with a made-up café's invoices, and the steps to make the same thing in ChatGPT or Claude.</p>
+<p>OpenAI uses this job as an example on its OpenWorks page. At Sign Badgers, a sign shop in Fargo, North Dakota, a staff member spent hours every week comparing vendor prices. After a local partner showed her how to use Codex and ChatGPT, OpenAI says price checks that once took hours now take 15 to 20 minutes, and she says it saves her two to five hours a week (<a href="https://openai.com/openworks/" rel="noopener" target="_blank">OpenAI</a>, the company's own example; the hours saved are what she reports).</p></div>
+<div class="prose t" style="margin-top:48px"><p><span class="note">[DAN: THE SAME SHORT REAL SCENE, IN VERY SIMPLE WORDS.]</span></p>
+<p>Most owners only look at the total on a bill from a supplier. A small price rise on one line can hide there for months. This guide shows a quick weekly check. You can try it on this page with a pretend café's bills.</p>
+<p>A sign shop in Fargo, North Dakota, used ChatGPT for this job. OpenAI says price checks that took hours now take 15 to 20 minutes (<a href="https://openai.com/openworks/" rel="noopener" target="_blank">OpenAI</a>, the company's own example).</p></div>
+</div>
+<figure class="widewrap linefig"><p class="figtitle">The price that matters is the price per unit</p><div class="invline"><p class="eyebrow madeup">Made-up invoice line</p><p class="il">Hot cups, 12 oz <span>case of 900</span> <b>$96.00</b></p></div><div class="eq"><div class="term"><p class="k">Pack price</p><p class="v">$96.00</p></div><span class="op">&divide;</span><div class="term"><p class="k">Units in the pack</p><p class="v">900</p></div><span class="op">=</span><div class="term res"><p class="k">Price per cup</p><p class="v">$0.1067</p></div></div><p class="was">Last time: $96.00 for a case of 1,000, or $0.0960 a cup. Same case price, <strong>11.1% more per cup</strong>.</p></figure>
+<div class="wrap"><nav class="toc" aria-label="In this guide"><p class="eyebrow">The workshop, question by question</p><ol><li><a href="#q1"><span class="n">1</span><span>Why do supplier prices creep up without me noticing?</span></a></li><li><a href="#q2"><span class="n">2</span><span>What do I need before I start?</span></a></li><li><a href="#q3"><span class="n">3</span><span>How does a 15-minute price check work?</span></a></li><li><a href="#q4"><span class="n">4</span><span>How do I build it myself in ChatGPT or Claude?</span></a></li><li><a href="#q5"><span class="n">5</span><span>Can an agent run it for me every week?</span></a></li><li><a href="#q6"><span class="n">6</span><span>How do I check the AI didn&#x27;t get the numbers wrong?</span></a></li><li><a href="#q7"><span class="n">7</span><span>What do I do when I find a price jump?</span></a></li><li><a href="#q8"><span class="n">8</span><span>What should I keep private?</span></a></li></ol></nav></div>
+<section class="q" id="q1"><div class="wrap"><p class="eyebrow">Question 1 of 8</p><h2>Why do supplier prices creep up without me noticing?</h2>
+<div class="prose d"><p class="answer">Because they rise in small steps, on single lines, and a weekly total hides them. In the US, producer prices for final demand rose 0.3% in October 2026 and 6.5% over the 12 months to October, while prices for processed goods that businesses buy from each other rose 14.6% over the same 12 months (<a href="https://www.bls.gov/news.release/ppi.nr0.htm" rel="noopener" target="_blank">U.S. Bureau of Labor Statistics</a>, released November 13, 2026). In Canada, the Industrial Product Price Index was up 12.6% year over year in October, its 25th straight month of year-over-year increases (<a href="https://www150.statcan.gc.ca/n1/daily-quotidien/261119/dq261119a-eng.htm" rel="noopener" target="_blank">Statistics Canada</a>, November 19, 2026).</p>
+<p>Owners feel it. Rising costs were the most common financial challenge in the Federal Reserve Banks' survey of US small employer firms: 77% reported rising costs, tariff-related costs or both. Among firms that buy some inputs from abroad, 76% passed at least some of the higher costs on to customers and 60% absorbed at least some (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve Banks, 2026 Report on Employer Firms</a>). In Canada, 45% of small firms named product input and material costs as a main cost constraint in November 2026 (a CFIB survey of its members, 565 responses, <a href="https://www.cfib-fcei.ca/en/research-economic-analysis/business-barometer" rel="noopener" target="_blank">CFIB Business Barometer</a>).</p>
+<p>Three things hide a rise on an invoice:</p>
+<ul>
+<li><strong>The step is small.</strong> A 3% move on one line doesn't change the total enough to catch your eye.</li>
+<li><strong>The pack changes.</strong> "A case of 40 instead of 48 at the same price is a 20% rise per unit," as one Canadian restaurant software maker puts it (<a href="https://desk.tasti.io/guides/catch-supplier-price-increases" rel="noopener" target="_blank">Tasti</a>, a vendor's guide).</li>
+<li><strong>A new charge appears.</strong> A fuel surcharge or delivery fee on its own line raises what you pay without touching any product price.</li>
+</ul></div>
+<div class="prose s"><p class="answer">Because they go up in small steps, one line at a time, and the total hides them. In the US, prices that businesses pay each other for processed goods rose 14.6% in the 12 months to October 2026 (<a href="https://www.bls.gov/news.release/ppi.nr0.htm" rel="noopener" target="_blank">U.S. Bureau of Labor Statistics</a>). In Canada, factory prices were up 12.6% from a year before, the 25th month in a row they rose (<a href="https://www150.statcan.gc.ca/n1/daily-quotidien/261119/dq261119a-eng.htm" rel="noopener" target="_blank">Statistics Canada</a>).</p>
+<p>Owners feel it. In a US Federal Reserve survey, 77% of small employer firms reported rising costs, tariff costs or both (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve Banks</a>). In Canada, 45% of small firms said input costs were a main problem in November 2026 (a survey by CFIB, a business owners' group, <a href="https://www.cfib-fcei.ca/en/research-economic-analysis/business-barometer" rel="noopener" target="_blank">CFIB</a>).</p>
+<p>Three things hide a rise:</p>
+<ul>
+<li><strong>The step is small.</strong> A 3% rise on one line barely moves the total.</li>
+<li><strong>The pack changes.</strong> "A case of 40 instead of 48 at the same price is a 20% rise per unit" (<a href="https://desk.tasti.io/guides/catch-supplier-price-increases" rel="noopener" target="_blank">Tasti</a>, a software company's guide).</li>
+<li><strong>A new charge appears</strong>, like a fuel surcharge on its own line.</li>
+</ul></div>
+<div class="prose t"><p class="answer">Prices go up in small steps, one line at a time. The total hides them. In the US, prices for processed goods that businesses buy from each other went up 14.6% in the year to October 2026 (<a href="https://www.bls.gov/news.release/ppi.nr0.htm" rel="noopener" target="_blank">U.S. Bureau of Labor Statistics</a>). In Canada, factory prices went up 12.6% in the year to October 2026 (<a href="https://www150.statcan.gc.ca/n1/daily-quotidien/261119/dq261119a-eng.htm" rel="noopener" target="_blank">Statistics Canada</a>).</p>
+<p>Three things hide a price rise:</p>
+<ul>
+<li>The rise is small.</li>
+<li>The box gets smaller but the price stays the same. 40 in a box instead of 48 is a 20% rise for each one (<a href="https://desk.tasti.io/guides/catch-supplier-price-increases" rel="noopener" target="_blank">Tasti</a>, a software company's guide).</li>
+<li>A new fee shows up, like a fuel fee.</li>
+</ul></div>
+</div></section>
+<section class="q" id="q2"><div class="wrap"><p class="eyebrow">Question 2 of 8</p><h2>What do I need before I start?</h2>
+<div class="prose d"><p class="answer">Two prices for each item you buy often: what you paid last time and what this invoice says, both with the pack size. You also need roughly how much of it you use in a month. Start with your top 20 to 30 lines by spend, not everything.</p>
+<p>Where those come from depends on how your suppliers bill you and what you run your business on:</p>
+<ul>
+<li><strong>Supplier invoices.</strong> Paper, PDF by email, or a download from the supplier's ordering site. A spreadsheet or CSV download is better than a PDF, and a PDF is better than a photo.</li>
+<li><strong>Your accounting software.</strong> QuickBooks Online and Xero both export bills and reports as spreadsheet files, but the cheaper plans limit what you can track. In Canada, QuickBooks Online's bill management, purchase orders and inventory tracking come only with Plus (CA$110 a month list price) and Advanced; Lite and EasyStart don't include them (<a href="https://quickbooks.intuit.com/ca/pricing/" rel="noopener" target="_blank">QuickBooks Canada</a>). Xero's Canadian Starter plan (CA$25 a month) includes entering 5 bills, so check the limit if you get supplier bills every week; Standard is CA$60 (<a href="https://www.xero.com/ca/pricing-plans/" rel="noopener" target="_blank">Xero Canada</a>).</li>
+<li><strong>Your till.</strong> Square exports reports as CSV files from Reports in the Square Dashboard (<a href="https://app.squareup.com/help/us/en/article/8362-print-export-or-email-your-reports" rel="noopener" target="_blank">Square</a>). Toast's basic system counts items, not ingredients; its xtraCHEF add-on, which includes an ingredient price tracker, is listed at $179 a month per location for Essentials and $279 for Pro on Toast's US support page (<a href="https://support.toasttab.com/en/article/xtraCHEF-by-Toast-Requesting-a-Demo" rel="noopener" target="_blank">Toast</a>).</li>
+</ul>
+<div class="where2"><div><h3>In the US</h3><p>Compare prices before sales tax. If a supplier sometimes charges tax and sometimes doesn't, that's a question for the supplier, not a price change.</p></div><div><h3>In Canada</h3><p>Compare prices before GST/HST and PST, because the same price lands differently by province: GST is 5%, HST is 13% in Ontario, 14% in Nova Scotia (since April 1, 2025) and 15% in New Brunswick, Newfoundland and Labrador and PEI; British Columbia and Manitoba add 7% PST, Saskatchewan 6% and Quebec 9.975% QST (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" rel="noopener" target="_blank">Canada Revenue Agency</a>). Check that tax is charged only where it should be. If you buy from a US supplier, convert to Canadian dollars first, so a weaker dollar and a real price rise show up as two different things.</p></div></div></div>
+<div class="prose s"><p class="answer">For each item you buy often, you need last time's price and this week's price, both with the pack size, and roughly how much you use in a month. Start with your top 20 to 30 items by spend. The first time takes longer, because you write down pack sizes and how much you use. After that, the weekly check is quick.</p>
+<ul>
+<li><strong>Supplier invoices.</strong> A spreadsheet or CSV download from the supplier's website is best. A PDF is next. A photo is last.</li>
+<li><strong>Your accounting software.</strong> QuickBooks Online and Xero both export spreadsheets. In Canada, QuickBooks Online tracks bills and purchase orders only on Plus (CA$110 a month list price) and Advanced (<a href="https://quickbooks.intuit.com/ca/pricing/" rel="noopener" target="_blank">QuickBooks Canada</a>). Xero's Canadian Starter plan (CA$25 a month) includes 5 bills, so check the limit (<a href="https://www.xero.com/ca/pricing-plans/" rel="noopener" target="_blank">Xero Canada</a>).</li>
+<li><strong>Your till.</strong> Square exports reports as CSV files (<a href="https://app.squareup.com/help/us/en/article/8362-print-export-or-email-your-reports" rel="noopener" target="_blank">Square</a>). Toast's ingredient price tracker is part of its xtraCHEF add-on, listed at $179 a month per location on Toast's US support page (<a href="https://support.toasttab.com/en/article/xtraCHEF-by-Toast-Requesting-a-Demo" rel="noopener" target="_blank">Toast</a>).</li>
+</ul>
+<div class="where2"><div><h3>In the US</h3><p>Compare prices before sales tax.</p></div><div><h3>In Canada</h3><p>Compare prices before GST/HST and PST, because tax differs by province: GST is 5%, HST is 13% in Ontario, 14% in Nova Scotia and 15% in New Brunswick, Newfoundland and Labrador and PEI. BC and Manitoba add 7% PST, Saskatchewan 6% and Quebec 9.975% QST (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" rel="noopener" target="_blank">Canada Revenue Agency</a>). Check tax is charged only where it should be. For US suppliers, change the price to Canadian dollars first.</p></div></div></div>
+<div class="prose t"><p class="answer">For each thing you buy a lot, you need last time's price, this week's price, how many are in the box, and how many you use in a month. Start with your 20 biggest items. The first time takes longer, because you write down box sizes and how much you use. After that, the weekly check is quick.</p>
+<ul>
+<li>A spreadsheet from your supplier's website is best. A PDF is next. A photo is last.</li>
+<li>Your accounting or till software can often save a spreadsheet too.</li>
+</ul>
+<div class="where2"><div><h3>In the US</h3><p>Compare prices before sales tax.</p></div><div><h3>In Canada</h3><p>Compare prices before GST, HST and PST. Tax is different in each province (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" rel="noopener" target="_blank">Canada Revenue Agency</a>). For US suppliers, change the price to Canadian dollars first.</p></div></div></div>
+</div></section>
+<section class="q" id="q3"><div class="wrap"><p class="eyebrow">Question 3 of 8</p><h2>How does a 15-minute price check work?</h2>
+<div class="prose d"><p class="answer">Four steps: work out the price per unit for each line, compare it with last time, flag anything up 3% or more, and rank the flags by what they cost you in a month. The price per unit is the pack price divided by the number of units in the pack (litres, kilograms or each). The monthly cost of a change is the change per unit times the units you use in a month. Accountants call the dollar figure a purchase price variance: "(Actual price - Standard price) x Actual quantity" (<a href="https://www.accountingtools.com/articles/purchase-price-variance" rel="noopener" target="_blank">AccountingTools</a>, September 2, 2026).</p>
+<p>The 3% line is a house rule, not a standard. I use 3% because it's high enough to skip normal noise and low enough to catch a rise worth a phone call. Pick your own and keep it the same every week.</p>
+<p>Here's the check on a made-up café. Laneway Coffee is a made-up Toronto café I use in my examples. The 12 lines below are its made-up invoices for one week, in Canadian dollars before tax, with last time's prices beside them. The tool runs in your browser: nothing you paste leaves your computer.</p></div>
+<div class="prose s"><p class="answer">Four steps: work out the price per unit, compare it with last time, flag anything up 3% or more, and sort the flags by what they cost you in a month. Price per unit = pack price divided by the units in the pack. Cost a month = the change per unit times how many units you use in a month. Accountants call this a purchase price variance (<a href="https://www.accountingtools.com/articles/purchase-price-variance" rel="noopener" target="_blank">AccountingTools</a>).</p>
+<p>3% is my house rule, not a law. Pick your own and keep it the same every week.</p>
+<p>Laneway Coffee is a made-up Toronto café. Below are its made-up invoices for one week, in Canadian dollars before tax. The tool runs in your browser. Nothing you paste leaves your computer.</p></div>
+<div class="prose t"><p class="answer">You find the price for one unit, compare it with last time, mark big rises, and put the biggest money first. Four steps:</p>
+<ol>
+<li>Find the price for one unit: the box price divided by how many are in the box.</li>
+<li>Compare it with last time.</li>
+<li>Flag (mark) anything that went up 3% or more. 3% is my own rule. Pick yours.</li>
+<li>Put the biggest money first: the change for one unit times how many you use in a month.</li>
+</ol>
+<p>Laneway Coffee is a pretend café in Toronto. Below are its pretend bills for one week, in Canadian dollars before tax. The tool works in your browser. What you paste stays on your computer. Try it: change 3 to 2 and see more lines flagged. For your own bills, open "Use your own prices", paste your rows from a spreadsheet, and press Check.</p></div>
+</div><figure class="widewrap toolfig" id="pricecheck"><p class="eyebrow madeup">Made-up example business: Laneway Coffee, Toronto</p><p class="figtitle">Supplier price check</p><p class="toolnote">Runs in your browser. Nothing you paste leaves your computer. Prices in CAD, before tax.</p><pre id="pc-sample" hidden>Item,Supplier,Unit,Last pack,Last units per pack,Last price (CAD),New pack,New units per pack,New price (CAD),Units used a month
+Whole milk,Dairy supplier,L,4 x 4 L bags,16,27.20,4 x 4 L bags,16,28.40,320
+Oat milk,Dairy supplier,L,12 x 1 L,12,39.60,12 x 1 L,12,43.20,216
+Butter,Dairy supplier,kg,10 kg case,10,94.00,10 kg case,10,97.50,20
+Espresso beans,Coffee roaster,kg,5 kg bag,5,112.50,5 kg bag,5,112.50,40
+Croissants (frozen),Bakery supplier,each,case of 96,96,86.40,case of 96,96,88.32,576
+Sandwich bread,Bakery supplier,loaf,12 loaves,12,42.00,12 loaves,12,43.20,72
+Eggs,Bakery supplier,each,15 dozen,180,63.00,15 dozen,180,66.15,540
+Avocados,Produce supplier,each,case of 48,48,69.60,case of 48,48,81.60,144
+&quot;Hot cups, 12 oz&quot;,Packaging supplier,each,&quot;case of 1,000&quot;,1000,96.00,case of 900,900,96.00,3600
+&quot;Lids, 12 oz&quot;,Packaging supplier,each,&quot;case of 1,000&quot;,1000,41.00,&quot;case of 1,000&quot;,1000,39.00,3600
+Sugar packets,Packaging supplier,each,&quot;case of 2,000&quot;,2000,28.00,&quot;case of 2,500&quot;,2500,33.00,2000
+Delivery fuel surcharge,Produce supplier,delivery,none,1,0.00,per delivery,1,6.50,8</pre><div class="pcrow"><label class="k" for="pc-thr">Flag rises of</label><input id="pc-thr" type="number" value="3" min="0" step="0.5" inputmode="decimal"><span>% or more</span></div><div id="pc-sum" class="pcsum" aria-live="polite"></div><div id="pc-out"></div><details class="data pcedit"><summary>Use your own prices</summary><p>Copy your rows from a spreadsheet and paste them here. Keep the same 10 columns in the same order, with the titles in the first row. Then press Check. The sample is already in the box so you can see the layout.</p><label for="pc-input" class="k">Your rows (starts with the made-up Laneway Coffee file)</label><textarea id="pc-input" rows="9" spellcheck="false"></textarea><div class="pcrow"><button type="button" id="pc-run" class="copy">Check</button><button type="button" id="pc-reset" class="copy">Back to the sample</button><button type="button" id="pc-clear" class="copy">Start blank</button></div><p id="pc-err" class="pcerr" role="status"></p></details></figure><div class="wrap">
+<div class="prose d"><p><strong>What the check finds.</strong> I worked these out in code from the 12 lines:</p>
+<div class="tablewrap"><table class="stack"><thead><tr>
+<th>Line</th>
+<th>What happened</th>
+<th>A month</th>
+</tr></thead><tbody><tr><td data-l="Line">Oat milk</td><td data-l="What happened">$3.30 to $3.60 a litre, up 9.1%</td><td data-l="A month">+$64.80</td></tr><tr><td data-l="Line">Fuel surcharge</td><td data-l="What happened">New: $6.50 on each of 8 deliveries</td><td data-l="A month">+$52.00</td></tr><tr><td data-l="Line">Hot cups, 12 oz</td><td data-l="What happened">Same $96.00 case, but 900 cups instead of 1,000: up 11.1% a cup</td><td data-l="A month">+$38.40</td></tr><tr><td data-l="Line">Avocados</td><td data-l="What happened">$1.45 to $1.70 each, up 17.2%</td><td data-l="A month">+$36.00</td></tr><tr><td data-l="Line">Whole milk, eggs, butter</td><td data-l="What happened">Up 4.4%, 5.0% and 3.7%</td><td data-l="A month">+$40.45 together</td></tr><tr><td data-l="Line">Sugar packets</td><td data-l="What happened">The case went from $28 to $33, but it's now 2,500 packets, not 2,000: down 5.7% a packet</td><td data-l="A month">-$1.60</td></tr></tbody></table></div>
+<p>Seven of the 12 lines get flagged (six rises and one new charge), worth $231.65 a month together. Across all 12 lines the change is $241.57 a month, about $2,900 over a year if nothing changes. Two traps are built in: the cups look unchanged on the invoice, and the sugar looks more expensive but isn't. Croissants (up 2.2%) and bread (up 2.9%) stay under the line; together they add $18.72 a month, which is the trade-off of any threshold. Drop it to 2% and nine lines get flagged.</p>
+<p>The two numbers you can't get from a single invoice are the pack size last time and how much you use in a month. Write them down once for your top lines and the check gets fast.</p>
+<p><strong>A real owner who built something similar.</strong> Angela Moznerova, who runs a restaurant in Brooklyn, used Claude to turn her suppliers' invoices into one price book and a plate-by-plate cost model, with all the dollar maths done in tested code and any plate cost that moves more than 15% flagged. She says it saves about four hours a week and found a vendor price gap worth $1,400 to $2,100 a year; the article notes the tool is still in progress and savings haven't been measured yet. Her rule: "AI can read, draft and suggest, but it doesn't get to make up a number" (<a href="https://aiworkrecipes.com/operations/ai-data-entry-from-forms-and-pdfs/" rel="noopener" target="_blank">AI Work Recipes</a>, owner-reported, from Deployed by AIM Media House, November 4, 2026).</p></div>
+<div class="prose s"><p><strong>What the check finds</strong> (worked out in code):</p>
+<div class="tablewrap"><table class="stack"><thead><tr>
+<th>Line</th>
+<th>What happened</th>
+<th>A month</th>
+</tr></thead><tbody><tr><td data-l="Line">Oat milk</td><td data-l="What happened">Up 9.1% a litre</td><td data-l="A month">+$64.80</td></tr><tr><td data-l="Line">Fuel surcharge</td><td data-l="What happened">New: $6.50 on each of 8 deliveries</td><td data-l="A month">+$52.00</td></tr><tr><td data-l="Line">Hot cups</td><td data-l="What happened">Same $96 case, but 900 cups, not 1,000: up 11.1% a cup</td><td data-l="A month">+$38.40</td></tr><tr><td data-l="Line">Avocados</td><td data-l="What happened">Up 17.2% each</td><td data-l="A month">+$36.00</td></tr><tr><td data-l="Line">Whole milk, eggs, butter</td><td data-l="What happened">Up 3.7% to 5.0%</td><td data-l="A month">+$40.45 together</td></tr><tr><td data-l="Line">Sugar packets</td><td data-l="What happened">Case cost $5 more, but holds 500 more packets: down 5.7% a packet</td><td data-l="A month">-$1.60</td></tr></tbody></table></div>
+<p>Seven of 12 lines are flagged, worth $231.65 a month. All 12 lines together add $241.57 a month, about $2,900 a year. Two lines are traps: the cups look the same on the invoice, and the sugar looks pricier but isn't.</p>
+<p><strong>A real owner who built something like this.</strong> Angela Moznerova, a Brooklyn restaurant owner, used Claude to turn supplier invoices into one price book, with the maths done in tested code. She says it saves about four hours a week and found a vendor price gap worth $1,400 to $2,100 a year; the article says savings haven't been measured yet. Her rule: "AI can read, draft and suggest, but it doesn't get to make up a number" (<a href="https://aiworkrecipes.com/operations/ai-data-entry-from-forms-and-pdfs/" rel="noopener" target="_blank">AI Work Recipes</a>, owner-reported).</p></div>
+<div class="prose t"><p><strong>What the check finds</strong> (worked out with code):</p>
+<div class="tablewrap"><table class="stack"><thead><tr>
+<th>Line</th>
+<th>What happened</th>
+<th>A month</th>
+</tr></thead><tbody><tr><td data-l="Line">Oat milk</td><td data-l="What happened">Up 9.1%</td><td data-l="A month">+$64.80</td></tr><tr><td data-l="Line">Fuel fee</td><td data-l="What happened">New fee on every delivery</td><td data-l="A month">+$52.00</td></tr><tr><td data-l="Line">Hot cups</td><td data-l="What happened">Same price, but 900 cups instead of 1,000</td><td data-l="A month">+$38.40</td></tr><tr><td data-l="Line">Avocados</td><td data-l="What happened">Up 17.2%</td><td data-l="A month">+$36.00</td></tr><tr><td data-l="Line">Milk, eggs, butter</td><td data-l="What happened">Each up a little (3.7% to 5.0%)</td><td data-l="A month">+$40.45 for all three</td></tr><tr><td data-l="Line">Sugar</td><td data-l="What happened">Box costs more but holds more, so each packet is cheaper</td><td data-l="A month">-$1.60</td></tr></tbody></table></div>
+<p>7 of the 12 lines get marked. Together they cost $231.65 more a month. All 12 lines together come to about $2,900 more a year. The cups look the same on the bill. They aren't.</p></div>
+</div></section>
+<section class="q" id="q4"><div class="wrap"><p class="eyebrow">Question 4 of 8</p><h2>How do I build it myself in ChatGPT or Claude?</h2>
+<div class="prose d"><p class="answer">Give it last time's prices and this week's invoice lines as a spreadsheet, ask it to do the maths in code, and ask for the same table every week. Both ChatGPT and Claude read spreadsheets on their free plans, and Claude's free plan can run code. Save the instructions once so next week is a single message.</p>
+<p>Set up your file with the same 10 columns as the tool, one row per item, headings in the first row: item, supplier, unit, last pack, last units per pack, last price, new pack, new units per pack, new price, units used a month. OpenAI's own advice for data files is the same: "Include descriptive column headers in the first row" and "Use one row per record", with no empty rows or columns or second table on the same sheet (<a href="https://help.openai.com/en/articles/8437071-data-analysis-with-chatgpt" rel="noopener" target="_blank">OpenAI Help Center</a>). You can copy the made-up Laneway Coffee file from the tool above to practise.</p>
+<p>The prompt (words in [brackets] are for you to fill in):</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>I run [business], a [type of business] in [city]. Attached are last time&#x27;s supplier prices and this week&#x27;s invoice lines, one row per item. Do the maths in code, not in your head. For each line: work out the price per unit (per litre, kilogram or each) for last time and now, the % change, and the monthly impact (change per unit x units used a month). Flag every line up [3]% or more, every new charge, and every line where the pack size changed. Give me one table sorted by monthly impact, biggest first, then the total for the flagged lines. List any line you couldn&#x27;t match or any number you had to guess.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><ol>
+<li>Create a Project called "Price check" and paste the prompt into its instructions. Projects are on the Free plan (<a href="https://chatgpt.com/pricing/" rel="noopener" target="_blank">ChatGPT</a>).</li>
+<li>Each week, start a chat in the Project and attach the spreadsheet. Spreadsheet uploads (XLSX, XLS, CSV, TSV) work on Free and paid plans (<a href="https://help.openai.com/en/articles/8555545-uploading-files-and-audio-to-chatgpt" rel="noopener" target="_blank">OpenAI Help Center</a>).</li>
+<li>Click View Analysis to see the code it ran, so you can check which rows it used.</li>
+</ol></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><ol>
+<li>Create a Project called "Price check" and put the prompt in its instructions. The Free plan allows up to 5 Projects and can "create files, and run code" (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>).</li>
+<li>Each week, attach the spreadsheet with the + button and send "This week's invoices."</li>
+<li>Ask for the table as a downloadable spreadsheet if you want to keep a history.</li>
+</ol></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>If your invoices already live in Google Sheets, open the sheet and use Ask Gemini at the top right with the same prompt. It needs an eligible Google Workspace or Google AI plan (<a href="https://support.google.com/docs/answer/14356410" rel="noopener" target="_blank">Google</a>).</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>If you work in Excel with Microsoft 365, Copilot in Excel can do the same. It needs a paid Microsoft 365 Copilot plan. <span class="note">[DAN: CONFIRM THE CURRENT COPILOT IN EXCEL PLAN AND PRICE BEFORE PUBLISHING.]</span></p></div></div>
+<p><strong>If your invoices are PDFs or photos.</strong> Ask the tool to read the invoice into a table first, check that table against the paper (every line, every total), and only then run the price check. Reading a scan is where mistakes start, so it's worth the two minutes.</p></div>
+<div class="prose s"><p class="answer">Give it last time's prices and this week's invoice as a spreadsheet, ask it to do the maths in code, and save the instructions so next week takes one message. ChatGPT and Claude can both read spreadsheets on their free plans, and Claude's free plan can run code.</p>
+<p>Use the same columns as the tool on this page, one row per item, with plain headings in the first row. OpenAI's own advice: "Include descriptive column headers in the first row" and "Use one row per record" (<a href="https://help.openai.com/en/articles/8437071-data-analysis-with-chatgpt" rel="noopener" target="_blank">OpenAI Help Center</a>). You can copy the made-up file from the tool to practise.</p>
+<p>The prompt (fill in the words in [brackets]):</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>I run [business], a [type of business] in [city]. Attached are last time&#x27;s supplier prices and this week&#x27;s invoice lines, one row per item. Do the maths in code, not in your head. For each line: work out the price per unit (per litre, kilogram or each) for last time and now, the % change, and the monthly impact (change per unit x units used a month). Flag every line up [3]% or more, every new charge, and every line where the pack size changed. Give me one table sorted by monthly impact, biggest first, then the total for the flagged lines. List any line you couldn&#x27;t match or any number you had to guess.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Make a Project called "Price check" and put the prompt in its instructions. Projects are on the free plan (<a href="https://chatgpt.com/pricing/" rel="noopener" target="_blank">ChatGPT</a>). Each week, attach the spreadsheet in a chat in the Project. Spreadsheet uploads work on free and paid plans (<a href="https://help.openai.com/en/articles/8555545-uploading-files-and-audio-to-chatgpt" rel="noopener" target="_blank">OpenAI Help Center</a>). Click View Analysis to see the code it ran.</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Make a Project called "Price check" and put the prompt in its instructions. The free plan allows up to 5 Projects and can run code (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>). Each week, attach the spreadsheet with the + button.</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>If your invoices are in Google Sheets, use Ask Gemini at the top right with the same prompt. It needs an eligible Google Workspace or Google AI plan (<a href="https://support.google.com/docs/answer/14356410" rel="noopener" target="_blank">Google</a>).</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>In Excel with Microsoft 365, Copilot can do the same. It needs a paid plan. <span class="note">[DAN: CONFIRM THE COPILOT IN EXCEL PLAN AND PRICE.]</span></p></div></div>
+<p><strong>If your invoices are PDFs or photos,</strong> ask the tool to turn the invoice into a table first. Check that table against the paper, every line and total, before the price check.</p></div>
+<div class="prose t"><p class="answer">Put last time's prices and this week's bill in one spreadsheet. Ask the AI to do the maths with code. Save the steps so next week is fast.</p>
+<p>Use the same columns as the tool on this page. Use one row for each item. Put plain titles in the first row (<a href="https://help.openai.com/en/articles/8437071-data-analysis-with-chatgpt" rel="noopener" target="_blank">OpenAI Help Center</a>).</p>
+<p>The prompt (fill in the words in [brackets]):</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>I run [business] in [city]. Attached are last time&#x27;s prices and this week&#x27;s bill, one row per item. Do the maths in code. Find the price for one unit for last time and now, the % change, and the cost a month (change for one unit x units used a month). Mark every line up [3]% or more, every new fee, and every box size change. Give me one table with the biggest cost first. Tell me anything you couldn&#x27;t match.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Make a Project called "Price check" and put the prompt in it. Projects are free (<a href="https://chatgpt.com/pricing/" rel="noopener" target="_blank">ChatGPT</a>). Each week, add the spreadsheet.</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Make a Project called "Price check" and put the prompt in it. The free plan has up to 5 Projects (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>). Each week, add the spreadsheet with the + button.</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>If your bills are in Google Sheets, use Ask Gemini. It needs a paid plan (<a href="https://support.google.com/docs/answer/14356410" rel="noopener" target="_blank">Google</a>).</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>Copilot in Excel can do it too. It needs a paid plan. <span class="note">[DAN: CONFIRM THE COPILOT PLAN AND PRICE.]</span></p></div></div>
+<p>If your bills are PDFs or photos, ask the AI to turn each bill into a table first. Check the table against the paper.</p></div>
+</div></section>
+<section class="q" id="q5"><div class="wrap"><p class="eyebrow">Question 5 of 8</p><h2>Can an agent run it for me every week?</h2>
+<div class="prose d"><p class="answer">Yes, for the reading and the maths, with you approving anything that goes to a supplier. An agent is an AI tool you give a goal; it works through the steps and stops when it needs you. For this job the steps are: open the week's invoices, fill in the price table, flag the lines, and draft a short note to the supplier about the biggest one. The note is a draft. You send it.</p>
+<div class="toolgroup" data-def="claude"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Claude Cowork works with files on your computer: "On desktop, Claude can read from and write to your local files without manual uploads or downloads," and only in folders you've connected. It's on paid plans (Pro and up). Set the approval mode to Manual, so Claude "pauses and asks for approval for actions" (<a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="noopener" target="_blank">Claude Help Center</a>). Save each week's invoices to one folder, connect that folder, and start the price check there every Monday. Cowork's scheduled tasks run remotely by default; a task that uses a folder on your computer runs only while the computer is awake and Claude Desktop is open, and that option is only offered where Computer access is turned on, so I start the weekly run myself.</p></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Scheduled tasks aren't on the Free plan (<a href="https://chatgpt.com/pricing/" rel="noopener" target="_blank">ChatGPT</a>). On a paid plan, a weekly reminder can open your price-check Project, but you still attach the week's file. <span class="note">[DAN: CONFIRM CHATGPT'S CURRENT AGENT FEATURE AND WHETHER IT CAN READ A FOLDER OF INVOICES.]</span></p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Tasks in Gemini are free, but they need a personal Google account with History on, which means your chats may be used for training (<a href="https://support.google.com/gemini/answer/17094507?hl=en&amp;co=GENIE.Platform%3DDesktop" rel="noopener" target="_blank">Google</a>). I don't use it for supplier invoices for that reason.</p></div></div>
+<p><strong>Where a person must approve, always:</strong> any message to a supplier, any order or payment, and any change to your records. Anthropic's own advice for Cowork is the right rule here: for work with real consequences, such as money, messages sent as you and important files, "stay close and review what Claude does" (<a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="noopener" target="_blank">Claude Help Center</a>).</p></div>
+<div class="prose s"><p class="answer">Yes, for the reading and the maths, as long as you approve anything that goes to a supplier. An agent is an AI tool you give a goal. It does the steps and stops when it needs you. Here it opens the week's invoices, fills in the table, flags lines and drafts a note to the supplier. You send the note.</p>
+<div class="toolgroup" data-def="claude"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Claude Cowork can read and write files in folders on your computer that you connect. It's on paid plans (Pro and up). Set it to Manual, so Claude asks before each action (<a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="noopener" target="_blank">Claude Help Center</a>). Save each week's invoices in one folder and start the check there every Monday.</p></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Scheduled tasks aren't on the free plan (<a href="https://chatgpt.com/pricing/" rel="noopener" target="_blank">ChatGPT</a>). On a paid plan, a weekly reminder can open your price-check Project, but you still attach the file. <span class="note">[DAN: CONFIRM CHATGPT'S CURRENT AGENT FEATURE.]</span></p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Tasks in Gemini are free, but they need History on, so your chats may be used for training (<a href="https://support.google.com/gemini/answer/17094507?hl=en&amp;co=GENIE.Platform%3DDesktop" rel="noopener" target="_blank">Google</a>). I don't use it for invoices.</p></div></div>
+<p><strong>A person always approves</strong> any message to a supplier, any order or payment, and any change to your records. Anthropic's own advice: for work with money or messages sent as you, "stay close and review what Claude does" (<a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="noopener" target="_blank">Claude Help Center</a>).</p></div>
+<div class="prose t"><p class="answer">Yes, for reading the bills and doing the maths. An agent is an AI tool you give a job. It does the steps and asks you when it needs you. It can write a note to your supplier. <strong>You send the note, not the agent.</strong></p>
+<div class="toolgroup" data-def="claude"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Claude Cowork can read bills in a folder on your computer. It needs a paid plan. Timed tasks usually run online, so start the check yourself each Monday. Set it to Manual, so it asks you before each step (<a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="noopener" target="_blank">Claude Help Center</a>).</p></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>You still add the file yourself, and weekly reminders need a paid plan (<a href="https://chatgpt.com/pricing/" rel="noopener" target="_blank">ChatGPT</a>).</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Gemini's free Tasks need History on, so your chats may be used for training (<a href="https://support.google.com/gemini/answer/17094507?hl=en&amp;co=GENIE.Platform%3DDesktop" rel="noopener" target="_blank">Google</a>). I don't use it for bills.</p></div></div>
+<p>A person always says yes before any message, order or payment.</p></div>
+</div></section>
+<section class="q" id="q6"><div class="wrap"><p class="eyebrow">Question 6 of 8</p><h2>How do I check the AI didn&#x27;t get the numbers wrong?</h2>
+<div class="prose d"><p class="answer">Check it against the invoice, not against the AI. AI tools still make mistakes on exactly this kind of work. In a benchmark posted in November 2026 (a preprint with strict pass-or-fail grading, by authors whose company sells evaluation services), the best AI tested passed only 38.3% of its attempts at 70 realistic workplace spreadsheet requests (<a href="https://arxiv.org/abs/2611.17766" rel="noopener" target="_blank">GDP.xlsx, arXiv</a>). In a data company's own test on finance data, one model counted 13 duplicated invoice lines twice and "12 runs in a row answered 16,836 instead of 16,810", and another "put 88.47% of value in Czech koruna, whose real share is 1.34%", by applying an exchange rate backwards (<a href="https://blog.dataddo.com/what-does-a-correct-ai-answer-really-cost-webinar-recap" rel="noopener" target="_blank">Dataddo</a>, a vendor-run test). The Government of Canada's own guide lists arithmetic among the "tasks that research shows they don't do well" (<a href="https://www.canada.ca/en/government/system/digital-government/digital-government-innovations/responsible-use-ai/generative-ai/generative-ai-your-daily-work.html" rel="noopener" target="_blank">Government of Canada</a>).</p>
+<p>Four checks before you act on a flag:</p>
+<ol class="checks4">
+<li><strong>Tie it to the invoice.</strong> The lines in the table should add up to the invoice total before tax. If they don't, a line is missing or doubled.</li>
+<li><strong>Check the flagged lines by hand.</strong> For each flag, divide the pack price by the pack size yourself. It takes a minute.</li>
+<li><strong>Look for pack changes.</strong> Any line where the pack size changed gets a second look, both ways: the cups and the sugar in the example above.</li>
+<li><strong>Ask what it couldn't match.</strong> An item with a new name or code can look like a new product. Running the same check twice and getting the same answer isn't proof: Dataddo's duplicate-line mistake repeated 12 times in a row.</li>
+</ol></div>
+<div class="prose s"><p class="answer">Check it against the invoice, not against the AI. In a November 2026 test (not yet reviewed by other experts, by a company that sells AI testing), the best AI passed only 38.3% of its tries at 70 real-world spreadsheet tasks (<a href="https://arxiv.org/abs/2611.17766" rel="noopener" target="_blank">GDP.xlsx</a>). In another company's test on finance data, one AI counted 13 invoice lines twice, 12 runs in a row (<a href="https://blog.dataddo.com/what-does-a-correct-ai-answer-really-cost-webinar-recap" rel="noopener" target="_blank">Dataddo</a>, a test run by a company that sells data tools). Canada's government lists arithmetic among the things AI tools "don't do well" (<a href="https://www.canada.ca/en/government/system/digital-government/digital-government-innovations/responsible-use-ai/generative-ai/generative-ai-your-daily-work.html" rel="noopener" target="_blank">Government of Canada</a>).</p>
+<p>Four checks:</p>
+<ol class="checks4">
+<li><strong>Add it up.</strong> The lines should add up to the invoice total before tax.</li>
+<li><strong>Check each flag by hand.</strong> Divide the pack price by the pack size yourself.</li>
+<li><strong>Look at pack changes</strong> both ways, like the cups and the sugar.</li>
+<li><strong>Ask what it couldn't match.</strong> Getting the same answer twice is not proof.</li>
+</ol></div>
+<div class="prose t"><p class="answer">Check it against the bill. AI still makes maths mistakes. In one test, the best AI passed fewer than 4 in 10 spreadsheet tasks (<a href="https://arxiv.org/abs/2611.17766" rel="noopener" target="_blank">GDP.xlsx</a>). The test was strict, and its authors sell AI testing.</p>
+<p>Four checks:</p>
+<ol class="checks4">
+<li>Do the lines add up to the bill total?</li>
+<li>Check each marked line yourself.</li>
+<li>Look again at any box size change.</li>
+<li>Ask what it couldn't match.</li>
+</ol></div>
+</div></section>
+<section class="q" id="q7"><div class="wrap"><p class="eyebrow">Question 7 of 8</p><h2>What do I do when I find a price jump?</h2>
+<div class="prose d"><p class="answer">Ask before you accept, and ask for one thing. Treat a rise as the start of a conversation with your supplier: confirm which items, how much and from when, ask what's driving it, and ask for one concession, such as more notice, the old price on orders already placed, or a better price for a bigger order. Then get whatever you agree in writing.</p>
+<p>Start with the lines at the top of the table, because that's where the money is. In the example, oat milk and the new fuel surcharge are about half the flagged total.</p>
+<p>Your choices for each flagged line:</p>
+<ul>
+<li><strong>Ask.</strong> A short, polite email to your rep about the specific line. I draft these with AI and send them myself.</li>
+<li><strong>Shop it.</strong> Get one other quote for the same item, pack and delivery, and compare the delivered cost per unit, not the case price.</li>
+<li><strong>Change what you buy.</strong> A different size, brand or spec, if quality holds.</li>
+<li><strong>Change your price.</strong> If the rise is real and lasting, re-cost the item it goes into and decide whether your menu or shelf price moves.</li>
+</ul>
+<p>Canada's development bank told owners in May 2026 to "Renegotiate your supplier contracts and include price adjustment clauses before your margins take a hit" and to "Explore other supplier opportunities" (<a href="https://www.bdc.ca/en/articles-tools/entrepreneur-toolkit/publications/monthly-economic-letter/2605" rel="noopener" target="_blank">BDC</a>).</p>
+<p>The prompt for the note to your supplier:</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Draft a short, friendly email to my rep at [supplier] about [item]. It went from [old price and pack] to [new price and pack] on the invoice dated [date]. Ask what&#x27;s driving the change and whether the old price can hold on orders already placed. Keep it under 100 words. Don&#x27;t promise anything, don&#x27;t threaten to leave, and don&#x27;t send it.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div></div>
+<div class="prose s"><p class="answer">Ask before you accept, and ask for one thing. Confirm which items, how much and from when. Ask what's driving it. Ask for one thing, like more notice or the old price on orders already placed. Get what you agree in writing.</p>
+<p>Start at the top of the table, where the money is. Then for each line:</p>
+<ul>
+<li><strong>Ask</strong> your rep in a short, polite email. I draft these with AI and send them myself.</li>
+<li><strong>Shop it.</strong> Get one other quote for the same item and compare the price per unit.</li>
+<li><strong>Change what you buy</strong>, if quality holds.</li>
+<li><strong>Change your price</strong>, if the rise is real and lasting.</li>
+</ul>
+<p>Canada's development bank, BDC, told owners in May 2026 to "Renegotiate your supplier contracts and include price adjustment clauses before your margins take a hit" (<a href="https://www.bdc.ca/en/articles-tools/entrepreneur-toolkit/publications/monthly-economic-letter/2605" rel="noopener" target="_blank">BDC</a>).</p>
+<p>The prompt for the email:</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Draft a short, friendly email to my rep at [supplier] about [item]. It went from [old price and pack] to [new price and pack] on the invoice dated [date]. Ask what&#x27;s driving the change and whether the old price can hold on orders already placed. Keep it under 100 words. Don&#x27;t promise anything, don&#x27;t threaten to leave, and don&#x27;t send it.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div></div>
+<div class="prose t"><p class="answer">Ask your supplier before you say yes. Ask what changed. Ask for one thing, like more time at the old price. Get it in writing.</p>
+<p>You can also get another price from a different supplier, buy a different size, or change your own price.</p>
+<div class="prompt"><p class="pl">Prompt</p><div class="ptext"><p>Write a short, friendly email to my rep at [supplier] about [item]. It went from [old price] to [new price] on [date]. Ask why, and ask if the old price can stay on orders I already placed. Under 100 words. Don&#x27;t send it.</p></div><button type="button" class="copy" data-label="Copy prompt">Copy prompt</button></div></div>
+</div></section>
+<section class="q" id="q8"><div class="wrap"><p class="eyebrow">Question 8 of 8</p><h2>What should I keep private?</h2>
+<div class="prose d"><p class="answer">Supplier invoices are business records, but they often carry a person's name, email or phone number, and some contracts say prices are confidential. Take contact details off before you upload, check your supplier agreement for a confidentiality clause, and switch off model training on personal accounts.</p>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>On a personal plan, turn off "Model improvement" in Settings, under Data controls (<a href="https://openai.com/consumer-privacy/" rel="noopener" target="_blank">OpenAI</a>). ChatGPT Business doesn't train on your business data by default (<a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">OpenAI</a>).</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>On a personal plan, turn off "Model Improvement" in Privacy Settings (<a href="https://privacy.claude.com/en/articles/10023580-is-my-data-used-to-train-claude-models" rel="noopener" target="_blank">Anthropic</a>).</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>On a personal account, Google says that, depending on your settings, it uses your Gemini history to train generative AI models, and some chats are read by human reviewers (<a href="https://support.google.com/gemini/answer/13594961" rel="noopener" target="_blank">Google</a>). Turn History off or use a Temporary Chat.</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>With a Microsoft 365 work account, "Prompts, responses, and data accessed through Microsoft Graph aren't used to train foundation LLMs" (<a href="https://learn.microsoft.com/en-us/copilot/plan/microsoft-365-copilot-privacy" rel="noopener" target="_blank">Microsoft Learn</a>).</p></div></div>
+<div class="where2 one"><div><h3>In Canada</h3><p>PIPEDA covers personal information. A rep's work contact details are exempt only when used to reach them, so I remove names before uploading; Alberta, British Columbia and Quebec have their own similar private-sector laws (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/pipeda_brief/" rel="noopener" target="_blank">Office of the Privacy Commissioner</a>). <span class="note">[DAN: FOR QUEBEC OWNERS, ADD A ONE-LINE NOTE ON LAW 25 ONCE YOU'VE CHECKED IT.]</span></p></div></div></div>
+<div class="prose s"><p class="answer">Take names, emails and phone numbers off invoices before you upload them, check your supplier contract for a confidentiality clause, and switch off training on personal accounts.</p>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Turn off "Model improvement" in Settings, under Data controls (<a href="https://openai.com/consumer-privacy/" rel="noopener" target="_blank">OpenAI</a>). ChatGPT Business doesn't train on business data by default (<a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">OpenAI</a>).</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Turn off "Model Improvement" in Privacy Settings (<a href="https://privacy.claude.com/en/articles/10023580-is-my-data-used-to-train-claude-models" rel="noopener" target="_blank">Anthropic</a>).</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Depending on your settings, Google uses your Gemini history to train its AI, and people may read some chats (<a href="https://support.google.com/gemini/answer/13594961" rel="noopener" target="_blank">Google</a>). Turn History off or use a Temporary Chat.</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>With a Microsoft 365 work account, prompts and responses aren't used to train Microsoft's AI models (<a href="https://learn.microsoft.com/en-us/copilot/plan/microsoft-365-copilot-privacy" rel="noopener" target="_blank">Microsoft Learn</a>).</p></div></div>
+<div class="where2 one"><div><h3>In Canada</h3><p>PIPEDA covers personal information. A rep's work contact details are exempt only when used to reach them, so take names off before you upload. Alberta, BC and Quebec have their own similar laws (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/pipeda_brief/" rel="noopener" target="_blank">Privacy Commissioner</a>). <span class="note">[DAN: ADD A QUEBEC LAW 25 NOTE.]</span></p></div></div></div>
+<div class="prose t"><p class="answer">Take names, emails and phone numbers off bills before you upload them. Switch off training.</p>
+<div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Settings, then Data controls. Turn off "Model improvement" (<a href="https://openai.com/consumer-privacy/" rel="noopener" target="_blank">OpenAI</a>).</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Privacy Settings. Turn off "Model Improvement" (<a href="https://privacy.claude.com/en/articles/10023580-is-my-data-used-to-train-claude-models" rel="noopener" target="_blank">Anthropic</a>).</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Turn History off, or use a Temporary Chat (<a href="https://support.google.com/gemini/answer/13594961" rel="noopener" target="_blank">Google</a>).</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>Use your work account if your business pays for Microsoft 365 (<a href="https://learn.microsoft.com/en-us/copilot/plan/microsoft-365-copilot-privacy" rel="noopener" target="_blank">Microsoft Learn</a>).</p></div></div>
+<div class="where2 one"><div><h3>In Canada</h3><p>Privacy law covers people's personal details. Taking names off before you upload is the safe habit (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/pipeda_brief/" rel="noopener" target="_blank">Privacy Commissioner</a>).</p></div></div></div>
+</div></section>
+<section class="q" id="check"><div class="wrap"><p class="eyebrow">This week</p><h2>Your checklist for this week</h2>
+<div class="prose d"><ul class="check"><li><label><input type="checkbox" id="cd0"><span>List your top 20 lines by spend, with the pack size and how much you use a month.</span></label></li><li><label><input type="checkbox" id="cd1"><span>Put last time&#x27;s prices and this week&#x27;s invoice into one sheet, one row per item.</span></label></li><li><label><input type="checkbox" id="cd2"><span>Run the check in the tool on this page, or in ChatGPT or Claude with the prompt above.</span></label></li><li><label><input type="checkbox" id="cd3"><span>Check every flagged line by hand against the invoice.</span></label></li><li><label><input type="checkbox" id="cd4"><span>Email your rep about the biggest flag, and write down what they say.</span></label></li></ul></div>
+<div class="prose s"><ul class="check"><li><label><input type="checkbox" id="cs0"><span>List your top 20 lines by spend, with pack size and how much you use a month.</span></label></li><li><label><input type="checkbox" id="cs1"><span>Put last time&#x27;s prices and this week&#x27;s invoice into one sheet.</span></label></li><li><label><input type="checkbox" id="cs2"><span>Run the check in the tool on this page, or in ChatGPT or Claude.</span></label></li><li><label><input type="checkbox" id="cs3"><span>Check every flag by hand against the invoice.</span></label></li><li><label><input type="checkbox" id="cs4"><span>Email your rep about the biggest flag.</span></label></li></ul></div>
+<div class="prose t"><ul class="check"><li><label><input type="checkbox" id="ct0"><span>Write down your 20 biggest items and how many you use a month.</span></label></li><li><label><input type="checkbox" id="ct1"><span>Put last time&#x27;s prices and this week&#x27;s bill in one sheet.</span></label></li><li><label><input type="checkbox" id="ct2"><span>Try the check on this page.</span></label></li><li><label><input type="checkbox" id="ct3"><span>Check each marked line yourself.</span></label></li><li><label><input type="checkbox" id="ct4"><span>Email your supplier about the biggest one.</span></label></li></ul></div>
+</div></section>
+<section class="cta"><h2>How Leverage Strategies helps</h2>
+<div class="d"><p>I set this check up with owners on their own invoices: which lines to track, where the numbers come from, and which tool fits what they already pay for. You decide what to ask your suppliers. I won't promise a saving before we've measured one.</p></div>
+<div class="s"><p>I set this check up with owners on their own invoices: which lines to track, where the numbers come from, and which tool fits what they already pay for. You decide what to ask your suppliers. I won't promise a saving before we've measured one.</p></div>
+<div class="t"><p>I set up this check with owners on their own bills. You decide what to ask your suppliers. I won't promise a saving before we measure one.</p></div>
+<p><span class="note">[BOOK A CALL LINK]</span></p></section>
+<section class="q st" id="words"><div class="wrap"><p class="eyebrow">Words to know</p><h2>Words to know</h2>
+<div class="prose s"><div class="tablewrap"><table class="stack two"><thead><tr>
+<th>Word</th>
+<th>What it means</th>
+</tr></thead><tbody><tr><td data-l="Word">Price per unit</td><td data-l="What it means">The pack price divided by what's in the pack, like the price of one litre or one cup.</td></tr><tr><td data-l="Word">Pack size</td><td data-l="What it means">How much is in the case or box.</td></tr><tr><td data-l="Word">Threshold</td><td data-l="What it means">The rise that gets a line flagged, like 3%.</td></tr><tr><td data-l="Word">Monthly impact</td><td data-l="What it means">What a price change costs you in a month: change per unit times units used.</td></tr><tr><td data-l="Word">CSV</td><td data-l="What it means">A simple spreadsheet file most software can export.</td></tr><tr><td data-l="Word">Project</td><td data-l="What it means">A saved space in ChatGPT or Claude with your instructions for one job.</td></tr><tr><td data-l="Word">Agent</td><td data-l="What it means">An AI tool you give a goal. It does the steps and asks you when it needs you.</td></tr><tr><td data-l="Word">Made-up example</td><td data-l="What it means">A business or file invented to show the steps. It isn't real.</td></tr></tbody></table></div></div>
+<div class="prose t"><div class="tablewrap"><table class="stack two"><thead><tr>
+<th>Word</th>
+<th>What it means</th>
+</tr></thead><tbody><tr><td data-l="Word">Supplier</td><td data-l="What it means">A business that sells you what you use, like milk or cups.</td></tr><tr><td data-l="Word">Price for one unit</td><td data-l="What it means">The box price divided by how many are in the box.</td></tr><tr><td data-l="Word">Spreadsheet</td><td data-l="What it means">A file with rows and columns, like Excel or Google Sheets.</td></tr><tr><td data-l="Word">Prompt</td><td data-l="What it means">What you type to ask AI for something.</td></tr><tr><td data-l="Word">Project</td><td data-l="What it means">A saved space for one job in ChatGPT or Claude.</td></tr><tr><td data-l="Word">Agent</td><td data-l="What it means">An AI tool that does the steps of a job and asks you when it needs you.</td></tr><tr><td data-l="Word">Training</td><td data-l="What it means">When a company uses your chats to improve its AI.</td></tr><tr><td data-l="Word">Flag</td><td data-l="What it means">A mark the check puts on a line that went up by your number or more.</td></tr><tr><td data-l="Word">Made-up example</td><td data-l="What it means">A pretend business that shows the steps.</td></tr></tbody></table></div></div>
+</div></section>
+<div class="sources"><div class="wrap"><h2>Sources</h2><p>All pages opened November 26, 2026. Prices checked the same day.</p>
+<ul>
+<li><a href="https://openai.com/openworks/" rel="noopener" target="_blank">OpenAI, OpenWorks</a>. Sign Badgers example. US. Vendor's own example; hours saved as reported by the staff member.</li>
+<li><a href="https://www.bls.gov/news.release/ppi.nr0.htm" rel="noopener" target="_blank">U.S. Bureau of Labor Statistics, Producer Price Indexes, October 2026</a>. Released November 13, 2026. US.</li>
+<li><a href="https://www150.statcan.gc.ca/n1/daily-quotidien/261119/dq261119a-eng.htm" rel="noopener" target="_blank">Statistics Canada, Industrial product and raw materials price indexes, October 2026</a>. Released November 19, 2026. Canada.</li>
+<li><a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve Banks, 2026 Report on Employer Firms</a>. Fielded September 3 to November 14, 2025; 6,525 firms; convenience sample. US.</li>
+<li><a href="https://www.cfib-fcei.ca/en/research-economic-analysis/business-barometer" rel="noopener" target="_blank">CFIB, Business Barometer, November 2026</a>. 565 responses, November 3 to 9, 2026. Canada. Member survey.</li>
+<li><a href="https://desk.tasti.io/guides/catch-supplier-price-increases" rel="noopener" target="_blank">Tasti, How to catch supplier price increases</a>. Updated October 13, 2026. Canada. Vendor guide.</li>
+<li><a href="https://quickbooks.intuit.com/ca/pricing/" rel="noopener" target="_blank">QuickBooks Canada, pricing</a>. CAD.</li>
+<li><a href="https://www.xero.com/ca/pricing-plans/" rel="noopener" target="_blank">Xero Canada, pricing</a>. CAD, excluding taxes.</li>
+<li><a href="https://app.squareup.com/help/us/en/article/8362-print-export-or-email-your-reports" rel="noopener" target="_blank">Square, Print, export or email your reports</a>. Vendor help page.</li>
+<li><a href="https://support.toasttab.com/en/article/xtraCHEF-by-Toast-Requesting-a-Demo" rel="noopener" target="_blank">Toast, xtraCHEF by Toast</a>. Vendor help page, US.</li>
+<li><a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" rel="noopener" target="_blank">Canada Revenue Agency, GST/HST rates</a>. Canada.</li>
+<li><a href="https://www.accountingtools.com/articles/purchase-price-variance" rel="noopener" target="_blank">AccountingTools, Purchase price variance</a>. September 2, 2026.</li>
+<li><a href="https://aiworkrecipes.com/operations/ai-data-entry-from-forms-and-pdfs/" rel="noopener" target="_blank">AI Work Recipes, AI data entry from forms and PDFs</a>. Moznerova case, from Deployed by AIM Media House, November 4, 2026. US. Owner-reported.</li>
+<li><a href="https://help.openai.com/en/articles/8437071-data-analysis-with-chatgpt" rel="noopener" target="_blank">OpenAI Help Center, Data analysis with ChatGPT</a>. Vendor help page.</li>
+<li><a href="https://help.openai.com/en/articles/8555545-uploading-files-and-audio-to-chatgpt" rel="noopener" target="_blank">OpenAI Help Center, Uploading files to ChatGPT</a>. Vendor help page.</li>
+<li><a href="https://chatgpt.com/pricing/" rel="noopener" target="_blank">ChatGPT, Plans</a>. Plan features.</li>
+<li><a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude, Plans and pricing</a>. USD; tax extra.</li>
+<li><a href="https://support.google.com/docs/answer/14356410" rel="noopener" target="_blank">Google, Collaborate with Gemini in Google Sheets</a>. Vendor help page.</li>
+<li><a href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork" rel="noopener" target="_blank">Claude Help Center, Schedule recurring tasks in Cowork</a>. Vendor help page.</li>
+<li><a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="noopener" target="_blank">Claude Help Center, Get started with Claude Cowork</a>. Vendor help page.</li>
+<li><a href="https://support.google.com/gemini/answer/17094507?hl=en&amp;co=GENIE.Platform%3DDesktop" rel="noopener" target="_blank">Google, Manage your tasks and workflows in Gemini Apps</a>. Vendor help page.</li>
+<li><a href="https://arxiv.org/abs/2611.17766" rel="noopener" target="_blank">Garre, Mehta and Chen, GDP.xlsx, arXiv</a>. Submitted November 13, 2026. Preprint.</li>
+<li><a href="https://blog.dataddo.com/what-does-a-correct-ai-answer-really-cost-webinar-recap" rel="noopener" target="_blank">Dataddo, What does a correct AI answer really cost?</a>. Webinar November 19, 2026. Vendor-run test.</li>
+<li><a href="https://www.canada.ca/en/government/system/digital-government/digital-government-innovations/responsible-use-ai/generative-ai/generative-ai-your-daily-work.html" rel="noopener" target="_blank">Government of Canada, Generative AI in your daily work</a>. Canada.</li>
+<li><a href="https://www.bdc.ca/en/articles-tools/entrepreneur-toolkit/publications/monthly-economic-letter/2605" rel="noopener" target="_blank">BDC, Monthly Economic Letter, May 2026</a>. Canada.</li>
+<li><a href="https://openai.com/consumer-privacy/" rel="noopener" target="_blank">OpenAI, Consumer privacy</a>. Vendor page.</li>
+<li><a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">OpenAI, ChatGPT Business pricing</a>. USD.</li>
+<li><a href="https://privacy.claude.com/en/articles/10023580-is-my-data-used-to-train-claude-models" rel="noopener" target="_blank">Anthropic, Is my data used to train Claude models?</a>. Vendor page.</li>
+<li><a href="https://support.google.com/gemini/answer/13594961" rel="noopener" target="_blank">Google, Gemini Apps Privacy Hub</a>. Updated November 24, 2026.</li>
+<li><a href="https://learn.microsoft.com/en-us/copilot/plan/microsoft-365-copilot-privacy" rel="noopener" target="_blank">Microsoft Learn, Microsoft 365 Copilot privacy</a>. Vendor page.</li>
+<li><a href="https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/pipeda_brief/" rel="noopener" target="_blank">Office of the Privacy Commissioner of Canada, PIPEDA in brief</a>. Canada.</li>
+<li>Made-up Laneway Coffee supplier file (12 lines, CAD, before tax), on this page. The answer key is computed from it.</li>
+</ul></div></div>
+<footer class="site"><span>Leverage Strategies · Dan Albasry</span><span>Prices and dates checked November 26, 2026</span></footer>
+<div class="seg float" role="group" aria-label="Reading level"><span class="lab">Reading level</span><button type="button" data-v="t" aria-pressed="true">Starter</button><button type="button" data-v="s" aria-pressed="false">Simple</button><button type="button" data-v="d" aria-pressed="false">Detailed</button></div>
+<script>
+{
+  const KEY='leverage-notes-level', TKEY='leverage-tool', BOX='leverage-pricecheck-checks';
+  const body=document.body, buttons=document.querySelectorAll('.seg button[data-v]');
+  const store=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+  const load=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+  const current=()=>body.classList.contains('lv-t')?'t':body.classList.contains('lv-s')?'s':'d';
+  const paint=v=>{body.classList.remove('lv-d','lv-s','lv-t');body.classList.add('lv-'+v);buttons.forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v?'true':'false'));};
+  const setLevel=v=>{
+    if(v===current()) return;
+    const secs=document.querySelectorAll('section.q'); let anchor=null;
+    secs.forEach(s=>{ if(s.offsetParent!==null && s.getBoundingClientRect().top<=120) anchor=s; });
+    let progress=0;
+    if(anchor){const r=anchor.getBoundingClientRect();progress=Math.min(1,Math.max(0,(120-r.top)/Math.max(1,r.height)));}
+    paint(v); store(KEY,v);
+    if(anchor && anchor.offsetParent!==null){const r2=anchor.getBoundingClientRect();window.scrollTo({top:window.pageYOffset+r2.top-120+progress*r2.height,behavior:'auto'});}
+  };
+  buttons.forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.v)));
+  const fl=document.querySelector('.float'), inl=document.querySelector('.versions');
+  if(fl&&inl&&'IntersectionObserver' in window){fl.classList.add('away');new IntersectionObserver(es=>es.forEach(e=>fl.classList.toggle('away',e.isIntersecting||e.boundingClientRect.top>0))).observe(inl);}
+  const saved=load(KEY); paint(saved==='d'||saved==='s'||saved==='t'?saved:'t');
+
+  // Tool switch: each group opens on its first tool (ChatGPT in most); a saved choice is shared by every group that has that tool.
+  const groups=document.querySelectorAll('.toolgroup');
+  const setTool=(t,init)=>{
+    groups.forEach(g=>{
+      const has=b=>g.querySelector('.toolblock[data-tool="'+b+'"]');
+      const first=g.querySelector('.toolblock');
+      if(!has(t)&&!init) return; // a choice only moves the groups that have that tool
+      const use=(t&&has(t))?t:(g.dataset.def&&has(g.dataset.def)?g.dataset.def:(first?first.dataset.tool:''));
+      g.querySelectorAll('.toolblock').forEach(b=>b.classList.toggle('on',b.dataset.tool===use));
+      g.querySelectorAll('.toolseg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tool===use?'true':'false'));
+    });
+  };
+  groups.forEach(g=>{g.classList.add('js');g.querySelectorAll('.toolseg button').forEach(b=>b.addEventListener('click',()=>{setTool(b.dataset.tool);store(TKEY,b.dataset.tool);}));});
+  const st=load(TKEY); setTool(st&&/^[a-z]+$/.test(st)?st:null,true);
+
+  let ticks={}; try{ticks=JSON.parse(load(BOX)||'{}')||{}}catch(e){ticks={}}
+  document.querySelectorAll('.check input').forEach(box=>{box.checked=!!ticks[box.id];box.addEventListener('change',()=>{ticks[box.id]=box.checked;store(BOX,JSON.stringify(ticks));});});
+
+  const copy=(btn,txt,selNode)=>{
+    const label=btn.dataset.label||btn.textContent;
+    const fail=()=>{
+      if(selNode){try{const r=document.createRange();r.selectNodeContents(selNode);const s=window.getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}}
+      btn.textContent=selNode?'Selected: copy with your keyboard':'Select the text to copy';
+    };
+    try{navigator.clipboard.writeText(txt).then(()=>{btn.textContent='Copied';setTimeout(()=>{btn.textContent=label},1600)},fail);}catch(e){fail()}
+  };
+  document.querySelectorAll('.copydata').forEach(btn=>btn.addEventListener('click',()=>{const pre=btn.closest('details').querySelector('pre');copy(btn,pre.textContent,pre);}));
+  document.querySelectorAll('.prompt .copy').forEach(btn=>btn.addEventListener('click',()=>{
+    const box=btn.parentElement.querySelector('.ptext');
+    const txt=[...box.querySelectorAll('p')].map(p=>p.textContent).join('\n\n');
+    copy(btn,txt,box);
+  }));
+  document.querySelectorAll('.copyplain').forEach(btn=>btn.addEventListener('click',()=>copy(btn,btn.dataset.text,btn.closest('.card')||null)));
+}
+
+/* Supplier price check: runs in the reader's browser, nothing is uploaded. */
+(function(){
+  const root=document.getElementById('pricecheck'); if(!root) return;
+  const SAMPLE=root.querySelector('#pc-sample').textContent.trim();
+  const ta=root.querySelector('#pc-input'), thr=root.querySelector('#pc-thr'), out=root.querySelector('#pc-out'), sum=root.querySelector('#pc-sum'), err=root.querySelector('#pc-err');
+  const money=v=>(v<0?'-':'')+'$'+Math.abs(v).toLocaleString('en-CA',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const unitMoney=v=>{if(v===0)return 'none';if(v<1)return '$'+v.toFixed(4);const s=v.toFixed(3);return '$'+(s.endsWith('0')?v.toFixed(2):s)};
+  function parseCSV(text){
+    const first=text.split('\n')[0];const D=(first.split('\t').length>first.split(',').length)?'\t':',';const rows=[];let row=[],cur='',q=false;
+    for(let i=0;i<text.length;i++){const c=text[i];
+      if(q){if(c=='"'){if(text[i+1]=='"'){cur+='"';i++}else q=false}else cur+=c}
+      else if(c=='"')q=true; else if(c==D){row.push(cur);cur=''} else if(c=='\n'||c=='\r'){if(c=='\r'&&text[i+1]=='\n')i++;row.push(cur);cur='';if(row.some(x=>x.trim()!==''))rows.push(row);row=[]} else cur+=c}
+    row.push(cur); if(row.some(x=>x.trim()!==''))rows.push(row); return rows;
+  }
+  const num=s=>{const v=parseFloat(String(s).replace(/[$,\s]/g,''));return isFinite(v)?v:NaN};
+  function run(){
+    err.textContent='';
+    const t=thr.value.trim()===''?3:Math.max(0,num(thr.value)||0);
+    const rows=parseCSV(ta.value.trim());
+    const hdr=rows.length&&isNaN(num(rows[0][4]));
+    const data=hdr?rows.slice(1):rows;
+    if(!data.length){err.textContent='Paste at least one item row, with the titles in the first row.';out.innerHTML='';sum.innerHTML='';return}
+    const res=[]; const bad=[];
+    data.forEach((r,i)=>{
+      const name=(r[0]||'').trim()||('item '+(i+1));
+      if(r.length!==10){bad.push(name);return}
+      const [item,sup,unit,,ou,op,,nu,np,used]=r;
+      const oU=num(ou),oP=num(op),nU=num(nu),nP=num(np),u=num(used);
+      if(!((oU>0||(oU===0&&oP===0))&&nU>0&&oP>=0&&nP>=0&&u>=0)){bad.push(name);return}
+      const ou1=oU>0?oP/oU:0,nu1=nP/nU,imp=(nu1-ou1)*u;
+      let ch=null,flag;
+      if(ou1===0){flag=nu1>0?'new':'ok'} else {ch=(nu1/ou1-1)*100; const cr=Math.round(ch*10)/10; flag=cr===0?'same':(cr>=t?'up':(cr<=-t?'down':'ok'))}
+      const notes=[]; if(oU!==nU)notes.push('Pack size changed'); if(oP!==nP&&ou1>0&&((nP>oP)!==(nu1>ou1)))notes.push('Pack price and unit price moved opposite ways');
+      res.push({item:item.trim(),sup:sup.trim(),unit:unit.trim(),ou1,nu1,ch,imp,flag,notes});
+    });
+    if(bad.length) err.textContent='Skipped: '+bad.join(', ')+'. Each row needs exactly 10 columns and numbers in the price, pack and units columns. Write numbers like 3,600 as 3600, or put them in quotes.';
+    if(!res.length){out.innerHTML='';sum.innerHTML='';return}
+    res.sort((a,b)=>b.imp-a.imp);
+    const lab={up:'Up',new:'New charge',down:'Down',ok:'Change under '+t+'%',same:'No change'};
+    out.innerHTML='<div class="tablewrap"><table class="pc"><thead><tr><th>Item</th><th class="n">Last, per unit</th><th class="n">New, per unit</th><th class="n">Change</th><th class="n">A month</th><th>Flag</th></tr></thead><tbody>'+
+      res.map(r=>'<tr class="'+r.flag+'"><td data-l="Item"><b>'+esc(r.item)+'</b><small>'+esc(r.sup)+' · '+(r.unit==='each'?'each':'per '+esc(r.unit))+(r.notes.length?' · <em>'+r.notes.map(esc).join('; ')+'</em>':'')+'</small></td>'+
+        '<td class="n" data-l="Last, per unit">'+unitMoney(r.ou1)+'</td><td class="n" data-l="New, per unit">'+unitMoney(r.nu1)+'</td>'+
+        '<td class="n" data-l="Change">'+(r.ch===null?'new':(r.ch>0?'+':'')+r.ch.toFixed(1)+'%')+'</td>'+
+        '<td class="n" data-l="A month">'+(r.imp>0?'+':'')+money(r.imp)+'</td><td data-l="Flag"><span class="fl">'+lab[r.flag]+'</span></td></tr>').join('')+'</tbody></table></div>';
+    const fl=res.filter(r=>r.flag==='up'||r.flag==='new'), tot=res.reduce((s,r)=>s+r.imp,0), fimp=fl.reduce((s,r)=>s+r.imp,0);
+    sum.innerHTML='<div><p class="k">Lines to look at</p><p class="v">'+fl.length+' of '+res.length+'</p></div><div><p class="k">Flagged lines, a month</p><p class="v">'+(fimp>0?'+':'')+money(fimp)+'</p></div><div><p class="k">All lines, a year</p><p class="v">'+(tot>0?'+':'')+money(tot*12)+'</p></div>';
+  }
+  function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+  ta.value=SAMPLE;
+  root.querySelector('#pc-run').addEventListener('click',()=>{run();try{sum.scrollIntoView({behavior:'smooth',block:'start'})}catch(e){}});
+  root.querySelector('#pc-reset').addEventListener('click',()=>{ta.value=SAMPLE;thr.value=3;run()});
+  root.querySelector('#pc-clear').addEventListener('click',()=>{ta.value=SAMPLE.split('\n')[0]+'\n';out.innerHTML='';sum.innerHTML='';err.textContent='';ta.focus()});
+  thr.addEventListener('change',run);thr.addEventListener('input',run);
+  run();
+})();
+
+</script>
+</body></html>

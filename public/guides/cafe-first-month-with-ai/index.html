@@ -1,0 +1,1101 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>A Café’s First Month</title><meta name="description" content="A whole first month of AI help on one made-up Toronto café, worked through a month of sample sales data, for US and Canadian owners. Three reading levels."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"><style>
+/* VOICE: calm, plain, first person; a worked example, not a sales page.
+   IDEA: one made-up café walked through the five steps of a first month.
+   PICTURE: the October sales chart drawn from the sample file.
+   COLOUR and TYPE: the site's "G. Combined" direction: paper, ink, one rust accent; Instrument Serif and Sans.
+   LAYOUT: one reading column, figures up to 1040px, one dark band, a floating level switch. Light theme by choice. */
+:root{
+  color-scheme: light;
+  --paper:#F8F6F1; --ink:#141412; --body:#3A3832; --muted:#5A584F; --rule:#CFCBC0; --panel:#EDE9DF; --accent:#7A2E1A;
+  --display:'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --text:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --col:680px; --wide:1040px;
+}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+.eyebrow{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 24px}
+.widewrap{max-width:var(--wide);margin:0 auto;padding:0 24px}
+figure.wrap,figure.widewrap{margin:44px auto}
+
+/* three reading levels: .d detailed, .s simple, .t starter, .ds detailed+simple, .st simple+starter */
+body.lv-d .s, body.lv-d .t, body.lv-d .st{display:none !important}
+body.lv-s .d, body.lv-s .t{display:none !important}
+body.lv-t .d, body.lv-t .s, body.lv-t .ds{display:none !important}
+body.lv-s .prose{font-size:19px;line-height:1.75}
+body.lv-t .prose{font-size:20px;line-height:1.8}
+
+header.site{padding:24px 32px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink)}
+header.site .mark{font-family:var(--display);font-size:32px;line-height:1}
+header.site .where{font-size:14px;color:var(--muted)}
+
+.hero{max-width:var(--wide);margin:0 auto;padding:72px 24px 0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:end}
+.hero h1{font-size:clamp(44px,6.4vw,80px);line-height:1.02;letter-spacing:-.02em;margin-top:24px}
+.hero .lede{margin:28px 0 0;font-size:21px;line-height:1.6;color:var(--body)}
+.hero .by{margin:28px 0 0;font-size:14px;color:var(--muted)}
+.hero figure{margin:0}
+.hero img{width:100%;max-height:620px;object-fit:cover;object-position:center 30%;border:1px solid var(--rule)}
+@media (max-width:820px){.hero{grid-template-columns:1fr;gap:32px;padding-top:56px}.hero img{max-height:520px}}
+
+.versions{margin:56px auto 0;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:22px 0}
+.versions p{margin:0;font-size:16px;color:var(--body);flex:1 1 300px}
+.seg{display:inline-flex;border:1px solid var(--ink);background:var(--paper)}
+.seg button{font:500 14px/1 var(--text);letter-spacing:.04em;padding:14px 16px;min-height:44px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button + button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.float{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:20;box-shadow:0 6px 24px rgba(20,20,18,.18)}
+.float .lab{display:flex;align-items:center;padding:0 14px 0 16px;font-size:13px;color:var(--muted);border-right:1px solid var(--rule)}
+@media (max-width:520px){.float .lab{display:none}.seg button{padding:14px 13px}}
+
+.toc{margin:56px auto 0}
+.toc ol{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--ink)}
+.toc li{border-bottom:1px solid var(--rule)}
+.toc a{display:flex;gap:20px;align-items:baseline;padding:14px 0;text-decoration:none;font-family:var(--display);font-size:24px;line-height:1.2}
+.toc a span.n{font:400 13px var(--text);color:var(--muted);flex:0 0 20px;font-variant-numeric:tabular-nums}
+
+section.q{padding:96px 0 0;scroll-margin-top:12px}
+section.q h2{font-size:clamp(34px,5vw,52px);line-height:1.06;margin:14px 0 28px}
+.prose p{margin:0 0 20px;color:var(--body)}
+.prose p.answer{font-size:1.14em;line-height:1.55;color:var(--ink)}
+.prose strong{color:var(--ink);font-weight:600}
+.prose ul,.prose ol{margin:0 0 20px;padding-left:22px;color:var(--body)}
+.prose li{margin:0 0 10px}
+.key{font-family:var(--display);font-size:clamp(28px,4vw,38px);line-height:1.15;color:var(--ink);margin:36px 0;padding:28px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.key em{color:var(--accent)}
+
+figure{margin:44px auto}
+figcaption{margin-top:12px;font-size:13px;line-height:1.5;color:var(--muted)}
+.figtitle{margin:0 0 18px;font-family:var(--display);font-size:26px;line-height:1.15}
+
+/* ladder */
+.ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end;border-bottom:1px solid var(--ink)}
+.rung{border:1px solid var(--ink);border-bottom:0;padding:18px 18px 20px;background:var(--paper)}
+.rung:nth-child(1){min-height:200px}.rung:nth-child(2){min-height:250px}.rung:nth-child(3){min-height:300px;background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.rung .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.rung h3{font-size:30px;line-height:1.1;margin:6px 0 10px}
+.rung p{margin:0;font-size:15.5px;line-height:1.55;color:var(--body)}
+.rung p.ex{margin-top:12px;padding-top:12px;border-top:1px solid var(--rule)}
+@media (max-width:700px){.ladder{grid-template-columns:1fr;border-bottom:0}.rung,.rung:nth-child(n){min-height:0;border-bottom:1px solid var(--ink)}.rung:nth-child(3){border-bottom-color:var(--accent)}}
+
+/* test list */
+.test{list-style:none;margin:0 0 24px;padding:0;border-top:1px solid var(--ink);counter-reset:tq}
+.test li{counter-increment:tq;display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.test li::before{content:counter(tq);font-family:var(--display);font-size:30px;line-height:1;color:var(--accent)}
+
+/* flow diagram */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px}
+.stage{position:relative;border:1px solid var(--ink);padding:16px 16px 18px;background:var(--paper)}
+.stage .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.stage h3{font-size:25px;line-height:1.1;margin:6px 0 8px}
+.stage p{margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.stage:not(:last-child)::after{content:"\2192";position:absolute;right:-29px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--muted)}
+.stage.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.repair{margin-top:36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:28px;align-items:start;border-top:1px dashed var(--ink);padding-top:22px}
+.repair h3{font-size:28px;line-height:1.1}
+.repair .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.repair ol{margin:0;padding-left:20px;font-size:15.5px;line-height:1.55;color:var(--body)}
+.repair li{margin-bottom:6px}
+@media (max-width:820px){.flow{grid-template-columns:1fr;gap:30px}.stage:not(:last-child)::after{content:"\2193";right:auto;left:22px;top:auto;bottom:-29px;transform:none}.repair{grid-template-columns:1fr;gap:12px}}
+
+/* bars */
+.bars{display:grid;gap:18px}
+.bar{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;align-items:center}
+.bar .l{font-size:15px;line-height:1.35;color:var(--ink)}
+.bar .l small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.bar .tr{display:flex;align-items:center;gap:12px}
+.bar .f{height:30px;background:#A8A397;min-width:2px}
+.bar .f.hot{background:var(--accent)}
+.bar .f.ink{background:var(--ink)}
+.bar .v{font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:560px){.bar{grid-template-columns:1fr;gap:6px}}
+
+/* business finder */
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.pick button{font:500 15px var(--text);min-height:44px;padding:10px 14px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.pick button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.biz{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink);border-left:1px solid var(--rule)}
+.biz li{padding:18px 20px 20px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);transition:background .25s}
+.biz li.on{background:var(--panel);box-shadow:inset 3px 0 0 var(--accent)}
+.biz h3{font-size:27px;line-height:1.1;margin:0 0 10px}
+.biz dl{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 12px;font-size:15px;line-height:1.5}
+.biz dt{font:500 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.biz dd{margin:0;color:var(--body)}
+@media (max-width:640px){.biz{grid-template-columns:1fr}}
+
+.box{margin:36px 0;padding:24px 26px;background:var(--panel);border:1px solid var(--ink)}
+.box h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.box p{margin:0 0 12px;font-size:16.5px;line-height:1.6;color:var(--body)}
+.box p:last-child{margin-bottom:0}
+
+/* two countries */
+.where2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;margin:36px 0;border:1px solid var(--ink)}
+.where2 > div{padding:24px 26px;background:var(--panel)}
+.where2 > div + div{border-left:1px solid var(--ink)}
+@media (max-width:600px){.where2 > div + div{border-left:0;border-top:1px solid var(--ink)}}
+.where2 h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2 ul{margin:0;padding-left:18px;font-size:15.5px;line-height:1.6;color:var(--body)}
+.where2 li{margin-bottom:10px}
+
+/* numbered risks */
+.steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink);counter-reset:st}
+.steps li{counter-increment:st;display:grid;grid-template-columns:64px 1fr;gap:8px;padding:26px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(st);font-family:var(--display);font-size:54px;line-height:.9;color:var(--accent)}
+.steps h3{font-size:28px;line-height:1.15;margin:0 0 8px}
+.steps p{margin:0;color:var(--body);font-size:.96em}
+
+.skip{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.skip li{display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.skip li::before{content:"\00D7";font-family:var(--display);font-size:36px;line-height:.8;color:var(--accent)}
+
+table{border-collapse:collapse;width:100%;font-size:15.5px;line-height:1.45}
+th{font:500 12.5px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 14px 10px 0;border-bottom:1px solid var(--ink)}
+td{padding:13px 14px 13px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--body)}
+td:first-child{color:var(--ink);font-weight:500;white-space:nowrap}
+
+.band{background:var(--ink);color:var(--paper);margin-top:96px;padding:64px 0}
+.band p.eyebrow{color:#B5B1A6;font-family:var(--text);font-size:13px;line-height:1.4;margin:0}
+.band p{margin:16px 0 0;font-family:var(--display);font-size:clamp(24px,3.4vw,32px);line-height:1.3;color:var(--paper)}
+
+.note{display:inline;background:#F3E3DC;color:var(--accent);font-size:.92em;padding:1px 6px}
+
+.check{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.check li{border-bottom:1px solid var(--rule)}
+.check label{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:20px 0;cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;width:24px;height:24px;margin:4px 0 0;border:1.5px solid var(--ink);background:var(--paper);display:grid;place-content:center;cursor:pointer}
+.check input:checked{background:var(--ink)}
+.check input:checked::after{content:"";width:11px;height:6px;border-left:2px solid var(--paper);border-bottom:2px solid var(--paper);transform:rotate(-45deg) translate(1px,-1px)}
+.check span{color:var(--ink)}
+
+.cta{border-top:1px solid var(--ink);margin-top:96px;padding:88px 24px;text-align:center}
+.cta h2{font-size:clamp(40px,6vw,68px);line-height:1.04}
+.cta p{max-width:600px;margin:22px auto 0;color:var(--body)}
+
+.sources{padding:72px 0 0}
+.sources h2{font-size:34px;margin:0 0 8px}
+.sources ul{margin:18px 0 0;padding-left:20px;font-size:15px;line-height:1.6;color:var(--body)}
+.sources li{margin-bottom:8px}
+.sources p{font-size:15px;color:var(--muted);margin:0}
+footer.site{margin-top:88px;border-top:1px solid var(--ink);padding:24px 32px 110px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.biz li{transition:none}}
+
+/* phone article additions */
+.log{border:1px solid var(--ink);background:#fff;padding:18px 0 8px;box-shadow:0 18px 40px rgba(20,20,18,.08)}
+.log .hd{display:flex;justify-content:space-between;align-items:baseline;padding:0 20px 12px;border-bottom:1px solid var(--rule)}
+.log .hd b{font-family:var(--display);font-weight:400;font-size:28px}
+.log .hd span{font-size:13px;color:var(--muted)}
+.log ul{list-style:none;margin:0;padding:0}
+.log li{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:12px 20px;border-bottom:1px solid var(--panel)}
+.log li:last-child{border-bottom:0}
+.log .ic{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--accent);position:relative}
+.log .ic::after{content:"";position:absolute;left:5px;top:9px;width:9px;height:1.5px;background:var(--accent);transform:rotate(-35deg)}
+.log .who{font-size:16px;color:var(--accent);line-height:1.3}
+.log .who small{display:block;font-size:13px;color:var(--muted)}
+.log .tm{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.verdict{margin:48px 0 0;padding:26px 28px;border:1px solid var(--ink);background:var(--panel);box-shadow:inset 0 3px 0 var(--accent)}
+.verdict h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+.verdict p{margin:0;font-family:var(--display);font-size:clamp(24px,3.2vw,30px);line-height:1.25;color:var(--ink)}
+.lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.lane{border:1px solid var(--ink);padding:18px}
+.lane h3{font-size:26px;line-height:1.1;margin:4px 0 8px}
+.lane .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.lane p{margin:10px 0 0;font-size:15px;line-height:1.5;color:var(--body)}
+.day{display:flex;height:26px;border:1px solid var(--ink);margin-top:10px}
+.day i{display:block;height:100%}
+.day .p{background:#A8A397}.day .a{background:var(--accent)}.day .pa{background:repeating-linear-gradient(135deg,#A8A397 0 6px,var(--accent) 6px 12px)}
+.daykey{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px}
+.legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:14px;color:var(--body)}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px}
+.legend .lp::before{background:#A8A397}.legend .la::before{background:var(--accent)}.legend .lpa::before{background:repeating-linear-gradient(135deg,#A8A397 0 3px,var(--accent) 3px 6px)}
+@media (max-width:760px){.lanes{grid-template-columns:1fr}}
+.dots{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:6px;max-width:560px}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--ink)}
+.dots i.m{background:transparent;border:1.5px solid #A8A397}
+.dots i.v{background:var(--accent)}
+.dotkey{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:14px;color:var(--body)}
+.dotkey span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.dotkey .a::before{background:var(--ink)}.dotkey .m::before{border:1.5px solid #A8A397}.dotkey .v::before{background:var(--accent)}
+.bar .f.cad{background:repeating-linear-gradient(135deg,#A8A397 0 6px,#CFCBC0 6px 12px)}
+.scroll{overflow-x:auto}
+@media (max-width:600px){.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--rule)}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8.5em;white-space:normal}.stack td::before{content:attr(data-l);float:inline-start;width:8em;margin-inline-start:-8.5em;font:500 12px/1.9 var(--text);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}.stack td:first-child{font-weight:600}}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+th.n{text-align:right}
+
+
+.hero.one{grid-template-columns:1fr}
+.flow5{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:none}
+.flow5 li{border:1px solid var(--ink);padding:16px 14px 18px;background:var(--paper)}
+.flow5 li.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.flow5 .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.flow5 h3{font-size:24px;line-height:1.1;margin:6px 0 8px}
+.flow5 li > p:not(.k){margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.flow5 li > p.get{margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink)}
+body.lv-t .flow5 li > p.get{display:none}
+.float{transition:opacity .2s}.float.away{opacity:0;pointer-events:none}
+@media (max-width:600px){.stack.two td::before{content:none}.stack.two td{padding-inline-start:0}.stack.two td:first-child{padding-top:10px}table.score td{padding-inline-start:10em}table.score td::before{width:9.5em;margin-inline-start:-10em}}
+.check{margin-left:0;padding-left:0}
+.after6{margin:14px 0 0;font-size:14px;color:var(--muted)}
+@media (max-width:820px){.flow5{grid-template-columns:1fr}}
+.tablewrap{margin:8px 0 28px}
+.prose table td:first-child{white-space:normal}
+table.score tr.chosen td{background:var(--panel)}
+table.score tr.chosen td:first-child{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px}
+table.score tr.gated td{color:#8A877D}
+.madeup{margin:20px 0 6px;color:var(--accent)}
+.toolgroup{margin:28px 0 32px;border-top:1px solid var(--ink);padding-top:18px}
+.toolseg{margin-bottom:16px}
+.toolblock{background:var(--panel);border:1px solid var(--ink);padding:20px 24px}
+.toolblock .toolname{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.toolblock ol{margin:0 0 12px}
+.toolblock p{font-size:15px}
+.toolgroup.js .toolblock{display:none}
+.toolgroup.js .toolblock.on{display:block}
+.bar .f.empty{background:transparent;border:1.5px dashed #A8A397;height:30px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.prose h3{font-size:26px;margin:28px 0 10px}
+@media (max-width:600px){.stack td:first-child{padding-inline-start:0}.stack td:first-child::before{content:none}table.score tr.chosen td:first-child{padding-left:10px}}
+.float{bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+
+/* café worked example additions */
+.toolseg{display:flex;flex-wrap:wrap;width:max-content;max-width:100%}
+.toolseg button{padding:12px 14px}
+.toolseg button + button{border-left:1px solid var(--rule)}
+@media (max-width:520px){.toolseg{width:100%}.toolseg button{flex:1 1 auto;padding:12px 10px;font-size:13px}}
+.toolblock h3{font-size:22px}
+.toolblock ul,.toolblock ol{font-size:15.5px}
+.where2 > div{min-width:0}
+.where2 p{margin:0 0 10px;font-size:15.5px;line-height:1.6;color:var(--body)}
+.where2 p:last-child{margin-bottom:0}
+.prompt{margin:24px 0 32px;border:1px solid var(--ink);background:#fff;padding:20px 22px 18px;box-shadow:inset 3px 0 0 var(--accent)}
+.prompt .pl{margin:0 0 8px;font:600 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.prompt .ptext{margin:0 0 14px;font-size:17px;line-height:1.6;color:var(--ink)}
+.prompt .copy{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.prompt .copy:hover{background:var(--ink);color:var(--paper)}
+.card{border:1px solid var(--ink);background:var(--panel);padding:22px 24px 24px;box-shadow:inset 0 3px 0 var(--accent)}
+.card .madeup{margin:0 0 4px}
+.card h3{font-size:34px;line-height:1.1;margin:0 0 14px}
+.card dl{margin:0;display:grid;grid-template-columns:92px minmax(0,1fr);gap:8px 14px;font-size:15.5px;line-height:1.5}
+.card dt{font:500 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card dd{margin:0;color:var(--body)}
+.flow5.cafe li.on .get{color:var(--accent)}
+.jobs{list-style:none;margin:0 0 12px;padding:0;border-top:1px solid var(--ink)}
+.jobs li{display:grid;grid-template-columns:96px 1fr;gap:4px 12px;padding:14px 0;border-bottom:1px solid var(--rule);font-size:18px;color:var(--ink)}
+.jobs li small{grid-column:2;font-size:14px;color:var(--muted)}
+.jobs .mk{font:600 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase}
+.jobs li.yes{background:var(--panel);box-shadow:inset 3px 0 0 var(--accent);padding-left:12px}
+.jobs li.yes .mk{color:var(--accent)}
+.jobs li.no{color:#8A877D}.jobs li.no .mk{color:var(--muted)}
+/* chart */
+.chart{display:grid;grid-template-columns:56px minmax(0,1fr);gap:8px;align-items:stretch}
+.yax{display:flex;flex-direction:column;justify-content:space-between;font-size:12px;color:var(--muted);text-align:right;padding-bottom:22px;font-variant-numeric:tabular-nums}
+.plot{position:relative;border-left:1px solid var(--ink);border-bottom:0}
+.days{display:grid;grid-template-columns:repeat(31,minmax(0,1fr));gap:3px;height:300px;align-items:end;position:relative;z-index:1}
+.days .c{display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-width:0}
+.bar2{display:block;position:relative;background:#A8A397;min-height:2px;border-bottom:1px solid var(--ink)}
+.c.we .bar2{background:var(--ink)}
+.dn{display:block;height:22px;padding-top:4px;font-size:11px;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+.drop{position:absolute;left:50%;top:-14px;width:8px;height:8px;margin-left:-4px;background:var(--accent);border-radius:0 50% 50% 50%;transform:rotate(45deg)}
+.tag{position:absolute;bottom:calc(100% + 18px);left:50%;transform:translateX(-50%);font:500 12px var(--text);color:var(--accent);white-space:nowrap}
+.roadband{position:absolute;top:0;bottom:22px;left:calc(12 / 31 * 100%);width:calc(5 / 31 * 100%);background:repeating-linear-gradient(135deg,rgba(122,46,26,.10) 0 6px,rgba(122,46,26,0) 6px 12px);border-left:1px dashed var(--accent);border-right:1px dashed var(--accent);z-index:0}
+.roadband span{position:absolute;top:6px;left:6px;font:500 12px var(--text);color:var(--accent);white-space:nowrap}
+.chartfig .legend .lw::before{background:#A8A397}.chartfig .legend .lwe::before{background:var(--ink)}
+.chartfig .legend .lr::before{background:var(--accent);border-radius:0 50% 50% 50%;transform:rotate(45deg);width:9px;height:9px}
+.chartfig .legend .lroad::before{background:repeating-linear-gradient(135deg,rgba(122,46,26,.3) 0 3px,transparent 3px 6px);border:1px dashed var(--accent)}
+@media (max-width:640px){.days{height:220px;gap:2px}.dn{font-size:9px}.chart{grid-template-columns:44px minmax(0,1fr)}.yax{font-size:11px}.roadband span{font-size:11px;top:-20px;left:0}.tag{font-size:11px}}
+/* before / after template */
+.ba{display:grid;grid-template-columns:40px minmax(0,1fr);gap:10px;height:240px}
+.ba-y{writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;color:var(--muted);text-align:center}
+.ba-plot{display:grid;grid-template-columns:repeat(2,minmax(0,160px));gap:48px;align-items:end;border-left:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:0 32px}
+.ba-col{display:flex;flex-direction:column;align-items:stretch;height:100%;justify-content:flex-end;position:relative}
+.ba-bar{display:block;height:70%;border:1.5px dashed #A8A397;border-bottom:0}
+.ba-l{position:absolute;top:100%;left:0;right:0;padding-top:6px;text-align:center;font-size:14px;color:var(--ink)}
+.ba-l small{display:block;font-size:12px;color:var(--muted)}
+.ba + figcaption{margin-top:52px}
+/* agent rows */
+.agentrows{list-style:none;margin:0 0 12px;padding:0;border-top:1px solid var(--ink)}
+.agentrows li{display:grid;grid-template-columns:110px minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule);font-size:16px}
+.agentrows .aj{font-family:var(--display);font-size:22px;line-height:1.1}
+.agentrows .aa{color:var(--body)}
+.agentrows .ap{color:var(--ink);font-weight:500}
+@media (max-width:600px){.agentrows li{grid-template-columns:1fr;gap:4px}}
+.stop{display:inline-block;width:12px;height:12px;background:var(--accent);margin-right:8px;vertical-align:-1px;clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%)}
+table.agent td:nth-child(3){color:var(--ink);font-weight:500}
+.prose blockquote{margin:0 0 20px;padding:4px 0 4px 18px;border-left:3px solid var(--accent)}
+.sources ul{word-break:break-word}
+section.q.st{display:block}
+body.lv-d section.q.st{display:none}
+.prose .where2 h3,.prose .box h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.prose .where2 p,.prose .where2 li{font-size:.86em}
+.prose .toolblock p,.prose .toolblock li{font-size:.86em;line-height:1.6}
+.tag{bottom:calc(100% + 16px);writing-mode:vertical-rl;transform:translateX(-50%) rotate(180deg);z-index:3;background:var(--paper);padding:2px 0;line-height:1}
+body.lv-t .flow5.cafe li > p.get{display:block}
+@media (max-width:640px){.dn:not(.k){color:transparent}}
+.prose .where2 ul,.prose .toolblock ol,.prose .toolblock ul{font-size:inherit}
+.prose .where2 li,.prose .toolblock li{font-size:.86em;line-height:1.6}
+.checked{margin:-24px 0 28px;font-size:14px !important;color:var(--muted) !important}
+/* chart scale: bars area = days height minus the 22px label row */
+.yax{position:relative;display:block;padding:0;height:300px}
+.yax span{position:absolute;right:0;transform:translateY(-50%);margin-top:0}
+.yax span:nth-child(1){top:0 !important}
+.yax span:nth-child(2){top:139px !important}
+.yax span:nth-child(3){top:278px !important}
+.grid{position:absolute;left:0;right:0;top:0;height:278px;border-top:1px solid var(--rule);border-bottom:1px solid var(--ink);background:linear-gradient(var(--rule),var(--rule)) 0 50%/100% 1px no-repeat;z-index:0}
+.bar2{border-bottom:0}
+.days .c{justify-content:flex-start}
+.days .c .bar2{margin-top:auto}
+.c{display:grid !important;grid-template-rows:278px 22px}
+.c .bar2{align-self:end;max-height:278px}
+.c .dn{align-self:start}
+.plot{border-left:1px solid var(--ink)}
+@media (max-width:640px){
+ .yax{height:220px}.yax span:nth-child(2){top:99px !important}.yax span:nth-child(3){top:198px !important}
+ .grid{height:198px}.c{grid-template-rows:198px 22px}.c .bar2{max-height:198px}
+ .roadband span{display:none}
+ .toolseg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}
+ .toolseg button + button{border-left:0}
+ .toolseg button{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+}
+.roadband{bottom:auto;height:278px}
+@media (max-width:640px){.roadband{height:198px}}
+.c{grid-template-columns:minmax(0,1fr)}.c .bar2{width:100%}.days{align-items:stretch}
+details.data{margin-top:16px;border-top:1px solid var(--rule);padding-top:12px;max-width:680px}
+details.data summary{cursor:pointer;font:500 15px var(--text);color:var(--ink);min-height:44px;display:flex;align-items:center}
+details.data p{font-size:14px;color:var(--muted);margin:4px 0 10px}
+details.data pre{margin:12px 0 0;max-height:260px;overflow:auto;background:#fff;border:1px solid var(--rule);padding:12px;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;color:var(--body)}
+.copydata{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+
+</style>
+<script>document.body.classList.add("lv-t")</script>
+<header class="site"><span class="mark">Leverage</span><span class="where">Notes · Worked example</span></header><div class="hero one"><div><p class="eyebrow"><span class="d">Detailed version · 24 minute read</span><span class="s">Simple version · 16 minute read</span><span class="t">Starter version · 9 minute read</span></p><h1>Worked example: a café’s first month with AI</h1><p class="lede d">See a whole first month of AI help on one café, worked through a real month of sample sales data, so you can picture what it would look like in your own business.</p><p class="lede s">See a whole first month of AI help on one café, worked through a real month of sample sales data, so you can picture what it would look like in your own business.</p><p class="lede t">See a whole first month of AI help on one café, using a month of sample sales, so you can picture it in your own business.</p><p class="by">By Dan Albasry · November 26, 2026 · For small business owners in the US and Canada</p></div></div>
+<div class="wrap"><div class="versions"><p><strong>Three ways to read this.</strong> Starter is the easiest. Simple says everything in plain words. Detailed has every number and source. Switch any time with the button at the bottom of your screen.</p><div class="seg" role="group" aria-label="Choose a reading level"><button type="button" data-v="t" aria-pressed="true">Starter</button><button type="button" data-v="s" aria-pressed="false">Simple</button><button type="button" data-v="d" aria-pressed="false">Detailed</button></div></div>
+<div class="prose d" style="margin-top:48px"><p><span class="note">[DAN: A SHORT REAL SCENE, 3 TO 5 SENTENCES, FROM A TIME YOU SAT WITH A CAFÉ OR RESTAURANT OWNER AND LOOKED AT THEIR WEEK OR THEIR SALES. NO CLIENT NAME, NO DETAILS THAT IDENTIFY THEM.]</span></p>
+<p>Most café owners I meet have tried AI once or twice. They've asked it for an Instagram caption or a nicer way to say "we're closed Monday". Very few have put it to work on the jobs that eat their week. That's not just my impression. In a National Restaurant Association survey of 212 US operators, released in November 2026, 38.6% said they use AI tools, but only 3.2% are rolling AI out across the whole company (<a href="https://www.restaurant.org/research-and-media/media/press-releases/new-research-from-the-national-restaurant-association-identifies-connected-technology-as-restaurants/" rel="noopener" target="_blank">National Restaurant Association</a>). In Canada it's lower still. In Statistics Canada's survey for the second quarter of 2025, accommodation and food services had the lowest AI use of any sector: 1.5% of businesses used AI to make products or deliver services, against 12.2% across all businesses (<a href="https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2025008-eng.htm" rel="noopener" target="_blank">Statistics Canada</a>).</p>
+<p>So this piece walks one café through the month I describe in How I work with a small business: the first 30 days <span class="note">[LINK TO THAT ARTICLE]</span>, step by step. The café is made up. Its sales file is a sample I use for testing AI tools, and you can download it from this page. Every sales number in this piece comes from that file, so you can check each one yourself.</p></div>
+<div class="prose s" style="margin-top:48px"><p><span class="note">[DAN: THE SAME SHORT REAL SCENE AS THE DETAILED VERSION, IN SIMPLER WORDS.]</span></p>
+<p>Most café owners I meet have tried AI once or twice, maybe for an Instagram caption. Very few use it for the jobs that fill their week. In a US survey of 212 restaurant owners and managers, released in November 2026, about 4 in 10 said they use AI tools. Only about 3 in 100 use AI across their whole business (<a href="https://www.restaurant.org/research-and-media/media/press-releases/new-research-from-the-national-restaurant-association-identifies-connected-technology-as-restaurants/" rel="noopener" target="_blank">National Restaurant Association</a>). In Canada, hotels, restaurants and cafés used AI to make products or serve customers the least of any kind of business: 1.5%, against 12.2% for all businesses, in mid-2025 (<a href="https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2025008-eng.htm" rel="noopener" target="_blank">Statistics Canada</a>).</p>
+<p>So I'll walk one café through the month I use with every business, step by step (<span class="note">[LINK TO THAT ARTICLE]</span>). The café is made up. Its sales file is a sample I use for testing AI tools, and you can download it from this page. Every sales number here comes from that file.</p></div>
+<div class="prose t" style="margin-top:48px"><p><span class="note">[DAN: THE SAME SHORT REAL SCENE, IN VERY SIMPLE WORDS.]</span></p>
+<p>Lots of café owners have tried AI once. Not many use it for the jobs that fill their week. In a US survey released in November 2026, only about 3 in 100 restaurants used AI across the whole business (<a href="https://www.restaurant.org/research-and-media/media/press-releases/new-research-from-the-national-restaurant-association-identifies-connected-technology-as-restaurants/" rel="noopener" target="_blank">National Restaurant Association</a>).</p>
+<p>This page follows one café through one month, step by step. The café is made up. Its sales numbers come from a sample file you can download here.</p></div>
+</div>
+<figure class="widewrap timeline-fig"><p class="figtitle"><span class="ds">Laneway’s first month, step by step</span><span class="t">The café’s month</span></p><ol class="flow5 cafe"><li><p class="k">Week 1</p><h3>Talk and watch</h3><p><span class="ds">The owner lists the jobs that repeat.</span><span class="t">We list the jobs.</span></p></li><li><p class="k">Weeks 1 to 2</p><h3>Pick three jobs</h3><p><span class="ds">Score the jobs, pick three, start a timed log.</span><span class="t">We pick three jobs.</span></p></li><li class="on"><p class="k">Weeks 2 to 3</p><h3>Build</h3><p><span class="ds">One saved tool per job, tested on the café’s own files.</span><span class="t">One helper per job.</span></p><p class="get"><span class="ds">Laneway’s three jobs: posts and specials board · supplier order lists · Monday sales check</span><span class="t">Posts, order lists, sales check.</span></p></li><li><p class="k">Weeks 3 to 4</p><h3>Train</h3><p><span class="ds">Short lessons on real work, one page of rules, a go-to person.</span><span class="t">Staff learn the rules.</span></p></li><li><p class="k">Week 4</p><h3>Count again</h3><p><span class="ds">The same counts as weeks 1 to 2.</span><span class="t">We count again.</span></p></li></ol><p class="after6"><span class="ds">The same five steps as my first 30 days with any business. Laneway Coffee is a made-up example.</span><span class="t">Laneway Coffee is made up.</span></p></figure>
+<div class="wrap"><nav class="toc" aria-label="In this worked example"><p class="eyebrow">The month, step by step</p><ol><li><a href="#q1"><span class="n">1</span><span>Meet the café (a made-up example)</span></a></li><li><a href="#q2"><span class="n">2</span><span>Week 1: Where does the owner&#x27;s week actually go?</span></a></li><li><a href="#q3"><span class="n">3</span><span>Weeks 1 to 2: Which three jobs does the café pick first?</span></a></li><li><a href="#q4"><span class="n">4</span><span>Weeks 2 to 3: What gets built?</span></a></li><li><a href="#q5"><span class="n">5</span><span>What does the sales file actually say?</span></a></li><li><a href="#q6"><span class="n">6</span><span>How do you check what the AI tells you?</span></a></li><li><a href="#q7"><span class="n">7</span><span>Weeks 3 to 4: How do the staff use it day to day?</span></a></li><li><a href="#q8"><span class="n">8</span><span>Week 4: What does the café measure, and what can&#x27;t a month show?</span></a></li><li><a href="#q9"><span class="n">9</span><span>After month one: which parts could an agent do?</span></a></li><li><a href="#q10"><span class="n">10</span><span>What would be different for your café?</span></a></li><li><a href="#q11"><span class="n">11</span><span>What does it cost, and what could go wrong?</span></a></li></ol></nav></div>
+<section class="q" id="q1"><div class="wrap"><p class="eyebrow">Step 1 of 11</p><h2>Meet the café (a made-up example)</h2>
+<div class="prose d"><p class="answer">Laneway Coffee is a made-up café in Toronto. It has one location, the owner and six part-time staff, and it sells coffee, pastries and breakfast sandwiches made on site. It takes payments on Square. In October it took in $40,056.74 (CAD) from 4,110 transactions, an average of $9.75 a sale.</p>
+<p>I picked Toronto because the sample sales file is a Toronto café's month, with Canadian Thanksgiving in it. Wherever the advice changes for a US café, you'll see an "In the US" box next to an "In Canada" box. Prices are in each country's currency, checked November 26, 2026.</p></div>
+<div class="prose s"><p class="answer">Laneway Coffee is a made-up café in Toronto. It has one shop, the owner and six part-time staff. It sells coffee, pastries and breakfast sandwiches it makes itself, and it uses Square to take payments. In October it took in $40,056.74 (CAD) from 4,110 sales. That's about $9.75 a sale.</p>
+<p>The sample file is from a Toronto café, so the café is in Toronto. Where the advice is different for a US café, you'll see an "In the US" box next to an "In Canada" box.</p></div>
+<div class="prose t"><p class="answer">Laneway Coffee is a made-up café in Toronto. It has the owner and six part-time staff. It sells coffee, pastries and breakfast sandwiches. It uses Square to take payments.</p>
+<p>In October it took in $40,056.74 (Canadian dollars) from 4,110 sales.</p>
+<p>If you're in the US, look for the "In the US" boxes.</p></div>
+</div><figure class="wrap"><div class="card"><p class="eyebrow madeup">Made-up example business</p><h3>Laneway Coffee</h3><dl><dt>Where</dt><dd>Toronto, one location</dd><dt>People</dt><dd>The owner and six part-time staff</dd><dt>Sells</dt><dd>Coffee, pastries, breakfast sandwiches made on site</dd><dt>Till</dt><dd>Square</dd><dt>October</dt><dd>$40,056.74 CAD from 4,110 sales</dd></dl></div></figure><div class="wrap">
+</div></section>
+<section class="q" id="q2"><div class="wrap"><p class="eyebrow">Step 2 of 11</p><h2>Week 1: Where does the owner&#x27;s week actually go?</h2>
+<div class="prose d"><p class="answer">The owner's week goes on jobs that come back every week: posts, specials, ordering, the schedule, reviews and looking at the numbers. Nobody has measured a café owner's week task by task, so week 1 is about writing down this café's own list, not borrowing someone else's.</p>
+<p>In the first conversation I ask which jobs repeat, who does them and roughly how long they take. Then I spend time in the café watching the jobs being done. Here is the list Laneway's owner might give. The hours are the owner's rough guesses, the kind I get in a first conversation, not measured results.</p>
+<p class="eyebrow madeup">Made-up example business</p><div class="tablewrap"><table class="stack"><thead><tr>
+<th>Job (made-up example)</th>
+<th>Who does it</th>
+<th>Hours per week (owner's guess)</th>
+</tr></thead><tbody><tr><td data-l="
+
+Job (made-up example)">Instagram posts and the specials board</td><td data-l="Who does it">Owner</td><td data-l="Hours per week (owner&#x27;s guess)">3</td></tr><tr><td data-l="
+
+Job (made-up example)">Supplier order lists from the paper count sheet</td><td data-l="Who does it">Shift lead, then owner</td><td data-l="Hours per week (owner&#x27;s guess)">2.5</td></tr><tr><td data-l="
+
+Job (made-up example)">Looking at sales and planning next week's staffing and prep</td><td data-l="Who does it">Owner</td><td data-l="Hours per week (owner&#x27;s guess)">3</td></tr><tr><td data-l="
+
+Job (made-up example)">Replying to Google reviews</td><td data-l="Who does it">Owner</td><td data-l="Hours per week (owner&#x27;s guess)">1.5</td></tr><tr><td data-l="
+
+Job (made-up example)">The staff schedule</td><td data-l="Who does it">Owner</td><td data-l="Hours per week (owner&#x27;s guess)">2</td></tr><tr><td data-l="
+
+Job (made-up example)">Writing allergen notes for new menu items</td><td data-l="Who does it">Owner</td><td data-l="Hours per week (owner&#x27;s guess)">0.5</td></tr><tr><td data-l="
+
+Job (made-up example)">Replying to Instagram messages about hours and catering</td><td data-l="Who does it">Owner and staff</td><td data-l="Hours per week (owner&#x27;s guess)">2</td></tr></tbody></table></div>
+<p>That's about 14.5 hours a week of jobs that repeat, by the owner's guess. Guesses aren't good enough for a before-and-after, so in weeks 1 to 2 whoever does each job keeps a one-week timed log. The point of week 1 isn't the total, though. It's knowing which jobs are on the list, where the information for each one lives (Square, a paper sheet, the Google profile) and what must never leave the café.</p></div>
+<div class="prose s"><p class="answer">It goes on jobs that come back every week. Think posts, specials, ordering, the schedule, reviews and the numbers. Week 1 is about writing down this café's own list.</p>
+<p>I ask which jobs repeat, who does them and how long they take. Then I watch the jobs being done. These hours are the owner's rough guesses, not measured results.</p>
+<p class="eyebrow madeup">Made-up example business</p><div class="tablewrap"><table class="stack"><thead><tr>
+<th>Job (made-up example)</th>
+<th>Who does it</th>
+<th>Hours a week (guess)</th>
+</tr></thead><tbody><tr><td data-l="
+
+Job (made-up example)">Instagram posts and the specials board</td><td data-l="Who does it">Owner</td><td data-l="Hours a week (guess)">3</td></tr><tr><td data-l="
+
+Job (made-up example)">Supplier order lists from the paper count sheet</td><td data-l="Who does it">Shift lead, then owner</td><td data-l="Hours a week (guess)">2.5</td></tr><tr><td data-l="
+
+Job (made-up example)">Looking at sales and planning next week</td><td data-l="Who does it">Owner</td><td data-l="Hours a week (guess)">3</td></tr><tr><td data-l="
+
+Job (made-up example)">Replying to Google reviews</td><td data-l="Who does it">Owner</td><td data-l="Hours a week (guess)">1.5</td></tr><tr><td data-l="
+
+Job (made-up example)">The staff schedule</td><td data-l="Who does it">Owner</td><td data-l="Hours a week (guess)">2</td></tr><tr><td data-l="
+
+Job (made-up example)">Writing allergen notes for new menu items</td><td data-l="Who does it">Owner</td><td data-l="Hours a week (guess)">0.5</td></tr><tr><td data-l="
+
+Job (made-up example)">Replying to Instagram messages</td><td data-l="Who does it">Owner and staff</td><td data-l="Hours a week (guess)">2</td></tr></tbody></table></div>
+<p>Guesses aren't good enough to measure change. So in weeks 1 and 2, whoever does each job writes down how long it really takes, for one week.</p></div>
+<div class="prose t"><p class="answer">It goes on jobs that come back every week. First, the owner lists them.</p>
+<ul>
+<li>Instagram posts and the specials board: about 3 hours</li>
+<li>Order lists for suppliers: about 2.5 hours</li>
+<li>Looking at sales: about 3 hours</li>
+<li>Replying to reviews: about 1.5 hours</li>
+<li>The staff schedule: about 2 hours</li>
+<li>Allergen notes for new food: about half an hour</li>
+<li>Replying to messages: about 2 hours</li>
+</ul>
+<p>These are guesses. So for one week, staff write down how long each job really takes.</p></div>
+</div></section>
+<section class="q" id="q3"><div class="wrap"><p class="eyebrow">Step 3 of 11</p><h2>Weeks 1 to 2: Which three jobs does the café pick first?</h2>
+<div class="prose d"><p class="answer">Laneway picks social posts and the specials board, supplier order lists, and the weekly sales check. Reviews and the schedule wait for round two, and two jobs fail the safety gate.</p>
+<p>I score each job the way I describe in How I work with a small business. Hours per week times how easy it is to check (3 easy, 2 medium, 1 hard), and then a safety gate. A job fails the gate if the AI's answer would reach a customer with no one reading it, if it moves money or changes records, or if it touches health information.</p>
+<p class="eyebrow madeup">Made-up example business</p><div class="tablewrap"><table class="stack score"><thead><tr>
+<th>Job (made-up example)</th>
+<th>Hours</th>
+<th>Ease of checking</th>
+<th>Passes the gate?</th>
+<th>Score</th>
+</tr></thead><tbody><tr class="chosen"><td data-l="
+
+Job (made-up example)">Posts and specials board</td><td data-l="Hours">3</td><td data-l="Ease of checking">3 (owner reads every post)</td><td data-l="Passes the gate?">Yes</td><td data-l="Score">9</td></tr><tr class="chosen"><td data-l="
+
+Job (made-up example)">Supplier order lists</td><td data-l="Hours">2.5</td><td data-l="Ease of checking">3 (lead checks against the shelf)</td><td data-l="Passes the gate?">Yes, drafts only</td><td data-l="Score">7.5</td></tr><tr class="chosen"><td data-l="
+
+Job (made-up example)">Weekly sales check</td><td data-l="Hours">3</td><td data-l="Ease of checking">2 (numbers need checking)</td><td data-l="Passes the gate?">Yes</td><td data-l="Score">6</td></tr><tr><td data-l="
+
+Job (made-up example)">Review replies</td><td data-l="Hours">1.5</td><td data-l="Ease of checking">3</td><td data-l="Passes the gate?">Yes, if the owner posts them</td><td data-l="Score">4.5</td></tr><tr><td data-l="
+
+Job (made-up example)">Staff schedule</td><td data-l="Hours">2</td><td data-l="Ease of checking">2</td><td data-l="Passes the gate?">Yes, drafts only</td><td data-l="Score">4</td></tr><tr class="gated"><td data-l="
+
+Job (made-up example)">Allergen notes for new items</td><td data-l="Hours">0.5</td><td data-l="Ease of checking">1 (a mistake is hard to spot and can hurt someone)</td><td data-l="Passes the gate?">No: health and safety</td><td data-l="Score">Never without the signed-off list</td></tr><tr class="gated"><td data-l="
+
+Job (made-up example)">Letting AI answer Instagram messages on its own</td><td data-l="Hours">2</td><td data-l="Ease of checking">1</td><td data-l="Passes the gate?">No: reaches customers unchecked</td><td data-l="Score">Not in month one</td></tr></tbody></table></div>
+<p>The allergen row matters most. Allergen notes take little time, but a wrong one can put a customer in hospital. So AI never writes them from scratch at Laneway. It can only copy from the café's own signed-off allergen list, and a person checks every line.</p>
+<p>One owner's own account fits this. Cole Morgan, who runs a small café, wrote about building a ChatGPT assistant that turns a photo of the café's paper count sheet into a shopping list grouped by supplier. Making the list by hand took him 2 to 10 minutes, and an off-the-shelf scanning tool that worked well cost him over $250 a month, by his own figures (<a href="https://www.colemorgan.com/posts/how-i-automated-my-cafe-inventory-ordering-with-chatgpt/" rel="noopener" target="_blank">Cole Morgan, January 2025</a>). That is the size of a good first job: small, repeated, and checked by a person before anything is ordered.</p></div>
+<div class="prose s"><p class="answer">Laneway picks posts and the specials board, supplier order lists, and the weekly sales check. Two jobs are not safe to hand over.</p>
+<p>Each job gets a score: hours a week times how easy it is to check (3 is easy, 1 is hard). Then comes a safety test. A job fails if the AI's answer would reach a customer with nobody reading it first, if it moves money, or if it touches health information.</p>
+<p class="eyebrow madeup">Made-up example business</p><div class="tablewrap"><table class="stack score"><thead><tr>
+<th>Job (made-up example)</th>
+<th>Hours</th>
+<th>Easy to check?</th>
+<th>Safe?</th>
+<th>Score</th>
+</tr></thead><tbody><tr class="chosen"><td data-l="
+
+Job (made-up example)">Posts and specials board</td><td data-l="Hours">3</td><td data-l="Easy to check?">3</td><td data-l="Safe?">Yes</td><td data-l="Score">9</td></tr><tr class="chosen"><td data-l="
+
+Job (made-up example)">Supplier order lists</td><td data-l="Hours">2.5</td><td data-l="Easy to check?">3</td><td data-l="Safe?">Yes, as drafts</td><td data-l="Score">7.5</td></tr><tr class="chosen"><td data-l="
+
+Job (made-up example)">Weekly sales check</td><td data-l="Hours">3</td><td data-l="Easy to check?">2</td><td data-l="Safe?">Yes</td><td data-l="Score">6</td></tr><tr><td data-l="
+
+Job (made-up example)">Review replies</td><td data-l="Hours">1.5</td><td data-l="Easy to check?">3</td><td data-l="Safe?">Yes, if the owner posts them</td><td data-l="Score">4.5</td></tr><tr><td data-l="
+
+Job (made-up example)">Staff schedule</td><td data-l="Hours">2</td><td data-l="Easy to check?">2</td><td data-l="Safe?">Yes, as drafts</td><td data-l="Score">4</td></tr><tr class="gated"><td data-l="
+
+Job (made-up example)">Allergen notes</td><td data-l="Hours">0.5</td><td data-l="Easy to check?">1</td><td data-l="Safe?">No: a mistake can hurt someone</td><td data-l="Score">Never without the signed-off list</td></tr><tr class="gated"><td data-l="
+
+Job (made-up example)">AI answering messages by itself</td><td data-l="Hours">2</td><td data-l="Easy to check?">1</td><td data-l="Safe?">No: customers see it unchecked</td><td data-l="Score">Not in month one</td></tr></tbody></table></div>
+<p>Allergen notes take little time, but a wrong one can send a customer to hospital. So AI never writes them from scratch. It can only copy from the café's own checked allergen list.</p>
+<p>One café owner, Cole Morgan, wrote about a ChatGPT helper that turns a photo of his paper count sheet into a shopping list for each supplier. Doing it by hand took him 2 to 10 minutes. A scanning tool that did the job cost him over $250 a month, by his own figures (<a href="https://www.colemorgan.com/posts/how-i-automated-my-cafe-inventory-ordering-with-chatgpt/" rel="noopener" target="_blank">Cole Morgan</a>). That's a good size for a first job.</p></div>
+<div class="prose t"><p class="answer">Laneway picks three: posts, order lists and the weekly sales check.</p>
+<p>Good first jobs come back often, take real time, and are easy for a person to check. Some jobs are not safe to hand to AI:</p>
+<ul>
+<li><strong>Allergen notes.</strong> A mistake can make someone very sick. AI can only copy from the café's own checked allergen list.</li>
+<li><strong>AI answering customers by itself.</strong> A person should read every answer first.</li>
+</ul>
+<p>One real café owner, Cole Morgan, made a ChatGPT helper. It turns a photo of his paper count sheet (the list of what's left on the shelf) into a shopping list for each supplier. By hand, that took him 2 to 10 minutes. A scanning tool that did the same job cost him over $250 a month, by his own figures (<a href="https://www.colemorgan.com/posts/how-i-automated-my-cafe-inventory-ordering-with-chatgpt/" rel="noopener" target="_blank">Cole Morgan</a>).</p></div>
+</div><figure class="wrap t"><p class="figtitle">Three jobs picked, two kept away from AI</p><ul class="jobs"><li class="yes"><span class="mk">Picked</span>Posts and the specials board</li><li class="yes"><span class="mk">Picked</span>Supplier order lists</li><li class="yes"><span class="mk">Picked</span>Weekly sales check</li><li class="no"><span class="mk">Not safe</span>Allergen notes<small>A mistake can make someone sick</small></li><li class="no"><span class="mk">Not safe</span>AI answering customers by itself<small>Nobody reads it first</small></li></ul><p class="eyebrow madeup">Made-up example business</p></figure><div class="wrap">
+</div></section>
+<section class="q" id="q4"><div class="wrap"><p class="eyebrow">Step 4 of 11</p><h2>Weeks 2 to 3: What gets built?</h2>
+<div class="prose d"><p class="answer">For each of the three jobs I build one small saved tool and test it on the café's own work: its menu, its count sheet, its sales file. Nothing new is bought apart from AI seats for the two people who use the tools.</p>
+<p><strong>1. Posts and specials board.</strong> A saved assistant (a Project, in both ChatGPT and Claude) holds the café's menu, prices, opening hours, ten past posts the owner liked, and the rules: no allergen claims, no "best in Toronto", no food photos the café didn't take. The owner gives it the special and the photo and gets back a post and a board line to edit.</p>
+<p><strong>2. Supplier order lists.</strong> A second Project holds the list of every item, its supplier and its usual order size. The shift lead photographs the paper count sheet at close, and the assistant returns a checklist grouped by supplier. The owner checks it against the shelf before ordering. Cole Morgan built his version as a custom GPT. I wouldn't today: OpenAI has scheduled custom GPTs to stop running on December 11, 2026 (<a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq" rel="noopener" target="_blank">OpenAI</a>), so I build it as a Project instead.</p>
+<p><strong>3. The weekly sales check.</strong> Each Monday the owner exports last week's sales and asks the same set of questions, using the same prompt each time. There are two ways to do it.</p>
+<div class="toolgroup"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="square" aria-pressed="false">Square</button><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button></div><div class="toolblock" data-tool="square"><p class="toolname">In Square</p><p>Square now has its own assistant inside the Dashboard, so you can ask without exporting anything.</p>
+<p>In the US it's called Squaremates. Sign in to Square Dashboard, where it opens as your landing page, and type your question in the box (<a href="https://squareup.com/help/us/en/article/8617-use-managerbot-to-manage-business-tasks-and-insights" rel="noopener" target="_blank">Square Help</a>). Square says it made it available to US sellers on November 12, 2026, at no additional cost (<a href="https://squareup.com/us/en/press/introducing-squaremates" rel="noopener" target="_blank">Square</a>).</p>
+<p>In Canada it's called Square AI. Square says it launched on March 9, 2026, at no additional cost, and answers questions like "Which items sell best on weekends?" (<a href="https://squareup.com/ca/en/press/square-ai" rel="noopener" target="_blank">Square Canada</a>). One Toronto café manager quoted by Square said: "Now I just ask a question and it builds the table for me." That's Square's own press release, so read it as a vendor story.</p></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><ol>
+<li>Export last week's sales from your till. Daily totals are enough to start. For item counts, Square's item report is in Square Dashboard under Reports &gt; Custom &gt; Custom item report; click Export and choose CSV (<a href="https://squareup.com/help/gb/en/article/8363-view-item-category-and-modifiers-sales-reports" rel="noopener" target="_blank">Square Help</a>). Add two columns yourself: the weather, and anything unusual that day (a holiday, road work, a staff shortage). Laneway's file has both, and they explain most of its month.</li>
+<li>Start a chat and attach the file. ChatGPT reads .csv and Excel files; spreadsheets can be up to about 50 MB (<a href="https://help.openai.com/en/articles/8437071-data-analysis-with-chatgpt" rel="noopener" target="_blank">OpenAI Help</a>).</li>
+<li>Paste the prompt below. OpenAI's own tip: keep descriptive column headers in the first row and one row per record.</li>
+</ol></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><ol>
+<li>Export the file from your till the same way, with the weather and notes columns added.</li>
+<li>Click the + button at the lower left of the chat box, or drag the file into the chat. Files can be up to 500 MB, up to 20 per chat. Excel files need code execution and file creation switched on in your settings (<a href="https://support.claude.com/en/articles/8241126-uploading-files-to-claude" rel="noopener" target="_blank">Claude Help Center</a>).</li>
+<li>Paste the prompt below.</li>
+</ol></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>If the café already runs on Google Workspace, import the CSV into Google Sheets, click Ask Gemini at the top right and type the prompt. It needs an eligible Workspace or Google AI plan, and a chart Gemini makes won't update if the data changes later (<a href="https://support.google.com/docs/answer/14356410" rel="noopener" target="_blank">Google</a>).</p></div></div>
+<p>The prompt Laneway uses every Monday:</p>
+<div class="prompt"><p class="pl">The Monday prompt</p><p class="ptext">Here are last week&#x27;s daily sales for my café. In plain words, what&#x27;s going on, and what are 3 things I should try next week? Show the numbers you used. Compare weekdays with weekdays and weekends with weekends. Tell me anything the file can&#x27;t answer.</p><button type="button" class="copy">Copy prompt</button></div></div>
+<div class="prose s"><p class="answer">I build one small saved tool for each of the three jobs and test it on the café's own menu, count sheet and sales file.</p>
+<p><strong>1. Posts and specials.</strong> A saved workspace (ChatGPT and Claude both call it a Project) holds the menu, prices, hours, ten past posts and the rules. Rules include: no allergen claims, and no food photos the café didn't take.</p>
+<p><strong>2. Order lists.</strong> A second Project holds every item, its supplier and the usual amount. The shift lead takes a photo of the count sheet at close. The tool gives back a list for each supplier, and the owner checks it before ordering. OpenAI plans to switch off custom GPTs (an older kind of saved helper) on December 11, 2026 (<a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq" rel="noopener" target="_blank">OpenAI</a>), so I build this as a Project, not a custom GPT.</p>
+<p><strong>3. Weekly sales check.</strong> Every Monday the owner asks the same questions about last week's sales.</p>
+<div class="toolgroup"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="square" aria-pressed="false">Square</button><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button></div><div class="toolblock" data-tool="square"><p class="toolname">In Square</p><p>Square has a helper built in. In the US it's called Squaremates: sign in to Square Dashboard and type your question (<a href="https://squareup.com/help/us/en/article/8617-use-managerbot-to-manage-business-tasks-and-insights" rel="noopener" target="_blank">Square Help</a>). Square says it costs nothing extra for US sellers (<a href="https://squareup.com/us/en/press/introducing-squaremates" rel="noopener" target="_blank">Square</a>). In Canada it's called Square AI, and Square says it costs nothing extra there too (<a href="https://squareup.com/ca/en/press/square-ai" rel="noopener" target="_blank">Square Canada</a>).</p></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><ol>
+<li>Export last week's sales from your till (in Square: Reports &gt; Custom &gt; Custom item report, then Export). Add two columns: the weather, and anything unusual that day.</li>
+<li>Attach the file to a chat. ChatGPT reads .csv and Excel files (<a href="https://help.openai.com/en/articles/8437071-data-analysis-with-chatgpt" rel="noopener" target="_blank">OpenAI Help</a>).</li>
+<li>Paste the prompt below.</li>
+</ol></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><ol>
+<li>Export the file the same way, with the two extra columns.</li>
+<li>Click the + button at the lower left of the chat box, or drag the file in (<a href="https://support.claude.com/en/articles/8241126-uploading-files-to-claude" rel="noopener" target="_blank">Claude Help Center</a>).</li>
+<li>Paste the prompt below.</li>
+</ol></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>If you use Google Workspace, open the file in Google Sheets, click Ask Gemini at the top right and type the prompt (<a href="https://support.google.com/docs/answer/14356410" rel="noopener" target="_blank">Google</a>).</p></div></div>
+<p>The Monday prompt:</p>
+<div class="prompt"><p class="pl">The Monday prompt</p><p class="ptext">Here are last week&#x27;s daily sales for my café. In plain words, what&#x27;s going on, and what are 3 things I should try next week? Show the numbers you used. Compare weekdays with weekdays and weekends with weekends. Tell me anything the file can&#x27;t answer.</p><button type="button" class="copy">Copy prompt</button></div></div>
+<div class="prose t"><p class="answer">One small helper for each job.</p>
+<ol>
+<li><strong>Posts.</strong> A saved space in ChatGPT or Claude, called a Project. It holds the menu, prices and rules. The owner adds the special and a photo. It writes a post. The owner fixes it and posts it.</li>
+<li><strong>Order lists.</strong> A second Project knows every item and its supplier. The shift lead takes a photo of the count sheet. The helper makes the lists. The owner checks them.</li>
+<li><strong>Sales check.</strong> Every Monday the owner asks the same questions about last week's sales.</li>
+</ol>
+<div class="toolgroup"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="square" aria-pressed="false">Square</button><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button></div><div class="toolblock" data-tool="square"><p class="toolname">In Square</p><p>Square has a helper built in. Square says it costs nothing extra. In the US it's called Squaremates (<a href="https://squareup.com/us/en/press/introducing-squaremates" rel="noopener" target="_blank">Square</a>). In Canada it's called Square AI (<a href="https://squareup.com/ca/en/press/square-ai" rel="noopener" target="_blank">Square Canada</a>).</p></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><p>Download last week's sales from your till. Add the weather and anything unusual. Attach the file to a chat and paste the question below (<a href="https://help.openai.com/en/articles/8437071-data-analysis-with-chatgpt" rel="noopener" target="_blank">OpenAI Help</a>).</p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><p>Download the file the same way. Click the + button at the lower left of the chat box, add the file and paste the question below (<a href="https://support.claude.com/en/articles/8241126-uploading-files-to-claude" rel="noopener" target="_blank">Claude Help Center</a>).</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>If you use Google Sheets, open the file and click Ask Gemini at the top right. It needs an eligible Google Workspace or Google AI plan (<a href="https://support.google.com/docs/answer/14356410" rel="noopener" target="_blank">Google</a>).</p></div></div>
+<p>The Monday question:</p>
+<div class="prompt"><p class="pl">The Monday prompt</p><p class="ptext">Here are last week&#x27;s daily sales for my café. In plain words, what&#x27;s going on, and what are 3 things I should try next week? Show the numbers you used. Compare weekdays with weekdays and weekends with weekends. Tell me anything the file can&#x27;t answer.</p><button type="button" class="copy">Copy prompt</button></div></div>
+</div></section>
+<section class="q" id="q5"><div class="wrap"><p class="eyebrow">Step 5 of 11</p><h2>What does the sales file actually say?</h2>
+<div class="prose d"><p class="answer">The file says Laneway's month was shaped by four things: weekends, rain, a week of road work and one seasonal drink. Here is what I get when I work the numbers myself, in code, so you have an answer key to check any AI's answer against.</p>
+<p><strong>Weekends carry the café.</strong> On a normal dry day with nothing unusual in the notes, a weekday took in $1,197.63 on average (about 132 transactions) and a weekend day took in $2,033.88 (about 190). That's about 70% more per day at weekends. People also spent more per visit at weekends: $10.71 against $9.08.</p>
+<p><strong>Rain hurt every day it fell.</strong> Weekdays give the cleanest comparison: the four rainy weekdays averaged $951.09, about 21% below a normal dry weekday. The two rainy Saturdays were lower too, but there are only two normal Saturdays to compare them with, so I wouldn't put a number on it.</p>
+<p><strong>The road work cost roughly $1,900.</strong> From October 13 to 17 the notes say "road work out front". Those five days took in $4,977.82, about $1,900 less than the same days of the week took in on normal dry days. Treat that as rough: each day of the week has only two or three normal days to compare with. The weekdays that week ran about 26% below a normal weekday.</p>
+<p><strong>The lowest day had a reason.</strong> Thanksgiving Monday (October 12) took in $513.59 from 56 transactions, with short hours.</p>
+<p><strong>Pumpkin spice took over.</strong> The file names one top seller per day. Before October 19, pumpkin spice latte topped 2 of 18 days. From October 19 it topped 11 of the last 13. The best week was October 19 to 25 at $9,967.20, and the best day was Sunday October 25 at $2,338.01.</p></div>
+<div class="prose s"><p class="answer">Four things shaped Laneway's month: weekends, rain, road work and one seasonal drink. I worked the numbers myself, in code, so you have an answer key.</p>
+<ul>
+<li><strong>Weekends.</strong> A normal dry weekday took in about $1,198. A normal weekend day took in about $2,034. That's about 70% more.</li>
+<li><strong>Rain.</strong> Rainy weekdays took in about $951, about 21% less than a normal weekday.</li>
+<li><strong>Road work.</strong> In the week of October 13, road work out front cost roughly $1,900. That's a rough figure, because there are only a few normal days to compare with.</li>
+<li><strong>Thanksgiving.</strong> The lowest day was Thanksgiving Monday: $513.59, with short hours.</li>
+<li><strong>Pumpkin spice.</strong> It was the top seller on 2 of the first 18 days and 11 of the last 13.</li>
+</ul></div>
+<div class="prose t"><p class="answer">Four things changed Laneway's month.</p>
+<ul>
+<li><strong>Weekends were busier.</strong> A normal weekend day took in about 70% more than a normal weekday.</li>
+<li><strong>Rain hurt.</strong> Rainy weekdays took in about 21% less.</li>
+<li><strong>Road work hurt.</strong> Road work out front for a week cost roughly $1,900.</li>
+<li><strong>Pumpkin spice took over.</strong> It was the top seller on 11 of the last 13 days.</li>
+</ul></div>
+</div><figure class="widewrap chartfig"><p class="figtitle"><span class="ds">Laneway Coffee, daily revenue, October 2026 (CAD)</span><span class="t">Money in, every day in October</span></p><div class="chart"><div class="yax" aria-hidden="true"><span style="top:0">$2,400</span><span style="top:50%">$1,200</span><span style="top:100%">$0</span></div><div class="plot"><div class="grid" aria-hidden="true"></div><div class="roadband" aria-hidden="true"><span>Road work out front</span></div><div class="days" role="list" aria-label="Daily revenue, October 1 to 31"><div class="c" role="listitem" aria-label="Thursday October 1, dry: $1,085.11 CAD, 124 transactions, top seller breakfast sandwich" title="Thursday October 1, dry: $1,085.11 CAD, 124 transactions, top seller breakfast sandwich"><span class="bar2" style="height:45.2%"></span><span class="dn k">1</span></div><div class="c" role="listitem" aria-label="Friday October 2, dry: $1,318.98 CAD, 140 transactions, top seller oat latte" title="Friday October 2, dry: $1,318.98 CAD, 140 transactions, top seller oat latte"><span class="bar2" style="height:55.0%"></span><span class="dn">2</span></div><div class="c we" role="listitem" aria-label="Saturday October 3, rain: $1,448.01 CAD, 141 transactions, top seller breakfast sandwich" title="Saturday October 3, rain: $1,448.01 CAD, 141 transactions, top seller breakfast sandwich"><span class="bar2" style="height:60.3%"><i class="drop" aria-hidden="true"></i></span><span class="dn">3</span></div><div class="c we" role="listitem" aria-label="Sunday October 4, dry: $1,823.66 CAD, 177 transactions, top seller drip coffee" title="Sunday October 4, dry: $1,823.66 CAD, 177 transactions, top seller drip coffee"><span class="bar2" style="height:76.0%"></span><span class="dn">4</span></div><div class="c" role="listitem" aria-label="Monday October 5, dry: $1,042.89 CAD, 120 transactions, top seller drip coffee" title="Monday October 5, dry: $1,042.89 CAD, 120 transactions, top seller drip coffee"><span class="bar2" style="height:43.5%"></span><span class="dn k">5</span></div><div class="c" role="listitem" aria-label="Tuesday October 6, dry: $1,099.85 CAD, 120 transactions, top seller oat latte" title="Tuesday October 6, dry: $1,099.85 CAD, 120 transactions, top seller oat latte"><span class="bar2" style="height:45.8%"></span><span class="dn">6</span></div><div class="c" role="listitem" aria-label="Wednesday October 7, dry: $1,193.79 CAD, 130 transactions, top seller oat latte" title="Wednesday October 7, dry: $1,193.79 CAD, 130 transactions, top seller oat latte"><span class="bar2" style="height:49.7%"></span><span class="dn">7</span></div><div class="c" role="listitem" aria-label="Thursday October 8, dry: $1,160.57 CAD, 129 transactions, top seller oat latte" title="Thursday October 8, dry: $1,160.57 CAD, 129 transactions, top seller oat latte"><span class="bar2" style="height:48.4%"></span><span class="dn">8</span></div><div class="c" role="listitem" aria-label="Friday October 9, rain: $1,030.97 CAD, 109 transactions, top seller drip coffee" title="Friday October 9, rain: $1,030.97 CAD, 109 transactions, top seller drip coffee"><span class="bar2" style="height:43.0%"><i class="drop" aria-hidden="true"></i></span><span class="dn">9</span></div><div class="c we" role="listitem" aria-label="Saturday October 10, rain: $1,540.53 CAD, 142 transactions, top seller breakfast sandwich" title="Saturday October 10, rain: $1,540.53 CAD, 142 transactions, top seller breakfast sandwich"><span class="bar2" style="height:64.2%"><i class="drop" aria-hidden="true"></i></span><span class="dn k">10</span></div><div class="c we" role="listitem" aria-label="Sunday October 11, dry: $2,012.28 CAD, 180 transactions, top seller oat latte" title="Sunday October 11, dry: $2,012.28 CAD, 180 transactions, top seller oat latte"><span class="bar2" style="height:83.8%"></span><span class="dn">11</span></div><div class="c hol" role="listitem" aria-label="Monday October 12, dry: $513.59 CAD, 56 transactions, top seller oat latte, thanksgiving (canada), short hours" title="Monday October 12, dry: $513.59 CAD, 56 transactions, top seller oat latte, thanksgiving (canada), short hours"><span class="bar2" style="height:21.4%"><b class="tag">Thanksgiving</b></span><span class="dn">12</span></div><div class="c road" role="listitem" aria-label="Tuesday October 13, dry: $823.30 CAD, 90 transactions, top seller oat latte, road work out front" title="Tuesday October 13, dry: $823.30 CAD, 90 transactions, top seller oat latte, road work out front"><span class="bar2" style="height:34.3%"></span><span class="dn">13</span></div><div class="c road" role="listitem" aria-label="Wednesday October 14, dry: $848.15 CAD, 92 transactions, top seller drip coffee, road work out front" title="Wednesday October 14, dry: $848.15 CAD, 92 transactions, top seller drip coffee, road work out front"><span class="bar2" style="height:35.3%"></span><span class="dn">14</span></div><div class="c road" role="listitem" aria-label="Thursday October 15, dry: $848.59 CAD, 94 transactions, top seller pumpkin spice latte, road work out front" title="Thursday October 15, dry: $848.59 CAD, 94 transactions, top seller pumpkin spice latte, road work out front"><span class="bar2" style="height:35.4%"></span><span class="dn k">15</span></div><div class="c road" role="listitem" aria-label="Friday October 16, dry: $1,019.01 CAD, 107 transactions, top seller pumpkin spice latte, road work out front" title="Friday October 16, dry: $1,019.01 CAD, 107 transactions, top seller pumpkin spice latte, road work out front"><span class="bar2" style="height:42.5%"></span><span class="dn">16</span></div><div class="c we road" role="listitem" aria-label="Saturday October 17, dry: $1,438.77 CAD, 129 transactions, top seller drip coffee, road work out front" title="Saturday October 17, dry: $1,438.77 CAD, 129 transactions, top seller drip coffee, road work out front"><span class="bar2" style="height:59.9%"></span><span class="dn">17</span></div><div class="c we" role="listitem" aria-label="Sunday October 18, dry: $1,837.49 CAD, 174 transactions, top seller breakfast sandwich" title="Sunday October 18, dry: $1,837.49 CAD, 174 transactions, top seller breakfast sandwich"><span class="bar2" style="height:76.6%"></span><span class="dn">18</span></div><div class="c" role="listitem" aria-label="Monday October 19, dry: $1,250.15 CAD, 134 transactions, top seller pumpkin spice latte" title="Monday October 19, dry: $1,250.15 CAD, 134 transactions, top seller pumpkin spice latte"><span class="bar2" style="height:52.1%"></span><span class="dn">19</span></div><div class="c" role="listitem" aria-label="Tuesday October 20, dry: $1,118.84 CAD, 129 transactions, top seller pumpkin spice latte" title="Tuesday October 20, dry: $1,118.84 CAD, 129 transactions, top seller pumpkin spice latte"><span class="bar2" style="height:46.6%"></span><span class="dn k">20</span></div><div class="c" role="listitem" aria-label="Wednesday October 21, rain: $924.73 CAD, 97 transactions, top seller pumpkin spice latte" title="Wednesday October 21, rain: $924.73 CAD, 97 transactions, top seller pumpkin spice latte"><span class="bar2" style="height:38.5%"><i class="drop" aria-hidden="true"></i></span><span class="dn">21</span></div><div class="c" role="listitem" aria-label="Thursday October 22, rain: $955.19 CAD, 102 transactions, top seller pumpkin spice latte" title="Thursday October 22, rain: $955.19 CAD, 102 transactions, top seller pumpkin spice latte"><span class="bar2" style="height:39.8%"><i class="drop" aria-hidden="true"></i></span><span class="dn">22</span></div><div class="c" role="listitem" aria-label="Friday October 23, dry: $1,328.11 CAD, 146 transactions, top seller pumpkin spice latte" title="Friday October 23, dry: $1,328.11 CAD, 146 transactions, top seller pumpkin spice latte"><span class="bar2" style="height:55.3%"></span><span class="dn">23</span></div><div class="c we" role="listitem" aria-label="Saturday October 24, dry: $2,052.17 CAD, 195 transactions, top seller pumpkin spice latte" title="Saturday October 24, dry: $2,052.17 CAD, 195 transactions, top seller pumpkin spice latte"><span class="bar2" style="height:85.5%"></span><span class="dn">24</span></div><div class="c we" role="listitem" aria-label="Sunday October 25, dry: $2,338.01 CAD, 213 transactions, top seller pumpkin spice latte" title="Sunday October 25, dry: $2,338.01 CAD, 213 transactions, top seller pumpkin spice latte"><span class="bar2" style="height:97.4%"></span><span class="dn k">25</span></div><div class="c" role="listitem" aria-label="Monday October 26, dry: $1,158.58 CAD, 125 transactions, top seller oat latte" title="Monday October 26, dry: $1,158.58 CAD, 125 transactions, top seller oat latte"><span class="bar2" style="height:48.3%"></span><span class="dn">26</span></div><div class="c" role="listitem" aria-label="Tuesday October 27, rain: $893.46 CAD, 97 transactions, top seller pumpkin spice latte" title="Tuesday October 27, rain: $893.46 CAD, 97 transactions, top seller pumpkin spice latte"><span class="bar2" style="height:37.2%"><i class="drop" aria-hidden="true"></i></span><span class="dn">27</span></div><div class="c" role="listitem" aria-label="Wednesday October 28, dry: $1,152.27 CAD, 132 transactions, top seller pumpkin spice latte" title="Wednesday October 28, dry: $1,152.27 CAD, 132 transactions, top seller pumpkin spice latte"><span class="bar2" style="height:48.0%"></span><span class="dn">28</span></div><div class="c" role="listitem" aria-label="Thursday October 29, dry: $1,228.03 CAD, 135 transactions, top seller pumpkin spice latte" title="Thursday October 29, dry: $1,228.03 CAD, 135 transactions, top seller pumpkin spice latte"><span class="bar2" style="height:51.2%"></span><span class="dn">29</span></div><div class="c" role="listitem" aria-label="Friday October 30, dry: $1,431.99 CAD, 151 transactions, top seller breakfast sandwich" title="Friday October 30, dry: $1,431.99 CAD, 151 transactions, top seller breakfast sandwich"><span class="bar2" style="height:59.7%"></span><span class="dn">30</span></div><div class="c we" role="listitem" aria-label="Saturday October 31, dry: $2,139.67 CAD, 200 transactions, top seller pumpkin spice latte" title="Saturday October 31, dry: $2,139.67 CAD, 200 transactions, top seller pumpkin spice latte"><span class="bar2" style="height:89.2%"></span><span class="dn k">31</span></div></div></div></div><div class="legend"><span class="lw">Weekday</span><span class="lwe">Weekend</span><span class="lr">Rain</span><span class="lroad">Road work week</span></div><figcaption><span class="ds">Drawn from the 31 rows of the made-up sample file. Tallest day: Sunday October 25, $2,338.01. Lowest: Thanksgiving Monday, $513.59. </span><span class="t">From the made-up sample file. </span></figcaption><details class="data"><summary>Get the sample file (31 rows, CSV)</summary><p>Copy the rows below into a text file and save it as laneway-october.csv. It opens in Excel, Google Sheets, ChatGPT or Claude. All of it is made up.</p><button type="button" class="copy copydata">Copy the data</button><pre id="csvdata">Date,Day,Transactions,Revenue (CAD),Weather,Top seller,Notes
+2026-10-01,Thursday,124,1085.11,Dry,Breakfast sandwich,
+2026-10-02,Friday,140,1318.98,Dry,Oat latte,
+2026-10-03,Saturday,141,1448.01,Rain,Breakfast sandwich,
+2026-10-04,Sunday,177,1823.66,Dry,Drip coffee,
+2026-10-05,Monday,120,1042.89,Dry,Drip coffee,
+2026-10-06,Tuesday,120,1099.85,Dry,Oat latte,
+2026-10-07,Wednesday,130,1193.79,Dry,Oat latte,
+2026-10-08,Thursday,129,1160.57,Dry,Oat latte,
+2026-10-09,Friday,109,1030.97,Rain,Drip coffee,
+2026-10-10,Saturday,142,1540.53,Rain,Breakfast sandwich,
+2026-10-11,Sunday,180,2012.28,Dry,Oat latte,
+2026-10-12,Monday,56,513.59,Dry,Oat latte,&quot;Thanksgiving (Canada), short hours&quot;
+2026-10-13,Tuesday,90,823.3,Dry,Oat latte,Road work out front
+2026-10-14,Wednesday,92,848.15,Dry,Drip coffee,Road work out front
+2026-10-15,Thursday,94,848.59,Dry,Pumpkin spice latte,Road work out front
+2026-10-16,Friday,107,1019.01,Dry,Pumpkin spice latte,Road work out front
+2026-10-17,Saturday,129,1438.77,Dry,Drip coffee,Road work out front
+2026-10-18,Sunday,174,1837.49,Dry,Breakfast sandwich,
+2026-10-19,Monday,134,1250.15,Dry,Pumpkin spice latte,
+2026-10-20,Tuesday,129,1118.84,Dry,Pumpkin spice latte,
+2026-10-21,Wednesday,97,924.73,Rain,Pumpkin spice latte,
+2026-10-22,Thursday,102,955.19,Rain,Pumpkin spice latte,
+2026-10-23,Friday,146,1328.11,Dry,Pumpkin spice latte,
+2026-10-24,Saturday,195,2052.17,Dry,Pumpkin spice latte,
+2026-10-25,Sunday,213,2338.01,Dry,Pumpkin spice latte,
+2026-10-26,Monday,125,1158.58,Dry,Oat latte,
+2026-10-27,Tuesday,97,893.46,Rain,Pumpkin spice latte,
+2026-10-28,Wednesday,132,1152.27,Dry,Pumpkin spice latte,
+2026-10-29,Thursday,135,1228.03,Dry,Pumpkin spice latte,
+2026-10-30,Friday,151,1431.99,Dry,Breakfast sandwich,
+2026-10-31,Saturday,200,2139.67,Dry,Pumpkin spice latte,</pre></details></figure><div class="wrap">
+<div class="prose d"><p><strong>Three things Laneway could try next week.</strong> These are tests, not promises. Each one has a way to tell whether it worked.</p>
+<ol>
+<li><strong>Try a lighter rain-day prep.</strong> Check the forecast on Sunday. On a weekday with rain forecast, prep fewer sandwiches. If you want to try lighter staffing too, set it when you post the schedule, as a trial, and note it in the file. Check: compare what's left at close, and any sell-outs, against a dry weekday.</li>
+<li><strong>Protect the weekend.</strong> Weekends bring about 70% more per day. Make sure the best staff and full prep are on Saturday and Sunday mornings. Check: count sell-outs and the longest line on the next two weekends.</li>
+<li><strong>Decide what replaces pumpkin spice.</strong> It drove late October, and it's seasonal. Pick the next special now. Check: its daily count against the oat latte's, using the item report, since the daily file only names one top seller.</li>
+</ol>
+<p><strong>What the file can't tell you.</strong> This file has daily totals and one top seller per day. It has no item counts, no costs, no staff hours and no waste. So it can't say whether pumpkin spice is profitable, whether the café was overstaffed, or how much it threw away. For that you need the item report with costs, the schedule and a waste log. A good AI answer should say this. A bad one will guess.</p></div>
+<div class="prose s"><p><strong>Three things to try next week.</strong> These are tests, not promises.</p>
+<ol>
+<li><strong>Rain days:</strong> if rain is forecast for a weekday, make fewer sandwiches. Check what's left at close.</li>
+<li><strong>Weekends:</strong> put your best staff and full prep on Saturday and Sunday mornings. Count sell-outs.</li>
+<li><strong>After pumpkin spice:</strong> pick the next special now. Track it in the item report.</li>
+</ol>
+<p><strong>What the file can't tell you.</strong> It has daily totals only. It has no costs, staff hours or waste. So it can't say what makes money or whether you had too many staff. A good AI answer says so.</p></div>
+<div class="prose t"><p><strong>Three things to try.</strong> These are tests, not promises.</p>
+<ol>
+<li>Make fewer sandwiches on rainy weekdays. Check what's left at close.</li>
+<li>Put your best staff on weekend mornings. Count sell-outs.</li>
+<li>Pick the drink that comes after pumpkin spice. Track how many sell each day.</li>
+</ol>
+<p>The file has no costs or staff hours. So it can't tell you what makes the most money.</p></div>
+</div></section>
+<section class="q" id="q6"><div class="wrap"><p class="eyebrow">Step 6 of 11</p><h2>How do you check what the AI tells you?</h2>
+<div class="prose d"><p class="answer">You check it against numbers you trust, because AI tools still get spreadsheet work wrong. In a benchmark posted in November 2026 (a preprint, not yet peer-reviewed), researchers gave AI models 70 realistic workplace spreadsheet requests, and the best one passed only 38.3% of its attempts (<a href="https://arxiv.org/abs/2611.17766" rel="noopener" target="_blank">GDP.xlsx, arXiv</a>). Square says the same about its own assistant: "they can make mistakes. Please validate Squaremates' responses for accuracy" (<a href="https://squareup.com/help/us/en/article/8617-use-managerbot-to-manage-business-tasks-and-insights" rel="noopener" target="_blank">Square Help</a>).</p>
+<p>Here is the trap I see most with this file. A quick average of all six rain days against all the dry days says rain cost about 15%. That's wrong, because two of the rain days were Saturdays and the dry days include Thanksgiving and the road work week. Compare rainy weekdays with normal dry weekdays and it's about 21%. Both answers look reasonable. Only one compares like with like.</p>
+<p>Four checks I teach every owner:</p>
+<ul>
+<li><strong>Does the total match the till?</strong> Ask for the month's total and transaction count first. For this file it's $40,056.74 from 4,110. If that's wrong, nothing after it counts.</li>
+<li><strong>Show me the rows.</strong> Ask which days it used for each claim. If it can't list them, don't use the claim.</li>
+<li><strong>Like with like.</strong> Weekdays against weekdays, and leave out days with a note (holidays, road work).</li>
+<li><strong>What can't the file answer?</strong> If it gives you profit or staffing advice from a file with no costs or hours, it's guessing.</li>
+</ul>
+<p><strong>What ChatGPT and Claude actually said.</strong> <span class="note">[DAN: AI ANSWERS. RUN THE MONDAY PROMPT ON THE SAMPLE FILE IN A FRESH CHAT IN CHATGPT AND IN CLAUDE, NOTE THE DATE, PLAN AND MODEL, AND PASTE BOTH ANSWERS. THEY GET SCORED AGAINST THE FOUR CHECKS IN THE TABLE BELOW. UNTIL THEN THE TABLE STAYS EMPTY.]</span></p>
+<div class="tablewrap"><table class="stack"><thead><tr>
+<th>Check</th>
+<th>ChatGPT</th>
+<th>Claude</th>
+</tr></thead><tbody><tr><td data-l="
+
+Check">Total and count match ($40,056.74 from 4,110)</td><td data-l="ChatGPT"><span class="note">to fill</span></td><td data-l="Claude"><span class="note">to fill</span></td></tr><tr><td data-l="
+
+Check">Shows the rows behind each claim</td><td data-l="ChatGPT"><span class="note">to fill</span></td><td data-l="Claude"><span class="note">to fill</span></td></tr><tr><td data-l="
+
+Check">Compares like with like (rain about 21% on weekdays, not 15%)</td><td data-l="ChatGPT"><span class="note">to fill</span></td><td data-l="Claude"><span class="note">to fill</span></td></tr><tr><td data-l="
+
+Check">Says what the file can't answer</td><td data-l="ChatGPT"><span class="note">to fill</span></td><td data-l="Claude"><span class="note">to fill</span></td></tr></tbody></table></div></div>
+<div class="prose s"><p class="answer">Check it against numbers you trust, because AI still makes mistakes with spreadsheets. In a test posted in November 2026 (not yet checked by other experts), the best AI passed only 38.3% of its tries at 70 real-world spreadsheet tasks (<a href="https://arxiv.org/abs/2611.17766" rel="noopener" target="_blank">GDP.xlsx</a>). Square says its own helper "can make mistakes" and asks you to check its answers (<a href="https://squareup.com/help/us/en/article/8617-use-managerbot-to-manage-business-tasks-and-insights" rel="noopener" target="_blank">Square Help</a>).</p>
+<p>Here's an easy trap. If you average all rain days against all dry days, rain looks like it cost about 15%. But some rain days were Saturdays, and the dry days include Thanksgiving and road work. Compare rainy weekdays with normal weekdays and it's about 21%.</p>
+<p>Four checks:</p>
+<ul>
+<li><strong>Does the total match your till?</strong> For this file: $40,056.74 from 4,110 sales.</li>
+<li><strong>Which days did it use?</strong> If it can't say, don't trust it.</li>
+<li><strong>Like with like.</strong> Weekdays with weekdays. Leave out odd days.</li>
+<li><strong>What can't the file answer?</strong> Profit advice from a file with no costs is a guess.</li>
+</ul>
+<p><strong>What ChatGPT and Claude actually said.</strong> <span class="note">[DAN: AI ANSWERS, SCORED AGAINST THE FOUR CHECKS, SAME AS THE DETAILED VERSION.]</span></p></div>
+<div class="prose t"><p class="answer">Check it against numbers you know. AI still makes mistakes with numbers. In one test, the best AI fully passed only about 38 out of 100 tries at real spreadsheet tasks (<a href="https://arxiv.org/abs/2611.17766" rel="noopener" target="_blank">GDP.xlsx</a>).</p>
+<p>Four checks:</p>
+<ul>
+<li>Does the total match your till? (Here: $40,056.74 from 4,110 sales.)</li>
+<li>Which days did it use?</li>
+<li>Did it compare weekdays with weekdays?</li>
+<li>Did it say what the file can't answer?</li>
+</ul>
+<p><span class="note">[DAN: AI ANSWERS, SCORED AGAINST THE FOUR CHECKS.]</span></p></div>
+</div></section>
+<section class="q" id="q7"><div class="wrap"><p class="eyebrow">Step 7 of 11</p><h2>Weeks 3 to 4: How do the staff use it day to day?</h2>
+<div class="prose d"><p class="answer">The staff use two of the three tools every day, with one page of rules and one go-to person. At Laneway that's the shift lead who already does the count sheet.</p>
+<p>The training is short and on real work, as in How I work with a small business: one session where each person does a real task start to finish, one where we look at the tool's mistakes on purpose, and a check-in after I've gone. Training is what operators say they're missing. In the National Restaurant Association's survey released in November 2026, training and education topped the list of support that would help them adopt these tools, named by 56.5% (<a href="https://www.restaurant.org/research-and-media/media/press-releases/new-research-from-the-national-restaurant-association-identifies-connected-technology-as-restaurants/" rel="noopener" target="_blank">National Restaurant Association</a>).</p>
+<p><strong>Laneway's one page of rules:</strong></p>
+<ul>
+<li>Use the café's own paid account only, never personal accounts.</li>
+<li>Never paste customer names, emails, phone numbers, card details or anyone's allergy notes.</li>
+<li>AI never writes an allergen line from scratch. It may only copy from the signed-off allergen list, and a person checks it against the recipe.</li>
+<li>Never post a food photo the café didn't take of food it actually serves.</li>
+<li>A person reads every post, order list and review reply before it goes anywhere.</li>
+<li>Report a mistake the same day. No one gets in trouble for reporting.</li>
+</ul>
+<p><strong>Why the allergen rule differs by country.</strong> The lists aren't the same.</p>
+<div class="where2"><div><h3>In the US</h3><p>The nine major food allergens are milk, eggs, fish, crustacean shellfish, tree nuts, peanuts, wheat, soybeans and sesame (<a href="https://www.fda.gov/food/buy-store-serve-safe-food/food-allergies-what-you-need-know" rel="noopener" target="_blank">FDA</a>). What a café must tell customers about allergens in food it plates depends on its state or county. The FDA's Food Code is a model code that each state adopts in its own way: as of December 31, 2025, 14 states had adopted the newest (2022) version, covering 25.6% of the population (<a href="https://www.fda.gov/food/fda-food-code/adoption-fda-food-code-state-and-territorial-agencies-responsible-oversight-restaurants-andor-retail" rel="noopener" target="_blank">FDA</a>). Ask your local health department.</p></div><div><h3>In Canada</h3><p>The priority allergens are eggs, milk, mustard, peanuts, crustaceans and molluscs, fish, sesame seeds, soy, sulphites, tree nuts, wheat and triticale, plus gluten sources (<a href="https://inspection.canada.ca/en/food-labels/labelling/consumers/food-allergies" rel="noopener" target="_blank">CFIA</a>). Mustard, sulphites and molluscs aren't on the US list, so an AI tool that has learned the US list can miss them. These labelling rules are for prepackaged food. For food you plate, ask your local public health unit.</p></div><div><h3>In Quebec</h3><p>Menus must be in French. Another language can sit beside it, but not more prominently (<a href="https://www.legisquebec.gouv.qc.ca/en/pdf/cs/C-11.pdf" rel="noopener" target="_blank">Charter of the French Language, s. 51</a>). AI tools write good French, but they won't apply that rule unless you tell them. Write the French first and have a French speaker check it, on the menu, the board and the posts.</p></div></div></div>
+<div class="prose s"><p class="answer">Staff use two of the tools every day, with one page of rules and one go-to person. At Laneway that's the shift lead.</p>
+<p>Training is short and done on real work. In the same US survey, training was the help owners wanted most, named by 56.5% (<a href="https://www.restaurant.org/research-and-media/media/press-releases/new-research-from-the-national-restaurant-association-identifies-connected-technology-as-restaurants/" rel="noopener" target="_blank">National Restaurant Association</a>).</p>
+<p><strong>Laneway's rules:</strong></p>
+<ul>
+<li>Use the café's paid account, never a personal one.</li>
+<li>Never paste customer names, emails, phone numbers, card details or allergy notes.</li>
+<li>AI never writes an allergen line from scratch. It copies from the checked list, and a person checks it.</li>
+<li>Only post photos the café took of food it really serves.</li>
+<li>A person reads everything before it goes out.</li>
+<li>Report mistakes the same day. Nobody gets in trouble.</li>
+</ul>
+<div class="where2"><div><h3>In the US</h3><p>The nine main food allergens are milk, eggs, fish, crustacean shellfish (like shrimp and crab), tree nuts, peanuts, wheat, soy and sesame (<a href="https://www.fda.gov/food/buy-store-serve-safe-food/food-allergies-what-you-need-know" rel="noopener" target="_blank">FDA</a>). What you must tell customers depends on your state or county. Ask your local health department.</p></div><div><h3>In Canada</h3><p>Canada's list also has mustard, sulphites and molluscs, like clams and mussels (<a href="https://inspection.canada.ca/en/food-labels/labelling/consumers/food-allergies" rel="noopener" target="_blank">CFIA</a>). An AI that learned the US list can miss them. Ask your local public health unit about food you plate.</p></div><div><h3>In Quebec</h3><p>Menus must be in French. Other languages can be there too, but never more prominent than the French (<a href="https://www.legisquebec.gouv.qc.ca/en/pdf/cs/C-11.pdf" rel="noopener" target="_blank">Charter of the French Language</a>). Write the French first and have a French speaker check it.</p></div></div></div>
+<div class="prose t"><p class="answer">Staff use two of the helpers every day. One person is the go-to. Everyone follows one page of rules.</p>
+<ul>
+<li>Use the café's account, not your own.</li>
+<li>Never paste customer names, emails, phone numbers, card numbers or allergy notes.</li>
+<li>AI never writes allergen notes from scratch.</li>
+<li>Only post photos you took of food you really sell.</li>
+<li>A person reads everything before it goes out.</li>
+<li>Tell someone about a mistake the same day.</li>
+</ul>
+<div class="where2"><div><h3>In the US</h3><p>There are nine main food allergens, including milk, eggs, peanuts, wheat and sesame (<a href="https://www.fda.gov/food/buy-store-serve-safe-food/food-allergies-what-you-need-know" rel="noopener" target="_blank">FDA</a>).</p></div><div><h3>In Canada</h3><p>Canada's list also has mustard, sulphites (a preservative) and molluscs, like clams (<a href="https://inspection.canada.ca/en/food-labels/labelling/consumers/food-allergies" rel="noopener" target="_blank">CFIA</a>). An AI may miss them.</p></div><div><h3>In Quebec</h3><p>Menus must be in French. Other languages are OK, but not bigger than the French (<a href="https://www.legisquebec.gouv.qc.ca/en/pdf/cs/C-11.pdf" rel="noopener" target="_blank">Charter of the French Language</a>).</p></div></div></div>
+</div></section>
+<section class="q" id="q8"><div class="wrap"><p class="eyebrow">Step 8 of 11</p><h2>Week 4: What does the café measure, and what can&#x27;t a month show?</h2>
+<div class="prose d"><p class="answer">At week 4 the café counts four things for each job, the same way it did in weeks 1 to 2: minutes per job, how often the AI draft needed big changes, mistakes that reached a customer or supplier, and how many jobs actually used the new tool. It trusts the count over anyone's feeling.</p>
+<div class="tablewrap"><table class="stack"><thead><tr>
+<th>Number (for each of the three jobs)</th>
+<th>How Laneway gets it</th>
+<th>Before</th>
+<th>After</th>
+</tr></thead><tbody><tr><td data-l="
+
+Number (for each of the three jobs)">Minutes per job</td><td data-l="How Laneway gets it">A one-week timed log by whoever does it</td><td data-l="Before">Weeks 1 to 2</td><td data-l="After">Week 4</td></tr><tr><td data-l="
+
+Number (for each of the three jobs)">How often the AI draft needed big changes</td><td data-l="How Laneway gets it">The person checking ticks a box</td><td data-l="Before">No tool yet</td><td data-l="After">Week 4</td></tr><tr><td data-l="
+
+Number (for each of the three jobs)">Mistakes that reached a customer or a supplier</td><td data-l="How Laneway gets it">A note in the shift log</td><td data-l="Before">Weeks 1 to 2</td><td data-l="After">Week 4</td></tr><tr><td data-l="
+
+Number (for each of the three jobs)">Share of jobs that used the new tool</td><td data-l="How Laneway gets it">Simple count</td><td data-l="Before">No tool yet</td><td data-l="After">Weeks 4 and 6</td></tr></tbody></table></div>
+<p>The weekly sales check gets one more number: did the three tests from the sales file get run, and what happened? That's a yes or no and a sentence, not a percentage.</p>
+<p><strong>What one month can't show.</strong> It can't show an effect on profit. October's file has no costs, and a month is too short anyway. If you want an outside yardstick for later, the National Restaurant Association's median for limited-service restaurants in 2024 was food and non-alcohol beverage costs at 32.4% of sales and wages and benefits at 31.7%. The Association says these aren't standards or goals for individual restaurants (<a href="https://restaurant.org/research-and-media/research/restaurant-economic-insights/analysis-commentary/restaurant-operators-kept-food-cost-ratios-in-check-in-2024/" rel="noopener" target="_blank">food cost</a>, <a href="https://restaurant.org/research-and-media/research/restaurant-economic-insights/analysis-commentary/elevated-labor-costs-had-a-significant-impact-on-restaurant-profitability-in-2024/" rel="noopener" target="_blank">labour cost</a>). Those are US figures. I didn't find a published Canadian equivalent, so a Canadian café should compare itself with its own past months.</p></div>
+<div class="prose s"><p class="answer">The café counts four things for each job: minutes per job, how often the AI's draft needed big fixes, mistakes that got out, and how often staff used the tool. It counts them the same way as in weeks 1 and 2.</p>
+<div class="tablewrap"><table class="stack"><thead><tr>
+<th>What to count</th>
+<th>How</th>
+<th>Before</th>
+<th>After</th>
+</tr></thead><tbody><tr><td data-l="
+
+What to count">Minutes per job</td><td data-l="How">A one-week timed log</td><td data-l="Before">Weeks 1 to 2</td><td data-l="After">Week 4</td></tr><tr><td data-l="
+
+What to count">Drafts that needed big fixes</td><td data-l="How">The checker ticks a box</td><td data-l="Before">No tool yet</td><td data-l="After">Week 4</td></tr><tr><td data-l="
+
+What to count">Mistakes that got out</td><td data-l="How">A note in the shift log</td><td data-l="Before">Weeks 1 to 2</td><td data-l="After">Week 4</td></tr><tr><td data-l="
+
+What to count">How often the tool was used</td><td data-l="How">A simple count</td><td data-l="Before">No tool yet</td><td data-l="After">Weeks 4 and 6</td></tr></tbody></table></div>
+<p>A month can't show a change in profit. For later, here's a US yardstick: at counter-service (limited-service) restaurants in 2024, food and drink costs were about 32% of sales and wages about 32% (<a href="https://restaurant.org/research-and-media/research/restaurant-economic-insights/analysis-commentary/restaurant-operators-kept-food-cost-ratios-in-check-in-2024/" rel="noopener" target="_blank">NRA food cost</a>, <a href="https://restaurant.org/research-and-media/research/restaurant-economic-insights/analysis-commentary/elevated-labor-costs-had-a-significant-impact-on-restaurant-profitability-in-2024/" rel="noopener" target="_blank">NRA labour cost</a>). These are middle values, not targets. I didn't find a Canadian one, so compare with your own past months.</p></div>
+<div class="prose t"><p class="answer">The café counts the same things again:</p>
+<ul>
+<li>How many minutes each job takes now.</li>
+<li>How often the AI's first try needed big fixes.</li>
+<li>Mistakes that got out.</li>
+<li>How often staff used the helpers.</li>
+</ul>
+<p>One month is too short to show a change in profit. That takes longer.</p></div>
+</div><figure class="wrap"><p class="figtitle"><span class="ds">Template: minutes per order list, before and after</span><span class="t">Before and after: minutes per order list</span></p><div class="ba"><div class="ba-y" aria-hidden="true">Minutes per list</div><div class="ba-plot"><div class="ba-col"><span class="ba-bar"></span><span class="ba-l">Before<small>weeks 1 to 2</small></span></div><div class="ba-col"><span class="ba-bar"></span><span class="ba-l">After<small>week 4</small></span></div></div></div><figcaption><span class="note">Empty on purpose. Filled in only from a real café’s timed log, never from a guess.</span></figcaption></figure><div class="wrap">
+</div></section>
+<section class="q" id="q9"><div class="wrap"><p class="eyebrow">Step 9 of 11</p><h2>After month one: which parts could an agent do?</h2>
+<div class="prose d"><p class="answer">An agent could now do the middle of each of Laneway's three jobs (gathering, drafting and counting), but each job should stop and wait for a person before anything is posted, ordered or paid. An agent is an AI tool you give a goal instead of a single question. It works through the steps, uses the apps you connect, and comes back when it needs you. I'd wait until month one is done: an agent repeats whatever process you hand it, and month one is where you find out the process works.</p>
+<p class="eyebrow madeup">Made-up example business</p><div class="tablewrap"><table class="stack agent"><thead><tr>
+<th>Job (made-up example)</th>
+<th>What an agent can do on its own</th>
+<th>Where it stops for a person</th>
+<th>Tools that fit</th>
+</tr></thead><tbody><tr><td data-l="
+
+Job (made-up example)">Posts and specials board</td><td data-l="What an agent can do on its own">Draft the week's posts from the menu and specials, and lay them out as a post or a board graphic</td><td data-l="Where it stops for a person"><span class="stop" aria-hidden="true"></span>Before anything is posted</td><td data-l="Tools that fit">Muse, Canva, ChatGPT or Claude</td></tr><tr><td data-l="
+
+Job (made-up example)">Supplier order lists</td><td data-l="What an agent can do on its own">Turn the count-sheet photo into a draft list by supplier and flag anything unusual</td><td data-l="Where it stops for a person"><span class="stop" aria-hidden="true"></span>Before anything is ordered. The order stays a call or an email from the café</td><td data-l="Tools that fit">The ChatGPT or Claude Project from weeks 2 to 3</td></tr><tr><td data-l="
+
+Job (made-up example)">Weekly sales check</td><td data-l="What an agent can do on its own">Get last week's report, run the Monday prompt and leave the answer for the owner</td><td data-l="Where it stops for a person"><span class="stop" aria-hidden="true"></span>Before any change to staffing, prep or prices</td><td data-l="Tools that fit">Square's own assistant, then Claude, ChatGPT or Gemini</td></tr></tbody></table></div>
+<p>The order list is where the agent story stops short. I haven't found an agent that connects to a small café's suppliers, and most small suppliers take orders by phone or email anyway. So the agent drafts the order and a person places it.</p></div>
+<div class="prose s"><p class="answer">An agent could do the middle of each of Laneway's three jobs. But it should stop and wait for a person before anything is posted, ordered or paid. An agent is an AI tool you give a goal, not just one question. It works through the steps on its own, uses the apps you connect, and comes back when it needs you. I'd wait until month one is done. An agent repeats whatever process you give it, so the process has to work first.</p>
+<p class="eyebrow madeup">Made-up example business</p><div class="tablewrap"><table class="stack agent"><thead><tr>
+<th>Job (made-up example)</th>
+<th>What the agent does</th>
+<th>Where a person steps in</th>
+<th>Tools that fit</th>
+</tr></thead><tbody><tr><td data-l="
+
+Job (made-up example)">Posts and specials board</td><td data-l="What the agent does">Writes the week's posts and lays them out</td><td data-l="Where a person steps in"><span class="stop" aria-hidden="true"></span>Before anything is posted</td><td data-l="Tools that fit">Muse, Canva, ChatGPT or Claude</td></tr><tr><td data-l="
+
+Job (made-up example)">Order lists</td><td data-l="What the agent does">Turns the count-sheet photo into a draft list by supplier</td><td data-l="Where a person steps in"><span class="stop" aria-hidden="true"></span>Before anything is ordered</td><td data-l="Tools that fit">The ChatGPT or Claude helper from weeks 2 to 3</td></tr><tr><td data-l="
+
+Job (made-up example)">Weekly sales check</td><td data-l="What the agent does">Gets last week's report and runs the Monday prompt</td><td data-l="Where a person steps in"><span class="stop" aria-hidden="true"></span>Before any change to staff, prep or prices</td><td data-l="Tools that fit">Square's own assistant, then Claude, ChatGPT or Gemini</td></tr></tbody></table></div>
+<p>I haven't found an agent that connects to a small café's suppliers. So the agent writes the order list, and a person places the order.</p></div>
+<div class="prose t"><p class="answer">An agent is an AI tool you give a goal. It does the steps by itself and asks you when it needs you. It can do part of each job. But a person must say OK before anything is posted, ordered or paid. Wait until month one works first, because an agent copies the way you already do things.</p>
+<ul>
+<li><strong>Posts:</strong> the agent writes them. A person posts them.</li>
+<li><strong>Order lists:</strong> the agent makes the list. A person places the order. I haven't found an agent that can order from small suppliers.</li>
+<li><strong>Sales check:</strong> the agent reads last week's numbers. The owner decides what to change.</li>
+</ul></div>
+</div><figure class="wrap t"><p class="figtitle">What the agent does, and where a person says OK</p><ul class="agentrows"><li><span class="aj">Posts</span><span class="aa">The agent writes the week’s posts</span><span class="ap"><span class="stop" aria-hidden="true"></span>A person posts them</span></li><li><span class="aj">Order lists</span><span class="aa">The agent makes the list</span><span class="ap"><span class="stop" aria-hidden="true"></span>A person places the order</span></li><li><span class="aj">Sales check</span><span class="aa">The agent reads last week’s numbers</span><span class="ap"><span class="stop" aria-hidden="true"></span>The owner decides what to change</span></li></ul><p class="eyebrow madeup">Made-up example business</p></figure><div class="wrap">
+<div class="prose d"><p><strong>One job, three tools: the Monday numbers.</strong> This is the hand-off I'd set up first, because it reads data and changes nothing.</p>
+<ol>
+<li>Square holds the data. Its own assistant (Squaremates in the US, Square AI in Canada) answers quick questions inside the Dashboard at no extra cost.</li>
+<li>An agent gets last week's item report and runs the Monday prompt on it. Claude in Chrome can do this in the owner's own signed-in browser, and it's included in Claude Pro, which also includes scheduled tasks (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>). In ChatGPT, OpenAI's agent is now called ChatGPT Work (<a href="https://openai.com/index/ted-taylor-restaurant/" rel="noopener" target="_blank">OpenAI</a>). I couldn't open OpenAI's help pages today, so check which plans include it and what it asks before it acts. If your Square plan allows it, give the agent its own team login that can only see reports. Otherwise it works in an account that can issue refunds, change prices and see the customer directory, so watch its first few runs.</li>
+<li>The owner reads the answer, runs the four checks above, and decides. Nothing changes in Square, the schedule or the order list without them.</li>
+</ol>
+<p>Tools: Square, plus Claude or ChatGPT. Hand-offs: Square to the agent (the report), the agent to the owner (the summary). Cost: Laneway's seats are ChatGPT Business, so the Claude route adds a Claude Pro seat at US$17 a month billed yearly or US$20 monthly (the Canadian price is in the cost section below). Human check: the four checks, and the owner makes every decision.</p>
+<p><strong>How I'd set the agent up.</strong> In August 2025, while Claude in Chrome was still an early preview, Anthropic tested it against 123 attempts to trick it through the content it reads, a trick called prompt injection. In autonomous mode, 23.6% of the attacks worked before Anthropic's fixes and 11.2% after. That's Anthropic's own test, and it still means about 1 in 9 got through. Anthropic says Claude asks before high-risk actions like publishing, purchasing or sharing personal data (<a href="https://claude.com/resources/articles/claude-for-chrome" rel="noopener" target="_blank">Anthropic</a>). I'd go further: let it work only on the café's own Square Dashboard, and never point it at emails, invoices or websites from outside.</p>
+<p><strong>A real example, with a caveat.</strong> Ted Taylor runs three co-branded Schlotzsky's and Cinnabon restaurants in New Mexico and uses ChatGPT Work for pricing, sales, schedules and cash. He says repricing went from 5 days to 1 to 2 hours, and monthly cash reconciliation from three hours to 5 to 10 minutes. That's OpenAI's own case study, and the numbers are his. His method is the part worth copying: at first he did the work by hand alongside ChatGPT and compared the two, and his manager still reviews every schedule before it goes in (<a href="https://openai.com/index/ted-taylor-restaurant/" rel="noopener" target="_blank">OpenAI</a>).</p>
+<p><strong>What agents still get wrong.</strong> In EnterpriseOps-Gym, a test of 1,150 expert-written tasks from large-company office work, published in March 2026, the best model tested fully completed only 37.4% of them (<a href="https://arxiv.org/abs/2603.13594" rel="noopener" target="_blank">arXiv</a>). That's why every row in the table above ends with a person.</p>
+<p><strong>Other tools that fit these jobs.</strong></p>
+<div class="toolgroup"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="canva" aria-pressed="false">Canva</button><button type="button" data-tool="muse" aria-pressed="false">Muse</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button><button type="button" data-tool="automation" aria-pressed="false">Automation</button></div><div class="toolblock" data-tool="canva"><p class="toolname">In Canva</p><p>For the posts job, Canva is where the words become a post or a board graphic in one place. The free plan includes up to 20 uses of Canva's AI a month. In Canada, Pro is CA$142 a year for one person, before tax (<a href="https://www.canva.com/en_ca/pricing/" rel="noopener" target="_blank">Canva Canada</a>). Check the US price on Canva's own pricing page.</p></div><div class="toolblock" data-tool="muse"><p class="toolname">In Muse</p><p>Meta released its Muse agent on September 8, 2026, and launched Muse for Small Business in Canada on September 29. It connects to Instagram, Facebook Pages, Shopify, QuickBooks and Stripe, and can draft campaigns and look at how posts and sales did. Meta says nothing is published, sent or spent without your approval, and that Muse is free for most uses (<a href="https://www.iphoneincanada.ca/2026/09/29/meta-launches-muse-for-small-business-in-canada/" rel="noopener" target="_blank">iPhone in Canada</a>). I couldn't find whether it works in French, so a Quebec café should test it on something low-stakes first.</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>If the café runs on Google, a Scheduled Action can re-run the Monday prompt every week with no paid plan, up to 10 at a time, once the week's file is in Google Drive or Sheets. Someone still has to put it there, and it only works with Keep Activity switched on, so Google keeps your Gemini activity. Gemini prepares each result in the hour before it arrives, so it suits last week's numbers, not anything that changes by the minute. Gemini's agent, now called Task (it was Spark), needs Google AI Pro. It's designed to ask before it sends a message, changes your data or makes a purchase, and Android Police says those safeguards "aren't foolproof" (<a href="https://www.androidpolice.com/googles-renamed-gemini-features-field-guide/" rel="noopener" target="_blank">Android Police</a>). In Canada, Google AI Pro is CA$26.99 a month (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" rel="noopener" target="_blank">Google Canada</a>).</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>Only worth it if the café already runs on Microsoft 365 and keeps its numbers in Excel. Microsoft lists Microsoft 365 Copilot Business at US$21 per user a month (<a href="https://www.microsoft.com/en-us/microsoft-365/blog/2025/12/02/microsoft-365-copilot-business-the-future-of-work-for-small-businesses/" rel="noopener" target="_blank">Microsoft</a>), which is another US$42 a month for Laneway's two people. A Canadian café sees its price in CAD at checkout. I'd stay with the tools above.</p></div><div class="toolblock" data-tool="automation"><p class="toolname">With an automation tool</p><p>To have the Monday summary land in the same place every week, an automation tool can pass it along. Zapier's free plan is $0, and Professional starts at US$19.99 a month (<a href="https://zapier.com/pricing" rel="noopener" target="_blank">Zapier</a>); in Canada, check the price at checkout. Laneway doesn't need one yet.</p></div></div>
+<p>Everything in "What could go wrong" below gets more likely when an agent acts without asking. So the stopping points in the table are the rule, not a setting to switch off later.</p></div>
+<div class="prose s"><p><strong>One job, three tools: the Monday numbers.</strong> I'd set this one up first, because it only reads numbers and changes nothing.</p>
+<ol>
+<li>Square holds the sales. Its own assistant answers quick questions at no extra cost.</li>
+<li>An agent gets last week's report and runs the Monday prompt. Claude in Chrome can do this in the owner's own browser, and it comes with Claude Pro (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>). ChatGPT's agent is called ChatGPT Work (<a href="https://openai.com/index/ted-taylor-restaurant/" rel="noopener" target="_blank">OpenAI</a>). Check which plans include it and what it asks before it acts. If your Square plan allows it, give the agent its own login that can only see reports, not refunds, prices or customer details.</li>
+<li>The owner reads the answer, does the four checks, and decides.</li>
+</ol>
+<p>Laneway pays for ChatGPT Business, so using Claude in Chrome means adding a Claude Pro seat (US$17 to US$20 a month).</p>
+<p><strong>Keep it on a short leash.</strong> In August 2025, when Claude in Chrome was new, Anthropic tested it with 123 test attacks hidden in what it reads (this is called prompt injection). After Anthropic's fixes, about 1 in 9 tricks still worked (11.2%). That's Anthropic's own test (<a href="https://claude.com/resources/articles/claude-for-chrome" rel="noopener" target="_blank">Anthropic</a>). So I'd let it work only on the café's own Square page, never on outside emails or websites.</p>
+<p><strong>A real example.</strong> Ted Taylor runs three restaurants in New Mexico and uses ChatGPT Work. He says changing his prices went from 5 days to 1 to 2 hours. That's OpenAI's own story and his own numbers. He checked its work against his own at first, and his manager still checks every schedule (<a href="https://openai.com/index/ted-taylor-restaurant/" rel="noopener" target="_blank">OpenAI</a>).</p>
+<p><strong>Agents still make mistakes.</strong> In one test of 1,150 tasks from big-company office work, the best AI tested fully finished fewer than 4 in 10 (37.4%) (<a href="https://arxiv.org/abs/2603.13594" rel="noopener" target="_blank">arXiv</a>). That's why every job above ends with a person.</p>
+<p><strong>Other tools that fit.</strong></p>
+<div class="toolgroup"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="canva" aria-pressed="false">Canva</button><button type="button" data-tool="muse" aria-pressed="false">Muse</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button><button type="button" data-tool="automation" aria-pressed="false">Automation</button></div><div class="toolblock" data-tool="canva"><p class="toolname">In Canva</p><p>Canva turns your words into a post or a board sign in one place. The free plan includes up to 20 uses of its AI a month. In Canada, Pro is CA$142 a year before tax (<a href="https://www.canva.com/en_ca/pricing/" rel="noopener" target="_blank">Canva Canada</a>).</p></div><div class="toolblock" data-tool="muse"><p class="toolname">In Muse</p><p>Meta's Muse for Small Business connects to Instagram, Facebook Pages, Shopify, QuickBooks and Stripe. It came to Canada on September 29, 2026. Meta says nothing is published, sent or spent without your OK, and that it's free for most uses (<a href="https://www.iphoneincanada.ca/2026/09/29/meta-launches-muse-for-small-business-in-canada/" rel="noopener" target="_blank">iPhone in Canada</a>). I couldn't find out if it works in French.</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>A Scheduled Action can re-run the Monday prompt every week with no paid plan, once you add the week's file to Google Drive. It needs Keep Activity switched on, so Google keeps your Gemini activity. Gemini gets the answer ready in the hour before it arrives, so it's fine for last week's numbers. Gemini's agent (called Task) needs Google AI Pro. It's built to ask before it sends, changes or buys anything, but Android Police says these safeguards "aren't foolproof" (<a href="https://www.androidpolice.com/googles-renamed-gemini-features-field-guide/" rel="noopener" target="_blank">Android Police</a>). In Canada, Google AI Pro is CA$26.99 a month (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" rel="noopener" target="_blank">Google Canada</a>).</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>Only if your café already uses Microsoft 365 and Excel. In Canada, check the price at checkout. Microsoft lists Copilot Business at US$21 per person a month (<a href="https://www.microsoft.com/en-us/microsoft-365/blog/2025/12/02/microsoft-365-copilot-business-the-future-of-work-for-small-businesses/" rel="noopener" target="_blank">Microsoft</a>).</p></div><div class="toolblock" data-tool="automation"><p class="toolname">With an automation tool</p><p>An automation tool like Zapier can pass the Monday summary along each week. Its free plan is $0 (<a href="https://zapier.com/pricing" rel="noopener" target="_blank">Zapier</a>). Laneway doesn't need one yet.</p></div></div>
+<p>If an agent acts without asking, everything in "What could go wrong" below gets more likely. So the stopping points in the table are the rule, not a setting to switch off later.</p></div>
+<div class="prose t"><p><strong>The first one I'd set up: the Monday numbers.</strong></p>
+<ol>
+<li>Square keeps the sales.</li>
+<li>An agent reads last week's report and answers the Monday questions. Claude in Chrome, a Claude add-on for your web browser, comes with Claude Pro, so Laneway would add a Claude Pro seat (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>). ChatGPT has one too. It's called ChatGPT Work (<a href="https://openai.com/index/ted-taylor-restaurant/" rel="noopener" target="_blank">OpenAI</a>). Check what it asks before it acts. If you can, give the agent a Square login that can only see reports.</li>
+<li>The owner checks the answer and decides.</li>
+</ol>
+<p><strong>Keep it safe.</strong> In Anthropic's own test in August 2025, about 1 in 9 test tricks still fooled Claude in Chrome. The tricks were hidden orders on pages it read, trying to make it do the wrong thing (<a href="https://claude.com/resources/articles/claude-for-chrome" rel="noopener" target="_blank">Anthropic</a>). So only let it use your own Square page.</p>
+<p><strong>A real example.</strong> Ted Taylor runs three restaurants in New Mexico. He uses ChatGPT Work for prices, sales, staff schedules and cash. He says it cut his price changes from 5 days to 1 or 2 hours. That's OpenAI's own story, and his manager still checks every schedule (<a href="https://openai.com/index/ted-taylor-restaurant/" rel="noopener" target="_blank">OpenAI</a>).</p>
+<p><strong>Agents still get things wrong.</strong> In one big test, the best AI fully finished fewer than 4 in 10 big-company office tasks (<a href="https://arxiv.org/abs/2603.13594" rel="noopener" target="_blank">arXiv</a>).</p>
+<p><strong>Other tools.</strong></p>
+<div class="toolgroup"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="canva" aria-pressed="false">Canva</button><button type="button" data-tool="muse" aria-pressed="false">Muse</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button><button type="button" data-tool="automation" aria-pressed="false">Automation</button></div><div class="toolblock" data-tool="canva"><p class="toolname">In Canva</p><p>Canva turns your words into a post or a sign. The free plan has up to 20 AI uses a month (<a href="https://www.canva.com/en_ca/pricing/" rel="noopener" target="_blank">Canva Canada</a>).</p></div><div class="toolblock" data-tool="muse"><p class="toolname">In Muse</p><p>Meta's Muse links to Instagram and Facebook. It came to Canada on September 29, 2026. Meta says it won't post, send or spend without your OK. I couldn't find out if it works in French (<a href="https://www.iphoneincanada.ca/2026/09/29/meta-launches-muse-for-small-business-in-canada/" rel="noopener" target="_blank">iPhone in Canada</a>).</p></div><div class="toolblock" data-tool="gemini"><p class="toolname">In Gemini</p><p>Gemini can ask the Monday questions again every week for free, once you add the week's file (<a href="https://www.androidpolice.com/googles-renamed-gemini-features-field-guide/" rel="noopener" target="_blank">Android Police</a>).</p></div><div class="toolblock" data-tool="copilot"><p class="toolname">In Copilot</p><p>Only if you already use Microsoft 365. It's US$21 per person a month (<a href="https://www.microsoft.com/en-us/microsoft-365/blog/2025/12/02/microsoft-365-copilot-business-the-future-of-work-for-small-businesses/" rel="noopener" target="_blank">Microsoft</a>).</p></div><div class="toolblock" data-tool="automation"><p class="toolname">With an automation tool</p><p>Zapier's free plan can send the summary to your email each Monday (<a href="https://zapier.com/pricing" rel="noopener" target="_blank">Zapier</a>).</p></div></div>
+<p>Keep the OK steps. Don't switch them off later.</p></div>
+</div></section>
+<section class="q" id="q10"><div class="wrap"><p class="eyebrow">Step 10 of 11</p><h2>What would be different for your café?</h2>
+<div class="prose d"><p class="answer">Your month would have the same shape and different jobs. Laneway's choices come from its size, its till, its kitchen and where it is. Change any of those and the plan changes.</p>
+<div class="tablewrap"><table class="stack two"><thead><tr>
+<th>If your café...</th>
+<th>What changes</th>
+</tr></thead><tbody><tr><td data-l="
+
+If your café...">Is just you at a counter or kiosk</td><td data-l="What changes">One personal paid plan instead of a team plan. No staff training. Start with posts and ordering.</td></tr><tr><td data-l="
+
+If your café...">Has a real kitchen and a changing menu</td><td data-l="What changes">Write the signed-off allergen list before building anything. It becomes the only source AI may copy allergen lines from.</td></tr><tr><td data-l="
+
+If your café...">Runs on Toast in the US</td><td data-l="What changes">Toast says Toast IQ is included with Toast POS at no additional cost (<a href="https://pos.toasttab.com/products/toast-iq" rel="noopener" target="_blank">Toast</a>), so ask it first and export only what it can't answer.</td></tr><tr><td data-l="
+
+If your café...">Is in Quebec</td><td data-l="What changes">French first on menus, boards and posts. If your café counts as a restaurant establishment under Quebec's mandatory billing rules (check with Revenu Québec), your till must be a certified sales recording system for mandatory billing, and Square says its products aren't compatible with that system yet (<a href="https://squareup.com/ca/en/point-of-sale/restaurants/pricing" rel="noopener" target="_blank">Square Canada</a>, <a href="https://www.revenuquebec.ca/en/businesses/sector-specific-measures/mandatory-billing/mandatory-billing-restaurant-sector/" rel="noopener" target="_blank">Revenu Québec</a>).</td></tr><tr><td data-l="
+
+If your café...">Sends emails or texts to a customer list</td><td data-l="What changes">In Canada you need consent first (see below). Get that sorted before AI writes a single promo.</td></tr><tr><td data-l="
+
+If your café...">Has more than one location</td><td data-l="What changes">Start in one location, so the week 4 count means something.</td></tr><tr><td data-l="
+
+If your café...">Already has a busy Square or Toast dashboard nobody reads</td><td data-l="What changes">Make the weekly sales check job number one. It uses data you already pay for.</td></tr></tbody></table></div></div>
+<div class="prose s"><p class="answer">The month has the same steps, but the jobs change with your café.</p>
+<div class="tablewrap"><table class="stack two"><thead><tr>
+<th>If your café...</th>
+<th>What changes</th>
+</tr></thead><tbody><tr><td data-l="
+
+If your café...">Is just you</td><td data-l="What changes">One personal AI plan. No staff training. Start with posts and ordering.</td></tr><tr><td data-l="
+
+If your café...">Has a real kitchen</td><td data-l="What changes">Make the checked allergen list first.</td></tr><tr><td data-l="
+
+If your café...">Uses Toast in the US</td><td data-l="What changes">Toast says its helper, Toast IQ, costs nothing extra (<a href="https://pos.toasttab.com/products/toast-iq" rel="noopener" target="_blank">Toast</a>). Ask it first.</td></tr><tr><td data-l="
+
+If your café...">Is in Quebec</td><td data-l="What changes">French first. Your till may need to be certified for Quebec's billing rules (check with Revenu Québec), and Square says it isn't yet (<a href="https://squareup.com/ca/en/point-of-sale/restaurants/pricing" rel="noopener" target="_blank">Square Canada</a>, <a href="https://www.revenuquebec.ca/en/businesses/sector-specific-measures/mandatory-billing/mandatory-billing-restaurant-sector/" rel="noopener" target="_blank">Revenu Québec</a>).</td></tr><tr><td data-l="
+
+If your café...">Emails or texts customers</td><td data-l="What changes">In Canada, get consent first (see below).</td></tr><tr><td data-l="
+
+If your café...">Has more than one shop</td><td data-l="What changes">Start in one shop.</td></tr></tbody></table></div></div>
+<div class="prose t"><p class="answer">The steps stay the same. The jobs change.</p>
+<ul>
+<li><strong>Just you?</strong> One personal AI plan. Start with posts and ordering.</li>
+<li><strong>Real kitchen with a changing menu?</strong> Make your allergen list first.</li>
+<li><strong>In Quebec?</strong> French first. Your till may need special approval for Quebec's billing rules. Square says its tills can't do this yet, so ask Revenu Québec.</li>
+<li><strong>Send emails or texts to customers?</strong> In Canada, get permission first.</li>
+</ul></div>
+</div></section>
+<section class="q" id="q11"><div class="wrap"><p class="eyebrow">Step 11 of 11</p><h2>What does it cost, and what could go wrong?</h2>
+<div class="prose d"><p class="answer">Laneway's tools cost about US$40 to US$50 a month at US list prices: two seats on ChatGPT Business, with the till's own assistant at no extra cost. What could go wrong is mostly about allergens, reviews, marketing messages and customer data, below. My time is separate.</p>
+<div class="where2"><div><h3>In the US</h3><ul>
+<li><a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">ChatGPT Business</a>: US$20 per user a month billed yearly, US$25 billed monthly (Standard seat).</li>
+<li><a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude Pro</a>: US$17 a month billed yearly, US$20 monthly. <a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude Team</a>: US$20 per seat a month billed yearly, US$25 monthly (Standard seat).</li>
+<li><a href="https://squareup.com/us/en/pricing" rel="noopener" target="_blank">Square</a>: Free US$0, Plus US$49, Premium US$149 per location a month; Squaremates at no additional cost for US sellers.</li>
+<li><a href="https://pos.toasttab.com/blog/on-the-line/toast-vs-touchbistro" rel="noopener" target="_blank">Toast</a>: Starter Kit from US$0 a month, Point of Sale plan from US$69 a month; Toast IQ included.</li>
+</ul></div><div><h3>In Canada</h3><ul>
+<li>Claude Pro: CA$28 a month plus tax, the price Anthropic announced when it launched in Canada (<a href="https://www.anthropic.com/news/introducing-claude-to-canada" rel="noopener" target="_blank">Anthropic</a>). That announcement is from 2024, so confirm at checkout. ChatGPT shows its Canadian price at checkout too.</li>
+<li><a href="https://squareup.com/ca/en/point-of-sale/restaurants/pricing" rel="noopener" target="_blank">Square for Restaurants</a>: Free $0, Plus $60 per location a month; in-person card payments 2.5%. Square AI at no additional cost.</li>
+<li><a href="https://pos.toasttab.com/ca/pricing" rel="noopener" target="_blank">Toast Canada</a>: Starter CA$120 a month, Essentials CA$220 a month. There's no $0 plan.</li>
+</ul></div></div>
+<p class="checked">Prices checked November 26, 2026.</p>
+<p>Laneway needs two seats, for the owner and the shift lead. ChatGPT Business is sold to teams of two or more. Neither OpenAI's nor Anthropic's pricing page showed a Canadian team price when I checked, so a Canadian café sees its price in CAD at checkout. The till's assistant costs nothing extra. My fee for the month: <span class="note">[ENGAGEMENT PRICE AND WHAT IT INCLUDES]</span>.</p>
+<p><strong>What could go wrong.</strong></p>
+<ul>
+<li><strong>A wrong allergen line.</strong> This is the one that can hurt someone. The rule above (copy only from the signed-off list, a person checks) is the fix.</li>
+<li><strong>Fake or AI-written reviews.</strong> In the US, the FTC's rule banning fake reviews covers reviews "by someone who does not exist, such as AI-generated fake reviews" (<a href="https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials" rel="noopener" target="_blank">FTC</a>), and courts can impose civil penalties of up to $53,088 per violation (<a href="https://www.ftc.gov/system/files/ftc_gov/pdf/2025-Fake-Review-Warning-Template.pdf" rel="noopener" target="_blank">FTC warning letter</a>). In Canada, the Competition Act bans false or misleading representations in any form, including misuse of testimonials, with penalties for a company of up to $10 million on a first order (<a href="https://competition-bureau.canada.ca/en/node/121" rel="noopener" target="_blank">Competition Bureau</a>). In both countries Google doesn't allow businesses to offer incentives for reviews or to ask only happy customers (<a href="https://support.google.com/business/answer/7400114" rel="noopener" target="_blank">Google</a>). AI can draft your reply to a real review. It should never write the review.</li>
+<li><strong>Marketing messages that break the rules.</strong> In the US, CAN-SPAM doesn't require consent before a marketing email, but it does require you to say the message is an ad, include your physical postal address and a clear way to opt out, and honour opt-outs within 10 business days (<a href="https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business" rel="noopener" target="_blank">FTC</a>). Texts follow separate rules; check before you text customers. In Canada, CASL requires consent before you send commercial emails or texts. A purchase gives implied consent for up to 2 years, an inquiry for 6 months, and every message needs your business name and an unsubscribe option (<a href="https://ised-isde.canada.ca/site/canada-anti-spam-legislation/en/getting-consent-send-email" rel="noopener" target="_blank">Government of Canada</a>).</li>
+<li><strong>Customer data in the wrong place.</strong> Keep names, emails and allergy notes out of AI tools. In Canada, a breach that poses a real risk of significant harm must be reported to the Privacy Commissioner, and you must keep records of all breaches for two years (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-for-businesses/privacy-breaches-at-your-business/gd_pb_201810/" rel="noopener" target="_blank">Office of the Privacy Commissioner</a>).</li>
+<li><strong>Trusting a number you didn't check.</strong> See the four checks above.</li>
+</ul></div>
+<div class="prose s"><p class="answer">Laneway's tools cost about US$40 to US$50 a month at US prices: two ChatGPT Business seats, and Square's helper at no extra cost. Most risks are about allergens, reviews, messages and customer data.</p>
+<div class="where2"><div><h3>In the US</h3><ul>
+<li><a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">ChatGPT Business</a>: US$20 a person a month paid yearly, US$25 paid monthly.</li>
+<li><a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude Pro</a> for one person: US$17 a month paid yearly, US$20 monthly. <a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude Team</a>: US$20 a person paid yearly, US$25 monthly.</li>
+<li><a href="https://squareup.com/us/en/pricing" rel="noopener" target="_blank">Square</a>: US$0, US$49 or US$149 a month per shop.</li>
+<li><a href="https://pos.toasttab.com/blog/on-the-line/toast-vs-touchbistro" rel="noopener" target="_blank">Toast</a>: Starter Kit from US$0 a month, Point of Sale plan from US$69 a month.</li>
+</ul></div><div><h3>In Canada</h3><ul>
+<li>Claude Pro: CA$28 a month plus tax, from Anthropic's 2024 Canada launch (<a href="https://www.anthropic.com/news/introducing-claude-to-canada" rel="noopener" target="_blank">Anthropic</a>). Check at checkout. ChatGPT shows its Canadian price at checkout too.</li>
+<li><a href="https://squareup.com/ca/en/point-of-sale/restaurants/pricing" rel="noopener" target="_blank">Square for Restaurants</a>: $0 or $60 a month per shop.</li>
+<li><a href="https://pos.toasttab.com/ca/pricing" rel="noopener" target="_blank">Toast Canada</a>: CA$120 or CA$220 a month.</li>
+</ul></div></div>
+<p class="checked">Prices checked November 26, 2026.</p>
+<p>My fee for the month: <span class="note">[ENGAGEMENT PRICE AND WHAT IT INCLUDES]</span>.</p>
+<p><strong>What could go wrong:</strong></p>
+<ul>
+<li><strong>A wrong allergen line.</strong> Fix: copy only from the checked list.</li>
+<li><strong>Fake reviews.</strong> In the US, the FTC bans fake reviews, including ones written by AI (<a href="https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials" rel="noopener" target="_blank">FTC</a>). Fines can be up to $53,088 for each violation (<a href="https://www.ftc.gov/system/files/ftc_gov/pdf/2025-Fake-Review-Warning-Template.pdf" rel="noopener" target="_blank">FTC</a>). In Canada, false or misleading claims of any kind are against the Competition Act (<a href="https://competition-bureau.canada.ca/en/node/121" rel="noopener" target="_blank">Competition Bureau</a>). Google doesn't let you offer anything for a review, even a free coffee, or ask only happy customers (<a href="https://support.google.com/business/answer/7400114" rel="noopener" target="_blank">Google</a>). AI can help you reply to a real review. It should never write one.</li>
+<li><strong>Marketing emails and texts.</strong> In the US, a marketing email must say it's an ad, show your mailing address and let people opt out (<a href="https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business" rel="noopener" target="_blank">FTC</a>). Texts have their own rules, so check before you text. In Canada you need consent before you send (<a href="https://ised-isde.canada.ca/site/canada-anti-spam-legislation/en/getting-consent-send-email" rel="noopener" target="_blank">Government of Canada</a>).</li>
+<li><strong>Customer data.</strong> Keep it out of AI tools. In Canada, serious data breaches must be reported, and you must keep a record of every breach for two years (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-for-businesses/privacy-breaches-at-your-business/gd_pb_201810/" rel="noopener" target="_blank">Privacy Commissioner</a>).</li>
+<li><strong>A number you didn't check.</strong> Use the four checks.</li>
+</ul></div>
+<div class="prose t"><p class="answer">Laneway pays for two AI seats (one login each for two people): about US$40 to US$50 a month at US prices (<a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">ChatGPT Business</a>). Square's helper costs nothing extra.</p>
+<div class="where2"><div><h3>In the US</h3><p>ChatGPT Business is US$20 per person a month if you pay yearly, or US$25 if you pay monthly. Claude Pro is US$17 a month if you pay yearly, or US$20 monthly (<a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude</a>).</p></div><div><h3>In Canada</h3><p>Claude Pro was CA$28 a month plus tax when it came to Canada (<a href="https://www.anthropic.com/news/introducing-claude-to-canada" rel="noopener" target="_blank">Anthropic</a>). Check the price when you sign up.</p></div></div>
+<p class="checked">Prices checked November 26, 2026.</p>
+<p>My fee: <span class="note">[ENGAGEMENT PRICE AND WHAT IT INCLUDES]</span>.</p>
+<p>Things that can go wrong:</p>
+<ul>
+<li><strong>A wrong allergen note.</strong> Only copy from your checked list.</li>
+<li><strong>Fake reviews.</strong> Never let AI write reviews. It's against the rules in the US (<a href="https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials" rel="noopener" target="_blank">FTC</a>) and Canada (<a href="https://competition-bureau.canada.ca/en/node/121" rel="noopener" target="_blank">Competition Bureau</a>).</li>
+<li><strong>Emails or texts without permission.</strong> In Canada you need permission first (<a href="https://ised-isde.canada.ca/site/canada-anti-spam-legislation/en/getting-consent-send-email" rel="noopener" target="_blank">Government of Canada</a>).</li>
+<li><strong>Customer details in AI.</strong> Keep them out.</li>
+</ul></div>
+</div></section>
+<section class="q" id="check"><div class="wrap"><p class="eyebrow">This week</p><h2>Your checklist for this week</h2>
+<div class="prose d"><ul class="check"><li><label><input type="checkbox" id="cd0"><span>Write down the jobs that come back every week, who does them and a rough number of hours.</span></label></li><li><label><input type="checkbox" id="cd1"><span>Export last month&#x27;s sales from your till and find the total and transaction count yourself.</span></label></li><li><label><input type="checkbox" id="cd2"><span>Ask your till&#x27;s built-in assistant (if it has one) one question about weekends against weekdays, and check the answer against your export.</span></label></li><li><label><input type="checkbox" id="cd3"><span>Find or write your signed-off allergen list before AI touches a menu.</span></label></li><li><label><input type="checkbox" id="cd4"><span>If you&#x27;re in Canada and send promos, check you have consent for every address on your list.</span></label></li></ul></div>
+<div class="prose s"><ul class="check"><li><label><input type="checkbox" id="cs0"><span>List the jobs that come back every week, who does them and rough hours.</span></label></li><li><label><input type="checkbox" id="cs1"><span>Download last month&#x27;s sales and find the total yourself.</span></label></li><li><label><input type="checkbox" id="cs2"><span>Ask your till&#x27;s helper one question about weekends and weekdays. Check the answer.</span></label></li><li><label><input type="checkbox" id="cs3"><span>Find or write your checked allergen list.</span></label></li><li><label><input type="checkbox" id="cs4"><span>In Canada, check you have consent for every email on your list.</span></label></li></ul></div>
+<div class="prose t"><ul class="check"><li><label><input type="checkbox" id="ct0"><span>Write down the jobs you do every week.</span></label></li><li><label><input type="checkbox" id="ct1"><span>Download last month&#x27;s sales and find the total.</span></label></li><li><label><input type="checkbox" id="ct2"><span>Ask your till&#x27;s helper one question. Check the answer.</span></label></li><li><label><input type="checkbox" id="ct3"><span>Find your allergen list.</span></label></li></ul></div>
+</div></section>
+<section class="cta"><h2>How Leverage Strategies helps</h2>
+<div class="d"><p>I run this first month with café and restaurant owners: the job list, the scoring, the three builds, the staff training and the before-and-after count. You choose the jobs. I sit in the café, watch the work and build the tools on your real files. I won't promise a number before we've measured one.</p></div>
+<div class="s"><p>I run this first month with café and restaurant owners: the job list, the scores, the three tools, the staff training and the before-and-after count. You pick the jobs. I won't promise a number before we've measured one.</p></div>
+<div class="t"><p>I run this first month with café owners. You pick the jobs. I help build the tools and train your staff. I won't promise a number before we measure one.</p></div>
+<p><span class="note">[BOOK A CALL LINK]</span></p></section>
+<section class="q st" id="words"><div class="wrap"><p class="eyebrow">Words to know</p><h2>Words to know</h2>
+<div class="prose s"><div class="tablewrap"><table class="stack two"><thead><tr>
+<th>Word</th>
+<th>What it means</th>
+</tr></thead><tbody><tr><td data-l="
+
+Word">AI tool</td><td data-l="What it means">An app like ChatGPT or Claude that writes and answers questions.</td></tr><tr><td data-l="
+
+Word">Project</td><td data-l="What it means">A saved space in ChatGPT or Claude with your files and instructions for one job.</td></tr><tr><td data-l="
+
+Word">Export</td><td data-l="What it means">Download your data from an app as a file.</td></tr><tr><td data-l="
+
+Word">CSV</td><td data-l="What it means">A simple spreadsheet file most apps can open.</td></tr><tr><td data-l="
+
+Word">Till</td><td data-l="What it means">The system that rings up sales, like Square or Toast.</td></tr><tr><td data-l="
+
+Word">Allergen</td><td data-l="What it means">A food that can make some people very sick.</td></tr><tr><td data-l="
+
+Word">Prompt</td><td data-l="What it means">What you type to ask the AI for something.</td></tr><tr><td data-l="
+
+Word">Consent</td><td data-l="What it means">Permission from a customer to send them messages.</td></tr><tr><td data-l="
+
+Word">Made-up example</td><td data-l="What it means">A business invented to show the steps. It isn't real.</td></tr><tr><td data-l="
+
+Word">Agent</td><td data-l="What it means">An AI tool you give a goal. It does the steps itself and checks back with you.</td></tr><tr><td data-l="
+
+Word">Prompt injection</td><td data-l="What it means">A trick hidden in a web page or email that tries to make an agent do something you didn't ask.</td></tr></tbody></table></div></div>
+<div class="prose t"><div class="tablewrap"><table class="stack two"><thead><tr>
+<th>Word</th>
+<th>What it means</th>
+</tr></thead><tbody><tr><td data-l="
+
+Word">AI</td><td data-l="What it means">A computer helper that can write and answer questions.</td></tr><tr><td data-l="
+
+Word">Project</td><td data-l="What it means">A saved space in ChatGPT or Claude for one job.</td></tr><tr><td data-l="
+
+Word">Till</td><td data-l="What it means">What rings up sales, like Square.</td></tr><tr><td data-l="
+
+Word">Allergen</td><td data-l="What it means">A food that can make some people very sick.</td></tr><tr><td data-l="
+
+Word">Download</td><td data-l="What it means">Save a file from an app to your computer.</td></tr><tr><td data-l="
+
+Word">Made-up example</td><td data-l="What it means">A pretend business that shows the steps.</td></tr><tr><td data-l="
+
+Word">Agent</td><td data-l="What it means">An AI tool that does the steps of a job by itself and asks you when it needs you.</td></tr><tr><td data-l="
+
+Word">Prompt</td><td data-l="What it means">The words you type to ask AI for something.</td></tr><tr><td data-l="
+
+Word">CSV</td><td data-l="What it means">A simple spreadsheet file most apps can open.</td></tr><tr><td data-l="
+
+Word">Automation tool</td><td data-l="What it means">An app, like Zapier, that moves information from one app to another by itself.</td></tr></tbody></table></div></div>
+</div></section>
+<div class="sources"><div class="wrap"><h2>Sources</h2><p>All pages opened November 26, 2026. Prices checked the same day.</p>
+<ul>
+<li><a href="https://www150.statcan.gc.ca/n1/pub/11-621-m/11-621-m2025008-eng.htm" rel="noopener" target="_blank">Statistics Canada, Analysis on artificial intelligence use by businesses in Canada, second quarter of 2025</a>. Released June 16, 2025; 9,103 businesses responded. Canada.</li>
+<li><a href="https://www.restaurant.org/research-and-media/media/press-releases/new-research-from-the-national-restaurant-association-identifies-connected-technology-as-restaurants/" rel="noopener" target="_blank">National Restaurant Association, new research on restaurant technology</a>. November 5, 2026; 212 operators surveyed June 18 to July 18, 2026. US. Industry association.</li>
+<li><a href="https://www.colemorgan.com/posts/how-i-automated-my-cafe-inventory-ordering-with-chatgpt/" rel="noopener" target="_blank">Cole Morgan, How I automated my café inventory ordering with ChatGPT</a>. January 12, 2025. Owner's own account.</li>
+<li><a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq" rel="noopener" target="_blank">OpenAI, Custom GPT retirement and migration FAQ</a>. Vendor page; dates may change.</li>
+<li><a href="https://squareup.com/help/us/en/article/8617-use-managerbot-to-manage-business-tasks-and-insights" rel="noopener" target="_blank">Square Help, Use Squaremates</a>. Vendor help page. US.</li>
+<li><a href="https://squareup.com/us/en/press/introducing-squaremates" rel="noopener" target="_blank">Square, Square Expands its Agentic Platform with Squaremates</a>. November 12, 2026. Vendor press release. US.</li>
+<li><a href="https://squareup.com/ca/en/press/square-ai" rel="noopener" target="_blank">Square Canada, Square AI launch</a>. March 9, 2026. Vendor press release. Canada.</li>
+<li><a href="https://squareup.com/help/gb/en/article/8363-view-item-category-and-modifiers-sales-reports" rel="noopener" target="_blank">Square Help, View item, category and modifiers sales reports</a>. Vendor help page.</li>
+<li><a href="https://help.openai.com/en/articles/8437071-data-analysis-with-chatgpt" rel="noopener" target="_blank">OpenAI Help Center, Data analysis with ChatGPT</a>. Vendor help page.</li>
+<li><a href="https://support.claude.com/en/articles/8241126-uploading-files-to-claude" rel="noopener" target="_blank">Claude Help Center, Uploading files to Claude</a>. July 23, 2026. Vendor help page.</li>
+<li><a href="https://support.google.com/docs/answer/14356410" rel="noopener" target="_blank">Google, Collaborate with Gemini in Google Sheets</a>. Vendor help page.</li>
+<li><a href="https://arxiv.org/abs/2611.17766" rel="noopener" target="_blank">Garre, Mehta and Chen, GDP.xlsx, arXiv</a>. Submitted November 13, 2026. 70 tasks.</li>
+<li><a href="https://www.fda.gov/food/buy-store-serve-safe-food/food-allergies-what-you-need-know" rel="noopener" target="_blank">FDA, Food Allergies: What You Need to Know</a>. US.</li>
+<li><a href="https://www.fda.gov/food/fda-food-code/adoption-fda-food-code-state-and-territorial-agencies-responsible-oversight-restaurants-andor-retail" rel="noopener" target="_blank">FDA, Adoption of the FDA Food Code</a>. Current as of October 29, 2026; covers adoption to December 31, 2025. US.</li>
+<li><a href="https://inspection.canada.ca/en/food-labels/labelling/consumers/food-allergies" rel="noopener" target="_blank">Canadian Food Inspection Agency, Food allergies</a>. Modified August 12, 2026. Canada.</li>
+<li><a href="https://www.legisquebec.gouv.qc.ca/en/pdf/cs/C-11.pdf" rel="noopener" target="_blank">Charter of the French Language, consolidated to October 15, 2026</a>. Section 51. Quebec.</li>
+<li><a href="https://restaurant.org/research-and-media/research/restaurant-economic-insights/analysis-commentary/restaurant-operators-kept-food-cost-ratios-in-check-in-2024/" rel="noopener" target="_blank">National Restaurant Association, food cost ratios in 2024</a>. September 10, 2025; 900+ operators. US.</li>
+<li><a href="https://restaurant.org/research-and-media/research/restaurant-economic-insights/analysis-commentary/elevated-labor-costs-had-a-significant-impact-on-restaurant-profitability-in-2024/" rel="noopener" target="_blank">National Restaurant Association, labor costs in 2024</a>. October 8, 2025; 900+ operators. US.</li>
+<li><a href="https://pos.toasttab.com/products/toast-iq" rel="noopener" target="_blank">Toast, Toast IQ</a>. Vendor page. US.</li>
+<li><a href="https://squareup.com/ca/en/point-of-sale/restaurants/pricing" rel="noopener" target="_blank">Square Canada, Square for Restaurants pricing</a>. Vendor page. Canada.</li>
+<li><a href="https://www.revenuquebec.ca/en/businesses/sector-specific-measures/mandatory-billing/mandatory-billing-restaurant-sector/" rel="noopener" target="_blank">Revenu Québec, Mandatory billing in the restaurant sector</a>. Quebec.</li>
+<li><a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">OpenAI, ChatGPT Business pricing</a>. USD.</li>
+<li><a href="https://claude.com/pricing" rel="noopener" target="_blank">Anthropic, Claude pricing</a>. USD.</li>
+<li><a href="https://squareup.com/us/en/pricing" rel="noopener" target="_blank">Square, pricing</a>. USD.</li>
+<li><a href="https://pos.toasttab.com/blog/on-the-line/toast-vs-touchbistro" rel="noopener" target="_blank">Toast, Toast vs TouchBistro</a>. November 19, 2026. Vendor page. USD.</li>
+<li><a href="https://www.anthropic.com/news/introducing-claude-to-canada" rel="noopener" target="_blank">Anthropic, Introducing Claude to Canada</a>. June 5, 2024. CAD.</li>
+<li><a href="https://pos.toasttab.com/ca/pricing" rel="noopener" target="_blank">Toast Canada, pricing</a>. Updated October 22, 2026. CAD.</li>
+<li><a href="https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials" rel="noopener" target="_blank">FTC, final rule banning fake reviews and testimonials</a>. August 14, 2024. US.</li>
+<li><a href="https://www.ftc.gov/system/files/ftc_gov/pdf/2025-Fake-Review-Warning-Template.pdf" rel="noopener" target="_blank">FTC, fake review warning letter template</a>. December 22, 2025. US.</li>
+<li><a href="https://competition-bureau.canada.ca/en/node/121" rel="noopener" target="_blank">Competition Bureau Canada, Deceptive marketing practices</a>. Modified February 19, 2026. Canada.</li>
+<li><a href="https://support.google.com/business/answer/7400114" rel="noopener" target="_blank">Google Business Profile, Prohibited and restricted content</a>. US and Canada.</li>
+<li><a href="https://ised-isde.canada.ca/site/canada-anti-spam-legislation/en/getting-consent-send-email" rel="noopener" target="_blank">Government of Canada, Getting consent to send email (CASL)</a>. Canada.</li>
+<li><a href="https://www.priv.gc.ca/en/privacy-topics/privacy-for-businesses/privacy-breaches-at-your-business/gd_pb_201810/" rel="noopener" target="_blank">Office of the Privacy Commissioner of Canada, What you need to know about mandatory reporting of breaches</a>. Canada.</li>
+<li><a href="https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business" rel="noopener" target="_blank">FTC, CAN-SPAM Act: A Compliance Guide for Business</a>. Edited January 2024. US.</li>
+<li><a href="https://claude.com/resources/articles/claude-for-chrome" rel="noopener" target="_blank">Anthropic, Piloting Claude in Chrome</a>. August 25, 2025. Vendor-run safety test.</li>
+<li><a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude, Plans and pricing</a>. US prices.</li>
+<li><a href="https://openai.com/index/ted-taylor-restaurant/" rel="noopener" target="_blank">OpenAI, Ted Taylor case study</a>. October 20, 2026. Vendor-published; figures self-reported. US.</li>
+<li><a href="https://arxiv.org/abs/2603.13594" rel="noopener" target="_blank">EnterpriseOps-Gym, arXiv</a>. Submitted March 13, 2026. Independent benchmark.</li>
+<li><a href="https://www.canva.com/en_ca/pricing/" rel="noopener" target="_blank">Canva, Pricing (Canada)</a>. CAD, before tax.</li>
+<li><a href="https://www.iphoneincanada.ca/2026/09/29/meta-launches-muse-for-small-business-in-canada/" rel="noopener" target="_blank">iPhone in Canada, Meta launches Muse for Small Business in Canada</a>. September 29, 2026. Canada.</li>
+<li><a href="https://www.androidpolice.com/googles-renamed-gemini-features-field-guide/" rel="noopener" target="_blank">Android Police, Google's renamed Gemini features</a>. October 18, 2026.</li>
+<li><a href="https://gemini.google/ca/subscriptions/?hl=en-CA" rel="noopener" target="_blank">Google, Google AI plans (Canada)</a>. CAD.</li>
+<li><a href="https://www.microsoft.com/en-us/microsoft-365/blog/2025/12/02/microsoft-365-copilot-business-the-future-of-work-for-small-businesses/" rel="noopener" target="_blank">Microsoft, Microsoft 365 Copilot Business</a>. December 2, 2025. US.</li>
+<li><a href="https://zapier.com/pricing" rel="noopener" target="_blank">Zapier, Pricing</a>. US.</li>
+<li>Sample café sales file (made up, 31 days of October 2026, CAD), offered as a download on this page. All Laneway sales numbers are computed from it.</li>
+</ul></div></div>
+<footer class="site"><span>Leverage Strategies · Dan Albasry</span><span>Prices and dates checked November 26, 2026</span></footer>
+<div class="seg float" role="group" aria-label="Reading level"><span class="lab">Reading level</span><button type="button" data-v="t" aria-pressed="true">Starter</button><button type="button" data-v="s" aria-pressed="false">Simple</button><button type="button" data-v="d" aria-pressed="false">Detailed</button></div>
+<script>
+{
+  const KEY='leverage-notes-level', TKEY='leverage-tool', BOX='leverage-cafe-month-checks';
+  const body=document.body, buttons=document.querySelectorAll('.seg button[data-v]');
+  const store=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+  const load=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+  const current=()=>body.classList.contains('lv-t')?'t':body.classList.contains('lv-s')?'s':'d';
+  const paint=v=>{body.classList.remove('lv-d','lv-s','lv-t');body.classList.add('lv-'+v);buttons.forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v?'true':'false'));};
+  const setLevel=v=>{
+    if(v===current()) return;
+    const secs=document.querySelectorAll('section.q'); let anchor=null;
+    secs.forEach(s=>{ if(s.offsetParent!==null && s.getBoundingClientRect().top<=120) anchor=s; });
+    let progress=0;
+    if(anchor){const r=anchor.getBoundingClientRect();progress=Math.min(1,Math.max(0,(120-r.top)/Math.max(1,r.height)));}
+    paint(v); store(KEY,v);
+    if(anchor && anchor.offsetParent!==null){const r2=anchor.getBoundingClientRect();window.scrollTo({top:window.pageYOffset+r2.top-120+progress*r2.height,behavior:'auto'});}
+  };
+  buttons.forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.v)));
+  const fl=document.querySelector('.float'), inl=document.querySelector('.versions');
+  if(fl&&inl&&'IntersectionObserver' in window){fl.classList.add('away');new IntersectionObserver(es=>es.forEach(e=>fl.classList.toggle('away',e.isIntersecting||e.boundingClientRect.top>0))).observe(inl);}
+  const saved=load(KEY); paint(saved==='d'||saved==='s'||saved==='t'?saved:'t');
+
+  // Tool switch: ChatGPT by default; one choice shared by every group. A group without the chosen tool shows ChatGPT, or its first tool.
+  const groups=document.querySelectorAll('.toolgroup');
+  const setTool=(t,init)=>{
+    groups.forEach(g=>{
+      const has=b=>g.querySelector('.toolblock[data-tool="'+b+'"]');
+      const first=g.querySelector('.toolblock');
+      if(!has(t)&&!init) return; // a choice only moves the groups that have that tool
+      const use=has(t)?t:(has('chatgpt')?'chatgpt':(first?first.dataset.tool:''));
+      g.querySelectorAll('.toolblock').forEach(b=>b.classList.toggle('on',b.dataset.tool===use));
+      g.querySelectorAll('.toolseg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tool===use?'true':'false'));
+    });
+  };
+  groups.forEach(g=>{g.classList.add('js');g.querySelectorAll('.toolseg button').forEach(b=>b.addEventListener('click',()=>{setTool(b.dataset.tool);store(TKEY,b.dataset.tool);}));});
+  const st=load(TKEY); setTool(st&&/^[a-z]+$/.test(st)?st:'chatgpt',true);
+
+  let ticks={}; try{ticks=JSON.parse(load(BOX)||'{}')||{}}catch(e){ticks={}}
+  document.querySelectorAll('.check input').forEach(box=>{box.checked=!!ticks[box.id];box.addEventListener('change',()=>{ticks[box.id]=box.checked;store(BOX,JSON.stringify(ticks));});});
+
+  document.querySelectorAll('.copydata').forEach(btn=>btn.addEventListener('click',()=>{
+    const pre=document.getElementById('csvdata');
+    const sel=()=>{const r=document.createRange();r.selectNodeContents(pre);const s=window.getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='Selected: copy with your keyboard'};
+    try{navigator.clipboard.writeText(pre.textContent).then(()=>{btn.textContent='Copied';setTimeout(()=>{btn.textContent='Copy the data'},1600)},sel);}catch(e){sel()}
+  }));
+  document.querySelectorAll('.prompt .copy').forEach(btn=>btn.addEventListener('click',()=>{
+    const txt=btn.parentElement.querySelector('.ptext').textContent;
+    const done=()=>{btn.textContent='Copied';setTimeout(()=>{btn.textContent='Copy prompt'},1600)};
+    try{navigator.clipboard.writeText(txt).then(done,()=>{btn.textContent='Select the text to copy'});}catch(e){btn.textContent='Select the text to copy'}
+  }));
+}
+
+</script>
+</body></html>

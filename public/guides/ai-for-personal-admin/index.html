@@ -1,0 +1,1011 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI for your personal admin</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="How to let AI read your bills, explain your forms and sort your trips while you keep the paying, signing and booking. US and Canada, three reading levels.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* IDEA: a printed owner's guide to the Friday admin pile. Proof is three made-up bills with their traps circled.
+   COLOUR and TYPE: the site's "G. Combined" direction: paper, ink, one rust accent; Instrument Serif and Sans.
+   LAYOUT: one reading column, figures up to 1040px, one dark band, floating level switch. Light theme by choice. */
+:root{
+  color-scheme: light;
+  --paper:#F8F6F1; --ink:#141412; --body:#3A3832; --muted:#5A584F; --rule:#CFCBC0; --panel:#EDE9DF; --accent:#7A2E1A;
+  --tint:#F3E3DC; --mid:#A8A397; --sheet:#FFFFFF; --bandmuted:#B5B1A6;
+  --display:'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --text:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --col:680px; --wide:1040px;
+  --gl:max(20px, env(safe-area-inset-left, 0px)); --gr:max(20px, env(safe-area-inset-right, 0px));
+}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+.eyebrow{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:var(--col);margin:0 auto;padding-left:var(--gl);padding-right:var(--gr);box-sizing:content-box}
+.widewrap{max-width:var(--wide);margin:0 auto;padding-left:var(--gl);padding-right:var(--gr);box-sizing:content-box}
+@media (max-width:760px){.wrap,.widewrap{box-sizing:border-box;max-width:100%}}
+
+/* three reading levels: .d detailed, .s simple, .t starter, .ds detailed+simple, .st simple+starter */
+body.lv-d .s, body.lv-d .t, body.lv-d .st{display:none !important}
+body.lv-s .d, body.lv-s .t{display:none !important}
+body.lv-t .d, body.lv-t .s, body.lv-t .ds{display:none !important}
+body.lv-s .prose{font-size:19px;line-height:1.75}
+body.lv-t .prose{font-size:20px;line-height:1.8}
+
+header.site{padding-block:24px;padding-left:max(32px, env(safe-area-inset-left, 0px));padding-right:max(32px, env(safe-area-inset-right, 0px));display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink)}
+header.site .mark{font-family:var(--display);font-size:32px;line-height:1}
+header.site .where{font-size:14px;color:var(--muted)}
+@media (max-width:520px){header.site{padding-left:var(--gl);padding-right:var(--gr)}}
+
+.hero{padding-top:72px}
+.hero h1{font-size:clamp(44px,7vw,84px);line-height:1.02;letter-spacing:-.02em;margin-top:22px;max-width:14ch}
+.hero .lede{margin:26px 0 0;font-size:21px;line-height:1.6;color:var(--body);max-width:640px}
+.hero .by{margin:24px 0 0;font-size:14px;color:var(--muted)}
+
+/* hero lanes */
+.lanes{margin-top:48px;border-top:1px solid var(--ink)}
+.lanehead,.lanerow{display:grid;grid-template-columns:120px minmax(0,1fr) 64px minmax(0,1fr);gap:0 20px;align-items:center}
+.lanehead{padding:14px 0;border-bottom:1px solid var(--ink)}
+.lanehead span{font:500 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lanehead span.you{color:var(--accent)}
+.lanerow{padding:20px 0;border-bottom:1px solid var(--rule)}
+.lanerow h3{font-size:34px;line-height:1}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:15px;line-height:1.2;padding:8px 12px;border:1px solid var(--ink);background:var(--sheet);color:var(--ink)}
+.chip.you{background:var(--ink);color:var(--paper)}
+.meet{display:grid;place-items:center}
+.tick{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--accent);position:relative}
+.tick::after{content:"";position:absolute;left:12px;top:10px;width:14px;height:8px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
+.lanecap{margin-top:12px;font-size:13px;color:var(--muted)}
+@media (max-width:700px){
+  .lanehead{display:none}
+  .lanerow{grid-template-columns:1fr;gap:10px}
+  .lanerow h3{font-size:30px}
+  .lanerow .chips::before{content:attr(data-l);display:block;width:100%;font:500 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .lanerow .chips.you::before{color:var(--accent)}
+  .meet{justify-items:start}
+  .tick{width:30px;height:30px}.tick::after{left:8px;top:7px;width:11px;height:6px}
+}
+
+.versions{margin:56px auto 0;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:22px 0}
+.versions p{margin:0;font-size:16px;color:var(--body);flex:1 1 300px}
+.seg{display:inline-flex;border:1px solid var(--ink);background:var(--paper);flex-wrap:wrap}
+.seg button{font:500 14px/1 var(--text);letter-spacing:.04em;padding:14px 16px;min-height:44px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button + button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.float{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);z-index:20;box-shadow:0 6px 24px rgba(20,20,18,.18);flex-wrap:nowrap}
+.float .lab{display:flex;align-items:center;padding:0 14px 0 16px;font-size:13px;color:var(--muted);border-right:1px solid var(--rule);white-space:nowrap}
+@media (max-width:520px){.float .lab{display:none}.seg button{padding:14px 13px}}
+
+.toc{margin:56px auto 0}
+.toc ol{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--ink)}
+.toc li{border-bottom:1px solid var(--rule)}
+.toc a{display:flex;gap:20px;align-items:baseline;padding:14px 0;text-decoration:none;font-family:var(--display);font-size:24px;line-height:1.2}
+.toc a span.n{font:400 13px var(--text);color:var(--muted);flex:0 0 20px;font-variant-numeric:tabular-nums}
+
+section.q{padding:96px 0 0;scroll-margin-top:12px}
+section.q h2{font-size:clamp(34px,5vw,52px);line-height:1.06;margin:14px 0 28px}
+.prose p{margin:0 0 20px;color:var(--body)}
+.prose p.answer{font-size:1.14em;line-height:1.55;color:var(--ink)}
+.prose strong{color:var(--ink);font-weight:600}
+.prose ul,.prose ol{margin:0 0 20px;padding-left:22px;color:var(--body)}
+.prose li{margin:0 0 10px}
+.prose h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:28px 0 10px}
+
+figure{margin:44px auto}
+figcaption{margin-top:12px;font-size:13px;line-height:1.5;color:var(--muted)}
+.figtitle{margin:0 0 18px;font-family:var(--display);font-size:26px;line-height:1.15}
+
+.note{display:inline;background:var(--tint);color:var(--accent);font-size:.92em;padding:1px 6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.note b{font-weight:600}
+p.notep{background:var(--tint);color:var(--accent);padding:14px 18px;border-left:3px solid var(--accent);font-size:16px;line-height:1.55}
+p.notep b{font-weight:600;letter-spacing:.04em}
+
+table{border-collapse:collapse;width:100%;font-size:15.5px;line-height:1.45}
+th{font:500 12.5px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 14px 10px 0;border-bottom:1px solid var(--ink);vertical-align:bottom}
+td{padding:13px 14px 13px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--body)}
+td:first-child{color:var(--ink);font-weight:500}
+.tbl{margin:8px 0 28px}
+.scroll{overflow-x:auto;margin:8px 0 28px}
+.scroll table{min-width:620px}
+.swipe{display:none;margin:8px 0 -2px;font-size:13px;color:var(--muted)}
+@media (max-width:660px){.swipe{display:block}}
+@media (max-width:600px){
+  .stack thead{display:none}
+  .stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--rule)}
+  .stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8.5em}
+  .stack td::before{content:attr(data-l);float:inline-start;width:8em;margin-inline-start:-8.5em;font:500 12px/1.9 var(--text);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+  .stack td:first-child{font-weight:600;padding-inline-start:0}
+  .stack td:first-child::before{display:none}
+}
+td.run{color:var(--accent);background:var(--tint);font-size:13px;letter-spacing:.03em;text-align:center;border-bottom:1px solid var(--paper);border-right:1px solid var(--paper);padding:13px 6px}
+tr.free td{background:var(--panel)}
+tr.free td:first-child{box-shadow:inset 3px 0 0 var(--accent);padding-left:12px}
+.freetag{display:inline-block;margin-left:8px;font:600 11px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+
+/* where boxes */
+.where2{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin:28px 0;border:1px solid var(--ink)}
+.where2 > div{padding:22px 24px;background:var(--panel)}
+.where2 > div + div{border-left:1px solid var(--ink)}
+@media (max-width:600px){.where2 > div + div{border-left:0;border-top:1px solid var(--ink)}}
+.where2 h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2 p{margin:0;font-size:16px;line-height:1.6;color:var(--body)}
+
+/* looks right, is wrong */
+.wrong{display:flex;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.wrong > div{flex:1 1 0;padding:22px 22px 24px;position:relative}
+.wrong > div:not(:last-child){border-right:1px solid var(--rule)}
+.wrong .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.wrong .v{font-family:var(--display);font-size:30px;line-height:1.1;color:var(--ink);position:relative;display:inline-block}
+.wrong .v::after{content:"";position:absolute;left:-4px;right:-4px;top:52%;height:2px;background:var(--accent);transform:rotate(-4deg)}
+.wrong p{margin:10px 0 0;font-size:15px;line-height:1.5;color:var(--body)}
+.wrongtitle{font-family:var(--display);font-style:italic;font-size:clamp(26px,3.6vw,34px);line-height:1.15;margin:0 0 16px}
+@media (max-width:700px){.wrong{flex-direction:column}.wrong > div:not(:last-child){border-right:0;border-bottom:1px solid var(--rule)}}
+
+/* copy blocks */
+.copy{margin:28px 0;border:1px solid var(--ink);background:var(--sheet)}
+.copy .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 12px 10px 18px;border-bottom:1px solid var(--rule)}
+.copy .bar span{min-width:0;font:500 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.copy button{flex:0 0 auto;white-space:nowrap;font:500 14px var(--text);min-height:40px;padding:8px 14px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.copy button.done{background:var(--ink);color:var(--paper)}
+@media (max-width:420px){.copy .bar span{font-size:11px;letter-spacing:.03em}}
+.copy pre{margin:0;padding:18px 18px 20px;font-family:var(--mono);font-size:14.5px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.copy pre mark{background:var(--tint);color:var(--accent);font-weight:600;padding:0 3px}
+.copy pre .num{color:var(--accent);font-weight:600}
+.fill{margin:-14px 0 24px;font-size:14px;color:var(--muted)}
+
+/* tool switch */
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:32px 0 0;padding-top:18px;border-top:1px solid var(--ink)}
+.toolbar .eyebrow{flex:0 0 auto}
+.toolseg button{padding:12px 14px;font-size:14px}
+.toolblocks{border-bottom:1px solid var(--rule);padding:22px 0 6px}
+.prose .toolblock h3{font:400 28px/1.1 var(--display);letter-spacing:0;text-transform:none;margin:0 0 10px;color:var(--ink)}
+@media (max-width:560px){.toolbar .toolseg{display:flex;flex-wrap:nowrap;width:100%}.toolbar .toolseg button{flex:1 1 auto;padding:12px 4px;font-size:13px;letter-spacing:0}}
+.toolblock[hidden]{display:none !important}
+
+/* sample bills */
+.bills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.sheet{background:var(--sheet);border:1px solid var(--ink);padding:18px 18px 20px;box-shadow:0 14px 30px rgba(20,20,18,.07);font-size:14.5px;line-height:1.55;color:var(--ink)}
+.sheet .ex{font:600 11px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.sheet h3{font-family:var(--display);font-size:24px;line-height:1.1;margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
+.sheet p{margin:0 0 8px}
+.sheet .mono{font-family:var(--mono);font-size:13.5px}
+.trap{border:1.5px solid var(--accent);border-radius:999px;padding:0 7px;position:relative;white-space:nowrap}
+.tn{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:var(--sheet);font:600 11px/1 var(--text);vertical-align:2px;margin-left:4px}
+td .tn{margin:0 8px 0 0;vertical-align:1px}
+@media (max-width:860px){.bills{grid-template-columns:1fr;max-width:460px}}
+@media (max-width:420px){.trap{white-space:normal;border-radius:10px}}
+
+/* redaction */
+.redact{max-width:460px}
+.redact .sheet p{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.redact .lab{color:var(--muted);font-size:13px;min-width:110px}
+.blk{display:inline-block;height:18px;background:var(--ink);vertical-align:middle}
+.ok{font-family:var(--mono);font-size:13.5px}
+
+/* friday flow */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px}
+.stage{position:relative;border:1px solid var(--ink);padding:16px 16px 18px;background:var(--paper)}
+.stage .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.stage h3{font-size:26px;line-height:1.1;margin:6px 0 8px}
+.stage p{margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.stage:not(:last-child)::after{content:"\2192";position:absolute;right:-29px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--muted)}
+.stage.lock{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.check2{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--rule);font-size:13px;color:var(--accent);line-height:1.35}
+.person{flex:0 0 16px;width:16px;height:18px;position:relative}
+.person::before{content:"";position:absolute;left:4px;top:0;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.person::after{content:"";position:absolute;left:0;bottom:0;width:16px;height:8px;border-radius:8px 8px 0 0;background:var(--accent)}
+.padlock{flex:0 0 16px;width:16px;height:18px;position:relative}
+.padlock::before{content:"";position:absolute;left:3px;top:0;width:10px;height:10px;border:2px solid var(--accent);border-bottom:0;border-radius:6px 6px 0 0}
+.padlock::after{content:"";position:absolute;left:0;bottom:0;width:16px;height:10px;background:var(--accent)}
+@media (max-width:820px){.flow{grid-template-columns:1fr;gap:30px}.stage:not(:last-child)::after{content:"\2193";right:auto;left:22px;top:auto;bottom:-29px;transform:none}}
+
+/* agent meter */
+.meter{margin:8px 0 28px}
+.meter .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:end}
+.meter .track{grid-column:1 / -1;height:26px;border:1px solid var(--ink);display:flex}
+.meter .fillbar{background:var(--accent);height:100%}
+.meter .lbl{font-size:15px;color:var(--ink);line-height:1.35}
+.meter .val{font-family:var(--display);font-size:40px;line-height:1;font-variant-numeric:tabular-nums}
+
+.approve{list-style:none;margin:0 0 24px;padding:0;border-top:1px solid var(--ink)}
+.approve li{display:grid;grid-template-columns:34px 1fr;gap:8px;padding:14px 0;border-bottom:1px solid var(--rule);color:var(--ink);align-items:center}
+.approve li .padlock{margin-left:4px}
+
+.band{background:var(--ink);color:var(--paper);margin-top:96px;padding-block:64px}
+.band p.eyebrow{color:var(--bandmuted);font-family:var(--text);font-size:13px;line-height:1.4;margin:0}
+.band p.big{margin:16px 0 0;font-family:var(--display);font-size:clamp(30px,4.6vw,46px);line-height:1.15;color:var(--paper)}
+.band p.big em{font-style:italic;color:var(--tint)}
+
+.check{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.check li{border-bottom:1px solid var(--rule)}
+.check label{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:18px 0;cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;width:24px;height:24px;margin:4px 0 0;border:1.5px solid var(--ink);background:var(--paper);display:grid;place-content:center;cursor:pointer}
+.check input:checked{background:var(--ink)}
+.check input:checked::after{content:"";width:11px;height:6px;border-left:2px solid var(--paper);border-bottom:2px solid var(--paper);transform:rotate(-45deg) translate(1px,-1px)}
+.check span{color:var(--ink)}
+
+.cta{border-top:1px solid var(--ink);margin-top:96px;padding-block:88px;text-align:center}
+.cta h2{font-size:clamp(40px,6vw,68px);line-height:1.04}
+.cta p{max-width:600px;margin:22px auto 0;color:var(--body)}
+
+.sources{padding-top:72px}
+.sources h2{font-size:34px;margin:0 0 8px}
+.sources ul{margin:18px 0 0;padding-left:20px;font-size:15px;line-height:1.6;color:var(--body)}
+.sources li{margin-bottom:8px}
+.sources p{font-size:15px;color:var(--muted);margin:0}
+section.q.sources{padding-top:72px}
+footer.site{margin-top:88px;border-top:1px solid var(--ink);padding-top:24px;padding-bottom:calc(110px + env(safe-area-inset-bottom, 0px));padding-left:max(32px, env(safe-area-inset-left, 0px));padding-right:max(32px, env(safe-area-inset-right, 0px));display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:var(--muted)}
+@media (max-width:520px){footer.site{padding-left:var(--gl);padding-right:var(--gr)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body class="lv-t">
+
+<header class="site">
+  <span class="mark">Leverage</span>
+  <span class="where">Notes · For small business owners</span>
+</header>
+
+<div class="hero widewrap">
+  <p class="eyebrow"><span class="d">Note · 11 minute read</span><span class="s">Simple version · 9 minute read</span><span class="t">Easiest version · 6 minute read</span></p>
+  <h1>AI for your personal admin</h1>
+  <p class="lede d">Let AI read your bills, explain your forms and sort your trips, while you keep the paying, signing and booking.</p>
+  <p class="lede s">Let AI read your bills, explain your forms and sort your trips. You still do the paying, signing and booking.</p>
+  <p class="lede t">AI can read your bills, explain your forms and help plan trips. You still pay, sign and book.</p>
+  <p class="by">By Dan Albasry · November 27, 2026 · For owners in the US and Canada</p>
+
+  <figure class="lanes" aria-label="Three lanes: bills, forms and trips. In each, AI reads, explains and reminds, and you pay, sign and book.">
+    <div class="lanehead"><span>Job</span><span>AI does</span><span></span><span class="you">You do</span></div>
+    <div class="lanerow"><h3>Bills</h3><div class="chips" data-l="AI does"><span class="chip">Read</span><span class="chip">Explain</span><span class="chip">Remind</span></div><div class="meet"><span class="tick" aria-hidden="true"></span></div><div class="chips you" data-l="You do"><span class="chip you">Pay</span></div></div>
+    <div class="lanerow"><h3>Forms</h3><div class="chips" data-l="AI does"><span class="chip">Read</span><span class="chip">Explain</span><span class="chip">Remind</span></div><div class="meet"><span class="tick" aria-hidden="true"></span></div><div class="chips you" data-l="You do"><span class="chip you">Sign</span></div></div>
+    <div class="lanerow"><h3>Trips</h3><div class="chips" data-l="AI does"><span class="chip">Read</span><span class="chip">Explain</span><span class="chip">Remind</span></div><div class="meet"><span class="tick" aria-hidden="true"></span></div><div class="chips you" data-l="You do"><span class="chip you">Book</span></div></div>
+    <figcaption class="lanecap"><span class="ds">The check mark is where the AI hands over to you.</span><span class="t">AI reads. You pay, sign and book.</span></figcaption>
+  </figure>
+</div>
+
+<div class="wrap">
+  <div class="versions">
+    <p><strong>Three ways to read this.</strong> Starter is the easiest. Simple says everything in plain words. Detailed has every number and source. Switch any time with the button at the bottom of your screen.</p>
+    <div class="seg" role="group" aria-label="Choose a reading level">
+      <button type="button" data-v="t" aria-pressed="true">Starter</button>
+      <button type="button" data-v="s" aria-pressed="false">Simple</button>
+      <button type="button" data-v="d" aria-pressed="false">Detailed</button>
+    </div>
+  </div>
+
+  <div class="prose" style="margin-top:56px">
+    <p class="notep"><b>Placeholder, opening scene:</b> <span class="d">Dan to write three or four sentences from a real evening of catching up on bills, a form or a trip booking, and the moment that made him want help. No client names.</span><span class="s">Dan to write three or four short sentences about a real evening of catching up on bills, a form or a trip. No client names.</span><span class="t">Dan to write three short sentences about a real night of doing bills or a form. No client names.</span></p>
+  </div>
+
+  <nav class="toc" aria-label="Questions in this guide">
+    <p class="eyebrow">Eight questions, in order</p>
+    <ol>
+      <li><a href="#q1"><span class="n">1</span><span>What admin can AI take off my plate?</span></a></li>
+      <li><a href="#q2"><span class="n">2</span><span>How do I do it, step by step?</span></a></li>
+      <li><a href="#q3"><span class="n">3</span><span>How do I know if my tool gets it right?</span></a></li>
+      <li><a href="#q4"><span class="n">4</span><span>What should I never hand to AI?</span></a></li>
+      <li><a href="#q5"><span class="n">5</span><span>What can an agent do, and where must I approve?</span></a></li>
+      <li><a href="#q6"><span class="n">6</span><span>What does it cost?</span></a></li>
+      <li><a href="#q7"><span class="n">7</span><span>Where can I get free help with forms?</span></a></li>
+      <li><a href="#q8"><span class="n">8</span><span>What to do this week</span></a></li>
+    </ol>
+  </nav>
+</div>
+
+<!-- 1 -->
+<section class="q" id="q1">
+  <div class="wrap">
+    <p class="eyebrow">Question 1 of 8</p>
+    <h2>What admin can AI take off my plate?</h2>
+    <div class="prose">
+      <p class="answer d">The reading, the explaining and the reminding. You keep the maths that decides what you pay, the rules that decide what you owe, and the money. How far you go depends on the job, what a mistake would cost, and how often you will lean on the tool.</p>
+      <p class="answer s">AI can do the reading, the explaining and the reminding. You keep the final say on the numbers, the rules and the money.</p>
+      <p class="answer t">AI can read, explain, check and remind. You check its numbers and handle the money.</p>
+    </div>
+
+    <div class="tbl d"><table class="stack">
+      <thead><tr><th>Job</th><th>Hand to AI</th><th>You keep</th><th>Main risk</th></tr></thead>
+      <tbody>
+        <tr><td>Bills</td><td data-l="Hand to AI">Reading the total and due date, checking the sums, reminders</td><td data-l="You keep">Paying, on the biller's own site</td><td data-l="Main risk">Dates read the wrong way round</td></tr>
+        <tr><td>Forms</td><td data-l="Hand to AI">What each box means, a checklist, draft answers</td><td data-l="You keep">The numbers, signing, submitting</td><td data-l="Main risk">A confident wrong figure</td></tr>
+        <tr><td>Trips</td><td data-l="Hand to AI">A shortlist, an itinerary, a booking checklist</td><td data-l="You keep">Booking, paying, entry rules</td><td data-l="Main risk">Old prices and closed places</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tbl s"><table class="stack">
+      <thead><tr><th>Job</th><th>Hand to AI</th><th>You keep</th><th>Main risk</th></tr></thead>
+      <tbody>
+        <tr><td>Bills</td><td data-l="Hand to AI">Reading the total and due date, checking the sums</td><td data-l="You keep">Paying</td><td data-l="Main risk">Dates read the wrong way round</td></tr>
+        <tr><td>Forms</td><td data-l="Hand to AI">What each box means, a checklist</td><td data-l="You keep">The numbers, signing</td><td data-l="Main risk">A confident wrong figure</td></tr>
+        <tr><td>Trips</td><td data-l="Hand to AI">A shortlist and a plan</td><td data-l="You keep">Booking, paying, entry rules</td><td data-l="Main risk">Old prices, closed places</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tbl t"><table class="stack">
+      <thead><tr><th>Job</th><th>AI does</th><th>You do</th><th>Watch out for</th></tr></thead>
+      <tbody>
+        <tr><td>Bills</td><td data-l="AI does">Reads the total and the due date</td><td data-l="You do">Pay</td><td data-l="Watch out for">Day and month mixed up</td></tr>
+        <tr><td>Forms</td><td data-l="AI does">Explains each box</td><td data-l="You do">Fill in the numbers, sign</td><td data-l="Watch out for">A wrong number that sounds sure</td></tr>
+        <tr><td>Trips</td><td data-l="AI does">Makes a first plan</td><td data-l="You do">Book and pay</td><td data-l="Watch out for">Old prices, closed places</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="prose">
+      <div class="d">
+        <p><strong>Bills.</strong> In a test of 223 documents published 13 November 2026, the best AI models read 90% to 100% with every field right, and their main mistake was reading US dates day first (<a href="https://www.pantalytics.com/post/odoo-bill-digitization-benchmark" target="_blank" rel="noopener">Pantalytics</a>). Pantalytics sells AI add-ons for the accounting software it tested, and the documents were sample invoices and scanned shop receipts, each read once, not phone photos of real supplier bills.</p>
+        <p><strong>Forms.</strong> A tax-filing company gave ChatGPT and Gemini the same made-up return more than once and got five different refunds, from $4,672.10 to $5,721.10 (<a href="https://www.navo.ai/blog/can-ai-do-your-taxes" target="_blank" rel="noopener">Navo</a>, a free tax-filing service, which did not check which refund was right). The IRS says taxpayers "should not rely on AI-generated responses to complex tax questions, and they should verify any calculations" an AI tool gives them (<a href="https://www.irs.gov/newsroom/dirty-dozen-tax-scams-for-2026-irs-reminds-taxpayers-to-watch-out-for-dangerous-threats" target="_blank" rel="noopener">IRS, IR-2026-30</a>).</p>
+        <p><strong>Trips.</strong> In an August 2026 survey of 1,000 US travellers, 55% of the 485 who had used AI for travel got at least one recommendation that was wrong, closed or unavailable (<a href="https://www.greetwell.com/us/research/ai-travel-survey-2026" target="_blank" rel="noopener">Greetwell</a>, a travel company's own survey).</p>
+      </div>
+      <div class="s">
+        <p><strong>Bills.</strong> In one test of 223 sample invoices and receipts, the best tools got 90% to 100% of them fully right. Their main mistake was reading a US date like 11/04 the wrong way round (<a href="https://www.pantalytics.com/post/odoo-bill-digitization-benchmark" target="_blank" rel="noopener">Pantalytics</a>). The company that ran it sells AI add-ons, and the test used sample bills and scanned receipts, not phone photos.</p>
+        <p><strong>Forms.</strong> One company gave ChatGPT and Gemini the same made-up tax return more than once and got five different refunds, from $4,672.10 to $5,721.10 (<a href="https://www.navo.ai/blog/can-ai-do-your-taxes" target="_blank" rel="noopener">Navo</a>, a free tax-filing service, which did not check which refund was right). The IRS says people "should not rely on AI-generated responses to complex tax questions" (<a href="https://www.irs.gov/newsroom/dirty-dozen-tax-scams-for-2026-irs-reminds-taxpayers-to-watch-out-for-dangerous-threats" target="_blank" rel="noopener">IRS</a>).</p>
+        <p><strong>Trips.</strong> In a survey of US travellers, more than half of those who used AI got at least one wrong tip (<a href="https://www.greetwell.com/us/research/ai-travel-survey-2026" target="_blank" rel="noopener">Greetwell</a>, a travel company's survey).</p>
+      </div>
+      <div class="t">
+        <p><strong>Bills.</strong> In one test, the best tools got 90% to 100% of sample bills fully right. The most common mistake was mixing up the day and the month (<a href="https://www.pantalytics.com/post/odoo-bill-digitization-benchmark" target="_blank" rel="noopener">Pantalytics</a>).</p>
+        <p><strong>Forms.</strong> One company asked ChatGPT and Gemini about the same made-up tax return more than once. They gave five different refunds (<a href="https://www.navo.ai/blog/can-ai-do-your-taxes" target="_blank" rel="noopener">Navo</a>). The IRS says not to rely on AI for hard tax questions (<a href="https://www.irs.gov/newsroom/dirty-dozen-tax-scams-for-2026-irs-reminds-taxpayers-to-watch-out-for-dangerous-threats" target="_blank" rel="noopener">IRS</a>).</p>
+        <p><strong>Trips.</strong> More than half of travellers who used AI got at least one wrong tip (<a href="https://www.greetwell.com/us/research/ai-travel-survey-2026" target="_blank" rel="noopener">Greetwell</a>). Check prices and dates yourself.</p>
+      </div>
+    </div>
+  </div>
+  <figure class="widewrap">
+    <p class="wrongtitle">Looks right, is wrong</p>
+    <div class="wrong">
+      <div class="ds"><p class="k">Trips</p><span class="v">The 2023 fare</span><p>An old price, still quoted as if it were today's.</p></div>
+      <div><p class="k">Trips</p><span class="v">A closed hotel</span><p><span class="ds">Recommended with confidence, no longer open.</span><span class="t">The AI said go. It was closed.</span></p></div>
+      <div><p class="k">Bills</p><span class="v">03/12/2026</span><p><span class="ds">Read as 12 March. The bill meant 3 December.</span><span class="t">On this Canadian bill, it means 3 December, not 12 March.</span></p></div>
+    </div>
+    <figcaption><span class="ds">Illustration of the three kinds of mistake the tests above found. The items are made up.</span><span class="t">Made-up examples.</span></figcaption>
+  </figure>
+</section>
+
+<!-- 2 -->
+<section class="q" id="q2">
+  <div class="wrap">
+    <p class="eyebrow">Question 2 of 8</p>
+    <h2>How do I do it, step by step?</h2>
+    <div class="prose">
+      <p class="answer d">Attach the bill, form or booking email, paste one prompt, then check the two things AI gets wrong most: amounts and dates. The prompt is the same in every tool:</p>
+      <p class="answer s">Attach the bill, paste one prompt, then check the amount and the date yourself. Use this prompt in any tool:</p>
+      <p class="answer t">Add the bill. Paste the prompt. Check the amount and the date.</p>
+    </div>
+
+    <div class="copy">
+      <div class="bar"><span>The prompt · works in every tool</span><button type="button" data-copy="prompt">Copy prompt</button></div>
+<pre id="prompt">Read this [bill / form / booking]. Use only what is written in it.
+<span class="num">1.</span> What is it for, in one plain sentence?
+<span class="num">2.</span> The total, exactly as printed, and whether tax is already included.
+<span class="num">3.</span> The due date, exactly as printed. If only payment terms are printed (like "within 15 days"), quote the terms, then give the date they point to and mark it <mark>WORKED OUT</mark>. If nothing is printed, write <mark>NOT PRINTED</mark>.
+<span class="num">4.</span> Check the maths: do the lines add up to the subtotal, and the subtotal plus tax to the total? Show the sums.
+<span class="num">5.</span> Anything unclear, missing or unusual. If you cannot read a number, say so instead of guessing.
+Dates: if a date could be read two ways, say so, and use the billing period or month names on the bill to decide. This supplier is in [Canada / the US].</pre>
+    </div>
+    <p class="fill t">Where you see [ ], keep the one word that fits and delete the rest.</p>
+
+    <div class="prose">
+      <p>For a form, ask what each box means and which official page sets the number. For a trip, ask for a list of every price, date and entry rule to confirm on the official site.</p>
+      <p class="d"><strong>Before you attach anything, cover your account number, any SIN or SSN, card numbers and your date of birth.</strong></p>
+      <p class="s"><strong>First, cover your account number, ID numbers, card numbers and birth date.</strong></p>
+      <p class="t"><strong>Cover your account number and ID numbers first.</strong></p>
+    </div>
+
+    <div class="toolbar">
+      <p class="eyebrow">Show steps for</p>
+      <div class="seg toolseg" role="group" aria-label="Choose your AI tool">
+        <button type="button" data-tool="chatgpt" aria-pressed="true">ChatGPT</button>
+        <button type="button" data-tool="claude" aria-pressed="false">Claude</button>
+        <button type="button" data-tool="gemini" aria-pressed="false">Gemini</button>
+        <button type="button" data-tool="copilot" aria-pressed="false">Copilot</button>
+        <button type="button" data-tool="muse" aria-pressed="false">Muse</button>
+      </div>
+    </div>
+    <div class="toolblocks prose">
+      <div class="toolblock" data-tool="chatgpt">
+        <h3>In ChatGPT</h3>
+        <p class="d">Start a new chat, attach the PDF or photo with the + button and paste the prompt. Keep each month's bills together in one Project (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">ChatGPT pricing</a>).</p>
+        <p class="s">Start a new chat, attach the file with the + button and paste the prompt. Keep a month's bills together in a Project (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">ChatGPT pricing</a>).</p>
+        <p class="t">Add the file with the + button. Paste the prompt (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">ChatGPT pricing</a>).</p>
+      </div>
+      <div class="toolblock" data-tool="claude" hidden>
+        <h3>In Claude</h3>
+        <p class="d">Attach the file with the + button and paste the prompt. Connect Gmail and Google Calendar and Claude can find bills in your email and create calendar events; outside Auto mode it asks before it sends, replies or forwards anything (<a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors" target="_blank" rel="noopener">Claude help</a>).</p>
+        <p class="s">Attach the file with the + button and paste the prompt. If you connect Gmail and Google Calendar, Claude can find bills and make calendar events, and outside Auto mode it asks before it sends any email (<a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors" target="_blank" rel="noopener">Claude help</a>).</p>
+        <p class="t">Add the file with the + button. Paste the prompt. Claude asks before it sends email, unless Auto mode is on (<a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors" target="_blank" rel="noopener">Claude help</a>).</p>
+      </div>
+      <div class="toolblock" data-tool="gemini" hidden>
+        <h3>In Gemini</h3>
+        <p class="d">In Gmail on a computer, click Ask Gemini at the top right and ask for the amount and due date. Ask Gemini and Add to calendar need an eligible Google Workspace or Google AI plan, not a free Gmail account (<a href="https://support.google.com/mail/answer/14355636?hl=en" target="_blank" rel="noopener">Gmail help</a>); Google AI Plus is CA$6.99 a month in Canada (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google Canada</a>). On a free Google account, upload the bill in the Gemini app instead and paste the prompt (<a href="https://support.google.com/gemini/answer/14903178?hl=en" target="_blank" rel="noopener">Gemini help</a>).</p>
+        <p class="s">Open Gmail on a computer, click Ask Gemini at the top right, and ask for the amount and due date. You need an eligible Google Workspace or Google AI plan, not a free Gmail account (<a href="https://support.google.com/mail/answer/14355636?hl=en" target="_blank" rel="noopener">Gmail help</a>). On a free Google account, upload the bill in the Gemini app and paste the prompt (<a href="https://support.google.com/gemini/answer/14903178?hl=en" target="_blank" rel="noopener">Gemini help</a>).</p>
+        <p class="t">In Gmail on a computer, click Ask Gemini. Ask for the amount and the due date. This needs a paid Google plan (<a href="https://support.google.com/mail/answer/14355636?hl=en" target="_blank" rel="noopener">Gmail help</a>). For free, upload the bill in the Gemini app and paste the prompt (<a href="https://support.google.com/gemini/answer/14903178?hl=en" target="_blank" rel="noopener">Gemini help</a>).</p>
+      </div>
+      <div class="toolblock" data-tool="copilot" hidden>
+        <h3>In Copilot</h3>
+        <p class="d">In Outlook, open the thread and select Summary by Copilot at the top. In new Outlook, a PDF or Word attachment gets a Summarize a file option (<a href="https://support.microsoft.com/en-us/outlook/copilot-pages/summarize-an-email-thread-with-copilot-in-outlook" target="_blank" rel="noopener">Microsoft support</a>). Summary by Copilot has no prompt box. To paste the full prompt, open Chat with Copilot from the Copilot icon in Outlook; Microsoft says that chat needs a work or school account with a Copilot licence (<a href="https://support.microsoft.com/topic/07420c70-099e-4552-8522-7d426712917b" target="_blank" rel="noopener">Microsoft FAQ</a>). Microsoft 365 Personal and Family (owner only) include Copilot in Outlook (<a href="https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products" target="_blank" rel="noopener">Microsoft Canada</a>).</p>
+        <p class="s">In Outlook, open the email and choose Summary by Copilot. In new Outlook, a PDF or Word file gets Summarize a file (<a href="https://support.microsoft.com/en-us/outlook/copilot-pages/summarize-an-email-thread-with-copilot-in-outlook" target="_blank" rel="noopener">Microsoft support</a>). To paste the full prompt, use Chat with Copilot in Outlook. That needs a work or school account with a Copilot licence (<a href="https://support.microsoft.com/topic/07420c70-099e-4552-8522-7d426712917b" target="_blank" rel="noopener">Microsoft FAQ</a>). Microsoft 365 Personal and Family include Copilot in Outlook (<a href="https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products" target="_blank" rel="noopener">Microsoft Canada</a>).</p>
+        <p class="t">In Outlook, open the email. Choose Summary by Copilot (<a href="https://support.microsoft.com/en-us/outlook/copilot-pages/summarize-an-email-thread-with-copilot-in-outlook" target="_blank" rel="noopener">Microsoft support</a>). It comes with Microsoft 365 Personal or Family (<a href="https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products" target="_blank" rel="noopener">Microsoft Canada</a>).</p>
+      </div>
+      <div class="toolblock" data-tool="muse" hidden>
+        <h3>In Muse</h3>
+        <p class="d">Upload the file in your conversation and paste the prompt. Muse reads PDF, Word, Excel, CSV and image files (<a href="https://www.meta.com/en-gb/help/superintelligence/2074655449783957/" target="_blank" rel="noopener">Meta help</a>). <span class="note"><b>Placeholder:</b> Dan's Muse admin line</span></p>
+        <p class="s">Upload the file in your chat and paste the prompt. Muse reads PDF, Word, Excel and image files (<a href="https://www.meta.com/en-gb/help/superintelligence/2074655449783957/" target="_blank" rel="noopener">Meta help</a>). <span class="note"><b>Placeholder:</b> Dan's Muse admin line</span></p>
+        <p class="t">Upload the file in your chat and paste the prompt (<a href="https://www.meta.com/en-gb/help/superintelligence/2074655449783957/" target="_blank" rel="noopener">Meta help</a>). <span class="note"><b>Placeholder:</b> Dan's Muse admin line</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="q" id="q3">
+  <div class="wrap">
+    <p class="eyebrow">Question 3 of 8</p>
+    <h2>How do I know if my tool gets it right?</h2>
+    <div class="prose">
+      <p class="answer d">Test it on made-up bills before you trust it with real ones. I wrote three sample bills for an example owner, Sam, who runs a made-up two-chair barbershop in Ontario. Every company name and number below is invented. The three bills hide six traps between them, including the date mix-up the tests above found:</p>
+      <p class="answer s">Test it on made-up bills first. I wrote three sample bills for Sam, a made-up barber in Ontario. All names and numbers are invented. The three bills hide six traps.</p>
+      <p class="answer t">Test it on fake bills first. These three bills are made up. They hide six traps.</p>
+    </div>
+  </div>
+
+  <figure class="widewrap">
+    <p class="figtitle"><span class="ds">Three made-up bills for Sam's made-up barbershop, traps circled</span><span class="t">Three fake bills, traps circled</span></p>
+    <div class="bills">
+      <div class="sheet">
+        <p class="ex">Made-up example</p>
+        <h3>Bill 1. Northline Hydro (example)</h3>
+        <p>Statement date 02/11/2026.</p>
+        <p>Billing period 1 to 31 October 2026.</p>
+        <p>Account 0000-EXAMPLE. Amount due $142.38 <span class="trap">(includes HST $16.38)</span><span class="tn">1</span>.</p>
+        <p>Please pay by <span class="trap">03/12/2026</span><span class="tn">2</span>.</p>
+      </div>
+      <div class="sheet">
+        <p class="ex">Made-up example</p>
+        <h3>Bill 2. Brightwave Internet (example), a US company</h3>
+        <p>Invoice date <span class="trap">11/04/2026</span><span class="tn">3</span>.</p>
+        <p>Monthly service $65.00. Promo code <span class="trap">SAVE10</span><span class="tn">4</span> applied. Total $58.50.</p>
+        <p><span class="trap">Payment within 15 days.</span><span class="tn">5</span></p>
+      </div>
+      <div class="sheet">
+        <p class="ex">Made-up example</p>
+        <h3>Bill 3. Corner Supply Co. (example)</h3>
+        <p>Invoice 4471.</p>
+        <p class="mono">3 x clipper oil at $18.50 = $55.50</p>
+        <p class="mono">2 x neck strips (box) at $12.25 = $24.50</p>
+        <p><span class="trap">Subtotal $82.00.</span><span class="tn">6</span> HST 13% $10.66. Total $92.66.</p>
+      </div>
+    </div>
+    <figcaption>Every company name, account and amount is invented. The numbers in circles match the answer key below.</figcaption>
+  </figure>
+
+  <div class="wrap">
+    <div class="copy">
+      <div class="bar"><span>The three sample bills, as text</span><button type="button" data-copy="billtext">Copy bills</button></div>
+<pre id="billtext">BILL 1. Northline Hydro (example). Statement date 02/11/2026.
+Billing period 1 to 31 October 2026.
+Account 0000-EXAMPLE. Amount due $142.38 (includes HST $16.38).
+Please pay by 03/12/2026.
+
+BILL 2. Brightwave Internet (example), a US company. Invoice date 11/04/2026.
+Monthly service $65.00. Promo code SAVE10 applied. Total $58.50.
+Payment within 15 days.
+
+BILL 3. Corner Supply Co. (example). Invoice 4471.
+3 x clipper oil at $18.50 = $55.50
+2 x neck strips (box) at $12.25 = $24.50
+Subtotal $82.00. HST 13% $10.66. Total $92.66.</pre>
+    </div>
+
+    <div class="prose">
+      <p class="d"><strong>The answer key</strong>, worked out in code, not by AI:</p>
+      <p class="s"><strong>The right answers</strong> (worked out in code, not by AI):</p>
+      <p class="t"><strong>The right answers:</strong></p>
+    </div>
+    <div class="tbl d"><table>
+      <thead><tr><th>#</th><th>The trap</th><th>What a correct answer says</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><span class="tn">1</span>Total already includes tax</td><td>$142.38, not $158.76 (the $16.38 HST added twice)</td></tr>
+        <tr><td>1</td><td><span class="tn">2</span>Day-first dates (the October billing period shows it)</td><td>Due 3 December 2026, not 12 March</td></tr>
+        <tr><td>2</td><td><span class="tn">3</span>US month-first date</td><td>Invoice dated 4 November 2026</td></tr>
+        <tr><td>2</td><td><span class="tn">4</span>A code that looks like a number</td><td>SAVE10 is a promo code, not an account or invoice number</td></tr>
+        <tr><td>2</td><td><span class="tn">5</span>Only payment terms printed</td><td>No date printed. Terms are 15 days from 4 November, so 19 November 2026, marked as worked out. If it reads 11/04 day first, it gets 11 April and 26 April</td></tr>
+        <tr><td>3</td><td><span class="tn">6</span>The supplier's maths is wrong</td><td>Lines add to $80.00, not $82.00, so HST is $10.40 and the total $90.40: $2.26 too high. A good answer flags it</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tbl s"><table>
+      <thead><tr><th>#</th><th>The trap</th><th>The right answer</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><span class="tn">1</span>Tax is already in the total</td><td>$142.38, not $158.76</td></tr>
+        <tr><td>1</td><td><span class="tn">2</span>This bill writes the day first</td><td>Due 3 December 2026</td></tr>
+        <tr><td>2</td><td><span class="tn">3</span>The US writes the month first</td><td>Dated 4 November 2026</td></tr>
+        <tr><td>2</td><td><span class="tn">4</span>A code that looks like a number</td><td>SAVE10 is a promo code</td></tr>
+        <tr><td>2</td><td><span class="tn">5</span>Only payment terms are printed</td><td>No date printed. Terms are 15 days from 4 November, so 19 November 2026, marked as worked out</td></tr>
+        <tr><td>3</td><td><span class="tn">6</span>The supplier added wrong</td><td>Lines add to $80.00. Total should be $90.40, so the bill is $2.26 too high</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tbl t"><table>
+      <thead><tr><th>#</th><th>The trap</th><th>The right answer</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><span class="tn">1</span>Tax is already in the total</td><td>$142.38</td></tr>
+        <tr><td>1</td><td><span class="tn">2</span>This bill puts the day first</td><td>Due 3 December 2026</td></tr>
+        <tr><td>2</td><td><span class="tn">3</span>Month comes first in the US</td><td>Dated 4 November 2026</td></tr>
+        <tr><td>2</td><td><span class="tn">4</span>SAVE10</td><td>A promo code, not an account number</td></tr>
+        <tr><td>2</td><td><span class="tn">5</span>No due date</td><td>No date printed. 15 days from 4 November is 19 November.</td></tr>
+        <tr><td>3</td><td><span class="tn">6</span>The supplier added wrong</td><td>Should be $90.40. The bill is $2.26 too high</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="prose">
+      <p class="notep"><b>Placeholder, results by tool:</b> <span class="d">Dan to run. Paste the three bills and the prompt into ChatGPT, Claude, Gemini, Copilot and Muse, each in a fresh chat, and fill in the table. Run each twice, because the same tool can answer differently.</span><span class="s">Dan to run. Paste the bills and the prompt into ChatGPT, Claude, Gemini, Copilot and Muse, twice each, in fresh chats. Fill in the table.</span><span class="t">Dan to run. Try each tool twice and fill in the table.</span></p>
+    </div>
+    <p class="swipe" aria-hidden="true">Swipe sideways to see all five tools.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Check</th><th>ChatGPT</th><th>Claude</th><th>Gemini</th><th>Copilot</th><th>Muse</th></tr></thead>
+        <tbody>
+          <tr><td><span class="d">Bill 1: $142.38, due 3 December</span><span class="s">Bill 1: $142.38, due 3 December</span><span class="t">Bill 1 right</span></td><td class="run">Dan to run</td><td class="run">Dan to run</td><td class="run">Dan to run</td><td class="run">Dan to run</td><td class="run">Dan to run</td></tr>
+          <tr><td><span class="d">Bill 2 due 19 November, marked worked out</span><span class="s">Bill 2: 19 November, worked out</span><span class="t">Bill 2 right</span></td><td class="run">Dan to run</td><td class="run">Dan to run</td><td class="run">Dan to run</td><td class="run">Dan to run</td><td class="run">Dan to run</td></tr>
+          <tr><td><span class="d">Bill 3 maths error caught</span><span class="st">Bill 3 error caught</span></td><td class="run">Dan to run</td><td class="run">Dan to run</td><td class="run">Dan to run</td><td class="run">Dan to run</td><td class="run">Dan to run</td></tr>
+          <tr><td><span class="d">Same answer on the second run</span><span class="st">Same answer twice</span></td><td class="run">Dan to run</td><td class="run">Dan to run</td><td class="run">Dan to run</td><td class="run">Dan to run</td><td class="run">Dan to run</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="prose">
+      <p class="d">If a tool misses a trap, do not drop it. Add a line to your prompt that names the trap, and run the test again.</p>
+      <p class="s">If your tool misses a trap, add a line to the prompt that names it. Then test again.</p>
+      <p class="t">If your tool gets one wrong, add a line to the prompt about it and try again.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="q" id="q4">
+  <div class="wrap">
+    <p class="eyebrow">Question 4 of 8</p>
+    <h2>What should I never hand to AI?</h2>
+    <div class="prose">
+      <p class="answer d">Your ID numbers, your money details and your passwords. Canada's Get Cyber Safe names your social insurance number, financial information and account credentials, and warns: "Once you provide your data, you lose control over where it goes and who can see it" (<a href="https://www.getcybersafe.gc.ca/en/blogs/why-you-should-never-give-your-personal-information-ai" target="_blank" rel="noopener">Get Cyber Safe</a>). The same goes for an SSN, a card or bank number, a one-time code, and other people's details.</p>
+      <p class="answer s">Never share ID numbers, money details or passwords. Canada's Get Cyber Safe names your social insurance number, financial information and account log-ins. It says: "Once you provide your data, you lose control over where it goes and who can see it" (<a href="https://www.getcybersafe.gc.ca/en/blogs/why-you-should-never-give-your-personal-information-ai" target="_blank" rel="noopener">Get Cyber Safe</a>). The same goes for an SSN, card numbers and one-time codes.</p>
+      <p class="answer t">Never share ID numbers, bank or card numbers, or passwords. Canada's Get Cyber Safe says once you share them, "you lose control" (<a href="https://www.getcybersafe.gc.ca/en/blogs/why-you-should-never-give-your-personal-information-ai" target="_blank" rel="noopener">Get Cyber Safe</a>).</p>
+    </div>
+  </div>
+  <figure class="wrap redact" style="margin-bottom:36px">
+    <div class="sheet" role="img" aria-label="A made-up bill with the account number, date of birth and card digits covered by black bars before upload">
+      <p class="ex">Made-up example · ready to upload</p>
+      <h3>Northline Hydro (example)</h3>
+      <p><span class="lab">Account</span><span class="blk" style="width:150px"></span></p>
+      <p><span class="lab">Date of birth</span><span class="blk" style="width:110px"></span></p>
+      <p><span class="lab">Paid by card</span><span class="blk" style="width:170px"></span></p>
+      <p><span class="lab">Amount due</span><span class="ok">$142.38</span></p>
+      <p><span class="lab">Pay by</span><span class="ok">03/12/2026</span></p>
+    </div>
+    <figcaption><span class="ds">Cover the private numbers before you upload. Leave the amount and the date for the AI to read.</span><span class="t">Cover the private numbers first.</span></figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="prose">
+      <p class="d"><strong>Then check the training switch.</strong> On personal accounts most tools can use your chats to improve their models unless you switch it off. OpenAI says it does not train on business users' inputs by default (<a href="https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/" target="_blank" rel="noopener">OpenAI</a>).</p>
+      <p class="s"><strong>Turn off the training switch.</strong> On personal accounts, most tools can learn from your chats unless you switch it off. OpenAI does not train on business plans by default (<a href="https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/" target="_blank" rel="noopener">OpenAI</a>).</p>
+      <p class="t"><strong>Turn off training.</strong> Many tools learn from your chats unless you say no.</p>
+    </div>
+    <div class="tbl d"><table class="stack">
+      <thead><tr><th>Tool (personal account)</th><th>Uses your chats for training?</th><th>Where to switch it off</th></tr></thead>
+      <tbody>
+        <tr><td>ChatGPT</td><td data-l="Training?">It may, by default (<a href="https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/" target="_blank" rel="noopener">OpenAI</a>)</td><td data-l="Switch off">Settings, Data Controls, "Improve the model for everyone" (<a href="https://help.openai.com/en/articles/7730893-data-controls-faq" target="_blank" rel="noopener">OpenAI help</a>)</td></tr>
+        <tr><td>Claude</td><td data-l="Training?">Only if Model Improvement is on; check that it is off (<a href="https://privacy.claude.com/en/articles/10023580-is-my-data-used-for-model-training" target="_blank" rel="noopener">Anthropic</a>)</td><td data-l="Switch off">Privacy Settings, Model Improvement</td></tr>
+        <tr><td>Gemini</td><td data-l="Training?">Yes, the new setting starts on (<a href="https://9to5google.com/2026/11/24/gemini-history-ai-training/" target="_blank" rel="noopener">9to5Google</a>)</td><td data-l="Switch off">Settings, Gemini History, "Chat content including text &amp; attachments". With History off, Google still keeps chats for around two months (<a href="https://support.google.com/gemini/answer/13594961" target="_blank" rel="noopener">Google</a>)</td></tr>
+        <tr><td>Copilot</td><td data-l="Training?">Yes, unless you opt out (<a href="https://support.microsoft.com/en-us/topic/privacy-faq-for-microsoft-copilot-27b3a435-8dc9-4b55-9a4b-58eeb9647a7f" target="_blank" rel="noopener">Microsoft</a>)</td><td data-l="Switch off">Profile, Privacy: both "Training on conversation activity" and "Training on voice conversations"; future chats only (<a href="https://support.microsoft.com/en-us/topic/microsoft-copilot-privacy-controls-8e479f27-6eb6-48c5-8d6a-c134062e2be6" target="_blank" rel="noopener">Microsoft</a>)</td></tr>
+        <tr><td>Muse</td><td data-l="Training?">Yes, it is on when you first use Muse (<a href="https://www.meta.com/en-gb/help/superintelligence/1047255454427887/" target="_blank" rel="noopener">Meta</a>)</td><td data-l="Switch off">Settings, Data controls, "Help improve our AI models"; this also covers past chats (<a href="https://www.meta.com/help/superintelligence/2225571704857152/?helpref=faq_content" target="_blank" rel="noopener">Meta</a>)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tbl s"><table class="stack">
+      <thead><tr><th>Tool</th><th>Learns from your chats?</th><th>Where to switch it off</th></tr></thead>
+      <tbody>
+        <tr><td>ChatGPT</td><td data-l="Learns?">It may, by default (<a href="https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/" target="_blank" rel="noopener">OpenAI</a>)</td><td data-l="Switch off">Settings, Data Controls, "Improve the model for everyone" (<a href="https://help.openai.com/en/articles/7730893-data-controls-faq" target="_blank" rel="noopener">OpenAI help</a>)</td></tr>
+        <tr><td>Claude</td><td data-l="Learns?">Only if Model Improvement is on; check that it is off (<a href="https://privacy.claude.com/en/articles/10023580-is-my-data-used-for-model-training" target="_blank" rel="noopener">Anthropic</a>)</td><td data-l="Switch off">Privacy Settings</td></tr>
+        <tr><td>Gemini</td><td data-l="Learns?">Yes, it starts on (<a href="https://9to5google.com/2026/11/24/gemini-history-ai-training/" target="_blank" rel="noopener">9to5Google</a>)</td><td data-l="Switch off">Settings, Gemini History, "Chat content" (<a href="https://support.google.com/gemini/answer/13594961" target="_blank" rel="noopener">Google</a>)</td></tr>
+        <tr><td>Copilot</td><td data-l="Learns?">Yes, unless you opt out (<a href="https://support.microsoft.com/en-us/topic/privacy-faq-for-microsoft-copilot-27b3a435-8dc9-4b55-9a4b-58eeb9647a7f" target="_blank" rel="noopener">Microsoft</a>)</td><td data-l="Switch off">Privacy: turn off both training switches (<a href="https://support.microsoft.com/en-us/topic/microsoft-copilot-privacy-controls-8e479f27-6eb6-48c5-8d6a-c134062e2be6" target="_blank" rel="noopener">Microsoft</a>)</td></tr>
+        <tr><td>Muse</td><td data-l="Learns?">Yes, it starts on (<a href="https://www.meta.com/en-gb/help/superintelligence/1047255454427887/" target="_blank" rel="noopener">Meta</a>)</td><td data-l="Switch off">Settings, Data controls. This also covers old chats (<a href="https://www.meta.com/help/superintelligence/2225571704857152/?helpref=faq_content" target="_blank" rel="noopener">Meta</a>)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tbl t"><table>
+      <thead><tr><th>Tool</th><th>Where to say no</th></tr></thead>
+      <tbody>
+        <tr><td>ChatGPT</td><td>Settings, Data Controls (<a href="https://help.openai.com/en/articles/7730893-data-controls-faq" target="_blank" rel="noopener">OpenAI help</a>)</td></tr>
+        <tr><td>Claude</td><td>Privacy Settings (<a href="https://privacy.claude.com/en/articles/10023580-is-my-data-used-for-model-training" target="_blank" rel="noopener">Anthropic</a>)</td></tr>
+        <tr><td>Gemini</td><td>Settings, Gemini History, Chat content. Leave History on if you use Gemini Tasks (<a href="https://support.google.com/gemini/answer/13594961" target="_blank" rel="noopener">Google</a>)</td></tr>
+        <tr><td>Copilot</td><td>Privacy, both training switches (<a href="https://support.microsoft.com/en-us/topic/microsoft-copilot-privacy-controls-8e479f27-6eb6-48c5-8d6a-c134062e2be6" target="_blank" rel="noopener">Microsoft</a>)</td></tr>
+        <tr><td>Muse</td><td>Settings, Data controls (<a href="https://www.meta.com/help/superintelligence/2225571704857152/?helpref=faq_content" target="_blank" rel="noopener">Meta</a>)</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="prose">
+      <p class="d"><strong>Use AI to spot scams, then check yourself.</strong> Scammers now use AI to make fake letters look real, so a convincing notice proves nothing.</p>
+      <p class="s"><strong>Watch for scams.</strong> Scammers use AI to make fake letters look real.</p>
+    </div>
+    <div class="where2 d">
+      <div><h3>In the US</h3><p>The IRS generally contacts you by mail first and does not call to demand immediate payment (<a href="https://www.irs.gov/newsroom/dirty-dozen-tax-scams-for-2026-irs-reminds-taxpayers-to-watch-out-for-dangerous-threats" target="_blank" rel="noopener">IRS</a>). Only scammers insist you pay a bill by wire transfer, cryptocurrency, payment app or gift card, so call the number on your bill (<a href="https://consumer.ftc.gov/articles/scammers-pretend-be-your-utility-company" target="_blank" rel="noopener">FTC</a>).</p></div>
+      <div><h3>In Canada</h3><p>The CRA never sends refunds by e-transfer or text, and warns that generative AI makes fake CRA forms and messages more convincing (<a href="https://www.canada.ca/en/revenue-agency/corporate/scams-fraud/recognize-scam.html" target="_blank" rel="noopener">CRA</a>). End a suspicious call and find the official number yourself.</p></div>
+    </div>
+    <div class="where2 s">
+      <div><h3>In the US</h3><p>The IRS usually writes to you by mail first and does not call to demand payment right away (<a href="https://www.irs.gov/newsroom/dirty-dozen-tax-scams-for-2026-irs-reminds-taxpayers-to-watch-out-for-dangerous-threats" target="_blank" rel="noopener">IRS</a>). Only scammers insist on gift cards, crypto, wire transfers or payment apps, so call the number on your bill (<a href="https://consumer.ftc.gov/articles/scammers-pretend-be-your-utility-company" target="_blank" rel="noopener">FTC</a>).</p></div>
+      <div><h3>In Canada</h3><p>The CRA never sends refunds by e-transfer or text (<a href="https://www.canada.ca/en/revenue-agency/corporate/scams-fraud/recognize-scam.html" target="_blank" rel="noopener">CRA</a>). If a call feels wrong, hang up and find the official number yourself.</p></div>
+    </div>
+    <div class="where2 t">
+      <div><h3>In the US</h3><p>The IRS usually writes to you first (<a href="https://www.irs.gov/newsroom/dirty-dozen-tax-scams-for-2026-irs-reminds-taxpayers-to-watch-out-for-dangerous-threats" target="_blank" rel="noopener">IRS</a>). A real utility never asks for gift cards (<a href="https://consumer.ftc.gov/articles/scammers-pretend-be-your-utility-company" target="_blank" rel="noopener">FTC</a>).</p></div>
+      <div><h3>In Canada</h3><p>The CRA never sends refunds by text (<a href="https://www.canada.ca/en/revenue-agency/corporate/scams-fraud/recognize-scam.html" target="_blank" rel="noopener">CRA</a>). If a call feels wrong, hang up.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="q" id="q5">
+  <div class="wrap">
+    <p class="eyebrow">Question 5 of 8</p>
+    <h2>What can an agent do, and where must I approve?</h2>
+    <div class="prose">
+      <p class="answer d">An agent can watch your inbox, pull out due dates, put them on your calendar and watch a fare. It should not pay, sign, submit or book without you.</p>
+      <p class="answer s">An agent can watch your inbox, find due dates and watch a fare. It should never pay, sign or book for you.</p>
+      <p class="answer t">An agent can check your email and remind you. It must never pay for you.</p>
+    </div>
+    <div class="meter" role="img" aria-label="40.3 percent of the time, agents recommended a duplicate or incorrect invoice payment">
+      <div class="row"><span class="lbl"><span class="d">ShellBench: agents recommended a duplicate or incorrect invoice payment</span><span class="s">Agents suggested a double or wrong bill payment</span><span class="t">Agents picked a wrong or double payment</span></span><span class="val">40.3%</span></div>
+      <div class="track"><span class="fillbar" style="width:40.3%"></span></div>
+    </div>
+    <div class="prose">
+      <p class="d">In ShellBench, a test of AI agents on everyday tasks published 24 November 2026, agents recommended duplicate or incorrect invoice payments 40.3% of the time, and the best model got all three identical attempts right less than half the time (<a href="https://techcrunch.com/2026/11/24/even-the-best-ai-agents-struggle-with-everyday-life/" target="_blank" rel="noopener">TechCrunch</a>). The agents only recommended payments, and the test ran the models in research setups, not inside the consumer apps you would use.</p>
+      <p class="s">In one new test, AI agents suggested a double or wrong bill payment 40.3% of the time (<a href="https://techcrunch.com/2026/11/24/even-the-best-ai-agents-struggle-with-everyday-life/" target="_blank" rel="noopener">TechCrunch</a>). The agents only suggested payments, and it was a lab test, not the apps you use.</p>
+      <p class="t">In one test, agents picked a wrong or double payment 40.3% of the time (<a href="https://techcrunch.com/2026/11/24/even-the-best-ai-agents-struggle-with-everyday-life/" target="_blank" rel="noopener">TechCrunch</a>).</p>
+    </div>
+
+    <div class="tbl d"><table class="stack">
+      <thead><tr><th>Tool</th><th>What it can watch or do alone</th><th>Where it stops for you</th></tr></thead>
+      <tbody>
+        <tr><td>Claude</td><td data-l="Does alone">With Gmail and Calendar connected, finds bills and creates events. Scheduled tasks are on Pro and up (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>); a scheduled bill scan is untested</td><td data-l="Stops for you">Outside Auto mode it asks before it sends, replies or forwards. In Auto mode, Anthropic warns, "The check can miss risky actions" (<a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors" target="_blank" rel="noopener">Claude help</a>)</td></tr>
+        <tr><td>Claude in Chrome</td><td data-l="Does alone">Fills in forms on sites where you are logged in (paid plans)</td><td data-l="Stops for you">Approves actions it judges safe by default; you can switch that off (<a href="https://claude.com/resources/articles/claude-in-chrome-generally-available" target="_blank" rel="noopener">Anthropic</a>). My advice: for bank, tax and health sites, switch it off</td></tr>
+        <tr><td>ChatGPT Work</td><td data-l="Does alone">On Plus and up, runs tasks once, on a schedule, or when something happens; scheduled tasks can use your connected apps, such as Gmail (<a href="https://openai.com/index/chatgpt-for-your-most-ambitious-work/" target="_blank" rel="noopener">OpenAI</a>)</td><td data-l="Stops for you">"You decide what it can access, when it should check in, and when it needs your approval" (<a href="https://openai.com/index/chatgpt-for-your-most-ambitious-work/" target="_blank" rel="noopener">OpenAI</a>)</td></tr>
+        <tr><td>Gemini Tasks</td><td data-l="Does alone">Watches flight and hotel prices; free in the US and Canada on a personal Google account (<a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Gemini help</a>)</td><td data-l="Stops for you">Google says it asks before sending or buying, but offline "you may not be able to stop Gemini from completing an unintended action" (<a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Gemini help</a>). Tasks needs Gemini History on; you can still set "Chat content including text &amp; attachments" to Off, a separate setting (<a href="https://support.google.com/gemini/answer/13594961" target="_blank" rel="noopener">Google</a>)</td></tr>
+        <tr><td>Muse</td><td data-l="Does alone">Works on files you give it; the Meta pages I opened do not say what it does alone with email or calendar</td><td data-l="Stops for you">Asks you to confirm before important actions such as sending an email or making a purchase (<a href="https://www.meta.com/en-gb/help/superintelligence/1047255454427887/" target="_blank" rel="noopener">Meta</a>)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tbl s"><table class="stack">
+      <thead><tr><th>Tool</th><th>What it can do alone</th><th>Where it stops for you</th></tr></thead>
+      <tbody>
+        <tr><td>Claude</td><td data-l="Does alone">Finds bills in Gmail and makes calendar events. A scheduled morning scan is on Pro and up and is untested here (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>)</td><td data-l="Stops for you">Asks before sending email, unless Auto mode is on. Anthropic says "The check can miss risky actions" (<a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors" target="_blank" rel="noopener">Claude help</a>)</td></tr>
+        <tr><td>Claude in Chrome</td><td data-l="Does alone">Fills in forms on sites you are logged in to</td><td data-l="Stops for you">Anthropic says you can switch off its automatic approvals (<a href="https://claude.com/resources/articles/claude-in-chrome-generally-available" target="_blank" rel="noopener">Anthropic</a>). My advice: switch it off for bank, tax and health sites</td></tr>
+        <tr><td>ChatGPT Work</td><td data-l="Does alone">On Plus and up, runs tasks on a schedule and can use your connected apps (<a href="https://openai.com/index/chatgpt-for-your-most-ambitious-work/" target="_blank" rel="noopener">OpenAI</a>)</td><td data-l="Stops for you">You choose when it checks in and when it needs your OK</td></tr>
+        <tr><td>Gemini Tasks</td><td data-l="Does alone">Watches flight and hotel prices; free in the US and Canada on a personal Google account (<a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Gemini help</a>)</td><td data-l="Stops for you">Google says it asks before sending or buying, but it may finish an unwanted action if it runs while you are offline</td></tr>
+        <tr><td>Muse</td><td data-l="Does alone">Works on files you give it</td><td data-l="Stops for you">Built to ask before it sends an email or buys something (<a href="https://www.meta.com/en-gb/help/superintelligence/1047255454427887/" target="_blank" rel="noopener">Meta</a>)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="prose t">
+      <ul>
+        <li><strong>Claude</strong> can find bills in Gmail. A morning check on Pro is possible, but I have not tested it (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>).</li>
+        <li><strong>ChatGPT</strong> Work: you choose when it must stop and ask for your OK. It needs a paid plan (<a href="https://openai.com/index/chatgpt-for-your-most-ambitious-work/" target="_blank" rel="noopener">OpenAI</a>).</li>
+        <li><strong>Gemini</strong> Tasks can watch a fare for free in the US and Canada, on a personal Google account (<a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Gemini help</a>).</li>
+        <li><strong>Muse</strong>, says Meta, asks before it sends email or buys (<a href="https://www.meta.com/en-gb/help/superintelligence/1047255454427887/" target="_blank" rel="noopener">Meta</a>).</li>
+      </ul>
+    </div>
+
+    <div class="prose">
+      <p class="d">Microsoft bills its Copilot agents, such as Autopilot, by usage on top of a Copilot licence (<a href="https://www.microsoft.com/en-ca/microsoft-365/copilot/pricing" target="_blank" rel="noopener">Microsoft Canada</a>), so for most small businesses Copilot in Outlook is the practical part today.</p>
+      <p class="s">Copilot's agents cost extra, billed by use (<a href="https://www.microsoft.com/en-ca/microsoft-365/copilot/pricing" target="_blank" rel="noopener">Microsoft Canada</a>).</p>
+      <p class="t">Copilot's agents cost extra (<a href="https://www.microsoft.com/en-ca/microsoft-365/copilot/pricing" target="_blank" rel="noopener">Microsoft Canada</a>).</p>
+      <p><strong><span class="d">Where a person must approve, every time:</span><span class="s">You must approve, every time:</span><span class="t">You always do these:</span></strong></p>
+    </div>
+    <ul class="approve">
+      <li><span class="padlock" aria-hidden="true"></span><span><span class="d">Paying anything</span><span class="s">Paying</span><span class="t">Pay</span></span></li>
+      <li><span class="padlock" aria-hidden="true"></span><span><span class="d">Signing or submitting a form</span><span class="s">Signing, sending a form</span><span class="t">Sign, send forms</span></span></li>
+      <li><span class="padlock" aria-hidden="true"></span><span><span class="d">Booking or cancelling travel</span><span class="s">Booking a trip</span><span class="t">Book trips</span></span></li>
+      <li><span class="padlock" aria-hidden="true"></span><span><span class="d">Sending a message in your name</span><span class="s">Sending a message as you</span><span class="t">Send messages as you</span></span></li>
+      <li><span class="padlock" aria-hidden="true"></span><span><span class="d">Deleting anything</span><span class="s">Deleting anything</span><span class="t">Delete things</span></span></li>
+    </ul>
+
+    <div class="prose">
+      <p><strong><span class="d">A workflow across tools: the Friday admin routine.</span><span class="st">The Friday admin routine:</span></strong></p>
+    </div>
+  </div>
+  <figure class="widewrap">
+    <div class="flow">
+      <div class="stage">
+        <p class="k">Step 1 · Gmail</p><h3>Collect</h3>
+        <p><span class="d">Make a Gmail label called Bills. Email photos of paper bills to yourself. Cost: nothing.</span><span class="s">Make a Bills label in Gmail. Email photos of paper bills to yourself.</span><span class="t">Put bills in a Bills label in Gmail.</span></p>
+      </div>
+      <div class="stage">
+        <p class="k">Step 2 · Claude</p><h3>Read</h3>
+        <p><span class="d">Ask Claude (the Free plan works; Pro, US$20 a month, only if you want it on a schedule, <a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>) to find this week's Bills emails and list each total and due date with the prompt above. Then tell it which calendar events to create. Or use ChatGPT Plus with Gmail connected and run the same prompt as a scheduled task.</span><span class="s">Ask Claude (the Free plan works; Pro, US$20 a month, only if you want it on a schedule, <a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>) to list this week's bills with totals and due dates. Check each one against the bill, then tell it which calendar events to make. Or set up the same check in ChatGPT Plus with Gmail connected, as a scheduled task.</span><span class="t">Ask Claude to list the totals and due dates. The Free plan works (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>). Check each one.</span></p>
+        <p class="check2"><span class="person" aria-hidden="true"></span><span><span class="d">Human check: open each bill and compare the total and date first.</span><span class="st">You check each total and date.</span></span></p>
+      </div>
+      <div class="stage">
+        <p class="k">Step 3 · Gemini Tasks</p><h3>Watch the trip</h3>
+        <p><span class="d">Give Gemini Tasks a route, dates and a budget, and let it alert you to price drops. Cost: free in the US and Canada.</span><span class="s">Ask Gemini Tasks to watch a fare.</span><span class="t">Ask Gemini Tasks to watch a trip price.</span></p>
+        <p class="check2 ds"><span class="person" aria-hidden="true"></span><span><span class="d">Human check: confirm the fare on the airline's own site.</span><span class="s">Check it on the airline's site.</span></span></p>
+      </div>
+      <div class="stage lock">
+        <p class="k">Step 4 · You</p><h3>Act</h3>
+        <p><span class="d">You pay on the biller's or bank's own site, sign your own forms and book your own trip. The AI never does.</span><span class="s">You pay, sign and book yourself.</span><span class="t">You pay and book yourself.</span></p>
+        <p class="check2"><span class="padlock" aria-hidden="true"></span><span>Only you</span></p>
+      </div>
+    </div>
+    <figcaption><span class="ds">The person shape marks each human check. The lock marks the step the AI never takes.</span><span class="t">You check at each step.</span></figcaption>
+  </figure>
+  <div class="wrap">
+    <div class="prose"><p><span class="note"><b>Placeholder:</b> Muse in the Friday routine, from Dan</span></p></div>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap">
+    <p class="eyebrow">If you remember one thing</p>
+    <p class="big">AI reads and reminds. <em>You pay, sign and book.</em></p>
+  </div>
+</div>
+
+<!-- 6 -->
+<section class="q" id="q6">
+  <div class="wrap">
+    <p class="eyebrow">Question 6 of 8</p>
+    <h2>What does it cost?</h2>
+    <div class="prose">
+      <p class="answer d">The reading job works on the free plans of ChatGPT, Claude and Gemini. You only pay for agents, schedules or more use. Prices below were checked on the vendors' own pages on 27 November 2026.</p>
+      <p class="answer s">Reading a bill works on the free plans of ChatGPT, Claude and Gemini. You pay only for agents and extras. Prices checked 27 November 2026.</p>
+      <p class="answer t">Reading a bill is free in ChatGPT, Claude and the Gemini app.</p>
+    </div>
+
+    <div class="ds">
+      <div class="prose"><h3>In the US <span style="text-transform:none;letter-spacing:0;font-weight:400;color:var(--muted)">(USD, before sales tax)</span></h3></div>
+      <div class="tbl"><table>
+        <thead><tr><th>Tool</th><th>Plan</th><th>Price</th></tr></thead>
+        <tbody>
+          <tr><td>ChatGPT</td><td>Plus</td><td>US$20 a month (<a href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener">OpenAI</a>)</td></tr>
+          <tr><td>Claude</td><td>Pro</td><td><span class="d">US$17 a month yearly (US$200 up front), US$20 monthly</span><span class="s">US$17 a month yearly, or US$20 monthly</span> (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>)</td></tr>
+          <tr><td>Google AI</td><td>Pro</td><td>US$19.99 a month (<a href="https://one.google.com/about/google-ai-plans/" target="_blank" rel="noopener">Google One</a>)</td></tr>
+          <tr><td>Microsoft 365</td><td>Personal</td><td>US$9.99 a month or US$99.99 a year (<a href="https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products" target="_blank" rel="noopener">Microsoft</a>)</td></tr>
+          <tr class="free"><td>Gemini<span class="freetag">Free</span></td><td>Tasks</td><td><span class="d">No subscription needed</span><span class="s">Free</span> (<a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Gemini help</a>)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p class="d">chatgpt.com shows no amounts and openai.com shows older plan names, so I list only Plus. <span class="note"><b>Placeholder:</b> Muse price, from Dan</span></p>
+        <p class="s"><span class="note"><b>Placeholder:</b> Muse price, from Dan</span></p>
+        <h3>In Canada <span style="text-transform:none;letter-spacing:0;font-weight:400;color:var(--muted)">(CAD, plus tax)</span></h3>
+      </div>
+      <div class="tbl"><table>
+        <thead><tr><th>Tool</th><th>Plan</th><th>Price</th></tr></thead>
+        <tbody>
+          <tr><td>Google AI</td><td>Plus / Pro</td><td>CA$6.99 / CA$26.99 a month (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google Canada</a>)</td></tr>
+          <tr><td>Microsoft 365</td><td>Personal</td><td>CA$11.50 a month or CA$115 a year (<a href="https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products" target="_blank" rel="noopener">Microsoft Canada</a>)</td></tr>
+          <tr class="d"><td>Microsoft 365</td><td>Family</td><td>CA$14.50 a month or CA$145 a year; Copilot for the account owner only (<a href="https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products" target="_blank" rel="noopener">Microsoft Canada</a>)</td></tr>
+          <tr class="free"><td>Gemini<span class="freetag">Free</span></td><td>Tasks</td><td><span class="d">No subscription needed</span><span class="s">Free</span> (<a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Gemini help</a>)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <p class="d">ChatGPT and Claude show US dollars or an unlabelled "$", so check the currency at checkout; your card may convert it. On every plan you add your province's GST, HST or PST (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">CRA rates</a>). <span class="note"><b>Placeholder:</b> Muse price, from Dan</span></p>
+        <p class="s">ChatGPT and Claude show US dollars or just "$", so check the currency at checkout; your card may convert it. You also add GST, HST or PST for your province (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">CRA rates</a>). <span class="note"><b>Placeholder:</b> Muse price, from Dan</span></p>
+      </div>
+    </div>
+
+    <div class="t">
+      <div class="where2">
+        <div><h3>In the US</h3><p>ChatGPT Plus is US$20 a month (<a href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener">OpenAI</a>). Claude Pro is US$20 a month (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>). Google AI Pro is US$19.99 a month (<a href="https://one.google.com/about/google-ai-plans/" target="_blank" rel="noopener">Google One</a>). <strong>Gemini Tasks is free</strong> (<a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Gemini help</a>).</p></div>
+        <div><h3>In Canada</h3><p>Google AI Pro is CA$26.99 a month (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google Canada</a>). Microsoft 365 Personal is CA$11.50 a month (<a href="https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products" target="_blank" rel="noopener">Microsoft Canada</a>). <strong>Gemini Tasks is free.</strong> ChatGPT lists prices in US dollars and Claude shows "$", so check the currency when you pay. Add sales tax (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">CRA rates</a>).</p></div>
+      </div>
+      <div class="prose"><p><span class="note"><b>Placeholder:</b> Muse price, from Dan</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="q" id="q7">
+  <div class="wrap">
+    <p class="eyebrow">Question 7 of 8</p>
+    <h2>Where can I get free help with forms?</h2>
+    <div class="prose">
+      <p class="answer d">From the tax agencies themselves, and both are free.</p>
+      <p class="answer st">Ask the tax agency. It is free.</p>
+    </div>
+    <div class="where2 d">
+      <div><h3>In the US</h3><p>The IRS Interactive Tax Assistant answers tax questions from your own facts, such as whether you need to file or qualify for the child tax credit. The IRS says "Your information is anonymous and only used to answer your question" (<a href="https://www.irs.gov/help/ita" target="_blank" rel="noopener">IRS</a>).</p></div>
+      <div><h3>In Canada</h3><p>The CRA's Liaison Officer service gives free, personalised help to small business owners, self-employed people and people with rental income. A visit is "100% confidential" (<a href="https://www.canada.ca/en/revenue-agency/programs/about-canada-revenue-agency-cra/compliance/liaison-officer-initiative-loi.html" target="_blank" rel="noopener">CRA</a>). Bring the questions AI helped you write.</p></div>
+    </div>
+    <div class="where2 s">
+      <div><h3>In the US</h3><p>The IRS Interactive Tax Assistant answers tax questions from your facts, and your answers stay anonymous (<a href="https://www.irs.gov/help/ita" target="_blank" rel="noopener">IRS</a>).</p></div>
+      <div><h3>In Canada</h3><p>A CRA Liaison Officer gives free, private help to small business owners and self-employed people (<a href="https://www.canada.ca/en/revenue-agency/programs/about-canada-revenue-agency-cra/compliance/liaison-officer-initiative-loi.html" target="_blank" rel="noopener">CRA</a>).</p></div>
+    </div>
+    <div class="where2 t">
+      <div><h3>In the US</h3><p>Use the IRS Interactive Tax Assistant (<a href="https://www.irs.gov/help/ita" target="_blank" rel="noopener">IRS</a>).</p></div>
+      <div><h3>In Canada</h3><p>Ask for a free CRA Liaison Officer (<a href="https://www.canada.ca/en/revenue-agency/programs/about-canada-revenue-agency-cra/compliance/liaison-officer-initiative-loi.html" target="_blank" rel="noopener">CRA</a>).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="q" id="q8">
+  <div class="wrap">
+    <p class="eyebrow">Question 8 of 8</p>
+    <h2>What to do this week</h2>
+    <ul class="check">
+      <li><label><input type="checkbox" id="c1"><span><span class="d">Turn off the training switch in the AI tool you use most.</span><span class="s">Turn off the training switch in your main AI tool.</span><span class="t">Turn off training in your AI tool.</span></span></label></li>
+      <li><label><input type="checkbox" id="c2"><span><span class="d">Run the three sample bills through it and compare the answers with the key.</span><span class="s">Test it on the three sample bills.</span><span class="t">Test it on the three fake bills.</span></span></label></li>
+      <li><label><input type="checkbox" id="c3"><span><span class="d">Make a Bills label in your email and move this month's bills into it.</span><span class="st">Make a Bills label in your email.</span></span></label></li>
+      <li><label><input type="checkbox" id="c4"><span><span class="d">Run the prompt on one real bill, with your account number covered, and check the total and date yourself.</span><span class="s">Run the prompt on one real bill, with your account number covered.</span><span class="t">Try one real bill, with private numbers covered.</span></span></label></li>
+      <li><label><input type="checkbox" id="c5"><span><span class="ds">Put each due date on your calendar, then pay each bill yourself on the biller's own site.</span><span class="t">Put the due date on your calendar, then pay the bill yourself.</span></span></label></li>
+    </ul>
+    <p style="margin:14px 0 0;font-size:13px;color:var(--muted)">Your ticks are saved on this device only.</p>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap" style="max-width:600px">
+    <h2>How Leverage Strategies helps</h2>
+    <p class="d">I can sit with you for an hour, set up your Bills label, the prompt, the training switches and the calendar check in the tools you already use, and run the sample bills with you so you see where your tool slips. You keep every payment, signature and booking. I cannot promise a result. The aim is a routine you can run every Friday without me.</p>
+    <p class="s">I can spend an hour with you setting up the Bills label, the prompt, the privacy switches and the calendar check in tools you already use. We run the sample bills together. You keep every payment and signature. I cannot promise a result.</p>
+    <p class="t">I can set this up with you in one hour, in tools you already use. You keep every payment. I cannot promise a result.</p>
+    <p><span class="note"><b>Placeholder:</b> Book a call link</span></p>
+  </div>
+</section>
+
+<section class="q sources st" id="words">
+  <div class="wrap">
+    <h2>Words to know</h2>
+    <table class="s">
+      <thead><tr><th>Word</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td>Prompt</td><td>The instructions you type for the AI</td></tr>
+        <tr><td>Agent</td><td>An AI that takes steps on its own, like checking email every morning</td></tr>
+        <tr><td>Connector</td><td>A link that lets an AI read another app, like Gmail</td></tr>
+        <tr><td>Training</td><td>When a company uses your chats to improve its AI</td></tr>
+        <tr><td>Day-first date</td><td>A date written day, then month, like 03/12 for 3 December. Not every Canadian bill does this.</td></tr>
+        <tr><td>Tax included</td><td>The tax is already inside the total, so it should not be added again</td></tr>
+        <tr><td>HST / GST</td><td>Canada's sales taxes</td></tr>
+        <tr><td>Scheduled task</td><td>A job the AI repeats at set times</td></tr>
+        <tr><td>Auto mode</td><td>A Claude setting where it acts without asking you first</td></tr>
+      </tbody>
+    </table>
+    <table class="t">
+      <thead><tr><th>Word</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td>Prompt</td><td>What you type to tell the AI what to do</td></tr>
+        <tr><td>Agent</td><td>An AI that does steps on its own</td></tr>
+        <tr><td>Training</td><td>When a company uses your chats to teach its AI</td></tr>
+        <tr><td>Tax included</td><td>The tax is already in the total</td></tr>
+        <tr><td>HST</td><td>Canada's sales tax in Ontario and some other provinces</td></tr>
+        <tr><td>Due date</td><td>The last day to pay</td></tr>
+        <tr><td>Scam</td><td>A trick to steal your money or details</td></tr>
+        <tr><td>Auto mode</td><td>Claude acts without asking you first</td></tr>
+        <tr><td>Free plan</td><td>The version you do not pay for</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="q sources d" id="sources">
+  <div class="wrap">
+    <h2>Sources</h2>
+    <p>All pages opened on 27 November 2026.</p>
+    <ul>
+      <li><a href="https://www.pantalytics.com/post/odoo-bill-digitization-benchmark" target="_blank" rel="noopener">Pantalytics, Odoo bill digitization benchmark, 13 November 2026</a></li>
+      <li><a href="https://www.navo.ai/blog/can-ai-do-your-taxes" target="_blank" rel="noopener">Navo, "Can AI do your taxes?", 13 November 2026</a></li>
+      <li><a href="https://www.irs.gov/newsroom/dirty-dozen-tax-scams-for-2026-irs-reminds-taxpayers-to-watch-out-for-dangerous-threats" target="_blank" rel="noopener">IRS, Dirty Dozen tax scams for 2026, IR-2026-30</a></li>
+      <li><a href="https://www.greetwell.com/us/research/ai-travel-survey-2026" target="_blank" rel="noopener">Greetwell, AI Travel Report 2026</a></li>
+      <li><a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">ChatGPT pricing</a> and <a href="https://openai.com/chatgpt/pricing/" target="_blank" rel="noopener">OpenAI ChatGPT pricing</a></li>
+      <li><a href="https://help.openai.com/en/articles/7730893-data-controls-faq" target="_blank" rel="noopener">OpenAI Help: data controls FAQ</a></li>
+      <li><a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a></li>
+      <li><a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors" target="_blank" rel="noopener">Claude Help: Google Workspace connectors</a></li>
+      <li><a href="https://support.google.com/mail/answer/14355636?hl=en" target="_blank" rel="noopener">Gmail Help: Gemini in Gmail</a></li>
+      <li><a href="https://support.microsoft.com/en-us/outlook/copilot-pages/summarize-an-email-thread-with-copilot-in-outlook" target="_blank" rel="noopener">Microsoft Support: summarize an email thread with Copilot in Outlook</a></li>
+      <li><a href="https://www.meta.com/en-gb/help/superintelligence/2074655449783957/" target="_blank" rel="noopener">Meta Help: Muse and artefacts</a></li>
+      <li><a href="https://www.getcybersafe.gc.ca/en/blogs/why-you-should-never-give-your-personal-information-ai" target="_blank" rel="noopener">Get Cyber Safe: never give your personal information to AI</a></li>
+      <li><a href="https://openai.com/policies/how-your-data-is-used-to-improve-model-performance/" target="_blank" rel="noopener">OpenAI: how your data is used to improve model performance</a></li>
+      <li><a href="https://privacy.claude.com/en/articles/10023580-is-my-data-used-for-model-training" target="_blank" rel="noopener">Anthropic Privacy Center: is my data used for model training?</a></li>
+      <li><a href="https://9to5google.com/2026/11/24/gemini-history-ai-training/" target="_blank" rel="noopener">9to5Google: Gemini history and AI training settings, 24 November 2026</a></li>
+      <li><a href="https://support.google.com/gemini/answer/13594961" target="_blank" rel="noopener">Google: Gemini Apps Privacy Hub</a></li>
+      <li><a href="https://support.microsoft.com/en-us/topic/privacy-faq-for-microsoft-copilot-27b3a435-8dc9-4b55-9a4b-58eeb9647a7f" target="_blank" rel="noopener">Microsoft: privacy FAQ for Copilot</a> and <a href="https://support.microsoft.com/en-us/topic/microsoft-copilot-privacy-controls-8e479f27-6eb6-48c5-8d6a-c134062e2be6" target="_blank" rel="noopener">Copilot privacy controls</a></li>
+      <li><a href="https://www.meta.com/en-gb/help/superintelligence/1047255454427887/" target="_blank" rel="noopener">Meta Help: how Muse handles your privacy</a> and <a href="https://www.meta.com/help/superintelligence/2225571704857152/?helpref=faq_content" target="_blank" rel="noopener">manage your Muse data</a></li>
+      <li><a href="https://consumer.ftc.gov/articles/scammers-pretend-be-your-utility-company" target="_blank" rel="noopener">FTC: scammers pretend to be your utility company</a></li>
+      <li><a href="https://www.canada.ca/en/revenue-agency/corporate/scams-fraud/recognize-scam.html" target="_blank" rel="noopener">CRA: recognize a scam</a></li>
+      <li><a href="https://techcrunch.com/2026/11/24/even-the-best-ai-agents-struggle-with-everyday-life/" target="_blank" rel="noopener">TechCrunch: ShellBench, 24 November 2026</a></li>
+      <li><a href="https://claude.com/resources/articles/claude-in-chrome-generally-available" target="_blank" rel="noopener">Anthropic: Claude in Chrome generally available, 26 August 2026</a></li>
+      <li><a href="https://openai.com/index/chatgpt-for-your-most-ambitious-work/" target="_blank" rel="noopener">OpenAI: ChatGPT Work, 9 July 2026</a></li>
+      <li><a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Gemini Help: Tasks</a></li>
+      <li><a href="https://one.google.com/about/google-ai-plans/" target="_blank" rel="noopener">Google One: Google AI plans (US)</a> and <a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google AI plans, Canada</a></li>
+      <li><a href="https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products" target="_blank" rel="noopener">Microsoft 365 plans, US</a> and <a href="https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products" target="_blank" rel="noopener">Microsoft 365 plans, Canada</a></li>
+      <li><a href="https://www.microsoft.com/en-ca/microsoft-365/copilot/pricing" target="_blank" rel="noopener">Microsoft 365 Copilot pricing, Canada</a></li>
+      <li><a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">CRA: GST/HST rates</a></li>
+      <li><a href="https://www.irs.gov/help/ita" target="_blank" rel="noopener">IRS Interactive Tax Assistant</a></li>
+      <li><a href="https://www.canada.ca/en/revenue-agency/programs/about-canada-revenue-agency-cra/compliance/liaison-officer-initiative-loi.html" target="_blank" rel="noopener">CRA Liaison Officer service</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer class="site">
+  <span>Leverage Strategies · Dan Albasry · Toronto</span>
+  <span>General information, not tax or legal advice. Prices checked November 27, 2026.</span>
+</footer>
+
+<div class="seg float" role="group" aria-label="Reading level">
+  <span class="lab">Reading level</span>
+  <button type="button" data-v="t" aria-pressed="true">Starter</button>
+  <button type="button" data-v="s" aria-pressed="false">Simple</button>
+  <button type="button" data-v="d" aria-pressed="false">Detailed</button>
+</div>
+
+<script>
+{
+  const KEY='leverage-notes-level', TOOLKEY='leverage-tool', BOX='leverage-admin-checks';
+  const body=document.body;
+  const levelButtons=document.querySelectorAll('.seg button[data-v]');
+  const store=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+  const load=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+  const current=()=>body.classList.contains('lv-t')?'t':body.classList.contains('lv-s')?'s':'d';
+  const shown=el=>el.getClientRects().length>0;
+  const paint=v=>{
+    body.classList.remove('lv-d','lv-s','lv-t'); body.classList.add('lv-'+v);
+    levelButtons.forEach(b=>b.setAttribute('aria-pressed', b.dataset.v===v?'true':'false'));
+  };
+  // Keep the reader in the same section when they switch. Only sections visible at the
+  // current level can be the anchor, and if that section is hidden at the new level we
+  // land on the nearest section that is visible there.
+  const setLevel=v=>{
+    if(v===current()) return;
+    const secs=[...document.querySelectorAll('section.q')];
+    let anchor=null;
+    secs.filter(shown).forEach(s=>{ if(s.getBoundingClientRect().top<=120) anchor=s; });
+    let progress=0;
+    if(anchor){ const r=anchor.getBoundingClientRect(); progress=Math.min(1,Math.max(0,(120-r.top)/Math.max(1,r.height))); }
+    paint(v); store(KEY,v);
+    if(!anchor) return;
+    let target=anchor;
+    if(!shown(target)){
+      const i=secs.indexOf(anchor);
+      target=secs.slice(i+1).find(shown)||secs.slice(0,i).reverse().find(shown)||null;
+      progress=0;
+    }
+    if(target){ const r2=target.getBoundingClientRect(); window.scrollTo({top:window.pageYOffset+r2.top-120+progress*r2.height,behavior:'auto'}); }
+  };
+  levelButtons.forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.v)));
+  const saved=load(KEY); paint(saved==='d'||saved==='s'||saved==='t' ? saved : 't');
+
+  // Tool switch: one tool's steps at a time, ChatGPT by default.
+  const toolButtons=document.querySelectorAll('.toolseg button');
+  const toolBlocks=document.querySelectorAll('.toolblock');
+  const TOOLS=[...toolButtons].map(b=>b.dataset.tool);
+  const setTool=t=>{
+    if(!TOOLS.includes(t)) t='chatgpt';
+    toolButtons.forEach(b=>b.setAttribute('aria-pressed', b.dataset.tool===t?'true':'false'));
+    toolBlocks.forEach(el=>{ el.hidden = el.dataset.tool!==t; });
+  };
+  toolButtons.forEach(b=>b.addEventListener('click',()=>{ setTool(b.dataset.tool); store(TOOLKEY,b.dataset.tool); }));
+  setTool(load(TOOLKEY)||'chatgpt');
+
+  // Copy buttons.
+  document.querySelectorAll('[data-copy]').forEach(btn=>{
+    const label=btn.textContent;
+    btn.addEventListener('click',()=>{
+      const pre=document.getElementById(btn.dataset.copy);
+      const text=pre.textContent;
+      const ok=()=>{ btn.textContent='Copied'; btn.classList.add('done'); setTimeout(()=>{btn.textContent=label;btn.classList.remove('done')},1800); };
+      const fallback=()=>{ try{ const r=document.createRange(); r.selectNodeContents(pre); const s=getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent='Selected, press copy'; setTimeout(()=>{btn.textContent=label},2400);}catch(e){} };
+      try{ navigator.clipboard.writeText(text).then(ok,fallback); }catch(e){ fallback(); }
+    });
+  });
+
+  // This week's ticks are remembered on this device only.
+  let ticks={};
+  try{ticks=JSON.parse(load(BOX)||'{}')||{}}catch(e){ticks={}}
+  document.querySelectorAll('.check input').forEach(box=>{
+    box.checked=!!ticks[box.id];
+    box.addEventListener('change',()=>{ticks[box.id]=box.checked; store(BOX,JSON.stringify(ticks));});
+  });
+}
+</script>
+</body>
+</html>
+
+</body></html>

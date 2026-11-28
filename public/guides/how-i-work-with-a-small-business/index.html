@@ -1,0 +1,1228 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+
+<title>The First 30 Days</title><meta name="description" content="What working with me looks like, week by week, from the first conversation to a before-and-after count. For US small business owners, three reading levels.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: calm, plain, first person; an owner's guide, not a sales page.
+   IDEA: a printed buyer's guide with a verdict up front and three reading levels.
+   PICTURE: a phone call log of missed evening calls, then the 100-calls dot picture.
+   COLOUR and TYPE: the site's "G. Combined" direction: paper, ink, one rust accent; Instrument Serif and Sans.
+   LAYOUT: one reading column, figures up to 1040px, one dark band, a floating level switch. Light theme by choice. */
+:root{
+  color-scheme: light;
+  --paper:#F8F6F1; --ink:#141412; --body:#3A3832; --muted:#5A584F; --rule:#CFCBC0; --panel:#EDE9DF; --accent:#7A2E1A;
+  --display:'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --text:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --col:680px; --wide:1040px;
+}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+.eyebrow{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 24px}
+.widewrap{max-width:var(--wide);margin:0 auto;padding:0 24px}
+figure.wrap,figure.widewrap{margin:44px auto}
+
+/* three reading levels: .d detailed, .s simple, .t starter, .ds detailed+simple, .st simple+starter */
+body.lv-d .s, body.lv-d .t, body.lv-d .st{display:none !important}
+body.lv-s .d, body.lv-s .t{display:none !important}
+body.lv-t .d, body.lv-t .s, body.lv-t .ds{display:none !important}
+body.lv-s .prose{font-size:19px;line-height:1.75}
+body.lv-t .prose{font-size:20px;line-height:1.8}
+
+header.site{padding:24px 32px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink)}
+header.site .mark{font-family:var(--display);font-size:32px;line-height:1}
+header.site .where{font-size:14px;color:var(--muted)}
+
+.hero{max-width:var(--wide);margin:0 auto;padding:72px 24px 0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:end}
+.hero h1{font-size:clamp(44px,6.4vw,80px);line-height:1.02;letter-spacing:-.02em;margin-top:24px}
+.hero .lede{margin:28px 0 0;font-size:21px;line-height:1.6;color:var(--body)}
+.hero .by{margin:28px 0 0;font-size:14px;color:var(--muted)}
+.hero figure{margin:0}
+.hero img{width:100%;max-height:620px;object-fit:cover;object-position:center 30%;border:1px solid var(--rule)}
+@media (max-width:820px){.hero{grid-template-columns:1fr;gap:32px;padding-top:56px}.hero img{max-height:520px}}
+
+.versions{margin:56px auto 0;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:22px 0}
+.versions p{margin:0;font-size:16px;color:var(--body);flex:1 1 300px}
+.seg{display:inline-flex;border:1px solid var(--ink);background:var(--paper)}
+.seg button{font:500 14px/1 var(--text);letter-spacing:.04em;padding:14px 16px;min-height:44px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button + button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.float{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:20;box-shadow:0 6px 24px rgba(20,20,18,.18)}
+.float .lab{display:flex;align-items:center;padding:0 14px 0 16px;font-size:13px;color:var(--muted);border-right:1px solid var(--rule)}
+@media (max-width:520px){.float .lab{display:none}.seg button{padding:14px 13px}}
+
+.toc{margin:56px auto 0}
+.toc ol{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--ink)}
+.toc li{border-bottom:1px solid var(--rule)}
+.toc a{display:flex;gap:20px;align-items:baseline;padding:14px 0;text-decoration:none;font-family:var(--display);font-size:24px;line-height:1.2}
+.toc a span.n{font:400 13px var(--text);color:var(--muted);flex:0 0 20px;font-variant-numeric:tabular-nums}
+
+section.q{padding:96px 0 0;scroll-margin-top:12px}
+section.q h2{font-size:clamp(34px,5vw,52px);line-height:1.06;margin:14px 0 28px}
+.prose p{margin:0 0 20px;color:var(--body)}
+.prose p.answer{font-size:1.14em;line-height:1.55;color:var(--ink)}
+.prose strong{color:var(--ink);font-weight:600}
+.prose ul,.prose ol{margin:0 0 20px;padding-left:22px;color:var(--body)}
+.prose li{margin:0 0 10px}
+.key{font-family:var(--display);font-size:clamp(28px,4vw,38px);line-height:1.15;color:var(--ink);margin:36px 0;padding:28px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.key em{color:var(--accent)}
+
+figure{margin:44px auto}
+figcaption{margin-top:12px;font-size:13px;line-height:1.5;color:var(--muted)}
+.figtitle{margin:0 0 18px;font-family:var(--display);font-size:26px;line-height:1.15}
+
+/* ladder */
+.ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end;border-bottom:1px solid var(--ink)}
+.rung{border:1px solid var(--ink);border-bottom:0;padding:18px 18px 20px;background:var(--paper)}
+.rung:nth-child(1){min-height:200px}.rung:nth-child(2){min-height:250px}.rung:nth-child(3){min-height:300px;background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.rung .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.rung h3{font-size:30px;line-height:1.1;margin:6px 0 10px}
+.rung p{margin:0;font-size:15.5px;line-height:1.55;color:var(--body)}
+.rung p.ex{margin-top:12px;padding-top:12px;border-top:1px solid var(--rule)}
+@media (max-width:700px){.ladder{grid-template-columns:1fr;border-bottom:0}.rung,.rung:nth-child(n){min-height:0;border-bottom:1px solid var(--ink)}.rung:nth-child(3){border-bottom-color:var(--accent)}}
+
+/* test list */
+.test{list-style:none;margin:0 0 24px;padding:0;border-top:1px solid var(--ink);counter-reset:tq}
+.test li{counter-increment:tq;display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.test li::before{content:counter(tq);font-family:var(--display);font-size:30px;line-height:1;color:var(--accent)}
+
+/* flow diagram */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px}
+.stage{position:relative;border:1px solid var(--ink);padding:16px 16px 18px;background:var(--paper)}
+.stage .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.stage h3{font-size:25px;line-height:1.1;margin:6px 0 8px}
+.stage p{margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.stage:not(:last-child)::after{content:"\2192";position:absolute;right:-29px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--muted)}
+.stage.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.repair{margin-top:36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:28px;align-items:start;border-top:1px dashed var(--ink);padding-top:22px}
+.repair h3{font-size:28px;line-height:1.1}
+.repair .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.repair ol{margin:0;padding-left:20px;font-size:15.5px;line-height:1.55;color:var(--body)}
+.repair li{margin-bottom:6px}
+@media (max-width:820px){.flow{grid-template-columns:1fr;gap:30px}.stage:not(:last-child)::after{content:"\2193";right:auto;left:22px;top:auto;bottom:-29px;transform:none}.repair{grid-template-columns:1fr;gap:12px}}
+
+/* bars */
+.bars{display:grid;gap:18px}
+.bar{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;align-items:center}
+.bar .l{font-size:15px;line-height:1.35;color:var(--ink)}
+.bar .l small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.bar .tr{display:flex;align-items:center;gap:12px}
+.bar .f{height:30px;background:#A8A397;min-width:2px}
+.bar .f.hot{background:var(--accent)}
+.bar .f.ink{background:var(--ink)}
+.bar .v{font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:560px){.bar{grid-template-columns:1fr;gap:6px}}
+
+/* business finder */
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.pick button{font:500 15px var(--text);min-height:44px;padding:10px 14px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.pick button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.biz{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink);border-left:1px solid var(--rule)}
+.biz li{padding:18px 20px 20px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);transition:background .25s}
+.biz li.on{background:var(--panel);box-shadow:inset 3px 0 0 var(--accent)}
+.biz h3{font-size:27px;line-height:1.1;margin:0 0 10px}
+.biz dl{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 12px;font-size:15px;line-height:1.5}
+.biz dt{font:500 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.biz dd{margin:0;color:var(--body)}
+@media (max-width:640px){.biz{grid-template-columns:1fr}}
+
+.box{margin:36px 0;padding:24px 26px;background:var(--panel);border:1px solid var(--ink)}
+.box h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.box p{margin:0 0 12px;font-size:16.5px;line-height:1.6;color:var(--body)}
+.box p:last-child{margin-bottom:0}
+
+/* two countries */
+.where2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;margin:36px 0;border:1px solid var(--ink)}
+.where2 > div{padding:24px 26px;background:var(--panel)}
+.where2 > div + div{border-left:1px solid var(--ink)}
+@media (max-width:600px){.where2 > div + div{border-left:0;border-top:1px solid var(--ink)}}
+.where2 h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2 ul{margin:0;padding-left:18px;font-size:15.5px;line-height:1.6;color:var(--body)}
+.where2 li{margin-bottom:10px}
+
+/* numbered risks */
+.steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink);counter-reset:st}
+.steps li{counter-increment:st;display:grid;grid-template-columns:64px 1fr;gap:8px;padding:26px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(st);font-family:var(--display);font-size:54px;line-height:.9;color:var(--accent)}
+.steps h3{font-size:28px;line-height:1.15;margin:0 0 8px}
+.steps p{margin:0;color:var(--body);font-size:.96em}
+
+.skip{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.skip li{display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.skip li::before{content:"\00D7";font-family:var(--display);font-size:36px;line-height:.8;color:var(--accent)}
+
+table{border-collapse:collapse;width:100%;font-size:15.5px;line-height:1.45}
+th{font:500 12.5px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 14px 10px 0;border-bottom:1px solid var(--ink)}
+td{padding:13px 14px 13px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--body)}
+td:first-child{color:var(--ink);font-weight:500;white-space:nowrap}
+
+.band{background:var(--ink);color:var(--paper);margin-top:96px;padding:64px 0}
+.band p.eyebrow{color:#B5B1A6;font-family:var(--text);font-size:13px;line-height:1.4;margin:0}
+.band p{margin:16px 0 0;font-family:var(--display);font-size:clamp(24px,3.4vw,32px);line-height:1.3;color:var(--paper)}
+
+.note{display:inline;background:#F3E3DC;color:var(--accent);font-size:.92em;padding:1px 6px}
+
+.check{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.check li{border-bottom:1px solid var(--rule)}
+.check label{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:20px 0;cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;width:24px;height:24px;margin:4px 0 0;border:1.5px solid var(--ink);background:var(--paper);display:grid;place-content:center;cursor:pointer}
+.check input:checked{background:var(--ink)}
+.check input:checked::after{content:"";width:11px;height:6px;border-left:2px solid var(--paper);border-bottom:2px solid var(--paper);transform:rotate(-45deg) translate(1px,-1px)}
+.check span{color:var(--ink)}
+
+.cta{border-top:1px solid var(--ink);margin-top:96px;padding:88px 24px;text-align:center}
+.cta h2{font-size:clamp(40px,6vw,68px);line-height:1.04}
+.cta p{max-width:600px;margin:22px auto 0;color:var(--body)}
+
+.sources{padding:72px 0 0}
+.sources h2{font-size:34px;margin:0 0 8px}
+.sources ul{margin:18px 0 0;padding-left:20px;font-size:15px;line-height:1.6;color:var(--body)}
+.sources li{margin-bottom:8px}
+.sources p{font-size:15px;color:var(--muted);margin:0}
+footer.site{margin-top:88px;border-top:1px solid var(--ink);padding:24px 32px 110px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.biz li{transition:none}}
+
+/* phone article additions */
+.log{border:1px solid var(--ink);background:#fff;padding:18px 0 8px;box-shadow:0 18px 40px rgba(20,20,18,.08)}
+.log .hd{display:flex;justify-content:space-between;align-items:baseline;padding:0 20px 12px;border-bottom:1px solid var(--rule)}
+.log .hd b{font-family:var(--display);font-weight:400;font-size:28px}
+.log .hd span{font-size:13px;color:var(--muted)}
+.log ul{list-style:none;margin:0;padding:0}
+.log li{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:12px 20px;border-bottom:1px solid var(--panel)}
+.log li:last-child{border-bottom:0}
+.log .ic{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--accent);position:relative}
+.log .ic::after{content:"";position:absolute;left:5px;top:9px;width:9px;height:1.5px;background:var(--accent);transform:rotate(-35deg)}
+.log .who{font-size:16px;color:var(--accent);line-height:1.3}
+.log .who small{display:block;font-size:13px;color:var(--muted)}
+.log .tm{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.verdict{margin:48px 0 0;padding:26px 28px;border:1px solid var(--ink);background:var(--panel);box-shadow:inset 0 3px 0 var(--accent)}
+.verdict h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+.verdict p{margin:0;font-family:var(--display);font-size:clamp(24px,3.2vw,30px);line-height:1.25;color:var(--ink)}
+.lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.lane{border:1px solid var(--ink);padding:18px}
+.lane h3{font-size:26px;line-height:1.1;margin:4px 0 8px}
+.lane .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.lane p{margin:10px 0 0;font-size:15px;line-height:1.5;color:var(--body)}
+.day{display:flex;height:26px;border:1px solid var(--ink);margin-top:10px}
+.day i{display:block;height:100%}
+.day .p{background:#A8A397}.day .a{background:var(--accent)}.day .pa{background:repeating-linear-gradient(135deg,#A8A397 0 6px,var(--accent) 6px 12px)}
+.daykey{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px}
+.legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:14px;color:var(--body)}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px}
+.legend .lp::before{background:#A8A397}.legend .la::before{background:var(--accent)}.legend .lpa::before{background:repeating-linear-gradient(135deg,#A8A397 0 3px,var(--accent) 3px 6px)}
+@media (max-width:760px){.lanes{grid-template-columns:1fr}}
+.dots{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:6px;max-width:560px}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--ink)}
+.dots i.m{background:transparent;border:1.5px solid #A8A397}
+.dots i.v{background:var(--accent)}
+.dotkey{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:14px;color:var(--body)}
+.dotkey span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.dotkey .a::before{background:var(--ink)}.dotkey .m::before{border:1.5px solid #A8A397}.dotkey .v::before{background:var(--accent)}
+.bar .f.cad{background:repeating-linear-gradient(135deg,#A8A397 0 6px,#CFCBC0 6px 12px)}
+.scroll{overflow-x:auto}
+@media (max-width:600px){.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--rule)}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8.5em;white-space:normal}.stack td::before{content:attr(data-l);float:inline-start;width:8em;margin-inline-start:-8.5em;font:500 12px/1.9 var(--text);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}.stack td:first-child{font-weight:600}}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+th.n{text-align:right}
+
+
+.hero.one{grid-template-columns:1fr}
+.flow5{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:none}
+.flow5 li{border:1px solid var(--ink);padding:16px 14px 18px;background:var(--paper)}
+.flow5 li.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.flow5 .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.flow5 h3{font-size:24px;line-height:1.1;margin:6px 0 8px}
+.flow5 li > p:not(.k){margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.flow5 li > p.get{margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink)}
+body.lv-t .flow5 li > p.get{display:none}
+.float{transition:opacity .2s}.float.away{opacity:0;pointer-events:none}
+@media (max-width:600px){.stack.two td::before{content:none}.stack.two td{padding-inline-start:0}.stack.two td:first-child{padding-top:10px}table.score td{padding-inline-start:10em}table.score td::before{width:9.5em;margin-inline-start:-10em}}
+.check{margin-left:0;padding-left:0}
+.after6{margin:14px 0 0;font-size:14px;color:var(--muted)}
+@media (max-width:820px){.flow5{grid-template-columns:1fr}}
+.tablewrap{margin:8px 0 28px}
+.prose table td:first-child{white-space:normal}
+table.score tr.chosen td{background:var(--panel)}
+table.score tr.chosen td:first-child{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px}
+table.score tr.gated td{color:#8A877D}
+.madeup{margin:20px 0 6px;color:var(--accent)}
+.toolgroup{margin:28px 0 32px;border-top:1px solid var(--ink);padding-top:18px}
+.toolseg{margin-bottom:16px}
+.toolblock{background:var(--panel);border:1px solid var(--ink);padding:20px 24px}
+.toolblock .toolname{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.toolblock ol{margin:0 0 12px}
+.toolblock p{font-size:15px}
+.toolgroup.js .toolblock{display:none}
+.toolgroup.js .toolblock.on{display:block}
+.bar .f.empty{background:transparent;border:1.5px dashed #A8A397;height:30px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.prose h3{font-size:26px;margin:28px 0 10px}
+@media (max-width:600px){.stack td:first-child{padding-inline-start:0}.stack td:first-child::before{content:none}table.score tr.chosen td:first-child{padding-left:10px}}
+.float{bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+</style>
+<script>document.body.classList.add("lv-t")</script>
+<header class="site"><span class="mark">Leverage</span><span class="where">Notes · How I work</span></header>
+<div class="hero one"><div>
+<p class="eyebrow"><span class="d">Detailed version · 14 minute read</span><span class="s">Simple version · 10 minute read</span><span class="t">Starter version · 7 minute read</span></p>
+<h1>How I work with a small business: the first 30 days</h1>
+<p class="lede d">What working with me looks like, week by week, from the first conversation to a before-and-after count, so you know what you&#x27;re signing up for before you start.</p>
+<p class="lede s">This is what working with me looks like, week by week. It runs from our first talk to a before-and-after count, so you know what you&#x27;re signing up for.</p>
+<p class="lede t">Here is what working with me looks like, week by week. It goes from our first talk to a before-and-after count. You will know what you are signing up for before we start.</p>
+<p class="by">By Dan Albasry · November 26, 2026 · For small business owners in the US</p></div></div>
+<div class="wrap"><div class="versions"><p><strong>Three ways to read this.</strong> Starter is the easiest. Simple says everything in plain words. Detailed has every number and source. Switch any time with the button at the bottom of your screen.</p>
+<div class="seg" role="group" aria-label="Choose a reading level"><button type="button" data-v="t" aria-pressed="true">Starter</button><button type="button" data-v="s" aria-pressed="false">Simple</button><button type="button" data-v="d" aria-pressed="false">Detailed</button></div></div>
+<div class="prose d" style="margin-top:48px"><p><span class="note">[DAN: A SHORT REAL SCENE FROM A FIRST CONVERSATION WITH AN OWNER, 3 TO 5 SENTENCES. NO CLIENT NAME, NO DETAILS THAT IDENTIFY THEM.]</span></p>
+<p>Most owners I talk to have already tried AI. They've asked ChatGPT to write a post or tidy an email. What they haven't done is put it inside a job their business does every week, with a person checking it and a number showing whether it helped. That gap is common. In the Federal Reserve's latest survey of US employer firms, 46% said they use AI, but only 7% of those users said it was fully built into how they work (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve, 2026 Report on Employer Firms</a>).</p>
+<p>The first 30 days are about closing that gap for three jobs. Not ten. Not “AI transformation”. Three jobs, checked by people, measured before and after.</p>
+<div class="vh"><table class="stack">
+<thead>
+<tr>
+<th>Week</th>
+<th>What we do</th>
+<th>What you get at the end of it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-l="Week">1</td>
+<td data-l="What we do">A 60-minute first conversation, then time on site watching the work</td>
+<td data-l="What you get at the end of it">A written list of the jobs that eat your time</td>
+</tr>
+<tr>
+<td data-l="Week">1 to 2</td>
+<td data-l="What we do">Score the jobs and pick three; start counting</td>
+<td data-l="What you get at the end of it">Three chosen jobs, each with a “before” number</td>
+</tr>
+<tr>
+<td data-l="Week">2 to 3</td>
+<td data-l="What we do">Build one saved assistant or small automation per job</td>
+<td data-l="What you get at the end of it">A first version of each tool, tested on real work</td>
+</tr>
+<tr>
+<td data-l="Week">3 to 4</td>
+<td data-l="What we do">Short training on your real work, plus one page of rules</td>
+<td data-l="What you get at the end of it">Training done, and a go-to person named</td>
+</tr>
+<tr>
+<td data-l="Week">4</td>
+<td data-l="What we do">Count again, the same way</td>
+<td data-l="What you get at the end of it">A short report: what changed, what didn't, what's next</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Your time.</strong> Plan for about 5 to 6 hours of your own time across the month: the first conversation, an hour to pick the jobs, reviewing the first versions of the tools, the training sessions and the report. Staff who use the tools need about two hours each for training. <span class="note">[DAN: CONFIRM THESE TIME ESTIMATES.]</span></p></div>
+<div class="prose s" style="margin-top:48px"><p><span class="note">[DAN: THE SAME SHORT REAL SCENE AS THE DETAILED VERSION, SAID MORE SIMPLY.]</span></p>
+<p>Most owners I meet have tried AI already. They asked ChatGPT to write a post or fix an email. But very few have put AI into a job their business does every week, with a person checking it. A big US survey found that 46% of employer firms use AI. Only 7% of those said it was fully part of how they work (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve</a>).</p>
+<p>So the first 30 days focus on three jobs. Not ten. Three jobs, checked by people, measured before and after.</p>
+<div class="vh"><table class="stack">
+<thead>
+<tr>
+<th>Week</th>
+<th>What we do</th>
+<th>What you get</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-l="Week">1</td>
+<td data-l="What we do">A one-hour first talk, then time at your business watching the work</td>
+<td data-l="What you get">A list of the jobs that take your time</td>
+</tr>
+<tr>
+<td data-l="Week">1 to 2</td>
+<td data-l="What we do">Pick three jobs and start counting</td>
+<td data-l="What you get">Three jobs, each with a “before” number</td>
+</tr>
+<tr>
+<td data-l="Week">2 to 3</td>
+<td data-l="What we do">Build one tool for each job</td>
+<td data-l="What you get">A first version of each tool, tested on real work</td>
+</tr>
+<tr>
+<td data-l="Week">3 to 4</td>
+<td data-l="What we do">Short training on real work, plus one page of rules</td>
+<td data-l="What you get">Training done, and a go-to person named</td>
+</tr>
+<tr>
+<td data-l="Week">4</td>
+<td data-l="What we do">Count again, the same way</td>
+<td data-l="What you get">A short report on what changed</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Your time.</strong> Plan for about 5 to 6 hours of your own time over the month. Staff who use the tools need about two hours each for training. <span class="note">[DAN: CONFIRM THESE TIME ESTIMATES.]</span></p></div>
+<div class="prose t" style="margin-top:48px"><p><span class="note">[DAN: THE SAME SHORT REAL SCENE, IN VERY SIMPLE WORDS.]</span></p>
+<p>Many owners have tried AI a little. Few use it for a real job every week. A big US survey asked thousands of businesses. Almost half said they use AI. But only 7 in 100 of those said AI was fully part of their work (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve</a>).</p>
+<p>In our first month, we work on three jobs. A person checks each one. We count before and after.</p>
+<div class="vh"><table class="stack two">
+<thead>
+<tr>
+<th>Week</th>
+<th>What we do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-l="Week">1</td>
+<td data-l="What we do">We talk for one hour. Then I come and watch how the work gets done.</td>
+</tr>
+<tr>
+<td data-l="Week">1 to 2</td>
+<td data-l="What we do">We pick three jobs. We start counting.</td>
+</tr>
+<tr>
+<td data-l="Week">2 to 3</td>
+<td data-l="What we do">I build a first tool for each job. We test it on real work.</td>
+</tr>
+<tr>
+<td data-l="Week">3 to 4</td>
+<td data-l="What we do">I teach your team. We write one page of rules. One person becomes the go-to person.</td>
+</tr>
+<tr>
+<td data-l="Week">4</td>
+<td data-l="What we do">We count again. You get a short report.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Your time.</strong> Plan on about 5 to 6 hours of your own time in the month. Each staff member needs about two hours for lessons. <span class="note">[DAN: CONFIRM THESE TIME ESTIMATES.]</span></p></div>
+</div>
+<figure class="widewrap timeline-fig">
+  <p class="figtitle"><span class="ds">The first 30 days, step by step</span><span class="t">Our month together</span></p>
+  <ol class="flow5">
+    <li><p class="k">Week 1</p><h3>Talk and watch</h3><p><span class="ds">A one-hour first talk, then time at your business watching the work.</span></p><p class="get"><span class="ds">You get: a list of the jobs that take your time.</span><span class="t">We talk. I watch the work.</span></p></li>
+    <li><p class="k">Weeks 1 to 2</p><h3>Pick three jobs</h3><p><span class="ds">Score the jobs, pick three, start counting.</span></p><p class="get"><span class="ds">You get: three jobs, each with a “before” number.</span><span class="t">We pick three jobs and count.</span></p></li>
+    <li><p class="k">Weeks 2 to 3</p><h3>Build</h3><p><span class="ds">One saved tool per job.</span></p><p class="get"><span class="ds">You get: a first version of each tool, tested on real work.</span><span class="t">I build one tool for each job.</span></p></li>
+    <li><p class="k">Weeks 3 to 4</p><h3>Train</h3><p><span class="ds">Short lessons on real work and one page of rules.</span></p><p class="get"><span class="ds">You get: training done and a go-to person named.</span><span class="t">I teach your team.</span></p></li>
+    <li class="on"><p class="k">Week 4</p><h3>Count again</h3><p><span class="ds">The same counts as before.</span></p><p class="get"><span class="ds">You get: a short report on what changed, what didn't and what's next.</span><span class="t">We count again.</span></p></li>
+  </ol>
+  <p class="after6"><span class="ds">Week 6: a 15-minute check-in after I've gone.</span><span class="t">Week 6: a short check-in.</span></p>
+</figure>
+<div class="wrap"><nav class="toc" aria-label="Questions in this guide"><p class="eyebrow">Six questions owners ask</p><ol>
+<li><a href="#q1"><span class="n">1</span><span>What happens in the first conversation, and what should I bring?</span></a></li>
+<li><a href="#q2"><span class="n">2</span><span>How do we choose which jobs to hand to AI first?</span></a></li>
+<li><a href="#q3"><span class="n">3</span><span>What gets built in weeks 2 and 3, and how long does it take?</span></a></li>
+<li><a href="#q4"><span class="n">4</span><span>How do my staff learn to use it without it falling apart after I leave?</span></a></li>
+<li><a href="#q5"><span class="n">5</span><span>How do we know it worked?</span></a></li>
+<li><a href="#q6"><span class="n">6</span><span>What does it cost, what can go wrong, and when should I say no?</span></a></li>
+</ol></nav></div>
+<section class="q" id="q1"><div class="wrap"><p class="eyebrow">Question 1 of 6</p><h2>What happens in the first conversation, and what should I bring?</h2>
+<div class="prose d"><p class="answer">The first conversation is 60 minutes, and you do most of the talking. I'm not there to sell you software or audit your whole business. I'm there to understand how money and time move through it, and to find the jobs that repeat every week.</p>
+<p>That shape isn't something I invented. SCORE, the US small business mentoring network, publishes a guide for a mentor's first session. It's a 60-minute agenda: setting expectations, the client's story, exploring the business, with the next meeting booked before you leave. Its advice to mentors is “Listen more than you speak. Resist the urge to immediately solve problems” (<a href="https://supportcenter.score.org/kb/article/673-introductory-mentoring-session-guide/" rel="noopener" target="_blank">SCORE, Introductory Mentoring Session Guide</a>). I run mine the same way, with one AI-specific part (your data and your rules) added before next steps.</p>
+<p>Here's how the hour goes:</p>
+<ol>
+<li><strong>Your story (10 to 15 minutes).</strong> What you sell, who buys it, and how the business makes money.</li>
+<li><strong>Your next 6 to 12 months.</strong> What you're trying to get done, and what's in the way.</li>
+<li><strong>Where the hours go.</strong> Which jobs come back every day or every week, who does them, and roughly how long they take.</li>
+<li><strong>Your data and your rules.</strong> Where the information for those jobs lives (email, a spreadsheet, your point-of-sale system, paper), whether it can be exported, and what must never leave the building.</li>
+<li><strong>Next steps.</strong> What I'll send you, what I need from you, and when we meet next.</li>
+</ol>
+<p><strong>What to bring.</strong> Bring what you have. Messy is fine.</p>
+<ul>
+<li>A one-paragraph description of the business, or just be ready to tell it.</li>
+<li>Any numbers you already keep: sales by month, hours, job counts, invoices outstanding.</li>
+<li>A list of the three tasks you most wish someone else would do.</li>
+<li>The logins or exports for the tools you use every day (we won't change anything in the first meeting).</li>
+<li>Anything you've already tried with AI, including what went wrong.</li>
+</ul>
+<p><strong>After the conversation, I watch the work.</strong> In week 1 I spend <span class="note">[ON-SITE TIME, E.G. HALF A DAY]</span> at your business, in person, with whoever does the jobs on your list. I watch the job being done, note every step and every place the information comes from, and ask where it goes wrong. Most of the useful detail only shows up when someone does the job in front of you.</p>
+<p><strong>What changes the plan.</strong> The month is the same shape for everyone, but it bends with the business. Here is how it changes:</p>
+<div class="tablewrap"><table class="stack two">
+<thead>
+<tr>
+<th>If your business is...</th>
+<th>The month changes like this</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-l="If your business is...">Just you, or you plus one or two people</td>
+<td data-l="The month changes like this">Most building happens with you. Training is short. We start with the jobs that take your evenings. Team plans start at two seats, so a one-person business usually uses a personal paid plan such as ChatGPT Plus or Claude Pro.</td>
+</tr>
+<tr>
+<td data-l="If your business is...">5 to 20 staff in one location</td>
+<td data-l="The month changes like this">We pick at least one job a staff member does, so the training has a real owner. One person becomes the “go-to” for the tools.</td>
+</tr>
+<tr>
+<td data-l="If your business is...">Shifts, several locations, or 20+ staff</td>
+<td data-l="The month changes like this">Training is split by role and repeated. We write the one-page rules before anything is built. We start in one location, so the week 4 count covers that location only.</td>
+</tr>
+<tr>
+<td data-l="If your business is...">Heavily regulated (health, finance, legal, hiring)</td>
+<td data-l="The month changes like this">We start with internal drafting only. Nothing touches customer records until the rules are written down and checked.</td>
+</tr>
+</tbody>
+</table></div></div>
+<div class="prose s"><p class="answer">Our first talk lasts one hour, and you do most of the talking. I'm not selling you software. I want to learn how your business makes money and which jobs come back every week.</p>
+<p>SCORE, a US business mentoring group, uses a one-hour first meeting too. Its advice to mentors is: “Listen more than you speak. Resist the urge to immediately solve problems” (<a href="https://supportcenter.score.org/kb/article/673-introductory-mentoring-session-guide/" rel="noopener" target="_blank">SCORE</a>). I work the same way.</p>
+<p>In the hour we cover:</p>
+<ol>
+<li><strong>Your story.</strong> What you sell, who buys, how you make money.</li>
+<li><strong>Your goals</strong> for the next 6 to 12 months.</li>
+<li><strong>Where the hours go.</strong> Which jobs repeat, who does them, how long they take.</li>
+<li><strong>Your data and your rules.</strong> Where the information lives, and what must stay private.</li>
+<li><strong>Next steps.</strong> What happens next, and when we meet again.</li>
+</ol>
+<p><strong>What to bring.</strong> Bring what you have. Messy is fine.</p>
+<ul>
+<li>A short description of your business.</li>
+<li>Any numbers you keep, like monthly sales or hours.</li>
+<li>The three tasks you most wish someone else did.</li>
+<li>The tools you use every day.</li>
+<li>Anything you've tried with AI, including what went wrong.</li>
+</ul>
+<p><strong>Then I watch the work.</strong> In week 1 I spend <span class="note">[ON-SITE TIME, E.G. HALF A DAY]</span> at your business, in person. I watch each job being done and note every step. The useful details show up when someone does the job in front of you.</p>
+<p><strong>What changes the plan.</strong> Every month has the same steps, but it fits your business:</p>
+<div class="tablewrap"><table class="stack two">
+<thead>
+<tr>
+<th>If your business is...</th>
+<th>The month changes like this</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-l="If your business is...">Just you, or one or two helpers</td>
+<td data-l="The month changes like this">You and I build together. We start with the jobs that take your evenings. Team plans need two people, so you'd use a personal paid plan.</td>
+</tr>
+<tr>
+<td data-l="If your business is...">5 to 20 staff in one place</td>
+<td data-l="The month changes like this">At least one job belongs to a staff member. One person becomes the “go-to” for the tools.</td>
+</tr>
+<tr>
+<td data-l="If your business is...">Shifts, several locations, or 20+ staff</td>
+<td data-l="The month changes like this">Training is split by role. We write the rules first. We start in one location.</td>
+</tr>
+<tr>
+<td data-l="If your business is...">Health, money, legal or hiring work</td>
+<td data-l="The month changes like this">We start with inside drafts only. Customer records come later.</td>
+</tr>
+</tbody>
+</table></div></div>
+<div class="prose t"><p class="answer">We talk for one hour. You talk the most. I want to learn how your business works.</p>
+<p>A US group called SCORE helps business owners. It tells its helpers: “Listen more than you speak” (<a href="https://supportcenter.score.org/kb/article/673-introductory-mentoring-session-guide/" rel="noopener" target="_blank">SCORE</a>). I do that too.</p>
+<p>We talk about:</p>
+<ol>
+<li>What you sell and who buys it.</li>
+<li>What you want to get done this year.</li>
+<li>Which jobs come back every week.</li>
+<li>Where your information is kept, and what must stay private.</li>
+<li>What happens next.</li>
+</ol>
+<p><strong>What to bring.</strong> Bring what you have. Messy is fine.</p>
+<ul>
+<li>Any numbers you keep, like sales.</li>
+<li>Three jobs you wish someone else did.</li>
+<li>The tools you use every day.</li>
+<li>Anything you tried with AI, even if it went wrong.</li>
+</ul>
+<p><strong>Then I watch the work.</strong> I spend <span class="note">[ON-SITE TIME, E.G. HALF A DAY]</span> at your business. I watch each job being done. I write down every step.</p>
+<p><strong>Every business is different.</strong> If it's just you, we build together. If you have staff, one person learns the tools best and helps the others. If you have many staff or shops, we start in one place. If your work is about health, money, law or hiring, we go slower and start with safe jobs.</p></div>
+</div>
+</section>
+<section class="q" id="q2"><div class="wrap"><p class="eyebrow">Question 2 of 6</p><h2>How do we choose which jobs to hand to AI first?</h2>
+<div class="prose d"><p class="answer">We pick jobs that repeat often, take real hours, and are easy for a person to check. Then we throw out anything risky, however good it looks.</p>
+<p>The safe first jobs are the ones owners already use AI for. In the Federal Reserve survey, the most common use among firms using AI was writing or marketing (83%), then individual productivity (61%), then planning or analysis (51%) (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve</a>). In my experience, drafting, summarizing and sorting are where AI helps most today, and where mistakes are easiest to catch.</p>
+<p>The measured studies point the same way. When a large software company gave its 5,179 customer support agents an AI tool that suggested replies, issues resolved per hour rose 14% on average, and 34% for newer, less experienced agents. The AI suggested; people still answered (<a href="https://www.nber.org/papers/w31161" rel="noopener" target="_blank">Brynjolfsson, Li and Raymond, NBER</a>). That is the pattern I build around: AI drafts, a person decides.</p>
+<p><strong>How I score a job.</strong> I haven't found an official formula for this from any government or academic source, so treat this as my method, not a standard. For each job on your list I ask three things:</p>
+<ol>
+<li><strong>Hours per week.</strong> Your best estimate for now. We measure it properly in week 1 to 2.</li>
+<li><strong>How easy is it to check?</strong> Easy (3): a person reads the draft before it goes anywhere. Medium (2): checking takes some care. Hard (1): a mistake is hard to spot.</li>
+<li><strong>Does it pass the safety gate?</strong> A job fails the gate if AI's answer would reach a customer with no one reading it, if it moves money or changes records, or if it involves hiring decisions, health information or legal advice. Jobs that fail the gate wait for round two, whatever their score.</li>
+</ol>
+<p>Score = hours per week × ease of checking. The top three that pass the gate are your first three jobs.</p>
+<p><strong>A worked example.</strong> Here is the job list for a made-up business: Northside Plumbing, a 9-person plumbing and heating company. The hours are the kind of estimates an owner gives in a first conversation, not measured results.</p>
+<p class="eyebrow madeup">Made-up example business</p><div class="tablewrap"><table class="stack score">
+<thead>
+<tr>
+<th>Job (made-up example)</th>
+<th>Hours per week</th>
+<th>Ease of checking</th>
+<th>Passes the gate?</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="chosen">
+<td data-l="Job (made-up example)">Writing quotes from site-visit notes</td>
+<td data-l="Hours per week">6</td>
+<td data-l="Ease of checking">3 (owner reads every quote)</td>
+<td data-l="Passes the gate?">Yes</td>
+<td data-l="Score">18</td>
+</tr>
+<tr class="chosen">
+<td data-l="Job (made-up example)">Drafting replies to “when can you come?” messages</td>
+<td data-l="Hours per week">4</td>
+<td data-l="Ease of checking">2</td>
+<td data-l="Passes the gate?">Yes, if a person sends them</td>
+<td data-l="Score">8</td>
+</tr>
+<tr class="chosen">
+<td data-l="Job (made-up example)">Reminder emails for unpaid invoices</td>
+<td data-l="Hours per week">2</td>
+<td data-l="Ease of checking">3</td>
+<td data-l="Passes the gate?">Yes, drafts only</td>
+<td data-l="Score">6</td>
+</tr>
+<tr>
+<td data-l="Job (made-up example)">Weekly job-costing summary from the spreadsheet</td>
+<td data-l="Hours per week">2</td>
+<td data-l="Ease of checking">2</td>
+<td data-l="Passes the gate?">Yes</td>
+<td data-l="Score">4</td>
+</tr>
+<tr class="gated">
+<td data-l="Job (made-up example)">Auto-replying to customers with prices</td>
+<td data-l="Hours per week">4</td>
+<td data-l="Ease of checking">1</td>
+<td data-l="Passes the gate?">No: reaches customers unchecked</td>
+<td data-l="Score">Round two</td>
+</tr>
+<tr class="gated">
+<td data-l="Job (made-up example)">Screening job applicants</td>
+<td data-l="Hours per week">3</td>
+<td data-l="Ease of checking">1</td>
+<td data-l="Passes the gate?">No: hiring decision</td>
+<td data-l="Score">Round two</td>
+</tr>
+</tbody>
+</table></div>
+<p>Northside's first three jobs would be quotes, message replies and invoice reminders. Notice that the auto-reply job scores well on hours and still waits. A wrong price sent to a customer costs more than the hours it saves.</p></div>
+<div class="prose s"><p class="answer">We pick jobs that happen often, take real hours, and are easy for a person to check. Then we drop anything risky.</p>
+<p>The safest first jobs are the ones owners already use AI for. In the Federal Reserve survey, the top use was writing or marketing (83%) (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve</a>). In my experience, AI helps most with drafts and summaries. Mistakes there are easy to catch.</p>
+<p>One large study shows how this works. A software company gave 5,179 support agents an AI tool that suggested replies. Agents solved 14% more problems per hour. Newer agents solved 34% more. People still sent every answer (<a href="https://www.nber.org/papers/w31161" rel="noopener" target="_blank">NBER</a>).</p>
+<p><strong>How I score a job.</strong> I haven't found an official formula, so this is my own method. I ask three questions:</p>
+<ol>
+<li><strong>How many hours a week does it take?</strong></li>
+<li><strong>How easy is it to check?</strong> Easy = 3, medium = 2, hard = 1.</li>
+<li><strong>Is it safe?</strong> If AI's answer would reach a customer with no one reading it, or it moves money, or it's about hiring, health or legal advice, it waits for later.</li>
+</ol>
+<p>Score = hours × how easy it is to check. The top three safe jobs go first.</p>
+<p><strong>An example.</strong> Northside Plumbing is a made-up business with 9 people. The hours are guesses, not results.</p>
+<p class="eyebrow madeup">Made-up example business</p><div class="tablewrap"><table class="stack score">
+<thead>
+<tr>
+<th>Job (made-up example)</th>
+<th>Hours a week</th>
+<th>Easy to check</th>
+<th>Safe?</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="chosen">
+<td data-l="Job (made-up example)">Writing quotes from site notes</td>
+<td data-l="Hours a week">6</td>
+<td data-l="Easy to check">3</td>
+<td data-l="Safe?">Yes</td>
+<td data-l="Score">18</td>
+</tr>
+<tr class="chosen">
+<td data-l="Job (made-up example)">Drafting replies to “when can you come?”</td>
+<td data-l="Hours a week">4</td>
+<td data-l="Easy to check">2</td>
+<td data-l="Safe?">Yes, if a person sends them</td>
+<td data-l="Score">8</td>
+</tr>
+<tr class="chosen">
+<td data-l="Job (made-up example)">Reminders for unpaid invoices</td>
+<td data-l="Hours a week">2</td>
+<td data-l="Easy to check">3</td>
+<td data-l="Safe?">Yes, drafts only</td>
+<td data-l="Score">6</td>
+</tr>
+<tr>
+<td data-l="Job (made-up example)">Weekly job-cost summary</td>
+<td data-l="Hours a week">2</td>
+<td data-l="Easy to check">2</td>
+<td data-l="Safe?">Yes</td>
+<td data-l="Score">4</td>
+</tr>
+<tr class="gated">
+<td data-l="Job (made-up example)">Auto-replying with prices</td>
+<td data-l="Hours a week">4</td>
+<td data-l="Easy to check">1</td>
+<td data-l="Safe?">No</td>
+<td data-l="Score">Later</td>
+</tr>
+<tr class="gated">
+<td data-l="Job (made-up example)">Screening job applicants</td>
+<td data-l="Hours a week">3</td>
+<td data-l="Easy to check">1</td>
+<td data-l="Safe?">No</td>
+<td data-l="Score">Later</td>
+</tr>
+</tbody>
+</table></div>
+<p>The first three jobs are quotes, replies and invoice reminders. Auto-replies take lots of hours but wait. One wrong price sent to a customer costs more than the time saved.</p></div>
+<div class="prose t"><p class="answer">We pick jobs that happen a lot, take a lot of time, and are easy to check. We skip risky jobs.</p>
+<p>Most owners who use AI use it for writing or marketing (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve</a>). In one big study, support workers with an AI helper solved more problems each hour. New workers gained the most. A person still sent every answer (<a href="https://www.nber.org/papers/w31161" rel="noopener" target="_blank">NBER</a>).</p>
+<p><strong>My three questions.</strong> This is my own way of doing it:</p>
+<ol>
+<li>How many hours a week does the job take?</li>
+<li>Is it easy to check? (Easy = 3, medium = 2, hard = 1)</li>
+<li>Is it safe? Some jobs wait. These are jobs where no one checks AI's answer before a customer sees it. Jobs that send money or change records wait too. So do jobs about hiring, health or the law.</li>
+</ol>
+<p>Hours times “easy to check” gives a score. The top three safe jobs go first.</p>
+<p><strong>An example.</strong> Northside Plumbing is a made-up business. The hours are guesses, not results.</p>
+<p class="eyebrow madeup">Made-up example business</p><div class="tablewrap"><table class="stack score">
+<thead>
+<tr>
+<th>Job (made-up example)</th>
+<th>Hours a week</th>
+<th>Easy to check</th>
+<th>Safe?</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="chosen">
+<td data-l="Job (made-up example)">Writing quotes</td>
+<td data-l="Hours a week">6</td>
+<td data-l="Easy to check">3</td>
+<td data-l="Safe?">Yes</td>
+<td data-l="Score">18</td>
+</tr>
+<tr class="chosen">
+<td data-l="Job (made-up example)">Replies to “when can you come?”</td>
+<td data-l="Hours a week">4</td>
+<td data-l="Easy to check">2</td>
+<td data-l="Safe?">Yes, if a person sends them</td>
+<td data-l="Score">8</td>
+</tr>
+<tr class="chosen">
+<td data-l="Job (made-up example)">Reminders for unpaid bills</td>
+<td data-l="Hours a week">2</td>
+<td data-l="Easy to check">3</td>
+<td data-l="Safe?">Yes, if a person sends them</td>
+<td data-l="Score">6</td>
+</tr>
+<tr class="gated">
+<td data-l="Job (made-up example)">Auto-replies with prices</td>
+<td data-l="Hours a week">4</td>
+<td data-l="Easy to check">1</td>
+<td data-l="Safe?">No</td>
+<td data-l="Score">Later</td>
+</tr>
+</tbody>
+</table></div>
+<p>Quotes, replies and reminders go first. Auto-replies wait. A wrong price could upset a customer.</p></div>
+</div>
+</section>
+<section class="q" id="q3"><div class="wrap"><p class="eyebrow">Question 3 of 6</p><h2>What gets built in weeks 2 and 3, and how long does it take?</h2>
+<div class="prose d"><p class="answer">For each of the three jobs I build one small, saved tool: usually a saved assistant that holds the instructions and reference files for that one job, sometimes a simple automation between two systems. I plan one to two hours to build and test each one.</p>
+<p><strong>A saved assistant for one job.</strong> In both ChatGPT and Claude this is called a Project. It keeps the job's instructions (how you write quotes, your tone, your rules) and your reference files (your price list, past quotes, your terms) in one place, so nobody has to paste them in each time.</p>
+<div class="toolgroup"><div aria-label="Choose your AI tool" class="seg toolseg" role="group"><button aria-pressed="false" data-tool="chatgpt" type="button">ChatGPT</button><button aria-pressed="false" data-tool="claude" type="button">Claude</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><ol>
+<li>Open <strong>Projects</strong> in the left sidebar and create a new project. Give it the job's name, such as “Quotes”.</li>
+<li>Add your files, such as the price list and three good past quotes.</li>
+<li>Set the project instructions: what the job is, the format, and what to never do.</li>
+<li>On plans that support it, invite your team to the project.</li>
+</ol>
+<p>Source: <a href="https://openai.com/academy/projects/" rel="noopener" target="_blank">OpenAI Academy, Projects</a></p></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><ol>
+<li>Open <strong>Projects</strong> in the left sidebar (or go to claude.ai/projects) and click <strong>+ New Project</strong>. Add a name and a description.</li>
+<li>Click <strong>Instructions</strong>, write how Claude should handle the job, and click <strong>Save instructions</strong>.</li>
+<li>Click <strong>+</strong> in the files panel to upload your files or connect Google Drive.</li>
+<li>On a Team or Enterprise plan, click <strong>Share project</strong> and add your team.</li>
+</ol>
+<p>Source: <a href="https://academy.claude.com/courses/claude-101/introduction-to-projects" rel="noopener" target="_blank">Anthropic Academy, Introduction to projects</a></p></div></div>
+<p><strong>What I don't build any more.</strong> Until recently I'd have built a custom GPT or a Gemini Gem for this. Both are being wound down. OpenAI has currently scheduled custom GPTs to stop running on December 11, 2026, and says the dates may change (<a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq" rel="noopener" target="_blank">OpenAI, Custom GPT retirement FAQ</a>). Google is moving Gems to “skills”: personal-account Gems became read-only on November 17, 2026, and Workspace business accounts follow in March 2027. Skills aren't available on work accounts yet (<a href="https://support.google.com/gemini/answer/18560919" rel="noopener" target="_blank">Google, Gems to skills</a>). I won't hand you something with an end date on it.</p>
+<p><strong>How long it really takes.</strong> I haven't found an independent study that measures build times for tools like these, so here's what I can honestly say. A first draft of a saved assistant takes under an hour. Getting it good enough that your team trusts it takes two or three rounds of testing on real work, so I plan one to two hours per job. That's my planning figure, not a measured one.</p>
+<p>One documented small business example comes from OpenAI itself, so read it as a vendor story. A general contractor in Hermosa Beach, California, used ChatGPT to build a script that reads subcontractor invoices from his email, works out which job each one belongs to, and files it. OpenAI reports the first version took “about two hours to build” and saves him “roughly 5-6 hours a week” (<a href="https://academy.openai.com/public/blogs/how-chatgpt-became-a-contractors-back-office-2026-05-07" rel="noopener" target="_blank">OpenAI Academy</a>). That's the right size for a first build: one job, a couple of hours, a person still in charge.</p></div>
+<div class="prose s"><p class="answer">I build one small tool for each job. Usually it's a saved assistant that keeps the job's instructions and files in one place. I plan one to two hours to build and test each one.</p>
+<p>In ChatGPT and in Claude, this saved assistant is called a Project. It holds your rules (how you write quotes, your tone) and your files (your price list, good past quotes).</p>
+<div class="toolgroup"><div aria-label="Choose your AI tool" class="seg toolseg" role="group"><button aria-pressed="false" data-tool="chatgpt" type="button">ChatGPT</button><button aria-pressed="false" data-tool="claude" type="button">Claude</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><ol>
+<li>Open <strong>Projects</strong> on the left and make a new project. Name it after the job.</li>
+<li>Add your files, like a price list.</li>
+<li>Write the project instructions: what the job is and what to never do.</li>
+<li>If your plan allows it, invite your team.</li>
+</ol></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><ol>
+<li>Open <strong>Projects</strong> on the left and click <strong>+ New Project</strong>. Add a name.</li>
+<li>Click <strong>Instructions</strong>, write them, and click <strong>Save instructions</strong>.</li>
+<li>Click <strong>+</strong> in the files panel to add your files.</li>
+<li>On a Team plan, click <strong>Share project</strong> and add your team.</li>
+</ol></div></div>
+<p><strong>What I don't build any more.</strong> Custom GPTs and Gemini Gems are being shut down. OpenAI plans to stop custom GPTs on December 11, 2026, though the date may change (<a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq" rel="noopener" target="_blank">OpenAI</a>). Google is replacing Gems with “skills”, and work accounts can't use skills yet (<a href="https://support.google.com/gemini/answer/18560919" rel="noopener" target="_blank">Google</a>). I won't give you a tool with an end date.</p>
+<p><strong>How long it takes.</strong> I haven't found an outside study that timed this, so here is my honest guess. A first draft takes under an hour. Testing it on real work takes two or three more rounds. I plan one to two hours per job.</p>
+<p>OpenAI shares one example, so read it as a company's own story. A builder in California used ChatGPT to make a script that sorts invoices from his email. OpenAI says it took “about two hours to build” and saves him “roughly 5-6 hours a week” (<a href="https://academy.openai.com/public/blogs/how-chatgpt-became-a-contractors-back-office-2026-05-07" rel="noopener" target="_blank">OpenAI</a>).</p></div>
+<div class="prose t"><p class="answer">I build one small tool for each job. It's a saved helper that remembers the job's rules and files. I plan one to two hours to build and test each one.</p>
+<p>In ChatGPT and Claude, this helper is called a Project.</p>
+<div class="toolgroup"><div aria-label="Choose your AI tool" class="seg toolseg" role="group"><button aria-pressed="false" data-tool="chatgpt" type="button">ChatGPT</button><button aria-pressed="false" data-tool="claude" type="button">Claude</button></div><div class="toolblock" data-tool="chatgpt"><p class="toolname">In ChatGPT</p><ol>
+<li>Click <strong>Projects</strong> on the left. Make a new one.</li>
+<li>Add your files, like a price list.</li>
+<li>Write what the job is and what never to do.</li>
+</ol></div><div class="toolblock" data-tool="claude"><p class="toolname">In Claude</p><ol>
+<li>Click <strong>Projects</strong> on the left. Click <strong>+ New Project</strong>.</li>
+<li>Click <strong>Instructions</strong>. Write what the job is and what never to do. Click <strong>Save instructions</strong>.</li>
+<li>Click <strong>+</strong> to add your files.</li>
+</ol></div></div>
+<p>Some older kinds of saved helpers are closing. They are called custom GPTs (in ChatGPT) and Gems (in Google's Gemini). OpenAI plans to stop custom GPTs on December 11, 2026. The date may change (<a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq" rel="noopener" target="_blank">OpenAI</a>). Google is replacing Gems (<a href="https://support.google.com/gemini/answer/18560919" rel="noopener" target="_blank">Google</a>). So I don't build those.</p>
+<p>Here is one example, from OpenAI's own story. A builder in California made a tool with ChatGPT that sorts his bills from email. OpenAI says it took about two hours to build. It says the tool saves him about 5 to 6 hours a week (<a href="https://academy.openai.com/public/blogs/how-chatgpt-became-a-contractors-back-office-2026-05-07" rel="noopener" target="_blank">OpenAI</a>).</p></div>
+</div>
+</section>
+<section class="q" id="q4"><div class="wrap"><p class="eyebrow">Question 4 of 6</p><h2>How do my staff learn to use it without it falling apart after I leave?</h2>
+<div class="prose d"><p class="answer">Your staff learn on their own work, in short sessions spread over the month, with one page of rules and one person on your team who becomes the go-to. A single lecture doesn't stick.</p>
+<p>Training time matters, and most people don't get enough. In BCG's 2025 survey of more than 10,600 workers in 11 countries, only 36% said they'd been adequately trained, and people with five or more hours of training were much more likely to use AI regularly. BCG sells AI consulting, so treat this as a vendor survey (<a href="https://www.bcg.com/press/26june2025-beyond-ai-adoption-full-potential" rel="noopener" target="_blank">BCG, AI at Work 2025</a>). The same survey found 54% would use AI tools even if they weren't approved. Some of your staff may use AI either way. The choice is whether they use the tools you set up, with your rules, or their own.</p>
+<p>Here's how the training runs:</p>
+<ul>
+<li><strong>Session 1 (week 3, 45 minutes):</strong> each person does one real task with the tool, start to finish. Not a demo.</li>
+<li><strong>Session 2 (week 3, 30 minutes):</strong> we look at mistakes on purpose. I show where the tool gets things wrong, so people learn to check, not just trust.</li>
+<li><strong>Session 3 (week 4, 30 minutes):</strong> questions, fixes to the instructions, and the go-to person takes over.</li>
+<li><strong>Week 6 check-in (15 minutes):</strong> after I've gone, to see who's still using it and why.</li>
+</ul>
+<p>That's about two hours of sessions, well short of the five hours BCG links to regular use. The rest comes from using the tools on real work every day in weeks 3 and 4, with the go-to person on hand. If your team needs more, we add sessions; I'd rather add time than leave a tool nobody uses.</p>
+<p><strong>One page of rules.</strong> In the KPMG and University of Melbourne global study (more than 48,000 people in 47 countries), only 30% of employees said their organization had a policy on generative AI, and 57% admitted relying on AI output without checking it (<a href="https://kpmg.com/au/en/insights/artificial-intelligence-ai/trust-in-ai-global-insights-2025.html" rel="noopener" target="_blank">KPMG, Trust in AI 2025</a>). So before anyone uses the tools, we agree one page:</p>
+<ul>
+<li><strong>Approved tools:</strong> the business's own paid account only, never staff members' personal accounts.</li>
+<li><strong>Green:</strong> public information (your website, your menu, your published prices) can go in any approved tool.</li>
+<li><strong>Yellow:</strong> internal documents (quotes, job notes) go only in the business account.</li>
+<li><strong>Red:</strong> never paste customer personal details, staff records, payment details, passwords or health information. If unsure, treat it as red.</li>
+<li><strong>A person checks</strong> anything AI helped write before it goes to a customer.</li>
+<li><strong>Report a mistake the same day.</strong> No one gets in trouble for reporting.</li>
+</ul></div>
+<div class="prose s"><p class="answer">Your staff learn on their own work, in short sessions, with one page of rules. One person on your team becomes the go-to. One long class doesn't stick.</p>
+<p>Most workers don't get enough training. In a 2025 survey by BCG, only 36% of workers said they'd been trained well. People with five or more hours of training used AI much more often. BCG sells AI advice, so this is a company survey (<a href="https://www.bcg.com/press/26june2025-beyond-ai-adoption-full-potential" rel="noopener" target="_blank">BCG</a>). The same survey found 54% would use AI even if their boss hadn't approved it. Some of your staff may use AI anyway. It's better if they use your tools, with your rules.</p>
+<ul>
+<li><strong>Week 3, 45 minutes:</strong> each person does one real task with the tool.</li>
+<li><strong>Week 3, 30 minutes:</strong> we look at mistakes on purpose, so people learn to check.</li>
+<li><strong>Week 4, 30 minutes:</strong> questions and fixes. The go-to person takes over.</li>
+<li><strong>Week 6, 15 minutes:</strong> a check-in after I've gone.</li>
+</ul>
+<p>That's about two hours of lessons, less than the five hours BCG talks about. The rest comes from using the tools on real work every day, with the go-to person to help. If your team needs more, we add lessons.</p>
+<p><strong>One page of rules.</strong> A global study by KPMG found only 30% of workers had an AI policy at work. 57% said they used AI answers without checking them (<a href="https://kpmg.com/au/en/insights/artificial-intelligence-ai/trust-in-ai-global-insights-2025.html" rel="noopener" target="_blank">KPMG</a>). So we agree on these rules first:</p>
+<ul>
+<li>Use the business's paid account only, never a personal one.</li>
+<li><strong>Green:</strong> public facts, like your website or prices, are fine.</li>
+<li><strong>Yellow:</strong> inside documents, like quotes, go in the business account only.</li>
+<li><strong>Red:</strong> never paste customer details, staff records, card numbers, passwords or health information. Not sure? Treat it as red.</li>
+<li>A person checks anything AI wrote before a customer sees it.</li>
+<li>Report a mistake the same day. Nobody gets in trouble for reporting.</li>
+</ul></div>
+<div class="prose t"><p class="answer">Your team learns on real work, a little at a time. One person becomes the go-to person.</p>
+<p>In a 2025 survey by BCG, only 36 in 100 workers said they got enough training. And 54 in 100 said they would use AI even if their boss said no. BCG sells AI advice, so this is a company's own survey (<a href="https://www.bcg.com/press/26june2025-beyond-ai-adoption-full-potential" rel="noopener" target="_blank">BCG</a>). Many of them may use AI anyway. It's better if they use your tools, with your rules.</p>
+<ul>
+<li><strong>Week 3, 45 minutes:</strong> everyone does one real task with the tool.</li>
+<li><strong>Week 3, 30 minutes:</strong> we look at AI mistakes, so people learn to check.</li>
+<li><strong>Week 4, 30 minutes:</strong> questions and fixes.</li>
+<li><strong>Week 6, 15 minutes:</strong> a short check-in after I leave.</li>
+</ul>
+<p>That is about two hours of lessons. The rest comes from using the tools every day. If your team needs more, we add lessons.</p>
+<p>A big world study by KPMG found only 30 in 100 workers had AI rules at work. And 57 in 100 used AI answers without checking them (<a href="https://kpmg.com/au/en/insights/artificial-intelligence-ai/trust-in-ai-global-insights-2025.html" rel="noopener" target="_blank">KPMG</a>). So we write our rules first:</p>
+<ul>
+<li>Use the business's paid account only.</li>
+<li><strong>Green:</strong> facts anyone can see, like your prices, are fine.</li>
+<li><strong>Yellow:</strong> private work papers, like quotes, go in the business account only.</li>
+<li><strong>Red:</strong> never paste customer details, staff records, card numbers, passwords or health facts.</li>
+<li>A person checks AI's work before a customer sees it.</li>
+<li>Tell someone about a mistake the same day. No one gets in trouble.</li>
+</ul></div>
+</div>
+</section>
+<section class="q" id="q5"><div class="wrap"><p class="eyebrow">Question 5 of 6</p><h2>How do we know it worked?</h2>
+<div class="prose d"><p class="answer">We count the same things before and after, the same way, and we trust the count over anyone's feeling, including mine.</p>
+<p>This matters because people are bad at judging their own AI time savings. In a controlled study, 16 experienced software developers expected AI to make them 24% faster. Afterwards they believed it had made them 20% faster. The clock showed they were 19% slower (<a href="https://arxiv.org/abs/2507.09089" rel="noopener" target="_blank">METR, arXiv</a>). That was experts on hard coding work with early-2025 tools, so it won't match your business. But it's the clearest warning I know against “it feels faster”.</p>
+<p>Even real time savings don't automatically turn into money. In a six-month experiment across 66 firms and 7,137 office workers, people who used an AI tool spent two fewer hours a week on email. The researchers found no change in how much other work they did or what kind (<a href="https://arxiv.org/abs/2504.11436" rel="noopener" target="_blank">Dillon and others, arXiv</a>). Saved time only counts when you decide where it goes.</p>
+<p><strong>What we count, for each of the three jobs:</strong></p>
+<div class="tablewrap"><table class="stack">
+<thead>
+<tr>
+<th>Number</th>
+<th>How we get it</th>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-l="Number">How many times the job happened that week</td>
+<td data-l="How we get it">Your records or a tally sheet</td>
+<td data-l="Before">Week 1 to 2</td>
+<td data-l="After">Week 4</td>
+</tr>
+<tr>
+<td data-l="Number">Minutes per job</td>
+<td data-l="How we get it">A one-week timed log by whoever does it</td>
+<td data-l="Before">Week 1 to 2</td>
+<td data-l="After">Week 4</td>
+</tr>
+<tr>
+<td data-l="Number">How often the AI draft needed big changes</td>
+<td data-l="How we get it">The person checking ticks a box</td>
+<td data-l="Before">No tool yet</td>
+<td data-l="After">Week 4</td>
+</tr>
+<tr>
+<td data-l="Number">Mistakes that reached a customer</td>
+<td data-l="How we get it">Your complaint log or a quick note</td>
+<td data-l="Before">Week 1 to 2</td>
+<td data-l="After">Week 4</td>
+</tr>
+<tr>
+<td data-l="Number">Share of jobs that actually used the new tool</td>
+<td data-l="How we get it">Simple count</td>
+<td data-l="Before">No tool yet</td>
+<td data-l="After">Week 4 and week 6</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>What 30 days can't show.</strong> One week of “before” numbers is short; a month or more is better, and I'll say so in your report. Thirty days is too short to see effects on sales or profit, so I won't claim them. The week 6 check-in tells us more than week 4 does: early use shows curiosity, later use shows whether the tool fits the work.</p></div>
+<div class="prose s"><p class="answer">We count the same things before and after, in the same way. We trust the count, not our feelings.</p>
+<p>People often guess wrong about time saved. In one study, 16 skilled software developers thought AI made them 20% faster. The clock showed they were 19% slower (<a href="https://arxiv.org/abs/2507.09089" rel="noopener" target="_blank">METR</a>). That was hard coding work, not a small business. But it shows why we count.</p>
+<p>Saved time also doesn't turn into money by itself. In a study of 7,137 office workers at 66 firms, AI users spent two fewer hours a week on email. But they didn't do more of their other work (<a href="https://arxiv.org/abs/2504.11436" rel="noopener" target="_blank">arXiv</a>). You decide where the saved time goes.</p>
+<p>For each job, we count:</p>
+<div class="tablewrap"><table class="stack">
+<thead>
+<tr>
+<th>What we count</th>
+<th>How</th>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-l="What we count">How many times the job happened</td>
+<td data-l="How">Your records or a tally</td>
+<td data-l="Before">Week 1 to 2</td>
+<td data-l="After">Week 4</td>
+</tr>
+<tr>
+<td data-l="What we count">Minutes per job</td>
+<td data-l="How">A one-week timed log</td>
+<td data-l="Before">Week 1 to 2</td>
+<td data-l="After">Week 4</td>
+</tr>
+<tr>
+<td data-l="What we count">How often the draft needed big changes</td>
+<td data-l="How">The checker ticks a box</td>
+<td data-l="Before">No tool yet</td>
+<td data-l="After">Week 4</td>
+</tr>
+<tr>
+<td data-l="What we count">Mistakes that reached a customer</td>
+<td data-l="How">A quick note</td>
+<td data-l="Before">Week 1 to 2</td>
+<td data-l="After">Week 4</td>
+</tr>
+<tr>
+<td data-l="What we count">How many jobs used the new tool</td>
+<td data-l="How">A count</td>
+<td data-l="Before">No tool yet</td>
+<td data-l="After">Weeks 4 and 6</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>What 30 days can't show.</strong> One week of “before” numbers is short; a month or more is better. The week 6 check-in tells us more than week 4: early use shows curiosity, later use shows the tool fits. Thirty days is too short to see changes in sales or profit, so I won't claim them.</p></div>
+<div class="prose t"><p class="answer">We count the same things before and after. We trust the count, not our feelings.</p>
+<p>People often guess wrong. In one study, skilled software developers thought AI made them faster. A clock showed they were slower (<a href="https://arxiv.org/abs/2507.09089" rel="noopener" target="_blank">METR</a>). That was hard computer work, not a small business. But it shows why we count.</p>
+<p>Saved time does not turn into money by itself. In a study of more than 7,000 office workers, AI users spent two fewer hours a week on email. But they did not do more of their other work (<a href="https://arxiv.org/abs/2504.11436" rel="noopener" target="_blank">arXiv</a>). You decide where saved time goes.</p>
+<p>For each job, we count:</p>
+<ul>
+<li>How many times the job happened.</li>
+<li>How many minutes each one took.</li>
+<li>How often AI's draft needed big fixes.</li>
+<li>Mistakes that reached a customer.</li>
+<li>How many jobs used the new tool.</li>
+</ul>
+<p>One week of “before” numbers is short. One month is too short to see more sales. So I won't promise that.</p></div>
+</div>
+<figure class="wrap ba">
+  <p class="figtitle"><span class="ds">Before and after, for one job</span><span class="t">Before and after</span></p>
+  <div class="bars">
+    <div class="bar"><span class="l">Before<small>Minutes per quote, week 1 to 2</small></span><span class="tr"><span class="f empty" style="width:100%"></span></span></div>
+    <div class="bar"><span class="l">After<small>Minutes per quote, week 4</small></span><span class="tr"><span class="f empty" style="width:100%"></span></span></div>
+  </div>
+  <figcaption><span class="note">[CLIENT'S REAL NUMBERS]</span> This chart stays empty until a client gives written permission to share their counts.</figcaption>
+</figure>
+</section>
+<section class="q" id="q6"><div class="wrap"><p class="eyebrow">Question 6 of 6</p><h2>What does it cost, what can go wrong, and when should I say no?</h2>
+<div class="prose d"><p class="answer">You pay for two things: my time, and the AI tool seats for whoever uses them. Prices below are from each vendor's own page, in US dollars, checked November 26, 2026.</p>
+<div class="tablewrap"><table class="stack">
+<thead>
+<tr>
+<th>Tool</th>
+<th>Price per user per month (USD)</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-l="Tool"><a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">ChatGPT Business</a></td>
+<td data-l="Price per user per month (USD)">$20 billed yearly, $25 billed monthly (Standard seat)</td>
+<td data-l="Notes">Teams of 2 to 200</td>
+</tr>
+<tr>
+<td data-l="Tool"><a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude Team</a></td>
+<td data-l="Price per user per month (USD)">$20 billed yearly, $25 billed monthly (Standard seat)</td>
+<td data-l="Notes">2 to 150 seats</td>
+</tr>
+<tr>
+<td data-l="Tool"><a href="https://workspace.google.com/pricing" rel="noopener" target="_blank">Google Workspace</a></td>
+<td data-l="Price per user per month (USD)">$7 Starter, $14 Standard, $22 Plus (list price, before the introductory discount running when checked)</td>
+<td data-l="Notes">Gemini in Docs and Sheets starts at Standard</td>
+</tr>
+<tr>
+<td data-l="Tool"><a href="https://www.microsoft.com/en-us/copilot/pricing/enterprise" rel="noopener" target="_blank">Microsoft 365 Copilot</a></td>
+<td data-l="Price per user per month (USD)">$30 add-on, paid yearly</td>
+<td data-l="Notes">Needs a qualifying Microsoft 365 plan</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Just you?</strong> Team plans start at two seats. A one-person business usually uses a personal paid plan instead. <a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude Pro</a> is $17 a month billed yearly or $20 monthly. ChatGPT's pricing page didn't show the Plus price when I checked, so check it the day you sign up.</p>
+<p>My fee for the first 30 days: <span class="note">[ENGAGEMENT PRICE AND WHAT IT INCLUDES]</span>.</p>
+<p><strong>What usually goes wrong.</strong> The most common problem owners report is accuracy. Among firms already using AI, 46% named accuracy as a challenge, ahead of adapting the tools to their business (43%) (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve</a>). The other failures I watch for:</p>
+<ul>
+<li><strong>The wrong first job.</strong> Something nobody does often, or something too risky to check.</li>
+<li><strong>No owner.</strong> The tool works, but nobody on the team is responsible for it after I leave.</li>
+<li><strong>Data that can't get out.</strong> The information lives in a system with no export.</li>
+<li><strong>Private data pasted in.</strong> In guidance written to AI companies, the US Federal Trade Commission put it plainly: “There is no AI exemption from the laws on the books” (<a href="https://www.ftc.gov/policy/advocacy-research/tech-at-ftc/2024/01/ai-companies-uphold-your-privacy-confidentiality-commitments" rel="noopener" target="_blank">FTC, January 2024</a>). Your privacy promises to customers still apply inside an AI tool.</li>
+</ul>
+<p><strong>When I'll tell you no.</strong> I'd rather lose the work than sell you a month that won't help. I'll say so if:</p>
+<ul>
+<li>None of your jobs repeat often enough to be worth building for.</li>
+<li>What you mainly want is AI answering customers with no person checking.</li>
+<li>The data for the jobs you care about can't be exported or reached.</li>
+<li>No one in the business has an hour a week to own the tools after week 4.</li>
+</ul></div>
+<div class="prose s"><p class="answer">You pay for my time and for AI tool seats. These are the companies' own prices, in US dollars, checked November 26, 2026.</p>
+<div class="tablewrap"><table class="stack two">
+<thead>
+<tr>
+<th>Tool</th>
+<th>Price per person per month (USD)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-l="Tool"><a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">ChatGPT Business</a></td>
+<td data-l="Price per person per month (USD)">$20 paid yearly, $25 paid monthly</td>
+</tr>
+<tr>
+<td data-l="Tool"><a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude Team</a></td>
+<td data-l="Price per person per month (USD)">$20 paid yearly, $25 paid monthly</td>
+</tr>
+<tr>
+<td data-l="Tool"><a href="https://workspace.google.com/pricing" rel="noopener" target="_blank">Google Workspace</a></td>
+<td data-l="Price per person per month (USD)">$7, $14 or $22 list price (Gemini in Docs and Sheets from $14)</td>
+</tr>
+<tr>
+<td data-l="Tool"><a href="https://www.microsoft.com/en-us/copilot/pricing/enterprise" rel="noopener" target="_blank">Microsoft 365 Copilot</a></td>
+<td data-l="Price per person per month (USD)">$30 add-on, paid yearly</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Just you?</strong> Team plans need at least two people. <a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude Pro</a> is $17 a month paid yearly or $20 monthly. Check ChatGPT Plus on the day you sign up; its page didn't show a price when I checked.</p>
+<p>My fee: <span class="note">[ENGAGEMENT PRICE AND WHAT IT INCLUDES]</span>.</p>
+<p><strong>What goes wrong.</strong> The biggest problem owners report is wrong answers. 46% of firms using AI named accuracy as a challenge (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve</a>). Other problems:</p>
+<ul>
+<li>The wrong first job.</li>
+<li>No one owns the tool after I leave.</li>
+<li>The data is stuck in a system you can't export from.</li>
+<li>Private data gets pasted in. In advice to AI companies, the US Federal Trade Commission said “There is no AI exemption from the laws on the books” (<a href="https://www.ftc.gov/policy/advocacy-research/tech-at-ftc/2024/01/ai-companies-uphold-your-privacy-confidentiality-commitments" rel="noopener" target="_blank">FTC</a>).</li>
+</ul>
+<p><strong>When I'll say no.</strong> I'll tell you if:</p>
+<ul>
+<li>None of your jobs repeat often enough.</li>
+<li>You mainly want AI to answer customers with no one checking.</li>
+<li>The data can't be reached.</li>
+<li>Nobody has an hour a week to own the tools.</li>
+</ul></div>
+<div class="prose t"><p class="answer">You pay for my time and for the AI tools. Prices are in US dollars, checked November 26, 2026.</p>
+<div class="tablewrap"><table class="stack two">
+<thead>
+<tr>
+<th>Tool</th>
+<th>Price per person per month</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-l="Tool"><a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">ChatGPT Business</a></td>
+<td data-l="Price per person per month">$20 paid yearly, $25 monthly</td>
+</tr>
+<tr>
+<td data-l="Tool"><a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude Team</a></td>
+<td data-l="Price per person per month">$20 paid yearly, $25 monthly</td>
+</tr>
+<tr>
+<td data-l="Tool"><a href="https://workspace.google.com/pricing" rel="noopener" target="_blank">Google Workspace</a></td>
+<td data-l="Price per person per month">$7, $14 or $22 (AI in Docs and Sheets starts at $14)</td>
+</tr>
+<tr>
+<td data-l="Tool"><a href="https://www.microsoft.com/en-us/copilot/pricing/enterprise" rel="noopener" target="_blank">Microsoft 365 Copilot</a></td>
+<td data-l="Price per person per month">$30, paid yearly, on top of a Microsoft 365 plan</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Just you?</strong> Team plans need at least two people. <a href="https://claude.com/pricing" rel="noopener" target="_blank">Claude Pro</a> costs $17 a month paid yearly, or $20 monthly. Check the ChatGPT Plus price on the day you sign up.</p>
+<p>My fee: <span class="note">[ENGAGEMENT PRICE AND WHAT IT INCLUDES]</span>.</p>
+<p><strong>What goes wrong.</strong> AI can give wrong answers. That's the top problem owners name (<a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve</a>). Privacy laws still apply when you use AI (<a href="https://www.ftc.gov/policy/advocacy-research/tech-at-ftc/2024/01/ai-companies-uphold-your-privacy-confidentiality-commitments" rel="noopener" target="_blank">FTC</a>).</p>
+<p><strong>When I'll say no.</strong> I'll tell you if:</p>
+<ul>
+<li>No job repeats enough.</li>
+<li>You want AI to talk to customers with no one checking.</li>
+<li>Your information is stuck where we can't reach it.</li>
+<li>No one can look after the tools.</li>
+</ul></div>
+</div>
+</section>
+<div class="band"><div class="wrap"><p class="eyebrow">The short version</p><p><span class="ds">Three jobs, checked by people, counted before and after. I won't promise a number before we've measured one.</span><span class="t">Three jobs. A person checks them. We count before and after.</span></p></div></div>
+<section class="q" id="checklist"><div class="wrap"><p class="eyebrow">This week</p><h2>Your checklist for this week</h2>
+<div class="prose d"><ul class="check">
+<li><label><input id="c-d-0" type="checkbox"/><span>Write down the three tasks you most wish someone else did.</span></label></li>
+<li><label><input id="c-d-1" type="checkbox"/><span>Next to each, write roughly how many hours a week it takes.</span></label></li>
+<li><label><input id="c-d-2" type="checkbox"/><span>Find out where the information for each task lives, and whether you can export it.</span></label></li>
+<li><label><input id="c-d-3" type="checkbox"/><span>Decide who on your team would own the tools after the first month.</span></label></li>
+<li><label><input id="c-d-4" type="checkbox"/><span>If you have a privacy policy, check what it promises customers about sharing their data.</span></label></li>
+</ul></div>
+<div class="prose s"><ul class="check">
+<li><label><input id="c-s-0" type="checkbox"/><span>Write down the three tasks you most wish someone else did.</span></label></li>
+<li><label><input id="c-s-1" type="checkbox"/><span>Next to each, write about how many hours a week it takes.</span></label></li>
+<li><label><input id="c-s-2" type="checkbox"/><span>Find where the information for each task lives.</span></label></li>
+<li><label><input id="c-s-3" type="checkbox"/><span>Pick who would own the tools after the first month.</span></label></li>
+<li><label><input id="c-s-4" type="checkbox"/><span>If you have a privacy policy, check what it promises customers.</span></label></li>
+</ul></div>
+<div class="prose t"><ul class="check">
+<li><label><input id="c-t-0" type="checkbox"/><span>Write down three jobs you wish someone else did.</span></label></li>
+<li><label><input id="c-t-1" type="checkbox"/><span>Write how many hours each one takes.</span></label></li>
+<li><label><input id="c-t-2" type="checkbox"/><span>Find where the information for each job is kept.</span></label></li>
+<li><label><input id="c-t-3" type="checkbox"/><span>Pick who will look after the tools.</span></label></li>
+<li><label><input id="c-t-4" type="checkbox"/><span>If you have a privacy policy, read what it promises customers.</span></label></li>
+</ul></div>
+</div></section>
+<section class="q st" id="words"><div class="wrap"><h2>Words to know</h2>
+<div class="prose s"><div class="tablewrap"><table class="stack two">
+<thead>
+<tr>
+<th>Word</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-l="Word">AI</td>
+<td data-l="What it means">Software that can write, sum up or answer questions in plain language</td>
+</tr>
+<tr>
+<td data-l="Word">Project</td>
+<td data-l="What it means">A saved space in ChatGPT or Claude that keeps one job's instructions and files together</td>
+</tr>
+<tr>
+<td data-l="Word">Draft</td>
+<td data-l="What it means">A first try that a person checks and fixes</td>
+</tr>
+<tr>
+<td data-l="Word">Before number</td>
+<td data-l="What it means">What we count before anything changes</td>
+</tr>
+<tr>
+<td data-l="Word">Seat</td>
+<td data-l="What it means">One person's paid account on a tool</td>
+</tr>
+<tr>
+<td data-l="Word">Go-to person</td>
+<td data-l="What it means">The person on your team who knows the tools best and helps the others</td>
+</tr>
+</tbody>
+</table></div></div>
+<div class="prose t"><div class="tablewrap"><table class="stack two">
+<thead>
+<tr>
+<th>Word</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-l="Word">AI</td>
+<td data-l="What it means">Software that can write and answer questions</td>
+</tr>
+<tr>
+<td data-l="Word">Project</td>
+<td data-l="What it means">A saved space that keeps one job's rules and files</td>
+</tr>
+<tr>
+<td data-l="Word">Draft</td>
+<td data-l="What it means">A first try that a person checks and fixes</td>
+</tr>
+<tr>
+<td data-l="Word">Before number</td>
+<td data-l="What it means">What we count before anything changes</td>
+</tr>
+<tr>
+<td data-l="Word">Go-to person</td>
+<td data-l="What it means">The person on your team who knows the tools best and helps the others</td>
+</tr>
+</tbody>
+</table></div></div>
+</div></section>
+<section class="cta"><h2>How Leverage Strategies helps</h2>
+<div class="d"><p>I run this first month with owners: the first conversation, the job list, the builds, the training and the before-and-after count. You choose the jobs. I work alongside you and your team until the tools are yours to run. I won't promise a number before we've measured one.</p></div>
+<div class="s"><p>I run this first month with owners: the first talk, the job list, the tools, the training and the count. You choose the jobs. I work next to you and your team until the tools are yours. I won't promise a number before we've measured one.</p></div>
+<div class="t"><p>I run this first month with you. You pick the jobs. I work next to you and your team. I won't promise a result before we count one.</p></div>
+<p><span class="note">[BOOK A CALL LINK]</span></p></section>
+<div class="sources"><div class="wrap"><h2>Sources</h2><p>All pages opened November 26, 2026.</p>
+<ul>
+<li><a href="https://www.fedsmallbusiness.org/reports/survey/2026/2026-report-on-employer-firms" rel="noopener" target="_blank">Federal Reserve Banks, 2026 Report on Employer Firms</a>. Fielded September 3 to November 14, 2025; 6,525 employer firms with 1 to 499 employees; convenience sample, not random. US.</li>
+<li><a href="https://supportcenter.score.org/kb/article/673-introductory-mentoring-session-guide/" rel="noopener" target="_blank">SCORE, Introductory Mentoring Session Guide</a>. US.</li>
+<li><a href="https://www.nber.org/papers/w31161" rel="noopener" target="_blank">Brynjolfsson, Li and Raymond, “Generative AI at Work”, NBER Working Paper 31161</a>. One large US software firm; independent study.</li>
+<li><a href="https://openai.com/academy/projects/" rel="noopener" target="_blank">OpenAI Academy, Projects</a>. Vendor help page.</li>
+<li><a href="https://academy.claude.com/courses/claude-101/introduction-to-projects" rel="noopener" target="_blank">Anthropic Academy, Introduction to projects</a>. Vendor help page.</li>
+<li><a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq" rel="noopener" target="_blank">OpenAI, Custom GPT retirement and migration FAQ</a>. Vendor page; dates subject to change.</li>
+<li><a href="https://support.google.com/gemini/answer/18560919" rel="noopener" target="_blank">Google, About the transition from Gems to skills</a>. Vendor page.</li>
+<li><a href="https://academy.openai.com/public/blogs/how-chatgpt-became-a-contractors-back-office-2026-05-07" rel="noopener" target="_blank">OpenAI Academy, How ChatGPT became a contractor's back office</a>. Vendor customer story; figures are the owner's own.</li>
+<li><a href="https://www.bcg.com/press/26june2025-beyond-ai-adoption-full-potential" rel="noopener" target="_blank">BCG, AI at Work 2025 press release</a>. Vendor survey, 10,600+ workers, 11 countries.</li>
+<li><a href="https://kpmg.com/au/en/insights/artificial-intelligence-ai/trust-in-ai-global-insights-2025.html" rel="noopener" target="_blank">KPMG and University of Melbourne, Trust in AI: global insights 2025</a>. 48,340 people, 47 countries.</li>
+<li><a href="https://arxiv.org/abs/2507.09089" rel="noopener" target="_blank">Becker and others (METR), “Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity”</a>. Randomized trial, 16 developers, 246 tasks.</li>
+<li><a href="https://arxiv.org/abs/2504.11436" rel="noopener" target="_blank">Dillon, Jaffe, Immorlica and Stanton, “Shifting Work Patterns with Generative AI”</a>. Field experiment, 66 firms, 7,137 workers, 6 months.</li>
+<li><a href="https://openai.com/business/pricing/" rel="noopener" target="_blank">OpenAI, ChatGPT Business pricing</a>. USD.</li>
+<li><a href="https://claude.com/pricing" rel="noopener" target="_blank">Anthropic, Claude pricing</a>. USD.</li>
+<li><a href="https://workspace.google.com/pricing" rel="noopener" target="_blank">Google Workspace pricing</a>. USD; an introductory discount was running at the time of checking.</li>
+<li><a href="https://www.microsoft.com/en-us/copilot/pricing/enterprise" rel="noopener" target="_blank">Microsoft 365 Copilot pricing</a>. USD, paid yearly.</li>
+<li><a href="https://www.ftc.gov/policy/advocacy-research/tech-at-ftc/2024/01/ai-companies-uphold-your-privacy-confidentiality-commitments" rel="noopener" target="_blank">FTC, “AI Companies: Uphold Your Privacy and Confidentiality Commitments”</a>. January 9, 2024.</li>
+</ul></div></div>
+<footer class="site"><span>Leverage Strategies · Dan Albasry</span><span>Prices and dates checked November 26, 2026</span></footer>
+<div class="seg float" role="group" aria-label="Reading level"><span class="lab">Reading level</span><button type="button" data-v="t" aria-pressed="true">Starter</button><button type="button" data-v="s" aria-pressed="false">Simple</button><button type="button" data-v="d" aria-pressed="false">Detailed</button></div>
+<script>
+{
+  const KEY='leverage-notes-level', TKEY='leverage-tool', BOX='leverage-first30-checks';
+  const body=document.body, buttons=document.querySelectorAll('.seg button[data-v]');
+  const store=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+  const load=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+  const current=()=>body.classList.contains('lv-t')?'t':body.classList.contains('lv-s')?'s':'d';
+  const paint=v=>{body.classList.remove('lv-d','lv-s','lv-t');body.classList.add('lv-'+v);buttons.forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v?'true':'false'));};
+  const setLevel=v=>{
+    if(v===current()) return;
+    const secs=document.querySelectorAll('section.q'); let anchor=null;
+    secs.forEach(s=>{ if(s.getBoundingClientRect().top<=120) anchor=s; });
+    let progress=0;
+    if(anchor){const r=anchor.getBoundingClientRect();progress=Math.min(1,Math.max(0,(120-r.top)/Math.max(1,r.height)));}
+    paint(v); store(KEY,v);
+    if(anchor){const r2=anchor.getBoundingClientRect();window.scrollTo({top:window.pageYOffset+r2.top-120+progress*r2.height,behavior:'auto'});}
+  };
+  buttons.forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.v)));
+  // Show the floating switch only once the inline one has scrolled away.
+  const fl=document.querySelector('.float'), inl=document.querySelector('.versions');
+  if(fl&&inl&&'IntersectionObserver' in window){fl.classList.add('away');new IntersectionObserver(es=>es.forEach(e=>fl.classList.toggle('away',e.isIntersecting||e.boundingClientRect.top>0))).observe(inl);}
+  const saved=load(KEY); paint(saved==='d'||saved==='s'||saved==='t'?saved:'t');
+
+  // Tool switch: ChatGPT by default, choice shared across every tool group.
+  const groups=document.querySelectorAll('.toolgroup');
+  const setTool=t=>{
+    groups.forEach(g=>{
+      const has=g.querySelector('.toolblock[data-tool="'+t+'"]'); const use=has?t:'chatgpt';
+      g.querySelectorAll('.toolblock').forEach(b=>b.classList.toggle('on',b.dataset.tool===use));
+      g.querySelectorAll('.toolseg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tool===use?'true':'false'));
+    });
+  };
+  groups.forEach(g=>{g.classList.add('js');g.querySelectorAll('.toolseg button').forEach(b=>b.addEventListener('click',()=>{setTool(b.dataset.tool);store(TKEY,b.dataset.tool);}));});
+  const st=load(TKEY); setTool(st==='claude'||st==='chatgpt'?st:'chatgpt');
+
+  let ticks={}; try{ticks=JSON.parse(load(BOX)||'{}')||{}}catch(e){ticks={}}
+  document.querySelectorAll('.check input').forEach(box=>{box.checked=!!ticks[box.id];box.addEventListener('change',()=>{ticks[box.id]=box.checked;store(BOX,JSON.stringify(ticks));});});
+}
+</script>
+</body></html>

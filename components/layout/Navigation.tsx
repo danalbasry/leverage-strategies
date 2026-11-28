@@ -244,6 +244,14 @@ export default function Navigation() {
             </div>
           ))}
 
+          {/* Guides (static pages in public/guides) */}
+          <a
+            href="/guides/"
+            className="px-3 py-2 text-sm font-medium transition-colors rounded-md text-gray-text hover:text-heading"
+          >
+            Guides
+          </a>
+
           {/* Industries */}
           <Link
             href="/professional-services"
@@ -414,6 +422,11 @@ export default function Navigation() {
               ))}
             </div>
           </div>
+
+          {/* Guides (static pages in public/guides) */}
+          <a href="/guides/" className="block py-3 text-base font-medium text-heading">
+            Guides
+          </a>
 
           {/* Industries */}
           <Link

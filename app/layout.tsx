@@ -22,7 +22,7 @@ const sourceSerif = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://leveragestrategies.ai"),
+  metadataBase: new URL("https://leveragestrategies.ca"),
   title: {
     default: "Leverage Strategies | Systems That Scale You",
     template: "%s | Leverage Strategies",

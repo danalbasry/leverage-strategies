@@ -1,0 +1,673 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>One job, several tools: how I chain Muse, ChatGPT, Claude and an automation</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="How I split one weekly job across Muse, ChatGPT, Claude and an automation, with a person checking every hand-off. For small business owners in the US and Canada, three reading levels.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* LAYOUT: one reading column (680px), figures to 1040px, one dark ink band, floating level switch. G. Combined: paper, ink, one rust accent. Light theme by choice. */
+:root{
+  color-scheme: light;
+  --paper:#F8F6F1; --ink:#141412; --body:#3A3832; --muted:#5A584F; --rule:#CFCBC0; --panel:#EDE9DF; --accent:#7A2E1A;
+  --display:'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --text:'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --col:680px; --wide:1040px;
+}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+.eyebrow{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:var(--col);margin:0 auto;padding:0 24px}
+.widewrap{max-width:var(--wide);margin:0 auto;padding:0 24px}
+figure.wrap,figure.widewrap{margin:44px auto}
+
+/* three reading levels: .d detailed, .s simple, .t starter, .ds detailed+simple, .st simple+starter */
+body.lv-d .s, body.lv-d .t, body.lv-d .st{display:none !important}
+body.lv-s .d, body.lv-s .t{display:none !important}
+body.lv-t .d, body.lv-t .s, body.lv-t .ds{display:none !important}
+body.lv-s .prose{font-size:19px;line-height:1.75}
+body.lv-t .prose{font-size:20px;line-height:1.8}
+
+header.site{padding:24px 32px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink)}
+header.site .mark{font-family:var(--display);font-size:32px;line-height:1}
+header.site .where{font-size:14px;color:var(--muted)}
+
+.hero{max-width:var(--wide);margin:0 auto;padding:72px 24px 0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:end}
+.hero h1{font-size:clamp(44px,6.4vw,80px);line-height:1.02;letter-spacing:-.02em;margin-top:24px}
+.hero .lede{margin:28px 0 0;font-size:21px;line-height:1.6;color:var(--body)}
+.hero .by{margin:28px 0 0;font-size:14px;color:var(--muted)}
+.hero figure{margin:0}
+.hero img{width:100%;max-height:620px;object-fit:cover;object-position:center 30%;border:1px solid var(--rule)}
+@media (max-width:820px){.hero{grid-template-columns:1fr;gap:32px;padding-top:56px}.hero img{max-height:520px}}
+
+.versions{margin:56px auto 0;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:22px 0}
+.versions p{margin:0;font-size:16px;color:var(--body);flex:1 1 300px}
+.seg{display:inline-flex;border:1px solid var(--ink);background:var(--paper)}
+.seg button{font:500 14px/1 var(--text);letter-spacing:.04em;padding:14px 16px;min-height:44px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button + button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.float{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:20;box-shadow:0 6px 24px rgba(20,20,18,.18)}
+.float .lab{display:flex;align-items:center;padding:0 14px 0 16px;font-size:13px;color:var(--muted);border-right:1px solid var(--rule)}
+@media (max-width:520px){.float .lab{display:none}.seg button{padding:14px 13px}}
+
+.toc{margin:56px auto 0}
+.toc ol{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--ink)}
+.toc li{border-bottom:1px solid var(--rule)}
+.toc a{display:flex;gap:20px;align-items:baseline;padding:14px 0;text-decoration:none;font-family:var(--display);font-size:24px;line-height:1.2}
+.toc a span.n{font:400 13px var(--text);color:var(--muted);flex:0 0 20px;font-variant-numeric:tabular-nums}
+
+section.q{padding:96px 0 0;scroll-margin-top:12px}
+section.q h2{font-size:clamp(34px,5vw,52px);line-height:1.06;margin:14px 0 28px}
+.prose p{margin:0 0 20px;color:var(--body)}
+.prose p.answer{font-size:1.14em;line-height:1.55;color:var(--ink)}
+.prose strong{color:var(--ink);font-weight:600}
+.prose ul,.prose ol{margin:0 0 20px;padding-left:22px;color:var(--body)}
+.prose li{margin:0 0 10px}
+.key{font-family:var(--display);font-size:clamp(28px,4vw,38px);line-height:1.15;color:var(--ink);margin:36px 0;padding:28px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.key em{color:var(--accent)}
+
+figure{margin:44px auto}
+figcaption{margin-top:12px;font-size:13px;line-height:1.5;color:var(--muted)}
+.figtitle{margin:0 0 18px;font-family:var(--display);font-size:26px;line-height:1.15}
+
+/* ladder */
+.ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:end;border-bottom:1px solid var(--ink)}
+.rung{border:1px solid var(--ink);border-bottom:0;padding:18px 18px 20px;background:var(--paper)}
+.rung:nth-child(1){min-height:200px}.rung:nth-child(2){min-height:250px}.rung:nth-child(3){min-height:300px;background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.rung .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.rung h3{font-size:30px;line-height:1.1;margin:6px 0 10px}
+.rung p{margin:0;font-size:15.5px;line-height:1.55;color:var(--body)}
+.rung p.ex{margin-top:12px;padding-top:12px;border-top:1px solid var(--rule)}
+@media (max-width:700px){.ladder{grid-template-columns:1fr;border-bottom:0}.rung,.rung:nth-child(n){min-height:0;border-bottom:1px solid var(--ink)}.rung:nth-child(3){border-bottom-color:var(--accent)}}
+
+/* test list */
+.test{list-style:none;margin:0 0 24px;padding:0;border-top:1px solid var(--ink);counter-reset:tq}
+.test li{counter-increment:tq;display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.test li::before{content:counter(tq);font-family:var(--display);font-size:30px;line-height:1;color:var(--accent)}
+
+/* flow diagram */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px}
+.stage{position:relative;border:1px solid var(--ink);padding:16px 16px 18px;background:var(--paper)}
+.stage .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.stage h3{font-size:25px;line-height:1.1;margin:6px 0 8px}
+.stage p{margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.stage:not(:last-child)::after{content:"\2192";position:absolute;right:-29px;top:50%;transform:translateY(-50%);font-size:22px;color:var(--muted)}
+.stage.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.repair{margin-top:36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:28px;align-items:start;border-top:1px dashed var(--ink);padding-top:22px}
+.repair h3{font-size:28px;line-height:1.1}
+.repair .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.repair ol{margin:0;padding-left:20px;font-size:15.5px;line-height:1.55;color:var(--body)}
+.repair li{margin-bottom:6px}
+@media (max-width:820px){.flow{grid-template-columns:1fr;gap:30px}.stage:not(:last-child)::after{content:"\2193";right:auto;left:22px;top:auto;bottom:-29px;transform:none}.repair{grid-template-columns:1fr;gap:12px}}
+
+/* bars */
+.bars{display:grid;gap:18px}
+.bar{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;align-items:center}
+.bar .l{font-size:15px;line-height:1.35;color:var(--ink)}
+.bar .l small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.bar .tr{display:flex;align-items:center;gap:12px}
+.bar .f{height:30px;background:#A8A397;min-width:2px}
+.bar .f.hot{background:var(--accent)}
+.bar .f.ink{background:var(--ink)}
+.bar .v{font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:560px){.bar{grid-template-columns:1fr;gap:6px}}
+
+/* business finder */
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.pick button{font:500 15px var(--text);min-height:44px;padding:10px 14px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.pick button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.biz{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink);border-left:1px solid var(--rule)}
+.biz li{padding:18px 20px 20px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);transition:background .25s}
+.biz li.on{background:var(--panel);box-shadow:inset 3px 0 0 var(--accent)}
+.biz h3{font-size:27px;line-height:1.1;margin:0 0 10px}
+.biz dl{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 12px;font-size:15px;line-height:1.5}
+.biz dt{font:500 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.biz dd{margin:0;color:var(--body)}
+@media (max-width:640px){.biz{grid-template-columns:1fr}}
+
+.box{margin:36px 0;padding:24px 26px;background:var(--panel);border:1px solid var(--ink)}
+.box h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.box p{margin:0 0 12px;font-size:16.5px;line-height:1.6;color:var(--body)}
+.box p:last-child{margin-bottom:0}
+
+/* two countries */
+.where2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;margin:36px 0;border:1px solid var(--ink)}
+.where2 > div{padding:24px 26px;background:var(--panel)}
+.where2 > div + div{border-left:1px solid var(--ink)}
+@media (max-width:600px){.where2 > div + div{border-left:0;border-top:1px solid var(--ink)}}
+.where2 h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2 ul{margin:0;padding-left:18px;font-size:15.5px;line-height:1.6;color:var(--body)}
+.where2 li{margin-bottom:10px}
+
+/* numbered risks */
+.steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink);counter-reset:st}
+.steps li{counter-increment:st;display:grid;grid-template-columns:64px 1fr;gap:8px;padding:26px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(st);font-family:var(--display);font-size:54px;line-height:.9;color:var(--accent)}
+.steps h3{font-size:28px;line-height:1.15;margin:0 0 8px}
+.steps p{margin:0;color:var(--body);font-size:.96em}
+
+.skip{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.skip li{display:grid;grid-template-columns:40px 1fr;gap:8px;padding:16px 0;border-bottom:1px solid var(--rule);color:var(--ink)}
+.skip li::before{content:"\00D7";font-family:var(--display);font-size:36px;line-height:.8;color:var(--accent)}
+
+table{border-collapse:collapse;width:100%;font-size:15.5px;line-height:1.45}
+th{font:500 12.5px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 14px 10px 0;border-bottom:1px solid var(--ink)}
+td{padding:13px 14px 13px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--body)}
+td:first-child{color:var(--ink);font-weight:500;white-space:nowrap}
+
+.band{background:var(--ink);color:var(--paper);margin-top:96px;padding:64px 0}
+.band p.eyebrow{color:#B5B1A6;font-family:var(--text);font-size:13px;line-height:1.4;margin:0}
+.band p{margin:16px 0 0;font-family:var(--display);font-size:clamp(24px,3.4vw,32px);line-height:1.3;color:var(--paper)}
+
+.note{display:inline;background:#F3E3DC;color:var(--accent);font-size:.92em;padding:1px 6px}
+
+.check{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.check li{border-bottom:1px solid var(--rule)}
+.check label{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:20px 0;cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;width:24px;height:24px;margin:4px 0 0;border:1.5px solid var(--ink);background:var(--paper);display:grid;place-content:center;cursor:pointer}
+.check input:checked{background:var(--ink)}
+.check input:checked::after{content:"";width:11px;height:6px;border-left:2px solid var(--paper);border-bottom:2px solid var(--paper);transform:rotate(-45deg) translate(1px,-1px)}
+.check span{color:var(--ink)}
+
+.cta{border-top:1px solid var(--ink);margin-top:96px;padding:88px 24px;text-align:center}
+.cta h2{font-size:clamp(40px,6vw,68px);line-height:1.04}
+.cta p{max-width:600px;margin:22px auto 0;color:var(--body)}
+
+.sources{padding:72px 0 0}
+.sources h2{font-size:34px;margin:0 0 8px}
+.sources ul{margin:18px 0 0;padding-left:20px;font-size:15px;line-height:1.6;color:var(--body)}
+.sources li{margin-bottom:8px}
+.sources p{font-size:15px;color:var(--muted);margin:0}
+footer.site{margin-top:88px;border-top:1px solid var(--ink);padding:24px 32px 110px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.biz li{transition:none}}
+
+/* phone article additions */
+.log{border:1px solid var(--ink);background:#fff;padding:18px 0 8px;box-shadow:0 18px 40px rgba(20,20,18,.08)}
+.log .hd{display:flex;justify-content:space-between;align-items:baseline;padding:0 20px 12px;border-bottom:1px solid var(--rule)}
+.log .hd b{font-family:var(--display);font-weight:400;font-size:28px}
+.log .hd span{font-size:13px;color:var(--muted)}
+.log ul{list-style:none;margin:0;padding:0}
+.log li{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:12px 20px;border-bottom:1px solid var(--panel)}
+.log li:last-child{border-bottom:0}
+.log .ic{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--accent);position:relative}
+.log .ic::after{content:"";position:absolute;left:5px;top:9px;width:9px;height:1.5px;background:var(--accent);transform:rotate(-35deg)}
+.log .who{font-size:16px;color:var(--accent);line-height:1.3}
+.log .who small{display:block;font-size:13px;color:var(--muted)}
+.log .tm{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.verdict{margin:48px 0 0;padding:26px 28px;border:1px solid var(--ink);background:var(--panel);box-shadow:inset 0 3px 0 var(--accent)}
+.verdict h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+.verdict p{margin:0;font-family:var(--display);font-size:clamp(24px,3.2vw,30px);line-height:1.25;color:var(--ink)}
+.lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.lane{border:1px solid var(--ink);padding:18px}
+.lane h3{font-size:26px;line-height:1.1;margin:4px 0 8px}
+.lane .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.lane p{margin:10px 0 0;font-size:15px;line-height:1.5;color:var(--body)}
+.day{display:flex;height:26px;border:1px solid var(--ink);margin-top:10px}
+.day i{display:block;height:100%}
+.day .p{background:#A8A397}.day .a{background:var(--accent)}.day .pa{background:repeating-linear-gradient(135deg,#A8A397 0 6px,var(--accent) 6px 12px)}
+.daykey{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:4px}
+.legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:14px;color:var(--body)}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px}
+.legend .lp::before{background:#A8A397}.legend .la::before{background:var(--accent)}.legend .lpa::before{background:repeating-linear-gradient(135deg,#A8A397 0 3px,var(--accent) 3px 6px)}
+@media (max-width:760px){.lanes{grid-template-columns:1fr}}
+.dots{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:6px;max-width:560px}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--ink)}
+.dots i.m{background:transparent;border:1.5px solid #A8A397}
+.dots i.v{background:var(--accent)}
+.dotkey{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;font-size:14px;color:var(--body)}
+.dotkey span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.dotkey .a::before{background:var(--ink)}.dotkey .m::before{border:1.5px solid #A8A397}.dotkey .v::before{background:var(--accent)}
+.bar .f.cad{background:repeating-linear-gradient(135deg,#A8A397 0 6px,#CFCBC0 6px 12px)}
+.scroll{overflow-x:auto}
+@media (max-width:600px){.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--rule)}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8.5em;white-space:normal}.stack td::before{content:attr(data-l);float:inline-start;width:8em;margin-inline-start:-8.5em;font:500 12px/1.9 var(--text);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}.stack td:first-child{font-weight:600}}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+th.n{text-align:right}
+
+
+.hero.one{grid-template-columns:1fr}
+.flow5{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:none}
+.flow5 li{border:1px solid var(--ink);padding:16px 14px 18px;background:var(--paper)}
+.flow5 li.on{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.flow5 .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.flow5 h3{font-size:24px;line-height:1.1;margin:6px 0 8px}
+.flow5 li > p:not(.k){margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.flow5 li > p.get{margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink)}
+body.lv-t .flow5 li > p.get{display:none}
+.float{transition:opacity .2s}.float.away{opacity:0;pointer-events:none}
+@media (max-width:600px){.stack.two td::before{content:none}.stack.two td{padding-inline-start:0}.stack.two td:first-child{padding-top:10px}table.score td{padding-inline-start:10em}table.score td::before{width:9.5em;margin-inline-start:-10em}}
+.check{margin-left:0;padding-left:0}
+.after6{margin:14px 0 0;font-size:14px;color:var(--muted)}
+@media (max-width:820px){.flow5{grid-template-columns:1fr}}
+.tablewrap{margin:8px 0 28px}
+.prose table td:first-child{white-space:normal}
+table.score tr.chosen td{background:var(--panel)}
+table.score tr.chosen td:first-child{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px}
+table.score tr.gated td{color:#8A877D}
+.madeup{margin:20px 0 6px;color:var(--accent)}
+.toolgroup{margin:28px 0 32px;border-top:1px solid var(--ink);padding-top:18px}
+.toolseg{margin-bottom:16px}
+.toolblock{background:var(--panel);border:1px solid var(--ink);padding:20px 24px}
+.toolblock .toolname{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.toolblock ol{margin:0 0 12px}
+.toolblock p{font-size:15px}
+.toolgroup.js .toolblock{display:none}
+.toolgroup.js .toolblock.on{display:block}
+.bar .f.empty{background:transparent;border:1.5px dashed #A8A397;height:30px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.prose h3{font-size:26px;margin:28px 0 10px}
+@media (max-width:600px){.stack td:first-child{padding-inline-start:0}.stack td:first-child::before{content:none}table.score tr.chosen td:first-child{padding-left:10px}}
+.float{bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+
+/* café worked example additions */
+.toolseg{display:flex;flex-wrap:wrap;width:max-content;max-width:100%}
+.toolseg button{padding:12px 14px}
+.toolseg button + button{border-left:1px solid var(--rule)}
+@media (max-width:520px){.toolseg{width:100%}.toolseg button{flex:1 1 auto;padding:12px 10px;font-size:13px}}
+.toolblock h3{font-size:22px}
+.toolblock ul,.toolblock ol{font-size:15.5px}
+.where2 > div{min-width:0}
+.where2 p{margin:0 0 10px;font-size:15.5px;line-height:1.6;color:var(--body)}
+.where2 p:last-child{margin-bottom:0}
+.prompt{margin:24px 0 32px;border:1px solid var(--ink);background:#fff;padding:20px 22px 18px;box-shadow:inset 3px 0 0 var(--accent)}
+.prompt .pl{margin:0 0 8px;font:600 12px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.prompt .ptext{margin:0 0 14px;font-size:17px;line-height:1.6;color:var(--ink)}
+.prompt .copy{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.prompt .copy:hover{background:var(--ink);color:var(--paper)}
+.card{border:1px solid var(--ink);background:var(--panel);padding:22px 24px 24px;box-shadow:inset 0 3px 0 var(--accent)}
+.card .madeup{margin:0 0 4px}
+.card h3{font-size:34px;line-height:1.1;margin:0 0 14px}
+.card dl{margin:0;display:grid;grid-template-columns:92px minmax(0,1fr);gap:8px 14px;font-size:15.5px;line-height:1.5}
+.card dt{font:500 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card dd{margin:0;color:var(--body)}
+.flow5.cafe li.on .get{color:var(--accent)}
+.jobs{list-style:none;margin:0 0 12px;padding:0;border-top:1px solid var(--ink)}
+.jobs li{display:grid;grid-template-columns:96px 1fr;gap:4px 12px;padding:14px 0;border-bottom:1px solid var(--rule);font-size:18px;color:var(--ink)}
+.jobs li small{grid-column:2;font-size:14px;color:var(--muted)}
+.jobs .mk{font:600 12px/1.9 var(--text);letter-spacing:.06em;text-transform:uppercase}
+.jobs li.yes{background:var(--panel);box-shadow:inset 3px 0 0 var(--accent);padding-left:12px}
+.jobs li.yes .mk{color:var(--accent)}
+.jobs li.no{color:#8A877D}.jobs li.no .mk{color:var(--muted)}
+/* chart */
+.chart{display:grid;grid-template-columns:56px minmax(0,1fr);gap:8px;align-items:stretch}
+.yax{display:flex;flex-direction:column;justify-content:space-between;font-size:12px;color:var(--muted);text-align:right;padding-bottom:22px;font-variant-numeric:tabular-nums}
+.plot{position:relative;border-left:1px solid var(--ink);border-bottom:0}
+.days{display:grid;grid-template-columns:repeat(31,minmax(0,1fr));gap:3px;height:300px;align-items:end;position:relative;z-index:1}
+.days .c{display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-width:0}
+.bar2{display:block;position:relative;background:#A8A397;min-height:2px;border-bottom:1px solid var(--ink)}
+.c.we .bar2{background:var(--ink)}
+.dn{display:block;height:22px;padding-top:4px;font-size:11px;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+.drop{position:absolute;left:50%;top:-14px;width:8px;height:8px;margin-left:-4px;background:var(--accent);border-radius:0 50% 50% 50%;transform:rotate(45deg)}
+.tag{position:absolute;bottom:calc(100% + 18px);left:50%;transform:translateX(-50%);font:500 12px var(--text);color:var(--accent);white-space:nowrap}
+.roadband{position:absolute;top:0;bottom:22px;left:calc(12 / 31 * 100%);width:calc(5 / 31 * 100%);background:repeating-linear-gradient(135deg,rgba(122,46,26,.10) 0 6px,rgba(122,46,26,0) 6px 12px);border-left:1px dashed var(--accent);border-right:1px dashed var(--accent);z-index:0}
+.roadband span{position:absolute;top:6px;left:6px;font:500 12px var(--text);color:var(--accent);white-space:nowrap}
+.chartfig .legend .lw::before{background:#A8A397}.chartfig .legend .lwe::before{background:var(--ink)}
+.chartfig .legend .lr::before{background:var(--accent);border-radius:0 50% 50% 50%;transform:rotate(45deg);width:9px;height:9px}
+.chartfig .legend .lroad::before{background:repeating-linear-gradient(135deg,rgba(122,46,26,.3) 0 3px,transparent 3px 6px);border:1px dashed var(--accent)}
+@media (max-width:640px){.days{height:220px;gap:2px}.dn{font-size:9px}.chart{grid-template-columns:44px minmax(0,1fr)}.yax{font-size:11px}.roadband span{font-size:11px;top:-20px;left:0}.tag{font-size:11px}}
+/* before / after template */
+.ba{display:grid;grid-template-columns:40px minmax(0,1fr);gap:10px;height:240px}
+.ba-y{writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;color:var(--muted);text-align:center}
+.ba-plot{display:grid;grid-template-columns:repeat(2,minmax(0,160px));gap:48px;align-items:end;border-left:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:0 32px}
+.ba-col{display:flex;flex-direction:column;align-items:stretch;height:100%;justify-content:flex-end;position:relative}
+.ba-bar{display:block;height:70%;border:1.5px dashed #A8A397;border-bottom:0}
+.ba-l{position:absolute;top:100%;left:0;right:0;padding-top:6px;text-align:center;font-size:14px;color:var(--ink)}
+.ba-l small{display:block;font-size:12px;color:var(--muted)}
+.ba + figcaption{margin-top:52px}
+/* agent rows */
+.agentrows{list-style:none;margin:0 0 12px;padding:0;border-top:1px solid var(--ink)}
+.agentrows li{display:grid;grid-template-columns:110px minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--rule);font-size:16px}
+.agentrows .aj{font-family:var(--display);font-size:22px;line-height:1.1}
+.agentrows .aa{color:var(--body)}
+.agentrows .ap{color:var(--ink);font-weight:500}
+@media (max-width:600px){.agentrows li{grid-template-columns:1fr;gap:4px}}
+.stop{display:inline-block;width:12px;height:12px;background:var(--accent);margin-right:8px;vertical-align:-1px;clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%)}
+table.agent td:nth-child(3){color:var(--ink);font-weight:500}
+.prose blockquote{margin:0 0 20px;padding:4px 0 4px 18px;border-left:3px solid var(--accent)}
+.sources ul{word-break:break-word}
+section.q.st{display:block}
+body.lv-d section.q.st{display:none}
+.prose .where2 h3,.prose .box h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.where2{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.prose .where2 p,.prose .where2 li{font-size:.86em}
+.prose .toolblock p,.prose .toolblock li{font-size:.86em;line-height:1.6}
+.tag{bottom:calc(100% + 16px);writing-mode:vertical-rl;transform:translateX(-50%) rotate(180deg);z-index:3;background:var(--paper);padding:2px 0;line-height:1}
+body.lv-t .flow5.cafe li > p.get{display:block}
+@media (max-width:640px){.dn:not(.k){color:transparent}}
+.prose .where2 ul,.prose .toolblock ol,.prose .toolblock ul{font-size:inherit}
+.prose .where2 li,.prose .toolblock li{font-size:.86em;line-height:1.6}
+.checked{margin:-24px 0 28px;font-size:14px !important;color:var(--muted) !important}
+/* chart scale: bars area = days height minus the 22px label row */
+.yax{position:relative;display:block;padding:0;height:300px}
+.yax span{position:absolute;right:0;transform:translateY(-50%);margin-top:0}
+.yax span:nth-child(1){top:0 !important}
+.yax span:nth-child(2){top:139px !important}
+.yax span:nth-child(3){top:278px !important}
+.grid{position:absolute;left:0;right:0;top:0;height:278px;border-top:1px solid var(--rule);border-bottom:1px solid var(--ink);background:linear-gradient(var(--rule),var(--rule)) 0 50%/100% 1px no-repeat;z-index:0}
+.bar2{border-bottom:0}
+.days .c{justify-content:flex-start}
+.days .c .bar2{margin-top:auto}
+.c{display:grid !important;grid-template-rows:278px 22px}
+.c .bar2{align-self:end;max-height:278px}
+.c .dn{align-self:start}
+.plot{border-left:1px solid var(--ink)}
+@media (max-width:640px){
+ .yax{height:220px}.yax span:nth-child(2){top:99px !important}.yax span:nth-child(3){top:198px !important}
+ .grid{height:198px}.c{grid-template-rows:198px 22px}.c .bar2{max-height:198px}
+ .roadband span{display:none}
+ .toolseg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}
+ .toolseg button + button{border-left:0}
+ .toolseg button{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+ .toolseg{grid-template-columns:repeat(6,minmax(0,1fr))}
+ .toolseg button{grid-column:span 2}
+ .toolseg button:nth-child(4):nth-last-child(2),.toolseg button:nth-child(5):nth-last-child(1){grid-column:span 3}
+}
+.roadband{bottom:auto;height:278px}
+@media (max-width:640px){.roadband{height:198px}}
+.c{grid-template-columns:minmax(0,1fr)}.c .bar2{width:100%}.days{align-items:stretch}
+details.data{margin-top:16px;border-top:1px solid var(--rule);padding-top:12px;max-width:680px}
+details.data summary{cursor:pointer;font:500 15px var(--text);color:var(--ink);min-height:44px;display:flex;align-items:center}
+details.data p{font-size:14px;color:var(--muted);margin:4px 0 10px}
+details.data pre{margin:12px 0 0;max-height:260px;overflow:auto;background:#fff;border:1px solid var(--rule);padding:12px;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;color:var(--body)}
+.copydata{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+
+/* workshop 1 additions */
+.figslot{display:block}
+.figslot > figure{margin:40px auto}
+.k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+
+/* agenda drawn to scale */
+.agbar{list-style:none;margin:0;padding:0;display:flex;border-left:1px solid var(--ink)}
+.agbar li{flex:var(--m) 1 0;display:grid;grid-template-rows:22px 64px auto auto auto;padding:0 6px 0 0;border-right:1px solid var(--paper)}
+.agbar .tm{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;padding-left:6px;border-left:1px solid var(--ink);margin-left:-1px}
+.agbar .blk{display:block;background:#A8A397;margin-right:-6px}
+.agbar li.win .blk{background:var(--accent)}
+.agbar li.ag .blk{background:var(--ink)}
+.agbar li.brk .blk{background:repeating-linear-gradient(135deg,#CFCBC0 0 5px,transparent 5px 10px)}
+.agbar .nm{font-family:var(--display);font-size:21px;line-height:1.1;margin:10px 0 2px 6px}
+.agbar li.win .nm{color:var(--accent)}
+.agbar .sb{font-size:13px;line-height:1.35;color:var(--body);margin-left:6px}
+.agbar .mn{font-size:12px;color:var(--muted);margin:4px 0 0 6px}
+.agbar li.end{flex:0 0 0;padding:0;border:0}
+.agbar li.end .tm{position:relative;left:-34px;border-left:0;text-align:right;width:34px;padding:0}
+.agendafig .legend .lwin::before{background:var(--accent)}
+.agendafig .legend .lag::before{background:var(--ink)}
+.agendafig .legend .lother::before{background:#A8A397}
+@media (max-width:760px){
+  .agbar{flex-direction:column;border-left:0;border-top:1px solid var(--ink)}
+  .agbar li{display:grid;grid-template-columns:44px minmax(0,1fr) auto;grid-template-rows:auto auto auto;column-gap:12px;padding:12px 0;border-right:0;border-bottom:1px solid var(--rule)}
+  .agbar .tm{grid-row:1/3;border-left:0;padding:3px 0 0;margin:0}
+  .agbar .nm{grid-column:2;margin:0;font-size:22px}
+  .agbar .sb{grid-column:2;margin:0}
+  .agbar .mn{grid-column:3;grid-row:1;margin:4px 0 0;white-space:nowrap}
+  .agbar .blk{grid-column:2/4;grid-row:3;height:10px;width:calc(var(--m) / 35 * 100%);margin:8px 0 0}
+  .agbar li.end{display:none}
+}
+
+/* agenda table */
+table.agenda tr.win td{background:var(--panel)}
+table.agenda tr.win td:first-child{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px}
+table.agenda tr.brk td{color:var(--muted);font-style:italic}
+table.agenda td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:600px){table.agenda tr.win td:first-child{padding-left:10px}table.agenda tr.brk td:empty{display:none}}
+
+/* scoring rule */
+.formula{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr) 28px minmax(0,.8fr);align-items:stretch;gap:8px}
+.formula .term{border:1px solid var(--ink);padding:14px 16px;background:var(--paper)}
+.formula .term.res{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.formula .v{margin:6px 0 0;font-family:var(--display);font-size:22px;line-height:1.2;color:var(--ink)}
+.formula .op{align-self:center;text-align:center;font-family:var(--display);font-size:32px;color:var(--muted)}
+.gate{margin-top:16px;border:1px dashed var(--accent);padding:16px 18px}
+.gate .k{color:var(--accent)}
+.gate ul{margin:10px 0 0;padding-left:20px;font-size:16px;line-height:1.55;color:var(--body)}
+.scorefig .out{margin:14px 0 0;font-family:var(--display);font-size:24px;line-height:1.25;color:var(--ink)}
+@media (max-width:600px){.formula{grid-template-columns:1fr}.formula .op{font-size:26px;line-height:1}}
+
+/* free plan grid */
+.freegrid{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.freegrid li{display:grid;grid-template-columns:150px 150px minmax(0,1fr);gap:6px 16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--rule)}
+.freegrid .ex{font-family:var(--display);font-size:22px;line-height:1.1;color:var(--ink)}
+.freegrid .ex small{display:block;font:400 13px var(--text);color:var(--muted);margin-top:2px}
+.freegrid .mk{font:600 12px/1.6 var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.freegrid .mk::before{content:"";display:inline-block;width:10px;height:6px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg) translate(1px,-2px);margin-right:8px}
+.freegrid li.part .mk{color:var(--ink)}
+.freegrid li.part .mk::before{width:10px;height:0;border-left:0;transform:none;vertical-align:4px}
+.freegrid .tx{font-size:15.5px;line-height:1.5;color:var(--body)}
+@media (max-width:600px){.freegrid li{grid-template-columns:1fr}}
+
+/* sample file */
+.filecard{border:1px solid var(--ink);background:#fff;padding:18px 20px 8px;box-shadow:inset 3px 0 0 var(--accent)}
+.filecard .madeup{margin:0 0 4px}
+.filecard .fn{margin:0;font:500 17px ui-monospace,Menlo,Consolas,monospace;color:var(--ink);word-break:break-all}
+.filecard .fm{margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--muted)}
+.filecard details.data{border-top:1px solid var(--rule)}
+
+/* fact sheet */
+.card.fact{margin:24px 0 28px}
+.card.fact h3{font-size:30px;margin:0}
+.card.fact .sub{margin:2px 0 12px;font-size:14px !important;color:var(--muted) !important}
+.card.fact ul{margin:0 0 16px;padding-left:20px;font-size:.88em;line-height:1.6;color:var(--body)}
+.card.fact .copy,.hnote .copy{font:500 14px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.card.fact .copy:hover,.hnote .copy:hover,.copydata:hover{background:var(--ink);color:var(--paper)}
+.prompt .ptext p{margin:0 0 10px;font-size:17px;line-height:1.6;color:var(--ink)}
+.prompt .ptext p:last-child{margin-bottom:0}
+.prompt .ptext{margin:0 0 14px}
+
+/* agent flow */
+.agentfig .flow5 li > p:not(.k){font-size:15px}
+.agentfig .flow5 li .k{color:var(--muted)}
+.agentfig .flow5 li.on .k{color:var(--accent)}
+.agentfig .rule{margin:18px 0 0;font-family:var(--display);font-size:26px;line-height:1.25;color:var(--ink)}
+
+/* week after */
+.flow3{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.flow3 li{border:1px solid var(--ink);padding:16px 16px 18px;position:relative}
+.flow3 li:last-child{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.flow3 h3{font-size:24px;line-height:1.1;margin:6px 0 8px}
+.flow3 li > p:not(.k){margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+@media (max-width:700px){.flow3{grid-template-columns:1fr}}
+
+/* four checks */
+.prose ol.checks4{list-style:none;padding:0;margin:0 0 24px;border-top:1px solid var(--ink);counter-reset:ck}
+.prose ol.checks4 li{counter-increment:ck;display:grid;grid-template-columns:44px minmax(0,1fr);gap:6px;padding:14px 0;border-bottom:1px solid var(--rule)}
+.prose ol.checks4 li::before{content:counter(ck);font-family:var(--display);font-size:34px;line-height:.95;color:var(--accent)}
+
+/* answer key */
+table.akey td:first-child{font-weight:600;color:var(--ink)}
+table.akey tr:nth-child(4) td{background:#F3E3DC}
+
+/* one country box */
+.where2.one{grid-template-columns:1fr}
+
+/* handout */
+.handout{border:1.5px solid var(--ink);background:#fff;padding:26px 28px 22px;margin:8px 0 14px;box-shadow:0 14px 36px rgba(20,20,18,.07)}
+.handout .hhd{border-bottom:1px solid var(--ink);padding-bottom:12px;margin-bottom:16px}
+.handout .hhd h3{font-size:30px;line-height:1.1;margin:4px 0 0}
+.handout p{margin:0 0 14px;font-size:16px !important;line-height:1.6 !important;color:var(--body)}
+.handout p:last-child{margin-bottom:0}
+.handout strong{color:var(--accent)}
+.handout .blank{display:inline-block;width:7.5em;max-width:40%;border-bottom:1px solid var(--ink);height:1.1em;vertical-align:-3px;margin:0 6px 0 2px}
+.hnote{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:0 0 20px}
+.hnote span{font-size:14px;color:var(--muted)}
+table.akey tr:nth-child(4) td{padding-left:10px;padding-right:10px}
+.prose h3{line-height:1.15}
+.prose ol.checks4 li{display:block;position:relative;padding:14px 0 14px 50px}
+.prose ol.checks4 li::before{position:absolute;left:0;top:14px}
+
+
+/* workshop 2 additions */
+.hero .lede{max-width:760px}
+@media (max-width:760px){.agbar .blk{width:calc(var(--m) / 45 * 100%)}}
+.bar .f.ext{background:repeating-linear-gradient(135deg,#A8A397 0 4px,transparent 4px 8px);border:1px solid #A8A397;height:30px}
+.keyfig{margin:28px 0 36px}
+.keygrid{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;border-top:1px solid var(--ink);padding-top:18px}
+.keygrid .k{margin:0 0 10px}
+.keyfig .bar{grid-template-columns:150px minmax(0,1fr);gap:12px}
+.keyfig .bar .l{font-size:14px}
+.keyfig .bar .v{font-size:20px;white-space:normal}
+.keyfig .bar .f{height:22px}
+.keyfig .bar .f.ext{height:22px}
+.dotline{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:12px;align-items:center;margin:0 0 10px}
+.dotline .l{font-size:14px;color:var(--ink)}
+.dotline .v{font-family:var(--display);font-size:20px;white-space:nowrap}
+.dotrow{display:grid;grid-template-columns:repeat(18,minmax(0,16px));gap:4px}
+.dotrow i{display:block;aspect-ratio:1;border-radius:50%;background:transparent;border:1.5px solid #A8A397}
+.dotrow i.v{background:var(--accent);border-color:var(--accent)}
+.keyfig .bars{gap:10px}
+@media (max-width:560px){.keyfig .bar{grid-template-columns:1fr;gap:4px}.dotline{grid-template-columns:1fr auto}.dotline .l{grid-column:1/3}.dotrow{grid-template-columns:repeat(18,minmax(0,1fr))}}
+table.akey tr.trap td{background:#F3E3DC}
+table.akey tr.trap td:first-child{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px}
+.card.fact p{margin:0 0 10px;font-size:.92em;line-height:1.6;color:var(--body)}
+.card.fact p:last-child{margin-bottom:0}
+.card.fact .madeup{font-size:12px;margin:0 0 8px}
+.prose .box{margin:24px 0}
+.band .eyebrow{color:#B5B1A6}
+.toolgroup .toolseg button{font-size:13.5px}
+@media print{
+  body{background:#fff}
+  body > *:not([data-print]){display:none !important}
+  section[data-print]{padding:0}
+  section[data-print] > .wrap > .eyebrow, section[data-print] h2, section[data-print] .answer, .hnote{display:none !important}
+  .handout{box-shadow:none;border:1px solid #000;margin:0;break-inside:avoid}
+}
+.keyfig .bar .tr{min-width:0}
+.keyfig .bar .v{font-size:18px;flex:1 1 auto;min-width:0}
+.dotline .v{font-size:18px}
+
+
+/* #32 additions */
+.toolblock.single{margin:20px 0 28px}
+.prose ul.check{padding-left:0}
+.prose .where2 h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.prose .where2 ul{margin:0;padding-left:18px}
+.toolblock p:last-child{margin-bottom:0}
+.prose table td:first-child{white-space:normal}
+.pi{display:inline-block;width:14px;height:16px;position:relative;vertical-align:-2px;margin-right:6px;color:var(--accent)}
+.pi::before{content:"";position:absolute;left:4px;top:0;width:6px;height:6px;border-radius:50%;background:currentColor}
+.pi::after{content:"";position:absolute;left:1px;top:8px;width:12px;height:8px;border-radius:6px 6px 0 0;background:currentColor}
+.clk{display:inline-block;flex:0 0 auto;width:22px;height:22px;border:1.5px solid var(--ink);border-radius:50%;position:relative}
+.clk::before{content:"";position:absolute;left:9.5px;top:3px;width:1.5px;height:8px;background:var(--ink)}
+.clk::after{content:"";position:absolute;left:10px;top:10px;width:6px;height:1.5px;background:var(--ink)}
+/* chain */
+.chainfig{margin-top:56px}
+.clockbar{display:flex;gap:12px;align-items:center;border:1px solid var(--ink);border-bottom:0;padding:10px 14px;font-size:14px;color:var(--body);position:relative}
+.clockbar::after{content:"\21BA";position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--muted)}
+.chain{list-style:none;margin:0;padding:18px 14px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:22px;border:1px solid var(--ink)}
+.chain li{position:relative;border:1px solid var(--ink);padding:12px 12px 14px;background:var(--paper)}
+.chain li.gate{background:var(--panel);border-color:var(--accent);box-shadow:inset 0 3px 0 var(--accent)}
+.chain li.gate .k{color:var(--accent)}
+.chain li.out{background:var(--ink);color:var(--paper)}
+.chain li.out .k,.chain li.out p{color:#CFCBC0}
+.chain h3{font-size:22px;line-height:1.1;margin:4px 0 6px}
+.chain li > p:not(.k){margin:0;font-size:14px;line-height:1.45;color:var(--body)}
+.chain li:not(:last-child)::after{content:"\2192";position:absolute;right:-18px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--muted)}
+.chainfig .legend .lstep::before{background:var(--paper);border:1px solid var(--ink)}
+.chainfig .legend .lgate::before{background:var(--panel);border:1px solid var(--accent)}
+@media (max-width:820px){.chain{grid-template-columns:1fr;gap:22px}.chain li:not(:last-child)::after{content:"\2193";right:auto;left:16px;top:auto;bottom:-21px;transform:none}}
+/* waits */
+.waitfig{margin:28px 0 36px}
+.waitfig .k{margin:0 0 4px}
+.wchart{position:relative;margin-top:14px;padding-bottom:26px;border-left:1px solid var(--ink)}
+.wrows{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.wrows li{position:relative;height:16px}
+.wb{display:block;height:100%;background:var(--ink);position:relative}
+.wrows li.late .wb{background:var(--accent)}
+.wv{position:absolute;top:50%;transform:translateY(-50%);font-size:12px;line-height:1;color:var(--body);font-variant-numeric:tabular-nums;white-space:nowrap}
+.wv.in{left:auto;right:8px;color:var(--paper)}
+.wline{position:absolute;top:-6px;bottom:20px;border-left:1.5px dashed var(--accent);z-index:2}
+.wline span{position:absolute;top:-16px;left:4px;font-size:12px;font-weight:600;color:var(--accent);white-space:nowrap;background:var(--paper);padding:0 3px}
+.wax{position:absolute;left:0;right:0;bottom:0;height:20px;border-top:1px solid var(--ink)}
+.wax span{position:absolute;top:4px;transform:translateX(-50%);font-size:11px;color:var(--muted);white-space:nowrap}
+.wax span:first-child{transform:none}
+.waitfig .legend .lin::before{background:var(--ink)}
+.waitfig .legend .llate::before{background:var(--accent)}
+.waitfig .figtitle{margin-bottom:28px}
+/* fernwood */
+.fernfig{margin:24px 0 32px}
+.fernfig .madeup{margin:0 0 4px;color:var(--accent)}
+.fern{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.fern li{border:1px solid var(--ink);padding:14px 14px 12px;background:var(--paper)}
+.fern h3{font-size:24px;line-height:1.1;margin:4px 0 6px}
+.fern p.tool{margin:0 0 10px;font-size:14px !important;line-height:1.45;color:var(--body)}
+.fern p.chk{margin:0;padding-top:10px;border-top:1px solid var(--rule);font-size:14px !important;line-height:1.45;color:var(--ink);display:flex;align-items:flex-start}
+.fern p.chk .pi{margin-top:2px;flex:0 0 auto}
+@media (max-width:520px){.fern{grid-template-columns:1fr}}
+.prose ol.fern,.prose ol.wrows{padding-left:0;margin-left:0}
+.prose ol.fern li,.prose ol.wrows li{margin:0}
+.chain li.out > p:not(.k),.chain li.out .k{color:#CFCBC0}
+.wv{z-index:3;background:var(--paper);padding:1px 2px}
+.wv.in{background:transparent}
+.wax span:last-child{transform:translateX(-100%)}
+</style>
+<script>document.body.classList.add("lv-t")</script>
+<header class="site"><span class="mark">Leverage</span><span class="where">Notes &middot; For small businesses</span></header><div class="hero one"><div><p class="eyebrow"><span class="t">Starter version &middot; 6 minute read</span><span class="s">Simple version &middot; 10 minute read</span><span class="d">Detailed version &middot; 13 minute read</span></p><h1>One job, several tools: how I chain Muse, ChatGPT, Claude and an automation</h1><p class="lede t">Split one weekly job between two or three AI tools. Each tool does the part it is good at. A person checks the work each time it moves.</p><p class="lede s">How to split one weekly job between two or three AI tools and one automation. Each tool does the part it is good at, and a person checks the work each time it passes from one tool to the next.</p><p class="lede d">How to split one weekly job across two or three AI tools and one automation, so each tool does the part it is good at and a person checks every hand-off, without building anything you can't keep running.</p><p class="by">By Dan Albasry &middot; November 27, 2026 &middot; For small business owners in the US and Canada</p></div></div><div class="wrap"><div class="versions"><p><strong>Three ways to read this.</strong> Starter is the easiest. Simple says everything in plain words. Detailed has every number and source. Switch any time with the button at the bottom of your screen.</p><div class="seg" role="group" aria-label="Choose a reading level"><button type="button" data-v="t" aria-pressed="true">Starter</button><button type="button" data-v="s" aria-pressed="false">Simple</button><button type="button" data-v="d" aria-pressed="false">Detailed</button></div></div><div class="prose t" style="margin-top:48px" data-sec><p>Last night my setup worked while I slept. Muse, an AI helper from Meta, did research. It saved its answers in a shared folder. Claude read each answer. It opened the real web page behind every number. Then it wrote drafts. A timer started it again every hour. By morning, Muse had answered 22 requests. The checks caught mistakes. Here is how a small business can do the same.</p></div><div class="prose s" style="margin-top:48px" data-sec><p>Last night, my own setup kept working while I slept. Muse, Meta's AI agent, answered research requests waiting in a shared Google Drive folder. Claude picked up each answer, opened the original page behind every number, and wrote drafts. A scheduled task started it all again every hour. Between yesterday afternoon and this morning, Muse answered 22 requests. The checks caught mistakes before they went into print. Here is the small business version, including what broke.</p></div><div class="prose d" style="margin-top:48px" data-sec><p>Last night, while I slept, my own setup kept working. Muse, Meta's AI agent, answered research requests that were waiting in a shared Google Drive folder. Claude picked up each answer, opened the original source for every number, and wrote drafts. A scheduled task started the whole thing again every hour. Between yesterday afternoon and this morning, Muse answered 22 research requests, and the checks caught mistakes in the research before they reached a page. This guide is the small business version of that setup, with the parts that broke.</p></div></div><figure class="widewrap chainfig"><p class="figtitle">The chain, with a person at every hand-off</p><div class="clockbar"><span class="clk" aria-hidden="true"></span><span>A scheduled task starts the whole row again on a clock. Mine runs every hour.</span></div><ol class="chain"><li class="step"><p class="k">Step 1</p><h3>Research</h3><p>Muse gathers sources</p></li><li class="step"><p class="k">Hand-off</p><h3>Shared folder</h3><p>The answer is saved as a file</p></li><li class="gate"><p class="k"><span class="pi" aria-hidden="true"></span>Person</p><h3>Check</h3><p>Open the source behind every number</p></li><li class="step"><p class="k">Step 2</p><h3>Write</h3><p>Claude or ChatGPT drafts from checked notes</p></li><li class="gate"><p class="k"><span class="pi" aria-hidden="true"></span>Person</p><h3>Approve</h3><p>Read it, then press send</p></li><li class="out"><p class="k">Done</p><h3>It goes out</h3><p>Email, post or report</p></li></ol><div class="legend"><span class="lstep">A tool does the work</span><span class="lgate">A person checks</span></div></figure><div class="wrap"><nav class="toc" aria-label="In this guide"><p class="eyebrow">Questions in this guide</p><ol><li><a href="#q1"><span class="n">1</span><span>Why use more than one AI tool for one job?</span></a></li><li><a href="#q2"><span class="n">2</span><span>Which jobs are worth chaining, and which aren't?</span></a></li><li><a href="#q3"><span class="n">3</span><span>How do the hand-offs work?</span></a></li><li><a href="#q4"><span class="n">4</span><span>What does my own chain look like, and what did the checks catch?</span></a></li><li><a href="#q5"><span class="n">5</span><span>Where does a person check, and what goes wrong at the hand-offs?</span></a></li><li><a href="#q6"><span class="n">6</span><span>What does it cost to run every week?</span></a></li><li><a href="#q7"><span class="n">7</span><span>What rules apply when tools pass customer or staff data between them?</span></a></li><li><a href="#q8"><span class="n">8</span><span>What can you do this week?</span></a></li><li><a href="#q9"><span class="n">9</span><span>How Leverage Strategies helps</span></a></li><li class="st"><a href="#q10"><span class="n">10</span><span>Words to know</span></a></li></ol></nav></div><section class="q" id="q1" data-sec><div class="wrap"><p class="eyebrow">Question 1</p><h2>Why use more than one AI tool for one job?</h2><div class="prose t"><p>Each tool is better at some parts. And a second tool is a good moment to check the first one.</p><p>Most owners already use more than one. In a 2026 survey of 187 US owners, 73% used more than one AI tool. Of those, about 4 in 10 compare answers to check them. A company that sells websites paid for the survey (<a href="https://www.networksolutions.com/blog/small-business-ai-usage-survey/" target="_blank" rel="noopener">Network Solutions</a>).</p><ul><li><strong>Research.</strong> One test checked the pages each tool pointed to. None of Claude's 82 failed. About 3 in 10 of Grok's failed. It was a small test (<a href="https://magpieindex.com/guides/best-ai-deep-research-tools" target="_blank" rel="noopener">Magpie Index</a>).</li><li><strong>Agents.</strong> In a test of 100 everyday jobs, the best AI helper got about 6 in 10 right (<a href="https://arxiv.org/abs/2611.32946" target="_blank" rel="noopener">ShellBench</a>).</li></ul><p>No tool is always right. That is why a person checks.</p><div class="where2 one"><div><h3>In Canada</h3><p>About 4 in 10 businesses with under five staff use AI to make text or pictures (<a href="https://www.cfib-fcei.ca/en/research-economic-analysis/ai-adoption" target="_blank" rel="noopener">CFIB</a>).</p></div></div></div><div class="prose s"><p>Because each tool is better at some parts of the job. A second tool also gives you a natural moment to check the first tool's work.</p><p>Most owners already mix tools. In a September 2026 survey of 187 US small business owners who use AI, 73% had used more than one AI tool in three months. Of those, 62% said some tools are better at certain tasks, and 39% compare answers to double-check. A web company, Network Solutions, paid for this survey (<a href="https://www.networksolutions.com/blog/small-business-ai-usage-survey/" target="_blank" rel="noopener">Network Solutions</a>).</p><ul><li><strong>Research.</strong> One October 2026 test checked the pages the tools cited. None of Claude's 82 checked citations failed. About 3 in 10 of Grok's did. The test used only three questions, and it was written with Claude's help, which the authors say (<a href="https://magpieindex.com/guides/best-ai-deep-research-tools" target="_blank" rel="noopener">Magpie Index</a>).</li><li><strong>Agents.</strong> In a test of 100 everyday tasks, the best model passed 62.5% of the time (<a href="https://arxiv.org/abs/2611.32946" target="_blank" rel="noopener">ShellBench</a>).</li></ul><p>No tool is right every time. A chain puts each step's work where a person can look at it.</p><div class="where2 one"><div><h3>In Canada</h3><p>Many of the smallest businesses don't use AI yet. CFIB says 39% of businesses with fewer than five staff use generative AI (<a href="https://www.cfib-fcei.ca/en/research-economic-analysis/ai-adoption" target="_blank" rel="noopener">CFIB</a>).</p></div></div></div><div class="prose d"><p>Because the tools are good at different parts of the job, and a second tool gives you a natural place to check the first one's work.</p><p>Most owners already mix tools. In a September 2026 survey of 187 US small business owners who use AI, 73% had run more than one AI tool in the past three months. Of those, 62% said some tools are better at certain tasks, and 39% compare answers across tools to double-check them. This was run by Fractl for Network Solutions, a web company, so treat it as a vendor survey (<a href="https://www.networksolutions.com/blog/small-business-ai-usage-survey/" target="_blank" rel="noopener">Network Solutions</a>).</p><p>Two recent tests show where tools differ, and where they don't:</p><ul><li><strong>Research.</strong> In an October 2026 test that checked cited pages against what each answer claimed, none of the 82 Claude citations it checked failed. OpenAI's had 7% fail, Google's 10%, Perplexity's Sonar 23% and Grok 30%. It used only three questions, ran the models through their APIs rather than the apps, and was written with Claude's help, which the authors disclose (<a href="https://magpieindex.com/guides/best-ai-deep-research-tools" target="_blank" rel="noopener">Magpie Index</a>).</li><li><strong>Agents.</strong> On ShellBench, 100 everyday tasks built from real requests, the best model passed 62.5% of attempts, and the top three were within 1.1 points of each other (<a href="https://arxiv.org/abs/2611.32946" target="_blank" rel="noopener">ShellBench, arXiv, 24 Nov 2026</a>).</li></ul><p>So no single tool is right every time. That is the real case for a chain: each step's output lands somewhere a person can look at it before the next step uses it.</p><div class="where2 one"><div><h3>In Canada</h3><p>Many of the smallest businesses have not started with AI yet. CFIB reports that 39% of businesses with fewer than five employees use generative AI at all (<a href="https://www.cfib-fcei.ca/en/research-economic-analysis/ai-adoption" target="_blank" rel="noopener">CFIB</a>). I found no Canadian survey that counts how many tools a business uses.</p></div></div></div></div></section><section class="q" id="q2" data-sec><div class="wrap"><p class="eyebrow">Question 2</p><h2>Which jobs are worth chaining, and which aren't?</h2><div class="prose t"><p>Split a job only if you can say yes to three questions. Does it happen every week? Is it mostly finding, sorting or writing? Can you catch a mistake before a customer sees it? If any answer is no, do it by hand.</p><p>Never let a tool pay, sign or post by itself. You press that button.</p><div class="tablewrap scroll"><table class="stack two"><thead><tr><th>Job</th><th>Split it?</th></tr></thead><tbody><tr><td data-l="Job">Weekly email to customers</td><td data-l="Split it?">Yes</td></tr><tr><td data-l="Job">Weekly sales summary</td><td data-l="Split it?">Yes. The spreadsheet does the math</td></tr><tr><td data-l="Job">Replies to reviews</td><td data-l="Split it?">Drafts only. You post</td></tr><tr><td data-l="Job">Checking supplier prices</td><td data-l="Split it?">Yes</td></tr><tr><td data-l="Job">Complaints and refunds</td><td data-l="Split it?">No. Answer these yourself</td></tr><tr><td data-l="Job">A one-time contract</td><td data-l="Split it?">No</td></tr></tbody></table></div></div><div class="prose s"><p>Chain a job only if it passes three tests. It repeats on a schedule. Most of it is gathering, sorting or drafting. And you can catch a mistake before it leaves your business. If it fails one test, keep it manual, or chain only the prep work.</p><p>The more a customer depends on it, the slower you check. Anything that pays, signs or posts needs a person to press the button.</p><div class="tablewrap scroll"><table class="stack"><thead><tr><th>Job</th><th>Chain it?</th><th>Why</th></tr></thead><tbody><tr><td data-l="Job">Weekly customer email</td><td data-l="Chain it?">Yes</td><td data-l="Why">Repeats, and you read it before it sends</td></tr><tr><td data-l="Job">Weekly numbers summary</td><td data-l="Chain it?">Yes, with care</td><td data-l="Why">The spreadsheet does the math. AI only writes</td></tr><tr><td data-l="Job">Review replies</td><td data-l="Chain it?">Drafts only</td><td data-l="Why">AI drafts, you post</td></tr><tr><td data-l="Job">Supplier or competitor check</td><td data-l="Chain it?">Yes</td><td data-l="Why">Easy to check against the source</td></tr><tr><td data-l="Job">Complaints, refunds, apologies</td><td data-l="Chain it?">No</td><td data-l="Why">Your own reply is the service</td></tr><tr><td data-l="Job">A one-off contract</td><td data-l="Chain it?">No</td><td data-l="Why">Setting up takes longer than doing it once</td></tr></tbody></table></div></div><div class="prose d"><p>Chain a job only when it passes three tests: it repeats on a schedule, most of it is gathering, sorting or drafting, and a mistake can be caught before it leaves the business. If any test fails, keep the job manual or chain only the preparation.</p><p>It also depends on how much you rely on the result. A staff note can go out with one quick read. A price list or anything a customer sees needs a slower check, and anything that pays, signs or posts needs a person to press the button.</p><div class="tablewrap scroll"><table class="stack"><thead><tr><th>Job</th><th>Chain it?</th><th>Why</th></tr></thead><tbody><tr><td data-l="Job">Weekly customer email</td><td data-l="Chain it?">Yes</td><td data-l="Why">Repeats, mostly research and drafting, you read it before it sends</td></tr><tr><td data-l="Job">Weekly numbers summary</td><td data-l="Chain it?">Yes, with care</td><td data-l="Why">Let the spreadsheet do the math. AI only writes the summary</td></tr><tr><td data-l="Job">Review replies</td><td data-l="Chain it?">Drafts only</td><td data-l="Why">AI drafts, you post. Replies that name a staff member or an incident stay yours</td></tr><tr><td data-l="Job">Supplier or competitor check</td><td data-l="Chain it?">Yes</td><td data-l="Why">Repeats, easy to check against the source</td></tr><tr><td data-l="Job">Complaints, refunds, apologies</td><td data-l="Chain it?">No</td><td data-l="Why">The human reply is the service</td></tr><tr><td data-l="Job">A one-off contract or quote</td><td data-l="Chain it?">No</td><td data-l="Why">Setting up a chain takes longer than doing it once</td></tr></tbody></table></div></div></div></section><section class="q" id="q3" data-sec><div class="wrap"><p class="eyebrow">Question 3</p><h2>How do the hand-offs work?</h2><div class="prose t"><p>Work moves from tool to tool in five ways.</p><ol><li><strong>Shared folder.</strong> One tool saves a file. The next one reads it.</li><li><strong>Connector.</strong> One tool logs in to another app.</li><li><strong>Scheduled task.</strong> A saved request runs on a timer.</li><li><strong>Automation.</strong> A tool like Zapier starts the next step for you.</li><li><strong>Copy and paste.</strong> You move it, after you read it. This is your check.</li></ol><div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="muse" aria-pressed="false">Muse</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button><button type="button" data-tool="auto" aria-pressed="false">Automation</button></div><div class="toolblock" data-tool="chatgpt" data-tools="chatgpt"><p class="toolname">In ChatGPT</p><p>Keep your instructions in one project. The Plus plan can run tasks on a timer (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">OpenAI</a>).</p></div><div class="toolblock" data-tool="claude" data-tools="claude"><p class="toolname">In Claude</p><p>Use a project too. Every paid plan can run tasks on a timer, even when your computer sleeps (<a href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork" target="_blank" rel="noopener">Anthropic</a>).</p></div><div class="toolblock" data-tool="muse" data-tools="muse"><p class="toolname">In Muse</p><p>Good for research. Connect Zapier in Settings, Connectors to pass work on (<a href="https://docs.zapier.com/mcp/get-started/connect/muse" target="_blank" rel="noopener">Zapier</a>). Meta says Muse asks you before it posts, sends or spends (<a href="https://about.fb.com/news/2026/09/introducing-muse-small-business/" target="_blank" rel="noopener">Meta</a>).</p></div><div class="toolblock" data-tool="gemini" data-tools="gemini"><p class="toolname">In Gemini</p><p>You can set up to 10 timed requests. Gemini makes them up to an hour early, so numbers can be old (<a href="https://support.google.com/gemini/answer/16316416" target="_blank" rel="noopener">Google</a>).</p></div><div class="toolblock" data-tool="copilot" data-tools="copilot"><p class="toolname">In Copilot</p><p>Copilot Chat comes free with some Microsoft 365 plans (<a href="https://www.microsoft.com/en-ca/copilot/pricing/business-without-teams" target="_blank" rel="noopener">Microsoft</a>).</p></div><div class="toolblock" data-tool="auto" data-tools="auto"><p class="toolname">With an automation tool</p><p>Zapier's free plan does two steps. You can add a step that waits for a person to say yes. AI steps also have a setting to ask you first (<a href="https://zapier.com/blog/human-in-the-loop/" target="_blank" rel="noopener">Zapier</a>). Turn it on.</p></div></div><p><strong>The agent version.</strong> An AI helper can run all the steps on a timer. It should stop before it sends. You say yes to anything a customer sees, anything that costs money, and anything that deletes.</p></div><div class="prose s"><p>Work moves from one tool to the next in five ways: a shared folder, a connector, a scheduled task, an automation, or you copying it. The first three cover most small business chains. Copying by hand is fine. It is your check.</p><ol><li><strong>Shared folder.</strong> One tool saves a file in Google Drive or OneDrive. The next tool, or you, reads it there.</li><li><strong>Connector.</strong> A tool signs in to another app, like your Drive or Zapier.</li><li><strong>Scheduled task.</strong> A saved prompt runs on a clock.</li><li><strong>Automation.</strong> Zapier, Make or n8n starts the next step when something new arrives.</li><li><strong>Copy and paste.</strong> You move it, after reading it.</li></ol><div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="muse" aria-pressed="false">Muse</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button><button type="button" data-tool="auto" aria-pressed="false">Automation</button></div><div class="toolblock" data-tool="chatgpt" data-tools="chatgpt"><p class="toolname">In ChatGPT</p><p>Keep the instructions and past examples in one project. Plus includes scheduled tasks (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">OpenAI</a>).</p></div><div class="toolblock" data-tool="claude" data-tools="claude"><p class="toolname">In Claude</p><p>Use a project too. Scheduled tasks come with every paid plan and run even when your computer sleeps, unless the task uses a folder on your computer (<a href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork" target="_blank" rel="noopener">Anthropic</a>).</p></div><div class="toolblock" data-tool="muse" data-tools="muse"><p class="toolname">In Muse</p><p>Good for the wide research step. To pass its work on, connect Zapier in Settings, Connectors (<a href="https://docs.zapier.com/mcp/get-started/connect/muse" target="_blank" rel="noopener">Zapier</a>). Meta says nothing publishes, sends or spends without your OK (<a href="https://about.fb.com/news/2026/09/introducing-muse-small-business/" target="_blank" rel="noopener">Meta</a>).</p></div><div class="toolblock" data-tool="gemini" data-tools="gemini"><p class="toolname">In Gemini</p><p>You can schedule up to 10 repeating prompts. Gemini prepares them in the hour before delivery, so quick-changing numbers may be old (<a href="https://support.google.com/gemini/answer/16316416" target="_blank" rel="noopener">Google</a>). The tasks agent is free in the US and Canada on personal accounts only (<a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Google</a>).</p></div><div class="toolblock" data-tool="copilot" data-tools="copilot"><p class="toolname">In Copilot</p><p>Copilot Chat comes free with eligible Microsoft 365 plans (<a href="https://www.microsoft.com/en-ca/copilot/pricing/business-without-teams" target="_blank" rel="noopener">Microsoft</a>).</p></div><div class="toolblock" data-tool="auto" data-tools="auto"><p class="toolname">With an automation tool</p><p>Zapier's free plan only does two-step Zaps. A "Request approval" step can pause a Zap until a person says yes. AI steps have a "Require approval before running" setting, off by default (<a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier pricing</a>, <a href="https://zapier.com/blog/human-in-the-loop/" target="_blank" rel="noopener">Zapier</a>). Turn it on.</p></div></div><p><strong>The agent version.</strong> An agent can run the whole chain on a schedule and stop at the send button. It researches, sorts and drafts on its own. It checks back when an app is set to ask first. You approve anything a customer sees, anything that pays, and anything that deletes.</p></div><div class="prose d"><p>There are only five ways one tool's work reaches the next: a shared folder, a connector, a scheduled task, an automation trigger, or a person copying it across. For most small businesses, the first three cover almost every chain. The fifth one is not a failure. It is your approval step.</p><ol><li><strong>Shared folder.</strong> Tool A saves a file to a Google Drive or OneDrive folder. Tool B, or you, reads it there. This is how my own chain works.</li><li><strong>Connector.</strong> A tool signs in to another service, such as your Drive, email or Zapier, from inside the chat.</li><li><strong>Scheduled task.</strong> A saved prompt runs on a clock.</li><li><strong>Automation trigger.</strong> Zapier, Make or n8n starts the next step when something happens, like a new file or a new row.</li><li><strong>Copy and paste.</strong> You move it by hand, after reading it.</li></ol><div class="toolgroup" data-def="chatgpt"><div class="seg toolseg" role="group" aria-label="Choose a tool"><button type="button" data-tool="chatgpt" aria-pressed="false">ChatGPT</button><button type="button" data-tool="claude" aria-pressed="false">Claude</button><button type="button" data-tool="muse" aria-pressed="false">Muse</button><button type="button" data-tool="gemini" aria-pressed="false">Gemini</button><button type="button" data-tool="copilot" aria-pressed="false">Copilot</button><button type="button" data-tool="auto" aria-pressed="false">Automation</button></div><div class="toolblock" data-tool="chatgpt" data-tools="chatgpt"><p class="toolname">In ChatGPT</p><p>Keep the job's instructions, style guide and past examples in one project so every week's chat starts from the same brief. OpenAI's pricing page lists scheduled tasks as part of Plus (<a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">OpenAI</a>).</p></div><div class="toolblock" data-tool="claude" data-tools="claude"><p class="toolname">In Claude</p><p>Use a project the same way. Scheduled tasks are on every paid plan (Pro, Max, Ultra, Team, Enterprise). They run in the cloud even when your computer is asleep, unless you point the task at a folder on your computer, in which case the computer must be awake with Claude Desktop open (<a href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork" target="_blank" rel="noopener">Anthropic</a>).</p></div><div class="toolblock" data-tool="muse" data-tools="muse"><p class="toolname">In Muse</p><p>Muse is good at the wide research step. To hand its work to other apps, connect Zapier under Settings, Connectors, then Zapier, then Connect, and approve the access (<a href="https://docs.zapier.com/mcp/get-started/connect/muse" target="_blank" rel="noopener">Zapier</a>). Meta says nothing publishes, sends or spends without your approval (<a href="https://about.fb.com/news/2026/09/introducing-muse-small-business/" target="_blank" rel="noopener">Meta</a>).</p></div><div class="toolblock" data-tool="gemini" data-tools="gemini"><p class="toolname">In Gemini</p><p>Scheduled actions let you set up to 10 recurring prompts. Gemini prepares the result within the hour before delivery, so fast-changing numbers can be stale (<a href="https://support.google.com/gemini/answer/16316416" target="_blank" rel="noopener">Google</a>). Gemini's tasks agent is free in the US and Canada, but only on personal Google accounts, not work accounts (<a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Google</a>).</p></div><div class="toolblock" data-tool="copilot" data-tools="copilot"><p class="toolname">In Copilot</p><p>If you already pay for an eligible Microsoft 365 plan, Copilot Chat is included at no extra cost, so a OneDrive folder plus Copilot Chat is a hand-off you may already own (<a href="https://www.microsoft.com/en-ca/copilot/pricing/business-without-teams" target="_blank" rel="noopener">Microsoft</a>).</p></div><div class="toolblock" data-tool="auto" data-tools="auto"><p class="toolname">With an automation tool</p><p>Zapier's free plan runs two-step Zaps only. Triggers don't count toward your task limit. A "Request approval" step can pause a Zap until a person approves, and AI steps have a "Require approval before running" setting that is off by default (<a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier pricing</a>, <a href="https://zapier.com/blog/human-in-the-loop/" target="_blank" rel="noopener">Zapier</a>). Turn it on.</p></div></div><p><strong>The agent version.</strong> An agent can run the whole chain on a schedule: gather, draft, and stop at the send button. What it does alone: research, sorting, drafting, filing. Where it checks back: when a connector is set to ask first, or a source won't load. Where you must approve: anything a customer sees, anything that pays, and anything that deletes.</p></div></div></section><section class="q" id="q4" data-sec><div class="wrap"><p class="eyebrow">Question 4</p><h2>What does my own chain look like, and what did the checks catch?</h2><div class="prose t"><p>I use three tools and one rule: nothing moves on until someone checks it against the real page.</p><ol><li>Claude asks for research in a shared folder.</li><li>Muse answers in the same folder.</li><li>Claude reads all of it, checks every number, then writes.</li><li>A list shows who is doing what.</li></ol><div class="tablewrap scroll"><table class="stack two"><thead><tr><th>One night, 26 to 27 Nov 2026</th><th>Result</th></tr></thead><tbody><tr><td data-l="One night, 26 to 27 Nov 2026">Requests Muse answered</td><td data-l="Result">22</td></tr><tr><td data-l="One night, 26 to 27 Nov 2026">Usual wait</td><td data-l="Result">about 1 hour 45 minutes</td></tr><tr><td data-l="One night, 26 to 27 Nov 2026">Answered within 3 hours</td><td data-l="Result">18 of 22</td></tr></tbody></table></div><figure class="waitfig"><p class="k">From my pipeline log, 26 to 27 Nov 2026</p><p class="figtitle">How long each of 22 research requests waited for Muse</p><div class="wchart"><ol class="wrows" aria-label="Minutes from request to answer, shortest to longest"><li class=""><span class="wb" style="width:3.19%"></span><span class="wv" style="left:calc(3.19% + 6px)">23</span></li><li class=""><span class="wb" style="width:3.61%"></span><span class="wv" style="left:calc(3.61% + 6px)">26</span></li><li class=""><span class="wb" style="width:5.14%"></span><span class="wv" style="left:calc(5.14% + 6px)">37</span></li><li class=""><span class="wb" style="width:5.42%"></span><span class="wv" style="left:calc(5.42% + 6px)">39</span></li><li class=""><span class="wb" style="width:7.64%"></span><span class="wv" style="left:calc(7.64% + 6px)">55</span></li><li class=""><span class="wb" style="width:8.75%"></span><span class="wv" style="left:calc(8.75% + 6px)">63</span></li><li class=""><span class="wb" style="width:10.42%"></span><span class="wv" style="left:calc(10.42% + 6px)">75</span></li><li class=""><span class="wb" style="width:11.25%"></span><span class="wv" style="left:calc(11.25% + 6px)">81</span></li><li class=""><span class="wb" style="width:11.81%"></span><span class="wv" style="left:calc(11.81% + 6px)">85</span></li><li class=""><span class="wb" style="width:12.92%"></span><span class="wv" style="left:calc(12.92% + 6px)">93</span></li><li class=""><span class="wb" style="width:14.58%"></span><span class="wv" style="left:calc(14.58% + 6px)">105</span></li><li class=""><span class="wb" style="width:14.86%"></span><span class="wv" style="left:calc(14.86% + 6px)">107</span></li><li class=""><span class="wb" style="width:17.50%"></span><span class="wv" style="left:calc(17.50% + 6px)">126</span></li><li class=""><span class="wb" style="width:19.72%"></span><span class="wv" style="left:calc(19.72% + 6px)">142</span></li><li class=""><span class="wb" style="width:19.72%"></span><span class="wv" style="left:calc(19.72% + 6px)">142</span></li><li class=""><span class="wb" style="width:21.39%"></span><span class="wv" style="left:calc(21.39% + 6px)">154</span></li><li class=""><span class="wb" style="width:23.06%"></span><span class="wv" style="left:calc(23.06% + 6px)">166</span></li><li class=""><span class="wb" style="width:23.89%"></span><span class="wv" style="left:calc(23.89% + 6px)">172</span></li><li class="late"><span class="wb" style="width:28.19%"></span><span class="wv" style="left:calc(28.19% + 6px)">203</span></li><li class="late"><span class="wb" style="width:29.17%"></span><span class="wv" style="left:calc(29.17% + 6px)">210</span></li><li class="late"><span class="wb" style="width:40.97%"></span><span class="wv" style="left:calc(40.97% + 6px)">295</span></li><li class="late last"><span class="wb" style="width:92.78%"><span class="wv in">668 min &middot; queued last on purpose</span></span></li></ol><span class="wline" style="left:25.0000%"><span>3 hours</span></span><div class="wax"><span style="left:0.0000%">0</span><span style="left:16.6667%">2 h</span><span style="left:33.3333%">4 h</span><span style="left:50.0000%">6 h</span><span style="left:66.6667%">8 h</span><span style="left:83.3333%">10 h</span><span style="left:100.0000%">12 h</span></div></div><div class="legend"><span class="lin">Answered within 3 hours: 18</span><span class="llate">Later than 3 hours: 4</span></div><figcaption>Minutes from request to answer, one bar per request, sorted shortest to longest. Median 106 minutes. Times worked out from the request and reply times in the log.</figcaption></figure><p>What the checks caught:</p><ul><li>Muse said one Claude plan was gone. It was still there (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Anthropic</a>).</li><li>One answer had an old tax rate.</li><li>One price was really a short-time deal.</li></ul><p>What broke: one extra request got only one answer out of four. So my rule is: after 3 hours, use what I can check.</p><h3>The small business version</h3><p><strong>Example business:</strong> Fernwood Cycle is a made-up bike shop with 7 staff. Every Monday it emails customers.</p><div class="tablewrap scroll"><table class="stack"><thead><tr><th>Step</th><th>Tool</th><th>What a person checks</th></tr></thead><tbody><tr><td data-l="Step">1. Research</td><td data-l="Tool">Muse, ChatGPT or Gemini</td><td data-l="What a person checks">Open each link with a date or price</td></tr><tr><td data-l="Step">2. Write</td><td data-l="Tool">Claude or ChatGPT</td><td data-l="What a person checks">Read the draft out loud</td></tr><tr><td data-l="Step">3. Send</td><td data-l="Tool">Your email tool</td><td data-l="What a person checks">Only people who said yes to emails</td></tr><tr><td data-l="Step">4. Repeat</td><td data-l="Tool">A timer or Zapier</td><td data-l="What a person checks">Check the file is from this week</td></tr></tbody></table></div><figure class="fernfig"><p class="k madeup">Example business</p><p class="figtitle">Fernwood Cycle&rsquo;s Monday email in four steps</p><ol class="fern"><li><p class="k">Step 1</p><h3>Research</h3><p class="tool">Muse, ChatGPT or Gemini</p><p class="chk"><span class="pi" aria-hidden="true"></span><span>Open each link with a date or price</span></p></li><li><p class="k">Step 2</p><h3>Write</h3><p class="tool">Claude or ChatGPT</p><p class="chk"><span class="pi" aria-hidden="true"></span><span>Read the draft out loud</span></p></li><li><p class="k">Step 3</p><h3>Send</h3><p class="tool">Your email tool</p><p class="chk"><span class="pi" aria-hidden="true"></span><span>Only people who said yes to emails</span></p></li><li><p class="k">Step 4</p><h3>Repeat</h3><p class="tool">A timer or Zapier</p><p class="chk"><span class="pi" aria-hidden="true"></span><span>Check the file is from this week</span></p></li></ol></figure></div><div class="prose s"><p>My chain uses three tools and one rule: nothing moves on until it has been checked against the original page.</p><ol><li>Claude writes a research request in a shared Drive folder.</li><li>Muse saves its answer in the same folder, with every claim labelled.</li><li>A scheduled Claude task reads all of it, opens the page behind every number, fixes or drops what fails, then writes.</li><li>A tracker shows who is working on what, so nothing gets done twice.</li></ol><div class="tablewrap scroll"><table class="stack two"><thead><tr><th>What I measured, 26 to 27 Nov 2026</th><th>Result</th></tr></thead><tbody><tr><td data-l="What I measured, 26 to 27 Nov 2026">Requests Muse answered</td><td data-l="Result">22</td></tr><tr><td data-l="What I measured, 26 to 27 Nov 2026">Typical wait (median)</td><td data-l="Result">about 1 hour 45 minutes</td></tr><tr><td data-l="What I measured, 26 to 27 Nov 2026">Fastest and slowest</td><td data-l="Result">23 minutes; about 11 hours (queued last on purpose)</td></tr><tr><td data-l="What I measured, 26 to 27 Nov 2026">Answered within 3 hours</td><td data-l="Result">18 of 22</td></tr><tr><td data-l="What I measured, 26 to 27 Nov 2026">Follow-up answers that never came</td><td data-l="Result">3 of 4</td></tr></tbody></table></div><figure class="waitfig"><p class="k">From my pipeline log, 26 to 27 Nov 2026</p><p class="figtitle">How long each of 22 research requests waited for Muse</p><div class="wchart"><ol class="wrows" aria-label="Minutes from request to answer, shortest to longest"><li class=""><span class="wb" style="width:3.19%"></span><span class="wv" style="left:calc(3.19% + 6px)">23</span></li><li class=""><span class="wb" style="width:3.61%"></span><span class="wv" style="left:calc(3.61% + 6px)">26</span></li><li class=""><span class="wb" style="width:5.14%"></span><span class="wv" style="left:calc(5.14% + 6px)">37</span></li><li class=""><span class="wb" style="width:5.42%"></span><span class="wv" style="left:calc(5.42% + 6px)">39</span></li><li class=""><span class="wb" style="width:7.64%"></span><span class="wv" style="left:calc(7.64% + 6px)">55</span></li><li class=""><span class="wb" style="width:8.75%"></span><span class="wv" style="left:calc(8.75% + 6px)">63</span></li><li class=""><span class="wb" style="width:10.42%"></span><span class="wv" style="left:calc(10.42% + 6px)">75</span></li><li class=""><span class="wb" style="width:11.25%"></span><span class="wv" style="left:calc(11.25% + 6px)">81</span></li><li class=""><span class="wb" style="width:11.81%"></span><span class="wv" style="left:calc(11.81% + 6px)">85</span></li><li class=""><span class="wb" style="width:12.92%"></span><span class="wv" style="left:calc(12.92% + 6px)">93</span></li><li class=""><span class="wb" style="width:14.58%"></span><span class="wv" style="left:calc(14.58% + 6px)">105</span></li><li class=""><span class="wb" style="width:14.86%"></span><span class="wv" style="left:calc(14.86% + 6px)">107</span></li><li class=""><span class="wb" style="width:17.50%"></span><span class="wv" style="left:calc(17.50% + 6px)">126</span></li><li class=""><span class="wb" style="width:19.72%"></span><span class="wv" style="left:calc(19.72% + 6px)">142</span></li><li class=""><span class="wb" style="width:19.72%"></span><span class="wv" style="left:calc(19.72% + 6px)">142</span></li><li class=""><span class="wb" style="width:21.39%"></span><span class="wv" style="left:calc(21.39% + 6px)">154</span></li><li class=""><span class="wb" style="width:23.06%"></span><span class="wv" style="left:calc(23.06% + 6px)">166</span></li><li class=""><span class="wb" style="width:23.89%"></span><span class="wv" style="left:calc(23.89% + 6px)">172</span></li><li class="late"><span class="wb" style="width:28.19%"></span><span class="wv" style="left:calc(28.19% + 6px)">203</span></li><li class="late"><span class="wb" style="width:29.17%"></span><span class="wv" style="left:calc(29.17% + 6px)">210</span></li><li class="late"><span class="wb" style="width:40.97%"></span><span class="wv" style="left:calc(40.97% + 6px)">295</span></li><li class="late last"><span class="wb" style="width:92.78%"><span class="wv in">668 min &middot; queued last on purpose</span></span></li></ol><span class="wline" style="left:25.0000%"><span>3 hours</span></span><div class="wax"><span style="left:0.0000%">0</span><span style="left:16.6667%">2 h</span><span style="left:33.3333%">4 h</span><span style="left:50.0000%">6 h</span><span style="left:66.6667%">8 h</span><span style="left:83.3333%">10 h</span><span style="left:100.0000%">12 h</span></div></div><div class="legend"><span class="lin">Answered within 3 hours: 18</span><span class="llate">Later than 3 hours: 4</span></div><figcaption>Minutes from request to answer, one bar per request, sorted shortest to longest. Median 106 minutes. Times worked out from the request and reply times in the log.</figcaption></figure><p>What the checks caught:</p><ul><li>Muse said Claude's Team plan was gone from Anthropic's pricing page. It wasn't. Team seats are still listed at US$25 a month, or US$20 billed yearly (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Anthropic</a>).</li><li>One summary had an old Nova Scotia tax rate.</li><li>A Copilot price was really a first-year deal.</li><li>For this guide, the research said 32% of owners who used an agent could describe one. The survey says 38% (<a href="https://www.networksolutions.com/blog/small-business-ai-usage-survey/" target="_blank" rel="noopener">Network Solutions</a>).</li></ul><p>What broke: one follow-up asked for four extra answers, and only one came back. So my rule is: if an answer is more than 3 hours late, go ahead with what I can check, and say so.</p><h3>The small business version</h3><p><strong>Example business:</strong> Fernwood Cycle is a made-up 7-person bike shop. Every Monday it emails customers about the group ride, new stock and one repair tip.</p><div class="tablewrap scroll"><table class="stack"><thead><tr><th>Step</th><th>Tool (pick one)</th><th>Hand-off</th><th>What a person checks</th></tr></thead><tbody><tr><td data-l="Step">1. Research</td><td data-l="Tool (pick one)">Muse, ChatGPT or Gemini</td><td data-l="Hand-off">Notes with links go in the "Weekly email" folder</td><td data-l="What a person checks">Open each link with a date or price</td></tr><tr><td data-l="Step">2. Write</td><td data-l="Tool (pick one)">Claude or ChatGPT project</td><td data-l="Hand-off">Reads only checked notes, saves a draft</td><td data-l="What a person checks">Read the draft out loud</td></tr><tr><td data-l="Step">3. Send</td><td data-l="Tool (pick one)">Your email tool</td><td data-l="Hand-off">You approve</td><td data-l="What a person checks">Only people who said yes to emails</td></tr><tr><td data-l="Step">4. Repeat</td><td data-l="Tool (pick one)">Scheduled task or Zapier</td><td data-l="Hand-off">Starts step 1 every Monday at 7</td><td data-l="What a person checks">Check the folder date first</td></tr></tbody></table></div><figure class="fernfig"><p class="k madeup">Example business</p><p class="figtitle">Fernwood Cycle&rsquo;s Monday email in four steps</p><ol class="fern"><li><p class="k">Step 1</p><h3>Research</h3><p class="tool">Muse, ChatGPT or Gemini</p><p class="chk"><span class="pi" aria-hidden="true"></span><span>Open each link with a date or price</span></p></li><li><p class="k">Step 2</p><h3>Write</h3><p class="tool">Claude or ChatGPT project</p><p class="chk"><span class="pi" aria-hidden="true"></span><span>Read the draft out loud</span></p></li><li><p class="k">Step 3</p><h3>Send</h3><p class="tool">Your email tool</p><p class="chk"><span class="pi" aria-hidden="true"></span><span>Only people who said yes to emails</span></p></li><li><p class="k">Step 4</p><h3>Repeat</h3><p class="tool">Scheduled task or Zapier, every Monday at 7</p><p class="chk"><span class="pi" aria-hidden="true"></span><span>Check the folder date first</span></p></li></ol></figure></div><div class="prose d"><p>My chain has three tools and one rule: nothing moves to the next step until it has been checked against the original source.</p><ol><li>Claude writes a research request as a Google Doc in a shared Drive folder.</li><li>Muse picks it up and saves its answer in the same folder, with every claim labelled as official, independent test, vendor claim or inference.</li><li>A scheduled Claude task opens the answer, reads all of it, opens the source page for every number, fixes or drops what fails, then writes.</li><li>A tracker records who is working on what, so two runs never touch the same piece.</li></ol><p>Here is what the log shows for one night, 26 to 27 November 2026:</p><div class="tablewrap scroll"><table class="stack two"><thead><tr><th>What I measured</th><th>Result</th></tr></thead><tbody><tr><td data-l="What I measured">Research requests answered by Muse</td><td data-l="Result">22</td></tr><tr><td data-l="What I measured">Typical wait from request to answer (median)</td><td data-l="Result">about 1 hour 45 minutes</td></tr><tr><td data-l="What I measured">Fastest and slowest</td><td data-l="Result">23 minutes; about 11 hours (that one was queued last on purpose)</td></tr><tr><td data-l="What I measured">Answered within 3 hours</td><td data-l="Result">18 of 22</td></tr><tr><td data-l="What I measured">Follow-up answers that never came</td><td data-l="Result">3 of 4 (one follow-up asked for four extra answers; one came back)</td></tr></tbody></table></div><figure class="waitfig"><p class="k">From my pipeline log, 26 to 27 Nov 2026</p><p class="figtitle">How long each of 22 research requests waited for Muse</p><div class="wchart"><ol class="wrows" aria-label="Minutes from request to answer, shortest to longest"><li class=""><span class="wb" style="width:3.19%"></span><span class="wv" style="left:calc(3.19% + 6px)">23</span></li><li class=""><span class="wb" style="width:3.61%"></span><span class="wv" style="left:calc(3.61% + 6px)">26</span></li><li class=""><span class="wb" style="width:5.14%"></span><span class="wv" style="left:calc(5.14% + 6px)">37</span></li><li class=""><span class="wb" style="width:5.42%"></span><span class="wv" style="left:calc(5.42% + 6px)">39</span></li><li class=""><span class="wb" style="width:7.64%"></span><span class="wv" style="left:calc(7.64% + 6px)">55</span></li><li class=""><span class="wb" style="width:8.75%"></span><span class="wv" style="left:calc(8.75% + 6px)">63</span></li><li class=""><span class="wb" style="width:10.42%"></span><span class="wv" style="left:calc(10.42% + 6px)">75</span></li><li class=""><span class="wb" style="width:11.25%"></span><span class="wv" style="left:calc(11.25% + 6px)">81</span></li><li class=""><span class="wb" style="width:11.81%"></span><span class="wv" style="left:calc(11.81% + 6px)">85</span></li><li class=""><span class="wb" style="width:12.92%"></span><span class="wv" style="left:calc(12.92% + 6px)">93</span></li><li class=""><span class="wb" style="width:14.58%"></span><span class="wv" style="left:calc(14.58% + 6px)">105</span></li><li class=""><span class="wb" style="width:14.86%"></span><span class="wv" style="left:calc(14.86% + 6px)">107</span></li><li class=""><span class="wb" style="width:17.50%"></span><span class="wv" style="left:calc(17.50% + 6px)">126</span></li><li class=""><span class="wb" style="width:19.72%"></span><span class="wv" style="left:calc(19.72% + 6px)">142</span></li><li class=""><span class="wb" style="width:19.72%"></span><span class="wv" style="left:calc(19.72% + 6px)">142</span></li><li class=""><span class="wb" style="width:21.39%"></span><span class="wv" style="left:calc(21.39% + 6px)">154</span></li><li class=""><span class="wb" style="width:23.06%"></span><span class="wv" style="left:calc(23.06% + 6px)">166</span></li><li class=""><span class="wb" style="width:23.89%"></span><span class="wv" style="left:calc(23.89% + 6px)">172</span></li><li class="late"><span class="wb" style="width:28.19%"></span><span class="wv" style="left:calc(28.19% + 6px)">203</span></li><li class="late"><span class="wb" style="width:29.17%"></span><span class="wv" style="left:calc(29.17% + 6px)">210</span></li><li class="late"><span class="wb" style="width:40.97%"></span><span class="wv" style="left:calc(40.97% + 6px)">295</span></li><li class="late last"><span class="wb" style="width:92.78%"><span class="wv in">668 min &middot; queued last on purpose</span></span></li></ol><span class="wline" style="left:25.0000%"><span>3 hours</span></span><div class="wax"><span style="left:0.0000%">0</span><span style="left:16.6667%">2 h</span><span style="left:33.3333%">4 h</span><span style="left:50.0000%">6 h</span><span style="left:66.6667%">8 h</span><span style="left:83.3333%">10 h</span><span style="left:100.0000%">12 h</span></div></div><div class="legend"><span class="lin">Answered within 3 hours: 18</span><span class="llate">Later than 3 hours: 4</span></div><figcaption>Minutes from request to answer, one bar per request, sorted shortest to longest. Median 106 minutes. Times worked out from the request and reply times in the log.</figcaption></figure><p>The checks earned their place. Things the verification step caught before they reached a page:</p><ul><li>Muse reported that Claude's Team plan had vanished from Anthropic's pricing page. It hadn't. The page still lists Team seats at US$25 a month, or US$20 billed yearly (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Anthropic</a>).</li><li>One research summary gave Nova Scotia's HST rate as out of date. The check corrected it before it was used.</li><li>A Copilot price that was really a first-year promotion was labelled as a promotion.</li><li>For this guide, the research said 32% of owners who used an agent could describe one. The survey page says 38% (<a href="https://www.networksolutions.com/blog/small-business-ai-usage-survey/" target="_blank" rel="noopener">Network Solutions</a>).</li></ul><p>And the thing that broke: one follow-up asked Muse for four extra answers, and only one ever came back. So the chain has a rule. If an answer is more than 3 hours late, go ahead with what can be verified and say so in the notes.</p><h3>The small business version</h3><p><strong>Example business:</strong> Fernwood Cycle is a made-up 7-person bike shop. Every Monday it sends customers a short email: this week's group ride, what's new in stock, and one repair tip.</p><div class="tablewrap scroll"><table class="stack"><thead><tr><th>Step</th><th>Tool (pick one)</th><th>Hand-off</th><th>What a person checks</th></tr></thead><tbody><tr><td data-l="Step">1. Research</td><td data-l="Tool (pick one)">Muse, ChatGPT deep research or Gemini</td><td data-l="Hand-off">Saves notes with links to the "Weekly email" folder</td><td data-l="What a person checks">Open each link with a date or price</td></tr><tr><td data-l="Step">2. Write</td><td data-l="Tool (pick one)">Claude or ChatGPT project with past emails</td><td data-l="Hand-off">Reads only the checked notes, saves a draft</td><td data-l="What a person checks">Read the draft once, out loud</td></tr><tr><td data-l="Step">3. Send</td><td data-l="Tool (pick one)">Your email tool</td><td data-l="Hand-off">You paste or approve</td><td data-l="What a person checks">Only people who agreed to get it</td></tr><tr><td data-l="Step">4. Repeat</td><td data-l="Tool (pick one)">A scheduled task, or Zapier</td><td data-l="Hand-off">Starts step 1 every Monday at 7</td><td data-l="What a person checks">Check the folder date first</td></tr></tbody></table></div><figure class="fernfig"><p class="k madeup">Example business</p><p class="figtitle">Fernwood Cycle&rsquo;s Monday email in four steps</p><ol class="fern"><li><p class="k">Step 1</p><h3>Research</h3><p class="tool">Muse, ChatGPT deep research or Gemini</p><p class="chk"><span class="pi" aria-hidden="true"></span><span>Open each link with a date or price</span></p></li><li><p class="k">Step 2</p><h3>Write</h3><p class="tool">Claude or ChatGPT project with past emails</p><p class="chk"><span class="pi" aria-hidden="true"></span><span>Read the draft once, out loud</span></p></li><li><p class="k">Step 3</p><h3>Send</h3><p class="tool">Your email tool</p><p class="chk"><span class="pi" aria-hidden="true"></span><span>Only people who agreed to get it</span></p></li><li><p class="k">Step 4</p><h3>Repeat</h3><p class="tool">A scheduled task, or Zapier, every Monday at 7</p><p class="chk"><span class="pi" aria-hidden="true"></span><span>Check the folder date first</span></p></li></ol></figure></div></div></section><section class="q" id="q5" data-sec><div class="wrap"><p class="eyebrow">Question 5</p><h2>Where does a person check, and what goes wrong at the hand-offs?</h2><div class="prose t"><p>Check three times: before the first tool starts, between tools, and before anything goes out.</p><ul><li><strong>Copied mistakes.</strong> One tool's mistake gets passed along (<a href="https://genai.owasp.org/top-10-for-agentic-applications-2026/" target="_blank" rel="noopener">OWASP</a>).</li><li><strong>Quiet changes.</strong> At one rental company, Google changed a form question. Budget answers stopped arriving. No alarm went off. Fewer than 10 leads came in before a person noticed (<a href="https://zapier.com/blog/panoramic-properties-next-gen-zaps/" target="_blank" rel="noopener">Zapier</a>).</li><li><strong>Hidden orders.</strong> An email can hide words that tell the AI what to do. One email could pull data out of Microsoft's Copilot (<a href="https://arxiv.org/abs/2509.10540" target="_blank" rel="noopener">arXiv</a>). Never follow orders found inside a file.</li><li><strong>Doing it twice.</strong> Two automations can send the same email twice. Keep one timer per job.</li></ul><p>Saying yes to everything does not help. People say yes to 93% of Claude Code's questions. Over time they stop looking closely (<a href="https://www.anthropic.com/research/claude-code-auto-mode" target="_blank" rel="noopener">Anthropic</a>). Check fewer things, but slowly.</p><div class="where2 one"><div><h3>In Canada</h3><p>Air Canada had to pay about CA$812 because its chatbot gave a customer wrong information (<a href="https://en.wikipedia.org/wiki/Moffatt_v._Air_Canada" target="_blank" rel="noopener">summary</a>). What your tools send is you talking.</p></div></div></div><div class="prose s"><p>Check in three places: the source before the first tool uses it, the file before the next tool reads it, and the last step before anything leaves.</p><p>Four things go wrong:</p><ul><li><strong>Copied mistakes.</strong> One tool's error becomes the next tool's fact. OWASP, a security group, calls this "cascading failures" (<a href="https://genai.owasp.org/top-10-for-agentic-applications-2026/" target="_blank" rel="noopener">OWASP</a>).</li><li><strong>Quiet changes.</strong> At Panoramic Properties, Google changed a form question's wording. Budget answers stopped reaching the company's sales system, with no error. Fewer than 10 leads came in before a staff member caught it. He says: "I like to check everything manually 100% of the time." (Zapier's own story, <a href="https://zapier.com/blog/panoramic-properties-next-gen-zaps/" target="_blank" rel="noopener">Zapier</a>.)</li><li><strong>Hidden instructions.</strong> A document or email can hide text telling the AI to do something else. One crafted email could pull data out of Microsoft 365 Copilot with zero clicks (<a href="https://arxiv.org/abs/2509.10540" target="_blank" rel="noopener">arXiv</a>). Treat what a tool reads as information, never orders.</li><li><strong>Doing it twice.</strong> Two automations on the same trigger send the same email twice. Keep one owner, one trigger, and one log.</li></ul><p>Approving every step stops working. Anthropic says people accept 93% of Claude Code's permission prompts, and over time stop looking closely (<a href="https://www.anthropic.com/research/claude-code-auto-mode" target="_blank" rel="noopener">Anthropic</a>). Check fewer things, more carefully. Show the exact person, amount and date. Make "no answer" mean "don't send".</p><div class="where2 one"><div><h3>In Canada</h3><p>A BC tribunal made Air Canada pay about CA$812 for what its chatbot told a customer (<a href="https://en.wikipedia.org/wiki/Moffatt_v._Air_Canada" target="_blank" rel="noopener">summary</a>). What your chain sends is your business talking.</p></div></div></div><div class="prose d"><p>Check in three places: the source before the first tool uses it, the hand-off file before the next tool reads it, and the last step before anything leaves the business.</p><p>Four things go wrong at hand-offs:</p><ul><li><strong>Copied errors.</strong> One tool's mistake becomes the next tool's fact. OWASP's 2026 list of risks for AI agents calls this "cascading failures" (<a href="https://genai.owasp.org/top-10-for-agentic-applications-2026/" target="_blank" rel="noopener">OWASP</a>).</li><li><strong>Silent changes.</strong> At Panoramic Properties, Google reworded a lead form question from "What is your monthly budget?" to "What is your monthly rental budget?". The field names stopped matching and budget data quietly stopped reaching the CRM. Nothing threw an error, so the Zap's auto-fix never flagged it. Fewer than 10 leads came through before the marketing coordinator caught it by asking the AI builder to check the field mappings. His rule: "I like to check everything manually 100% of the time." (Vendor story, <a href="https://zapier.com/blog/panoramic-properties-next-gen-zaps/" target="_blank" rel="noopener">Zapier</a>.)</li><li><strong>Hidden instructions.</strong> A document, email or web page can contain text that tells the AI to do something else. EchoLeak showed that a single crafted email could pull data out of Microsoft 365 Copilot with zero clicks (CVE-2025-32711) (<a href="https://arxiv.org/abs/2509.10540" target="_blank" rel="noopener">arXiv</a>). Treat anything a tool reads as information, never as orders. Never give an agent write access to a document strangers can edit.</li><li><strong>Doing it twice.</strong> Two automations watching the same trigger, or a scheduled run and a manual run on the same morning, send the same email twice. My rule: one owner, one trigger, one log of what ran.</li></ul><p>Approving every step doesn't work either. Anthropic says people accept 93% of Claude Code's permission prompts, which it calls "approval fatigue" (<a href="https://www.anthropic.com/research/claude-code-auto-mode" target="_blank" rel="noopener">Anthropic</a>). Check fewer things, more carefully: put the exact recipient, amount and date in front of the person who approves, and make "no answer" mean "don't send".</p><div class="where2 one"><div><h3>In Canada</h3><p>In Moffatt v. Air Canada (2024), a BC tribunal held Air Canada responsible for what its website chatbot told a customer and awarded about CA$812 (<a href="https://en.wikipedia.org/wiki/Moffatt_v._Air_Canada" target="_blank" rel="noopener">Wikipedia summary</a>). Whatever your chain sends out is your business speaking.</p></div></div></div></div></section><section class="q" id="q6" data-sec><div class="wrap"><p class="eyebrow">Question 6</p><h2>What does it cost to run every week?</h2><div class="prose t"><p>About the cost of one or two AI plans.</p><div class="tablewrap scroll"><table class="stack"><thead><tr><th>Tool</th><th>Plan</th><th>Price</th></tr></thead><tbody><tr><td data-l="Tool">Claude</td><td data-l="Plan">Pro</td><td data-l="Price">US$20 a month (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Anthropic</a>)</td></tr><tr><td data-l="Tool">ChatGPT</td><td data-l="Plan">Plus</td><td data-l="Price">US$20 a month (<a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus" target="_blank" rel="noopener">OpenAI</a>)</td></tr><tr><td data-l="Tool">Muse</td><td data-l="Plan">Free, or Power</td><td data-l="Price">$20 a month (<a href="https://www.meta.com/help/subscriptions/1021145227643680/" target="_blank" rel="noopener">Meta</a>)</td></tr><tr><td data-l="Tool">Zapier</td><td data-l="Plan">Professional</td><td data-l="Price">from US$19.99 a month (<a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier</a>)</td></tr></tbody></table></div><p>Two AI plans cost US$40 a month. That is about US$9.21 a week, before tax.</p><div class="where2"><div><h3>In the US</h3><p>Prices are in US dollars, before tax.</p></div><div><h3>In Canada</h3><p>Claude Pro is CA$28 a month plus tax (<a href="https://www.anthropic.com/news/introducing-claude-to-canada" target="_blank" rel="noopener">Anthropic</a>). Google AI Pro is CA$26.99 a month (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google</a>). Together that is CA$54.99 a month before tax, about CA$12.66 a week.</p></div></div></div><div class="prose s"><p>About the same as one or two AI subscriptions. A free automation plan can be enough for a short chain. Zapier's free plan only does two-step Zaps, so a longer chain needs a paid plan.</p><div class="tablewrap scroll"><table class="stack"><thead><tr><th>Tool</th><th>Entry paid plan</th><th>Price on 27 Nov 2026</th></tr></thead><tbody><tr><td data-l="Tool">Claude</td><td data-l="Entry paid plan">Pro</td><td data-l="Price on 27 Nov 2026">US$20 a month, or US$17 billed yearly (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Anthropic</a>)</td></tr><tr><td data-l="Tool">ChatGPT</td><td data-l="Entry paid plan">Plus</td><td data-l="Price on 27 Nov 2026">US$20 a month (<a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus" target="_blank" rel="noopener">OpenAI</a>)</td></tr><tr><td data-l="Tool">Muse</td><td data-l="Entry paid plan">Free with a limit; Power</td><td data-l="Price on 27 Nov 2026">$20 a month (<a href="https://www.meta.com/help/subscriptions/1021145227643680/" target="_blank" rel="noopener">Meta</a>)</td></tr><tr><td data-l="Tool">Zapier</td><td data-l="Entry paid plan">Professional</td><td data-l="Price on 27 Nov 2026">From US$19.99 a month (<a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier</a>)</td></tr><tr><td data-l="Tool">Make</td><td data-l="Entry paid plan">Core</td><td data-l="Price on 27 Nov 2026">From US$9 a month (<a href="https://www.make.com/compare/make-vs-zapier" target="_blank" rel="noopener">Make</a>)</td></tr></tbody></table></div><p>Example: two AI plans at US$20 each are US$40 a month, about US$9.21 a week. Add Zapier and it is about US$59.99 a month, about US$13.81 a week, before tax.</p><div class="where2"><div><h3>In the US</h3><p>Prices are in US dollars, before sales tax.</p></div><div><h3>In Canada</h3><p>Claude Pro is CA$28 a month plus tax (<a href="https://www.anthropic.com/news/introducing-claude-to-canada" target="_blank" rel="noopener">Anthropic</a>). Google AI Pro is CA$26.99 a month (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google</a>). Microsoft 365 Business Standard with Copilot is CA$27.50 per user a month paid yearly, plus tax (<a href="https://www.microsoft.com/en-ca/copilot/pricing/business-without-teams" target="_blank" rel="noopener">Microsoft</a>). Claude Pro plus Google AI Pro is CA$54.99 a month before GST/HST, about CA$12.66 a week. Zapier and Make charge in US dollars.</p></div></div></div><div class="prose d"><p>A weekly chain costs about the same as one or two AI subscriptions. The automation tool is the cheaper part. Make's free plan includes 1,000 credits a month, and Zapier's free plan runs two-step Zaps only, so a longer chain on Zapier needs a paid plan.</p><div class="tablewrap scroll"><table class="stack"><thead><tr><th>Tool</th><th>Entry paid plan</th><th>Price checked 27 Nov 2026</th></tr></thead><tbody><tr><td data-l="Tool">Claude</td><td data-l="Entry paid plan">Pro</td><td data-l="Price checked 27 Nov 2026">US$20 a month, or US$17 a month billed yearly (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Anthropic</a>)</td></tr><tr><td data-l="Tool">ChatGPT</td><td data-l="Entry paid plan">Plus</td><td data-l="Price checked 27 Nov 2026">US$20 a month (<a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus" target="_blank" rel="noopener">OpenAI</a>)</td></tr><tr><td data-l="Tool">Muse</td><td data-l="Entry paid plan">Free with a limit; Power</td><td data-l="Price checked 27 Nov 2026">$20 a month (<a href="https://www.meta.com/help/subscriptions/1021145227643680/" target="_blank" rel="noopener">Meta</a>)</td></tr><tr><td data-l="Tool">Zapier</td><td data-l="Entry paid plan">Professional</td><td data-l="Price checked 27 Nov 2026">From US$19.99 a month; free plan is two-step Zaps only (<a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier</a>)</td></tr><tr><td data-l="Tool">Make</td><td data-l="Entry paid plan">Core</td><td data-l="Price checked 27 Nov 2026">From US$9 a month; free plan 1,000 credits a month (<a href="https://www.make.com/compare/make-vs-zapier" target="_blank" rel="noopener">Make</a>)</td></tr></tbody></table></div><p>Worked example, monthly list prices divided by 4.345 weeks: two AI subscriptions at US$20 each come to US$40 a month, about US$9.21 a week. Add Zapier Professional from US$19.99 and it is about US$59.99 a month, about US$13.81 a week. Prices are before tax.</p><div class="where2"><div><h3>In the US</h3><p>These vendors list prices in US dollars before sales tax. Muse's page shows "$" without a currency code.</p></div><div><h3>In Canada</h3><p>Claude Pro is CA$28 a month plus tax (<a href="https://www.anthropic.com/news/introducing-claude-to-canada" target="_blank" rel="noopener">Anthropic</a>). Google AI Pro is CA$26.99 a month (<a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google</a>). Microsoft 365 Business Standard with Copilot is CA$27.50 per user a month paid yearly, or CA$33.00 monthly, plus applicable tax (<a href="https://www.microsoft.com/en-ca/copilot/pricing/business-without-teams" target="_blank" rel="noopener">Microsoft</a>). Claude Pro plus Google AI Pro comes to CA$54.99 a month before GST/HST, about CA$12.66 a week. Zapier and Make list US dollar prices only, so your card may add a currency fee.</p></div></div></div></div></section><section class="q" id="q7" data-sec><div class="wrap"><p class="eyebrow">Question 7</p><h2>What rules apply when tools pass customer or staff data between them?</h2><div class="prose t"><p>You are in charge of your customers' information at every step. Only pass on what the next tool needs. This is not legal advice.</p><div class="where2"><div><h3>In the US</h3><p>AI can help write your reply to a real review. It must never make up a review or a customer (<a href="https://www.ftc.gov/business-guidance/resources/consumer-reviews-testimonials-rule-questions-answers" target="_blank" rel="noopener">FTC</a>). <span class="note">[CHECK YOUR STATE'S PRIVACY LAW]</span></p></div><div><h3>In Canada</h3><p>Tell people their information may be handled in another country (<a href="https://WWW.PRIV.GC.CA/media/1992/gl_dab_090127_e.pdf" target="_blank" rel="noopener">OPC</a>). In Quebec, check the risks in writing and sign an agreement before data leaves the province (<a href="https://www.legisquebec.gouv.qc.ca:443/en/version/cs/P-39.1?code=se:17&amp;history=20240729" target="_blank" rel="noopener">Law 25</a>). Marketing emails need a yes from the person, your business name and a way to stop the emails (<a href="https://crtc.gc.ca/eng/com500/faq500.htm" target="_blank" rel="noopener">CRTC</a>). Zapier keeps data in the US (<a href="https://zapier.com/legal/data-privacy" target="_blank" rel="noopener">Zapier</a>).</p></div></div></div><div class="prose s"><p>You stay responsible for customer data at every step. Put only what the next tool needs into the chain. This is general information, not legal advice.</p><div class="where2"><div><h3>In the US</h3><p>The FTC bans fake reviews. AI can draft your reply to a real review, but must never invent a customer or a review (<a href="https://www.ftc.gov/business-guidance/resources/consumer-reviews-testimonials-rule-questions-answers" target="_blank" rel="noopener">FTC</a>). Marketing email must follow CAN-SPAM. <span class="note">[CHECK YOUR STATE'S PRIVACY LAW]</span></p></div><div><h3>In Canada</h3><ul><li><strong>PIPEDA.</strong> You stay responsible for data you send to a tool. Tell people their data may be handled in another country (<a href="https://WWW.PRIV.GC.CA/media/1992/gl_dab_090127_e.pdf" target="_blank" rel="noopener">OPC</a>).</li><li><strong>Quebec.</strong> Before personal data leaves Quebec, do a privacy impact assessment and sign a written agreement (<a href="https://www.legisquebec.gouv.qc.ca:443/en/version/cs/P-39.1?code=se:17&amp;history=20240729" target="_blank" rel="noopener">Law 25, s. 17</a>).</li><li><strong>CASL.</strong> Marketing email to anyone in Canada needs consent, your business name and a working unsubscribe, honoured within 10 business days (<a href="https://crtc.gc.ca/eng/com500/faq500.htm" target="_blank" rel="noopener">CRTC</a>).</li><li><strong>Where data sits.</strong> Zapier keeps data on US servers (<a href="https://zapier.com/legal/data-privacy" target="_blank" rel="noopener">Zapier</a>). List each tool, what data it sees, and where it keeps it.</li></ul></div></div></div><div class="prose d"><p>Every tool in the chain handles data for you, and you stay responsible for it at every step. Keep the minimum in the chain: send the review text, not the customer's whole order history. This is general information, not legal advice.</p><div class="where2"><div><h3>In the US</h3><p>The FTC's rule on reviews bans fake consumer reviews, so AI can draft your own reply to a real review but must never invent a customer or a review. Your reply also can't falsely accuse the reviewer (<a href="https://www.ftc.gov/business-guidance/resources/consumer-reviews-testimonials-rule-questions-answers" target="_blank" rel="noopener">FTC</a>). Marketing email must follow CAN-SPAM, and <span class="note">[CHECK YOUR STATE'S PRIVACY LAW]</span> before you pass customer data through a new tool.</p></div><div><h3>In Canada</h3><ul><li><strong>PIPEDA.</strong> Sending personal information to a tool for processing counts as a "use". You stay accountable, need a contract or other means for comparable protection, and must tell people in clear language that their information may be processed in another country (<a href="https://WWW.PRIV.GC.CA/media/1992/gl_dab_090127_e.pdf" target="_blank" rel="noopener">OPC guidelines</a>).</li><li><strong>Quebec.</strong> Before personal information leaves Quebec, you must do a privacy impact assessment and have a written agreement (<a href="https://www.legisquebec.gouv.qc.ca:443/en/version/cs/P-39.1?code=se:17&amp;history=20240729" target="_blank" rel="noopener">Law 25, s. 17</a>).</li><li><strong>CASL.</strong> A marketing email to anyone in Canada needs consent, your business's identification and a working unsubscribe, honoured within 10 business days. This applies even if you send from outside Canada (<a href="https://crtc.gc.ca/eng/com500/faq500.htm" target="_blank" rel="noopener">CRTC</a>). If your unsubscribe list lives in only one tool, every other tool in the chain must check it.</li><li><strong>Where data sits.</strong> Zapier hosts data on servers in the United States and does not offer EU-only storage (<a href="https://zapier.com/legal/data-privacy" target="_blank" rel="noopener">Zapier</a>). Write down, for each tool, what data it sees and where it stores it. That one page is the start of a Quebec assessment and your PIPEDA record.</li></ul></div></div></div></div></section><div class="band"><div class="wrap"><p class="eyebrow">The one rule</p><p class="ds">Nothing moves to the next step until it has been checked against the original source.</p><p class="t">Nothing moves on until someone checks it against the real page.</p></div></div><section class="q" id="q8" data-sec><div class="wrap"><p class="eyebrow">Take it with you</p><h2>What can you do this week?</h2><div class="prose t"><ul class="check"><li><label for="ck-t-1"><input type="checkbox" id="ck-t-1"><span>Pick one job you do every week.</span></label></li><li><label for="ck-t-2"><input type="checkbox" id="ck-t-2"><span>Make one shared folder for it.</span></label></li><li><label for="ck-t-3"><input type="checkbox" id="ck-t-3"><span>Ask one tool to do the research. Save it in the folder.</span></label></li><li><label for="ck-t-4"><input type="checkbox" id="ck-t-4"><span>Open every link with a number. Fix what is wrong.</span></label></li><li><label for="ck-t-5"><input type="checkbox" id="ck-t-5"><span>Ask a second tool to write from the checked notes.</span></label></li><li><label for="ck-t-6"><input type="checkbox" id="ck-t-6"><span>Read it. Send it yourself. Do this twice before you set a timer.</span></label></li></ul></div><div class="prose s"><ul class="check"><li><label for="ck-s-7"><input type="checkbox" id="ck-s-7"><span>Pick one weekly job that passes the three tests.</span></label></li><li><label for="ck-s-8"><input type="checkbox" id="ck-s-8"><span>Make one shared folder with the brief, a style guide and two past examples.</span></label></li><li><label for="ck-s-9"><input type="checkbox" id="ck-s-9"><span>Run the research step. Save the notes, with links, to the folder.</span></label></li><li><label for="ck-s-10"><input type="checkbox" id="ck-s-10"><span>Open every link with a number or date. Fix or delete what doesn't match.</span></label></li><li><label for="ck-s-11"><input type="checkbox" id="ck-s-11"><span>Let a second tool write from the checked notes only.</span></label></li><li><label for="ck-s-12"><input type="checkbox" id="ck-s-12"><span>Read it, then send it yourself. Do this by hand twice before you schedule it.</span></label></li><li><label for="ck-s-13"><input type="checkbox" id="ck-s-13"><span>Write down each tool, what data it sees and where it keeps it.</span></label></li></ul></div><div class="prose d"><ul class="check"><li><label for="ck-d-14"><input type="checkbox" id="ck-d-14"><span>Pick one job that repeats every week and passes the three tests.</span></label></li><li><label for="ck-d-15"><input type="checkbox" id="ck-d-15"><span>Make one shared folder for it, with the brief, a style guide and two past examples.</span></label></li><li><label for="ck-d-16"><input type="checkbox" id="ck-d-16"><span>Run the research step and save the notes, with links, to the folder.</span></label></li><li><label for="ck-d-17"><input type="checkbox" id="ck-d-17"><span>Open every link that carries a number or a date. Fix or delete what doesn't match.</span></label></li><li><label for="ck-d-18"><input type="checkbox" id="ck-d-18"><span>Let a second tool write the draft from the checked notes only.</span></label></li><li><label for="ck-d-19"><input type="checkbox" id="ck-d-19"><span>Read it, then send it yourself. Don't schedule anything until you have done this by hand twice.</span></label></li><li><label for="ck-d-20"><input type="checkbox" id="ck-d-20"><span>Write down each tool, what data it sees and where it stores it.</span></label></li></ul></div></div></section><section class="q" id="q9" data-sec><div class="wrap"><p class="eyebrow">Take it with you</p><h2>How Leverage Strategies helps</h2><div class="prose t"><p>I set this up with owners. We pick one job, choose where a person checks, and try it by hand together first. I can't promise what it will save. You will know what each tool does. <span class="note">[BOOK A CALL LINK]</span></p></div><div class="prose s"><p>I set up chains like this with owners. We pick one job, map the hand-offs, choose where a person checks, and run it by hand together before anything is scheduled. I can't promise what it will save, but you will know what each tool does and where it can go wrong. <span class="note">[BOOK A CALL LINK]</span></p></div><div class="prose d"><p>I set up chains like this with owners: we pick the one job, map the hand-offs, decide where a person checks, and run it together by hand before anything is scheduled. I can't promise what it will save you, but you will know exactly what each tool does and where it can go wrong. <span class="note">[BOOK A CALL LINK]</span></p></div></div></section><section class="q st" id="q10" data-sec><div class="wrap"><p class="eyebrow">Take it with you</p><h2>Words to know</h2><div class="prose t"><div class="tablewrap scroll"><table class="stack two"><thead><tr><th>Word</th><th>What it means</th></tr></thead><tbody><tr><td data-l="Word">Chain</td><td data-l="What it means">One job done by several tools, one after another</td></tr><tr><td data-l="Word">Hand-off</td><td data-l="What it means">When work moves from one tool to the next</td></tr><tr><td data-l="Word">Connector</td><td data-l="What it means">A link that lets one tool use another app</td></tr><tr><td data-l="Word">Scheduled task</td><td data-l="What it means">A request that runs on a timer</td></tr><tr><td data-l="Word">Agent</td><td data-l="What it means">An AI helper that does several steps by itself</td></tr><tr><td data-l="Word">Automation</td><td data-l="What it means">A tool that does steps for you, like Zapier</td></tr></tbody></table></div></div><div class="prose s"><div class="tablewrap scroll"><table class="stack two"><thead><tr><th>Word</th><th>What it means</th></tr></thead><tbody><tr><td data-l="Word">Chain</td><td data-l="What it means">One job split into steps, done by different tools in order</td></tr><tr><td data-l="Word">Hand-off</td><td data-l="What it means">The moment work passes from one tool to the next</td></tr><tr><td data-l="Word">Connector</td><td data-l="What it means">A link that lets an AI tool use another app, like Drive</td></tr><tr><td data-l="Word">Scheduled task</td><td data-l="What it means">A saved prompt that runs on a clock</td></tr><tr><td data-l="Word">Agent</td><td data-l="What it means">An AI tool that does several steps on its own</td></tr><tr><td data-l="Word">Zap</td><td data-l="What it means">One automation in Zapier</td></tr><tr><td data-l="Word">Hidden instructions</td><td data-l="What it means">Text in a file or page that tries to give the AI orders</td></tr><tr><td data-l="Word">Median</td><td data-l="What it means">The middle value when you sort the numbers</td></tr></tbody></table></div></div></div></section><section class="sources" id="sources" data-sec><div class="wrap"><h2>Sources</h2><p>Pages opened November 27, 2026. Prices checked the same day.</p><ul><li><a href="https://www.networksolutions.com/blog/small-business-ai-usage-survey/" target="_blank" rel="noopener">Network Solutions small business AI survey</a> (Fractl for Network Solutions, US, Sep 2026, n=187), opened 27 Nov 2026</li><li><a href="https://magpieindex.com/guides/best-ai-deep-research-tools" target="_blank" rel="noopener">Magpie Index deep research citation test</a> (28 Oct 2026), opened 27 Nov 2026</li><li><a href="https://arxiv.org/abs/2611.32946" target="_blank" rel="noopener">ShellBench</a> (Koc et al., arXiv, 24 Nov 2026), opened 27 Nov 2026</li><li><a href="https://www.cfib-fcei.ca/en/research-economic-analysis/ai-adoption" target="_blank" rel="noopener">CFIB AI adoption research</a>, opened 27 Nov 2026</li><li><a href="https://chatgpt.com/pricing" target="_blank" rel="noopener">ChatGPT pricing</a> and <a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus" target="_blank" rel="noopener">What is ChatGPT Plus</a> (OpenAI), opened 27 Nov 2026</li><li><a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>, <a href="https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork" target="_blank" rel="noopener">Schedule recurring tasks in Claude Cowork</a>, <a href="https://www.anthropic.com/news/introducing-claude-to-canada" target="_blank" rel="noopener">Introducing Claude to Canada</a> and <a href="https://www.anthropic.com/research/claude-code-auto-mode" target="_blank" rel="noopener">How we built Claude Code auto mode</a> (Anthropic), opened 27 Nov 2026</li><li><a href="https://docs.zapier.com/mcp/get-started/connect/muse" target="_blank" rel="noopener">Zapier MCP for Muse</a>, <a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier pricing</a>, <a href="https://zapier.com/blog/human-in-the-loop/" target="_blank" rel="noopener">Human in the loop</a>, <a href="https://zapier.com/legal/data-privacy" target="_blank" rel="noopener">Data privacy</a> and <a href="https://zapier.com/blog/panoramic-properties-next-gen-zaps/" target="_blank" rel="noopener">Panoramic Properties story</a> (Zapier), opened 27 Nov 2026</li><li><a href="https://about.fb.com/news/2026/09/introducing-muse-small-business/" target="_blank" rel="noopener">Introducing Muse for Small Business</a> and <a href="https://www.meta.com/help/subscriptions/1021145227643680/" target="_blank" rel="noopener">About Muse subscriptions</a> (Meta), opened 27 Nov 2026</li><li><a href="https://support.google.com/gemini/answer/16316416" target="_blank" rel="noopener">Schedules in Gemini Apps</a>, <a href="https://support.google.com/gemini/answer/17094507" target="_blank" rel="noopener">Tasks in Gemini Apps</a> and <a href="https://gemini.google/ca/subscriptions/?hl=en-CA" target="_blank" rel="noopener">Google AI plans, Canada</a> (Google), opened 27 Nov 2026</li><li><a href="https://www.microsoft.com/en-ca/copilot/pricing/business-without-teams" target="_blank" rel="noopener">Microsoft 365 Copilot business pricing, Canada</a> (Microsoft), opened 27 Nov 2026</li><li><a href="https://www.make.com/compare/make-vs-zapier" target="_blank" rel="noopener">Make vs Zapier</a> (Make), opened 27 Nov 2026</li><li><a href="https://genai.owasp.org/top-10-for-agentic-applications-2026/" target="_blank" rel="noopener">OWASP Top 10 for Agentic Applications</a>, opened 27 Nov 2026</li><li><a href="https://arxiv.org/abs/2509.10540" target="_blank" rel="noopener">EchoLeak case study</a> (Reddy and Gujral, arXiv, Sep 2025), opened 27 Nov 2026</li><li><a href="https://en.wikipedia.org/wiki/Moffatt_v._Air_Canada" target="_blank" rel="noopener">Moffatt v. Air Canada summary</a>, opened 27 Nov 2026</li><li><a href="https://www.ftc.gov/business-guidance/resources/consumer-reviews-testimonials-rule-questions-answers" target="_blank" rel="noopener">FTC Consumer Reviews and Testimonials Rule Q&amp;A</a>, opened 27 Nov 2026</li><li><a href="https://WWW.PRIV.GC.CA/media/1992/gl_dab_090127_e.pdf" target="_blank" rel="noopener">OPC guidelines for processing personal data across borders</a> (2009), opened 27 Nov 2026</li><li><a href="https://www.legisquebec.gouv.qc.ca:443/en/version/cs/P-39.1?code=se:17&amp;history=20240729" target="_blank" rel="noopener">Quebec private sector privacy act, s. 17</a>, opened 27 Nov 2026</li><li><a href="https://crtc.gc.ca/eng/com500/faq500.htm" target="_blank" rel="noopener">CRTC CASL FAQ</a>, opened 27 Nov 2026</li><li>My own pipeline log (Pipeline tracker, 26 to 27 Nov 2026)</li></ul></div></section><footer class="site"><span>Leverage Strategies &middot; Dan Albasry</span><span>Prices and dates checked November 27, 2026</span></footer><div class="seg float" role="group" aria-label="Reading level"><span class="lab">Reading level</span><button type="button" data-v="t" aria-pressed="true">Starter</button><button type="button" data-v="s" aria-pressed="false">Simple</button><button type="button" data-v="d" aria-pressed="false">Detailed</button></div><script>
+{
+  const KEY='leverage-notes-level', TKEY='leverage-tool', BOX='leverage-chain-checks';
+  const body=document.body, buttons=document.querySelectorAll('.seg button[data-v]');
+  const store=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+  const load=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+  const current=()=>body.classList.contains('lv-t')?'t':body.classList.contains('lv-s')?'s':'d';
+  const paint=v=>{body.classList.remove('lv-d','lv-s','lv-t');body.classList.add('lv-'+v);buttons.forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v?'true':'false'));};
+  const shown=el=>el.offsetParent!==null;
+  const setLevel=v=>{
+    if(v===current()) return;
+    const secs=[...document.querySelectorAll('[data-sec]')]; let anchor=null;
+    secs.forEach(s=>{ if(shown(s) && s.getBoundingClientRect().top<=120) anchor=s; });
+    let progress=0;
+    if(anchor){const r=anchor.getBoundingClientRect();progress=Math.min(1,Math.max(0,(120-r.top)/Math.max(1,r.height)));}
+    paint(v); store(KEY,v);
+    if(!anchor) return;
+    let target=anchor;
+    if(!shown(target)){
+      // the reader's section is not part of this level: go to the next section this level shows, or the one before
+      const i=secs.indexOf(anchor);
+      target=secs.slice(i+1).find(shown)||secs.slice(0,i).reverse().find(shown)||null;
+      progress=0;
+    }
+    if(target){const r2=target.getBoundingClientRect();window.scrollTo({top:window.pageYOffset+r2.top-120+progress*r2.height,behavior:'instant'});}
+  };
+  buttons.forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.v)));
+  const fl=document.querySelector('.float'), inl=document.querySelector('.versions');
+  if(fl&&inl&&'IntersectionObserver' in window){fl.classList.add('away');new IntersectionObserver(es=>es.forEach(e=>fl.classList.toggle('away',e.isIntersecting||e.boundingClientRect.top>0))).observe(inl);}
+  const saved=load(KEY); paint(saved==='d'||saved==='s'||saved==='t'?saved:'t');
+
+  // Tool switch: ChatGPT by default; one choice moves every group that has that tool ("ChatGPT or Claude" counts for both).
+  const groups=document.querySelectorAll('.toolgroup');
+  const blockFor=(g,t)=>[...g.querySelectorAll('.toolblock')].find(b=>(b.dataset.tools||b.dataset.tool).split(' ').includes(t));
+  const setTool=(t,init)=>{
+    groups.forEach(g=>{
+      let blk=t?blockFor(g,t):null;
+      if(!blk&&!init) return;
+      if(!blk) blk=blockFor(g,'chatgpt')||blockFor(g,g.dataset.def)||g.querySelector('.toolblock');
+      g.querySelectorAll('.toolblock').forEach(b=>b.classList.toggle('on',b===blk));
+      g.querySelectorAll('.toolseg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tool===blk.dataset.tool?'true':'false'));
+    });
+  };
+  groups.forEach(g=>{g.classList.add('js');g.querySelectorAll('.toolseg button').forEach(b=>b.addEventListener('click',()=>{setTool(b.dataset.tool);store(TKEY,b.dataset.tool);}));});
+  const st=load(TKEY); setTool(st&&/^[a-z]+$/.test(st)?st:null,true);
+
+  let ticks={}; try{ticks=JSON.parse(load(BOX)||'{}')||{}}catch(e){ticks={}}
+  document.querySelectorAll('.check input').forEach(box=>{box.checked=!!ticks[box.id];box.addEventListener('change',()=>{ticks[box.id]=box.checked;store(BOX,JSON.stringify(ticks));});});
+
+  const copy=(btn,txt,selNode)=>{
+    const label=btn.dataset.label||btn.textContent;
+    const fail=()=>{
+      if(selNode){try{const r=document.createRange();r.selectNodeContents(selNode);const s=window.getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}}
+      btn.textContent=selNode?'Selected: copy with your keyboard':'Select the text to copy';
+    };
+    try{navigator.clipboard.writeText(txt).then(()=>{btn.textContent='Copied';setTimeout(()=>{btn.textContent=label},1600)},fail);}catch(e){fail()}
+  };
+  document.querySelectorAll('.prompt .copy').forEach(btn=>btn.addEventListener('click',()=>{
+    const box=btn.parentElement.querySelector('.ptext');
+    const txt=[...box.querySelectorAll('p')].map(p=>p.textContent).join('\n\n');
+    copy(btn,txt,box);
+  }));
+  document.querySelectorAll('.copyplain').forEach(btn=>btn.addEventListener('click',()=>copy(btn,btn.dataset.text,btn.closest('.prose').querySelector('.handout'))));
+}
+
+</script>
+
+</body></html>

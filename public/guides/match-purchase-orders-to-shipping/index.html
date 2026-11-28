@@ -1,0 +1,1011 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Build: match purchase orders to shipping records</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* LAYOUT: one reading column, the working matcher as the wide figure, one dark band for "you decide". G. Combined, light by choice. */
+:root{
+  color-scheme: light;
+  --paper:#F8F6F1; --ink:#141412; --body:#3A3832; --muted:#5A584F; --rule:#CFCBC0; --panel:#EDE9DF; --accent:#7A2E1A;
+  --ok:#2F5D3A; --okbg:#E3ECDF; --warn:#7A5A12; --warnbg:#F4E9CF; --badbg:#F3E3DC; --white:#FFFFFF;
+  --display:'Instrument Serif','Iowan Old Style',Georgia,serif;
+  --text:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --col:680px; --wide:1040px;
+}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip;padding-left:max(0px,env(safe-area-inset-left,0px));padding-right:max(0px,env(safe-area-inset-right,0px))}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px;overflow-wrap:anywhere}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+.eyebrow{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wrap{max-width:var(--col);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.widewrap{max-width:var(--wide);margin:44px auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (min-width:720px){.wrap,.widewrap{padding-left:24px;padding-right:24px}}
+body.lv-d .s, body.lv-d .t, body.lv-d .st{display:none !important}
+body.lv-s .d, body.lv-s .t{display:none !important}
+body.lv-t .d, body.lv-t .s, body.lv-t .ds{display:none !important}
+body.lv-s .prose{font-size:19px;line-height:1.75}
+body.lv-t .prose{font-size:20px;line-height:1.8}
+header.site{padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--ink)}
+header.site .mark{font-family:var(--display);font-size:32px;line-height:1}
+header.site .where{font-size:14px;color:var(--muted)}
+.hero{padding-top:64px}
+.hero h1{font-size:clamp(40px,6.4vw,76px);line-height:1.03;letter-spacing:-.02em;margin-top:20px}
+.hero .lede{margin:26px 0 0;font-size:21px;line-height:1.6;color:var(--body)}
+.hero .by{margin:24px 0 0;font-size:14px;color:var(--muted)}
+.versions{margin:48px 0 0;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:center;justify-content:space-between;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:22px 0}
+.versions p{margin:0;font-size:16px;color:var(--body);flex:1 1 280px}
+.seg{display:inline-flex;border:1px solid var(--ink);background:var(--paper);flex-wrap:wrap}
+.seg button{font:500 14px/1 var(--text);letter-spacing:.04em;padding:14px 16px;min-height:44px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.seg button + button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.float{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:20;box-shadow:0 6px 24px rgba(20,20,18,.18);flex-wrap:nowrap}
+.float .lab{display:flex;align-items:center;padding:0 14px 0 16px;font-size:13px;color:var(--muted);border-right:1px solid var(--rule)}
+@media (max-width:520px){.float .lab{display:none}.float button{padding:14px 13px}}
+.toc{margin:56px 0 0}
+.toc ol{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--ink)}
+.toc li{border-bottom:1px solid var(--rule)}
+.toc a{display:flex;gap:20px;align-items:baseline;padding:14px 0;text-decoration:none;font-family:var(--display);font-size:23px;line-height:1.2}
+.toc a span.n{font:400 13px var(--text);color:var(--muted);flex:0 0 20px;font-variant-numeric:tabular-nums}
+section.q{padding:88px 0 0;scroll-margin-top:12px}
+section.q h2{font-size:clamp(32px,5vw,50px);line-height:1.08;margin:14px 0 28px}
+.prose p{margin:0 0 20px;color:var(--body)}
+.prose p.answer{font-size:1.14em;line-height:1.55;color:var(--ink)}
+.prose strong{color:var(--ink);font-weight:600}
+.prose ul,.prose ol{margin:0 0 20px;padding-left:22px;color:var(--body)}
+.prose li{margin:0 0 10px}
+.prose h3{font-size:26px;margin:28px 0 10px}
+.intro{margin-top:48px}
+figure{margin:44px auto}
+figcaption{margin-top:12px;font-size:13px;line-height:1.5;color:var(--muted)}
+.figtitle{margin:0;font-family:var(--display);font-size:28px;line-height:1.15}
+.scroll{overflow-x:auto;margin:8px 0 24px}
+table{border-collapse:collapse;width:100%;font-size:15.5px;line-height:1.45}
+th{font:500 12.5px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 14px 10px 0;border-bottom:1px solid var(--ink)}
+td{padding:12px 14px 12px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--body)}
+td:first-child{color:var(--ink);font-weight:500}
+.note{display:inline;background:var(--badbg);color:var(--accent);font-size:.92em;padding:1px 6px}
+.box,.where2>div,.tool{background:var(--panel);border:1px solid var(--ink);padding:22px 24px;margin:28px 0}
+.box h3,.where2 h3,.tool h3{font:600 13px var(--text);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.box p,.where2 p,.tool p{margin:0 0 10px;font-size:16.5px;line-height:1.6;color:var(--body)}
+.box p:last-child,.where2 p:last-child,.tool p:last-child{margin-bottom:0}
+.where2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:28px 0;border:1px solid var(--ink)}
+.where2>div{margin:0;border:0}
+.where2>div+div{border-left:1px solid var(--ink)}
+@media (max-width:640px){.where2{grid-template-columns:1fr}.where2>div+div{border-left:0;border-top:1px solid var(--ink)}}
+.tools{margin:28px 0}
+.tools .tool{margin:0;border-top:0}
+.tools .tool[hidden]{display:none}
+.tsw{display:flex;flex-wrap:wrap;border:1px solid var(--ink);background:var(--paper)}
+.tsw button{flex:1 1 auto;font:500 14px/1 var(--text);padding:13px 14px;min-height:44px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.tsw button+button{border-left:1px solid var(--rule)}
+.tsw button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.code{position:relative;margin:8px 0 24px;border:1px solid var(--ink);background:var(--white)}
+.code pre{margin:0;padding:52px 18px 18px;overflow-x:auto;white-space:pre-wrap;font:13.5px/1.6 var(--mono);color:var(--ink)}
+.copy{position:absolute;top:8px;right:8px;font:500 13px var(--text);padding:8px 12px;min-height:36px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.copy.done{background:var(--ink);color:var(--paper)}
+li.ck{list-style:none;position:relative;padding-left:4px}
+li.ck::before{content:"";position:absolute;left:-26px;top:.35em;width:17px;height:17px;border:1.5px solid var(--ink)}
+.band{background:var(--ink);color:var(--paper);margin-top:88px;padding-block:60px}
+.band .eyebrow{color:#B5B1A6}
+.band p:not(.eyebrow){margin:14px 0 0;font-family:var(--display);font-size:clamp(24px,3.4vw,34px);line-height:1.3;color:var(--paper)}
+/* funnel */
+.fn{display:grid;grid-template-columns:minmax(0,1.1fr) 28px minmax(0,.6fr) 28px minmax(0,1.1fr);align-items:center;gap:10px}
+.files,.outs{display:grid;gap:10px}
+.file{border:1px solid var(--ink);background:var(--white);padding:14px 16px;font-family:var(--display);font-size:24px;line-height:1.1}
+.file .k,.o b{display:block}
+.file .k{font:500 11.5px var(--text);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.file small{display:block;font:400 13px var(--text);color:var(--muted);margin-top:4px}
+.mid{background:var(--ink);color:var(--paper);font-family:var(--display);font-size:28px;text-align:center;padding:26px 8px;clip-path:polygon(0 0,100% 18%,100% 82%,0 100%)}
+.arrow{height:2px;background:var(--ink);position:relative}
+.arrow::after{content:"";position:absolute;right:-1px;top:-5px;border:6px solid transparent;border-left:8px solid var(--ink);border-right:0}
+.o{border:1px solid var(--ink);padding:10px 14px;font-size:14px;color:var(--body)}
+.o b{font-family:var(--display);font-weight:400;font-size:28px;line-height:1.05;color:var(--ink)}
+.o.ok{background:var(--okbg)}.o.look{background:var(--warnbg)}.o.risk{background:var(--badbg)}.o.risk b{color:var(--accent)}
+@media (max-width:700px){.fn{grid-template-columns:1fr}.arrow{width:2px;height:24px;margin:0 auto}.arrow::after{right:auto;left:-5px;top:auto;bottom:-2px;border:6px solid transparent;border-top:8px solid var(--ink);border-bottom:0}.mid{clip-path:none;padding:14px}.files,.outs{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}}
+/* matcher */
+.tool-ui{border:1px solid var(--ink);background:var(--white);padding:22px}
+.tool-hd{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between}
+.tag{font:600 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--badbg);padding:4px 8px}
+.hint{margin:8px 0 16px;font-size:15px;color:var(--muted)}
+.pastes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:760px){.pastes{grid-template-columns:1fr}}
+.paste{display:grid;gap:6px}
+.paste .k{font:500 12px var(--text);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.paste textarea{width:100%;font:12.5px/1.5 var(--mono);border:1px solid var(--rule);background:var(--paper);color:var(--ink);padding:10px;resize:vertical;white-space:pre;overflow:auto}
+.paste input{font-size:13px;color:var(--muted);max-width:100%}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+.actions button{font:500 15px var(--text);min-height:44px;padding:10px 16px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer}
+.actions button.primary{background:var(--ink);color:var(--paper)}
+#out{margin-top:20px}
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin-bottom:16px}
+.sum div{padding:12px 14px 12px 0}
+.sum b{display:block;font-family:var(--display);font-weight:400;font-size:34px;line-height:1.05;font-variant-numeric:tabular-nums}
+.sum span{font-size:13px;color:var(--muted)}
+.sum .risk b{color:var(--accent)}
+.res td,.res th{font-size:14px;white-space:nowrap}
+.res td.n,.res th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font:600 11.5px/1.2 var(--text);letter-spacing:.05em;padding:4px 7px;border:1px solid currentColor}
+.p-ok{color:var(--ok);background:var(--okbg)}.p-warn{color:var(--warn);background:var(--warnbg)}.p-bad{color:var(--accent);background:var(--badbg)}
+.flags{margin:14px 0 0;padding-left:20px;font-size:14px;color:var(--body)}
+.err{color:var(--accent);font-size:15px}
+.cta{border-top:1px solid var(--ink);margin-top:88px;padding-block:72px}
+.sources{padding:56px 0 0}
+.sources ul{font-size:15px;line-height:1.6;color:var(--body);padding-left:20px}
+.sources h2{font-size:34px;margin:0 0 8px}
+footer.site{margin-top:80px;border-top:1px solid var(--ink);padding:24px max(16px,env(safe-area-inset-right,0px)) 120px max(16px,env(safe-area-inset-left,0px));display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<script>document.body.classList.add('lv-t')</script>
+
+<header class="site"><span class="mark">Leverage</span><span class="where">Notes · Builds</span></header>
+
+<div class="wrap hero">
+  <p class="eyebrow"><span class="d">Build · Detailed version</span><span class="s">Build · Simple version</span><span class="t">Build · Easiest version</span></p>
+  <h1>Match purchase orders to shipping records</h1>
+  <p class="lede d">Before you pay a supplier, check what you ordered against what actually arrived. This guide gives you a small matcher you can run on two spreadsheet files, the same check done in ChatGPT, Claude, Excel or Google Sheets, and a weekly version that runs on its own while you keep the final say.</p><p class="lede s">Before you pay a supplier, check what you ordered against what came. This guide gives you a small tool that does the check, the same check in ChatGPT, Claude, Excel or Google Sheets, and a weekly version where you still make every decision.</p><p class="lede t">Before you pay a supplier, check what you ordered against what came. This guide gives you a free tool for that check, the steps to do it with AI, and a weekly plan where you still decide.</p>
+  <p class="by">By Dan Albasry · November 27, 2026 · For business owners in the US and Canada</p>
+  <div class="versions">
+    <p><strong>Three ways to read this.</strong> Starter is the easiest. Simple says everything in plain words. Detailed has every number and source. Switch any time with the button at the bottom of your screen.</p>
+    <div class="seg" role="group" aria-label="Choose a reading level"><button type="button" data-v="t" aria-pressed="true">Starter</button><button type="button" data-v="s" aria-pressed="false">Simple</button><button type="button" data-v="d" aria-pressed="false">Detailed</button></div>
+  </div>
+  <div class="prose intro"><div class="d"><p><span class="note">Placeholder: Dan's real scene: a short moment from your own work where a delivery did not match the order. What arrived, what was missing, and when you noticed. Two or three sentences, no client names.</span></p>
+<p>Most small businesses already have the two records this check needs. One is the purchase order, the list of what you asked a supplier for and at what price. The other is the packing slip or receiving log, the list of what actually came off the truck. The trouble is that nobody lines them up, so a short box or a swapped item gets paid for at full price. To show what the check finds, I built a made-up example business and ran its real files through a working matcher. Every number in the example below comes from that run.</p>
+</div><div class="s"><p><span class="note">Placeholder: Dan's real scene: a short moment from your own work when a delivery did not match the order. Two or three sentences, no client names.</span></p>
+<p>You probably already have the two lists this check needs. One is your purchase order: what you asked for, and the price. The other is your packing slip or receiving log: what actually came in the box. Most owners never put the two side by side. So a missing box or a swapped item gets paid for anyway. I made up an example business and ran its files through a working tool. Every number in the example comes from that run.</p>
+</div><div class="t"><p><span class="note">Placeholder: Dan's real scene: a short moment when a delivery did not match the order. Two or three sentences, no client names.</span></p>
+<p>You have two lists. One says what you ordered. The other says what came in the box. Most owners never put them side by side. So a missing box can get paid for. I made up a small business and tested a real tool on its lists. The numbers below come from that test.</p>
+</div></div>
+</div>
+<figure class="widewrap funnel" aria-label="Two files, purchase orders and receiving records, go into a match step that sorts every line into matched, needs a look, and money at risk">
+  <div class="fn">
+    <div class="files"><div class="file"><span class="k">File 1</span>Purchase orders<small>what you asked for</small></div><div class="file"><span class="k">File 2</span>Receiving records<small>what came in the box</small></div></div>
+    <div class="arrow" aria-hidden="true"></div>
+    <div class="mid">Match</div>
+    <div class="arrow" aria-hidden="true"></div>
+    <div class="outs"><div class="o ok"><b>6</b>Matched</div><div class="o look"><b>5</b>Needs a look</div><div class="o risk"><b>$426.20</b>Money at risk</div></div>
+  </div>
+  <figcaption>Results from the made-up Copperleaf Candle Co. sample files, run through the matcher below.</figcaption>
+</figure>
+
+<div class="wrap">
+  <nav class="toc" aria-label="Questions in this guide"><p class="eyebrow">9 questions</p><ol><li><a href="#q1"><span class="n">1</span><span>What goes wrong between an order and a delivery, and what does it cost?</span></a></li><li><a href="#q2"><span class="n">2</span><span>What files do I need, and what should match?</span></a></li><li><a href="#q3"><span class="n">3</span><span>How does the matcher work?</span></a></li><li><a href="#q4"><span class="n">4</span><span>How do I do the match in ChatGPT, Claude or my spreadsheet?</span></a></li><li><a href="#q5"><span class="n">5</span><span>Can an agent or automation run it every week?</span></a></li><li><a href="#q6"><span class="n">6</span><span>What do I do when something doesn&#x27;t match?</span></a></li><li><a href="#q7"><span class="n">7</span><span>What is safe to upload?</span></a></li><li><a href="#q8"><span class="n">8</span><span>Your checklist for this week</span></a></li><li><a href="#q9"><span class="n">9</span><span>How Leverage Strategies helps</span></a></li></ol></nav>
+</div>
+<section class="q" id="q1"><div class="wrap"><p class="eyebrow">Question 1 of 9</p><h2>What goes wrong between an order and a delivery, and what does it cost?</h2><div class="prose d"><p class="answer">What goes wrong is ordinary: boxes come up short, extras show up, an item never ships, a supplier swaps in something similar, or an order arrives in two loads and only one gets written down. Each one is small. Paid without checking, they add up.</p>
+<p>Accountants have a name for the fix. A three-way match compares three things before a bill is paid: the purchase order (what you agreed), the receiving record (what arrived) and the supplier's invoice (what they want paid). This guide builds the first half, purchase order against what arrived, because that is the part most small businesses skip. Once you have it, checking the invoice is one more column.</p>
+<p>How often does a bill need a second look? An accounts payable benchmark by Ardent Partners puts it at 19.9% of invoices on average, against 11.8% for the best teams, at an average cost of US$9.90 to process one invoice (<a href="https://silentinfotech.com/blog/integration-6/ai-invoice-processing-quickbooks-xero-830" target="_blank" rel="noopener">Silent Infotech, citing Ardent Partners' 2026 benchmark, Nov 12, 2026</a>). Silent Infotech builds custom invoice tools, and I could not open the Ardent report itself, so treat these as a rough guide, not a law of nature. Nobody has published an independent study of how often small businesses specifically get shorted.</p>
+<p>Your situation decides how much this matters:</p>
+<ul>
+<li><strong>A shop receiving stock.</strong> A few suppliers, a few orders a month. A short box costs you the item and maybe a lost sale. A monthly check is plenty.</li>
+<li><strong>A maker buying materials.</strong> Wax, fabric, jars, parts. A missing input can stop production, and a substitution can change your product. Check every delivery before you use it.</li>
+<li><strong>A distributor or a supplier selling to big retailers.</strong> Here you are checked too. Large retailers match your shipments against their purchase orders and take money off your payment when they don't agree. Your own records are your defence, so you want them matched before the retailer does it for you.</li>
+</ul></div><div class="prose s"><p class="answer">Small things go wrong. A box is short. Extra items show up. One item never ships. The supplier sends something similar instead. An order comes in two deliveries and only one gets written down.</p>
+<p>Accountants check three papers before they pay a bill. This is called a three-way match: the purchase order, the receiving record and the supplier's invoice. This guide covers the first two, because that's the part most small businesses skip.</p>
+<p>How often does a bill need a second look? One industry benchmark says about 1 in 5 invoices on average, and about 1 in 8 for the best teams (<a href="https://silentinfotech.com/blog/integration-6/ai-invoice-processing-quickbooks-xero-830" target="_blank" rel="noopener">Silent Infotech, citing Ardent Partners' 2026 benchmark</a>). Silent Infotech sells invoice tools, and I couldn't open the original report. So use this as a rough guide only. No one has published an independent study of small businesses on this.</p>
+<p>How much it matters depends on your business:</p>
+<ul>
+<li><strong>A shop buying stock.</strong> A few orders a month. A monthly check is enough.</li>
+<li><strong>A maker buying materials.</strong> A missing part can stop your work. A swap can change your product. Check each delivery before you use it.</li>
+<li><strong>A supplier selling to big stores.</strong> Big stores check you too. They take money off your payment when your shipment doesn't match their order. Your own records are your proof.</li>
+</ul></div><div class="prose t"><p class="answer">Small things go wrong. A box is short. Extra things come. Something never comes. The supplier sends a different item.</p>
+<p>You pay for it if no one checks. One benchmark says about 1 in 5 bills needs a second look (<a href="https://silentinfotech.com/blog/integration-6/ai-invoice-processing-quickbooks-xero-830" target="_blank" rel="noopener">Silent Infotech, citing Ardent Partners</a>). The company that shared it sells bill tools, so take it as a rough guide.</p>
+<p>It matters more for some owners:</p>
+<ul>
+<li><strong>A shop buying stock:</strong> check once a month.</li>
+<li><strong>A maker buying supplies:</strong> check each box before you use it.</li>
+<li><strong>A seller to big stores:</strong> big stores check you too, and take money off your pay.</li>
+</ul></div></div></section><section class="q" id="q2"><div class="wrap"><p class="eyebrow">Question 2 of 9</p><h2>What files do I need, and what should match?</h2><div class="prose d"><p class="answer">You need two files with one row per item: your purchase orders and your receiving records. A third, the supplier invoice, comes later.</p>
+<p>The columns that matter:</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Columns you need</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Purchase orders</td>
+<td>PO number, supplier, SKU (your item code), item name, quantity ordered, unit cost, date</td>
+</tr>
+<tr>
+<td>Receiving records</td>
+<td>Receipt or packing slip number, PO number as written, supplier, SKU, quantity received, date received, notes</td>
+</tr>
+</tbody>
+</table></div>
+<p>Where those files come from depends on your tools. QuickBooks Online Canada includes purchase orders and inventory on the Plus (C$110 a month) and Advanced (C$220 a month) plans, not on Lite or EasyStart, with taxes not included (<a href="https://quickbooks.intuit.com/ca/pricing/" target="_blank" rel="noopener">QuickBooks Canada pricing</a>, checked 2026-11-27). Xero's accounting product can raise purchase orders, but it keeps no receiving record and does not compare a bill's quantities or prices with the purchase order, so the match is manual (<a href="https://www.aequoap.com/accounts-payable/three-way-matching-xero" target="_blank" rel="noopener">Aequo AP, Nov 13, 2026</a>). If you write receipts on paper, a simple spreadsheet log is enough. Type each packing slip into it the day it arrives.</p>
+<p>Two habits make the match work. Write the PO number on every packing slip as it comes in, exactly as it appears on the order. And record what arrived, not what the order says should have arrived.</p></div><div class="prose s"><p class="answer">You need two spreadsheet files, with one row per item.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>Columns you need</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Purchase orders</td>
+<td>PO number, supplier, item code (SKU), item name, how many ordered, price each, date</td>
+</tr>
+<tr>
+<td>Receiving records</td>
+<td>Slip number, PO number as written, supplier, item code, how many arrived, date, notes</td>
+</tr>
+</tbody>
+</table></div>
+<p>Your software may hold these already. In Canada, QuickBooks Online has purchase orders on its Plus plan (C$110 a month) and Advanced plan (C$220 a month), before tax (<a href="https://quickbooks.intuit.com/ca/pricing/" target="_blank" rel="noopener">QuickBooks Canada</a>). Xero can make purchase orders, but it doesn't record what arrived. It also doesn't compare the two for you (<a href="https://www.aequoap.com/accounts-payable/three-way-matching-xero" target="_blank" rel="noopener">Aequo AP</a>). A simple spreadsheet log works fine.</p>
+<p>Two habits help most. Write the PO number on every packing slip. And write down what arrived, not what should have arrived.</p></div><div class="prose t"><p class="answer">You need two lists, one row per item.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>List</th>
+<th>What it shows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Purchase orders</td>
+<td>Order number, supplier, item code, how many, price</td>
+</tr>
+<tr>
+<td>Receiving records</td>
+<td>Order number, supplier, item code, how many came, date</td>
+</tr>
+</tbody>
+</table></div>
+<p>Your software may already have them. In Canada, QuickBooks has order lists on its Plus plan, C$110 a month before tax (<a href="https://quickbooks.intuit.com/ca/pricing/" target="_blank" rel="noopener">QuickBooks Canada</a>). Xero can make orders, but it does not track what came (<a href="https://www.aequoap.com/accounts-payable/three-way-matching-xero" target="_blank" rel="noopener">Aequo AP</a>). A simple sheet works too.</p>
+<p>Write the order number on every packing slip. Write down what came, not what should have come.</p></div></div></section><section class="q" id="q3"><div class="wrap"><p class="eyebrow">Question 3 of 9</p><h2>How does the matcher work?</h2><div class="prose d"><p class="answer">The matcher lines up every purchase order line with what was received for it, then sorts each line into matched, short, over, not shipped, substituted, or not on any order. It adds up the dollar value of every line that needs a look.</p>
+<p>Here is the example. <strong>Copperleaf Candle Co. is a made-up business</strong>, a two-person candle maker that buys wax, jars, lids, wicks, fragrance oils, labels and boxes from five suppliers. In November it placed five purchase orders, 11 lines worth $3,242.00 in total. Its receiving log has 12 rows. I wrote the problems into the files on purpose, the way they show up in real life:</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>What happened</th>
+<th>Line</th>
+<th>What the matcher says</th>
+<th>Value to check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Short shipment</td>
+<td>Coconut wax, ordered 6, got 4</td>
+<td>SHORT by 2</td>
+<td>$82.00</td>
+</tr>
+<tr>
+<td>Short shipment</td>
+<td>Mailer boxes, ordered 6, got 5</td>
+<td>SHORT by 1</td>
+<td>$39.00</td>
+</tr>
+<tr>
+<td>Never shipped</td>
+<td>CD-14 wicks, ordered 2, got 0</td>
+<td>NOT SHIPPED</td>
+<td>$54.00</td>
+</tr>
+<tr>
+<td>Swapped item</td>
+<td>Fig oil ordered, fig and vanilla arrived</td>
+<td>SUBSTITUTED</td>
+<td>$232.00</td>
+</tr>
+<tr>
+<td>Over shipment</td>
+<td>Black lids, ordered 15, got 17</td>
+<td>OVER by 2</td>
+<td>$19.20</td>
+</tr>
+<tr>
+<td>Not ordered</td>
+<td>Square warning labels, 2 rolls</td>
+<td>NOT ON ANY PO</td>
+<td>price unknown</td>
+</tr>
+<tr>
+<td>Split delivery</td>
+<td>Amber jars, 9 then 6</td>
+<td>MATCH (split)</td>
+<td>$0</td>
+</tr>
+<tr>
+<td>PO typed as "1042" and "PO 1042"</td>
+<td>three receipt rows</td>
+<td>Read as PO-1042</td>
+<td>$0</td>
+</tr>
+<tr>
+<td>PO number left blank</td>
+<td>two rows from the label supplier</td>
+<td>Matched by supplier and SKU</td>
+<td>$0</td>
+</tr>
+</tbody>
+</table></div>
+<p>Six of the 11 order lines match. Five need a person, worth <strong>$426.20 of the $3,242.00 ordered, about 13%</strong>. That share is just this made-up example; yours will be different.</p>
+
+<p>Three choices in the matcher matter more than the code:</p>
+<ol>
+<li><strong>It matches on exact codes first.</strong> PO number plus SKU decides almost every line. Research on product matching points the same way: a simple word-overlap rule did as well as a large language model, and a tuned prompt did worse at full scale (F1 0.950 for the rule against 0.948 for the model on 2,194 product pairs, <a href="https://arxiv.org/html/2608.18158v1" target="_blank" rel="noopener">Shrestha, arXiv 2608.18158</a>). Use AI only for the leftovers.</li>
+<li><strong>It cleans up PO numbers but never guesses quantities.</strong> "1042" and "PO 1042" become PO-1042 because that order exists. A blank PO number is matched only when exactly one open order from that supplier has that SKU. Anything else goes on the list for a person.</li>
+<li><strong>It shows substitutions as their own status.</strong> A swap is not a short shipment. You may be happy with fig and vanilla, or it may be the wrong scent for a product you've already labelled. Only you know.</li>
+</ol>
+<p>The matcher on this page runs in your browser on sample data. The code and both sample files come with the tool, so anyone can check the answer key.</p></div><div class="prose s"><p class="answer">The tool puts every order line next to what arrived for it. Then it gives each line a label and adds up the money that needs a look.</p>
+<p><strong>Copperleaf Candle Co. is a made-up business.</strong> It's a two-person candle maker. In November it sent five purchase orders, with 11 lines worth $3,242.00. Its receiving log has 12 rows. I put real-life problems into the files on purpose.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>What happened</th>
+<th>What the tool says</th>
+<th>Money to check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coconut wax: ordered 6, got 4</td>
+<td>SHORT by 2</td>
+<td>$82.00</td>
+</tr>
+<tr>
+<td>Mailer boxes: ordered 6, got 5</td>
+<td>SHORT by 1</td>
+<td>$39.00</td>
+</tr>
+<tr>
+<td>CD-14 wicks: ordered 2, got 0</td>
+<td>NOT SHIPPED</td>
+<td>$54.00</td>
+</tr>
+<tr>
+<td>Fig oil ordered, fig and vanilla came</td>
+<td>SUBSTITUTED</td>
+<td>$232.00</td>
+</tr>
+<tr>
+<td>Black lids: ordered 15, got 17</td>
+<td>OVER by 2</td>
+<td>$19.20</td>
+</tr>
+<tr>
+<td>Warning labels nobody ordered</td>
+<td>NOT ON ANY PO</td>
+<td>price unknown</td>
+</tr>
+<tr>
+<td>Amber jars came in two loads, 9 and 6</td>
+<td>MATCH (split)</td>
+<td>$0</td>
+</tr>
+<tr>
+<td>PO typed as "1042" or "PO 1042"</td>
+<td>Read as PO-1042</td>
+<td>$0</td>
+</tr>
+<tr>
+<td>PO number left blank</td>
+<td>Matched by supplier and item code</td>
+<td>$0</td>
+</tr>
+</tbody>
+</table></div>
+<p>Six of the 11 lines match. Five need a person. That's <strong>$426.20 out of $3,242.00, about 13%</strong>. That share is only for this made-up example.</p>
+
+<p>Three rules make the tool safe:</p>
+<ol>
+<li><strong>It matches on exact codes first.</strong> PO number plus item code decides most lines. In one study, a simple word-matching rule matched products about as well as an AI model (<a href="https://arxiv.org/html/2608.18158v1" target="_blank" rel="noopener">Shrestha, arXiv</a>).</li>
+<li><strong>It fixes PO numbers but never guesses amounts.</strong> "1042" becomes PO-1042 only because that order exists. A blank PO number is filled in only when one order fits.</li>
+<li><strong>It shows swaps on their own.</strong> A swap is not a short box. Only you know if the new item is okay.</li>
+</ol></div><div class="prose t"><p class="answer">The tool puts each order line next to what came. Then it labels each line and adds up the money to check.</p>
+<p><strong>Copperleaf Candle Co. is a made-up business.</strong> It makes candles. It sent 5 orders worth $3,242.00.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>What happened</th>
+<th>Label</th>
+<th>Money to check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wax: ordered 6, got 4</td>
+<td>SHORT</td>
+<td>$82.00</td>
+</tr>
+<tr>
+<td>Boxes: ordered 6, got 5</td>
+<td>SHORT</td>
+<td>$39.00</td>
+</tr>
+<tr>
+<td>Wicks: ordered 2, got 0</td>
+<td>NOT SHIPPED</td>
+<td>$54.00</td>
+</tr>
+<tr>
+<td>A different scent came</td>
+<td>SUBSTITUTED</td>
+<td>$232.00</td>
+</tr>
+<tr>
+<td>Lids: ordered 15, got 17</td>
+<td>OVER</td>
+<td>$19.20</td>
+</tr>
+<tr>
+<td>Labels no one ordered</td>
+<td>NOT ON ANY PO</td>
+<td>price unknown</td>
+</tr>
+<tr>
+<td>Jars came in two loads</td>
+<td>MATCH</td>
+<td>$0</td>
+</tr>
+</tbody>
+</table></div>
+<p>Six lines match. Five need you. That is <strong>$426.20 to check, about 13%</strong>. Your number will be different.</p>
+
+<p>The tool matches order numbers and item codes first. It never guesses how many came. It shows swaps on their own, because only you know if the swap is okay.</p></div></div><figure class="widewrap" id="matcher">
+  <div class="tool-ui">
+    <div class="tool-hd"><p class="figtitle">The matcher</p><span class="tag">Example business (made up): Copperleaf Candle Co.</span></div>
+    <p class="hint">Paste two CSV files, or pick a file from your computer. Nothing leaves your browser.</p>
+    <div class="pastes">
+      <label class="paste" for="po-in"><span class="k">Purchase orders (CSV)</span><textarea id="po-in" spellcheck="false" rows="9">po_number,supplier,sku,item,qty_ordered,unit_cost,po_date
+PO-1041,Lakeside Wax Supply,WAX-SOY-10,Soy wax 10 kg bag,20,38.50,2026-11-02
+PO-1041,Lakeside Wax Supply,WAX-COCO-5,Coconut wax 5 kg bag,6,41.00,2026-11-02
+PO-1042,Glassworks Jar Co,JAR-8OZ-AMB,8 oz amber jar (case of 24),15,31.20,2026-11-03
+PO-1042,Glassworks Jar Co,LID-8OZ-BLK,8 oz black lid (case of 24),15,9.60,2026-11-03
+PO-1043,Wickline Supply,WICK-CD12,Cotton wick CD-12 (box of 500),4,27.00,2026-11-05
+PO-1043,Wickline Supply,WICK-CD14,Cotton wick CD-14 (box of 500),2,27.00,2026-11-05
+PO-1044,Oakmoss Fragrance,FO-CEDAR-1L,Cedar fragrance oil 1 L,8,54.00,2026-11-06
+PO-1044,Oakmoss Fragrance,FO-LAV-1L,Lavender fragrance oil 1 L,8,52.00,2026-11-06
+PO-1044,Oakmoss Fragrance,FO-FIG-1L,Fig fragrance oil 1 L,4,58.00,2026-11-06
+PO-1045,Printleaf Labels,LBL-JAR-RND,Round jar label (roll of 500),3,46.00,2026-11-09
+PO-1045,Printleaf Labels,BOX-MAIL-S,Small mailer box (bundle of 50),6,39.00,2026-11-09</textarea><input type="file" id="po-file" accept=".csv,text/csv"></label>
+      <label class="paste" for="rc-in"><span class="k">Receiving records (CSV)</span><textarea id="rc-in" spellcheck="false" rows="9">receipt_id,po_ref,supplier,sku,item,qty_received,received_date,note
+R-501,PO-1041,Lakeside Wax Supply,WAX-SOY-10,Soy wax 10kg,20,2026-11-10,
+R-501,PO-1041,Lakeside Wax Supply,WAX-COCO-5,Coconut wax 5kg,4,2026-11-10,
+R-502,1042,Glassworks Jar Co,JAR-8OZ-AMB,Amber jar 8oz cs/24,9,2026-11-11,first part of order
+R-502,1042,Glassworks Jar Co,LID-8OZ-BLK,Black lid 8oz cs/24,17,2026-11-11,
+R-503,PO-1043,Wickline Supply,WICK-CD12,CD-12 wick 500ct,4,2026-11-12,
+R-504,PO-1044,Oakmoss Fragrance,FO-CEDAR-1L,Cedar FO 1L,8,2026-11-13,
+R-504,PO-1044,Oakmoss Fragrance,FO-LAV-1L,Lavender FO 1L,8,2026-11-13,
+R-504,PO-1044,Oakmoss Fragrance,FO-FIGV-1L,Fig and vanilla FO 1L,4,2026-11-13,substituted: fig out of stock
+R-505,,Printleaf Labels,LBL-JAR-RND,Round jar labels,3,2026-11-16,
+R-505,,Printleaf Labels,BOX-MAIL-S,Mailer box small x50,5,2026-11-16,
+R-505,,Printleaf Labels,LBL-WARN-SQ,Square warning label roll,2,2026-11-16,
+R-506,PO 1042,Glassworks Jar Co,JAR-8OZ-AMB,Amber jar 8oz cs/24,6,2026-11-18,rest of order</textarea><input type="file" id="rc-file" accept=".csv,text/csv"></label>
+    </div>
+    <div class="actions"><button type="button" class="primary" id="run">Match</button><button type="button" id="sample">Use sample files</button><button type="button" id="blank">Start blank</button><button type="button" id="copycsv">Copy results as CSV</button></div>
+    <div id="out" aria-live="polite"></div>
+  </div>
+</figure>
+</section><section class="q" id="q4"><div class="wrap"><p class="eyebrow">Question 4 of 9</p><h2>How do I do the match in ChatGPT, Claude or my spreadsheet?</h2><div class="prose d"><p class="answer">Upload your two files, give the tool the exact columns to match on, and tell it to compute with code, not in its head. Then check its totals yourself before you act on anything.</p>
+<p>Here is the prompt I use. Change the column names to match your files.</p>
+<div class="code"><button type="button" class="copy">Copy prompt</button><pre><code>I'm uploading two CSV files: purchase_orders.csv and receiving_records.csv.
+Use code to do every calculation. Do not estimate.
+1. Count the rows in each file and tell me the counts first.
+2. Clean the PO number in receiving_records (for example &quot;1042&quot; or &quot;PO 1042&quot; means PO-1042 only if that PO exists).
+3. If a receiving row has no PO number, match it only when exactly one PO from that supplier has that SKU. Otherwise list it as unmatched.
+4. Add up quantity received per PO number and SKU (some orders arrive in more than one delivery).
+5. For every PO line, show: PO, supplier, SKU, ordered, received, difference, unit cost, status (MATCH, SHORT, OVER, NOT SHIPPED).
+6. List every received SKU that is on no PO line. If its PO has a line with nothing received, call it a possible SUBSTITUTION.
+7. Value each mismatch at difference x unit cost and give the total.
+Give me the full list, not a summary, and a downloadable CSV of it. Read dates as year-month-day.
+</code></pre></div>
+<div class="tools"><div class="tool" data-tool="chatgpt"><h3>In ChatGPT</h3><p>Start a new chat, attach both files, paste the prompt. ChatGPT handles .csv, .xls, .xlsx, PDF and JSON for data analysis, and it writes Python code to do the work; click the [&gt;_] link at the end of its reply to see that code (<a href="https://help.openai.com/en/articles/8437071-data-analysis-with-chatgpt" target="_blank" rel="noopener">OpenAI Help, Data analysis with ChatGPT</a>). Its code can't reach the internet, so upload the files rather than asking it to fetch them. Plus is US$20 a month (<a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus" target="_blank" rel="noopener">OpenAI Help, What is ChatGPT Plus</a>). If you planned to save this as a custom GPT, don't: OpenAI's scheduled retirement date for custom GPTs is December 11, 2026 for affected Enterprise workspaces, with other plans possibly following, and plugins as the suggested replacement and a warning that a migrated one "may respond differently" (<a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq" target="_blank" rel="noopener">OpenAI Help, Custom GPT retirement FAQ</a>). Keep your prompt in a document and reuse it.</p></div><div class="tool" data-tool="claude"><h3>In Claude</h3><p>Check that "Code execution and file creation" is on (Settings, Capabilities; newer Settings call it "Create and edit files"). It is on by default for Free, Pro, Max, Ultra and Team. Claude then runs code in an isolated sandbox and can hand back a spreadsheet; files can be up to 30 MB each (<a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude" target="_blank" rel="noopener">Claude Help, Create and edit files</a>). For a weekly job, make a Project, put the prompt in its instructions and add each week's files; project files are available to the code environment. Pro is US$20 a month or US$17 a month billed annually; Team Standard is US$25 a seat monthly or US$20 annually (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>, taxes not included).</p></div><div class="tool" data-tool="copilot"><h3>In Excel with Copilot</h3><p>Save the workbook to OneDrive and format each sheet as a table (Ctrl+T). Microsoft says Copilot in Excel only works on files saved to OneDrive with data in a table or supported range (<a href="https://learn.microsoft.com/en-us/training/modules/analyze-visualize-data-copilot/2-analyze-data-workflows-excel" target="_blank" rel="noopener">Microsoft Learn</a>). Put both lists in one workbook, then ask Copilot to add formula columns (SUMIFS for received quantity, then the difference). Formulas you can see are easier to check than an answer in a chat. I did not verify a current Copilot price today; check Microsoft's page for your plan.</p></div><div class="tool" data-tool="gemini"><h3>In Google Sheets with Gemini</h3><p>Gemini in Sheets is not included in Business Starter; it starts at Business Standard, US$14 per user per month at list (<a href="https://workspace.google.com/pricing/" target="_blank" rel="noopener">Google Workspace pricing</a>, checked 2026-11-27). Use ordinary formulas (SUMIFS, XLOOKUP) for the numbers. The =AI() function is useful for one job only: labelling messy item names ("Is 'Amber jar 8oz cs/24' the same item as '8 oz amber jar (case of 24)'?"). Google says its output is text only, it only sees the range you give it, only the first 350 selected cells generate per run, and it won't prompt you to refresh when your data changes (<a href="https://support.google.com/docs/answer/15877199" target="_blank" rel="noopener">Google Docs Help</a>).</p></div></div><p>What to check every time, in any tool:</p>
+<ol>
+<li><strong>Row counts.</strong> The tool's count of rows must equal your file's. If it says 10 receiving rows and you have 12, stop.</li>
+<li><strong>Totals.</strong> Re-add the mismatch values yourself with SUM. In the Copperleaf files the answer is $426.20.</li>
+<li><strong>Dates.</strong> In one independent test of invoice reading, the main mistake was reading US dates day first; one sentence telling the model to read dates in the supplier's own format lifted the cheapest model from 64% to 97% on US-style invoices (<a href="https://www.pantalytics.com/post/odoo-bill-digitization-benchmark" target="_blank" rel="noopener">Pantalytics, Nov 13, 2026</a>; Pantalytics sells an AI product for Odoo and published its method). That's why the prompt says "read dates as year-month-day".</li>
+<li><strong>Nothing filled in.</strong> If a quantity is blank, the answer must say blank, not a guess.</li>
+</ol>
+<p>No one has published an independent test of AI doing this exact purchase-order match. The tools are good at it when you give them clean files and make them use code. They are not good enough to skip the four checks above.</p></div><div class="prose s"><p class="answer">Upload both files. Tell the tool exactly which columns to match. Tell it to use code for the math. Then check its totals yourself.</p>
+<p>Copy this prompt and change the column names to fit your files:</p>
+<div class="code"><button type="button" class="copy">Copy prompt</button><pre><code>I'm uploading two CSV files: purchase_orders.csv and receiving_records.csv.
+Use code to do every calculation. Do not estimate.
+1. Count the rows in each file and tell me the counts first.
+2. Clean the PO number in receiving_records (&quot;1042&quot; or &quot;PO 1042&quot; means PO-1042 only if that PO exists).
+3. If a receiving row has no PO number, match it only when exactly one PO from that supplier has that SKU. Otherwise list it as unmatched.
+4. Add up quantity received per PO number and SKU.
+5. For every PO line, show: PO, supplier, SKU, ordered, received, difference, unit cost, status (MATCH, SHORT, OVER, NOT SHIPPED).
+6. List every received SKU that is on no PO line. If its PO has a line with nothing received, call it a possible SUBSTITUTION.
+7. Value each mismatch at difference x unit cost and give the total.
+Give me the full list, not a summary, and a downloadable CSV. Read dates as year-month-day.
+</code></pre></div>
+<div class="tools"><div class="tool" data-tool="chatgpt"><h3>In ChatGPT</h3><p>Start a new chat. Attach both files and paste the prompt. ChatGPT writes Python code to do the work. Click the [&gt;_] link at the end of its answer to see the code (<a href="https://help.openai.com/en/articles/8437071-data-analysis-with-chatgpt" target="_blank" rel="noopener">OpenAI Help</a>). Plus costs US$20 a month (<a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus" target="_blank" rel="noopener">OpenAI Help</a>). Don't save this as a custom GPT. OpenAI plans to retire custom GPTs, starting with some business accounts on December 11, 2026 (<a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq" target="_blank" rel="noopener">OpenAI Help</a>). Keep your prompt in a document instead.</p></div><div class="tool" data-tool="claude"><h3>In Claude</h3><p>Turn on "Code execution and file creation" in Settings, under Capabilities. It's on by default for most plans. Claude then runs code in a safe sandbox. Each file can be up to 30 MB (<a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude" target="_blank" rel="noopener">Claude Help</a>). For a weekly job, make a Project and save the prompt there. Pro is US$20 a month, or US$17 a month if you pay for a year (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>).</p></div><div class="tool" data-tool="copilot"><h3>In Excel with Copilot</h3><p>Save the file to OneDrive. Turn each list into a table (Ctrl+T). Copilot only works on files saved to OneDrive, with data in a table (<a href="https://learn.microsoft.com/en-us/training/modules/analyze-visualize-data-copilot/2-analyze-data-workflows-excel" target="_blank" rel="noopener">Microsoft Learn</a>). Ask Copilot to add formula columns, so you can see every step.</p></div><div class="tool" data-tool="gemini"><h3>In Google Sheets with Gemini</h3><p>Gemini in Sheets starts at the Business Standard plan, US$14 per user a month (<a href="https://workspace.google.com/pricing/" target="_blank" rel="noopener">Google Workspace pricing</a>). Use normal formulas like SUMIFS for the numbers. The =AI() function only gives text. Use it to ask if two item names mean the same thing. It does only 350 cells per run, and it won't remind you to refresh when data changes (<a href="https://support.google.com/docs/answer/15877199" target="_blank" rel="noopener">Google Help</a>).</p></div></div><p>Check four things every time:</p>
+<ol>
+<li><strong>Row counts.</strong> The tool's count must match your file.</li>
+<li><strong>Totals.</strong> Add the mismatch money up yourself. For Copperleaf it's $426.20.</li>
+<li><strong>Dates.</strong> In one test, AI often read US dates the wrong way round. One added sentence about date format fixed most of it (<a href="https://www.pantalytics.com/post/odoo-bill-digitization-benchmark" target="_blank" rel="noopener">Pantalytics</a>).</li>
+<li><strong>No guesses.</strong> A blank amount must stay blank.</li>
+</ol>
+<p>No one has tested AI on this exact check yet. The tools do well with clean files and code. They still need your four checks.</p></div><div class="prose t"><p class="answer">Upload both lists. Ask the AI to use code for the math. Then check the total yourself.</p>
+<p>Copy this prompt:</p>
+<div class="code"><button type="button" class="copy">Copy prompt</button><pre><code>I'm uploading two CSV files: purchase_orders.csv and receiving_records.csv.
+Use code to do every calculation. Do not estimate.
+1. Count the rows in each file and tell me the counts first.
+2. Clean the PO number in receiving_records (&quot;1042&quot; or &quot;PO 1042&quot; means PO-1042 only if that PO exists).
+3. If a receiving row has no PO number, match it only when exactly one PO from that supplier has that SKU. Otherwise list it as unmatched.
+4. Add up quantity received per PO number and SKU.
+5. For every PO line, show: PO, supplier, SKU, ordered, received, difference, unit cost, status (MATCH, SHORT, OVER, NOT SHIPPED).
+6. List every received SKU that is on no PO line. If its PO has a line with nothing received, call it a possible SUBSTITUTION.
+7. Value each mismatch at difference x unit cost and give the total.
+Give me the full list, not a summary, and a downloadable CSV. Read dates as year-month-day.
+</code></pre></div>
+<div class="tools"><div class="tool" data-tool="chatgpt"><h3>In ChatGPT</h3><p>Start a new chat. Add both files. Paste the prompt. ChatGPT writes code to do the math. Click [&gt;_] to see it (<a href="https://help.openai.com/en/articles/8437071-data-analysis-with-chatgpt" target="_blank" rel="noopener">OpenAI Help</a>). Plus is US$20 a month (<a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus" target="_blank" rel="noopener">OpenAI Help</a>).</p></div><div class="tool" data-tool="claude"><h3>In Claude</h3><p>Turn on "Code execution and file creation" in Settings. Add both files. Paste the prompt. Each file can be up to 30 MB (<a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude" target="_blank" rel="noopener">Claude Help</a>). Pro is US$20 a month (<a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>).</p></div><div class="tool" data-tool="copilot"><h3>In Excel with Copilot</h3><p>Save the file to OneDrive. Make each list a table (<a href="https://learn.microsoft.com/en-us/training/modules/analyze-visualize-data-copilot/2-analyze-data-workflows-excel" target="_blank" rel="noopener">Microsoft Learn</a>). Ask Copilot to add formula columns.</p></div><div class="tool" data-tool="gemini"><h3>In Google Sheets with Gemini</h3><p>You need the Business Standard plan, US$14 per user a month (<a href="https://workspace.google.com/pricing/" target="_blank" rel="noopener">Google Workspace</a>). Use normal formulas for the math. The =AI() function only gives words, not math (<a href="https://support.google.com/docs/answer/15877199" target="_blank" rel="noopener">Google Help</a>).</p></div></div><p>Always check four things:</p>
+<ol>
+<li>The number of rows is right.</li>
+<li>You added the total yourself.</li>
+<li>The dates are read the right way. AI often mixes up US dates (<a href="https://www.pantalytics.com/post/odoo-bill-digitization-benchmark" target="_blank" rel="noopener">Pantalytics</a>).</li>
+<li>Nothing blank was filled in with a guess.</li>
+</ol></div></div></section><section class="q" id="q5"><div class="wrap"><p class="eyebrow">Question 5 of 9</p><h2>Can an agent or automation run it every week?</h2><div class="prose d"><p class="answer">Yes, for the reading and the comparing. Not for the deciding. The automation pulls the week's orders and receipts, runs the same match, and sends you the short list. Paying a supplier, disputing an invoice or emailing a supplier stays with a person, every time.</p>
+<div class="tools"><div class="tool" data-tool="chatgpt"><h3>In ChatGPT</h3><p>ChatGPT's agent can work in a browser on your behalf, and OpenAI is moving this kind of longer task into ChatGPT Work. OpenAI's agent help page would not open for me today, so I'm not quoting its limits or schedules; check what your plan shows. Whatever the version, give it access only to the folder where your exports land, and tell it to produce the mismatch list and nothing else.</p></div><div class="tool" data-tool="claude"><h3>In Claude</h3><p>In a Claude Project with your prompt saved, add the week's two files and ask for the mismatch list. With Google Drive connected, Claude can find the files itself. Keep anything that sends or shares behind your approval.</p></div></div><p><strong>A weekly workflow across tools</strong> (example setup, not a tested product):</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Tool</th>
+<th>What happens</th>
+<th>Who</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Orders</td>
+<td>QuickBooks Online Plus or Xero</td>
+<td>You raise purchase orders as usual</td>
+<td>You</td>
+</tr>
+<tr>
+<td>2. Receiving</td>
+<td>Google Sheet or Excel log</td>
+<td>Whoever opens the boxes types in each packing slip</td>
+<td>Staff</td>
+</tr>
+<tr>
+<td>3. Match</td>
+<td>Zapier, or Claude or ChatGPT on a schedule</td>
+<td>Every Monday, export both lists and run the match</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td>4. Short list</td>
+<td>Email or Slack</td>
+<td>"11 lines, 6 matched, 5 need you, $426.20" with a link</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td>5. Decide</td>
+<td>You</td>
+<td>Approve the bill, ask for a credit, or accept a substitution</td>
+<td><strong>You, always</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Cost, checked 2026-11-27: if you already use QuickBooks or Xero and Google or Microsoft 365, the new cost can be zero to start. Zapier's free plan covers small two-step jobs; Professional starts from US$19.99 a month on its pricing page (the page has a monthly or yearly toggle and does not say which billing that figure is), and Zapier counts each completed action as a task and never counts the trigger, so a flow with one trigger and four actions, run weekly, uses 16 to 20 tasks a month, depending on how many Mondays the month has (<a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier pricing</a>). The time cost is your review: the short list, not the whole file.</p>
+<p>What agents and automations still get wrong: a rule-based flow will happily write a wrong match into your sheet if your PO numbers are messy, and it never asks. An AI agent can misread a scanned packing slip, especially dates. And Anthropic's help page warns that instructions hidden in files or websites can try to trick Claude, and recommends watching its work (<a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude" target="_blank" rel="noopener">Claude Help</a>). So the agent reads and compares, and you approve.</p>
+<div class="box"><h3>In the US / In Canada</h3><p>In the US, Zapier, ChatGPT and Claude show US dollar prices. In Canada, those same tools show US dollar prices on their public pages, so your card converts, and GST/HST may be added depending on your registration. Xero Canada lists Starter C$25, Standard C$60 and Premium C$80 a month, "in Canadian dollars and exclude applicable taxes" (<a href="https://www.xero.com/ca/pricing-plans/" target="_blank" rel="noopener">Xero Canada pricing</a>). In Ontario, 13% HST takes Standard to C$67.80 (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">CRA GST/HST rates</a>).</p></div></div><div class="prose s"><p class="answer">Yes, for reading and comparing. Not for deciding. Paying a supplier, arguing an invoice or emailing a supplier always needs a person.</p>
+<div class="tools"><div class="tool" data-tool="chatgpt"><h3>In ChatGPT</h3><p>ChatGPT's agent can work in a browser for you. OpenAI is moving this into ChatGPT Work. I couldn't open OpenAI's agent help page today, so check what your plan shows. Let it see only your export folder, and ask only for the mismatch list.</p></div><div class="tool" data-tool="claude"><h3>In Claude</h3><p>Use a Claude Project with your prompt saved. Add the week's two files and ask for the list. If Google Drive is connected, Claude can find the files. Keep anything that sends or shares behind your OK.</p></div></div><p><strong>A weekly plan across tools</strong> (an example setup):</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Tool</th>
+<th>What happens</th>
+<th>Who</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Orders</td>
+<td>QuickBooks or Xero</td>
+<td>You make purchase orders</td>
+<td>You</td>
+</tr>
+<tr>
+<td>2. Receiving</td>
+<td>A Google Sheet or Excel log</td>
+<td>Staff type in each packing slip</td>
+<td>Staff</td>
+</tr>
+<tr>
+<td>3. Match</td>
+<td>Zapier, or Claude or ChatGPT</td>
+<td>Every Monday, run the match</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td>4. Short list</td>
+<td>Email</td>
+<td>"5 lines need you, $426.20"</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td>5. Decide</td>
+<td>You</td>
+<td>Pay, ask for a credit, or accept a swap</td>
+<td><strong>You, always</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Cost: if you already use QuickBooks or Xero and Google or Microsoft, you may pay nothing extra to start. Zapier has a free plan. Its paid plan starts from US$19.99 a month (<a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier pricing</a>).</p>
+<p>What still goes wrong: an automation will copy a wrong match into your sheet without asking. An AI can misread a scanned slip. Hidden text in a file can try to trick it (<a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude" target="_blank" rel="noopener">Claude Help</a>). So the tool reads, and you decide.</p>
+<div class="box"><h3>In the US / In Canada</h3><p>In the US, Zapier, ChatGPT and Claude list prices in US dollars. In Canada, they list the same US dollar prices, so your card converts. GST/HST may be added. Xero Canada is C$25, C$60 or C$80 a month, before tax (<a href="https://www.xero.com/ca/pricing-plans/" target="_blank" rel="noopener">Xero Canada</a>). With Ontario's 13% HST, the C$60 plan is C$67.80 (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">CRA</a>).</p></div></div><div class="prose t"><p class="answer">Yes, an agent can read and compare. You still decide. Paying, arguing a bill, or emailing a supplier always needs a person.</p>
+<div class="tools"><div class="tool" data-tool="chatgpt"><h3>In ChatGPT</h3><p>ChatGPT's agent can work in a browser for you. Let it see only your export folder. Ask only for the list of problems.</p></div><div class="tool" data-tool="claude"><h3>In Claude</h3><p>Save the prompt in a Claude Project. Add the week's files. Ask for the list. Keep sending and sharing behind your OK.</p></div></div><p><strong>A weekly plan</strong> (an example):</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Who does it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Make orders in QuickBooks or Xero</td>
+<td>You</td>
+</tr>
+<tr>
+<td>2. Type in each packing slip</td>
+<td>Staff</td>
+</tr>
+<tr>
+<td>3. Run the match every Monday</td>
+<td>The tool</td>
+</tr>
+<tr>
+<td>4. Send you the short list</td>
+<td>The tool</td>
+</tr>
+<tr>
+<td>5. Pay, ask for money back, or accept a swap</td>
+<td><strong>You, always</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>To start, it can cost nothing extra. Zapier has a free plan. Its paid plan starts from US$19.99 a month (<a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier</a>).</p>
+<div class="box"><h3>In the US / In Canada</h3><p>In the US, these tools show US dollar prices. In Canada, they show the same US dollar prices, so your card changes the money. Tax may be added. Xero Canada's middle plan is C$60 a month before tax (<a href="https://www.xero.com/ca/pricing-plans/" target="_blank" rel="noopener">Xero Canada</a>), or C$67.80 with Ontario's 13% HST (<a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">CRA</a>).</p></div></div></div></section><div class="band"><div class="wrap"><p class="eyebrow">Step 5, every week</p><p>The tool reads and compares. Paying, asking for a credit or accepting a swap stays with you, always.</p></div></div>
+<section class="q" id="q6"><div class="wrap"><p class="eyebrow">Question 6 of 9</p><h2>What do I do when something doesn&#x27;t match?</h2><div class="prose d"><p class="answer">Write it down, tell the supplier quickly and specifically, and don't use the goods you plan to send back. The match gives you the facts. What you do with them is a business decision, and sometimes a legal one.</p>
+<div class="where2"><div><h3>In the US</h3><p>Under the Uniform Commercial Code, which each state adopts, you generally accept goods when you tell the seller they're fine, when you fail to reject them properly after a reasonable chance to inspect, or when you act like the owner, for example by using them (<a href="https://www.law.cornell.edu/ucc/2/2-606" target="_blank" rel="noopener">UCC 2-606, Cornell LII</a>). If you reject, name the specific problem: a defect you don't mention can't be relied on later if the seller could have fixed it (<a href="https://www.law.cornell.edu/ucc/2/2-605" target="_blank" rel="noopener">UCC 2-605</a>).</p></div><div><h3>In Canada</h3><p>Each province has its own sale of goods law. In Ontario, if a supplier delivers less than you ordered you may reject it, but if you accept it you pay the contract rate; if they deliver more, you can keep what you ordered and reject the rest (<a href="https://www.ontario.ca/laws/statute/90s01" target="_blank" rel="noopener">Sale of Goods Act, s. 29</a>). You are treated as having accepted goods if you say so, act as the owner, or keep them past a reasonable time without saying you reject them (s. 34). Both sections give way to your contract and the usual practice in your trade. Quebec uses its Civil Code instead.</p></div></div><p>Your supplier agreement usually sets the real rules, so read it first. Talk to a lawyer before you refuse a shipment, hold back payment, or send a formal notice. Have AI draft the email if you like. Then check every number, date and item against your own files before it goes, and send it yourself.</p>
+<p>If you sell to large retailers, the direction flips. They match your shipments and take deductions through their own supplier portals, with their own deadlines. Their published compliance guides, not this one, are the rulebook.</p></div><div class="prose s"><p class="answer">Write it down. Tell the supplier quickly and say exactly what's wrong. Don't use the goods you want to send back.</p>
+<div class="where2"><div><h3>In the US</h3><p>Under US sales law (the UCC), you usually accept goods if you say they're fine, if you don't reject them in time, or if you use them (<a href="https://www.law.cornell.edu/ucc/2/2-606" target="_blank" rel="noopener">UCC 2-606</a>). If you reject them, name the exact problem. A problem you don't mention may not count later (<a href="https://www.law.cornell.edu/ucc/2/2-605" target="_blank" rel="noopener">UCC 2-605</a>).</p></div><div><h3>In Canada</h3><p>Each province has its own law. In Ontario, if you get less than you ordered, you can reject it. If you keep it, you pay for what came. If you get more, you can keep what you ordered and reject the rest (<a href="https://www.ontario.ca/laws/statute/90s01" target="_blank" rel="noopener">Sale of Goods Act, s. 29</a>). Keeping goods too long without saying no counts as accepting them (s. 34). Your contract can change these rules. Quebec uses its Civil Code.</p></div></div><p>Read your supplier agreement first. Talk to a lawyer before you refuse a shipment, hold back money, or send a formal notice. AI can draft the email. You check every number, then you send it.</p>
+<p>If you sell to big stores, it works the other way. They check you, using their own rules and deadlines.</p></div><div class="prose t"><p class="answer">Write it down. Tell the supplier fast. Say exactly what is wrong. Don't use goods you want to send back.</p>
+<div class="where2"><div><h3>In the US</h3><p>If you use the goods, or wait too long, the law may say you kept them (<a href="https://www.law.cornell.edu/ucc/2/2-606" target="_blank" rel="noopener">UCC 2-606</a>). Name the exact problem when you say no (<a href="https://www.law.cornell.edu/ucc/2/2-605" target="_blank" rel="noopener">UCC 2-605</a>).</p></div><div><h3>In Canada</h3><p>In Ontario, if less comes than you ordered, you can say no. If you keep it, you pay for what came (<a href="https://www.ontario.ca/laws/statute/90s01" target="_blank" rel="noopener">Sale of Goods Act, s. 29</a>). Keeping goods too long without saying no counts as keeping them (s. 34).</p></div></div><p>Read your supplier deal first. Ask a lawyer before you refuse goods or hold back money. AI can write the email. You check it and send it.</p></div></div></section><section class="q" id="q7"><div class="wrap"><p class="eyebrow">Question 7 of 9</p><h2>What is safe to upload?</h2><div class="prose d"><p class="answer">Upload only the columns the match needs, on a business plan where you can. Purchase orders and packing slips are mostly business data, but shipping files can name real people.</p>
+<p>In Canada, personal information means information about an identifiable individual, such as a customer's name and home address on a shipping record. Business contact information used only to reach someone at their job is excluded (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/pipeda_brief" target="_blank" rel="noopener">Office of the Privacy Commissioner, PIPEDA in brief</a>). The matcher needs PO number, supplier, SKU, quantities, cost and dates. Delete every other column before you upload, especially names, addresses, phone numbers and notes.</p>
+<p>Business plans and personal plans treat your data differently. Check the data setting on whatever plan you use before you upload customer details, and keep the mismatch file in your business workspace, not a personal inbox. Quebec has stricter rules for sending personal information outside the province; if you serve Quebec customers, get advice before uploading their details.</p></div><div class="prose s"><p class="answer">Upload only the columns the match needs. Use a business plan if you can.</p>
+<p>In Canada, personal information is information about a person you can identify, like a customer's name and home address. Work contact details used only for work are not counted (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/pipeda_brief" target="_blank" rel="noopener">Privacy Commissioner of Canada</a>). The match needs PO number, supplier, item code, amounts, prices and dates. Delete names, addresses, phone numbers and notes before you upload.</p>
+<p>Check the data setting on your plan before you upload customer details. Keep results in your business account. Quebec has stricter rules for sending personal information out of the province. Get advice first if you serve Quebec customers.</p></div><div class="prose t"><p class="answer">Upload only what the match needs: order number, supplier, item code, amounts, prices and dates.</p>
+<p>Delete customer names, home addresses and phone numbers first. In Canada, those are personal information (<a href="https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/pipeda_brief" target="_blank" rel="noopener">Privacy Commissioner of Canada</a>). Use a business plan if you can. Quebec has stricter rules, so ask first if you serve Quebec customers.</p></div></div></section><section class="q" id="q8"><div class="wrap"><p class="eyebrow">Question 8 of 9</p><h2>Your checklist for this week</h2><div class="prose d"><ul>
+<li class="ck">Pick one supplier and pull last month's purchase orders into a spreadsheet.</li>
+<li class="ck">Type in the packing slips for the same orders, with the PO number exactly as written.</li>
+<li class="ck">Run the match: the tool on this page, or the prompt above in ChatGPT or Claude.</li>
+<li class="ck">Re-add the mismatch total yourself and check the row counts.</li>
+<li class="ck">Decide each mismatch: pay, ask for a credit, or accept the swap. Write down what you decided.</li>
+<li class="ck">Start a receiving log and write the PO number on every slip from now on.</li>
+</ul></div><div class="prose s"><ul>
+<li class="ck">Pick one supplier. Put last month's purchase orders in a spreadsheet.</li>
+<li class="ck">Type in the packing slips for those orders, with the PO number.</li>
+<li class="ck">Run the match with the tool on this page, or the prompt above.</li>
+<li class="ck">Add up the mismatch total yourself. Check the row counts.</li>
+<li class="ck">Decide each mismatch: pay, ask for a credit, or accept the swap.</li>
+<li class="ck">Start a receiving log and write the PO number on every slip.</li>
+</ul></div><div class="prose t"><ul>
+<li class="ck">Pick one supplier and list last month's orders.</li>
+<li class="ck">Type in the packing slips for those orders.</li>
+<li class="ck">Run the match with the tool on this page.</li>
+<li class="ck">Add up the total yourself.</li>
+<li class="ck">Decide each problem: pay, ask for money back, or accept the swap.</li>
+<li class="ck">Write the order number on every slip from now on.</li>
+</ul></div></div></section><section class="q" id="q9"><div class="wrap"><p class="eyebrow">Question 9 of 9</p><h2>How Leverage Strategies helps</h2><div class="prose d"><p class="answer">I can help you set up this check with the tools you already pay for: getting the two files to line up, writing the prompt or the formulas, and setting up the weekly short list with a clear point where you approve. You keep the decisions. <span class="note">Placeholder: Book a call link</span></p>
+<p>If you'd rather start with free help, these are open or worth a look (status checked 2026-11-27):</p>
+<div class="where2"><div><h3>In the US</h3><p>SCORE mentors give advice at no cost, and Small Business Development Centers offer one-to-one advising on operations and financial management (<a href="https://www.sba.gov/local-assistance/resource-partners" target="_blank" rel="noopener">SBA</a>). Manufacturers, including small makers, can use their state's MEP Center for hands-on process help (<a href="https://www.nist.gov/mep" target="_blank" rel="noopener">NIST MEP</a>).</p></div><div><h3>In Canada</h3><p>The federal Canada Digital Adoption Program is closed (it concluded March 31, 2025), and Digital Main Street's $2,500 grant portal is closed, though its free assessment and training remain (<a href="https://www.buildy.ca/blog/cdap-digital-main-street-closed" target="_blank" rel="noopener">Buildy, Nov 12, 2026</a>). In Ontario, the Retail Modernization Project Grant (up to $5,000, storefront retailers with 1 to 50 staff and at least $100,000 revenue) shows "Now accepting applications", and the Digital Modernization and Adoption Plan (up to $15,000 toward a plan) shows no closed notice, first come, first served (<a href="https://www.oc-innovation.ca/programs/digitalization-competence-centre/" target="_blank" rel="noopener">OCI</a>). Check the page before you plan around either.</p></div></div></div><div class="prose s"><p class="answer">I can help you set up this check with the tools you already pay for. That means getting your two files to line up, writing the prompt or formulas, and setting up a weekly short list with a clear step where you approve. You keep every decision. <span class="note">Placeholder: Book a call link</span></p>
+<p>Free help, checked 2026-11-27:</p>
+<div class="where2"><div><h3>In the US</h3><p>SCORE mentors give free advice. Small Business Development Centers help with operations and money (<a href="https://www.sba.gov/local-assistance/resource-partners" target="_blank" rel="noopener">SBA</a>). Small manufacturers can ask their state's MEP Center (<a href="https://www.nist.gov/mep" target="_blank" rel="noopener">NIST MEP</a>).</p></div><div><h3>In Canada</h3><p>The Canada Digital Adoption Program has ended. Digital Main Street's $2,500 grant is closed, but its free training is still there (<a href="https://www.buildy.ca/blog/cdap-digital-main-street-closed" target="_blank" rel="noopener">Buildy</a>). In Ontario, the Retail Modernization Project Grant (up to $5,000 for storefront shops) says it is accepting applications (<a href="https://www.oc-innovation.ca/programs/digitalization-competence-centre/" target="_blank" rel="noopener">OCI</a>). Check the page first.</p></div></div></div><div class="prose t"><p class="answer">I can help you set up this check with tools you already have. You keep every decision. <span class="note">Placeholder: Book a call link</span></p>
+<p>Free help, checked 2026-11-27:</p>
+<div class="where2"><div><h3>In the US</h3><p>SCORE mentors help for free (<a href="https://www.sba.gov/local-assistance/resource-partners" target="_blank" rel="noopener">SBA</a>). Small makers can ask their state's MEP Center (<a href="https://www.nist.gov/mep" target="_blank" rel="noopener">NIST MEP</a>).</p></div><div><h3>In Canada</h3><p>The federal digital grant has ended. Digital Main Street still has free training (<a href="https://www.buildy.ca/blog/cdap-digital-main-street-closed" target="_blank" rel="noopener">Buildy</a>). Ontario shops with a storefront can look at a grant of up to $5,000 (<a href="https://www.oc-innovation.ca/programs/digitalization-competence-centre/" target="_blank" rel="noopener">OCI</a>).</p></div></div></div></div></section>
+<div class="wrap">
+  <div class="sources st"><h2>Words to know</h2><div class="prose s"><div class="scroll"><table>
+<thead>
+<tr>
+<th>Word</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Purchase order (PO)</td>
+<td>Your written order to a supplier: what, how many, what price</td>
+</tr>
+<tr>
+<td>Packing slip</td>
+<td>The list in the box of what was shipped</td>
+</tr>
+<tr>
+<td>Receiving log</td>
+<td>Your own list of what actually arrived</td>
+</tr>
+<tr>
+<td>SKU</td>
+<td>A short code for one item, like WAX-SOY-10</td>
+</tr>
+<tr>
+<td>Three-way match</td>
+<td>Checking the order, what arrived and the bill before you pay</td>
+</tr>
+<tr>
+<td>Short shipment</td>
+<td>Fewer items arrived than you ordered</td>
+</tr>
+<tr>
+<td>Substitution</td>
+<td>The supplier sent a different item instead</td>
+</tr>
+<tr>
+<td>CSV</td>
+<td>A simple spreadsheet file that most tools can open</td>
+</tr>
+<tr>
+<td>Automation</td>
+<td>A tool that does the same steps on a schedule</td>
+</tr>
+<tr>
+<td>GST/HST</td>
+<td>Canada's sales taxes on goods and services</td>
+</tr>
+</tbody>
+</table></div></div><div class="prose t"><div class="scroll"><table>
+<thead>
+<tr>
+<th>Word</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Purchase order</td>
+<td>Your order to a supplier</td>
+</tr>
+<tr>
+<td>Packing slip</td>
+<td>The paper in the box that lists what was sent</td>
+</tr>
+<tr>
+<td>Item code (SKU)</td>
+<td>A short code for one item</td>
+</tr>
+<tr>
+<td>Short</td>
+<td>Fewer things came than you ordered</td>
+</tr>
+<tr>
+<td>Swap (substitution)</td>
+<td>The supplier sent a different item</td>
+</tr>
+<tr>
+<td>Spreadsheet</td>
+<td>A file with rows and columns</td>
+</tr>
+<tr>
+<td>Agent</td>
+<td>An AI tool that does steps for you</td>
+</tr>
+<tr>
+<td>HST</td>
+<td>A sales tax in some provinces</td>
+</tr>
+</tbody>
+</table></div></div></div>
+  <div class="sources d"><h2>Sources</h2><div class="prose"><p>All pages opened 2026-11-27 unless noted.</p>
+<ul>
+<li><a href="https://silentinfotech.com/blog/integration-6/ai-invoice-processing-quickbooks-xero-830" target="_blank" rel="noopener">Silent Infotech, AI invoice processing in QuickBooks and Xero</a>, Nov 12, 2026. Builds custom invoice agents; cites Ardent Partners' 2026 benchmark (report not opened).</li>
+<li><a href="https://www.aequoap.com/accounts-payable/three-way-matching-xero" target="_blank" rel="noopener">Aequo AP, Three-way matching in Xero</a>, updated Nov 13, 2026.</li>
+<li><a href="https://quickbooks.intuit.com/ca/pricing/" target="_blank" rel="noopener">QuickBooks Online Canada pricing</a>. Vendor page.</li>
+<li><a href="https://www.xero.com/ca/pricing-plans/" target="_blank" rel="noopener">Xero Canada pricing</a>. Vendor page.</li>
+<li><a href="https://help.openai.com/en/articles/8437071-data-analysis-with-chatgpt" target="_blank" rel="noopener">OpenAI Help, Data analysis with ChatGPT</a>. Vendor page.</li>
+<li><a href="https://help.openai.com/en/articles/6950777-what-is-chatgpt-plus" target="_blank" rel="noopener">OpenAI Help, What is ChatGPT Plus</a>. Vendor page.</li>
+<li><a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq" target="_blank" rel="noopener">OpenAI Help, Custom GPT retirement and migration FAQ</a>. Vendor page.</li>
+<li><a href="https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude" target="_blank" rel="noopener">Claude Help, Create and edit files with Claude</a>. Vendor page.</li>
+<li><a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a>. Vendor page.</li>
+<li><a href="https://learn.microsoft.com/en-us/training/modules/analyze-visualize-data-copilot/2-analyze-data-workflows-excel" target="_blank" rel="noopener">Microsoft Learn, Analyze data workflows in Excel with Copilot</a>. Vendor page.</li>
+<li><a href="https://workspace.google.com/pricing/" target="_blank" rel="noopener">Google Workspace pricing</a>. Vendor page.</li>
+<li><a href="https://support.google.com/docs/answer/15877199" target="_blank" rel="noopener">Google Docs Help, AI function in Sheets</a>. Vendor page.</li>
+<li><a href="https://zapier.com/pricing" target="_blank" rel="noopener">Zapier pricing</a>. Vendor page.</li>
+<li><a href="https://www.pantalytics.com/post/odoo-bill-digitization-benchmark" target="_blank" rel="noopener">Pantalytics, Odoo bill digitization benchmark</a>, Nov 13, 2026, updated Nov 17. Independent test by a firm that sells an AI product for Odoo; method public.</li>
+<li><a href="https://arxiv.org/html/2608.18158v1" target="_blank" rel="noopener">Shrestha, LLMs as data-quality annotators, arXiv 2608.18158</a>. Academic paper.</li>
+<li><a href="https://www.law.cornell.edu/ucc/2/2-606" target="_blank" rel="noopener">UCC 2-606</a> and <a href="https://www.law.cornell.edu/ucc/2/2-605" target="_blank" rel="noopener">UCC 2-605</a>, Cornell LII.</li>
+<li><a href="https://www.ontario.ca/laws/statute/90s01" target="_blank" rel="noopener">Ontario Sale of Goods Act, R.S.O. 1990, c. S.1</a>.</li>
+<li><a href="https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/pipeda_brief" target="_blank" rel="noopener">Office of the Privacy Commissioner of Canada, PIPEDA in brief</a>.</li>
+<li><a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">Canada Revenue Agency, GST/HST rates</a>.</li>
+<li><a href="https://www.sba.gov/local-assistance/resource-partners" target="_blank" rel="noopener">SBA resource partners</a>, <a href="https://www.nist.gov/mep" target="_blank" rel="noopener">NIST MEP</a>, <a href="https://www.oc-innovation.ca/programs/digitalization-competence-centre/" target="_blank" rel="noopener">Ontario Centre of Innovation, Digitalization Competence Centre</a>, <a href="https://www.buildy.ca/blog/cdap-digital-main-street-closed" target="_blank" rel="noopener">Buildy on CDAP and Digital Main Street</a>, Nov 12, 2026 (help programs).</li>
+</ul></div></div>
+</div>
+<footer class="site"><span>Leverage Strategies · Dan Albasry · Toronto</span><span>General information, not legal advice. Last checked November 27, 2026.</span></footer>
+<div class="seg float" role="group" aria-label="Reading level"><span class="lab">Reading level</span><button type="button" data-v="t" aria-pressed="true">Starter</button><button type="button" data-v="s" aria-pressed="false">Simple</button><button type="button" data-v="d" aria-pressed="false">Detailed</button></div>
+<script>
+// PO vs receiving matcher. Plain JavaScript, no libraries. Sample data only.
+function parseCSV(text) {
+  // Handles quoted cells ("Soy wax, 10 kg"), Windows line ends, a leading BOM, and skips blank lines.
+  const split = line => {
+    const out = []; let cur = '', q = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (q) { if (ch === '"' && line[i + 1] === '"') { cur += '"'; i++; } else if (ch === '"') q = false; else cur += ch; }
+      else if (ch === '"') q = true; else if (ch === ',') { out.push(cur); cur = ''; } else cur += ch;
+    }
+    out.push(cur); return out.map(c => c.trim());
+  };
+  const lines = text.replace(/^\uFEFF/, '').split(/\r?\n/).filter(l => l.replace(/[\s,]/g, '') !== '');
+  const head = split(lines.shift()).map(h => h.toLowerCase().replace(/\s+/g, '_'));
+  return lines.map(line => {
+    const cells = split(line), row = {};
+    head.forEach((h, i) => { row[h] = cells[i] || ''; });
+    return row;
+  });
+}
+
+// "12", " 12 ", "$38.50", "1,000" and "12 cases" read as numbers; "twelve" does not (NaN, flagged below).
+function num(v) {
+  const m = String(v || '').replace(/[$,\s]/g, '').match(/^-?\d+(\.\d+)?/);
+  return m ? Number(m[0]) : NaN;
+}
+const up = v => String(v || '').trim().toUpperCase();
+
+function normPO(ref, known) {
+  const digits = (ref || '').replace(/\D/g, '');
+  if (!digits) return null;
+  const cand = 'PO-' + digits;
+  return known.has(cand) ? cand : null;
+}
+
+function matchOrders(pos, recs) {
+  // Same SKU and supplier whatever the case or spacing ("wax-coco-5", "Lakeside wax supply ").
+  pos = pos.map(p => ({ ...p, po_number: up(p.po_number).replace(/^PO\D*/, 'PO-'), sku: up(p.sku), supplier: String(p.supplier || '').trim(), sup: up(p.supplier) }));
+  recs = recs.map(r => ({ ...r, sku: up(r.sku), supplier: String(r.supplier || '').trim(), sup: up(r.supplier) }));
+  const known = new Set(pos.map(p => p.po_number));
+  const key = (po, sku) => po + '|' + sku;
+  const lines = new Map(pos.map(p => [key(p.po_number, p.sku), p]));
+  const flags = [], received = new Map(), extras = [];
+  for (const r of recs) {
+    if (Number.isNaN(num(r.qty_received))) { flags.push({ receipt: r.receipt_id, type: 'QUANTITY NOT A NUMBER', detail: `${r.sku}: '${r.qty_received}' left out, check by hand` }); continue; }
+    let po = normPO(r.po_ref, known);
+    const raw = (r.po_ref || '').trim();
+    if (po && raw !== po) flags.push({ receipt: r.receipt_id, type: 'PO NUMBER TYPED DIFFERENTLY', detail: `'${raw}' read as ${po}` });
+    if (!po) {
+      const cands = [...new Set(pos.filter(p => p.sup === r.sup && p.sku === r.sku).map(p => p.po_number))].sort();
+      if (cands.length === 1) {
+        po = cands[0];
+        flags.push({ receipt: r.receipt_id, type: 'PO NUMBER MISSING', detail: `${r.sku} matched to ${po} by supplier and SKU` });
+      }
+    }
+    const k = key(po, r.sku);
+    if (po && lines.has(k)) {
+      if (!received.has(k)) received.set(k, []);
+      received.get(k).push(r);
+    } else extras.push([po, r]);
+  }
+  const rows = pos.map(p => {
+    const k = key(p.po_number, p.sku);
+    const list = received.get(k) || [];
+    const o = num(p.qty_ordered), c = num(p.unit_cost);
+    const g = list.reduce((s, x) => s + num(x.qty_received), 0);
+    let st;
+    if (g === o) st = list.length <= 1 ? 'MATCH' : 'MATCH (SPLIT SHIPMENT)';
+    else if (g === 0) st = 'NOT SHIPPED';
+    else if (g < o) st = 'SHORT';
+    else st = 'OVER';
+    return { po: p.po_number, supplier: p.supplier, sku: p.sku, ordered: o, received: g, diff: g - o, unit_cost: c, status: st, value: Math.round(Math.abs(g - o) * c * 100) / 100 };
+  });
+  for (const [po, r] of extras) {
+    let sub = null;
+    if (po) sub = rows.find(x => x.po === po && x.status === 'NOT SHIPPED' && up(x.supplier) === r.sup) || null;
+    if (!sub && !po) {
+      const supPOs = new Set(pos.filter(p => p.sup === r.sup).map(p => p.po_number));
+      sub = rows.find(x => supPOs.has(x.po) && x.status === 'NOT SHIPPED') || null;
+    }
+    if (sub) { sub.status = 'SUBSTITUTED'; sub.substitute = `${r.sku} x${r.qty_received}`; }
+    else rows.push({ po: po || '(none)', supplier: r.supplier, sku: r.sku, ordered: 0, received: num(r.qty_received), diff: num(r.qty_received), unit_cost: null, status: 'NOT ON ANY PO', value: null });
+  }
+  const ok = s => s === 'MATCH' || s === 'MATCH (SPLIT SHIPMENT)';
+  const atRisk = Math.round(rows.filter(x => !ok(x.status) && x.value !== null).reduce((s, x) => s + x.value, 0) * 100) / 100;
+  const poTotal = Math.round(pos.reduce((s, p) => s + num(p.qty_ordered) * num(p.unit_cost), 0) * 100) / 100;
+  return { rows, flags, at_risk: atRisk, po_total: poTotal };
+}
+
+
+
+</script>
+<script>
+{
+  const KEY='leverage-notes-level', TKEY='leverage-tool';
+  const body=document.body, buttons=document.querySelectorAll('.seg button');
+  const store=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+  const load=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+  const current=()=>body.classList.contains('lv-t')?'t':body.classList.contains('lv-s')?'s':'d';
+  const paint=v=>{body.classList.remove('lv-d','lv-s','lv-t');body.classList.add('lv-'+v);buttons.forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v?'true':'false'));};
+  const setLevel=v=>{
+    if(v===current())return;
+    const secs=document.querySelectorAll('section.q');let anchor=null;
+    secs.forEach(s=>{if(s.getBoundingClientRect().top<=120)anchor=s;});
+    let progress=0;
+    if(anchor){const r=anchor.getBoundingClientRect();progress=Math.min(1,Math.max(0,(120-r.top)/Math.max(1,r.height)));}
+    paint(v);store(KEY,v);
+    if(anchor){const r2=anchor.getBoundingClientRect();window.scrollTo({top:window.pageYOffset+r2.top-120+progress*r2.height,behavior:'auto'});}
+  };
+  buttons.forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.v)));
+  const saved=load(KEY);paint(saved==='d'||saved==='s'||saved==='t'?saved:'t');
+
+  // Tool switch
+  const NAMES={chatgpt:'ChatGPT',claude:'Claude',copilot:'Excel with Copilot',gemini:'Sheets with Gemini'};
+  const groups=[...document.querySelectorAll('.tools')];
+  groups.forEach(g=>{
+    const have=[...g.querySelectorAll('.tool')].map(t=>t.dataset.tool);
+    const bar=document.createElement('div');bar.className='tsw';bar.setAttribute('role','group');bar.setAttribute('aria-label','Choose a tool');
+    have.forEach(t=>{const b=document.createElement('button');b.type='button';b.dataset.tool=t;b.textContent=NAMES[t]||t;bar.appendChild(b);});
+    g.prepend(bar);
+  });
+  const setTool=t=>{
+    groups.forEach(g=>{
+      const have=[...g.querySelectorAll('.tool')].map(x=>x.dataset.tool);
+      const pick=have.includes(t)?t:(have.includes('chatgpt')?'chatgpt':have[0]);
+      g.querySelectorAll('.tool').forEach(x=>x.hidden=x.dataset.tool!==pick);
+      g.querySelectorAll('.tsw button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tool===pick?'true':'false'));
+    });
+  };
+  document.querySelectorAll('.tsw button').forEach(b=>b.addEventListener('click',()=>{store(TKEY,b.dataset.tool);setTool(b.dataset.tool);}));
+  setTool(load(TKEY)||'chatgpt');
+
+  // Copy buttons
+  const copyText=(btn,text,label)=>{
+    const done=()=>{btn.textContent='Copied';btn.classList.add('done');setTimeout(()=>{btn.textContent=label;btn.classList.remove('done');},1600);};
+    const fallback=()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(e){btn.textContent='Select and copy';}ta.remove();};
+    try{navigator.clipboard.writeText(text).then(done,fallback);}catch(e){fallback();}
+  };
+  document.querySelectorAll('.code .copy').forEach(b=>b.addEventListener('click',()=>copyText(b,b.parentElement.querySelector('code').textContent,'Copy prompt')));
+
+  // Matcher UI
+  const po=document.getElementById('po-in'), rc=document.getElementById('rc-in'), out=document.getElementById('out');
+  const SAMPLE={po:po.value,rc:rc.value};
+  const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const money=v=>v==null?'price unknown':'$'+v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const cls=s=>s.startsWith('MATCH')?'p-ok':(s==='SUBSTITUTED'||s==='NOT ON ANY PO'||s==='OVER')?'p-warn':'p-bad';
+  let last=null;
+  const run=()=>{
+    try{
+      if(!po.value.trim()||!rc.value.trim()){out.innerHTML='<p class="err">Add both files first. Each needs a header row and at least one line.</p>';last=null;return;}
+      const pos=parseCSV(po.value), recs=parseCSV(rc.value);
+      if(!pos.length||!recs.length){out.innerHTML='<p class="err">Add both files first. Each needs a header row and at least one line.</p>';last=null;return;}
+      const need=['po_number','supplier','sku','qty_ordered','unit_cost'].filter(c=>!(c in pos[0])), need2=['po_ref','supplier','sku','qty_received'].filter(c=>!(c in recs[0]));
+      if(need.length||need2.length){out.innerHTML='<p class="err">Missing columns: '+esc(need.concat(need2).join(', '))+'. Rename your headers to match the sample files.</p>';last=null;return;}
+      const x=matchOrders(pos,recs); last=x;
+      const poRows=x.rows.filter(r=>r.status!=='NOT ON ANY PO'), extra=x.rows.filter(r=>r.status==='NOT ON ANY PO');
+      const ok=poRows.filter(r=>r.status.startsWith('MATCH')).length;
+      let h='<div class="sum"><div><b data-k="matched">'+ok+' of '+poRows.length+'</b><span>order lines match</span></div><div><b data-k="need">'+(poRows.length-ok)+'</b><span>lines need a person</span></div><div class="risk"><b data-k="risk">'+money(x.at_risk)+'</b><span>to check, of '+money(x.po_total)+' ordered</span></div><div><b data-k="extra">'+extra.length+'</b><span>not on any PO (no price)</span></div></div>';
+      h+='<div class="scroll"><table class="res"><thead><tr><th>PO</th><th>Supplier</th><th>SKU</th><th class="n">Ordered</th><th class="n">Received</th><th>Status</th><th class="n">To check</th></tr></thead><tbody>';
+      x.rows.forEach(r=>{h+='<tr data-status="'+esc(r.status)+'"><td>'+esc(r.po)+'</td><td>'+esc(r.supplier)+'</td><td>'+esc(r.sku)+(r.substitute?'<br><small>came instead: '+esc(r.substitute)+'</small>':'')+'</td><td class="n">'+esc(r.ordered)+'</td><td class="n">'+esc(r.received)+'</td><td><span class="pill '+cls(r.status)+'">'+esc(r.status)+'</span></td><td class="n">'+(r.status.startsWith('MATCH')?'$0':money(r.value))+'</td></tr>';});
+      h+='</tbody></table></div>';
+      if(x.flags.length){h+='<ul class="flags">'+x.flags.map(f=>'<li><strong>'+esc(f.receipt)+'</strong> '+esc(f.type.toLowerCase())+': '+esc(f.detail)+'</li>').join('')+'</ul>';}
+      out.innerHTML=h;
+    }catch(e){out.innerHTML='<p class="err">Could not read these files. Check that both are CSV files with a header row, like the sample files.</p>';last=null;}
+  };
+  document.getElementById('run').addEventListener('click',run);
+  document.getElementById('sample').addEventListener('click',()=>{po.value=SAMPLE.po;rc.value=SAMPLE.rc;run();});
+  document.getElementById('blank').addEventListener('click',()=>{po.value='po_number,supplier,sku,item,qty_ordered,unit_cost,po_date\n';rc.value='receipt_id,po_ref,supplier,sku,item,qty_received,received_date,note\n';out.innerHTML='<p class="hint">Paste your own rows under each header, then press Match.</p>';last=null;});
+  [['po-file',po],['rc-file',rc]].forEach(([id,ta])=>document.getElementById(id).addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{ta.value=r.result;};r.readAsText(f);}));
+  document.getElementById('copycsv').addEventListener('click',e=>{
+    if(!last){run();}
+    if(!last)return;
+    const q=v=>/[",\n]/.test(String(v))?'"'+String(v).replace(/"/g,'""')+'"':String(v==null?'':v);
+    const csv=['po,supplier,sku,ordered,received,difference,unit_cost,status,value_to_check'].concat(last.rows.map(r=>[r.po,r.supplier,r.sku,r.ordered,r.received,r.diff,r.unit_cost==null?'':r.unit_cost,r.status,r.value==null?'':r.value].map(q).join(','))).join('\n');
+    copyText(e.currentTarget,csv,'Copy results as CSV');
+  });
+  run();
+}
+</script>
+
+</body></html>
